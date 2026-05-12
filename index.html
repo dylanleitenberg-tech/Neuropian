@@ -1403,12 +1403,17 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <span onclick="openPostProblem()" style="cursor:pointer;color:#00aa38;font-size:.7rem" title="Post a Problem">+</span>
       </div>
       <div id="problem-room-list"></div>
-      <div style="font-size:.42rem;letter-spacing:.28em;text-transform:uppercase;color:#444;font-weight:700;padding:.8rem 1rem .3rem">Friends</div>
+      <div style="font-size:.42rem;letter-spacing:.28em;text-transform:uppercase;color:#444;font-weight:700;padding:.8rem 1rem .3rem;display:flex;align-items:center;justify-content:space-between">
+        <span>Friends</span>
+        <span id="friend-req-badge" style="display:none;background:#00cc44;color:#000;font-size:.55rem;font-weight:700;padding:1px 5px;border-radius:999px"></span>
+      </div>
       <div id="friends-list"></div>
-      <div onclick="openFriendRequest()" style="padding:.45rem 1rem;cursor:pointer;font-size:.68rem;color:#e8e2d6;transition:color .15s;display:flex;align-items:center;gap:.4rem"
+      <div onclick="openFriendRequest()" style="padding:.45rem 1rem;cursor:pointer;font-size:.68rem;color:#555;transition:color .15s;display:flex;align-items:center;gap:.4rem"
         onmouseenter="this.style.color='#00cc44'" onmouseleave="this.style.color='#555'">
         <span style="font-size:.8rem">＋</span> Add Friend
       </div>
+      <div style="font-size:.42rem;letter-spacing:.28em;text-transform:uppercase;color:#444;font-weight:700;padding:.8rem 1rem .3rem">Direct Messages</div>
+      <div id="dm-list"></div>
     </div>
     <!-- User info strip -->
     <div style="padding:.7rem 1rem;border-top:1px solid rgba(0,200,40,.1);display:flex;align-items:center;gap:.6rem;background:#0e0e0e">
@@ -1425,7 +1430,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <!-- Chat header -->
     <div style="height:52px;background:#111;border-bottom:1px solid rgba(0,200,40,.1);display:flex;align-items:center;padding:0 1.4rem;gap:.8rem;flex-shrink:0">
       <button id="mobile-sidebar-toggle" onclick="toggleChatSidebar()" style="display:none;background:none;border:none;color:#e8e2d6;cursor:pointer;font-size:1.1rem;padding:.2rem">☰</button>
-      <span style="color:#e8e2d6;font-size:.9rem">#</span>
+      <span id="chat-room-icon" style="color:#e8e2d6;font-size:.9rem">#</span>
       <div>
         <div id="chat-room-name" style="font-size:.78rem;font-weight:600;color:#eee">general</div>
         <div id="chat-room-desc" style="font-size:.5rem;color:#e8e2d6;margin-top:.05rem">Open discussion for all members</div>
@@ -2406,6 +2411,7 @@ async function initChat(){
   await switchRoom('general','general','Open discussion for all members');
   await loadFriends();
   await loadFriendRequests();
+  await loadDMList();
   chatInitialized=true;
 }
 
@@ -2603,9 +2609,13 @@ async function switchRoom(roomId,roomName,roomDesc){
   const active=document.getElementById('ri-'+roomId);
   if(active){active.style.color='#00cc44';active.style.borderLeft='2px solid #00cc44';active.style.background='rgba(0,200,40,.07)';}
   if(chatSubscription){try{await sb.removeChannel(chatSubscription);}catch(e){}chatSubscription=null;}
+  // Update header icon
+  const _icon=document.getElementById('chat-room-icon');
+  if(_icon)_icon.textContent=roomId.startsWith('dm_')?'@':'#';
   const ml=document.getElementById('chat-messages');
+  const _roomPrefix=roomId.startsWith('dm_')?'@':'#';
   ml.innerHTML=`<div style="text-align:center;padding:2rem 0 1rem">
-    <div style="font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#333"># ${escHtml(roomName)}</div>
+    <div style="font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#333">${_roomPrefix} ${escHtml(roomName)}</div>
     <div style="font-size:.62rem;color:#444;margin-top:.3rem;font-style:italic">${escHtml(roomDesc)}</div>
     <div style="width:40px;height:1px;background:rgba(0,200,40,.15);margin:.8rem auto"></div>
   </div>`;
@@ -2725,7 +2735,20 @@ async function loadServerRail(){
   }catch(e){console.error('loadServerRail',e);}
 }
 
-// ── FRIENDS ────────────────────────────────────────────────────────
+// ── FRIENDS & DMs ─────────────────────────────────────────────────
+
+function dmRoomId(otherUserId){
+  return 'dm_'+[currentUser.id,otherUserId].sort().join('_');
+}
+
+async function openDM(friendId,friendName){
+  await switchRoom(dmRoomId(friendId),'@ '+friendName,'Direct Message');
+  // Update header icon to @ for DMs
+  const icon=document.getElementById('chat-room-icon');
+  if(icon)icon.textContent='@';
+  await loadDMList();
+}
+
 async function loadFriends(){
   try{
     const {data}=await sb.from('friends')
@@ -2733,13 +2756,59 @@ async function loadFriends(){
       .eq('user_id',currentUser.id)
       .eq('status','accepted');
     const fl=document.getElementById('friends-list');
-    if(!data||!data.length){fl.innerHTML=`<div style="padding:.45rem 1rem;font-size:.65rem;color:#444;font-style:italic">No friends yet</div>`;return;}
+    if(!data||!data.length){
+      fl.innerHTML=`<div style="padding:.45rem 1rem;font-size:.65rem;color:#444;font-style:italic">No friends yet</div>`;
+      return;
+    }
     fl.innerHTML=data.map(f=>`
-      <div style="padding:.45rem 1rem;font-size:.7rem;color:#e8e2d6;display:flex;align-items:center;gap:.5rem">
-        <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#1a2e1a,#2a5a2a);display:flex;align-items:center;justify-content:center;font-size:.48rem;color:#e8e2d6;font-weight:700;flex-shrink:0">${(f.friend_name||'?').slice(0,2).toUpperCase()}</div>
-        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escHtml(f.friend_name||'Member')}</span>
+      <div onclick="openDM('${f.friend_id}','${escHtml(f.friend_name||'Friend')}')"
+        style="padding:.45rem 1rem;cursor:pointer;font-size:.7rem;color:#e8e2d6;display:flex;align-items:center;gap:.5rem;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem;transition:all .12s"
+        onmouseenter="this.style.color='#fff';this.style.background='rgba(0,200,40,.07)';this.style.borderLeftColor='rgba(0,200,40,.3)'"
+        onmouseleave="this.style.color='#e8e2d6';this.style.background='transparent';this.style.borderLeftColor='transparent'">
+        <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#1a2e1a,#2a5a2a);display:flex;align-items:center;justify-content:center;font-size:.5rem;color:#e8e2d6;font-weight:700;flex-shrink:0">${(f.friend_name||'?').slice(0,2).toUpperCase()}</div>
+        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${escHtml(f.friend_name||'Member')}</span>
+        <span style="font-size:.52rem;color:#00aa38;opacity:.5">DM</span>
       </div>`).join('');
   }catch(e){console.error('loadFriends',e);}
+}
+
+async function loadDMList(){
+  const dl=document.getElementById('dm-list');
+  if(!dl||!currentUser)return;
+  try{
+    // Get accepted friends
+    const {data:friends}=await sb.from('friends')
+      .select('friend_id,friend_name')
+      .eq('user_id',currentUser.id)
+      .eq('status','accepted');
+    if(!friends||!friends.length){
+      dl.innerHTML=`<div style="padding:.45rem 1rem;font-size:.65rem;color:#333;font-style:italic">No messages yet</div>`;
+      return;
+    }
+    // For each friend, check if there's any DM history
+    const checks=await Promise.all(friends.map(async f=>{
+      const rid=dmRoomId(f.friend_id);
+      const {data}=await sb.from('messages').select('content,created_at').eq('room',rid).order('created_at',{ascending:false}).limit(1);
+      return{...f,roomId:rid,last:data&&data.length?data[0]:null};
+    }));
+    const active=checks.filter(f=>f.last).sort((a,b)=>new Date(b.last.created_at)-new Date(a.last.created_at));
+    if(!active.length){
+      dl.innerHTML=`<div style="padding:.45rem 1rem;font-size:.65rem;color:#333;font-style:italic">No messages yet</div>`;
+      return;
+    }
+    dl.innerHTML=active.map(f=>`
+      <div onclick="openDM('${f.friend_id}','${escHtml(f.friend_name||'Friend')}')"
+        id="ri-${f.roomId}"
+        style="padding:.45rem 1rem;cursor:pointer;font-size:.68rem;color:#666;display:flex;align-items:center;gap:.5rem;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem;transition:all .12s"
+        onmouseenter="this.style.color='#bbb';this.style.background='rgba(255,255,255,.04)'"
+        onmouseleave="this.style.color='#666';this.style.background='transparent'">
+        <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#1a2e1a,#2a5a2a);display:flex;align-items:center;justify-content:center;font-size:.48rem;color:#e8e2d6;font-weight:700;flex-shrink:0">${(f.friend_name||'?').slice(0,2).toUpperCase()}</div>
+        <div style="overflow:hidden;flex:1;min-width:0">
+          <div style="font-weight:600;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escHtml(f.friend_name||'Friend')}</div>
+          <div style="font-size:.6rem;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.1rem">${escHtml((f.last.content||'').slice(0,35))}…</div>
+        </div>
+      </div>`).join('');
+  }catch(e){console.error('loadDMList',e);}
 }
 
 async function loadFriendRequests(){
@@ -2750,6 +2819,9 @@ async function loadFriendRequests(){
       .eq('status','pending');
     const sec=document.getElementById('friend-requests-section');
     const list=document.getElementById('friend-requests-list');
+    // Show badge on sidebar
+    const badge=document.getElementById('friend-req-badge');
+    if(badge){if(data&&data.length){badge.textContent=data.length;badge.style.display='inline';}else{badge.style.display='none';}}
     if(!data||!data.length){sec.style.display='none';return;}
     sec.style.display='block';
     list.innerHTML=data.map(r=>`
@@ -2775,12 +2847,10 @@ async function submitFriendRequest(){
   if(email===currentUser.email){msg.textContent="You can't add yourself.";msg.style.color='#e55';msg.style.display='block';return;}
   btn.textContent='Sending…';btn.disabled=true;
   try{
-    // Look up user by email in profiles
     const {data:prof,error}=await sb.from('profiles').select('user_id,first_name,last_name,email').eq('email',email).single();
     if(error||!prof){msg.textContent='No Neuropian member found with that email.';msg.style.color='#e55';msg.style.display='block';btn.textContent='Send Request';btn.disabled=false;return;}
     const friendName=`${prof.first_name||''} ${prof.last_name||''}`.trim()||email;
     const myName=getChatName();
-    // Insert both directions: one pending for them to accept
     const {error:e2}=await sb.from('friends').insert({
       user_id:currentUser.id,friend_id:prof.user_id,
       friend_name:friendName,requester_name:myName,status:'pending'
@@ -2797,15 +2867,16 @@ async function acceptFriend(reqId){
     const {data:req}=await sb.from('friends').select('*').eq('id',reqId).single();
     if(!req)return;
     await sb.from('friends').update({status:'accepted'}).eq('id',reqId);
-    // Create reverse entry so both can see each other
     await sb.from('friends').upsert({
       user_id:currentUser.id,friend_id:req.user_id,
       friend_name:req.requester_name,requester_name:getChatName(),status:'accepted'
     },{onConflict:'user_id,friend_id'});
     await loadFriends();
     await loadFriendRequests();
+    await loadDMList();
   }catch(e){console.error('acceptFriend',e);}
 }
+
 async function declineFriend(reqId){
   try{await sb.from('friends').delete().eq('id',reqId);await loadFriendRequests();}
   catch(e){console.error('declineFriend',e);}
