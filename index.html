@@ -1209,7 +1209,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         </div>
         <div class="rstat">
           <span class="rstat-n">1</span>
-          <span class="rstat-l">Next Elon to be found, Season One · 2026</span>
+          <span class="rstat-l">Next Elon to be found, Season One · 2028</span>
         </div>
       </div>
     </div>
@@ -1241,7 +1241,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <span class="tick-i">No Credentials Required</span><span class="tick-dot">◆</span>
     <span class="tick-i bold">Leitenberg Academy</span><span class="tick-dot">◆</span>
     <span class="tick-i">Who's the Next Elon</span><span class="tick-dot">◆</span>
-    <span class="tick-i bold">Season One · 2026</span><span class="tick-dot">◆</span>
+    <span class="tick-i bold">Season One · 2028</span><span class="tick-dot">◆</span>
     <span class="tick-i">Data-Mined Casting</span><span class="tick-dot">◆</span>
     <span class="tick-i bold">Neuropian</span><span class="tick-dot">◆</span>
     <span class="tick-i">Intellect Accelerator</span><span class="tick-dot">◆</span>
@@ -1249,7 +1249,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <span class="tick-i">No Credentials Required</span><span class="tick-dot">◆</span>
     <span class="tick-i bold">Leitenberg Academy</span><span class="tick-dot">◆</span>
     <span class="tick-i">Who's the Next Elon</span><span class="tick-dot">◆</span>
-    <span class="tick-i bold">Season One · 2026</span><span class="tick-dot">◆</span>
+    <span class="tick-i bold">Season One · 2028</span><span class="tick-dot">◆</span>
     <span class="tick-i">Data-Mined Casting</span><span class="tick-dot">◆</span>
   </div>
 </div>
@@ -1334,6 +1334,30 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 </div>
 
 <!-- PLATFORM PAGE -->
+<div id="page-server-match" class="page">
+<div style="min-height:100vh;background:#000;color:#fff;font-family:'DM Sans',sans-serif">
+  <div style="position:fixed;top:0;left:0;right:0;z-index:100;height:56px;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;border-bottom:1px solid rgba(255,255,255,.08)">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;letter-spacing:.04em;color:#fff">NEUROPIAN</span>
+    <button onclick="showPage('collective')" style="background:none;border:1px solid rgba(255,255,255,.15);color:#aaa;padding:.3rem .9rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.55rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">Skip to RoundTable →</button>
+  </div>
+  <div style="max-width:860px;margin:0 auto;padding:6rem 2rem 4rem">
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <div style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#00aa38;margin-bottom:1rem">Profile Complete</div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:400;line-height:1.1;margin-bottom:1rem">Your cognitive signature<br>has been mapped.</h1>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.7;max-width:520px;margin:0 auto" id="sm-summary">Analysing your profile…</p>
+    </div>
+    <!-- Server cards -->
+    <div id="sm-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;margin-bottom:2.5rem"></div>
+    <!-- Footer CTA -->
+    <div style="text-align:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.07)">
+      <p style="font-size:.72rem;color:rgba(255,255,255,.3);margin-bottom:1.2rem">You can explore all servers once inside RoundTable.</p>
+      <button onclick="showPage('collective')" style="background:#00cc44;border:none;color:#000;padding:.85rem 2.5rem;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Enter RoundTable →</button>
+    </div>
+  </div>
+</div>
+</div>
+
 <div id="page-platform" class="page">
 <div class="plpg">
   <div style="position:fixed;top:0;left:0;right:0;z-index:100;height:56px;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;border-bottom:1px solid rgba(255,255,255,.08)">
@@ -1769,7 +1793,7 @@ async function finSurvey(){
       survey_completed_at:new Date().toISOString()
     },{onConflict:'user_id'});
   }
-  showPage('platform');
+  showPage('server-match');
 }
 
 // ── apply / save buttons (wired in renderJobs) ────────────
@@ -2253,6 +2277,7 @@ function showPage(id){
     document.documentElement.scrollTop=0;
     if(nav)nav.style.display=(id==='home')?'':'none';
     if(id==='platform')renderJobs();
+    if(id==='server-match')renderServerMatch();
     if(id==='collective'){console.log('initChat called');initChat();}
     setTimeout(function(){
       ov.style.transition='opacity .4s ease';
@@ -2361,6 +2386,119 @@ function applyF(cat){
 }
 function fj(btn,cat){document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');CF=cat;applyF(cat)}
 renderJobs();
+
+// ═══ SERVER MATCH ═══
+const SERVER_PROFILES = [
+  {
+    id:'physics', name:'Physics', icon:'⚛️',
+    desc:'Theoretical and experimental physics — from quantum mechanics to cosmology.',
+    traits:{science:4,logical:4,data:3,pattern:3,experiment:3,focus:3,absorb:3,puzzle:3}
+  },
+  {
+    id:'engineering', name:'Engineering', icon:'⚙️',
+    desc:'Systems, hardware, software architecture, and design challenges.',
+    traits:{tech:4,builder:4,systems:3,logical:3,ops:3,experiment:2,pattern:2}
+  },
+  {
+    id:'ai-ml', name:'AI & Machine Learning', icon:'🤖',
+    desc:'Artificial intelligence, machine learning, and the future of intelligent systems.',
+    traits:{tech:4,data:4,pattern:4,systems:3,logical:3,builder:3,focus:3}
+  },
+  {
+    id:'mathematics', name:'Mathematics', icon:'∑',
+    desc:'Pure and applied mathematics — proofs, structures, and unsolved conjectures.',
+    traits:{data:4,logical:4,pattern:4,focus:4,absorb:3,puzzle:4}
+  },
+  {
+    id:'neuroscience', name:'Neuroscience', icon:'🧠',
+    desc:'Brain, cognition, consciousness, and the science of human potential.',
+    traits:{science:3,psych:4,bio:3,pattern:3,absorb:3,focus:3,people:2,ideas:2}
+  },
+  {
+    id:'creativity', name:'Creativity & Design', icon:'✦',
+    desc:'Art, music, writing, lateral thinking, and creative technology.',
+    traits:{art:4,ideas:4,visual:3,writing:3,social:2,narrative:2,intuition:2}
+  },
+  {
+    id:'general', name:'General', icon:'⬡',
+    desc:'Open discussion — a space for every kind of extraordinary mind.',
+    traits:{social:2,flex_c:2,live_c:2,people:2}
+  },
+];
+
+function scoreServer(srv){
+  let score = 0, total = 0;
+  for(const [trait, weight] of Object.entries(srv.traits)){
+    total += weight * 8;
+    const v = TR[trait];
+    if(v === true) score += weight * 8;
+    else if(typeof v === 'number') score += weight * (v / 10) * 8;
+  }
+  return total > 0 ? Math.round((score / total) * 100) : 20;
+}
+
+function renderServerMatch(){
+  const cards = document.getElementById('sm-cards');
+  const summary = document.getElementById('sm-summary');
+  if(!cards) return;
+
+  const hasSurvey = Object.keys(TR).length > 0;
+  const scored = SERVER_PROFILES
+    .map(s => ({...s, pct: scoreServer(s)}))
+    .sort((a,b) => b.pct - a.pct);
+
+  // Top trait labels for summary line
+  const TRAIT_LABELS = {tech:'technical aptitude',data:'quantitative reasoning',pattern:'pattern recognition',systems:'systems thinking',art:'creative intelligence',psych:'psychological insight',builder:'builder mentality',ideas:'original ideation',focus:'deep focus',science:'scientific reasoning',logical:'logical precision',visual:'visual thinking'};
+  const topTraits = Object.entries(TR).filter(([,v])=>v===true||v>7).map(([k])=>TRAIT_LABELS[k]).filter(Boolean).slice(0,3);
+  if(summary){
+    summary.innerHTML = hasSurvey && topTraits.length
+      ? `Your profile signals <strong>${topTraits.join(', ')}</strong>. The servers below are ranked by fit with your cognitive signature.`
+      : 'Servers ranked by alignment with your profile. You can join any of them inside RoundTable.';
+  }
+
+  // Show top 6 servers
+  cards.innerHTML = scored.slice(0,6).map((s, i) => {
+    const pct = s.pct;
+    const isTop = i === 0;
+    const barColor = pct > 70 ? '#00cc44' : pct > 45 ? '#00883a' : '#3a3a3a';
+    return `
+    <div style="background:#0e0e0e;border:1px solid ${isTop?'rgba(0,200,40,.35)':'rgba(255,255,255,.07)'};border-radius:8px;padding:1.4rem;display:flex;flex-direction:column;gap:.8rem;transition:border-color .2s;position:relative;overflow:hidden"
+      onmouseenter="this.style.borderColor='rgba(0,200,40,.3)'" onmouseleave="this.style.borderColor='${isTop?'rgba(0,200,40,.35)':'rgba(255,255,255,.07)'}'">
+      ${isTop?'<div style="position:absolute;top:0;right:0;background:#00cc44;color:#000;font-size:.48rem;font-weight:800;letter-spacing:.12em;padding:.25rem .7rem;border-radius:0 8px 0 6px;text-transform:uppercase">Best Match</div>':''}
+      <div style="display:flex;align-items:center;gap:.7rem">
+        <div style="font-size:1.4rem;width:38px;height:38px;border-radius:8px;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;flex-shrink:0">${s.icon}</div>
+        <div>
+          <div style="font-weight:700;font-size:.85rem;color:#eee">${s.name}</div>
+          <div style="font-size:.58rem;color:#00aa38;font-weight:600;letter-spacing:.06em">${pct}% match</div>
+        </div>
+      </div>
+      <p style="font-size:.72rem;color:rgba(255,255,255,.45);line-height:1.6;margin:0">${s.desc}</p>
+      <div style="height:3px;background:#1a1a1a;border-radius:2px;overflow:hidden">
+        <div style="height:100%;width:${pct}%;background:${barColor};border-radius:2px;transition:width .6s ease"></div>
+      </div>
+      <button onclick="joinServer('${s.id}','${s.name}')"
+        style="background:${isTop?'#00cc44':'rgba(0,200,40,.1)'};border:1px solid ${isTop?'#00cc44':'rgba(0,200,40,.2)'};color:${isTop?'#000':'#00aa38'};padding:.55rem;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .15s"
+        onmouseenter="this.style.background='#00cc44';this.style.color='#000';this.style.borderColor='#00cc44'"
+        onmouseleave="this.style.background='${isTop?'#00cc44':'rgba(0,200,40,.1)'}';this.style.color='${isTop?'#000':'#00aa38'}';this.style.borderColor='${isTop?'#00cc44':'rgba(0,200,40,.2)'}'">
+        Enter Server →
+      </button>
+    </div>`;
+  }).join('');
+}
+
+async function joinServer(roomId, roomName){
+  showPage('collective');
+  // Wait for chat to init then switch to the chosen room
+  let tries = 0;
+  const wait = setInterval(async ()=>{
+    tries++;
+    if(chatInitialized || tries > 20){
+      clearInterval(wait);
+      const room = CHAT_ROOMS.find(r=>r.id===roomId);
+      if(room) await switchRoom(room.id, room.name, room.desc);
+    }
+  }, 300);
+}
 
 // ═══ INIT EVERYTHING ═══
 (function(){
