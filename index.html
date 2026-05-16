@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,8 +101,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:600;height:56px;display:flex;ali
 .eyebrow::before{content:'';display:block;width:28px;height:1px;background:rgba(255,255,255,.25)}
 
 /* REVEAL */
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
-.reveal.in{opacity:1;transform:translateY(0)}
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.js .reveal.in{opacity:1;transform:translateY(0)}
 
 /* ── SECTION: HOW WE FIND ── */
 .find-section{background:var(--black);color:var(--white)}
@@ -512,13 +511,13 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 
 
 /* ── SITE-WIDE SCROLL FADE-IN ── */
-.fade-in{opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
-.fade-in.in{opacity:1;transform:translateY(0)}
-.fade-in-fast{opacity:0;transition:opacity .6s ease}
-.fade-in-fast.in{opacity:1}
+.js .fade-in{opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.js .fade-in.in{opacity:1;transform:translateY(0)}
+.js .fade-in-fast{opacity:0;transition:opacity .6s ease}
+.js .fade-in-fast.in{opacity:1}
 
 /* Stagger children of method-grid, pillars-grid etc */
-.method-card,.pillar,.crisis-card,.rstat,.manifesto-item,.jc{
+.js .method-card,.js .pillar,.js .crisis-card,.js .rstat,.js .manifesto-item,.js .jc{
   opacity:0;transform:translateY(18px);
   transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)
 }
@@ -529,6 +528,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add('js')</script>
+<noscript><style>.hero-season,.hero-pre,.hero-title,.hero-desc,.hero-btns,.hero-scroll{opacity:1!important;transform:none!important}</style></noscript>
 <div id="cur"></div>
 <div id="page-overlay"></div>
 
