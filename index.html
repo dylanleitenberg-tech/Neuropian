@@ -1330,11 +1330,16 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       onmouseenter="this.style.borderRadius='12px'" onmouseleave="if(currentServerId!=='neuropian')this.style.borderRadius='50%'">RT</div>
     <div style="width:32px;height:1px;background:rgba(0,200,40,.15);margin:.2rem 0"></div>
     <div id="server-rail-items"></div>
-    <!-- Add server button -->
+    <!-- Create server button -->
     <div onclick="openCreateServer()" title="Create Server"
       style="width:44px;height:44px;border-radius:50%;background:#1a1a1a;border:2px dashed rgba(0,200,40,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;color:#00aa38;flex-shrink:0;transition:all .2s;margin-top:.3rem"
       onmouseenter="this.style.borderRadius='12px';this.style.background='rgba(0,200,40,.08)'"
       onmouseleave="this.style.borderRadius='50%';this.style.background='#1a1a1a'">+</div>
+    <!-- Join server button -->
+    <div onclick="openJoinServer()" title="Join a Server"
+      style="width:44px;height:44px;border-radius:50%;background:#1a1a1a;border:2px dashed rgba(0,200,40,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;color:#555;flex-shrink:0;transition:all .2s"
+      onmouseenter="this.style.borderRadius='12px';this.style.background='rgba(0,200,40,.06)';this.style.color='#00aa38'"
+      onmouseleave="this.style.borderRadius='50%';this.style.background='#1a1a1a';this.style.color='#555'">⤵</div>
   </div>
 
   <!-- SIDEBAR (channels + users) -->
@@ -1466,6 +1471,23 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <input id="cs-desc" type="text" placeholder="What's this server about?" style="width:100%;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;padding:.6rem .85rem;color:#ddd;font-family:'DM Sans',sans-serif;font-size:.75rem;outline:none;box-sizing:border-box"></div>
       <div id="cs-err" style="font-size:.7rem;color:#e55;display:none"></div>
       <button id="cs-btn" onclick="submitCreateServer()" style="padding:.75rem;background:#00cc44;border:none;border-radius:4px;color:#000;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Create Server</button>
+    </div>
+  </div>
+</div>
+
+<!-- JOIN SERVER MODAL -->
+<div id="join-server-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:2000;align-items:center;justify-content:center">
+  <div style="background:#141414;border:1px solid rgba(0,200,40,.2);border-radius:6px;width:min(420px,92vw);padding:1.8rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#eee;font-weight:400">Join a Server</h3>
+      <button onclick="closeJoinServer()" style="background:none;border:none;color:#e8e2d6;cursor:pointer;font-size:1.1rem">✕</button>
+    </div>
+    <p style="font-size:.7rem;color:#e8e2d6;line-height:1.6;margin-bottom:1.2rem">Enter the invite code shared by the server owner.</p>
+    <div style="display:flex;flex-direction:column;gap:.9rem">
+      <div><label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.35rem">Invite Code</label>
+        <input id="js-code" type="text" placeholder="e.g. ABC123" style="width:100%;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;padding:.6rem .85rem;color:#ddd;font-family:'DM Sans',sans-serif;font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;outline:none;box-sizing:border-box"></div>
+      <div id="js-err" style="font-size:.7rem;color:#e55;display:none"></div>
+      <button id="js-btn" onclick="submitJoinServer()" style="padding:.75rem;background:#00cc44;border:none;border-radius:4px;color:#000;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Join Server</button>
     </div>
   </div>
 </div>
@@ -2435,7 +2457,19 @@ async function renderSidebarForServer(serverId, serverData){
       rl.innerHTML=html||`<div style="padding:.5rem 1rem;font-size:.65rem;color:#444;font-style:italic">No channels yet</div>`;
     }catch(e){console.error('renderSidebar',e);}
   }
-  await loadProblemRooms();
+  // Problems only shown on the main Neuropian server
+  const problemSection = document.querySelector('[style*="Problem Rooms"]')?.closest('div[style]')?.parentElement;
+  const problemHeader = Array.from(document.querySelectorAll('#chat-sidebar div')).find(el => el.textContent.trim() === 'Problem Rooms' || el.querySelector?.('span')?.textContent?.trim() === 'Problem Rooms');
+  if(serverId==='neuropian'){
+    await loadProblemRooms();
+    if(problemHeader)problemHeader.style.display='';
+    const prl=document.getElementById('problem-room-list');
+    if(prl)prl.style.display='';
+  } else {
+    const prl=document.getElementById('problem-room-list');
+    if(prl){prl.innerHTML='';prl.style.display='none';}
+    if(problemHeader)problemHeader.style.display='none';
+  }
 }
 
 function openCreateServer(){
@@ -2456,21 +2490,63 @@ async function submitCreateServer(){
   err.style.display='none';
   const btn=document.getElementById('cs-btn');btn.textContent='Creating…';btn.disabled=true;
   try{
+    const joinCode = Math.random().toString(36).substring(2,5).toUpperCase() + Math.random().toString(36).substring(2,5).toUpperCase();
     const {data:srv,error}=await sb.from('servers').insert({
-      name,description:desc||null,owner_id:currentUser.id,parent_id:parentId
+      name,description:desc||null,owner_id:currentUser.id,parent_id:parentId,join_code:joinCode
     }).select().single();
     if(error)throw error;
     await sb.from('server_channels').insert({server_id:srv.id,name:'general',description:'General discussion'});
+    // Auto-add owner as member
+    await sb.from('server_members').insert({server_id:srv.id,user_id:currentUser.id}).then(()=>{});
     await loadServerRail();
-    closeCreateServer();
     document.getElementById('cs-name').value='';
     document.getElementById('cs-desc').value='';
     document.getElementById('cs-parent-id').value='';
     document.getElementById('cs-parent-label').style.display='none';
-    if(!parentId){await switchServer(srv.id);}
-    else{await switchServer(parentId);} // refresh parent view
+    btn.textContent='Create Server';btn.disabled=false;
+    // Show join code before closing
+    err.style.color='#00cc44';
+    err.textContent='Server created! Invite code: ' + joinCode + ' — share this with people you want to join.';
+    err.style.display='block';
+    setTimeout(async ()=>{
+      closeCreateServer();
+      err.style.color='#e55';err.style.display='none';
+      if(!parentId){await switchServer(srv.id);}
+      else{await switchServer(parentId);}
+    }, 4000);
+    return;
   }catch(e){err.textContent='Failed to create server. Try again.';err.style.display='block';}
   btn.textContent='Create Server';btn.disabled=false;
+}
+
+// ── JOIN SERVER ─────────────────────────────────────────────────────
+function openJoinServer(){
+  document.getElementById('js-code').value='';
+  document.getElementById('js-err').style.display='none';
+  document.getElementById('join-server-modal').style.display='flex';
+}
+function closeJoinServer(){document.getElementById('join-server-modal').style.display='none';}
+
+async function submitJoinServer(){
+  const code=document.getElementById('js-code').value.trim().toUpperCase();
+  const err=document.getElementById('js-err');
+  const btn=document.getElementById('js-btn');
+  if(!code){err.textContent='Please enter an invite code.';err.style.display='block';return;}
+  err.style.display='none';
+  btn.textContent='Joining…';btn.disabled=true;
+  try{
+    const {data:srv,error}=await sb.from('servers').select('id,name').eq('join_code',code).single();
+    if(error||!srv){err.textContent='Invalid code. Check with the server owner.';err.style.display='block';btn.textContent='Join Server';btn.disabled=false;return;}
+    // Check not already a member
+    const {data:existing}=await sb.from('server_members').select('id').eq('server_id',srv.id).eq('user_id',currentUser.id).single();
+    if(!existing){
+      await sb.from('server_members').insert({server_id:srv.id,user_id:currentUser.id});
+    }
+    await loadServerRail();
+    closeJoinServer();
+    await switchServer(srv.id);
+  }catch(e){err.textContent='Something went wrong. Try again.';err.style.display='block';}
+  btn.textContent='Join Server';btn.disabled=false;
 }
 
 // ── PROBLEM ROOMS ──────────────────────────────────────────────────
@@ -2528,6 +2604,7 @@ async function submitProblem(){
 }
 {const _e=document.getElementById('post-problem-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closePostProblem();});}
 {const _e=document.getElementById('create-server-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeCreateServer();});}
+{const _e=document.getElementById('join-server-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeJoinServer();});}
 {const _e=document.getElementById('friend-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeFriendRequest();});}
 
 // ── ROOMS & MESSAGES ───────────────────────────────────────────────
@@ -2655,10 +2732,13 @@ async function loadSubServers(parentId){
 
 async function loadServerRail(){
   try{
-    const {data}=await sb.from('servers').select('id,name,parent_id').order('created_at',{ascending:true});
+    // Only show servers this user is a member of
+    const {data:memberships}=await sb.from('server_members').select('server_id').eq('user_id',currentUser.id);
     const rail=document.getElementById('server-rail-items');
+    if(!memberships||!memberships.length){rail.innerHTML='';return;}
+    const memberIds=memberships.map(m=>m.server_id);
+    const {data}=await sb.from('servers').select('id,name,parent_id').in('id',memberIds).order('created_at',{ascending:true});
     if(!data||!data.length){rail.innerHTML='';return;}
-    // Only top-level servers in rail (parent_id is null)
     const topLevel=data.filter(s=>!s.parent_id);
     rail.innerHTML=topLevel.map(s=>{
       const abbr=s.name.slice(0,2).toUpperCase();
@@ -2849,7 +2929,7 @@ else{renderOppPreview();}
     </p>
 
     <!-- Download button -->
-    <a href="/downloads/talent-scout-extension.zip" download="talent-scout-extension.zip"
+    <a href="/downloads/eagleeyes.zip" download="eagleeyes.zip"
        style="display:inline-flex;align-items:center;gap:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;background:#e8e2d6;color:#0d0c0b;padding:1rem 2.4rem;transition:all .25s;border:none;cursor:pointer">
       <span style="font-size:1rem">&#11015;</span>
       Download EagleEyes &nbsp;(.zip)
@@ -2889,7 +2969,7 @@ else{renderOppPreview();}
         <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(0,0,0,.10);line-height:1;padding-top:.2rem">2</div>
         <div>
           <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;margin-bottom:.5rem">Unzip</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">Find the downloaded file and unzip it. On Mac, double-click it. On Windows, right-click &rarr; &ldquo;Extract All.&rdquo; You&rsquo;ll get a folder called <code style="font-family:monospace;background:rgba(0,0,0,.06);padding:.1em .4em;font-size:.9em">talent-scout-extension</code>.</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">Find the downloaded file and unzip it. On Mac, double-click it. On Windows, right-click &rarr; &ldquo;Extract All.&rdquo; You&rsquo;ll get a folder called <code style="font-family:monospace;background:rgba(0,0,0,.06);padding:.1em .4em;font-size:.9em">talent-scout-extension-2</code>.</p>
         </div>
       </div>
 
@@ -2917,7 +2997,7 @@ else{renderOppPreview();}
         <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(0,0,0,.10);line-height:1;padding-top:.2rem">5</div>
         <div>
           <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;margin-bottom:.5rem">Load the Extension</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">Click <strong style="color:#000">Load unpacked</strong>, then select the <code style="font-family:monospace;background:rgba(0,0,0,.06);padding:.1em .4em;font-size:.9em">talent-scout-extension</code> folder you unzipped in Step 2.</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">Click <strong style="color:#000">Load unpacked</strong>, then select the <code style="font-family:monospace;background:rgba(0,0,0,.06);padding:.1em .4em;font-size:.9em">talent-scout-extension-2</code> folder you unzipped in Step 2.</p>
         </div>
       </div>
 
