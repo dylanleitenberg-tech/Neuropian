@@ -582,6 +582,30 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 
 
 
+/* ── TOP MINDS LEADERBOARD ── */
+.minds-section{background:var(--black);color:var(--white);padding:9rem 3rem}
+.minds-grid{margin-top:3.5rem;display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.06)}
+.mind-row{background:var(--off-black);padding:2rem 2.5rem;display:grid;grid-template-columns:2.8rem 1fr auto;gap:2rem;align-items:center;transition:background .3s;position:relative;overflow:hidden}
+.mind-row:hover{background:var(--near-black)}
+.mind-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:rgba(255,255,255,.0);transition:background .3s}
+.mind-row:hover::before{background:rgba(255,255,255,.3)}
+.mind-rank{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:rgba(255,255,255,.08);line-height:1;letter-spacing:-.04em}
+.mind-rank.top{color:rgba(255,255,255,.25)}
+.mind-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.3rem}
+.mind-signals{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.45rem}
+.mind-signal{font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12);color:#e8e2d6;padding:.12rem .45rem}
+.mind-domain{font-family:'Barlow Condensed',sans-serif;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:.35rem}
+.mind-score{text-align:right;flex-shrink:0}
+.mind-score-n{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;line-height:1;letter-spacing:-.04em;color:var(--white)}
+.mind-score-l{font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.2rem}
+.minds-updated{font-family:'Barlow Condensed',sans-serif;font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:1.5rem;display:flex;align-items:center;gap:.6rem}
+.minds-updated::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);animation:blink 2s ease-in-out infinite}
+.minds-empty{padding:3rem;text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:rgba(255,255,255,.3)}
+@media(max-width:768px){
+  .mind-row{grid-template-columns:2rem 1fr auto;gap:1rem;padding:1.4rem 1.2rem}
+  .mind-score-n{font-size:2rem}
+}
+
 /* ── SITE-WIDE SCROLL FADE-IN ── */
 .fade-in{opacity:0;transform:translateY(10px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
 .fade-in.in{opacity:1;transform:translateY(0)}
@@ -615,7 +639,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   <div style="display:flex;align-items:center;gap:.6rem;flex-shrink:0">
     <span id="nav-user" style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.95);font-weight:500;display:none"></span>
     <button id="nav-signout" style="display:none;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,0.95);padding:.32rem .75rem;font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .22s" onmouseenter="this.style.borderColor='rgba(255,255,255,.5)';this.style.color='#fff'" onmouseleave="this.style.borderColor='rgba(255,255,255,.2)';this.style.color='rgba(255,255,255,.5)'" onclick="doSignOut()">Sign Out</button>
-    <button class="nav-apply" onclick="gatedPage('survey')">Apply Now</button>
+    <button class="nav-apply" onclick="openNextElonApply()">Apply Now</button>
   </div>
 </nav>
 
@@ -635,7 +659,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <a onclick="closeMobileNav();gatedPage('platform')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">Opportunities</a>
     <a onclick="closeMobileNav();gatedPage('collective')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">RoundTable</a>
     <a onclick="closeMobileNav();navScroll('academy')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">Academy</a>
-    <a onclick="closeMobileNav();gatedPage('survey')" style="margin:1.2rem 1.4rem 0;padding:.85rem 1.2rem;background:#fff;color:#000;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-align:center;cursor:pointer">Apply Now</a>
+    <a onclick="closeMobileNav();openNextElonApply()" style="margin:1.2rem 1.4rem 0;padding:.85rem 1.2rem;background:#fff;color:#000;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-align:center;cursor:pointer">Apply Now</a>
     <div id="mobile-nav-user" style="display:none;padding:.9rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.6rem;color:rgba(255,255,255,0.95);letter-spacing:.14em;text-transform:uppercase"></div>
     <a onclick="closeMobileNav();navScroll('eagleeyes-intro')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;display:flex;align-items:center;gap:.6rem"><span style="font-size:.8rem">&#10022;</span>EagleEyes</a>
     <a id="mobile-nav-signout" onclick="closeMobileNav();doSignOut()" style="display:none;padding:.7rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.62rem;color:rgba(255,255,255,0.95);cursor:pointer;letter-spacing:.1em">Sign Out</a>
@@ -754,7 +778,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   <div class="section-inner">
     <div class="eyebrow reveal">Our Methodology</div>
     <h2 class="section-title reveal" style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:.95;letter-spacing:-.025em;color:var(--white);margin-bottom:2rem">How Neuropian <em style="font-style:italic;color:rgba(255,255,255,0.95)">Finds You</em></h2>
-    <p class="find-body reveal">Neuropian has built the algorithms to find those whose potential the world never measured correctly, and those already moving fast who need a team capable of keeping up.</p>
+    <p class="find-body reveal">Neuropian has built the algorithms to find those whose potential the world never measured correctly, and those already moving fast who need a team capable of keeping up. From across the globe, we scout the best and brightest.</p>
 
 
 
@@ -876,7 +900,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 
     <div style="display:flex;gap:1rem;margin-bottom:3rem;flex-wrap:wrap">
       <button class="btn-primary" onclick="gatedPage('collective')"><span>Enter RoundTable</span></button>
-      <button class="btn-secondary" onclick="gatedPage('survey')">Create Account</button>
+      <button class="btn-secondary" onclick="openNextElonApply()">Create Account</button>
     </div>
 
     <div class="method-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem">
@@ -1167,13 +1191,26 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   </div>
 </section>
 
+<!-- TOP MINDS -->
+<section class="minds-section" id="top-minds">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Neuropian Intelligence · Live</div>
+    <h2 class="section-title reveal" style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:.95;letter-spacing:-.025em;color:var(--white);margin-bottom:1rem">The Minds <em style="font-style:italic;color:#e8e2d6">We've Found</em></h2>
+    <p class="find-body reveal" style="margin-bottom:0">Updated daily. These are the highest-signal individuals Neuropian has identified in the last 30 days.</p>
+    <div class="minds-grid reveal" id="top-minds-grid">
+      <div class="minds-empty">Scanning…</div>
+    </div>
+    <div class="minds-updated reveal" id="minds-updated-label">Updating daily</div>
+  </div>
+</section>
+
 <section class="cta-section reveal" id="cta">
   <div class="cta-inner">
     <div class="cta-pre">Neuropian · Apply</div>
     <h2 class="cta-h">Are You the One We've<br>Been <em>Looking For?</em></h2>
     <p class="cta-p">You found this page for a reason. People with ordinary minds do not end up here. Our AI already suspects you belong, now prove it.</p>
     <div class="cta-btns">
-      <button class="btn-primary" onclick="gatedPage('survey')"><span>Submit Application</span></button>
+      <button class="btn-primary" onclick="openNextElonApply()"><span>Submit Application</span></button>
       <button class="btn-secondary" onclick="gatedPage('collective')">Enter RoundTable</button>
       <button class="btn-secondary" onclick="gatedPage('eagleeyes')">&#10022; EagleEyes</button>
     </div>
@@ -1672,6 +1709,55 @@ function showAuth(mode,dest){
 function closeAuth(){document.getElementById('auth-gate').classList.remove('show')}
 function switchToRegister(){showAuth('reg')}
 function switchToLogin(){showAuth('login')}
+
+// ── NEXT ELON APPLICATION ─────────────────────────────────────────
+function openNextElonApply(){
+  if(currentUser){showPage('survey');return;}
+  const modal=document.getElementById('nextelon-apply-modal');
+  document.getElementById('nextelon-form-view').style.display='';
+  document.getElementById('nextelon-success-view').style.display='none';
+  document.getElementById('nextelon-err').style.display='none';
+  ['ne-fn','ne-ln','ne-email','ne-why'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  modal.style.display='flex';
+}
+function closeNextElonApply(){
+  document.getElementById('nextelon-apply-modal').style.display='none';
+}
+function showNEErr(msg){
+  const el=document.getElementById('nextelon-err');
+  el.textContent=msg;el.style.display='block';
+}
+async function submitNextElonApply(){
+  if(!sb){showNEErr('Service unavailable. Please try again later.');return;}
+  const fn=document.getElementById('ne-fn').value.trim();
+  const ln=document.getElementById('ne-ln').value.trim();
+  const email=document.getElementById('ne-email').value.trim();
+  const why=document.getElementById('ne-why').value.trim();
+  if(!fn||!email){showNEErr('Please enter your first name and email address.');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showNEErr('Please enter a valid email address.');return;}
+  const btn=document.getElementById('ne-btn');
+  btn.textContent='Submitting…';btn.disabled=true;
+  document.getElementById('nextelon-err').style.display='none';
+  try{
+    const {error}=await sb.auth.signInWithOtp({
+      email,
+      options:{
+        emailRedirectTo:'https://neuropian.com',
+        data:{first_name:fn,last_name:ln,full_name:(fn+' '+ln).trim()}
+      }
+    });
+    if(error)throw error;
+    await sb.from('nextelon_applications').insert({
+      email,first_name:fn,last_name:ln,why:why||null,
+      applied_at:new Date().toISOString()
+    }).then(()=>{});
+    document.getElementById('nextelon-form-view').style.display='none';
+    document.getElementById('nextelon-success-view').style.display='block';
+  }catch(e){
+    showNEErr(e.message||'Something went wrong. Please try again.');
+  }
+  btn.textContent='Submit Application';btn.disabled=false;
+}
 
 // ── login ─────────────────────────────────────────────────
 async function doLogin(){
@@ -2606,6 +2692,7 @@ async function submitProblem(){
 {const _e=document.getElementById('create-server-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeCreateServer();});}
 {const _e=document.getElementById('join-server-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeJoinServer();});}
 {const _e=document.getElementById('friend-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeFriendRequest();});}
+{const _e=document.getElementById('nextelon-apply-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeNextElonApply();});}
 
 // ── ROOMS & MESSAGES ───────────────────────────────────────────────
 async function switchRoom(roomId,roomName,roomDesc){
@@ -2910,6 +2997,102 @@ function renderOppPreview(){
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderOppPreview);}
 else{renderOppPreview();}
 
+// ═══ TOP MINDS LEADERBOARD ═══
+
+// Seed data from Intelligence Scout sweeper — shown until EagleEyes data surpasses it
+const SCOUT_TOP5=[{"name":"PrismaticGStonks","avg":8.3,"signals":["Vocabulary","Technical Depth","Originality","Built / Created"],"domains":["r/math"],"sessions":1,"source":"reddit"},{"name":"mfb-","avg":7.6,"signals":["Vocabulary","Technical Depth","Originality"],"domains":["r/Physics"],"sessions":1,"source":"reddit"},{"name":"MechanicActual1508","avg":7.5,"signals":["Vocabulary","Technical Depth","Originality","Built / Created"],"domains":["r/astrophysics"],"sessions":1,"source":"reddit"},{"name":"Astrophysicsnerd22","avg":7.4,"signals":["Vocabulary","Technical Depth","Originality","Built / Created"],"domains":["r/astrophysics"],"sessions":1,"source":"reddit"},{"name":"axora_rxby","avg":7.4,"signals":["Vocabulary","Technical Depth","Originality"],"domains":["r/math"],"sessions":1,"source":"reddit"}];
+
+async function loadTopMinds(){
+  const grid=document.getElementById('top-minds-grid');
+  const label=document.getElementById('minds-updated-label');
+  if(!grid)return;
+
+  const cacheKey='top_minds_cache';
+  const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');
+  const now=Date.now();
+  if(cached&&(now-cached.ts)<86400000){
+    renderTopMinds(cached.data);
+    if(label)label.textContent='Last updated '+new Date(cached.ts).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    return;
+  }
+
+  // Try EagleEyes Supabase data first
+  if(sb){
+    try{
+      const since=new Date(now-30*86400000).toISOString();
+      const {data,error}=await sb
+        .from('eagleeyes_signals')
+        .select('user_id,score,signals,domain,recorded_at')
+        .gte('recorded_at',since)
+        .order('score',{ascending:false});
+
+      if(!error&&data&&data.length>=5){
+        const byUser={};
+        for(const row of data){
+          if(!row.user_id)continue;
+          if(!byUser[row.user_id]){byUser[row.user_id]={scores:[],signals:[],domains:new Set()};}
+          byUser[row.user_id].scores.push(row.score);
+          (row.signals||[]).forEach(s=>byUser[row.user_id].signals.push(s));
+          if(row.domain)byUser[row.user_id].domains.add(row.domain);
+        }
+        const ranked=Object.entries(byUser)
+          .map(([uid,d])=>({
+            uid,
+            avg:Math.round(d.scores.reduce((a,b)=>a+b,0)/d.scores.length*10)/10,
+            signals:[...new Set(d.signals)].slice(0,4),
+            domains:[...d.domains].slice(0,3),
+            sessions:d.scores.length
+          }))
+          .sort((a,b)=>b.avg-a.avg).slice(0,5);
+
+        const uids=ranked.map(r=>r.uid);
+        const {data:profiles}=await sb.from('profiles').select('user_id,first_name,last_name').in('user_id',uids);
+        const nameMap={};
+        (profiles||[]).forEach(p=>{nameMap[p.user_id]=p.first_name?(p.first_name+' '+((p.last_name||'')[0]||'')+'.').trim():'Anonymous';});
+        const final=ranked.map(r=>({...r,name:nameMap[r.uid]||'Anonymous',source:'eagleeyes'}));
+
+        // Only use EagleEyes data if its top score beats the scout data
+        if(final[0].avg>=SCOUT_TOP5[0].avg){
+          localStorage.setItem(cacheKey,JSON.stringify({ts:now,data:final}));
+          renderTopMinds(final);
+          if(label)label.textContent='Updated '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+          return;
+        }
+      }
+    }catch(e){}
+  }
+
+  // Fall back to scout data
+  renderTopMinds(SCOUT_TOP5);
+  if(label)label.textContent='Intelligence Sweep · May 2026';
+}
+
+function renderTopMinds(list){
+  const grid=document.getElementById('top-minds-grid');
+  if(!grid)return;
+  if(!list||!list.length){grid.innerHTML='<div class="minds-empty">No minds detected yet.</div>';return;}
+  grid.innerHTML=list.map((m,i)=>{
+    const isScout=m.source==='reddit'||m.source==='hackernews';
+    const nameHtml=isScout
+      ?`<a href="https://reddit.com/u/${escHtml(m.name)}" target="_blank" rel="noopener" style="color:var(--white);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.15)">${escHtml(m.name)}</a>`
+      :escHtml(m.name);
+    return `
+    <div class="mind-row">
+      <div class="mind-rank${i<3?' top':''}">${i+1}</div>
+      <div>
+        <div class="mind-name">${nameHtml}</div>
+        ${m.signals.length?`<div class="mind-signals">${m.signals.map(s=>`<span class="mind-signal">${escHtml(s)}</span>`).join('')}</div>`:''}
+        <div class="mind-domain">${m.domains.map(d=>escHtml(d)).join(' · ')}${m.sessions>1?' · '+m.sessions+' sessions':''}</div>
+      </div>
+      <div class="mind-score">
+        <div class="mind-score-n">${m.avg}</div>
+        <div class="mind-score-l">Score</div>
+      </div>
+    </div>`;}).join('');
+}
+
+loadTopMinds();
+
 </script>
 
 <!-- EAGLEEYES PAGE -->
@@ -3030,6 +3213,38 @@ else{renderOppPreview();}
 
   </div><!-- /install guide -->
 </div><!-- /page-eagleeyes -->
+
+<!-- NEXT ELON APPLICATION MODAL -->
+<div id="nextelon-apply-modal" style="display:none;position:fixed;inset:0;z-index:850;background:rgba(0,0,0,.92);backdrop-filter:blur(16px);align-items:center;justify-content:center">
+  <div style="background:var(--off-black);border:1px solid rgba(255,255,255,.12);width:100%;max-width:500px;padding:3rem;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.8)">
+    <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent)"></div>
+    <button onclick="closeNextElonApply()" style="position:absolute;top:1.2rem;right:1.2rem;width:28px;height:28px;border:none;background:none;cursor:pointer;color:#e8e2d6;font-size:1.2rem;display:flex;align-items:center;justify-content:center">✕</button>
+    <div id="nextelon-form-view">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.34em;text-transform:uppercase;color:#e8e2d6;margin-bottom:.6rem">Who's the Next Elon · Season One</div>
+      <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1;margin-bottom:.4rem;letter-spacing:-.02em">Apply to be <em style="font-style:italic;color:#e8e2d6">Found</em></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#e8e2d6;margin-bottom:2rem;line-height:1.6;font-style:italic">Your Neuropian account is created automatically. The link in your email signs you in.</div>
+      <div id="nextelon-err" style="background:rgba(200,0,0,.15);border:1px solid rgba(200,0,0,.3);color:rgba(255,120,120,.9);font-family:'Barlow',sans-serif;font-size:.72rem;padding:.65rem .9rem;margin-bottom:.8rem;display:none"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.9rem">
+        <div><label style="display:block;font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#e8e2d6;margin-bottom:.38rem">First Name</label>
+          <input id="ne-fn" type="text" placeholder="Given name" style="width:100%;padding:.75rem .95rem;border:1px solid rgba(255,255,255,.12);font-family:'Barlow',sans-serif;font-size:.84rem;color:var(--white);background:rgba(255,255,255,.05);outline:none;transition:border-color .25s;box-sizing:border-box" onfocus="this.style.borderColor='#e8e2d6'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></div>
+        <div><label style="display:block;font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#e8e2d6;margin-bottom:.38rem">Last Name</label>
+          <input id="ne-ln" type="text" placeholder="Family name" style="width:100%;padding:.75rem .95rem;border:1px solid rgba(255,255,255,.12);font-family:'Barlow',sans-serif;font-size:.84rem;color:var(--white);background:rgba(255,255,255,.05);outline:none;transition:border-color .25s;box-sizing:border-box" onfocus="this.style.borderColor='#e8e2d6'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></div>
+      </div>
+      <div style="margin-bottom:.9rem"><label style="display:block;font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#e8e2d6;margin-bottom:.38rem">Email Address</label>
+        <input id="ne-email" type="email" placeholder="you@example.com" style="width:100%;padding:.75rem .95rem;border:1px solid rgba(255,255,255,.12);font-family:'Barlow',sans-serif;font-size:.84rem;color:var(--white);background:rgba(255,255,255,.05);outline:none;transition:border-color .25s;box-sizing:border-box" onfocus="this.style.borderColor='#e8e2d6'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></div>
+      <div style="margin-bottom:1.4rem"><label style="display:block;font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#e8e2d6;margin-bottom:.38rem">Why do you think you belong here?</label>
+        <textarea id="ne-why" placeholder="One or two sentences is enough." rows="3" style="width:100%;padding:.75rem .95rem;border:1px solid rgba(255,255,255,.12);font-family:'Barlow',sans-serif;font-size:.84rem;color:var(--white);background:rgba(255,255,255,.05);outline:none;transition:border-color .25s;resize:vertical;box-sizing:border-box" onfocus="this.style.borderColor='#e8e2d6'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></textarea></div>
+      <button id="ne-btn" onclick="submitNextElonApply()" style="width:100%;padding:.9rem;background:var(--white);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;border:none;cursor:pointer;transition:all .25s">Submit Application</button>
+      <div style="text-align:center;margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#e8e2d6">Already have an account? <a onclick="closeNextElonApply();showAuth('login')" style="color:#e8e2d6;cursor:pointer;font-weight:600;text-decoration:none">Sign in</a></div>
+    </div>
+    <div id="nextelon-success-view" style="display:none;text-align:center;padding:1rem 0">
+      <div style="font-size:2.5rem;margin-bottom:1rem">✦</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--white);margin-bottom:.6rem">Application Received</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;line-height:1.75;color:#e8e2d6;margin-bottom:1.5rem">Check your email — click the link to activate your Neuropian account and sign in automatically. No password needed.</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35)">One click and you're in.</div>
+    </div>
+  </div>
+</div>
 
 <!-- AUTH GATE MODAL -->
 <div class="auth-gate" id="auth-gate">
