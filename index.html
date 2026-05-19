@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <title>Neuropian — Intelligence Reimagined | Dylan Leitenberg</title>
 <meta name="description" content="Neuropian, founded by Dylan Leitenberg, is the AI-powered platform discovering extraordinary minds worldwide. Creator of Who's the Next Elon, EagleEyes, RoundTable, and Leitenberg Academy.">
 <meta name="author" content="Dylan Leitenberg">
@@ -173,8 +174,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:600;height:56px;display:flex;ali
 .eyebrow::before{content:'';display:block;width:28px;height:1px;background:rgba(255,255,255,.25)}
 
 /* REVEAL */
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
-.reveal.in{opacity:1;transform:translateY(0)}
+@keyframes revealFallback{to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);animation:revealFallback .01s 1.5s forwards}
+.reveal.in{opacity:1;transform:translateY(0);animation:none}
 
 /* ── SECTION: HOW WE FIND ── */
 .find-section{background:var(--black);color:var(--white)}
@@ -582,54 +584,18 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 
 
 /* ── SITE-WIDE SCROLL FADE-IN ── */
-.fade-in{opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
-.fade-in.in{opacity:1;transform:translateY(0)}
-.fade-in-fast{opacity:0;transition:opacity .6s ease}
-.fade-in-fast.in{opacity:1}
+.fade-in{opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1);animation:revealFallback .01s 2s forwards}
+.fade-in.in{opacity:1;transform:translateY(0);animation:none}
+.fade-in-fast{opacity:0;transition:opacity .6s ease;animation:revealFallback .01s 2s forwards}
+.fade-in-fast.in{opacity:1;animation:none}
 
-/* Stagger children of method-grid, pillars-grid etc */
-.method-card,.pillar,.crisis-card,.rstat,.manifesto-item,.jc{
-  opacity:0;transform:translateY(18px);
-  transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)
-}
-.method-card.in,.pillar.in,.crisis-card.in,.rstat.in,.manifesto-item.in,.jc.in{
-  opacity:1;transform:translateY(0)
-}
+/* Stagger animation handled via .fade-in class added by JS — elements visible by default */
 
 </style>
 </head>
 <body>
 <div id="cur"></div>
 <div id="page-overlay"></div>
-
-<!-- AUTH GATE MODAL -->
-<div class="auth-gate" id="auth-gate">
-  <div class="auth-box">
-    <button class="auth-close" onclick="closeAuth()" title="Close">✕</button>
-    <div id="auth-login-view">
-      <div class="auth-title">Sign <em>In</em></div>
-      <div class="auth-sub">Access your cognitive profile and opportunity matches</div>
-      <div class="auth-err" id="li-err"></div>
-      <div class="auth-field"><label>Email Address</label><input type="email" id="li-email" placeholder="you@example.com"></div>
-      <div class="auth-field"><label>Password</label><input type="password" id="li-pass" placeholder="Your password"></div>
-      <button class="auth-sub-btn" id="li-btn" onclick="doLogin()">Sign In &amp; Continue</button>
-      <div class="auth-switch">Don't have an account? <a onclick="switchToRegister()">Create one, it's free</a></div>
-    </div>
-    <div id="auth-reg-view" style="display:none">
-      <div class="auth-title">Join <em>neuropian</em></div>
-      <div class="auth-sub">Create your account to access the survey and opportunities</div>
-      <div class="auth-err" id="rg-err"></div>
-      <div class="auth-row">
-        <div class="auth-field"><label>First Name</label><input type="text" id="rg-fn" placeholder="Given name"></div>
-        <div class="auth-field"><label>Last Name</label><input type="text" id="rg-ln" placeholder="Family name"></div>
-      </div>
-      <div class="auth-field"><label>Email Address</label><input type="email" id="rg-email" placeholder="you@example.com"></div>
-      <div class="auth-field"><label>Password</label><input type="password" id="rg-pass" placeholder="Create a strong password"></div>
-      <button class="auth-sub-btn" id="rg-btn" onclick="doRegister()">Create Account &amp; Continue</button>
-      <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
-    </div>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav>
@@ -795,37 +761,37 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 
     <div class="method-grid reveal">
       <div class="method-card" style="cursor:pointer" onclick="document.getElementById('eagleeyes-intro').scrollIntoView({behavior:'smooth'})">
-        <div class="method-n">↗</div>
+        <div class="method-n">01</div>
         <h4>EagleEyes</h4>
         <p>Neuropian&rsquo;s browser extension. Install it once and every site you opt into becomes part of the intelligence sweep. The algorithm reads your behavioral signals in the background, building a cognitive profile that connects you to the opportunities and people you were built for.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Browser Extension</span>
       </div>
       <div class="method-card" style="transition-delay:.08s">
-        <div class="method-n">◈</div>
+        <div class="method-n">02</div>
         <h4>Falcon</h4>
         <p>Neuropian&rsquo;s data sweeper. Falcon crawls the internet continuously, reading intellectual activity across forums, research threads, open-source contributions, competitive platforms, and niche communities. Where others see noise, Falcon reads signal, surfacing extraordinary minds from what they actually do online.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Data Sweep</span>
       </div>
       <div class="method-card" style="transition-delay:.16s;cursor:pointer" onclick="document.getElementById('opportunities-home').scrollIntoView({behavior:'smooth'})">
-        <div class="method-n">↗</div>
+        <div class="method-n">03</div>
         <h4>Live Opportunities</h4>
         <p>Every day, Neuropian&rsquo;s AI agent surfaces science and technology positions from across the internet, filtered for depth and matched to your cognitive profile. Not a job board. The roles that reward how you actually think.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Job Finder</span>
       </div>
       <div class="method-card" style="transition-delay:.06s;cursor:pointer" onclick="document.getElementById('nextelon').scrollIntoView({behavior:'smooth'})">
-        <div class="method-n">↗</div>
+        <div class="method-n">04</div>
         <h4>Who&rsquo;s the Next Elon?</h4>
         <p>Every era has its outliers. The ones who see what no one else sees, who build what no one thought to build. Most disappear not because they lacked ability, but because no one was looking. Neuropian has built something powerful enough to find them.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Neuropian Originals</span>
       </div>
       <div class="method-card" style="transition-delay:.14s;cursor:pointer" onclick="document.getElementById('roundtable').scrollIntoView({behavior:'smooth'})">
-        <div class="method-n">↗</div>
+        <div class="method-n">05</div>
         <h4>RoundTable</h4>
         <p>Chat hubs, team systems, and project rooms for the world&rsquo;s sharpest minds. The algorithms don&rsquo;t just find extraordinary people, they find the right extraordinary people for each other. Shared obsessions. Complementary strengths.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Collective Intelligence</span>
       </div>
       <div class="method-card" style="transition-delay:.22s">
-        <div class="method-n">◆</div>
+        <div class="method-n">06</div>
         <h4>Our Mission</h4>
         <p>Every gifted program that closes is a tragedy. Every extraordinary mind that goes unrecognized is a loss the world will never calculate. Neuropian has built the system that education refused to build, one that finds the gifted, the divergent, the different, and gives them the stage they have always deserved.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Intellect Accelerator</span>
@@ -1441,6 +1407,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
     <!-- Typing indicator -->
     <div id="typing-indicator" style="height:18px;padding:0 1.4rem;font-size:.56rem;color:#00aa38;font-style:italic"></div>
+    <div id="chat-err" style="display:none;padding:0 1.4rem;font-size:.54rem;color:#e55;font-style:italic"></div>
     <!-- Input -->
     <div style="padding:.7rem 1rem;background:#111;border-top:1px solid rgba(0,200,40,.1);display:flex;gap:.6rem;align-items:flex-end">
       <textarea id="chat-input" placeholder="Message RoundTable…" onkeydown="handleChatKey(event)" oninput="handleTyping()"
@@ -1530,7 +1497,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 <script>
 // ═══ CURSOR ═══
 const cur=document.getElementById('cur');
-document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'});
+if(cur&&cur.style.display!=='none')document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'});
 
 // ═══ MOBILE NAV ═══
 function toggleMobileNav(){
@@ -1580,7 +1547,7 @@ function closeMobileNav(){
 // ⚠️  Replace these two values with your project's URL and anon key from supabase.com → Settings → API
 const SUPA_URL = 'https://qggduzzwvdkmekihwuav.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw';
-const sb = supabase.createClient(SUPA_URL, SUPA_KEY);
+const sb = (typeof supabase !== 'undefined') ? supabase.createClient(SUPA_URL, SUPA_KEY) : null;
 
 // ═══ AUTH STATE ═══
 let isAuthed = false;
@@ -1622,6 +1589,7 @@ function setNavUser(user){
 
 // ── session restore on page load ─────────────────────────
 (async function initSession(){
+  if(!sb)return;
   const {data:{session}}=await sb.auth.getSession();
   if(session){
     currentUser=session.user;
@@ -1685,6 +1653,7 @@ function switchToLogin(){showAuth('login')}
 
 // ── login ─────────────────────────────────────────────────
 async function doLogin(){
+  if(!sb){showErr('li-err','Service unavailable. Please try again later.');return}
   const email=document.getElementById('li-email').value.trim();
   const pass=document.getElementById('li-pass').value;
   if(!email||!pass){showErr('li-err','Please fill in all fields.');return}
@@ -1711,6 +1680,7 @@ async function doLogin(){
 
 // ── register ──────────────────────────────────────────────
 async function doRegister(){
+  if(!sb){showErr('rg-err','Service unavailable. Please try again later.');return}
   const fn=document.getElementById('rg-fn').value.trim();
   const ln=document.getElementById('rg-ln').value.trim();
   const email=document.getElementById('rg-email').value.trim();
@@ -1739,7 +1709,7 @@ async function doRegister(){
 
 // ── sign out ──────────────────────────────────────────────
 async function doSignOut(){
-  await sb.auth.signOut();
+  if(sb)await sb.auth.signOut();
   isAuthed=false;surveyDone=false;currentUser=null;
   Object.keys(TR).forEach(k=>delete TR[k]);
   setNavUser(null);
@@ -1751,7 +1721,7 @@ async function finSurvey(){
   surveyDone=true;
   const accomplishment=document.getElementById('s8-accomplishment').value.trim();
   const hiddenAbility=document.getElementById('s8-hidden-ability').value.trim();
-  if(currentUser){
+  if(currentUser&&sb){
     await sb.from('profiles').upsert({
       user_id:currentUser.id,
       traits:TR,
@@ -1765,7 +1735,7 @@ async function finSurvey(){
 
 // ── apply / save buttons (wired in renderJobs) ────────────
 async function applyToJob(jobId,jobTitle,company){
-  if(!currentUser)return;
+  if(!currentUser||!sb)return;
   await sb.from('applications').upsert({
     user_id:currentUser.id,
     job_id:jobId,
@@ -1775,7 +1745,7 @@ async function applyToJob(jobId,jobTitle,company){
   },{onConflict:'user_id,job_id'});
 }
 async function saveJob(jobId,jobTitle,company){
-  if(!currentUser)return;
+  if(!currentUser||!sb)return;
   await sb.from('saved_jobs').upsert({
     user_id:currentUser.id,
     job_id:jobId,
@@ -1785,7 +1755,7 @@ async function saveJob(jobId,jobTitle,company){
   },{onConflict:'user_id,job_id'});
 }
 
-document.getElementById('auth-gate').addEventListener('click',function(e){if(e.target===this)closeAuth()});
+{const _ag=document.getElementById('auth-gate');if(_ag)_ag.addEventListener('click',function(e){if(e.target===this)closeAuth();});}
 
 // ═══ WATCH ID ═══
 const wid=document.getElementById('wid');
@@ -2066,10 +2036,12 @@ function Brain(canvasId,W,H,isHero){
     // Signal pulses, faster with click
     pulses.forEach(p=>{
       p.t+=p.sp*(1+clickPulse*3.2+hb*.5);
-      if(p.t>1){p.t=0;p.ax=Math.floor(Math.random()*axons.length)}
-      const ax=axons[p.ax],tp=p.t,mt=1-tp;
-      const bx=mt**3*ax.x1+3*mt**2*tp*ax.cx1+3*mt*tp**2*ax.cx2+tp**3*ax.x2;
-      const by=mt**3*ax.y1+3*mt**2*tp*ax.cy1+3*mt*tp**2*ax.cy2+tp**3*ax.y2;
+      if(p.t>1){p.t=0;p.path=Math.floor(Math.random()*pulsePaths.length);}
+      const path=pulsePaths[p.path];if(!path||path.length<2)return;
+      const tp=p.t,idx=Math.min(Math.floor(tp*(path.length-1)),path.length-2);
+      const frac=tp*(path.length-1)-idx;
+      const bx=path[idx].x*(1-frac)+path[idx+1].x*frac;
+      const by=path[idx].y*(1-frac)+path[idx+1].y*frac;
       const life=Math.sin(tp*Math.PI);
       const sz=p.sz*(1+clickPulse*.6+hb*.12);
       const pg=g.createRadialGradient(bx,by,0,bx,by,sz);
@@ -2185,9 +2157,9 @@ const inkRevObs = new IntersectionObserver(entries => {
       });
     }
   });
-}, {threshold: .04, rootMargin: '0px 0px -40px 0px'});
+}, {threshold: .04, rootMargin: '200px 0px 200px 0px'});
 
-// Observe all .reveal elements
+// Observe all .reveal elements — also immediately reveal any already in viewport
 document.querySelectorAll('.reveal').forEach(el => inkRevObs.observe(el));
 
 // Observe all .fade-in elements
@@ -2201,15 +2173,14 @@ const autoFadeObs = new IntersectionObserver(entries => {
       autoFadeObs.unobserve(en.target);
     }
   });
-}, {threshold: .04, rootMargin: '0px 0px -40px 0px'});
+}, {threshold: .04, rootMargin: '200px 0px 200px 0px'});
 
-// Add fade-in to major page elements that don't already have reveal
+// Add fade-in to major container elements that don't already have reveal
 document.querySelectorAll(
   '.section-inner > h2, .section-inner > p, .si > h2, .si > p,' +
   '.method-grid, .pillars-grid, .crisis-cards, .crisis-stats,' +
   '.manifesto-list, .quotes-grid, .reality-hero, .founder-layout,' +
-  '.academy-card, .timeline-inner, .cta-inner, .live-block,' +
-  '.method-card, .pillar, .crisis-card, .rstat, .manifesto-item'
+  '.academy-card, .timeline-inner, .cta-inner, .live-block'
 ).forEach((el, i) => {
   if (!el.classList.contains('reveal') && !el.classList.contains('fade-in') && !el.classList.contains('in')) {
     el.classList.add('fade-in');
@@ -2299,19 +2270,19 @@ function scJ(j){
 let CF='all';
 const CL={tech:'Technology & AI',data:'Data & Intelligence',research:'Science & Research',design:'Design & Creative Technology',art:'Art & Music',psych:'Psychology & Human Behavior',prize:'Prize Competitions',startup:'Startups & Founding Roles'};
 function renderJobs(){
-  const list=document.getElementById('jlist');list.innerHTML='';
+  const list=document.getElementById('jlist');if(!list)return;list.innerHTML='';
   const surv=Object.keys(TR).length>0;
   const sc=[...JOBS,...AGENT_JOBS].map(j=>({...j,score:scJ(j)})).sort((a,b)=>b.score-a.score);
   sc.forEach((j,i)=>{
-    const c=document.createElement('div');c.className='jc fi hj';c.dataset.cat=j.cat;c.style.animationDelay=(i*.032)+'s';
+    const c=document.createElement('div');c.className='jc fi';c.dataset.cat=j.cat;c.style.animationDelay=(i*.032)+'s';
     const score=scJ(j);
     const matchColor=score>82?'#00cc44':score>68?'#00883a':'#7a5c2a';
     const applyBtn=j.url
-      ?'<a class="bsb" href="'+j.url+'" target="_blank" rel="noopener noreferrer">Apply Now</a>'
+      ?'<a class="bsb" href="'+safeUrl(j.url)+'" target="_blank" rel="noopener noreferrer">Apply Now</a>'
       :'<button class="bsb" disabled style="opacity:.35;cursor:default">Apply Now</button>';
-    c.innerHTML='<div><div class="jt">'+j.t+'</div><div class="jco">'+j.co+
-      '<span style="margin-left:.6rem;font-size:.38rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:#888;padding:.06rem .35rem;vertical-align:middle">'+(CL[j.cat]||j.cat)+'</span></div>'+
-      '<div class="jd">'+j.d+'</div><div class="jtgs">'+j.tags.map(function(t){return'<span class="jtag">'+t+'</span>';}).join('')+'</div>'+
+    c.innerHTML='<div><div class="jt">'+escHtml(j.t)+'</div><div class="jco">'+escHtml(j.co)+
+      '<span style="margin-left:.6rem;font-size:.38rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:#888;padding:.06rem .35rem;vertical-align:middle">'+escHtml(CL[j.cat]||j.cat)+'</span></div>'+
+      '<div class="jd">'+escHtml(j.d)+'</div><div class="jtgs">'+j.tags.map(function(t){return'<span class="jtag">'+escHtml(t)+'</span>';}).join('')+'</div>'+
       '<div class="jact">'+applyBtn+'<button class="bsbo save-btn">Save</button></div></div>'+
       '<div><div class="jmp" style="color:'+matchColor+'">'+score+'%</div><div class="jml">'+(surv?'Match':'Est.')+'</div></div>';
     var saveBtn=c.querySelector('.save-btn');
@@ -2392,21 +2363,6 @@ async function initChat(){
 }
 
 // ── SERVERS ────────────────────────────────────────────────────────
-async function loadServerRail(){
-  try{
-    const {data}=await sb.from('servers').select('id,name').order('created_at',{ascending:true});
-    const rail=document.getElementById('server-rail-items');
-    if(!data||!data.length){rail.innerHTML='';return;}
-    rail.innerHTML=data.map(s=>{
-      const abbr=s.name.slice(0,2).toUpperCase();
-      const hue=Math.abs(s.name.split('').reduce((a,c)=>a+c.charCodeAt(0),0))%360;
-      return `<div onclick="switchServer('${s.id}')" id="srv-${s.id}" title="${escHtml(s.name)}"
-        style="width:44px;height:44px;border-radius:50%;background:hsl(${hue},55%,22%);border:2px solid hsl(${hue},55%,35%);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.62rem;font-weight:700;color:hsl(${hue},80%,72%);flex-shrink:0;transition:border-radius .2s;margin-bottom:.5rem"
-        onmouseenter="this.style.borderRadius='12px'" onmouseleave="if(currentServerId!=='${s.id}')this.style.borderRadius='50%'">${abbr}</div>`;
-    }).join('');
-  }catch(e){console.error('loadServerRail',e);}
-}
-
 async function switchServer(serverId){
   currentServerId=serverId;
   // Update rail highlight
@@ -2570,9 +2526,9 @@ async function submitProblem(){
   }
   btn.textContent='Post Problem';btn.disabled=false;
 }
-document.getElementById('post-problem-modal').addEventListener('click',function(e){if(e.target===this)closePostProblem();});
-document.getElementById('create-server-modal').addEventListener('click',function(e){if(e.target===this)closeCreateServer();});
-document.getElementById('friend-modal').addEventListener('click',function(e){if(e.target===this)closeFriendRequest();});
+{const _e=document.getElementById('post-problem-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closePostProblem();});}
+{const _e=document.getElementById('create-server-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeCreateServer();});}
+{const _e=document.getElementById('friend-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeFriendRequest();});}
 
 // ── ROOMS & MESSAGES ───────────────────────────────────────────────
 async function switchRoom(roomId,roomName,roomDesc){
@@ -2632,11 +2588,17 @@ function appendMessage(msg,scroll){
 }
 
 function escHtml(t){if(!t)return'';return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function safeUrl(u){return(u&&/^https?:\/\//i.test(u))?u:'#';}
 
+let _lastSend=0;
 async function sendMessage(){
   const input=document.getElementById('chat-input');
   const content=input.value.trim();
   if(!content||!currentUser)return;
+  if(content.length>2000){showErr('chat-err','Message too long (max 2000 characters).');return;}
+  const now=Date.now();
+  if(now-_lastSend<500){return;}
+  _lastSend=now;
   input.value='';input.style.height='auto';
   const name=getChatName();
   // Optimistic UI
@@ -2834,11 +2796,11 @@ function renderRoomJobs(roomId){
   if(none)none.style.display='none';
   list.style.display='flex';
   jobs.slice(0,6).forEach(function(j){
-    var url=j.url||'';
+    var url=safeUrl(j.url||'');
     var card=document.createElement('div');
     card.style.cssText='background:#111;border:1px solid rgba(0,200,40,.1);padding:.7rem .9rem;display:flex;justify-content:space-between;align-items:flex-start;gap:.8rem';
-    var applyHtml=url?'<a href="'+url+'" target="_blank" rel="noopener noreferrer" style="flex-shrink:0;font-size:.46rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:#00cc44;color:#000;padding:.28rem .65rem;text-decoration:none;white-space:nowrap">Apply</a>':'';
-    card.innerHTML='<div style="min-width:0"><div style="font-size:.62rem;font-weight:700;color:#eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+j.t+'</div><div style="font-size:.5rem;color:#00aa38;letter-spacing:.1em;text-transform:uppercase;margin:.12rem 0">'+j.co+'</div><div style="font-size:.72rem;color:#888;font-style:italic;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+j.d+'</div></div>'+applyHtml;
+    var applyHtml=url&&url!=='#'?'<a href="'+url+'" target="_blank" rel="noopener noreferrer" style="flex-shrink:0;font-size:.46rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:#00cc44;color:#000;padding:.28rem .65rem;text-decoration:none;white-space:nowrap">Apply</a>':'';
+    card.innerHTML='<div style="min-width:0"><div style="font-size:.62rem;font-weight:700;color:#eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+escHtml(j.t)+'</div><div style="font-size:.5rem;color:#00aa38;letter-spacing:.1em;text-transform:uppercase;margin:.12rem 0">'+escHtml(j.co)+'</div><div style="font-size:.72rem;color:#888;font-style:italic;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+escHtml(j.d)+'</div></div>'+applyHtml;
     list.appendChild(card);
   });
 }
@@ -2871,18 +2833,18 @@ else{renderOppPreview();}
 </script>
 
 <!-- EAGLEEYES PAGE -->
-<div id="page-eagleeyes" class="page" style="background:#000;min-height:100vh;color:#fff">
+<div id="page-eagleeyes" class="page" style="background:#fff;min-height:100vh;color:#000">
 
   <!-- Hero -->
   <div style="position:relative;padding:9rem 3rem 5rem;max-width:960px;margin:0 auto">
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.95);margin-bottom:1.4rem;display:flex;align-items:center;gap:.8rem">
-      <span style="display:block;width:28px;height:1px;background:rgba(255,255,255,.3)"></span>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(0,0,0,.85);margin-bottom:1.4rem;display:flex;align-items:center;gap:.8rem">
+      <span style="display:block;width:28px;height:1px;background:rgba(0,0,0,.25)"></span>
       Neuropian Intelligence
     </div>
-    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(3.5rem,7vw,6.5rem);font-weight:900;line-height:.88;letter-spacing:-.03em;color:#fff;margin-bottom:1.2rem">
-      Eagle<em style="-webkit-text-stroke:1.5px rgba(255,255,255,.7);color:transparent;font-style:italic">Eyes</em>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(3.5rem,7vw,6.5rem);font-weight:900;line-height:.88;letter-spacing:-.03em;color:#000;margin-bottom:1.2rem">
+      Eagle<em style="-webkit-text-stroke:1.5px rgba(0,0,0,.7);color:transparent;font-style:italic">Eyes</em>
     </h1>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;line-height:1.75;color:rgba(255,255,255,.95);max-width:580px;margin-bottom:3rem">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;line-height:1.75;color:rgba(0,0,0,.85);max-width:580px;margin-bottom:3rem">
       The Neuropian browser extension. Opt any site into Neuropian&rsquo;s intelligence sweep and let the algorithm find you.
     </p>
 
@@ -2892,21 +2854,21 @@ else{renderOppPreview();}
       <span style="font-size:1rem">&#11015;</span>
       Download EagleEyes &nbsp;(.zip)
     </a>
-    <div style="margin-top:.9rem;font-family:'Barlow Condensed',sans-serif;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.95)">
+    <div style="margin-top:.9rem;font-family:'Barlow Condensed',sans-serif;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,0,0,.85)">
       Chrome · Edge · Brave &nbsp;&middot;&nbsp; Free
     </div>
   </div>
 
   <!-- Divider -->
   <div style="max-width:960px;margin:0 auto 0;padding:0 3rem">
-    <div style="height:1px;background:rgba(255,255,255,.08)"></div>
+    <div style="height:1px;background:rgba(0,0,0,.06)"></div>
   </div>
 
   <!-- Install guide -->
   <div style="max-width:960px;margin:0 auto;padding:5rem 3rem 8rem">
 
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.95);margin-bottom:3rem;display:flex;align-items:center;gap:.8rem">
-      <span style="display:block;width:28px;height:1px;background:rgba(255,255,255,.3)"></span>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(0,0,0,.85);margin-bottom:3rem;display:flex;align-items:center;gap:.8rem">
+      <span style="display:block;width:28px;height:1px;background:rgba(0,0,0,.25)"></span>
       How to Install
     </div>
 
@@ -2914,74 +2876,74 @@ else{renderOppPreview();}
     <div style="display:flex;flex-direction:column;gap:0">
 
       <!-- Step 1 -->
-      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(255,255,255,.07)">
-        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(255,255,255,.12);line-height:1;padding-top:.2rem">1</div>
+      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(0,0,0,.08)">
+        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(0,0,0,.10);line-height:1;padding-top:.2rem">1</div>
         <div>
-          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:.5rem">Download</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(255,255,255,.95)">Click the button above to download the extension as a <code style="font-family:monospace;background:rgba(255,255,255,.08);padding:.1em .4em;font-size:.9em">.zip</code> file. Your browser will save it to your Downloads folder.</p>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;margin-bottom:.5rem">Download</h3>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">Click the button above to download the extension as a <code style="font-family:monospace;background:rgba(0,0,0,.06);padding:.1em .4em;font-size:.9em">.zip</code> file. Your browser will save it to your Downloads folder.</p>
         </div>
       </div>
 
       <!-- Step 2 -->
-      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(255,255,255,.07)">
-        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(255,255,255,.12);line-height:1;padding-top:.2rem">2</div>
+      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(0,0,0,.08)">
+        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(0,0,0,.10);line-height:1;padding-top:.2rem">2</div>
         <div>
-          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:.5rem">Unzip</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(255,255,255,.95)">Find the downloaded file and unzip it. On Mac, double-click it. On Windows, right-click &rarr; &ldquo;Extract All.&rdquo; You&rsquo;ll get a folder called <code style="font-family:monospace;background:rgba(255,255,255,.08);padding:.1em .4em;font-size:.9em">talent-scout-extension</code>.</p>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;margin-bottom:.5rem">Unzip</h3>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">Find the downloaded file and unzip it. On Mac, double-click it. On Windows, right-click &rarr; &ldquo;Extract All.&rdquo; You&rsquo;ll get a folder called <code style="font-family:monospace;background:rgba(0,0,0,.06);padding:.1em .4em;font-size:.9em">talent-scout-extension</code>.</p>
         </div>
       </div>
 
       <!-- Step 3 -->
-      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(255,255,255,.07)">
-        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(255,255,255,.12);line-height:1;padding-top:.2rem">3</div>
+      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(0,0,0,.08)">
+        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(0,0,0,.10);line-height:1;padding-top:.2rem">3</div>
         <div>
-          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:.5rem">Open Chrome Extensions</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(255,255,255,.95);margin-bottom:.8rem">In Chrome, Edge, or Brave, type this into your address bar and press Enter:</p>
-          <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:.8rem 1.2rem;font-family:monospace;font-size:.9rem;color:#e8e2d6;letter-spacing:.04em">chrome://extensions</div>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;margin-bottom:.5rem">Open Chrome Extensions</h3>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85);margin-bottom:.8rem">In Chrome, Edge, or Brave, type this into your address bar and press Enter:</p>
+          <div style="background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.12);padding:.8rem 1.2rem;font-family:monospace;font-size:.9rem;color:#444;letter-spacing:.04em">chrome://extensions</div>
         </div>
       </div>
 
       <!-- Step 4 -->
-      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(255,255,255,.07)">
-        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(255,255,255,.12);line-height:1;padding-top:.2rem">4</div>
+      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(0,0,0,.08)">
+        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(0,0,0,.10);line-height:1;padding-top:.2rem">4</div>
         <div>
-          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:.5rem">Enable Developer Mode</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(255,255,255,.95)">In the top-right corner of the Extensions page, toggle <strong style="color:#fff;font-weight:600">Developer mode</strong> on. This lets you install extensions that aren&rsquo;t from the Chrome Web Store.</p>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;margin-bottom:.5rem">Enable Developer Mode</h3>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">In the top-right corner of the Extensions page, toggle <strong style="color:#000;font-weight:600">Developer mode</strong> on. This lets you install extensions that aren&rsquo;t from the Chrome Web Store.</p>
         </div>
       </div>
 
       <!-- Step 5 -->
-      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(255,255,255,.07)">
-        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(255,255,255,.12);line-height:1;padding-top:.2rem">5</div>
+      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(0,0,0,.08)">
+        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(0,0,0,.10);line-height:1;padding-top:.2rem">5</div>
         <div>
-          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:.5rem">Load the Extension</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(255,255,255,.95)">Click <strong style="color:#fff">Load unpacked</strong>, then select the <code style="font-family:monospace;background:rgba(255,255,255,.08);padding:.1em .4em;font-size:.9em">talent-scout-extension</code> folder you unzipped in Step 2.</p>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;margin-bottom:.5rem">Load the Extension</h3>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">Click <strong style="color:#000">Load unpacked</strong>, then select the <code style="font-family:monospace;background:rgba(0,0,0,.06);padding:.1em .4em;font-size:.9em">talent-scout-extension</code> folder you unzipped in Step 2.</p>
         </div>
       </div>
 
       <!-- Step 6 -->
-      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(255,255,255,.07)">
-        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(255,255,255,.12);line-height:1;padding-top:.2rem">6</div>
+      <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.2rem 0;border-bottom:1px solid rgba(0,0,0,.08)">
+        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(0,0,0,.10);line-height:1;padding-top:.2rem">6</div>
         <div>
-          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:.5rem">Pin It</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(255,255,255,.95)">Click the puzzle piece &#129513; icon in your Chrome toolbar, find EagleEyes, and click the pin icon so it stays visible.</p>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;margin-bottom:.5rem">Pin It</h3>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">Click the puzzle piece &#129513; icon in your Chrome toolbar, find EagleEyes, and click the pin icon so it stays visible.</p>
         </div>
       </div>
 
       <!-- Done -->
       <div style="display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.5rem 0">
-        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:rgba(255,255,255,.12);line-height:1;padding-top:.4rem">&#10022;</div>
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:rgba(0,0,0,.10);line-height:1;padding-top:.4rem">&#10022;</div>
         <div>
-          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:.5rem">Done</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(255,255,255,.95)">Click the <strong style="color:#fff">&#10022; EagleEyes</strong> icon in your toolbar to enable it and opt your first site into Neuropian&rsquo;s intelligence sweep.</p>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;margin-bottom:.5rem">Done</h3>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">Click the <strong style="color:#000">&#10022; EagleEyes</strong> icon in your toolbar to enable it and opt your first site into Neuropian&rsquo;s intelligence sweep.</p>
         </div>
       </div>
 
     </div><!-- /steps -->
 
     <!-- Back button -->
-    <div style="margin-top:3rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.07)">
-      <button onclick="showPage('home')" style="font-family:'Barlow Condensed',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;background:transparent;color:rgba(255,255,255,.95);border:1px solid rgba(255,255,255,.2);padding:.7rem 1.8rem;cursor:pointer;transition:all .25s">
+    <div style="margin-top:3rem;padding-top:3rem;border-top:1px solid rgba(0,0,0,.08)">
+      <button onclick="showPage('home')" style="font-family:'Barlow Condensed',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;background:transparent;color:rgba(0,0,0,.85);border:1px solid rgba(255,255,255,.2);padding:.7rem 1.8rem;cursor:pointer;transition:all .25s">
         &larr; &nbsp;Back to Neuropian
       </button>
     </div>
@@ -2989,4 +2951,34 @@ else{renderOppPreview();}
   </div><!-- /install guide -->
 </div><!-- /page-eagleeyes -->
 
->
+<!-- AUTH GATE MODAL -->
+<div class="auth-gate" id="auth-gate">
+  <div class="auth-box">
+    <button class="auth-close" onclick="closeAuth()" title="Close">✕</button>
+    <div id="auth-login-view">
+      <div class="auth-title">Sign <em>In</em></div>
+      <div class="auth-sub">Access your cognitive profile and opportunity matches</div>
+      <div class="auth-err" id="li-err"></div>
+      <div class="auth-field"><label>Email Address</label><input type="email" id="li-email" placeholder="you@example.com"></div>
+      <div class="auth-field"><label>Password</label><input type="password" id="li-pass" placeholder="Your password"></div>
+      <button class="auth-sub-btn" id="li-btn" onclick="doLogin()">Sign In &amp; Continue</button>
+      <div class="auth-switch">Don't have an account? <a onclick="switchToRegister()">Create one, it's free</a></div>
+    </div>
+    <div id="auth-reg-view" style="display:none">
+      <div class="auth-title">Join <em>neuropian</em></div>
+      <div class="auth-sub">Create your account to access the survey and opportunities</div>
+      <div class="auth-err" id="rg-err"></div>
+      <div class="auth-row">
+        <div class="auth-field"><label>First Name</label><input type="text" id="rg-fn" placeholder="Given name"></div>
+        <div class="auth-field"><label>Last Name</label><input type="text" id="rg-ln" placeholder="Family name"></div>
+      </div>
+      <div class="auth-field"><label>Email Address</label><input type="email" id="rg-email" placeholder="you@example.com"></div>
+      <div class="auth-field"><label>Password</label><input type="password" id="rg-pass" placeholder="Create a strong password"></div>
+      <button class="auth-sub-btn" id="rg-btn" onclick="doRegister()">Create Account &amp; Continue</button>
+      <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
