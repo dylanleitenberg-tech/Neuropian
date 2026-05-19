@@ -131,7 +131,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:600;height:56px;display:flex;ali
 .hero-content{position:relative;z-index:10;padding:3rem 3rem 2rem;max-width:900px}
 
 .hero-season{font-family:'Barlow Condensed',sans-serif;font-size:.58rem;font-weight:500;letter-spacing:.45em;text-transform:uppercase;color:var(--grey);margin-bottom:2rem;opacity:0;animation:fadeUp .8s .2s forwards}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 .hero-pre{font-family:'Barlow Condensed',sans-serif;font-size:clamp(1rem,2.5vw,1.6rem);font-weight:200;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;margin-bottom:.5rem;opacity:0;animation:fadeUp .9s .35s forwards}
 
@@ -174,9 +174,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:600;height:56px;display:flex;ali
 .eyebrow::before{content:'';display:block;width:28px;height:1px;background:rgba(255,255,255,.25)}
 
 /* REVEAL */
-@keyframes revealFallback{to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);animation:revealFallback .01s 1.5s forwards}
-.reveal.in{opacity:1;transform:translateY(0);animation:none}
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
 
 /* ── SECTION: HOW WE FIND ── */
 .find-section{background:var(--black);color:var(--white)}
@@ -584,10 +583,10 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 
 
 /* ── SITE-WIDE SCROLL FADE-IN ── */
-.fade-in{opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1);animation:revealFallback .01s 2s forwards}
-.fade-in.in{opacity:1;transform:translateY(0);animation:none}
-.fade-in-fast{opacity:0;transition:opacity .6s ease;animation:revealFallback .01s 2s forwards}
-.fade-in-fast.in{opacity:1;animation:none}
+.fade-in{opacity:0;transform:translateY(10px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.fade-in.in{opacity:1;transform:translateY(0)}
+.fade-in-fast{opacity:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
+.fade-in-fast.in{opacity:1}
 
 /* Stagger animation handled via .fade-in class added by JS — elements visible by default */
 
@@ -1579,6 +1578,7 @@ function setNavUser(user){
     if(ns)ns.style.display='';
     if(mu){mu.textContent=name;mu.style.display='';}
     if(ms)ms.style.display='';
+    localStorage.setItem('neuropian_uid', user.id);
   } else {
     if(nu)nu.style.display='none';
     if(ns)ns.style.display='none';
@@ -2157,7 +2157,7 @@ const inkRevObs = new IntersectionObserver(entries => {
       });
     }
   });
-}, {threshold: .04, rootMargin: '200px 0px 200px 0px'});
+}, {threshold: .04, rootMargin: '0px 0px -10px 0px'});
 
 // Observe all .reveal elements — also immediately reveal any already in viewport
 document.querySelectorAll('.reveal').forEach(el => inkRevObs.observe(el));
@@ -2173,7 +2173,7 @@ const autoFadeObs = new IntersectionObserver(entries => {
       autoFadeObs.unobserve(en.target);
     }
   });
-}, {threshold: .04, rootMargin: '200px 0px 200px 0px'});
+}, {threshold: .04, rootMargin: '0px 0px -10px 0px'});
 
 // Add fade-in to major container elements that don't already have reveal
 document.querySelectorAll(
@@ -2191,7 +2191,7 @@ document.querySelectorAll(
 // Stagger grid children
 document.querySelectorAll('.method-grid,.pillars-grid,.crisis-cards,.quotes-grid,.crisis-stats').forEach(grid => {
   Array.from(grid.children).forEach((child, i) => {
-    child.style.transitionDelay = (i * 0.07) + 's';
+    child.style.transitionDelay = (i * 0.06) + 's';
   });
 });
 
