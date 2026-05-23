@@ -582,29 +582,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 
 
 
-/* ── TOP MINDS LEADERBOARD ── */
-.minds-section{background:var(--black);color:var(--white);padding:9rem 3rem}
-.minds-grid{margin-top:3.5rem;display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.06)}
-.mind-row{background:var(--off-black);padding:2rem 2.5rem;display:grid;grid-template-columns:2.8rem 1fr auto;gap:2rem;align-items:center;transition:background .3s;position:relative;overflow:hidden}
-.mind-row:hover{background:var(--near-black)}
-.mind-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:rgba(255,255,255,.0);transition:background .3s}
-.mind-row:hover::before{background:rgba(255,255,255,.3)}
-.mind-rank{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:rgba(255,255,255,.08);line-height:1;letter-spacing:-.04em}
-.mind-rank.top{color:rgba(255,255,255,.25)}
-.mind-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.3rem}
-.mind-signals{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.45rem}
-.mind-signal{font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12);color:#e8e2d6;padding:.12rem .45rem}
-.mind-domain{font-family:'Barlow Condensed',sans-serif;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:.35rem}
-.mind-score{text-align:right;flex-shrink:0}
-.mind-score-n{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;line-height:1;letter-spacing:-.04em;color:var(--white)}
-.mind-score-l{font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.2rem}
-.minds-updated{font-family:'Barlow Condensed',sans-serif;font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:1.5rem;display:flex;align-items:center;gap:.6rem}
-.minds-updated::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);animation:blink 2s ease-in-out infinite}
-.minds-empty{padding:3rem;text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:rgba(255,255,255,.3)}
-@media(max-width:768px){
-  .mind-row{grid-template-columns:2rem 1fr auto;gap:1rem;padding:1.4rem 1.2rem}
-  .mind-score-n{font-size:2rem}
-}
 
 /* ── SITE-WIDE SCROLL FADE-IN ── */
 .js .fade-in{opacity:0;transform:translateY(10px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
@@ -1188,19 +1165,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       <div class="crisis-promise-lbl">The Neuropian Promise</div>
       <div class="crisis-promise-text"><strong>Every gifted program that closes is a tragedy. Every extraordinary mind that goes unrecognized is a loss the world will never calculate.</strong> Neuropian has built the system that education refused to build, one that finds the gifted, the divergent, the different, and gives them the stage they have always deserved.</div>
     </div>
-  </div>
-</section>
-
-<!-- TOP MINDS -->
-<section class="minds-section" id="top-minds">
-  <div class="section-inner">
-    <div class="eyebrow reveal">Neuropian Intelligence · Live</div>
-    <h2 class="section-title reveal" style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:.95;letter-spacing:-.025em;color:var(--white);margin-bottom:1rem">The Minds <em style="font-style:italic;color:#e8e2d6">We've Found</em></h2>
-    <p class="find-body reveal" style="margin-bottom:0">Updated daily. These are the highest-signal individuals Neuropian has identified in the last 30 days.</p>
-    <div class="minds-grid reveal" id="top-minds-grid">
-      <div class="minds-empty">Scanning…</div>
-    </div>
-    <div class="minds-updated reveal" id="minds-updated-label">Updating daily</div>
   </div>
 </section>
 
@@ -3007,102 +2971,6 @@ function renderOppPreview(){
 }
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderOppPreview);}
 else{renderOppPreview();}
-
-// ═══ TOP MINDS LEADERBOARD ═══
-
-// Seed data from Intelligence Scout sweeper — shown until EagleEyes data surpasses it
-const SCOUT_TOP5=[{"name":"PrismaticGStonks","avg":7.6,"signals":["Vocabulary","Technical Depth","Originality","Built / Created"],"domains":["r/math"],"sessions":1,"source":"reddit"},{"name":"lord_technosex","avg":7.6,"signals":["Vocabulary","Technical Depth","Originality"],"domains":["r/AskPhysics"],"sessions":1,"source":"reddit"},{"name":"Yutong Zhang","avg":7.5,"signals":["Vocabulary","Technical Depth","Originality","Built / Created"],"domains":["Hacker News"],"sessions":1,"source":"arxiv"},{"name":"Yuki Nakamura","avg":7.5,"signals":["Vocabulary","Technical Depth","Originality","Built / Created"],"domains":["Hacker News"],"sessions":1,"source":"arxiv"},{"name":"dhsilver","avg":7.4,"signals":["Vocabulary","Technical Depth","Originality"],"domains":["r/math"],"sessions":1,"source":"reddit"}];
-
-async function loadTopMinds(){
-  const grid=document.getElementById('top-minds-grid');
-  const label=document.getElementById('minds-updated-label');
-  if(!grid)return;
-
-  const cacheKey='top_minds_cache';
-  const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');
-  const now=Date.now();
-  if(cached&&(now-cached.ts)<86400000){
-    renderTopMinds(cached.data);
-    if(label)label.textContent='Last updated '+new Date(cached.ts).toLocaleDateString('en-US',{month:'short',day:'numeric'});
-    return;
-  }
-
-  // Try EagleEyes Supabase data first
-  if(sb){
-    try{
-      const since=new Date(now-30*86400000).toISOString();
-      const {data,error}=await sb
-        .from('eagleeyes_signals')
-        .select('user_id,score,signals,domain,recorded_at')
-        .gte('recorded_at',since)
-        .order('score',{ascending:false});
-
-      if(!error&&data&&data.length>=5){
-        const byUser={};
-        for(const row of data){
-          if(!row.user_id)continue;
-          if(!byUser[row.user_id]){byUser[row.user_id]={scores:[],signals:[],domains:new Set()};}
-          byUser[row.user_id].scores.push(row.score);
-          (row.signals||[]).forEach(s=>byUser[row.user_id].signals.push(s));
-          if(row.domain)byUser[row.user_id].domains.add(row.domain);
-        }
-        const ranked=Object.entries(byUser)
-          .map(([uid,d])=>({
-            uid,
-            avg:Math.round(d.scores.reduce((a,b)=>a+b,0)/d.scores.length*10)/10,
-            signals:[...new Set(d.signals)].slice(0,4),
-            domains:[...d.domains].slice(0,3),
-            sessions:d.scores.length
-          }))
-          .sort((a,b)=>b.avg-a.avg).slice(0,5);
-
-        const uids=ranked.map(r=>r.uid);
-        const {data:profiles}=await sb.from('profiles').select('user_id,first_name,last_name').in('user_id',uids);
-        const nameMap={};
-        (profiles||[]).forEach(p=>{nameMap[p.user_id]=p.first_name?(p.first_name+' '+((p.last_name||'')[0]||'')+'.').trim():'Anonymous';});
-        const final=ranked.map(r=>({...r,name:nameMap[r.uid]||'Anonymous',source:'eagleeyes'}));
-
-        // Only use EagleEyes data if its top score beats the scout data
-        if(final[0].avg>=SCOUT_TOP5[0].avg){
-          localStorage.setItem(cacheKey,JSON.stringify({ts:now,data:final}));
-          renderTopMinds(final);
-          if(label)label.textContent='Updated '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-          return;
-        }
-      }
-    }catch(e){}
-  }
-
-  // Fall back to scout data
-  renderTopMinds(SCOUT_TOP5);
-  if(label)label.textContent='Intelligence Sweep · May 2026';
-}
-
-function renderTopMinds(list){
-  const grid=document.getElementById('top-minds-grid');
-  if(!grid)return;
-  if(!list||!list.length){grid.innerHTML='<div class="minds-empty">No minds detected yet.</div>';return;}
-  grid.innerHTML=list.map((m,i)=>{
-    const isScout=m.source==='reddit'||m.source==='hackernews';
-    const nameHtml=isScout
-      ?`<a href="https://reddit.com/u/${escHtml(m.name)}" target="_blank" rel="noopener" style="color:var(--white);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.15)">${escHtml(m.name)}</a>`
-      :escHtml(m.name);
-    return `
-    <div class="mind-row">
-      <div class="mind-rank${i<3?' top':''}">${i+1}</div>
-      <div>
-        <div class="mind-name">${nameHtml}</div>
-        ${m.signals.length?`<div class="mind-signals">${m.signals.map(s=>`<span class="mind-signal">${escHtml(s)}</span>`).join('')}</div>`:''}
-        <div class="mind-domain">${m.domains.map(d=>escHtml(d)).join(' · ')}${m.sessions>1?' · '+m.sessions+' sessions':''}</div>
-      </div>
-      <div class="mind-score">
-        <div class="mind-score-n">${m.avg}</div>
-        <div class="mind-score-l">Score</div>
-      </div>
-    </div>`;}).join('');
-}
-
-loadTopMinds();
 
 </script>
 
