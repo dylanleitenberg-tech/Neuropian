@@ -2603,7 +2603,16 @@ async function renderSidebarForServer(serverId, serverData){
 }
 
 function addServerIconToRail(id, name, imageUrl){
-  if(document.getElementById('srv-'+id)) return;
+  const existing=document.getElementById('srv-'+id);
+  if(existing){
+    if(imageUrl){
+      existing.style.backgroundImage='url('+imageUrl+')';
+      existing.style.backgroundSize='cover';
+      existing.style.backgroundPosition='center';
+      existing.textContent='';
+    }
+    return;
+  }
   const rail=document.getElementById('server-rail-items');
   if(!rail) return;
   const abbr=name.slice(0,2).toUpperCase();
@@ -2746,8 +2755,8 @@ async function submitCreateServer(){
       imageUrl=await uploadServerImage(srv.id,imgFile);
       if(imageUrl)await sb.from('servers').update({image_url:imageUrl}).eq('id',srv.id);
     }
-    addServerIconToRail(srv.id, name, imageUrl);
     await loadServerRail();
+    addServerIconToRail(srv.id, name, imageUrl);
     document.getElementById('cs-name').value='';
     document.getElementById('cs-desc').value='';
     document.getElementById('cs-parent-id').value='';
@@ -2785,8 +2794,8 @@ async function submitJoinServer(){
     if(!existing){
       await sb.from('server_members').insert({server_id:srv.id,user_id:currentUser.id});
     }
-    addServerIconToRail(srv.id, srv.name);
     await loadServerRail();
+    addServerIconToRail(srv.id, srv.name);
     closeJoinServer();
     await switchServer(srv.id);
   }catch(e){err.textContent='Something went wrong. Try again.';err.style.display='block';}
@@ -2980,10 +2989,10 @@ async function loadServerRail(){
     // Only show servers this user is a member of
     const {data:memberships}=await sb.from('server_members').select('server_id').eq('user_id',currentUser.id);
     const rail=document.getElementById('server-rail-items');
-    if(!memberships||!memberships.length){rail.innerHTML='';return;}
+    if(!memberships||!memberships.length){return;}
     const memberIds=memberships.map(m=>m.server_id);
     const {data}=await sb.from('servers').select('id,name,parent_id,image_url').in('id',memberIds).order('created_at',{ascending:true});
-    if(!data||!data.length){rail.innerHTML='';return;}
+    if(!data||!data.length){return;}
     const topLevel=data.filter(s=>!s.parent_id);
     rail.innerHTML=topLevel.map(s=>{
       const abbr=s.name.slice(0,2).toUpperCase();
