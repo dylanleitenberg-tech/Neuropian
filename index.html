@@ -1575,10 +1575,10 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#eee;font-weight:400">Add a Friend</h3>
       <button onclick="closeFriendRequest()" style="background:none;border:none;color:#e8e2d6;cursor:pointer;font-size:1.1rem">✕</button>
     </div>
-    <p style="font-size:.7rem;color:#e8e2d6;line-height:1.6;margin-bottom:1rem">Enter the email address of another Neuropian member.</p>
+    <p style="font-size:.7rem;color:#e8e2d6;line-height:1.6;margin-bottom:1rem">Enter the 7-digit Neuropian ID of the person you want to add.</p>
     <div style="display:flex;flex-direction:column;gap:.9rem">
-      <div><label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.35rem">Email Address</label>
-        <input id="fr-email" type="email" placeholder="friend@example.com" style="width:100%;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;padding:.6rem .85rem;color:#ddd;font-family:'DM Sans',sans-serif;font-size:.75rem;outline:none;box-sizing:border-box"></div>
+      <div><label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.35rem">Neuropian ID</label>
+        <input id="fr-email" type="text" placeholder="e.g. 1234567" maxlength="7" style="width:100%;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;padding:.6rem .85rem;color:#ddd;font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:.18em;outline:none;box-sizing:border-box"></div>
       <div id="fr-msg" style="font-size:.7rem;display:none"></div>
       <button id="fr-btn" onclick="submitFriendRequest()" style="padding:.75rem;background:#00cc44;border:none;border-radius:4px;color:#000;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Send Request</button>
     </div>
@@ -3050,22 +3050,13 @@ async function submitFriendRequest(){
   const raw=document.getElementById('fr-email').value.trim();
   const msg=document.getElementById('fr-msg');
   const btn=document.getElementById('fr-btn');
-  if(!raw){msg.textContent='Please enter an email or Neuropian ID.';msg.style.color='#e55';msg.style.display='block';return;}
-  const isId=/^\d{7}$/.test(raw);
-  const email=isId?null:raw.toLowerCase();
-  if(email&&email===currentUser.email){msg.textContent="You can't add yourself.";msg.style.color='#e55';msg.style.display='block';return;}
-  if(!isId&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='Enter a valid email or 7-digit ID.';msg.style.color='#e55';msg.style.display='block';return;}
+  if(!/^\d{7}$/.test(raw)){msg.textContent='Please enter a valid 7-digit Neuropian ID.';msg.style.color='#e55';msg.style.display='block';return;}
   btn.textContent='Sending…';btn.disabled=true;
   try{
-    let prof,error;
-    if(isId){
-      ({data:prof,error}=await sb.from('profiles').select('user_id,first_name,last_name,email').eq('neuropian_id',raw).single());
-    } else {
-      ({data:prof,error}=await sb.from('profiles').select('user_id,first_name,last_name,email').eq('email',email).single());
-    }
-    if(error||!prof){msg.textContent=isId?'No member found with that ID.':'No Neuropian member found with that email.';msg.style.color='#e55';msg.style.display='block';btn.textContent='Send Request';btn.disabled=false;return;}
+    const {data:prof,error}=await sb.from('profiles').select('user_id,first_name,last_name').eq('neuropian_id',raw).single();
+    if(error||!prof){msg.textContent='No member found with that ID.';msg.style.color='#e55';msg.style.display='block';btn.textContent='Send Request';btn.disabled=false;return;}
     if(prof.user_id===currentUser.id){msg.textContent="You can't add yourself.";msg.style.color='#e55';msg.style.display='block';btn.textContent='Send Request';btn.disabled=false;return;}
-    const friendName=`${prof.first_name||''} ${prof.last_name||''}`.trim()||email;
+    const friendName=`${prof.first_name||''} ${prof.last_name||''}`.trim()||'Member';
     const myName=getChatName();
     // Insert both directions: one pending for them to accept
     const {error:e2}=await sb.from('friends').insert({
