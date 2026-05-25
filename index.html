@@ -3128,15 +3128,17 @@ async function loadServerRail(){
     }).join('');
     // Load signed URLs for server logos
     for(const s of topLevel){
-      if(!s.image_url)continue;
-      sb.storage.from('server_images').createSignedUrl(s.image_url,3600).then(({data:sd})=>{
-        if(!sd?.signedUrl)return;
+      if(!s.image_url){console.log('server rail - no image_url for:',s.name);continue;}
+      console.log('server rail - loading logo for:',s.name,'path:',s.image_url);
+      sb.storage.from('server_images').createSignedUrl(s.image_url,3600).then(({data:sd,error:sdErr})=>{
+        if(sdErr)return console.error('server rail - signed URL error for',s.name,sdErr);
+        if(!sd?.signedUrl)return console.warn('server rail - no signedUrl for',s.name);
         const el=document.getElementById('srv-'+s.id);
-        if(!el)return;
+        if(!el)return console.warn('server rail - element not found for',s.name);
         const img=document.createElement('img');
         img.src=sd.signedUrl;
         img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit';
-        img.onerror=function(){this.style.display='none';};
+        img.onerror=function(){console.error('server rail - img failed to load for',s.name);this.style.display='none';};
         el.appendChild(img);
       });
     }
