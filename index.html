@@ -1507,7 +1507,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
           <div id="cs-img-preview" style="width:44px;height:44px;border-radius:50%;background:#1a1a1a;border:2px dashed rgba(0,200,40,.2);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:#444;flex-shrink:0;overflow:hidden">IMG</div>
           <label style="flex:1;padding:.55rem .85rem;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.72rem;color:#888;text-align:center;transition:border-color .2s" onmouseenter="this.style.borderColor='rgba(0,200,40,.4)'" onmouseleave="this.style.borderColor='rgba(0,200,40,.15)'">
             Choose JPEG…
-            <input id="cs-img" type="file" accept="image/jpeg,image/jpg" style="display:none" onchange="previewServerImg(this)">
+            <input id="cs-img" type="file" accept="image/*" style="display:none" onchange="previewServerImg(this)">
           </label>
         </div>
       </div>
@@ -1545,7 +1545,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       <div id="ss-img-preview" style="width:64px;height:64px;border-radius:50%;background:#1a1a1a;border:2px dashed rgba(0,200,40,.25);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:#555;overflow:hidden;position:relative"></div>
       <label style="font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:#00aa38;cursor:pointer;border:1px solid rgba(0,200,40,.25);padding:.25rem .7rem;border-radius:3px;transition:background .15s" onmouseenter="this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.background='transparent'">
         Upload Server Image (JPEG)
-        <input id="ss-img-input" type="file" accept="image/jpeg,image/jpg" style="display:none" onchange="previewSsImg(this)">
+        <input id="ss-img-input" type="file" accept="image/*" style="display:none" onchange="previewSsImg(this)">
       </label>
     </div>
     <div id="ss-status" style="font-size:.65rem;text-align:center;margin-bottom:1rem;display:none"></div>
@@ -2680,12 +2680,16 @@ function openServerSettings(){
   if(!srv)return;
   const prev=document.getElementById('ss-img-preview');
   prev.innerHTML='';
-  if(srv.image_url){
-    const img=document.createElement('img');
-    img.src=srv.image_url;
-    img.style.cssText='width:100%;height:100%;object-fit:cover;border-radius:inherit';
-    img.onerror=function(){this.style.display='none';prev.textContent=(srv.name||'').slice(0,2).toUpperCase();};
-    prev.appendChild(img);
+  if(srv.image_url&&sb){
+    sb.storage.from('server_images').createSignedUrl(srv.image_url,3600).then(({data:sd})=>{
+      if(sd?.signedUrl){
+        const img=document.createElement('img');
+        img.src=sd.signedUrl;
+        img.style.cssText='width:100%;height:100%;object-fit:cover;border-radius:inherit';
+        img.onerror=function(){this.style.display='none';prev.textContent=(srv.name||'').slice(0,2).toUpperCase();};
+        prev.appendChild(img);
+      }else{prev.textContent=(srv.name||'').slice(0,2).toUpperCase();}
+    });
   } else {
     prev.textContent=(srv.name||'').slice(0,2).toUpperCase();
   }
@@ -2714,23 +2718,22 @@ async function saveServerImage(){
   const srv=window._currentServerData;
   const file=document.getElementById('ss-img-input').files[0];
   const status=document.getElementById('ss-status');
-  if(!file){status.textContent='Please choose a JPEG image.';status.style.color='#e55';status.style.display='block';return;}
+  if(!file){status.textContent='Please choose an image.';status.style.color='#e55';status.style.display='block';return;}
   if(!srv||!sb){status.textContent='Error: no server selected.';status.style.color='#e55';status.style.display='block';return;}
   status.textContent='Uploading…';status.style.color='#00aa38';status.style.display='block';
-  const url=await uploadServerImage(srv.id,file);
-  if(!url){status.textContent='Upload failed. Check storage policies.';status.style.color='#e55';return;}
-  await sb.from('servers').update({image_url:url}).eq('id',srv.id);
-  srv.image_url=url;
+  const result=await uploadServerImage(srv.id,file);
+  if(!result){status.textContent='Upload failed. Check storage policies.';status.style.color='#e55';return;}
+  await sb.from('servers').update({image_url:result.path}).eq('id',srv.id);
+  srv.image_url=result.path;
   window._currentServerData=srv;
   // Update rail icon
   const railEl=document.getElementById('srv-'+srv.id);
   if(railEl){
     railEl.style.position='relative';
-    // Remove old img if any
     const oldImg=railEl.querySelector('img');
     if(oldImg)oldImg.remove();
     const img=document.createElement('img');
-    img.src=url+'?t='+Date.now();
+    img.src=result.signedUrl;
     img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit';
     img.onerror=function(){this.style.display='none';};
     railEl.appendChild(img);
@@ -2828,11 +2831,14 @@ function previewServerImg(input){
 async function uploadServerImage(serverId, file){
   if(!file||!sb)return null;
   try{
-    const path=serverId+'.jpg';
-    await sb.storage.from('server-images').upload(path,file,{contentType:'image/jpeg',upsert:true});
-    const {data:urlData}=sb.storage.from('server-images').getPublicUrl(path);
-    return urlData.publicUrl;
-  }catch(e){return null;}
+    const ext=file.name.split('.').pop().toLowerCase()||'jpg';
+    const path=serverId+'.'+ext;
+    const {error:upErr}=await sb.storage.from('server_images').upload(path,file,{contentType:file.type||'image/jpeg',upsert:true});
+    if(upErr)throw upErr;
+    const {data:signedData,error:signErr}=await sb.storage.from('server_images').createSignedUrl(path,3600);
+    if(signErr)throw signErr;
+    return {path,signedUrl:signedData.signedUrl};
+  }catch(e){console.error('uploadServerImage',e);return null;}
 }
 
 function openCreateServer(){
@@ -2864,8 +2870,11 @@ async function submitCreateServer(){
     const imgFile=document.getElementById('cs-img')?.files[0];
     let imageUrl=null;
     if(imgFile){
-      imageUrl=await uploadServerImage(srv.id,imgFile);
-      if(imageUrl)await sb.from('servers').update({image_url:imageUrl}).eq('id',srv.id);
+      const result=await uploadServerImage(srv.id,imgFile);
+      if(result){
+        await sb.from('servers').update({image_url:result.path}).eq('id',srv.id);
+        imageUrl=result.signedUrl;
+      }
     }
     await loadServerRail();
     addServerIconToRail(srv.id, name, imageUrl);
@@ -3110,9 +3119,23 @@ async function loadServerRail(){
       const abbr=s.name.slice(0,2).toUpperCase();
       const hue=Math.abs(s.name.split('').reduce((a,c)=>a+c.charCodeAt(0),0))%360;
       return `<div onclick="switchServer('${s.id}')" id="srv-${s.id}" title="${escHtml(s.name)}"
-        style="width:44px;height:44px;border-radius:50%;background:hsl(${hue},55%,22%);border:2px solid hsl(${hue},55%,35%);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.62rem;font-weight:700;color:hsl(${hue},80%,72%);flex-shrink:0;transition:border-radius .2s;margin-bottom:.5rem"
+        style="width:44px;height:44px;border-radius:50%;background:hsl(${hue},55%,22%);border:2px solid hsl(${hue},55%,35%);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.62rem;font-weight:700;color:hsl(${hue},80%,72%);flex-shrink:0;transition:border-radius .2s;margin-bottom:.5rem;position:relative;overflow:hidden"
         onmouseenter="this.style.borderRadius='12px'" onmouseleave="if(currentServerId!=='${s.id}')this.style.borderRadius='50%'">${abbr}</div>`;
     }).join('');
+    // Load signed URLs for server logos
+    for(const s of topLevel){
+      if(!s.image_url)continue;
+      sb.storage.from('server_images').createSignedUrl(s.image_url,3600).then(({data:sd})=>{
+        if(!sd?.signedUrl)return;
+        const el=document.getElementById('srv-'+s.id);
+        if(!el)return;
+        const img=document.createElement('img');
+        img.src=sd.signedUrl;
+        img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit';
+        img.onerror=function(){this.style.display='none';};
+        el.appendChild(img);
+      });
+    }
   }catch(e){console.error('loadServerRail',e);}
 }
 
