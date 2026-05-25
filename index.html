@@ -8,6 +8,9 @@
 <meta name="description" content="Neuropian, founded by Dylan Leitenberg, is the AI-powered platform discovering extraordinary minds worldwide. Creator of Who's the Next Elon, EagleEyes, RoundTable, and Leitenberg Academy.">
 <meta name="author" content="Dylan Leitenberg">
 <meta name="keywords" content="Dylan Leitenberg, Neuropian, Who's the Next Elon, intellect accelerator, gifted, neurodivergent, talent discovery, EagleEyes, RoundTable, Leitenberg Academy">
+<link rel="canonical" href="https://neuropian.com">
+<link rel="icon" type="image/png" href="https://qggduzzwvdkmekihwuav.supabase.co/storage/v1/object/public/assets/brain-og.png">
+<meta property="og:url" content="https://neuropian.com">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Neuropian — Intelligence Reimagined | Dylan Leitenberg">
 <meta property="og:description" content="Neuropian, founded by Dylan Leitenberg, is the AI-powered platform discovering extraordinary minds worldwide. Creator of Who's the Next Elon, EagleEyes, and RoundTable.">
@@ -85,6 +88,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow+Condensed:wght@200;300;400;500;600;700&family=Barlow:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -623,6 +627,16 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 .ee-grid{display:grid;grid-template-columns:repeat(2,1fr)}
 @media(max-width:640px){.ee-grid{grid-template-columns:1fr}}
 
+/* ── ROUNDTABLE MOBILE ── */
+@media(max-width:768px){
+  #server-rail{width:48px;min-width:48px}
+  #server-rail div[style*="width:44px"]{width:36px!important;height:36px!important;font-size:.46rem!important}
+  #chat-sidebar{position:absolute;left:48px;top:0;bottom:0;z-index:200;transform:translateX(-110%);transition:transform .28s cubic-bezier(.4,0,.2,1)}
+  #chat-sidebar.open{transform:translateX(0)}
+  #mobile-sidebar-toggle{display:flex!important}
+  #members-panel{display:none!important}
+}
+
 
 .sec{padding:9rem 3rem;position:relative}
 .si{max-width:1100px;margin:0 auto;position:relative;z-index:2}
@@ -666,7 +680,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <li><a style="cursor:pointer" onclick="navScroll('eagleeyes-intro')">EagleEyes</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:.6rem;flex-shrink:0">
-    <span id="nav-user" style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.95);font-weight:500;display:none"></span>
+    <span id="nav-user" onclick="openProfile()" style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.95);font-weight:500;display:none;cursor:pointer;transition:opacity .2s" onmouseenter="this.style.opacity='.7'" onmouseleave="this.style.opacity='1'"></span>
     <button id="nav-signout" style="display:none;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,0.95);padding:.32rem .75rem;font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .22s" onmouseenter="this.style.borderColor='rgba(255,255,255,.5)';this.style.color='#fff'" onmouseleave="this.style.borderColor='rgba(255,255,255,.2)';this.style.color='rgba(255,255,255,.5)'" onclick="doSignOut()">Sign Out</button>
     <button class="nav-apply" onclick="openNextElonApply()">Apply Now</button>
   </div>
@@ -689,7 +703,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <a onclick="closeMobileNav();gatedPage('collective')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">RoundTable</a>
     <a onclick="closeMobileNav();navScroll('academy')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">Academy</a>
     <a onclick="closeMobileNav();openNextElonApply()" style="margin:1.2rem 1.4rem 0;padding:.85rem 1.2rem;background:#fff;color:#000;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-align:center;cursor:pointer">Apply Now</a>
-    <div id="mobile-nav-user" style="display:none;padding:.9rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.6rem;color:rgba(255,255,255,0.95);letter-spacing:.14em;text-transform:uppercase"></div>
+    <div id="mobile-nav-user" onclick="closeMobileNav();openProfile()" style="display:none;padding:.9rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.6rem;color:rgba(255,255,255,0.95);letter-spacing:.14em;text-transform:uppercase;cursor:pointer"></div>
     <a onclick="closeMobileNav();navScroll('eagleeyes-intro')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;display:flex;align-items:center;gap:.6rem"><span style="font-size:.8rem">&#10022;</span>EagleEyes</a>
     <a id="mobile-nav-signout" onclick="closeMobileNav();doSignOut()" style="display:none;padding:.7rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.62rem;color:rgba(255,255,255,0.95);cursor:pointer;letter-spacing:.1em">Sign Out</a>
   </nav>
@@ -1687,9 +1701,19 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
     <!-- Account info -->
     <div style="margin-bottom:1.2rem">
-      <div style="font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:#555;margin-bottom:.5rem">Account</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem">
+        <div style="font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:#555">Account</div>
+        <button onclick="toggleNameEdit()" id="name-edit-btn" style="background:none;border:none;font-family:'Barlow Condensed',sans-serif;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:#444;cursor:pointer;transition:color .2s;padding:0" onmouseenter="this.style.color='#00aa38'" onmouseleave="this.style.color='#444'">Edit Name</button>
+      </div>
       <div id="profile-name-display" style="font-size:.82rem;font-weight:600;color:#eee;margin-bottom:.2rem"></div>
-      <div id="profile-email-display" style="font-size:.68rem;color:#555"></div>
+      <div id="profile-email-display" style="font-size:.68rem;color:#555;margin-bottom:.6rem"></div>
+      <div id="name-edit-section" style="display:none">
+        <div style="display:flex;gap:.4rem;margin-bottom:.4rem">
+          <input id="pf-fn" type="text" placeholder="First name" autocomplete="given-name" style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#e8e2d6;font-family:'Barlow',sans-serif;font-size:.76rem;padding:.45rem .6rem;outline:none;transition:border-color .2s;box-sizing:border-box" onfocus="this.style.borderColor='rgba(0,200,40,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+          <input id="pf-ln" type="text" placeholder="Last name" autocomplete="family-name" style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#e8e2d6;font-family:'Barlow',sans-serif;font-size:.76rem;padding:.45rem .6rem;outline:none;transition:border-color .2s;box-sizing:border-box" onfocus="this.style.borderColor='rgba(0,200,40,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+        </div>
+        <button onclick="saveDisplayName()" id="name-save-btn" style="background:rgba(0,200,40,.12);border:1px solid rgba(0,200,40,.25);border-radius:3px;color:#00aa38;font-family:'DM Sans',sans-serif;font-size:.56rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;cursor:pointer;transition:all .15s" onmouseenter="this.style.background='rgba(0,200,40,.22)'" onmouseleave="this.style.background='rgba(0,200,40,.12)'">Save Name</button>
+      </div>
     </div>
     <!-- Bio -->
     <div style="margin-bottom:1.2rem">
@@ -1879,7 +1903,8 @@ function setNavUser(user){
     }
   }
   // Listen for auth changes (login/logout in other tabs)
-  sb.auth.onAuthStateChange((_event,session)=>{
+  sb.auth.onAuthStateChange((event,session)=>{
+    if(event==='PASSWORD_RECOVERY'){showSetPasswordModal();return;}
     if(session){currentUser=session.user;isAuthed=true;setNavUser(session.user);}
     else{currentUser=null;isAuthed=false;surveyDone=false;setNavUser(null);}
   });
@@ -1923,6 +1948,7 @@ function showAuth(mode,dest){
   } else {
     document.getElementById('auth-login-view').style.display='none';
     document.getElementById('auth-reg-view').style.display='';
+    _resetTurnstile();
   }
 }
 function closeAuth(){document.getElementById('auth-gate').classList.remove('show');hideAuthLegal();document.getElementById('auth-reset-view').style.display='none';}
@@ -1955,6 +1981,30 @@ async function doReset(){
 function openDoNotSell(){const m=document.getElementById('do-not-sell-modal');m.style.display='flex';}
 function closeDoNotSell(){document.getElementById('do-not-sell-modal').style.display='none';}
 document.addEventListener('click',function(e){if(e.target===document.getElementById('do-not-sell-modal'))closeDoNotSell();});
+// Turnstile callbacks
+window._turnstileToken=null;
+function onTurnstileSuccess(token){window._turnstileToken=token;}
+function onTurnstileExpire(){window._turnstileToken=null;}
+// Reset widget when register view opens
+function _resetTurnstile(){window._turnstileToken=null;if(window.turnstile){try{turnstile.reset('#turnstile-widget');}catch(e){}}}
+
+function showSetPasswordModal(){const m=document.getElementById('set-password-modal');m.style.display='flex';document.getElementById('sp-err').style.display='none';document.getElementById('sp-pass1').value='';document.getElementById('sp-pass2').value='';}
+async function doSetPassword(){
+  if(!sb)return;
+  const p1=document.getElementById('sp-pass1').value;
+  const p2=document.getElementById('sp-pass2').value;
+  const errEl=document.getElementById('sp-err');
+  errEl.style.display='none';
+  if(!p1||!p2){errEl.textContent='Please fill in both fields.';errEl.style.display='block';return;}
+  if(p1.length<6){errEl.textContent='Password must be at least 6 characters.';errEl.style.display='block';return;}
+  if(p1!==p2){errEl.textContent='Passwords do not match.';errEl.style.display='block';return;}
+  const btn=document.getElementById('sp-btn');btn.textContent='Updating…';btn.disabled=true;
+  const{error}=await sb.auth.updateUser({password:p1});
+  btn.textContent='Update Password';btn.disabled=false;
+  if(error){errEl.textContent=error.message;errEl.style.display='block';return;}
+  document.getElementById('set-password-modal').style.display='none';
+  showPage(surveyDone?'platform':'survey');
+}
 function switchToRegister(){showAuth('reg')}
 function switchToLogin(){showAuth('login')}
 
@@ -2064,11 +2114,15 @@ async function doRegister(){
   if(age<13){showErr('rg-err','You must be at least 13 years old to create an account.');return}
   if(age<18&&!document.getElementById('rg-consent').checked){showErr('rg-err','Parental consent is required for users under 18. Please check the consent box.');return}
   if(pass.length<6){showErr('rg-err','Password must be at least 6 characters.');return}
+  if(!window._turnstileToken){showErr('rg-err','Please complete the verification above.');return}
   authBtn('rg-btn',true,'Creating account…');
   showErr('rg-err','');
+  const captchaToken=window._turnstileToken;
+  window._turnstileToken=null;
+  _resetTurnstile();
   const {data,error}=await sb.auth.signUp({
     email,password:pass,
-    options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob}}
+    options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob},captchaToken}
   });
   authBtn('rg-btn',false,'Create Account &amp; Continue');
   if(error){showErr('rg-err',error.message);return}
@@ -2076,7 +2130,13 @@ async function doRegister(){
   isAuthed=true;
   setNavUser(data.user);
   // Create empty profile row so we can upsert traits later
-  const neuropianId = String(Math.floor(1000000 + Math.random() * 9000000));
+  let neuropianId;
+  for(let i=0;i<10;i++){
+    const candidate=String(Math.floor(1000000+Math.random()*9000000));
+    const{data:existing}=await sb.from('profiles').select('neuropian_id').eq('neuropian_id',candidate).maybeSingle();
+    if(!existing){neuropianId=candidate;break;}
+  }
+  if(!neuropianId)neuropianId=String(Date.now()).slice(-7);
   await sb.from('profiles').upsert({user_id:data.user.id,first_name:fn,last_name:ln,email,traits:{},neuropian_id:neuropianId},{onConflict:'user_id'});
   closeAuth();
   // If they registered to get to RoundTable, send them there, otherwise survey first
@@ -2097,6 +2157,7 @@ async function doSignOut(){
 // ── save survey on completion ─────────────────────────────
 async function finSurvey(){
   surveyDone=true;
+  try{localStorage.removeItem('np_tr');}catch(e){}
   const accomplishment=document.getElementById('s8-accomplishment').value.trim();
   const hiddenAbility=document.getElementById('s8-hidden-ability').value.trim();
   if(currentUser&&sb){
@@ -2113,10 +2174,16 @@ async function finSurvey(){
 
 // ── apply / save buttons (wired in renderJobs) ────────────
 window._appliedJobs=new Set();
+window._savedJobs=new Set();
 async function loadAppliedJobs(){
   if(!currentUser||!sb)return;
   const{data}=await sb.from('applications').select('job_id').eq('user_id',currentUser.id);
   if(data)data.forEach(r=>window._appliedJobs.add(r.job_id));
+}
+async function loadSavedJobs(){
+  if(!currentUser||!sb)return;
+  const{data}=await sb.from('saved_jobs').select('job_id').eq('user_id',currentUser.id);
+  if(data)data.forEach(r=>window._savedJobs.add(r.job_id));
 }
 async function applyToJob(jobId,jobTitle,company){
   if(!currentUser||!sb)return;
@@ -2138,6 +2205,8 @@ function recordApply(jobId,jobTitle,company,el){
 function surveyRetake(){
   surveyDone=false;
   Object.keys(TR).forEach(k=>delete TR[k]);
+  try{localStorage.removeItem('np_tr');}catch(e){}
+  if(currentUser&&sb){sb.from('profiles').update({traits:{},survey_completed_at:null,accomplishment:null,hidden_ability:null}).eq('user_id',currentUser.id).then(()=>{});}
   document.querySelectorAll('.sst').forEach(s=>s.classList.remove('on'));
   const sc=document.getElementById('step-consent');
   if(sc)sc.classList.add('on');
@@ -2617,9 +2686,21 @@ function showPage(id){
     document.body.scrollTop=0;
     document.documentElement.scrollTop=0;
     if(nav)nav.style.display=(id==='home')?'':'none';
-    if(id==='platform'){if(typeof renderProblems==='function')renderProblems();loadAppliedJobs().then(renderJobs);}
+    if(id==='platform'){
+      if(typeof renderProblems==='function')renderProblems();
+      if(currentUser){
+        const jl=document.getElementById('jlist');
+        if(jl)jl.innerHTML='<div style="text-align:center;padding:2.5rem 0;font-family:\'Barlow Condensed\',sans-serif;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:#555">Loading opportunities…</div>';
+        window._appliedJobs=new Set();window._savedJobs=new Set();
+        Promise.all([loadAppliedJobs(),loadSavedJobs()]).then(renderJobs);
+      }else{renderJobs();}
+    }
     if(id==='collective'){console.log('initChat called');initChat();setTimeout(function(){renderRoomJobs('general');},800);}
-    if(id==='survey'){const sc=document.getElementById('step-consent');const s1=document.getElementById('step-1');const cb=document.getElementById('survey-consent-check');if(sc&&s1&&cb&&!cb.checked&&!surveyDone){document.querySelectorAll('.sst').forEach(s=>s.classList.remove('on'));sc.classList.add('on');}}
+    if(id==='survey'){
+      if(!surveyDone){try{const saved=localStorage.getItem('np_tr');if(saved){const p=JSON.parse(saved);Object.assign(TR,p);}}catch(e){}}
+      const sc=document.getElementById('step-consent');const s1=document.getElementById('step-1');const cb=document.getElementById('survey-consent-check');
+      if(sc&&s1&&cb&&!cb.checked&&!surveyDone){document.querySelectorAll('.sst').forEach(s=>s.classList.remove('on'));sc.classList.add('on');}
+    }
     setTimeout(function(){
       ov.style.transition='opacity .4s ease';
       ov.style.opacity='0';
@@ -2632,8 +2713,9 @@ function navScroll(id){showPage('home');setTimeout(()=>{const el=document.getEle
 
 // ═══ SURVEY ═══
 const TR={};const TOT=8;
-function tag(el,t){el.classList.toggle('sl');TR[t]=el.classList.contains('sl')}
-function doS(gid,el,t,v){document.querySelectorAll('#'+gid+' .scl').forEach(b=>b.classList.remove('sl'));el.classList.add('sl');TR[t]=v}
+function _saveSurveyProgress(){try{localStorage.setItem('np_tr',JSON.stringify(TR));}catch(e){}}
+function tag(el,t){el.classList.toggle('sl');TR[t]=el.classList.contains('sl');_saveSurveyProgress();}
+function doS(gid,el,t,v){document.querySelectorAll('#'+gid+' .scl').forEach(b=>b.classList.remove('sl'));el.classList.add('sl');TR[t]=v;_saveSurveyProgress();}
 function _spLabel(n){const el=document.getElementById('sp-label');if(el){el.style.display='';el.textContent='Step '+n+' of '+TOT;}}
 function startSurvey(){document.getElementById('step-consent').classList.remove('on');document.getElementById('step-1').classList.add('on');document.getElementById('sp').style.width=(1/TOT*100)+'%';_spLabel(1);window.scrollTo(0,0);}
 function ns(n){document.getElementById('step-'+n).classList.remove('on');const nx=Math.min(n+1,TOT);document.getElementById('step-'+nx).classList.add('on');document.getElementById('sp').style.width=(nx/TOT*100)+'%';_spLabel(nx);window.scrollTo(0,0)}
@@ -2696,10 +2778,12 @@ function renderJobs(){
       '<div><div class="jmp" style="color:'+matchColor+'">'+score+'%</div><div class="jml">'+(surv?'Match':'Est.')+'</div></div>';
     var saveBtn=c.querySelector('.save-btn');
     saveBtn.dataset.jobId=j.id;saveBtn.dataset.jobTitle=j.t;saveBtn.dataset.company=j.co;
+    if(window._savedJobs.has(j.id)){saveBtn.textContent='Saved ✓';saveBtn.style.opacity='.55';saveBtn.disabled=true;}
     saveBtn.addEventListener('click',function(){
       if(!currentUser){showAuth('reg');return;}
+      window._savedJobs.add(this.dataset.jobId);
       saveJob(this.dataset.jobId,this.dataset.jobTitle,this.dataset.company);
-      this.textContent='Saved ✓';
+      this.textContent='Saved ✓';this.style.opacity='.55';this.disabled=true;
     });
     list.appendChild(c);
   });
@@ -2790,7 +2874,7 @@ async function initChat(){
   setupUnreadTracker();
   setupPresence();
   setupReactionsTracker();
-  if('Notification' in window&&Notification.permission==='default')Notification.requestPermission();
+  // Notification permission is requested lazily on first background message
   // Auto-open join modal if invite link was used
   const inviteCode=new URLSearchParams(window.location.search).get('invite');
   if(inviteCode){
@@ -2812,8 +2896,9 @@ function setupUnreadTracker(){
       if(!msg||msg.room===currentRoom)return;
       if(msg.user_id===currentUser?.id)return;
       markRoomUnread(msg.room);
-      if('Notification' in window&&Notification.permission==='granted'&&!document.hasFocus()){
-        new Notification(msg.display_name||'New message',{body:(msg.content||'').slice(0,100),icon:'/favicon.ico'});
+      if('Notification' in window&&!document.hasFocus()){
+        if(Notification.permission==='default'){Notification.requestPermission();}
+        if(Notification.permission==='granted'){new Notification(msg.display_name||'New message',{body:(msg.content||'').slice(0,100),icon:'/favicon.ico'});}
       }
     })
     .subscribe();
@@ -3473,6 +3558,31 @@ function copyInviteLink(){
     setTimeout(()=>{btn.textContent='Copy Link';},1800);
   }).catch(()=>{});
 }
+function toggleNameEdit(){
+  const s=document.getElementById('name-edit-section');
+  const btn=document.getElementById('name-edit-btn');
+  const open=s.style.display==='none'||!s.style.display;
+  s.style.display=open?'':'none';
+  btn.textContent=open?'Cancel':'Edit Name';
+}
+async function saveDisplayName(){
+  if(!currentUser||!sb)return;
+  const fn=document.getElementById('pf-fn').value.trim();
+  const ln=document.getElementById('pf-ln').value.trim();
+  if(!fn&&!ln)return;
+  const btn=document.getElementById('name-save-btn');
+  btn.textContent='Saving…';btn.disabled=true;
+  const full=[fn,ln].filter(Boolean).join(' ');
+  await Promise.all([
+    sb.from('profiles').upsert({user_id:currentUser.id,first_name:fn,last_name:ln},{onConflict:'user_id'}),
+    sb.auth.updateUser({data:{first_name:fn,last_name:ln,full_name:full}})
+  ]);
+  currentUser={...currentUser,user_metadata:{...currentUser.user_metadata,first_name:fn,last_name:ln,full_name:full}};
+  document.getElementById('profile-name-display').textContent=full;
+  setNavUser(currentUser);
+  btn.textContent='Saved ✓';
+  setTimeout(()=>{btn.textContent='Save Name';btn.disabled=false;toggleNameEdit();},1500);
+}
 let _bioVis='public';
 function setBioVis(v){
   _bioVis=v;
@@ -3499,6 +3609,10 @@ function openProfile(){
   document.getElementById('profile-avatar-initials').textContent=initials;
   document.getElementById('profile-name-display').textContent=name;
   document.getElementById('profile-email-display').textContent=currentUser.email||'';
+  document.getElementById('pf-fn').value=currentUser.user_metadata?.first_name||name.split(' ')[0]||'';
+  document.getElementById('pf-ln').value=currentUser.user_metadata?.last_name||name.split(' ').slice(1).join(' ')||'';
+  document.getElementById('name-edit-section').style.display='none';
+  document.getElementById('name-edit-btn').textContent='Edit Name';
   const idEl=document.getElementById('profile-neuropian-id');
   idEl.textContent=window._myNeuropianId||'——';
   if(sb){
@@ -3574,12 +3688,16 @@ function genOgImage(){
   },1200);
 }
 async function uploadOgImage(file){
-  if(!file||!sb)return;
+  if(!file||!sb){alert(!sb?'Not connected to Supabase':'No file selected');return;}
   const lbl=document.getElementById('og-upload-label');
   const orig=lbl.childNodes[0].textContent;
   lbl.childNodes[0].textContent='Uploading…';
-  const{error}=await sb.storage.from('assets').upload('brain-og.png',file,{upsert:true,contentType:file.type||'image/png'});
-  if(error){lbl.childNodes[0].textContent='Failed ✕';setTimeout(()=>lbl.childNodes[0].textContent=orig,2000);return;}
+  const{data,error}=await sb.storage.from('assets').upload('brain-og.png',file,{upsert:true,contentType:file.type||'image/png'});
+  if(error){
+    lbl.childNodes[0].textContent=orig;
+    alert('Upload failed: '+error.message);
+    return;
+  }
   lbl.childNodes[0].textContent='Uploaded ✓';
   setTimeout(()=>lbl.childNodes[0].textContent=orig,2500);
 }
@@ -3848,11 +3966,14 @@ async function switchRoom(roomId,roomName,roomDesc){
     const {data,error}=await sb.from('messages').select('*').eq('room',roomId).order('created_at',{ascending:true}).limit(100);
     if(error)throw error;
     if(data){
-      data.forEach(m=>appendMessage(m,false));
-      ml.scrollTop=ml.scrollHeight;
-      // Load reactions for all messages in this room
-      const ids=data.map(m=>m.id);
-      if(ids.length)loadRoomReactions(ids);
+      if(data.length===0){
+        ml.insertAdjacentHTML('beforeend',`<div style="text-align:center;padding:3rem 1.5rem;font-family:'Barlow Condensed',sans-serif;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:#333">No messages yet. Say hello.</div>`);
+      }else{
+        data.forEach(m=>appendMessage(m,false));
+        ml.scrollTop=ml.scrollHeight;
+        const ids=data.map(m=>m.id);
+        if(ids.length)loadRoomReactions(ids);
+      }
     }
   }catch(e){console.error('loadMessages',e);}
   // Real-time subscription
@@ -4945,7 +5066,8 @@ else{renderOppPreview();}
         </label>
       </div>
       <div class="auth-field"><label>Email Address</label><input type="email" id="rg-email" placeholder="you@example.com" autocomplete="email"></div>
-      <div class="auth-field"><label>Password</label><input type="password" id="rg-pass" placeholder="Create a strong password" autocomplete="new-password"></div>
+      <div class="auth-field"><label>Password</label><input type="password" id="rg-pass" placeholder="Create a strong password" autocomplete="new-password"><div style="font-size:.52rem;color:#444;margin-top:.3rem;line-height:1.5">At least 6 characters.</div></div>
+      <div id="turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAADWK4l1ABvL_xp1z" data-callback="onTurnstileSuccess" data-expired-callback="onTurnstileExpire" data-theme="dark" style="margin:.6rem 0"></div>
       <button class="auth-sub-btn" id="rg-btn" onclick="doRegister()">Create Account &amp; Continue</button>
       <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
     </div>
@@ -4956,6 +5078,18 @@ else{renderOppPreview();}
       </div>
       <div id="auth-legal-body" style="overflow-y:auto;padding:1.4rem;flex:1;font-family:'Barlow',sans-serif;font-size:.7rem;color:#aaa;line-height:1.75;background:var(--off-black) !important;color-scheme:dark" class="auth-legal-content"></div>
     </div>
+  </div>
+</div>
+
+<!-- SET NEW PASSWORD MODAL (shown after clicking a password reset email link) -->
+<div id="set-password-modal" style="display:none;position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);align-items:center;justify-content:center">
+  <div style="background:var(--off-black);border:1px solid rgba(255,255,255,.1);padding:2.4rem 2rem;width:100%;max-width:380px;position:relative;font-family:'Barlow',sans-serif">
+    <div style="font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--white);margin-bottom:.4rem">Set New Password</div>
+    <div style="font-size:.72rem;color:#e8e2d6;margin-bottom:1.4rem">Enter and confirm your new password.</div>
+    <div class="auth-err" id="sp-err" style="display:none;margin-bottom:.8rem"></div>
+    <div class="auth-field" style="margin-bottom:1rem"><label>New Password</label><input type="password" id="sp-pass1" placeholder="New password" autocomplete="new-password"></div>
+    <div class="auth-field" style="margin-bottom:1.4rem"><label>Confirm Password</label><input type="password" id="sp-pass2" placeholder="Confirm new password" autocomplete="new-password"></div>
+    <button id="sp-btn" onclick="doSetPassword()" class="auth-sub-btn" style="width:100%">Update Password</button>
   </div>
 </div>
 
