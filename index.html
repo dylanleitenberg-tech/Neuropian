@@ -1423,7 +1423,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <!-- Chat header -->
     <div style="height:52px;background:#111;border-bottom:1px solid rgba(0,200,40,.1);display:flex;align-items:center;padding:0 1.4rem;gap:.8rem;flex-shrink:0">
       <button id="mobile-sidebar-toggle" onclick="toggleChatSidebar()" style="display:none;background:none;border:none;color:#e8e2d6;cursor:pointer;font-size:1.1rem;padding:.2rem">☰</button>
-      <span style="color:#e8e2d6;font-size:.9rem">#</span>
+      <span id="chat-room-prefix" style="color:#e8e2d6;font-size:.9rem">#</span>
       <div>
         <div id="chat-room-name" style="font-size:.78rem;font-weight:600;color:#eee">general</div>
         <div id="chat-room-desc" style="font-size:.5rem;color:#e8e2d6;margin-top:.05rem">Open discussion for all members</div>
@@ -1431,6 +1431,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       <div style="margin-left:auto;display:flex;align-items:center;gap:.8rem">
         <button onclick="openFriendRequest()" style="background:none;border:1px solid rgba(0,200,40,.25);color:#00aa38;padding:.3rem .7rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s" onmouseenter="this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.background='none'">+ Friend</button>
         <div id="online-count" style="font-size:.5rem;color:#00aa38;letter-spacing:.08em">● online</div>
+        <button id="members-toggle-btn" onclick="toggleMembersPanel()" title="Members" style="display:none;background:none;border:none;color:#444;cursor:pointer;font-size:.78rem;padding:.2rem;transition:color .15s" onmouseenter="this.style.color='#00cc44'" onmouseleave="this.style.color=membersOpen?'#00cc44':'#444'">👥</button>
       </div>
     </div>
     <!-- Messages -->
@@ -1453,6 +1454,13 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         style="padding:.6rem 1.1rem;background:#00cc44;border:none;border-radius:6px;color:#000;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;flex-shrink:0;height:40px;transition:background .2s"
         onmouseenter="this.style.background='#00aa38'" onmouseleave="this.style.background='#00cc44'">Send</button>
     </div>
+  </div>
+  <!-- MEMBERS PANEL -->
+  <div id="members-panel" style="display:none;width:200px;min-width:200px;background:#111;border-left:1px solid rgba(0,200,40,.1);flex-direction:column;flex-shrink:0">
+    <div style="padding:.8rem 1rem;border-bottom:1px solid rgba(0,200,40,.1);flex-shrink:0">
+      <div style="font-size:.42rem;letter-spacing:.28em;text-transform:uppercase;color:#444;font-weight:700">Members</div>
+    </div>
+    <div id="members-panel-list" style="flex:1;overflow-y:auto;padding:.4rem 0"></div>
   </div>
 </div>
 
@@ -1490,18 +1498,18 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 <div id="create-server-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:2000;align-items:center;justify-content:center">
   <div style="background:#141414;border:1px solid rgba(0,200,40,.2);border-radius:6px;width:min(420px,92vw);padding:1.8rem">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#eee;font-weight:400">Create a Server</h3>
+      <h3 id="cs-modal-title" style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#eee;font-weight:400">Create a Server</h3>
       <button onclick="closeCreateServer()" style="background:none;border:none;color:#e8e2d6;cursor:pointer;font-size:1.1rem">✕</button>
     </div>
-    <p style="font-size:.7rem;color:#e8e2d6;line-height:1.6;margin-bottom:1.2rem">Servers are spaces for your community, team, or research group. Give it a name and invite others.</p>
+    <p id="cs-modal-desc" style="font-size:.7rem;color:#e8e2d6;line-height:1.6;margin-bottom:1.2rem">Servers are spaces for your community, team, or research group. Give it a name and invite others.</p>
     <div style="display:flex;flex-direction:column;gap:.9rem">
       <input type="hidden" id="cs-parent-id" value="">
       <div id="cs-parent-label" style="display:none;font-size:.6rem;color:#00aa38;letter-spacing:.1em;padding:.4rem .6rem;background:rgba(0,200,40,.08);border-radius:3px;margin-bottom:.2rem"></div>
       <div><label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.35rem">Server Name</label>
         <input id="cs-name" type="text" placeholder="e.g. Quantum Research Lab" style="width:100%;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;padding:.6rem .85rem;color:#ddd;font-family:'DM Sans',sans-serif;font-size:.75rem;outline:none;box-sizing:border-box"></div>
-      <div><label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.35rem">Description (optional)</label>
+      <div id="cs-desc-section"><label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.35rem">Description (optional)</label>
         <input id="cs-desc" type="text" placeholder="What's this server about?" style="width:100%;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;padding:.6rem .85rem;color:#ddd;font-family:'DM Sans',sans-serif;font-size:.75rem;outline:none;box-sizing:border-box"></div>
-      <div>
+      <div id="cs-image-section">
         <label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.35rem">Server Image (optional, JPEG)</label>
         <div style="display:flex;align-items:center;gap:.8rem">
           <div id="cs-img-preview" style="width:44px;height:44px;border-radius:50%;background:#1a1a1a;border:2px dashed rgba(0,200,40,.2);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:#444;flex-shrink:0;overflow:hidden">IMG</div>
@@ -1510,6 +1518,10 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
             <input id="cs-img" type="file" accept="image/*" style="display:none" onchange="previewServerImg(this)">
           </label>
         </div>
+      </div>
+      <div id="cs-roles-section" style="display:none">
+        <label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.5rem">Access (leave unchecked for all members)</label>
+        <div id="cs-roles-list" style="display:flex;flex-direction:column;gap:.4rem"></div>
       </div>
       <div id="cs-err" style="font-size:.7rem;color:#e55;display:none"></div>
       <button id="cs-btn" onclick="submitCreateServer()" style="padding:.75rem;background:#00cc44;border:none;border-radius:4px;color:#000;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Create Server</button>
@@ -1574,6 +1586,12 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.06)">
       <div style="font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:#555;margin-bottom:.8rem">Members</div>
       <div id="ss-members-list" style="display:flex;flex-direction:column;gap:.5rem"></div>
+    </div>
+    <!-- Channel Permissions -->
+    <div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.06)">
+      <div style="font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:#555;margin-bottom:.8rem">Channel Permissions</div>
+      <div style="font-size:.6rem;color:#444;margin-bottom:.8rem;line-height:1.5">Restrict channels to specific roles. Leave unchecked to allow everyone.</div>
+      <div id="ss-channels-list" style="display:flex;flex-direction:column;gap:.5rem"></div>
     </div>
     <!-- Danger -->
     <div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.06)">
@@ -2545,6 +2563,7 @@ const CHAT_ROOMS=[
 let currentRoom='general';
 let currentServerId='neuropian';
 let chatSubscription=null;
+let unreadSubscription=null;
 let chatInitialized=false;
 
 function getChatName(){
@@ -2580,6 +2599,43 @@ async function initChat(){
   await loadFriends();
   await loadFriendRequests();
   chatInitialized=true;
+  setupUnreadTracker();
+}
+
+function setupUnreadTracker(){
+  if(!sb||!currentUser)return;
+  if(unreadSubscription){try{sb.removeChannel(unreadSubscription);}catch(e){}}
+  window._unreadRooms=new Set();
+  unreadSubscription=sb.channel('unread-tracker')
+    .on('postgres_changes',{event:'INSERT',schema:'public',table:'messages'},payload=>{
+      const msg=payload.new;
+      if(!msg||msg.room===currentRoom)return;
+      if(msg.user_id===currentUser?.id)return;
+      markRoomUnread(msg.room);
+    })
+    .subscribe();
+}
+
+function markRoomUnread(roomId){
+  if(!roomId)return;
+  if(!window._unreadRooms)window._unreadRooms=new Set();
+  window._unreadRooms.add(roomId);
+  const el=document.getElementById('ri-'+roomId);
+  if(!el||el.querySelector('.unread-dot'))return;
+  const dot=document.createElement('span');
+  dot.className='unread-dot';
+  dot.style.cssText='width:7px;height:7px;border-radius:50%;background:#00cc44;flex-shrink:0;margin-left:auto;box-shadow:0 0 5px rgba(0,204,68,.55)';
+  el.appendChild(dot);
+  if(el.style.color!=='#00cc44')el.style.color='#bbb';
+}
+
+function clearRoomUnread(roomId){
+  if(!roomId)return;
+  if(window._unreadRooms)window._unreadRooms.delete(roomId);
+  const el=document.getElementById('ri-'+roomId);
+  if(!el)return;
+  const dot=el.querySelector('.unread-dot');
+  if(dot)dot.remove();
 }
 
 // ── SERVERS ────────────────────────────────────────────────────────
@@ -2595,6 +2651,10 @@ async function switchServer(serverId){
     const sBtnN=document.getElementById('server-settings-btn');
     if(sBtnN)sBtnN.style.display='none';
     window._currentServerData=null;
+    // Hide members panel for main server
+    const mBtn=document.getElementById('members-toggle-btn');
+    if(mBtn)mBtn.style.display='none';
+    if(membersOpen){membersOpen=false;document.getElementById('members-panel').style.display='none';}
     await renderSidebarForServer('neuropian');
     await switchRoom('general','general','Open discussion for all members');
   } else {
@@ -2608,6 +2668,10 @@ async function switchServer(serverId){
         const sBtn=document.getElementById('server-settings-btn');
         if(sBtn){sBtn.style.display=(currentUser&&data.owner_id&&(data.owner_id===currentUser.id||data.owner_id===currentUser.id.toString()))?'block':'none';}
         window._currentServerData=data;
+        // Show members toggle button for user servers
+        const mBtn=document.getElementById('members-toggle-btn');
+        if(mBtn)mBtn.style.display='block';
+        if(membersOpen)loadMembersPanel(serverId);
         await renderSidebarForServer(serverId,data);
         // Load server's first channel
         const {data:channels}=await sb.from('server_channels').select('*').eq('server_id',serverId).order('created_at',{ascending:true}).limit(1);
@@ -2631,12 +2695,26 @@ async function renderSidebarForServer(serverId, serverData){
       </div>`).join('');
   } else {
     try{
-      const {data:channels}=await sb.from('server_channels').select('*').eq('server_id',serverId).order('created_at',{ascending:true});
-      // Load sub-servers
-      const {data:subServers}=await sb.from('servers').select('id,name').eq('parent_id',serverId).order('created_at',{ascending:true});
+      const [{data:channels},{data:perms},{data:myRoles},{data:subServers},{data:subAccess}]=await Promise.all([
+        sb.from('server_channels').select('*').eq('server_id',serverId).order('created_at',{ascending:true}),
+        sb.from('channel_permissions').select('channel_id,role_id').eq('server_id',serverId),
+        sb.from('server_member_roles').select('role_id').eq('server_id',serverId).eq('user_id',currentUser.id),
+        sb.from('servers').select('id,name').eq('parent_id',serverId).order('created_at',{ascending:true}),
+        sb.from('server_access_roles').select('server_id,role_id').eq('parent_server_id',serverId)
+      ]);
+      const isOwner=serverData&&currentUser&&serverData.owner_id===currentUser.id;
+      const myRoleSet=new Set((myRoles||[]).map(r=>r.role_id));
+      const permMap={};
+      (perms||[]).forEach(p=>{if(!permMap[p.channel_id])permMap[p.channel_id]=new Set();permMap[p.channel_id].add(p.role_id);});
+      const visibleChannels=(channels||[]).filter(c=>{
+        if(isOwner)return true;
+        const allowed=permMap[c.id];
+        if(!allowed||!allowed.size)return true;
+        return [...allowed].some(rid=>myRoleSet.has(rid));
+      });
       let html='';
-      if(channels&&channels.length){
-        html+=channels.map(c=>`
+      if(visibleChannels.length){
+        html+=visibleChannels.map(c=>`
           <div class="chat-room-item" id="ri-srv_${serverId}_${c.id}" onclick="switchRoom('srv_${serverId}_${c.id}','${escHtml(c.name)}','${escHtml(c.description||'')}')"
             style="padding:.45rem 1rem;cursor:pointer;font-size:.72rem;color:#e8e2d6;transition:all .12s;display:flex;align-items:center;gap:.4rem;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem"
             onmouseenter="this.style.color='#bbb';this.style.background='rgba(255,255,255,.04)'"
@@ -2644,13 +2722,21 @@ async function renderSidebarForServer(serverId, serverData){
             <span style="color:#444;font-size:.7rem">#</span>${escHtml(c.name)}
           </div>`).join('');
       }
-      // Sub-servers section
-      if(subServers&&subServers.length){
+      // Sub-servers section — filter by access roles
+      const subAccessMap={};
+      (subAccess||[]).forEach(a=>{if(!subAccessMap[a.server_id])subAccessMap[a.server_id]=new Set();subAccessMap[a.server_id].add(a.role_id);});
+      const visibleSubServers=(subServers||[]).filter(ss=>{
+        if(isOwner)return true;
+        const allowed=subAccessMap[ss.id];
+        if(!allowed||!allowed.size)return true;
+        return [...allowed].some(rid=>myRoleSet.has(rid));
+      });
+      if(visibleSubServers.length){
         html+=`<div style="font-size:.4rem;letter-spacing:.26em;text-transform:uppercase;color:#333;font-weight:700;padding:.7rem 1rem .3rem;display:flex;align-items:center;justify-content:space-between">
           <span>Sub-servers</span>
           <span onclick="openCreateSubServer('${serverId}','${escHtml(serverData?.name||'')}')" style="cursor:pointer;color:#00aa38;font-size:.7rem" title="Add Sub-server">+</span>
         </div>`;
-        html+=subServers.map(ss=>`
+        html+=visibleSubServers.map(ss=>`
           <div onclick="switchServer('${ss.id}')"
             style="padding:.4rem 1rem .4rem 1.6rem;cursor:pointer;font-size:.68rem;color:#e8e2d6;transition:all .12s;display:flex;align-items:center;gap:.4rem;border-left:2px solid rgba(0,200,40,.15);margin:1px .4rem"
             onmouseenter="this.style.color='#bbb'" onmouseleave="this.style.color='#555'">
@@ -2678,6 +2764,94 @@ async function renderSidebarForServer(serverId, serverData){
     if(prl){prl.innerHTML='';prl.style.display='none';}
     if(problemHeader)problemHeader.style.display='none';
   }
+}
+
+let membersOpen=false;
+function toggleMembersPanel(){
+  membersOpen=!membersOpen;
+  const p=document.getElementById('members-panel');
+  p.style.display=membersOpen?'flex':'none';
+  const btn=document.getElementById('members-toggle-btn');
+  if(btn)btn.style.color=membersOpen?'#00cc44':'#444';
+  if(membersOpen&&window._currentServerData)loadMembersPanel(window._currentServerData.id);
+}
+
+async function loadMembersPanel(serverId){
+  const list=document.getElementById('members-panel-list');
+  if(!list||!sb)return;
+  list.innerHTML='<div style="padding:.5rem 1rem;font-size:.62rem;color:#444">Loading…</div>';
+  try{
+    const [membersRes,rolesRes,memberRolesRes]=await Promise.all([
+      sb.from('server_members').select('user_id').eq('server_id',serverId),
+      sb.from('server_roles').select('*').eq('server_id',serverId).order('created_at',{ascending:true}),
+      sb.from('server_member_roles').select('*').eq('server_id',serverId)
+    ]);
+    const memberIds=(membersRes.data||[]).map(m=>m.user_id);
+    const roles=rolesRes.data||[];
+    const memberRoles=memberRolesRes.data||[];
+    if(!memberIds.length){list.innerHTML='<div style="padding:.5rem 1rem;font-size:.62rem;color:#444">No members.</div>';return;}
+    const {data:profiles}=await sb.from('profiles').select('user_id,first_name,last_name').in('user_id',memberIds);
+    const profs=profiles||[];
+    // Group: members with roles first (by role), then ungrouped
+    const rendered=new Set();
+    let html='';
+    for(const role of roles){
+      const roleMembers=profs.filter(p=>memberRoles.some(mr=>mr.user_id===p.user_id&&mr.role_id===role.id));
+      if(!roleMembers.length)continue;
+      html+=`<div style="font-size:.38rem;letter-spacing:.24em;text-transform:uppercase;color:${role.color};font-weight:700;padding:.6rem .8rem .2rem">${escHtml(role.name)} — ${roleMembers.length}</div>`;
+      for(const p of roleMembers){
+        rendered.add(p.user_id);
+        html+=memberRow(p,roles,memberRoles);
+      }
+    }
+    const ungrouped=profs.filter(p=>!rendered.has(p.user_id));
+    if(ungrouped.length){
+      html+=`<div style="font-size:.38rem;letter-spacing:.24em;text-transform:uppercase;color:#444;font-weight:700;padding:.6rem .8rem .2rem">Members — ${ungrouped.length}</div>`;
+      ungrouped.forEach(p=>{html+=memberRow(p,roles,memberRoles);});
+    }
+    list.innerHTML=html||'<div style="padding:.5rem 1rem;font-size:.62rem;color:#444">No members.</div>';
+  }catch(e){console.error('loadMembersPanel',e);}
+}
+
+function memberRow(p,roles,memberRoles){
+  const srv=window._currentServerData;
+  const canModerate=srv&&currentUser&&srv.owner_id===currentUser.id&&p.user_id!==srv.owner_id;
+  const name=p.first_name?`${p.first_name} ${p.last_name||''}`.trim():p.user_id.slice(0,8);
+  const initials=name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?';
+  const userRoles=roles.filter(r=>memberRoles.some(mr=>mr.user_id===p.user_id&&mr.role_id===r.id));
+  const badges=userRoles.map(r=>`<span style="font-size:.44rem;padding:.1rem .35rem;border-radius:20px;background:${r.color}22;color:${r.color};border:1px solid ${r.color}44">${escHtml(r.name)}</span>`).join('');
+  const actions=canModerate?`<div class="mbr-actions" style="display:flex;gap:.25rem;flex-shrink:0;opacity:0;transition:opacity .12s">
+    <button onclick="kickMember('${p.user_id}')" style="background:rgba(255,180,0,.08);border:1px solid rgba(255,180,0,.2);border-radius:3px;color:#ffb400;cursor:pointer;font-size:.5rem;padding:.15rem .35rem;font-family:'DM Sans',sans-serif" onmouseenter="this.style.background='rgba(255,180,0,.2)'" onmouseleave="this.style.background='rgba(255,180,0,.08)'">Kick</button>
+    <button onclick="banMember('${p.user_id}')" style="background:rgba(255,0,0,.06);border:1px solid rgba(255,60,60,.2);border-radius:3px;color:#e55;cursor:pointer;font-size:.5rem;padding:.15rem .35rem;font-family:'DM Sans',sans-serif" onmouseenter="this.style.background='rgba(255,0,0,.15)'" onmouseleave="this.style.background='rgba(255,0,0,.06)'">Ban</button>
+  </div>`:'';
+  return `<div style="display:flex;align-items:center;gap:.55rem;padding:.35rem .8rem;transition:background .12s"
+    onmouseenter="this.style.background='rgba(255,255,255,.04)';var a=this.querySelector('.mbr-actions');if(a)a.style.opacity='1'"
+    onmouseleave="this.style.background='transparent';var a=this.querySelector('.mbr-actions');if(a)a.style.opacity='0'">
+    <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#1a1a2e,#2d2d4e);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.5rem;font-weight:700;color:#888">${initials}</div>
+    <div style="overflow:hidden;min-width:0;flex:1">
+      <div style="font-size:.68rem;color:#ccc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escHtml(name)}</div>
+      ${badges?`<div style="display:flex;gap:.2rem;flex-wrap:wrap;margin-top:.15rem">${badges}</div>`:''}
+    </div>
+    ${actions}
+  </div>`;
+}
+
+async function kickMember(userId){
+  const srv=window._currentServerData;
+  if(!srv||!sb)return;
+  if(!confirm('Kick this member from the server?'))return;
+  const {error}=await sb.from('server_members').delete().eq('server_id',srv.id).eq('user_id',userId);
+  if(error){console.error('kickMember',error);return;}
+  loadMembersPanel(srv.id);
+}
+
+async function banMember(userId){
+  const srv=window._currentServerData;
+  if(!srv||!sb)return;
+  if(!confirm('Ban this member? They will not be able to rejoin.'))return;
+  await sb.from('server_bans').upsert({server_id:srv.id,user_id:userId,banned_by:currentUser.id},{onConflict:'server_id,user_id'});
+  await sb.from('server_members').delete().eq('server_id',srv.id).eq('user_id',userId);
+  loadMembersPanel(srv.id);
 }
 
 function addServerIconToRail(id, name, imageUrl){
@@ -2738,6 +2912,7 @@ function openServerSettings(){
   document.getElementById('ss-status').style.display='none';
   document.getElementById('ss-roles-list').innerHTML='';
   document.getElementById('ss-members-list').innerHTML='<div style="font-size:.65rem;color:#444">Loading…</div>';
+  document.getElementById('ss-channels-list').innerHTML='<div style="font-size:.65rem;color:#444">Loading…</div>';
   document.getElementById('ss-role-name').value='';
   document.getElementById('ss-role-err').style.display='none';
   window._selectedRoleColor='#00cc44';
@@ -2755,17 +2930,22 @@ function selectRoleColor(color, el){
 
 async function loadServerRolesAndMembers(serverId){
   if(!sb)return;
-  const [rolesRes, memberRolesRes, membersRes] = await Promise.all([
+  const [rolesRes, memberRolesRes, membersRes, channelsRes, permsRes] = await Promise.all([
     sb.from('server_roles').select('*').eq('server_id',serverId).order('created_at',{ascending:true}),
     sb.from('server_member_roles').select('*').eq('server_id',serverId),
-    sb.from('server_members').select('user_id').eq('server_id',serverId)
+    sb.from('server_members').select('user_id').eq('server_id',serverId),
+    sb.from('server_channels').select('*').eq('server_id',serverId).order('created_at',{ascending:true}),
+    sb.from('channel_permissions').select('channel_id,role_id').eq('server_id',serverId)
   ]);
   const roles=rolesRes.data||[];
   const memberRoles=memberRolesRes.data||[];
   const memberIds=(membersRes.data||[]).map(m=>m.user_id);
+  const channels=channelsRes.data||[];
+  const perms=permsRes.data||[];
   window._serverRoles=roles;
   window._serverMemberRoles=memberRoles;
   renderRolesList(roles);
+  renderChannelPermissions(channels, roles, perms, serverId);
   if(!memberIds.length){document.getElementById('ss-members-list').innerHTML='<div style="font-size:.65rem;color:#444">No members yet.</div>';return;}
   const {data:profiles}=await sb.from('profiles').select('user_id,first_name,last_name,neuropian_id').in('user_id',memberIds);
   renderMembersList(profiles||[], roles, memberRoles, serverId);
@@ -2817,6 +2997,46 @@ function toggleMemberExpand(id){
   const el=document.getElementById(id);
   if(!el)return;
   el.style.display=el.style.display==='none'?'flex':'none';
+}
+
+function renderChannelPermissions(channels, roles, perms, serverId){
+  const el=document.getElementById('ss-channels-list');
+  if(!channels.length){el.innerHTML='<div style="font-size:.65rem;color:#444;font-style:italic">No channels yet.</div>';return;}
+  if(!roles.length){el.innerHTML='<div style="font-size:.65rem;color:#444;font-style:italic">Create roles first to set permissions.</div>';return;}
+  el.innerHTML=channels.map(c=>{
+    const restrictedRoleIds=new Set(perms.filter(p=>p.channel_id===c.id).map(p=>p.role_id));
+    const roleCheckboxes=roles.map(r=>{
+      const checked=restrictedRoleIds.has(r.id);
+      return `<label style="display:flex;align-items:center;gap:.35rem;cursor:pointer;font-size:.65rem;color:#bbb">
+        <input type="checkbox" ${checked?'checked':''} onchange="toggleChannelPermission('${c.id}','${r.id}','${serverId}',this.checked)" style="accent-color:${r.color}">
+        <span style="color:${r.color}">${escHtml(r.name)}</span>
+      </label>`;
+    }).join('');
+    const lockedLabel=restrictedRoleIds.size?`<span style="font-size:.52rem;color:#888">🔒 ${restrictedRoleIds.size} role${restrictedRoleIds.size>1?'s':''}</span>`:'<span style="font-size:.52rem;color:#444">open</span>';
+    return `<div style="border:1px solid rgba(255,255,255,.06);border-radius:5px;overflow:hidden">
+      <div onclick="toggleMemberExpand('chperms-${c.id}')" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;cursor:pointer;background:rgba(255,255,255,.02)" onmouseenter="this.style.background='rgba(255,255,255,.05)'" onmouseleave="this.style.background='rgba(255,255,255,.02)'">
+        <span style="color:#444;font-size:.7rem">#</span>
+        <span style="flex:1;font-size:.72rem;color:#ddd">${escHtml(c.name)}</span>
+        ${lockedLabel}
+        <span style="color:#444;font-size:.6rem">▾</span>
+      </div>
+      <div id="chperms-${c.id}" style="display:none;padding:.6rem .9rem;border-top:1px solid rgba(255,255,255,.06);flex-direction:column;gap:.45rem">
+        ${roleCheckboxes}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function toggleChannelPermission(channelId, roleId, serverId, checked){
+  if(!sb)return;
+  if(checked){
+    await sb.from('channel_permissions').insert({server_id:serverId,channel_id:channelId,role_id:roleId});
+  } else {
+    await sb.from('channel_permissions').delete().eq('channel_id',channelId).eq('role_id',roleId);
+  }
+  // Refresh sidebar so changes take effect immediately for owner
+  const srv=window._currentServerData;
+  if(srv)await renderSidebarForServer(srv.id,srv);
 }
 
 async function createRole(){
@@ -3058,6 +3278,15 @@ async function uploadServerImage(serverId, file){
 function openCreateServer(){
   document.getElementById('cs-parent-id').value='';
   document.getElementById('cs-parent-label').style.display='none';
+  document.getElementById('cs-modal-title').textContent='Create a Server';
+  document.getElementById('cs-modal-desc').style.display='block';
+  document.getElementById('cs-desc-section').style.display='block';
+  document.getElementById('cs-image-section').style.display='block';
+  document.getElementById('cs-roles-section').style.display='none';
+  document.getElementById('cs-roles-list').innerHTML='';
+  document.getElementById('cs-name').value='';
+  document.getElementById('cs-desc').value='';
+  document.getElementById('cs-err').style.display='none';
   document.getElementById('create-server-modal').style.display='flex';
 }
 function closeCreateServer(){
@@ -3081,6 +3310,13 @@ async function submitCreateServer(){
     await sb.from('server_channels').insert({server_id:srv.id,name:'general',description:'General discussion'});
     // Auto-add owner as member
     await sb.from('server_members').insert({server_id:srv.id,user_id:currentUser.id}).then(()=>{});
+    // Save access roles for sub-servers
+    if(parentId){
+      const checked=[...document.querySelectorAll('#cs-roles-list input[type=checkbox]:checked')].map(cb=>cb.value);
+      if(checked.length){
+        await sb.from('server_access_roles').insert(checked.map(roleId=>({server_id:srv.id,parent_server_id:parentId,role_id:roleId})));
+      }
+    }
     const imgFile=document.getElementById('cs-img')?.files[0];
     let imageUrl=null;
     if(imgFile){
@@ -3124,6 +3360,9 @@ async function submitJoinServer(){
   try{
     const {data:srv,error}=await sb.from('servers').select('id,name').eq('join_code',code).single();
     if(error||!srv){err.textContent='Invalid code. Check with the server owner.';err.style.display='block';btn.textContent='Join Server';btn.disabled=false;return;}
+    // Check not banned
+    const {data:ban}=await sb.from('server_bans').select('id').eq('server_id',srv.id).eq('user_id',currentUser.id).single();
+    if(ban){err.textContent='You are banned from this server.';err.style.display='block';btn.textContent='Join Server';btn.disabled=false;return;}
     // Check not already a member
     const {data:existing}=await sb.from('server_members').select('id').eq('server_id',srv.id).eq('user_id',currentUser.id).single();
     if(!existing){
@@ -3198,10 +3437,16 @@ async function submitProblem(){
 
 // ── ROOMS & MESSAGES ───────────────────────────────────────────────
 async function switchRoom(roomId,roomName,roomDesc){
+  clearRoomUnread(roomId);
   renderRoomJobs(roomId);
   currentRoom=roomId;
   document.getElementById('chat-room-name').textContent=roomName;
   document.getElementById('chat-room-desc').textContent=roomDesc;
+  const isDM=roomId.startsWith('dm_');
+  const prefix=document.getElementById('chat-room-prefix');
+  if(prefix)prefix.textContent=isDM?'@':'#';
+  const inp=document.getElementById('chat-input');
+  if(inp)inp.placeholder=isDM?`Message ${roomName}…`:`Message RoundTable…`;
   document.querySelectorAll('.chat-room-item').forEach(el=>{
     el.style.color='#666';el.style.borderLeft='2px solid transparent';el.style.background='transparent';
   });
@@ -3239,7 +3484,7 @@ function appendMessage(msg,scroll){
   const initials=(msg.display_name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
   const div=document.createElement('div');
   div.id='msg-'+msg.id;
-  div.style.cssText=`display:flex;gap:.65rem;align-items:flex-start;${isMe?'flex-direction:row-reverse':''}`;
+  div.style.cssText=`display:flex;gap:.65rem;align-items:flex-start;position:relative;padding:.1rem 0;${isMe?'flex-direction:row-reverse':''}`;
   div.innerHTML=`
     <div style="width:28px;height:28px;border-radius:50%;background:${isMe?'linear-gradient(135deg,#005c1e,#00cc44)':'linear-gradient(135deg,#1e1e2e,#2d2d4e)'};display:flex;align-items:center;justify-content:center;font-size:.54rem;font-weight:700;color:${isMe?'#000':'#aaa'};flex-shrink:0;margin-top:.1rem">${initials}</div>
     <div style="max-width:70%;display:flex;flex-direction:column;gap:.18rem;${isMe?'align-items:flex-end':'align-items:flex-start'}">
@@ -3247,10 +3492,69 @@ function appendMessage(msg,scroll){
         <span style="font-size:.6rem;font-weight:600;color:${isMe?'#00cc44':'#888'}">${escHtml(msg.display_name||'Anonymous')}</span>
         <span style="font-size:.48rem;color:#333">${time}</span>
       </div>
-      <div style="background:${isMe?'rgba(0,200,40,.1)':'rgba(255,255,255,.04)'};border:1px solid ${isMe?'rgba(0,200,40,.18)':'rgba(255,255,255,.05)'};border-radius:${isMe?'10px 2px 10px 10px':'2px 10px 10px 10px'};padding:.5rem .8rem;font-size:.73rem;color:#e8e2d6;line-height:1.55;word-break:break-word">${escHtml(msg.content)}</div>
+      <div id="msg-content-${msg.id}" style="background:${isMe?'rgba(0,200,40,.1)':'rgba(255,255,255,.04)'};border:1px solid ${isMe?'rgba(0,200,40,.18)':'rgba(255,255,255,.05)'};border-radius:${isMe?'10px 2px 10px 10px':'2px 10px 10px 10px'};padding:.5rem .8rem;font-size:.73rem;color:#e8e2d6;line-height:1.55;word-break:break-word">${escHtml(msg.content)}</div>
     </div>`;
+  if(isMe){
+    const bar=document.createElement('div');
+    bar.style.cssText='position:absolute;top:2px;left:36px;display:flex;background:#1e1e1e;border:1px solid rgba(255,255,255,.08);border-radius:4px;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .12s;z-index:5';
+    bar.innerHTML=`
+      <button onclick="editMessage('${msg.id}')" title="Edit" style="background:none;border:none;color:#555;cursor:pointer;padding:.28rem .45rem;font-size:.65rem;line-height:1;transition:all .12s" onmouseenter="this.style.color='#00cc44';this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.color='#555';this.style.background='none'">✏</button>
+      <button onclick="deleteMessage('${msg.id}')" title="Delete" style="background:none;border:none;color:#555;cursor:pointer;padding:.28rem .45rem;font-size:.65rem;line-height:1;transition:all .12s" onmouseenter="this.style.color='#e55';this.style.background='rgba(255,0,0,.08)'" onmouseleave="this.style.color='#555';this.style.background='none'">🗑</button>`;
+    div.appendChild(bar);
+    div.addEventListener('mouseenter',()=>{bar.style.opacity='1';bar.style.pointerEvents='auto';});
+    div.addEventListener('mouseleave',()=>{bar.style.opacity='0';bar.style.pointerEvents='none';});
+  }
   ml.appendChild(div);
   if(scroll)ml.scrollTop=ml.scrollHeight;
+}
+
+function editMessage(msgId){
+  const cd=document.getElementById('msg-content-'+msgId);
+  if(!cd||cd.dataset.editing)return;
+  const original=cd.textContent;
+  cd.dataset.original=original;
+  cd.dataset.editing='1';
+  const ta=document.createElement('textarea');
+  ta.value=original;
+  ta.style.cssText='width:100%;min-width:200px;background:#1a1a1a;border:1px solid rgba(0,200,40,.3);border-radius:6px;padding:.5rem .7rem;color:#ddd;font-family:\'DM Sans\',sans-serif;font-size:.73rem;line-height:1.55;resize:none;outline:none;box-sizing:border-box';
+  ta.rows=3;
+  ta.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();saveEditMessage(msgId);}if(e.key==='Escape')cancelEditMessage(msgId);});
+  const btns=document.createElement('div');
+  btns.style.cssText='display:flex;gap:.4rem;margin-top:.35rem;justify-content:flex-end';
+  btns.innerHTML=`<button onclick="cancelEditMessage('${msgId}')" style="background:none;border:1px solid rgba(255,255,255,.1);border-radius:3px;color:#888;cursor:pointer;font-size:.56rem;font-family:'DM Sans',sans-serif;padding:.25rem .6rem;transition:all .12s" onmouseenter="this.style.borderColor='rgba(255,255,255,.25)'" onmouseleave="this.style.borderColor='rgba(255,255,255,.1)'">Cancel</button><button onclick="saveEditMessage('${msgId}')" style="background:#00cc44;border:none;border-radius:3px;color:#000;cursor:pointer;font-size:.56rem;font-family:'DM Sans',sans-serif;padding:.25rem .6rem;font-weight:700">Save</button>`;
+  cd.innerHTML='';
+  cd.appendChild(ta);
+  cd.appendChild(btns);
+  ta.focus();
+}
+
+function cancelEditMessage(msgId){
+  const cd=document.getElementById('msg-content-'+msgId);
+  if(!cd)return;
+  cd.textContent=cd.dataset.original||'';
+  delete cd.dataset.editing;
+  delete cd.dataset.original;
+}
+
+async function saveEditMessage(msgId){
+  const cd=document.getElementById('msg-content-'+msgId);
+  if(!cd)return;
+  const ta=cd.querySelector('textarea');
+  if(!ta)return;
+  const newContent=ta.value.trim();
+  if(!newContent)return;
+  const {error}=await sb.from('messages').update({content:newContent}).eq('id',msgId).eq('user_id',currentUser.id);
+  if(error){console.error('saveEditMessage',error);return;}
+  cd.textContent=newContent;
+  delete cd.dataset.editing;
+  delete cd.dataset.original;
+}
+
+async function deleteMessage(msgId){
+  const {error}=await sb.from('messages').delete().eq('id',msgId).eq('user_id',currentUser.id);
+  if(error){console.error('deleteMessage',error);return;}
+  const el=document.getElementById('msg-'+msgId);
+  if(el)el.remove();
 }
 
 function escHtml(t){if(!t)return'';return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -3305,11 +3609,34 @@ function closeChatSidebar(){
 }
 
 // ── SUB-SERVERS ────────────────────────────────────────────────────
-function openCreateSubServer(parentId,parentName){
+async function openCreateSubServer(parentId,parentName){
   document.getElementById('cs-parent-id').value=parentId;
   document.getElementById('cs-parent-label').textContent=`Sub-server of: ${parentName}`;
   document.getElementById('cs-parent-label').style.display='block';
+  document.getElementById('cs-modal-title').textContent='Create Sub-server';
+  document.getElementById('cs-modal-desc').style.display='none';
+  document.getElementById('cs-desc-section').style.display='none';
+  document.getElementById('cs-image-section').style.display='none';
+  document.getElementById('cs-name').value='';
+  document.getElementById('cs-err').style.display='none';
+  // Load parent server's roles for access control
+  const rolesList=document.getElementById('cs-roles-list');
+  const rolesSection=document.getElementById('cs-roles-section');
+  rolesList.innerHTML='<div style="font-size:.62rem;color:#444">Loading roles…</div>';
+  rolesSection.style.display='block';
   document.getElementById('create-server-modal').style.display='flex';
+  if(sb){
+    const {data:roles}=await sb.from('server_roles').select('*').eq('server_id',parentId).order('created_at',{ascending:true});
+    if(!roles||!roles.length){
+      rolesList.innerHTML='<div style="font-size:.62rem;color:#444;font-style:italic">No roles on this server yet — sub-server will be open to all members.</div>';
+    } else {
+      rolesList.innerHTML=roles.map(r=>`
+        <label style="display:flex;align-items:center;gap:.45rem;cursor:pointer;font-size:.68rem;color:#bbb">
+          <input type="checkbox" value="${r.id}" style="accent-color:${r.color}">
+          <span style="color:${r.color}">${escHtml(r.name)}</span>
+        </label>`).join('');
+    }
+  }
 }
 
 async function loadSubServers(parentId){
@@ -3364,9 +3691,13 @@ async function loadFriends(){
     const fl=document.getElementById('friends-list');
     if(!data||!data.length){fl.innerHTML=`<div style="padding:.45rem 1rem;font-size:.65rem;color:#444;font-style:italic">No friends yet</div>`;return;}
     fl.innerHTML=data.map(f=>`
-      <div style="padding:.45rem 1rem;font-size:.7rem;color:#e8e2d6;display:flex;align-items:center;gap:.5rem">
+      <div class="chat-room-item" id="ri-dm_${[currentUser.id,f.friend_id].sort().join('_')}"
+        onclick="openDM('${f.friend_id}','${escHtml(f.friend_name||'Member')}')"
+        style="padding:.45rem 1rem;cursor:pointer;font-size:.7rem;color:#666;display:flex;align-items:center;gap:.5rem;transition:all .12s;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem"
+        onmouseenter="if(currentRoom!=='dm_${[currentUser.id,f.friend_id].sort().join('_')}')this.style.color='#bbb';this.style.background='rgba(255,255,255,.04)'"
+        onmouseleave="if(currentRoom!=='dm_${[currentUser.id,f.friend_id].sort().join('_')}')this.style.color='#666';this.style.background='transparent'">
         <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#1a2e1a,#2a5a2a);display:flex;align-items:center;justify-content:center;font-size:.48rem;color:#e8e2d6;font-weight:700;flex-shrink:0">${(f.friend_name||'?').slice(0,2).toUpperCase()}</div>
-        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escHtml(f.friend_name||'Member')}</span>
+        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${escHtml(f.friend_name||'Member')}</span>
       </div>`).join('');
   }catch(e){console.error('loadFriends',e);}
 }
@@ -3437,6 +3768,16 @@ async function acceptFriend(reqId){
 async function declineFriend(reqId){
   try{await sb.from('friends').delete().eq('id',reqId);await loadFriendRequests();}
   catch(e){console.error('declineFriend',e);}
+}
+
+async function openDM(friendId,friendName){
+  if(!currentUser)return;
+  const dmRoom='dm_'+[currentUser.id,friendId].sort().join('_');
+  await switchRoom(dmRoom,friendName,'Direct Message');
+  // Hide members panel — DMs don't have a member list
+  const mBtn=document.getElementById('members-toggle-btn');
+  if(mBtn)mBtn.style.display='none';
+  if(membersOpen){membersOpen=false;document.getElementById('members-panel').style.display='none';}
 }
 
 // ═══ CONTACT FORM ═══
