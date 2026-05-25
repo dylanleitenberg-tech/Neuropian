@@ -680,7 +680,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <li><a style="cursor:pointer" onclick="navScroll('eagleeyes-intro')">EagleEyes</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:.6rem;flex-shrink:0">
-    <span id="nav-user" onclick="openProfile()" style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.95);font-weight:500;display:none;cursor:pointer;transition:opacity .2s" onmouseenter="this.style.opacity='.7'" onmouseleave="this.style.opacity='1'"></span>
+    <span id="nav-friend-badge" onclick="gatedPage('collective')" title="Friend requests" style="display:none;position:relative;cursor:pointer;padding:.2rem .28rem;transition:opacity .2s" onmouseenter="this.style.opacity='.7'" onmouseleave="this.style.opacity='1'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span id="nav-friend-count" style="position:absolute;top:-3px;right:-4px;background:#00cc44;color:#000;font-family:'DM Sans',sans-serif;font-size:.36rem;font-weight:800;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 3px;line-height:1"></span></span>
+    <span id="nav-user" onclick="openProfile()" style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.95);font-weight:500;display:none;cursor:pointer;transition:opacity .2s;align-items:center;gap:.45rem" onmouseenter="this.style.opacity='.7'" onmouseleave="this.style.opacity='1'"><span id="nav-avatar" style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#005c1e,#00cc44);display:inline-flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:.42rem;font-weight:700;color:#fff;overflow:hidden;flex-shrink:0;vertical-align:middle"><span id="nav-avatar-initials"></span></span><span id="nav-user-name"></span></span>
     <button id="nav-signout" style="display:none;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,0.95);padding:.32rem .75rem;font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .22s" onmouseenter="this.style.borderColor='rgba(255,255,255,.5)';this.style.color='#fff'" onmouseleave="this.style.borderColor='rgba(255,255,255,.2)';this.style.color='rgba(255,255,255,.5)'" onclick="doSignOut()">Sign Out</button>
     <button class="nav-apply" onclick="openNextElonApply()">Apply Now</button>
   </div>
@@ -1292,6 +1293,15 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
     <div id="sp-label" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.6rem;text-align:right">Step 1 of 8</div>
     <div class="spw"><div class="spf" id="sp" style="width:12%"></div></div>
+    <div id="survey-welcome-banner" style="display:none;max-width:640px;margin:0 auto 0;padding:3rem 0 0">
+      <div style="background:linear-gradient(135deg,rgba(0,200,40,.06),rgba(0,100,20,.04));border:1px solid rgba(0,200,40,.2);border-radius:8px;padding:1.2rem 1.6rem;margin-bottom:2rem;display:flex;align-items:flex-start;gap:1rem">
+        <div style="font-size:1.4rem;line-height:1;flex-shrink:0">🧠</div>
+        <div>
+          <div id="survey-welcome-name" style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#00aa38;margin-bottom:.3rem">Welcome to Neuropian</div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.7;margin:0">You're about to complete your cognitive profile. This 8-question survey takes about 3 minutes and unlocks personalized opportunity matching, your Neuropian ID, and access to RoundTable.</p>
+        </div>
+      </div>
+    </div>
     <div class="sst on" id="step-consent" style="max-width:640px;margin:0 auto;padding:3rem 0 2rem">
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.36em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.2rem">Neuropian · Cognitive Survey</div>
       <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1;letter-spacing:-.03em;color:var(--white);margin-bottom:1rem">Before we begin</h2>
@@ -1342,8 +1352,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
     <div class="sst" id="step-8">
       <div class="slbl">Question 8 of 8</div>
-      <div class="sc"><div class="slb">Describe your single most impressive accomplishment, recognized or not.</div><div class="field" style="margin-top:.72rem"><textarea id="s8-accomplishment" placeholder="Something you built, solved, discovered, or created. The more specific the better." style="min-height:98px"></textarea></div></div>
-      <div class="sc"><div class="slb">Is there an ability the world hasn't fully seen yet?</div><div class="field" style="margin-top:.72rem"><textarea id="s8-hidden-ability" placeholder="Tell us the part of your mind nobody has given a proper stage to yet." style="min-height:86px"></textarea></div></div>
+      <div class="sc"><div class="slb">Describe your single most impressive accomplishment, recognized or not.</div><div class="field" style="margin-top:.72rem"><textarea id="s8-accomplishment" oninput="_saveSurveyProgress()" placeholder="Something you built, solved, discovered, or created. The more specific the better." style="min-height:98px"></textarea></div></div>
+      <div class="sc"><div class="slb">Is there an ability the world hasn't fully seen yet?</div><div class="field" style="margin-top:.72rem"><textarea id="s8-hidden-ability" oninput="_saveSurveyProgress()" placeholder="Tell us the part of your mind nobody has given a proper stage to yet." style="min-height:86px"></textarea></div></div>
       <div class="nb"><button class="bk" onclick="ps(8)">Back</button><button class="btn-primary" onclick="finSurvey()">See My Matches</button></div>
     </div>
   </div>
@@ -1374,9 +1384,10 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
     <button onclick="gatedPage('collective')" style="padding:.7rem 1.6rem;background:#00cc44;border:none;border-radius:3px;color:#000;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background .2s" onmouseenter="this.style.background='#00aa38'" onmouseleave="this.style.background='#00cc44'">Enter RoundTable →</button>
   </div>
-    <div class="fr"><span class="flb">Filter:</span><button class="fb on" onclick="fj(this,'all')">All</button><button class="fb" onclick="fj(this,'tech')">Tech</button><button class="fb" onclick="fj(this,'science')">Science</button><button class="fb" onclick="fj(this,'data')">Data</button><button class="fb" onclick="fj(this,'design')">Design</button><button class="fb" onclick="fj(this,'art')">Art &amp; Music</button><button class="fb" onclick="fj(this,'prize')">Prize</button><button class="fb" onclick="fj(this,'research')">Research</button><button class="fb" onclick="fj(this,'startup')">Startup</button><button class="fb" onclick="fj(this,'psych')">Psychology</button></div>
+    <div style="padding:0 2.5rem;margin-bottom:1rem"><div style="position:relative;max-width:400px"><svg style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.35" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="jkw" type="text" placeholder="Search opportunities…" oninput="filterByKeyword(this.value)" style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#e8e2d6;font-family:'Barlow',sans-serif;font-size:.74rem;padding:.52rem .7rem .52rem 2rem;outline:none;transition:border-color .2s;box-sizing:border-box" onfocus="this.style.borderColor='rgba(0,200,40,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"></div></div>
+    <div class="fr"><span class="flb">Filter:</span><button class="fb on" onclick="fj(this,'all')">All</button><button class="fb" onclick="fj(this,'tech')">Tech</button><button class="fb" onclick="fj(this,'science')">Science</button><button class="fb" onclick="fj(this,'data')">Data</button><button class="fb" onclick="fj(this,'design')">Design</button><button class="fb" onclick="fj(this,'art')">Art &amp; Music</button><button class="fb" onclick="fj(this,'prize')">Prize</button><button class="fb" onclick="fj(this,'research')">Research</button><button class="fb" onclick="fj(this,'startup')">Startup</button><button class="fb" onclick="fj(this,'psych')">Psychology</button><button class="fb" id="fb-saved" onclick="fj(this,'saved')" style="border-color:rgba(0,200,40,.3);color:#00aa38">Saved ✓</button></div>
     <div id="jlist"></div>
-    <div class="nr" id="nores">No matches in this category. <a onclick="showPage('survey')" style="color:var(--v2);cursor:pointer;font-weight:600">Retake the survey</a> for better results.</div>
+    <div class="nr" id="nores">No opportunities found.</div>
     <div style="text-align:center;margin-top:2.5rem;padding:2.4rem;border-top:1px solid var(--b1)">
       <p style="font-size:.76rem;color:#333333;margin-bottom:1.15rem;font-weight:300;font-style:italic">Complete the talent survey for more precise matches tailored to your cognitive profile.</p>
     </div>
@@ -1662,6 +1673,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.06)">
       <div id="ss-delete-confirm" style="display:none;font-size:.68rem;color:#e55;margin-bottom:.8rem;line-height:1.6">Permanently delete this server and all its messages? This cannot be undone.</div>
       <div id="ss-delete-row" style="display:flex;gap:.6rem">
+        <button id="ss-leave-btn" onclick="leaveServer()" style="flex:1;padding:.6rem;background:rgba(255,165,0,.06);border:1px solid rgba(255,165,0,.2);border-radius:4px;color:#c88;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s" onmouseenter="this.style.background='rgba(255,165,0,.12)'" onmouseleave="this.style.background='rgba(255,165,0,.06)'">Leave Server</button>
         <button id="ss-delete-btn" onclick="showDeleteConfirm()" style="flex:1;padding:.6rem;background:rgba(255,0,0,.06);border:1px solid rgba(255,60,60,.2);border-radius:4px;color:#c44;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s" onmouseenter="this.style.background='rgba(255,0,0,.12)'" onmouseleave="this.style.background='rgba(255,0,0,.06)'">Delete Server</button>
       </div>
       <div id="ss-delete-confirm-row" style="display:none;gap:.6rem">
@@ -1699,6 +1711,15 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       </div>
       <div style="font-size:.52rem;color:#555;margin-top:.4rem">Share this 7-digit ID so others can add you as a friend.</div>
     </div>
+    <!-- Profile completeness -->
+    <div id="pf-completeness" style="margin-bottom:1.2rem;display:none">
+      <div style="font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:#555;margin-bottom:.5rem">Profile Completeness</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+        <span id="pfc-survey" style="font-family:'Barlow Condensed',sans-serif;font-size:.5rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .55rem;border-radius:3px;border:1px solid rgba(255,255,255,.1);color:#555">Survey</span>
+        <span id="pfc-bio" style="font-family:'Barlow Condensed',sans-serif;font-size:.5rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .55rem;border-radius:3px;border:1px solid rgba(255,255,255,.1);color:#555">Bio</span>
+        <span id="pfc-avatar" style="font-family:'Barlow Condensed',sans-serif;font-size:.5rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .55rem;border-radius:3px;border:1px solid rgba(255,255,255,.1);color:#555">Photo</span>
+      </div>
+    </div>
     <!-- Account info -->
     <div style="margin-bottom:1.2rem">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem">
@@ -1730,12 +1751,18 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <button id="bio-save-btn" onclick="saveBio()" style="background:rgba(0,200,40,.12);border:1px solid rgba(0,200,40,.25);border-radius:3px;color:#00aa38;font-family:'DM Sans',sans-serif;font-size:.56rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;cursor:pointer;transition:all .15s" onmouseenter="this.style.background='rgba(0,200,40,.22)'" onmouseleave="this.style.background='rgba(0,200,40,.12)'">Save</button>
       </div>
     </div>
-    <div style="display:flex;gap:.4rem;margin-bottom:.5rem">
-      <button onclick="genOgImage()" style="flex:1;padding:.5rem;background:none;border:1px solid rgba(255,255,255,.07);border-radius:4px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.style.borderColor='rgba(255,255,255,.15)'" onmouseleave="this.style.color='rgba(255,255,255,.3)';this.style.borderColor='rgba(255,255,255,.07)'">⬇ Download Brain</button>
-      <label style="flex:1;padding:.5rem;background:none;border:1px solid rgba(255,255,255,.07);border-radius:4px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-align:center;display:flex;align-items:center;justify-content:center" id="og-upload-label" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.style.borderColor='rgba(255,255,255,.15)'" onmouseleave="this.style.color='rgba(255,255,255,.3)';this.style.borderColor='rgba(255,255,255,.07)'">⬆ Upload OG Image
-        <input type="file" accept="image/*" style="display:none" onchange="uploadOgImage(this.files[0])">
-      </label>
+    <div id="pf-survey-section" style="display:none;margin-bottom:.8rem">
+      <div style="font-size:.42rem;letter-spacing:.22em;text-transform:uppercase;color:#444;font-weight:700;margin-bottom:.5rem">Survey Highlights</div>
+      <div id="pf-accomplishment-row" style="display:none;margin-bottom:.5rem">
+        <div style="font-size:.52rem;color:#00aa38;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem">Top Accomplishment</div>
+        <div id="pf-accomplishment" style="font-family:'Cormorant Garamond',serif;font-size:.88rem;color:#e8e2d6;line-height:1.6;font-style:italic"></div>
+      </div>
+      <div id="pf-hidden-ability-row" style="display:none">
+        <div style="font-size:.52rem;color:#00aa38;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem">Hidden Ability</div>
+        <div id="pf-hidden-ability" style="font-family:'Cormorant Garamond',serif;font-size:.88rem;color:#e8e2d6;line-height:1.6;font-style:italic"></div>
+      </div>
     </div>
+    <button onclick="closeProfile();showSetPasswordModal(true);" style="width:100%;padding:.65rem;background:rgba(0,200,40,.05);border:1px solid rgba(0,200,40,.15);border-radius:4px;color:#00aa38;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-bottom:.5rem" onmouseenter="this.style.background='rgba(0,200,40,.1)'" onmouseleave="this.style.background='rgba(0,200,40,.05)'">Change Password</button>
     <button onclick="doSignOut();closeProfile();" style="width:100%;padding:.65rem;background:rgba(255,0,0,.06);border:1px solid rgba(255,60,60,.2);border-radius:4px;color:#c44;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s" onmouseenter="this.style.background='rgba(255,0,0,.12)'" onmouseleave="this.style.background='rgba(255,0,0,.06)'">Sign Out</button>
     <div id="delete-acct-confirm" style="display:none;margin-top:.8rem;background:rgba(255,0,0,.06);border:1px solid rgba(255,60,60,.2);border-radius:4px;padding:.8rem">
       <p style="font-size:.62rem;color:#c44;margin-bottom:.6rem;line-height:1.5">This will send an account deletion request. Your data will be permanently removed within 30 days.</p>
@@ -1764,6 +1791,14 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div id="uc-bio-row" style="display:none;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:.7rem .9rem;margin-bottom:1rem">
       <div style="font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:#444;margin-bottom:.35rem">About</div>
       <p id="uc-bio" style="font-family:'Barlow',sans-serif;font-size:.74rem;color:#bbb;line-height:1.6;margin:0;word-break:break-word"></p>
+    </div>
+    <div id="uc-accomplishment-row" style="display:none;background:rgba(0,200,40,.04);border:1px solid rgba(0,200,40,.1);border-radius:4px;padding:.7rem .9rem;margin-bottom:.6rem">
+      <div style="font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:#00aa38;margin-bottom:.35rem">Top Accomplishment</div>
+      <p id="uc-accomplishment" style="font-family:'Cormorant Garamond',serif;font-size:.88rem;font-style:italic;color:#bbb;line-height:1.6;margin:0;word-break:break-word"></p>
+    </div>
+    <div id="uc-hidden-ability-row" style="display:none;background:rgba(0,200,40,.04);border:1px solid rgba(0,200,40,.1);border-radius:4px;padding:.7rem .9rem;margin-bottom:1rem">
+      <div style="font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:#00aa38;margin-bottom:.35rem">Hidden Ability</div>
+      <p id="uc-hidden-ability" style="font-family:'Cormorant Garamond',serif;font-size:.88rem;font-style:italic;color:#bbb;line-height:1.6;margin:0;word-break:break-word"></p>
     </div>
     <button id="uc-add-btn" style="width:100%;padding:.6rem;background:rgba(0,200,40,.1);border:1px solid rgba(0,200,40,.25);border-radius:4px;color:#00aa38;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s" onmouseenter="if(!this.disabled)this.style.background='rgba(0,200,40,.2)'" onmouseleave="if(!this.disabled)this.style.background='rgba(0,200,40,.1)'">Add Friend</button>
   </div>
@@ -1872,18 +1907,38 @@ function setNavUser(user){
   const ns=document.getElementById('nav-signout');
   const mu=document.getElementById('mobile-nav-user');
   const ms=document.getElementById('mobile-nav-signout');
+  const badge=document.getElementById('nav-friend-badge');
   if(user){
     const name=user.user_metadata?.first_name||user.email.split('@')[0];
-    if(nu){nu.textContent=name;nu.style.display='';}
+    if(nu){
+      const initials=(user.user_metadata?.first_name||name).slice(0,1).toUpperCase()+(user.user_metadata?.last_name||'').slice(0,1).toUpperCase()||name.slice(0,2).toUpperCase();
+      const niEl=document.getElementById('nav-avatar-initials');
+      const nnEl=document.getElementById('nav-user-name');
+      if(niEl)niEl.textContent=initials;
+      if(nnEl)nnEl.textContent=name;
+      nu.style.display='flex';
+      // Load avatar async
+      if(sb)sb.from('profiles').select('avatar_url').eq('user_id',user.id).maybeSingle().then(({data:pf})=>{
+        if(pf?.avatar_url)sb.storage.from('profile_avatars').createSignedUrl(pf.avatar_url,3600).then(({data:sd})=>{
+          if(sd?.signedUrl){const av=document.getElementById('nav-avatar');if(av){av.style.background='url('+sd.signedUrl+') center/cover no-repeat';if(niEl)niEl.textContent='';}}
+        });
+      });
+    }
     if(ns)ns.style.display='';
     if(mu){mu.textContent=name;mu.style.display='';}
     if(ms)ms.style.display='';
     localStorage.setItem('neuropian_uid', user.id);
+    if(sb&&badge)sb.from('friends').select('id',{count:'exact',head:true}).eq('friend_id',user.id).eq('status','pending').then(({count})=>{
+      if(count>0){badge.style.display='';document.getElementById('nav-friend-count').textContent=count;}
+      else badge.style.display='none';
+    });
   } else {
     if(nu)nu.style.display='none';
     if(ns)ns.style.display='none';
     if(mu)mu.style.display='none';
     if(ms)ms.style.display='none';
+    if(badge)badge.style.display='none';
+    const av=document.getElementById('nav-avatar');if(av){av.style.background='linear-gradient(135deg,#005c1e,#00cc44)';const ni=document.getElementById('nav-avatar-initials');if(ni)ni.textContent='';}
   }
 }
 
@@ -1988,7 +2043,8 @@ function onTurnstileExpire(){window._turnstileToken=null;}
 // Reset widget when register view opens
 function _resetTurnstile(){window._turnstileToken=null;if(window.turnstile){try{turnstile.reset('#turnstile-widget');}catch(e){}}}
 
-function showSetPasswordModal(){const m=document.getElementById('set-password-modal');m.style.display='flex';document.getElementById('sp-err').style.display='none';document.getElementById('sp-pass1').value='';document.getElementById('sp-pass2').value='';}
+let _spFromProfile=false;
+function showSetPasswordModal(fromProfile){_spFromProfile=!!fromProfile;const m=document.getElementById('set-password-modal');m.style.display='flex';document.getElementById('sp-err').style.display='none';document.getElementById('sp-pass1').value='';document.getElementById('sp-pass2').value='';}
 async function doSetPassword(){
   if(!sb)return;
   const p1=document.getElementById('sp-pass1').value;
@@ -2003,7 +2059,8 @@ async function doSetPassword(){
   btn.textContent='Update Password';btn.disabled=false;
   if(error){errEl.textContent=error.message;errEl.style.display='block';return;}
   document.getElementById('set-password-modal').style.display='none';
-  showPage(surveyDone?'platform':'survey');
+  if(_spFromProfile){_spFromProfile=false;openProfile();}
+  else showPage(surveyDone?'platform':'survey');
 }
 function switchToRegister(){showAuth('reg')}
 function switchToLogin(){showAuth('login')}
@@ -2157,7 +2214,7 @@ async function doSignOut(){
 // ── save survey on completion ─────────────────────────────
 async function finSurvey(){
   surveyDone=true;
-  try{localStorage.removeItem('np_tr');}catch(e){}
+  try{localStorage.removeItem('np_tr');localStorage.removeItem('np_s8a');localStorage.removeItem('np_s8h');}catch(e){}
   const accomplishment=document.getElementById('s8-accomplishment').value.trim();
   const hiddenAbility=document.getElementById('s8-hidden-ability').value.trim();
   if(currentUser&&sb){
@@ -2205,7 +2262,7 @@ function recordApply(jobId,jobTitle,company,el){
 function surveyRetake(){
   surveyDone=false;
   Object.keys(TR).forEach(k=>delete TR[k]);
-  try{localStorage.removeItem('np_tr');}catch(e){}
+  try{localStorage.removeItem('np_tr');localStorage.removeItem('np_s8a');localStorage.removeItem('np_s8h');}catch(e){}
   if(currentUser&&sb){sb.from('profiles').update({traits:{},survey_completed_at:null,accomplishment:null,hidden_ability:null}).eq('user_id',currentUser.id).then(()=>{});}
   document.querySelectorAll('.sst').forEach(s=>s.classList.remove('on'));
   const sc=document.getElementById('step-consent');
@@ -2225,6 +2282,11 @@ async function saveJob(jobId,jobTitle,company){
     company,
     saved_at:new Date().toISOString()
   },{onConflict:'user_id,job_id'});
+}
+async function unsaveJob(jobId){
+  if(!currentUser||!sb)return;
+  window._savedJobs.delete(jobId);
+  await sb.from('saved_jobs').delete().eq('user_id',currentUser.id).eq('job_id',jobId);
 }
 
 {const _ag=document.getElementById('auth-gate');if(_ag)_ag.addEventListener('click',function(e){if(e.target===this)closeAuth();});}
@@ -2590,8 +2652,9 @@ function Brain(canvasId,W,H,isHero){
     });
   },{threshold:0.01});
   brainObs.observe(cv);
-  // Reactivate on any interaction
+  // Reactivate on any interaction — skip if canvas is in a hidden page
   function reactivate(){
+    if(cv.offsetParent===null)return;
     cv._active = true;
     if(!rafId){rafId = requestAnimationFrame(frame);}
   }
@@ -2672,7 +2735,6 @@ document.querySelectorAll('.method-grid,.pillars-grid,.crisis-cards,.quotes-grid
 function showPage(id){
   const current=document.querySelector('.page.active');
   const next=document.getElementById('page-'+id);
-  console.log('showPage called:', id, 'next:', !!next, 'same:', next===current);
   if(!next||next===current)return;
   const ov=document.getElementById('page-overlay');
   const nav=document.querySelector('nav');
@@ -2688,6 +2750,7 @@ function showPage(id){
     if(nav)nav.style.display=(id==='home')?'':'none';
     if(id==='platform'){
       if(typeof renderProblems==='function')renderProblems();
+      _kw='';const kwEl=document.getElementById('jkw');if(kwEl)kwEl.value='';
       if(currentUser){
         const jl=document.getElementById('jlist');
         if(jl)jl.innerHTML='<div style="text-align:center;padding:2.5rem 0;font-family:\'Barlow Condensed\',sans-serif;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:#555">Loading opportunities…</div>';
@@ -2695,11 +2758,23 @@ function showPage(id){
         Promise.all([loadAppliedJobs(),loadSavedJobs()]).then(renderJobs);
       }else{renderJobs();}
     }
-    if(id==='collective'){console.log('initChat called');initChat();setTimeout(function(){renderRoomJobs('general');},800);}
+    if(id==='collective'){initChat();setTimeout(function(){renderRoomJobs('general');},800);}
     if(id==='survey'){
-      if(!surveyDone){try{const saved=localStorage.getItem('np_tr');if(saved){const p=JSON.parse(saved);Object.assign(TR,p);}}catch(e){}}
+      if(!surveyDone){try{
+        const saved=localStorage.getItem('np_tr');if(saved){const p=JSON.parse(saved);Object.assign(TR,p);_restoreSurveyUI();}
+        const sa=localStorage.getItem('np_s8a');const sh=localStorage.getItem('np_s8h');
+        const accEl=document.getElementById('s8-accomplishment');const hidEl=document.getElementById('s8-hidden-ability');
+        if(sa&&accEl)accEl.value=sa;if(sh&&hidEl)hidEl.value=sh;
+      }catch(e){}}
       const sc=document.getElementById('step-consent');const s1=document.getElementById('step-1');const cb=document.getElementById('survey-consent-check');
       if(sc&&s1&&cb&&!cb.checked&&!surveyDone){document.querySelectorAll('.sst').forEach(s=>s.classList.remove('on'));sc.classList.add('on');}
+      // Show welcome banner only for new users (no saved progress)
+      const wb=document.getElementById('survey-welcome-banner');
+      if(wb){
+        const isNew=!localStorage.getItem('np_tr')&&Object.keys(TR).length===0;
+        wb.style.display=isNew&&!surveyDone?'block':'none';
+        if(isNew&&currentUser){const fn=currentUser.user_metadata?.first_name;const wn=document.getElementById('survey-welcome-name');if(fn&&wn)wn.textContent='Welcome, '+fn+'!';}
+      }
     }
     setTimeout(function(){
       ov.style.transition='opacity .4s ease';
@@ -2713,7 +2788,25 @@ function navScroll(id){showPage('home');setTimeout(()=>{const el=document.getEle
 
 // ═══ SURVEY ═══
 const TR={};const TOT=8;
-function _saveSurveyProgress(){try{localStorage.setItem('np_tr',JSON.stringify(TR));}catch(e){}}
+function _saveSurveyProgress(){
+  try{
+    const acc=document.getElementById('s8-accomplishment');
+    const hid=document.getElementById('s8-hidden-ability');
+    localStorage.setItem('np_tr',JSON.stringify(TR));
+    if(acc)localStorage.setItem('np_s8a',acc.value);
+    if(hid)localStorage.setItem('np_s8h',hid.value);
+  }catch(e){}
+}
+function _restoreSurveyUI(){
+  document.querySelectorAll('.opt').forEach(el=>{
+    const m=(el.getAttribute('onclick')||'').match(/tag\(this,'([^']+)'\)/);
+    if(m&&TR[m[1]]===true)el.classList.add('sl');
+  });
+  document.querySelectorAll('.scl').forEach(el=>{
+    const m=(el.getAttribute('onclick')||'').match(/doS\('[^']+',this,'([^']+)',(\d+)\)/);
+    if(m&&TR[m[1]]===Number(m[2]))el.classList.add('sl');
+  });
+}
 function tag(el,t){el.classList.toggle('sl');TR[t]=el.classList.contains('sl');_saveSurveyProgress();}
 function doS(gid,el,t,v){document.querySelectorAll('#'+gid+' .scl').forEach(b=>b.classList.remove('sl'));el.classList.add('sl');TR[t]=v;_saveSurveyProgress();}
 function _spLabel(n){const el=document.getElementById('sp-label');if(el){el.style.display='';el.textContent='Step '+n+' of '+TOT;}}
@@ -2731,10 +2824,8 @@ const AGENT_JOBS=[/* AGENT_JOBS_START */{"id":"at-team-senior-independent-softwa
 // Without survey: quality-only, spread 52-88%.
 // With survey: poor match ≈50-65%, strong match ≈78-99%.
 function scJ(j){
-  // Job quality from base score (b range 40-82 → 0.0-1.0)
   var baseQuality=Math.max(0,Math.min(1,(j.b-10)/75));
 
-  // Survey match: what fraction of job weights the user satisfies
   var surveyScore=0,maxPossible=0;
   for(var trait in j.w){
     var weight=j.w[trait];
@@ -2743,15 +2834,38 @@ function scJ(j){
     surveyScore+=weight*tv;
     maxPossible+=weight;
   }
+
+  // Opportunity type alignment — boost jobs whose type matches user preference,
+  // using tag/category inference for jobs that don't explicitly list opp_ weights
+  var oppKeywords={opp_free:['freelance','contract'],opp_job:['full-time','full time'],opp_prize:['prize','competition'],opp_res:['research','fellowship'],opp_start:['founding','startup']};
+  var catOppMap={prize:'opp_prize',research:'opp_res',startup:'opp_start'};
+  for(var oppKey in oppKeywords){
+    if(TR[oppKey]!==true)continue;
+    if(j.w&&j.w[oppKey]!==undefined)continue; // already counted in main loop
+    var kws=oppKeywords[oppKey];
+    var tags=(j.tags||[]).map(function(t){return t.toLowerCase();});
+    var matched=kws.some(function(kw){return tags.some(function(t){return t.indexOf(kw)>=0;});});
+    if(!matched&&catOppMap[j.cat]===oppKey)matched=true;
+    if(TR.opp_open===true)matched=true;
+    surveyScore+=matched?2:0;
+    maxPossible+=2;
+  }
+
+  // Field category alignment — user's cognitive profile vs job's domain
+  var catTraitMap={tech:['tech','systems','logical','builder'],data:['data','pattern','logical'],research:['experiment','absorb','pattern'],design:['visual'],art:['art','visual'],psych:['empathy'],startup:['builder','ideas'],prize:['focus','pattern']};
+  var relevantTraits=catTraitMap[j.cat]||[];
+  if(relevantTraits.length>0){
+    var catScore=relevantTraits.filter(function(t){var v=TR[t];return v===true||(typeof v==='number'&&v>6);}).length/relevantTraits.length;
+    surveyScore+=catScore*2;
+    maxPossible+=2;
+  }
+
   var surveyMatch=maxPossible>0?surveyScore/maxPossible:0;
   var hasSurvey=Object.keys(TR).length>0;
-
   if(hasSurvey){
-    // Survey dominates: 65% survey match, 35% job quality
     var combined=surveyMatch*0.65+baseQuality*0.35;
     return Math.min(99,Math.round(45+combined*54));
   }
-  // No survey: quality only
   return Math.min(99,Math.round(50+baseQuality*38));
 }
 
@@ -2762,7 +2876,7 @@ function renderJobs(){
   const surv=Object.keys(TR).length>0;
   const sc=[...JOBS,...AGENT_JOBS].map(j=>({...j,score:scJ(j)})).sort((a,b)=>b.score-a.score);
   sc.forEach((j,i)=>{
-    const c=document.createElement('div');c.className='jc fi';c.dataset.cat=j.cat;c.style.animationDelay=(i*.032)+'s';
+    const c=document.createElement('div');c.className='jc fi';c.dataset.cat=j.cat;c.dataset.jobId=j.id;c.style.animationDelay=(i*.032)+'s';
     const score=scJ(j);
     const matchColor=score>82?'#00cc44':score>68?'#00883a':'#7a5c2a';
     const applied=window._appliedJobs.has(j.id);
@@ -2778,12 +2892,22 @@ function renderJobs(){
       '<div><div class="jmp" style="color:'+matchColor+'">'+score+'%</div><div class="jml">'+(surv?'Match':'Est.')+'</div></div>';
     var saveBtn=c.querySelector('.save-btn');
     saveBtn.dataset.jobId=j.id;saveBtn.dataset.jobTitle=j.t;saveBtn.dataset.company=j.co;
-    if(window._savedJobs.has(j.id)){saveBtn.textContent='Saved ✓';saveBtn.style.opacity='.55';saveBtn.disabled=true;}
+    function _updateSaveBtn(btn,saved){
+      if(saved){btn.textContent='Saved ✓';btn.style.opacity='.55';btn.style.background='rgba(0,200,40,.06)';}
+      else{btn.textContent='Save';btn.style.opacity='1';btn.style.background='';}
+    }
+    _updateSaveBtn(saveBtn,window._savedJobs.has(j.id));
     saveBtn.addEventListener('click',function(){
       if(!currentUser){showAuth('reg');return;}
-      window._savedJobs.add(this.dataset.jobId);
-      saveJob(this.dataset.jobId,this.dataset.jobTitle,this.dataset.company);
-      this.textContent='Saved ✓';this.style.opacity='.55';this.disabled=true;
+      const id=this.dataset.jobId;
+      if(window._savedJobs.has(id)){
+        unsaveJob(id);
+        _updateSaveBtn(this,false);
+      }else{
+        window._savedJobs.add(id);
+        saveJob(id,this.dataset.jobTitle,this.dataset.company);
+        _updateSaveBtn(this,true);
+      }
     });
     list.appendChild(c);
   });
@@ -2795,11 +2919,28 @@ function renderJobs(){
   const rr=document.getElementById('retake-row');if(rr)rr.style.display=surveyDone?'':'none';
   applyF(CF);
 }
+let _kw='';
+function filterByKeyword(kw){
+  _kw=kw.trim().toLowerCase();
+  applyF(CF);
+}
 function applyF(cat){
   const cards=document.querySelectorAll('.jc');
-  cards.forEach(c=>c.classList.toggle('hj',!(cat==='all'||c.dataset.cat===cat)));
+  cards.forEach(c=>{
+    let show=cat==='all'||(cat==='saved'?window._savedJobs.has(c.dataset.jobId):c.dataset.cat===cat);
+    if(show&&_kw){const text=(c.textContent||'').toLowerCase();show=text.indexOf(_kw)>=0;}
+    c.classList.toggle('hj',!show);
+  });
   const nores=document.getElementById('nores');
-  if(nores)nores.style.display=[...cards].some(c=>!c.classList.contains('hj'))?'none':'block';
+  if(nores){
+    const any=[...cards].some(c=>!c.classList.contains('hj'));
+    nores.style.display=any?'none':'block';
+    if(!any){
+      if(_kw)nores.textContent='No results for "'+_kw+'".';
+      else if(cat==='saved')nores.textContent='No saved opportunities yet.';
+      else nores.innerHTML='No matches in this category. <a onclick="showPage(\'survey\')" style="color:var(--v2);cursor:pointer;font-weight:600">Retake the survey</a> for better results.';
+    }
+  }
 }
 function fj(btn,cat){document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');CF=cat;applyF(cat)}
 renderJobs();
@@ -3296,6 +3437,12 @@ function openServerSettings(){
   window._selectedRoleColor='#00cc44';
   document.getElementById('server-settings-modal').style.display='flex';
   loadServerRolesAndMembers(srv.id);
+  // Show Leave for members, Delete for owners
+  const isOwner=srv.owner_id&&currentUser&&srv.owner_id===currentUser.id;
+  const leaveBtn=document.getElementById('ss-leave-btn');
+  const deleteBtn=document.getElementById('ss-delete-btn');
+  if(leaveBtn)leaveBtn.style.display=isOwner?'none':'';
+  if(deleteBtn)deleteBtn.style.display=isOwner?'':'none';
 }
 
 let _selectedRoleColor='#00cc44';
@@ -3470,6 +3617,17 @@ function hideDeleteConfirm(){
   document.getElementById('ss-delete-row').style.display='flex';
   document.getElementById('ss-delete-confirm-row').style.display='none';
 }
+async function leaveServer(){
+  const srv=window._currentServerData;
+  if(!srv||!currentUser||!sb)return;
+  if(!confirm('Leave "'+srv.name+'"? You can rejoin with an invite link.'))return;
+  await sb.from('server_members').delete().eq('server_id',srv.id).eq('user_id',currentUser.id);
+  closeServerSettings();
+  // Remove from rail and switch back to main server
+  const railItem=document.getElementById('srv-'+srv.id);
+  if(railItem)railItem.remove();
+  await switchServer('neuropian');
+}
 async function deleteServer(){
   const srv=window._currentServerData;
   if(!srv||!currentUser||!sb)return;
@@ -3580,6 +3738,7 @@ async function saveDisplayName(){
   currentUser={...currentUser,user_metadata:{...currentUser.user_metadata,first_name:fn,last_name:ln,full_name:full}};
   document.getElementById('profile-name-display').textContent=full;
   setNavUser(currentUser);
+  const cu=document.getElementById('chat-username');if(cu)cu.textContent=full;
   btn.textContent='Saved ✓';
   setTimeout(()=>{btn.textContent='Save Name';btn.disabled=false;toggleNameEdit();},1500);
 }
@@ -3615,11 +3774,33 @@ function openProfile(){
   document.getElementById('name-edit-btn').textContent='Edit Name';
   const idEl=document.getElementById('profile-neuropian-id');
   idEl.textContent=window._myNeuropianId||'——';
+  // Show completeness widget
+  const pfcEl=document.getElementById('pf-completeness');
+  if(pfcEl){
+    pfcEl.style.display='';
+    function _pfcDot(id,done){const el=document.getElementById(id);if(!el)return;el.textContent=(done?'✓ ':'✗ ')+el.textContent.replace(/^[✓✗] /,'');el.style.color=done?'#00aa38':'#555';el.style.borderColor=done?'rgba(0,200,40,.3)':'rgba(255,255,255,.1)';}
+    _pfcDot('pfc-survey',surveyDone);
+    _pfcDot('pfc-bio',false); // updated after profile loads
+    _pfcDot('pfc-avatar',false);
+  }
   if(sb){
-    sb.from('profiles').select('avatar_url,neuropian_id,bio,bio_visibility').eq('user_id',currentUser.id).single().then(({data:pf})=>{
+    sb.from('profiles').select('avatar_url,neuropian_id,bio,bio_visibility,accomplishment,hidden_ability').eq('user_id',currentUser.id).single().then(({data:pf})=>{
       if(pf?.neuropian_id){window._myNeuropianId=pf.neuropian_id;idEl.textContent=pf.neuropian_id;}
       if(pf?.bio){const ta=document.getElementById('pf-bio');ta.value=pf.bio;document.getElementById('bio-char-count').textContent=pf.bio.length+' / 280';}
       setBioVis(pf?.bio_visibility||'public');
+      const ss=document.getElementById('pf-survey-section');
+      const ar=document.getElementById('pf-accomplishment-row');const hr=document.getElementById('pf-hidden-ability-row');
+      if(pf?.accomplishment){document.getElementById('pf-accomplishment').textContent=pf.accomplishment;ar.style.display='';ss.style.display='';}
+      else{ar.style.display='none';}
+      if(pf?.hidden_ability){document.getElementById('pf-hidden-ability').textContent=pf.hidden_ability;hr.style.display='';ss.style.display='';}
+      else{hr.style.display='none';}
+      if(!pf?.accomplishment&&!pf?.hidden_ability)ss.style.display='none';
+      // Update completeness
+      if(pfcEl){
+        function _pfcDot2(id,done){const el=document.getElementById(id);if(!el)return;el.textContent=(done?'✓ ':'✗ ')+el.textContent.replace(/^[✓✗] /,'');el.style.color=done?'#00aa38':'#555';el.style.borderColor=done?'rgba(0,200,40,.3)':'rgba(255,255,255,.1)';}
+        _pfcDot2('pfc-bio',!!(pf?.bio&&pf.bio.trim().length>0));
+        _pfcDot2('pfc-avatar',!!pf?.avatar_url);
+      }
       const disp=document.getElementById('profile-avatar-display');
       if(pf?.avatar_url){
         sb.storage.from('profile_avatars').createSignedUrl(pf.avatar_url,3600).then(({data:sd})=>{
@@ -3632,7 +3813,7 @@ function openProfile(){
 async function openUserCard(userId){
   if(!sb||!currentUser)return;
   if(userId===currentUser.id){openProfile();return;}
-  const{data:prof}=await sb.from('profiles').select('first_name,last_name,bio,bio_visibility,avatar_url,neuropian_id').eq('user_id',userId).maybeSingle();
+  const{data:prof}=await sb.from('profiles').select('first_name,last_name,bio,bio_visibility,avatar_url,neuropian_id,accomplishment,hidden_ability').eq('user_id',userId).maybeSingle();
   if(!prof)return;
   const name=[prof.first_name,prof.last_name].filter(Boolean).join(' ')||'Member';
   const initials=name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?';
@@ -3648,6 +3829,10 @@ async function openUserCard(userId){
   const bioRow=document.getElementById('uc-bio-row');
   if(showBio&&prof.bio){document.getElementById('uc-bio').textContent=prof.bio;bioRow.style.display='';}
   else bioRow.style.display='none';
+  const ucAcc=document.getElementById('uc-accomplishment-row');
+  const ucHid=document.getElementById('uc-hidden-ability-row');
+  if(showBio&&prof.accomplishment){document.getElementById('uc-accomplishment').textContent=prof.accomplishment;ucAcc.style.display='';}else if(ucAcc)ucAcc.style.display='none';
+  if(showBio&&prof.hidden_ability){document.getElementById('uc-hidden-ability').textContent=prof.hidden_ability;ucHid.style.display='';}else if(ucHid)ucHid.style.display='none';
   // Avatar
   const av=document.getElementById('uc-avatar');
   av.style.background='linear-gradient(135deg,#005c1e,#00cc44)';
@@ -3741,6 +3926,8 @@ async function uploadProfilePicture(input){
     document.getElementById('profile-avatar-initials').textContent='';
     const av=document.getElementById('chat-avatar');
     if(av){av.style.background='url('+signedUrl+') center/cover no-repeat';av.textContent='';}
+    const nav=document.getElementById('nav-avatar');
+    if(nav){nav.style.background='url('+signedUrl+') center/cover no-repeat';const ni=document.getElementById('nav-avatar-initials');if(ni)ni.textContent='';}
     status.textContent='Profile photo updated!';
   }catch(e){console.error('Profile picture upload error:',e);status.textContent='Upload failed: '+(e?.message||'Try again.');status.style.color='#e55';}
 }
@@ -3939,6 +4126,32 @@ async function submitProblem(){
 {const _e=document.getElementById('nextelon-apply-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeNextElonApply();});}
 
 // ── ROOMS & MESSAGES ───────────────────────────────────────────────
+async function loadOlderMessages(){
+  if(!window._oldestMsgTime||!sb)return;
+  const btn=document.getElementById('load-older-btn');
+  if(btn)btn.innerHTML='<span style="font-size:.6rem;color:#444">Loading…</span>';
+  const {data,error}=await sb.from('messages').select('*').eq('room',currentRoom).lt('created_at',window._oldestMsgTime).order('created_at',{ascending:false}).limit(100);
+  if(error||!data){if(btn)btn.remove();return;}
+  const ml=document.getElementById('chat-messages');
+  const prevH=ml.scrollHeight;
+  if(data.length===0){if(btn)btn.remove();window._oldestMsgTime=null;return;}
+  const ordered=[...data].reverse();
+  window._oldestMsgTime=ordered[0].created_at;
+  if(data.length<100){if(btn)btn.remove();window._oldestMsgTime=null;}
+  else if(btn)btn.innerHTML=`<button onclick="loadOlderMessages()" style="background:none;border:1px solid rgba(0,200,40,.2);color:#00aa38;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:4px;cursor:pointer;transition:all .2s" onmouseenter="this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.background='none'">Load older messages</button>`;
+  const anchor=btn?btn.nextSibling:ml.firstChild;
+  ordered.forEach(m=>{
+    if(document.getElementById('msg-'+m.id))return;
+    const tmp=document.createElement('div');
+    ml.insertBefore(tmp,anchor);
+    appendMessage(m,false);
+    ml.insertBefore(document.getElementById('msg-'+m.id),tmp);
+    tmp.remove();
+  });
+  ml.scrollTop=ml.scrollHeight-prevH;
+  const ids=ordered.map(m=>m.id);
+  if(ids.length)loadRoomReactions(ids);
+}
 async function switchRoom(roomId,roomName,roomDesc){
   clearRoomUnread(roomId);
   renderRoomJobs(roomId);
@@ -3956,6 +4169,7 @@ async function switchRoom(roomId,roomName,roomDesc){
   const active=document.getElementById('ri-'+roomId);
   if(active){active.style.color='#00cc44';active.style.borderLeft='2px solid #00cc44';active.style.background='rgba(0,200,40,.07)';}
   if(chatSubscription){try{await sb.removeChannel(chatSubscription);}catch(e){}chatSubscription=null;}
+  window._oldestMsgTime=null;
   const ml=document.getElementById('chat-messages');
   ml.innerHTML=`<div style="text-align:center;padding:2rem 0 1rem">
     <div style="font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#333"># ${escHtml(roomName)}</div>
@@ -3963,15 +4177,20 @@ async function switchRoom(roomId,roomName,roomDesc){
     <div style="width:40px;height:1px;background:rgba(0,200,40,.15);margin:.8rem auto"></div>
   </div>`;
   try{
-    const {data,error}=await sb.from('messages').select('*').eq('room',roomId).order('created_at',{ascending:true}).limit(100);
+    const {data,error}=await sb.from('messages').select('*').eq('room',roomId).order('created_at',{ascending:false}).limit(100);
     if(error)throw error;
     if(data){
       if(data.length===0){
         ml.insertAdjacentHTML('beforeend',`<div style="text-align:center;padding:3rem 1.5rem;font-family:'Barlow Condensed',sans-serif;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:#333">No messages yet. Say hello.</div>`);
       }else{
-        data.forEach(m=>appendMessage(m,false));
+        const ordered=[...data].reverse();
+        if(data.length===100){
+          window._oldestMsgTime=ordered[0].created_at;
+          ml.insertAdjacentHTML('afterbegin',`<div id="load-older-btn" style="text-align:center;padding:.7rem;"><button onclick="loadOlderMessages()" style="background:none;border:1px solid rgba(0,200,40,.2);color:#00aa38;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:4px;cursor:pointer;transition:all .2s" onmouseenter="this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.background='none'">Load older messages</button></div>`);
+        }
+        ordered.forEach(m=>appendMessage(m,false));
         ml.scrollTop=ml.scrollHeight;
-        const ids=data.map(m=>m.id);
+        const ids=ordered.map(m=>m.id);
         if(ids.length)loadRoomReactions(ids);
       }
     }
@@ -4286,6 +4505,7 @@ function escHtml(t){if(!t)return'';return String(t).replace(/&/g,'&amp;').replac
 function safeUrl(u){return(u&&/^https?:\/\//i.test(u))?u:'#';}
 
 let _lastSend=0;
+let _msgWindow=[];
 async function sendMessage(){
   const input=document.getElementById('chat-input');
   const content=input.value.trim();
@@ -4293,7 +4513,10 @@ async function sendMessage(){
   if(content.length>2000){showErr('chat-err','Message too long (max 2000 characters).');return;}
   const now=Date.now();
   if(now-_lastSend<500)return;
+  _msgWindow=_msgWindow.filter(t=>now-t<10000);
+  if(_msgWindow.length>=5){showErr('chat-err','Slow down — max 5 messages per 10 seconds.');return;}
   _lastSend=now;
+  _msgWindow.push(now);
   input.value='';input.style.height='auto';
   const name=getChatName();
   const reply=replyingTo;
@@ -4444,8 +4667,15 @@ async function loadFriendRequests(){
       .eq('status','pending');
     const sec=document.getElementById('friend-requests-section');
     const list=document.getElementById('friend-requests-list');
-    if(!data||!data.length){sec.style.display='none';return;}
-    sec.style.display='block';
+    const badge=document.getElementById('nav-friend-badge');
+    const count=document.getElementById('nav-friend-count');
+    if(!data||!data.length){
+      if(sec)sec.style.display='none';
+      if(badge)badge.style.display='none';
+      return;
+    }
+    if(sec)sec.style.display='block';
+    if(badge){badge.style.display='';count.textContent=data.length;}
     list.innerHTML=data.map(r=>`
       <div style="display:flex;align-items:center;gap:.5rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)">
         <span style="flex:1;font-size:.7rem;color:#e8e2d6">${escHtml(r.requester_name||'Someone')}</span>
