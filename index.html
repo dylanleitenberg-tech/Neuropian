@@ -2525,13 +2525,17 @@ async function initChat(){
   document.getElementById('chat-username').textContent=name;
   document.getElementById('chat-avatar').textContent=initials;
   if(sb){
-    sb.from('profiles').select('avatar_url').eq('user_id',currentUser.id).single().then(({data:pf})=>{
-      if(pf?.avatar_url){
-        sb.storage.from('profile_avatars').createSignedUrl(pf.avatar_url,3600).then(({data:sd})=>{
-          if(sd?.signedUrl){const av=document.getElementById('chat-avatar');av.style.background='url('+sd.signedUrl+') center/cover no-repeat';av.textContent='';}
-        });
-      }
-    }).catch(()=>{});
+    sb.from('profiles').select('avatar_url').eq('user_id',currentUser.id).single().then(({data:pf,error:pfErr})=>{
+      if(pfErr)return console.error('avatar load - profile error:',pfErr);
+      if(!pf?.avatar_url)return console.log('avatar load - no avatar_url in profile');
+      sb.storage.from('profile_avatars').createSignedUrl(pf.avatar_url,3600).then(({data:sd,error:sdErr})=>{
+        if(sdErr)return console.error('avatar load - signed URL error:',sdErr);
+        if(!sd?.signedUrl)return console.warn('avatar load - no signedUrl returned');
+        const av=document.getElementById('chat-avatar');
+        av.style.background='url('+sd.signedUrl+') center/cover no-repeat';
+        av.textContent='';
+      });
+    }).catch(e=>console.error('avatar load - exception:',e));
   }
   await loadServerRail();
   await renderSidebarForServer('neuropian');
