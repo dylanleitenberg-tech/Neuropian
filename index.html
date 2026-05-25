@@ -12,9 +12,13 @@
 <meta property="og:title" content="Neuropian — Intelligence Reimagined | Dylan Leitenberg">
 <meta property="og:description" content="Neuropian, founded by Dylan Leitenberg, is the AI-powered platform discovering extraordinary minds worldwide. Creator of Who's the Next Elon, EagleEyes, and RoundTable.">
 <meta property="og:site_name" content="Neuropian">
+<meta property="og:image" content="https://qggduzzwvdkmekihwuav.supabase.co/storage/v1/object/public/assets/brain-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Neuropian — Intelligence Reimagined | Dylan Leitenberg">
 <meta name="twitter:description" content="Neuropian, founded by Dylan Leitenberg, discovers extraordinary minds through AI. Creator of Who's the Next Elon, EagleEyes, and RoundTable.">
+<meta name="twitter:image" content="https://qggduzzwvdkmekihwuav.supabase.co/storage/v1/object/public/assets/brain-og.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -456,6 +460,11 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 .auth-sub-btn{width:100%;padding:.9rem;background:var(--white);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;border:none;cursor:pointer;margin-top:.5rem;transition:all .25s}
 .auth-sub-btn:hover{background:var(--cream);transform:translateY(-1px)}
 .auth-sub-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.auth-legal-content *{background:transparent!important;color:#ccc!important;border-color:rgba(255,255,255,.1)!important}
+.auth-legal-content h1,.auth-legal-content h2,.auth-legal-content h3{color:#eee!important;font-size:1rem!important;margin-bottom:.5rem}
+.auth-legal-content p,.auth-legal-content li{font-size:.7rem!important;line-height:1.75!important;margin-bottom:.6rem}
+.auth-legal-content a{color:#aaa!important}
+.auth-legal-content strong{color:#ddd!important}
 @keyframes spin{to{transform:rotate(360deg)}}
 .auth-spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:.5rem}
 .auth-switch{text-align:center;margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#e8e2d6}
@@ -1682,6 +1691,27 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       <div id="profile-name-display" style="font-size:.82rem;font-weight:600;color:#eee;margin-bottom:.2rem"></div>
       <div id="profile-email-display" style="font-size:.68rem;color:#555"></div>
     </div>
+    <!-- Bio -->
+    <div style="margin-bottom:1.2rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem">
+        <div style="font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:#555">About You</div>
+        <div style="display:flex;border:1px solid rgba(255,255,255,.1);border-radius:3px;overflow:hidden">
+          <button id="bio-vis-btn-public" onclick="setBioVis('public')" style="background:rgba(0,200,40,.18);border:none;color:#00cc44;font-family:'Barlow Condensed',sans-serif;font-size:.48rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .6rem;cursor:pointer;transition:all .15s">Everyone</button>
+          <button id="bio-vis-btn-friends" onclick="setBioVis('friends')" style="background:none;border:none;color:#555;font-family:'Barlow Condensed',sans-serif;font-size:.48rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .6rem;cursor:pointer;transition:all .15s">Friends Only</button>
+        </div>
+      </div>
+      <textarea id="pf-bio" maxlength="280" placeholder="Tell the community who you are…" oninput="document.getElementById('bio-char-count').textContent=this.value.length+' / 280'" style="width:100%;min-height:72px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#e8e2d6;font-family:'Barlow',sans-serif;font-size:.76rem;line-height:1.6;padding:.6rem .8rem;resize:vertical;outline:none;box-sizing:border-box;transition:border-color .2s" onfocus="this.style.borderColor='rgba(0,200,40,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"></textarea>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:.35rem">
+        <span id="bio-char-count" style="font-size:.5rem;color:#444">0 / 280</span>
+        <button id="bio-save-btn" onclick="saveBio()" style="background:rgba(0,200,40,.12);border:1px solid rgba(0,200,40,.25);border-radius:3px;color:#00aa38;font-family:'DM Sans',sans-serif;font-size:.56rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;cursor:pointer;transition:all .15s" onmouseenter="this.style.background='rgba(0,200,40,.22)'" onmouseleave="this.style.background='rgba(0,200,40,.12)'">Save</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:.4rem;margin-bottom:.5rem">
+      <button onclick="genOgImage()" style="flex:1;padding:.5rem;background:none;border:1px solid rgba(255,255,255,.07);border-radius:4px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.style.borderColor='rgba(255,255,255,.15)'" onmouseleave="this.style.color='rgba(255,255,255,.3)';this.style.borderColor='rgba(255,255,255,.07)'">⬇ Download Brain</button>
+      <label style="flex:1;padding:.5rem;background:none;border:1px solid rgba(255,255,255,.07);border-radius:4px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-align:center;display:flex;align-items:center;justify-content:center" id="og-upload-label" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.style.borderColor='rgba(255,255,255,.15)'" onmouseleave="this.style.color='rgba(255,255,255,.3)';this.style.borderColor='rgba(255,255,255,.07)'">⬆ Upload OG Image
+        <input type="file" accept="image/*" style="display:none" onchange="uploadOgImage(this.files[0])">
+      </label>
+    </div>
     <button onclick="doSignOut();closeProfile();" style="width:100%;padding:.65rem;background:rgba(255,0,0,.06);border:1px solid rgba(255,60,60,.2);border-radius:4px;color:#c44;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s" onmouseenter="this.style.background='rgba(255,0,0,.12)'" onmouseleave="this.style.background='rgba(255,0,0,.06)'">Sign Out</button>
     <div id="delete-acct-confirm" style="display:none;margin-top:.8rem;background:rgba(255,0,0,.06);border:1px solid rgba(255,60,60,.2);border-radius:4px;padding:.8rem">
       <p style="font-size:.62rem;color:#c44;margin-bottom:.6rem;line-height:1.5">This will send an account deletion request. Your data will be permanently removed within 30 days.</p>
@@ -1691,6 +1721,27 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       </div>
     </div>
     <button onclick="document.getElementById('delete-acct-confirm').style.display=''" style="width:100%;margin-top:.5rem;padding:.5rem;background:none;border:none;color:rgba(255,80,80,.4);font-family:'DM Sans',sans-serif;font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:color .2s" onmouseenter="this.style.color='rgba(255,80,80,.7)'" onmouseleave="this.style.color='rgba(255,80,80,.4)'">Request Account Deletion</button>
+  </div>
+</div>
+
+<!-- USER CARD MODAL -->
+<div id="user-card-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2100;align-items:center;justify-content:center" onclick="if(event.target===this)closeUserCard()">
+  <div style="background:#141414;border:1px solid rgba(0,200,40,.2);border-radius:8px;width:min(340px,92vw);padding:1.6rem;position:relative">
+    <button onclick="closeUserCard()" style="position:absolute;top:.9rem;right:.9rem;background:none;border:none;color:#555;cursor:pointer;font-size:1.1rem;line-height:1">✕</button>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:.6rem;margin-bottom:1.2rem">
+      <div id="uc-avatar" style="width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,#005c1e,#00cc44);display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:#fff;overflow:hidden;flex-shrink:0">
+        <span id="uc-initials">?</span>
+      </div>
+      <div style="text-align:center">
+        <div id="uc-name" style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#eee;margin-bottom:.18rem"></div>
+        <div id="uc-nid" style="font-family:'DM Mono',monospace;font-size:.52rem;color:#444;letter-spacing:.12em"></div>
+      </div>
+    </div>
+    <div id="uc-bio-row" style="display:none;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:.7rem .9rem;margin-bottom:1rem">
+      <div style="font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:#444;margin-bottom:.35rem">About</div>
+      <p id="uc-bio" style="font-family:'Barlow',sans-serif;font-size:.74rem;color:#bbb;line-height:1.6;margin:0;word-break:break-word"></p>
+    </div>
+    <button id="uc-add-btn" style="width:100%;padding:.6rem;background:rgba(0,200,40,.1);border:1px solid rgba(0,200,40,.25);border-radius:4px;color:#00aa38;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s" onmouseenter="if(!this.disabled)this.style.background='rgba(0,200,40,.2)'" onmouseleave="if(!this.disabled)this.style.background='rgba(0,200,40,.1)'">Add Friend</button>
   </div>
 </div>
 
@@ -1896,7 +1947,7 @@ async function doReset(){
   const email=document.getElementById('rs-email').value.trim();
   if(!email){showErr('rs-err','Please enter your email address.');return;}
   authBtn('rs-btn',true,'Sending…');
-  const{error}=await sb.auth.resetPasswordForEmail(email);
+  const{error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.href});
   authBtn('rs-btn',false,'Send Reset Link');
   if(error){showErr('rs-err',error.message);return;}
   showErr('rs-err','');document.getElementById('rs-success').style.display='';
@@ -1939,7 +1990,7 @@ async function submitNextElonApply(){
     const {error}=await sb.auth.signInWithOtp({
       email,
       options:{
-        emailRedirectTo:'https://neuropian.com',
+        emailRedirectTo:window.location.href,
         data:{first_name:fn,last_name:ln,full_name:(fn+' '+ln).trim()}
       }
     });
@@ -2591,7 +2642,7 @@ function ps(n){document.getElementById('step-'+n).classList.remove('on');const p
 const JOBS=[];
 
 // ═══ AGENT JOBS — updated daily by ~/job_agent/agent.py ═══
-const AGENT_JOBS=[/* AGENT_JOBS_START */{"id":"at-team-senior-independent-software-developer","t":"Senior Independent Software Developer","co":"A.Team","cat":"tech","d":"Join A.Team’s invite-only network of senior builders and access exclusive missions with Fortune 500s and top startups. This isn’t client work or employment—it’s a vetted collective where you’re matched to impactful projects.","tags":["Remote","Full-Time","Builder","AI/ML"],"w":{"builder":3,"systems":2},"b":50,"url":"https://remotive.com/remote-jobs/software-development/senior-independent-software-developer-1919265"},{"id":"at-team-senior-independent-ai-engineer-architect","t":"Senior Independent AI Engineer / Architect","co":"A.Team","cat":"tech","d":"Join A.Team’s invite-only network of senior builders and access exclusive missions with Fortune 500s and top startups. This isn’t client work or employment—it’s a vetted collective where you’re matched to impactful projects.","tags":["Remote","Full-Time","Builder","AI/ML"],"w":{"builder":3,"systems":2},"b":59,"url":"https://remotive.com/remote-jobs/software-development/senior-independent-ai-engineer-architect-1919266"},{"id":"lemon-io-senior-full-stack-react-developer","t":"Senior Full-stack React Developer","co":"Lemon.io","cat":"tech","d":"Are you a talented Senior Developer looking for a remote job that lets you show your skills and get decent compensation? Look no further than  Lemon.io  — the marketplace that connects you with hand-picked startups in the US and Europe.","tags":["Remote","Full-Time","Builder","React"],"w":{"builder":3,"focus":2},"b":54,"url":"https://remotive.com/remote-jobs/software-development/senior-full-stack-react-developer-2088711"},{"id":"mitre-media-tech-lead-full-stack-rails-engineer","t":"Tech Lead Full-Stack Rails Engineer","co":"Mitre Media","cat":"tech","d":"About Mitre Media  \n  Mitre Media is redefining FinTech with AI-driven tools that empower millions of investors. Our portfolio, including Dividend.com and MutualFunds.com, leverages LLMs to deliver novel data insights and visually rich user experiences.","tags":["USA","Canada","Full-Time","AI/ML"],"w":{"tech":4,"systems":2},"b":40,"url":"https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746"},{"id":"nooro-ios-developer","t":"iOS Developer","co":"nooro","cat":"tech","d":"WHO ARE WE?   \n   \n At nooro, we're revolutionizing pain management for seniors. Our platform is transforming how older adults engage with pain management at home.","tags":["USA","Full-Time","Bio"],"w":{"bio":3,"focus":2},"b":40,"url":"https://remotive.com/remote-jobs/software-development/ios-developer-1956455"},{"id":"lemon-io-senior-devops-engineer","t":"Senior DevOps Engineer","co":"Lemon.io","cat":"tech","d":"Are you a talented Senior DevOps looking for a remote job that lets you show your skills and get decent compensation? Look no further than  Lemon.io  — the marketplace that connects you with hand-picked startups in the US and Europe.","tags":["Remote","Full-Time","Systems","DevOps"],"w":{"systems":3,"logical":2},"b":54,"url":"https://remotive.com/remote-jobs/devops/senior-devops-engineer-2090002"},{"id":"dry-ground-ai-ai-engineer","t":"AI Engineer","co":"Dry Ground AI","cat":"tech","d":"We are seeking a versatile and highly skilled AI Engineer to join our fast-growing Full-Stack AI Solutions company. This role blends the expertise of building cutting-edge AI/ML models with the practical know-how of automation and agentic system integrations.","tags":["Brazil","Colombia","Full-Time","AI/ML"],"w":{"ai/ml":4,"absorb":3},"b":49,"url":"https://remotive.com/remote-jobs/artificial-intelligence/ai-engineer-2089958"},{"id":"cpu-silicon-validation-engineer","t":"CPU Silicon Validation Engineer","co":"Apple","cat":"tech","d":"Join Apple's team and contribute to the development of innovative products, services, and customer experiences.","tags":["Remote","Full-Time"],"w":{"tech":3,"logical":4,"focus":4,"systems":3,"experiment":2},"b":78,"url":"https://www.themuse.com/jobs/apple/cpu-silicon-validation-engineer-a07869"},{"id":"spring-2026-intern-electronics-masters-c","t":"Spring 2026 Intern - Electronics (Masters), C++","co":"Ansys","cat":"tech","d":"Join Ansys' team and contribute to the development of innovative products, services, and customer experiences.","tags":["Remote","Full-Time"],"w":{"tech":3,"logical":4,"focus":4,"systems":3,"experiment":2},"b":46,"url":"https://www.themuse.com/jobs/ansys/spring-2026-intern-electronics-masters-c"},{"id":"software-engineer-product-technical-leadership","t":"Software Engineer - Product (Technical Leadership)","co":"Meta","cat":"tech","d":"We are the teams who create all of Facebook's product used by more than 1.5 billion people around the world. Want to build new features and improve existing products like Commerce, Ads, Video, Groups, News Feed, Search, and more? Want to solve unique, large scale, highly complex technical problems? Facebook is seeking experienced full-stack software engineers to join our p","tags":["Meta","Software Engineering"],"w":{"tech":3,"builder":3,"systems":3,"logical":3,"focus":2},"b":75,"url":"https://www.themuse.com/jobs/meta/software-engineer-product-technical-leadership-835238"},{"id":"software-qa-engineer-machine-learning-creativity-apps","t":"Software QA Engineer, Machine Learning - Creativity Apps","co":"Apple","cat":"data","d":"Imagine what you could do here. At Apple, new ideas have a way of becoming outstanding products, services, and customer experiences very quickly. Bring passion and dedication to your job and there's no telling what you could accomplish.<br><br>The Creativity Apps QA team is seeking a Software QA Engineer, Machine Learning to help us ensure that our iOS and macOS creativity a","tags":["Apple","Data Science","Software Engineering"],"w":{"data":4,"pattern":3,"logical":3,"focus":3,"systems":2,"tech":1},"b":74,"url":"https://www.themuse.com/jobs/apple/software-qa-engineer-machine-learning-creativity-apps-fd128a"},{"id":"journeyman-infrastructure-engineer","t":"Journeyman Infrastructure Engineer","co":"Leidos","cat":"tech","d":"This Department of War enterprise data and analytics program delivers mission-critical capabilities that enable leaders across the Department to make faster, better-informed decisions using trusted data at scale. Leidos Digital Modernization sector is seeking an experienced <b>Journeyman Infrastructure Engineer </b>to support the delivery, enhan","tags":["Leidos","Infrastructure Engineering","Software Engineering"],"w":{"tech":3,"systems":4,"builder":3,"logical":3,"focus":3},"b":67,"url":"https://www.themuse.com/jobs/leidos/journeyman-infrastructure-engineer-39c63d"},{"id":"application-developer","t":"Application Developer","co":"Wipro","cat":"tech","d":"Software Engineering. City: Bengaluru State/Province: Karnataka Posting Start Date: 3/18/26 Wipro Limited (NYSE: WIT, BSE: 507685, NSE: WIPRO) is a leading technology services and consulting company focused on building innovative solutions that address clients' most pressing needs.","tags":["Remote","Full-Time"],"w":{"tech":3,"builder":3,"systems":2,"logical":2,"focus":2},"b":50,"url":"https://www.themuse.com/jobs/wipro/application-developer-df8090"},{"id":"backend-engineer","t":"Backend Engineer (Mid-level & Senior)","co":"Woosmap","cat":"tech","d":"Woosmap | https://www.woosmap.com/ | Backend Engineer (Mid-level & Senior) | HYBRID (London, Paris, Montpellier) or REMOTE (UTC-1 to UTC+2) | Full-time\nWe run location APIs. Geocoding, routing, store locator, address autocomplete, etc. at enterprise scale.","tags":["Remote","Full-Time"],"w":{"tech":3,"builder":3,"systems":3,"logical":3,"focus":2},"b":54,"url":"https://news.ycombinator.com/item?id=48147597"},{"id":"founding-engineer","t":"Founding Engineer","co":"Stealth Startup","cat":"tech","d":"Stealth Startup | Founding Engineer | NYC (in-person 5x/week) | Full-Time\nThe mission\nWe’re building a best-in-class multi-modal AI agent product (voice + SMS + email) with the potential to disrupt deeply entrenched software businesses and unify a fragmented industry.","tags":["Full-Time","NYC"],"w":{"builder":4,"ideas":3,"opp_start":3,"tech":3,"focus":2,"opp_job":1},"b":40,"url":"https://news.ycombinator.com/item?id=48127030"},{"id":"java-developer","t":"Hiring Java Developer (Full-Time)","co":"Furtim Modus","cat":"tech","d":"Furtim Modus | Hiring Java Developer (Full-Time) | NYC (HYBRID) | $125K-$200K + equity |  https://www.furtimmodus.com/software-engineer \nWe are currently seeking a talented and driven Java Developer to join our team full-time.","tags":["Hybrid","Full-Time"],"w":{"tech":3,"builder":3,"systems":3,"logical":3,"focus":2},"b":40,"url":"https://news.ycombinator.com/item?id=48123123"},{"id":"senior-mobile-engineer","t":"Senior Mobile Engineer (React Native)","co":"Forage","cat":"tech","d":"Forage | Senior Mobile Engineer (React Native) | Hybrid NYC (2-3 days in office) | Full-time | $185,000 - $200,000 per year base | joinforage.com\nForage is a payments company building the infrastructure for SNAP EBT online.","tags":["Hybrid","Full-Time"],"w":{"tech":3,"systems":4,"builder":3,"logical":3,"focus":3},"b":50,"url":"https://news.ycombinator.com/item?id=48113023"}/* AGENT_JOBS_END */];
+const AGENT_JOBS=[/* AGENT_JOBS_START */{"id":"at-team-senior-independent-software-developer","t":"Senior Independent Software Developer","co":"A.Team","cat":"tech","d":"Join A.Team’s invite-only network of senior builders and access exclusive missions with Fortune 500s and top startups. This isn’t client work or employment—it’s a vetted collective where you’re matched to impactful projects.","tags":["Remote","Full-Time","Builder","AI/ML"],"w":{"builder":3,"systems":2},"b":50,"url":"https://remotive.com/remote-jobs/software-development/senior-independent-software-developer-1919265"},{"id":"at-team-senior-independent-ai-engineer-architect","t":"Senior Independent AI Engineer / Architect","co":"A.Team","cat":"tech","d":"Join A.Team’s invite-only network of senior builders and access exclusive missions with Fortune 500s and top startups. This isn’t client work or employment—it’s a vetted collective where you’re matched to impactful projects.","tags":["Remote","Full-Time","Builder","AI/ML"],"w":{"builder":3,"systems":2},"b":59,"url":"https://remotive.com/remote-jobs/software-development/senior-independent-ai-engineer-architect-1919266"},{"id":"lemon-io-senior-full-stack-react-developer","t":"Senior Full-stack React Developer","co":"Lemon.io","cat":"tech","d":"Are you a talented Senior Developer looking for a remote job that lets you show your skills and get decent compensation? Look no further than  Lemon.io  — the marketplace that connects you with hand-picked startups in the US and Europe.","tags":["Remote","Full-Time","Builder","React"],"w":{"builder":3,"focus":2},"b":54,"url":"https://remotive.com/remote-jobs/software-development/senior-full-stack-react-developer-2088711"},{"id":"mitre-media-tech-lead-full-stack-rails-engineer","t":"Tech Lead Full-Stack Rails Engineer","co":"Mitre Media","cat":"tech","d":"About Mitre Media  \n  Mitre Media is redefining FinTech with AI-driven tools that empower millions of investors. Our portfolio, including Dividend.com and MutualFunds.com, leverages LLMs to deliver novel data insights and visually rich user experiences.","tags":["USA","Canada","Full-Time","AI/ML"],"w":{"tech":4,"systems":2},"b":40,"url":"https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746"},{"id":"nooro-ios-developer","t":"iOS Developer","co":"nooro","cat":"tech","d":"WHO ARE WE?   \n   \n At nooro, we're revolutionizing pain management for seniors. Our platform is transforming how older adults engage with pain management at home.","tags":["USA","Full-Time","Bio"],"w":{"bio":3,"focus":2},"b":40,"url":"https://remotive.com/remote-jobs/software-development/ios-developer-1956455"},{"id":"lemon-io-senior-devops-engineer","t":"Senior DevOps Engineer","co":"Lemon.io","cat":"tech","d":"Are you a talented Senior DevOps looking for a remote job that lets you show your skills and get decent compensation? Look no further than  Lemon.io  — the marketplace that connects you with hand-picked startups in the US and Europe.","tags":["Remote","Full-Time","Systems","DevOps"],"w":{"systems":3,"logical":2},"b":54,"url":"https://remotive.com/remote-jobs/devops/senior-devops-engineer-2090002"},{"id":"dry-ground-ai-ai-engineer","t":"AI Engineer","co":"Dry Ground AI","cat":"tech","d":"We are seeking a versatile and highly skilled AI Engineer to join our fast-growing Full-Stack AI Solutions company. This role blends the expertise of building cutting-edge AI/ML models with the practical know-how of automation and agentic system integrations.","tags":["Brazil","Colombia","Full-Time","AI/ML"],"w":{"ai/ml":4,"absorb":3},"b":49,"url":"https://remotive.com/remote-jobs/artificial-intelligence/ai-engineer-2089958"},{"id":"cpu-silicon-validation-engineer","t":"CPU Silicon Validation Engineer","co":"Apple","cat":"tech","d":"Join Apple's team and contribute to the development of innovative products, services, and customer experiences.","tags":["Remote","Full-Time"],"w":{"tech":3,"logical":4,"focus":4,"systems":3,"experiment":2},"b":78,"url":"https://www.themuse.com/jobs/apple/cpu-silicon-validation-engineer-a07869"},{"id":"software-engineer-product-technical-leadership","t":"Software Engineer - Product (Technical Leadership)","co":"Meta","cat":"tech","d":"We are the teams who create all of Facebook's product used by more than 1.5 billion people around the world. Want to build new features and improve existing products like Commerce, Ads, Video, Groups, News Feed, Search, and more? Want to solve unique, large scale, highly complex technical problems? Facebook is seeking experienced full-stack software engineers to join our p","tags":["Meta","Software Engineering"],"w":{"tech":3,"builder":3,"systems":3,"logical":3,"focus":2},"b":75,"url":"https://www.themuse.com/jobs/meta/software-engineer-product-technical-leadership-835238"},{"id":"software-qa-engineer-machine-learning-creativity-apps","t":"Software QA Engineer, Machine Learning - Creativity Apps","co":"Apple","cat":"data","d":"Imagine what you could do here. At Apple, new ideas have a way of becoming outstanding products, services, and customer experiences very quickly. Bring passion and dedication to your job and there's no telling what you could accomplish.<br><br>The Creativity Apps QA team is seeking a Software QA Engineer, Machine Learning to help us ensure that our iOS and macOS creativity a","tags":["Apple","Data Science","Software Engineering"],"w":{"data":4,"pattern":3,"logical":3,"focus":3,"systems":2,"tech":1},"b":74,"url":"https://www.themuse.com/jobs/apple/software-qa-engineer-machine-learning-creativity-apps-fd128a"},{"id":"journeyman-infrastructure-engineer","t":"Journeyman Infrastructure Engineer","co":"Leidos","cat":"tech","d":"This Department of War enterprise data and analytics program delivers mission-critical capabilities that enable leaders across the Department to make faster, better-informed decisions using trusted data at scale. Leidos Digital Modernization sector is seeking an experienced <b>Journeyman Infrastructure Engineer </b>to support the delivery, enhan","tags":["Leidos","Infrastructure Engineering","Software Engineering"],"w":{"tech":3,"systems":4,"builder":3,"logical":3,"focus":3},"b":67,"url":"https://www.themuse.com/jobs/leidos/journeyman-infrastructure-engineer-39c63d"},{"id":"application-developer","t":"Application Developer","co":"Wipro","cat":"tech","d":"Software Engineering. City: Bengaluru State/Province: Karnataka Posting Start Date: 3/18/26 Wipro Limited (NYSE: WIT, BSE: 507685, NSE: WIPRO) is a leading technology services and consulting company focused on building innovative solutions that address clients' most pressing needs.","tags":["Remote","Full-Time"],"w":{"tech":3,"builder":3,"systems":2,"logical":2,"focus":2},"b":50,"url":"https://www.themuse.com/jobs/wipro/application-developer-df8090"},{"id":"backend-engineer","t":"Backend Engineer (Mid-level & Senior)","co":"Woosmap","cat":"tech","d":"Woosmap | https://www.woosmap.com/ | Backend Engineer (Mid-level & Senior) | HYBRID (London, Paris, Montpellier) or REMOTE (UTC-1 to UTC+2) | Full-time\nWe run location APIs. Geocoding, routing, store locator, address autocomplete, etc. at enterprise scale.","tags":["Remote","Full-Time"],"w":{"tech":3,"builder":3,"systems":3,"logical":3,"focus":2},"b":54,"url":"https://news.ycombinator.com/item?id=48147597"},{"id":"founding-engineer","t":"Founding Engineer","co":"Stealth Startup","cat":"tech","d":"Stealth Startup | Founding Engineer | NYC (in-person 5x/week) | Full-Time\nThe mission\nWe’re building a best-in-class multi-modal AI agent product (voice + SMS + email) with the potential to disrupt deeply entrenched software businesses and unify a fragmented industry.","tags":["Full-Time","NYC"],"w":{"builder":4,"ideas":3,"opp_start":3,"tech":3,"focus":2,"opp_job":1},"b":40,"url":"https://news.ycombinator.com/item?id=48127030"},{"id":"java-developer","t":"Hiring Java Developer (Full-Time)","co":"Furtim Modus","cat":"tech","d":"Furtim Modus | Hiring Java Developer (Full-Time) | NYC (HYBRID) | $125K-$200K + equity |  https://www.furtimmodus.com/software-engineer \nWe are currently seeking a talented and driven Java Developer to join our team full-time.","tags":["Hybrid","Full-Time"],"w":{"tech":3,"builder":3,"systems":3,"logical":3,"focus":2},"b":40,"url":"https://news.ycombinator.com/item?id=48123123"},{"id":"senior-mobile-engineer","t":"Senior Mobile Engineer (React Native)","co":"Forage","cat":"tech","d":"Forage | Senior Mobile Engineer (React Native) | Hybrid NYC (2-3 days in office) | Full-time | $185,000 - $200,000 per year base | joinforage.com\nForage is a payments company building the infrastructure for SNAP EBT online.","tags":["Hybrid","Full-Time"],"w":{"tech":3,"systems":4,"builder":3,"logical":3,"focus":3},"b":50,"url":"https://news.ycombinator.com/item?id=48113023"}/* AGENT_JOBS_END */];
 
 
 // Scoring: survey match (0-1) weighted 70%, job quality (0-1) weighted 30%.
@@ -3422,11 +3473,27 @@ function copyInviteLink(){
     setTimeout(()=>{btn.textContent='Copy Link';},1800);
   }).catch(()=>{});
 }
+let _bioVis='public';
+function setBioVis(v){
+  _bioVis=v;
+  document.getElementById('bio-vis-btn-public').style.background=v==='public'?'rgba(0,200,40,.18)':'none';
+  document.getElementById('bio-vis-btn-public').style.color=v==='public'?'#00cc44':'#555';
+  document.getElementById('bio-vis-btn-friends').style.background=v==='friends'?'rgba(0,200,40,.18)':'none';
+  document.getElementById('bio-vis-btn-friends').style.color=v==='friends'?'#00cc44':'#555';
+}
+async function saveBio(){
+  if(!currentUser||!sb)return;
+  const bio=document.getElementById('pf-bio').value.trim();
+  const btn=document.getElementById('bio-save-btn');
+  btn.textContent='Saving…';btn.disabled=true;
+  await sb.from('profiles').upsert({user_id:currentUser.id,bio,bio_visibility:_bioVis},{onConflict:'user_id'});
+  btn.textContent='Saved ✓';
+  setTimeout(()=>{btn.textContent='Save';btn.disabled=false;},1800);
+}
 function openProfile(){
   if(!currentUser)return;
   const modal=document.getElementById('profile-modal');
   modal.style.display='flex';
-  // Populate fields
   const name=getChatName();
   const initials=name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?';
   document.getElementById('profile-avatar-initials').textContent=initials;
@@ -3434,10 +3501,11 @@ function openProfile(){
   document.getElementById('profile-email-display').textContent=currentUser.email||'';
   const idEl=document.getElementById('profile-neuropian-id');
   idEl.textContent=window._myNeuropianId||'——';
-  // Load avatar
   if(sb){
-    sb.from('profiles').select('avatar_url,neuropian_id').eq('user_id',currentUser.id).single().then(({data:pf})=>{
+    sb.from('profiles').select('avatar_url,neuropian_id,bio,bio_visibility').eq('user_id',currentUser.id).single().then(({data:pf})=>{
       if(pf?.neuropian_id){window._myNeuropianId=pf.neuropian_id;idEl.textContent=pf.neuropian_id;}
+      if(pf?.bio){const ta=document.getElementById('pf-bio');ta.value=pf.bio;document.getElementById('bio-char-count').textContent=pf.bio.length+' / 280';}
+      setBioVis(pf?.bio_visibility||'public');
       const disp=document.getElementById('profile-avatar-display');
       if(pf?.avatar_url){
         sb.storage.from('profile_avatars').createSignedUrl(pf.avatar_url,3600).then(({data:sd})=>{
@@ -3446,6 +3514,74 @@ function openProfile(){
       }
     }).catch(()=>{});
   }
+}
+async function openUserCard(userId){
+  if(!sb||!currentUser)return;
+  if(userId===currentUser.id){openProfile();return;}
+  const{data:prof}=await sb.from('profiles').select('first_name,last_name,bio,bio_visibility,avatar_url,neuropian_id').eq('user_id',userId).maybeSingle();
+  if(!prof)return;
+  const name=[prof.first_name,prof.last_name].filter(Boolean).join(' ')||'Member';
+  const initials=name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?';
+  document.getElementById('uc-initials').textContent=initials;
+  document.getElementById('uc-name').textContent=name;
+  document.getElementById('uc-nid').textContent=prof.neuropian_id?'ID: '+prof.neuropian_id:'';
+  // Determine bio visibility
+  let showBio=!prof.bio_visibility||prof.bio_visibility==='public';
+  if(!showBio&&prof.bio_visibility==='friends'){
+    const{data:fr}=await sb.from('friends').select('id').eq('user_id',currentUser.id).eq('friend_id',userId).eq('status','accepted').maybeSingle();
+    showBio=!!fr;
+  }
+  const bioRow=document.getElementById('uc-bio-row');
+  if(showBio&&prof.bio){document.getElementById('uc-bio').textContent=prof.bio;bioRow.style.display='';}
+  else bioRow.style.display='none';
+  // Avatar
+  const av=document.getElementById('uc-avatar');
+  av.style.background='linear-gradient(135deg,#005c1e,#00cc44)';
+  document.getElementById('uc-initials').textContent=initials;
+  if(prof.avatar_url){
+    sb.storage.from('profile_avatars').createSignedUrl(prof.avatar_url,3600).then(({data:sd})=>{
+      if(sd?.signedUrl){av.style.background='url('+sd.signedUrl+') center/cover no-repeat';document.getElementById('uc-initials').textContent='';}
+    });
+  }
+  // Friend status
+  const{data:existing}=await sb.from('friends').select('status').eq('user_id',currentUser.id).eq('friend_id',userId).maybeSingle();
+  const addBtn=document.getElementById('uc-add-btn');
+  if(existing?.status==='accepted'){addBtn.textContent='Friends ✓';addBtn.disabled=true;addBtn.style.opacity='.5';}
+  else if(existing?.status==='pending'){addBtn.textContent='Request Sent';addBtn.disabled=true;addBtn.style.opacity='.5';}
+  else{addBtn.textContent='Add Friend';addBtn.disabled=false;addBtn.style.opacity='1';addBtn.onclick=()=>sendFriendFromCard(userId,name);}
+  window._ucTargetId=userId;
+  document.getElementById('user-card-modal').style.display='flex';
+}
+function closeUserCard(){document.getElementById('user-card-modal').style.display='none';}
+async function sendFriendFromCard(userId,name){
+  if(!currentUser||!sb)return;
+  const btn=document.getElementById('uc-add-btn');
+  btn.textContent='Sending…';btn.disabled=true;
+  const{error}=await sb.from('friends').upsert({
+    user_id:currentUser.id,friend_id:userId,
+    friend_name:name,requester_name:getChatName(),status:'pending'
+  },{onConflict:'user_id,friend_id'});
+  if(error){btn.textContent='Add Friend';btn.disabled=false;}
+  else{btn.textContent='Request Sent';btn.style.opacity='.5';}
+}
+function genOgImage(){
+  const c=document.createElement('canvas');c.width=1200;c.height=630;
+  document.body.appendChild(c);
+  Brain(c.id=('_og_'+Date.now()),1200,630,true);
+  setTimeout(()=>{
+    const a=document.createElement('a');a.download='brain-og.png';a.href=c.toDataURL('image/png');
+    a.click();document.body.removeChild(c);
+  },1200);
+}
+async function uploadOgImage(file){
+  if(!file||!sb)return;
+  const lbl=document.getElementById('og-upload-label');
+  const orig=lbl.childNodes[0].textContent;
+  lbl.childNodes[0].textContent='Uploading…';
+  const{error}=await sb.storage.from('assets').upload('brain-og.png',file,{upsert:true,contentType:file.type||'image/png'});
+  if(error){lbl.childNodes[0].textContent='Failed ✕';setTimeout(()=>lbl.childNodes[0].textContent=orig,2000);return;}
+  lbl.childNodes[0].textContent='Uploaded ✓';
+  setTimeout(()=>lbl.childNodes[0].textContent=orig,2500);
 }
 function closeProfile(){document.getElementById('profile-modal').style.display='none';document.getElementById('delete-acct-confirm').style.display='none';}
 function requestDeleteAccount(){
@@ -3750,7 +3886,7 @@ function appendMessage(msg,scroll){
     <div style="width:28px;height:28px;border-radius:50%;background:${isMe?'linear-gradient(135deg,#005c1e,#00cc44)':'linear-gradient(135deg,#1e1e2e,#2d2d4e)'};display:flex;align-items:center;justify-content:center;font-size:.54rem;font-weight:700;color:${isMe?'#000':'#aaa'};flex-shrink:0;margin-top:.1rem">${initials}</div>
     <div style="max-width:70%;display:flex;flex-direction:column;gap:.18rem;${isMe?'align-items:flex-end':'align-items:flex-start'}">
       <div style="display:flex;align-items:baseline;gap:.45rem;${isMe?'flex-direction:row-reverse':''}">
-        <span style="font-size:.6rem;font-weight:600;color:${isMe?'#00cc44':'#888'}">${escHtml(msg.display_name||'Anonymous')}</span>
+        <span style="font-size:.6rem;font-weight:600;color:${isMe?'#00cc44':'#888'};cursor:pointer;transition:opacity .15s" onmouseenter="this.style.opacity='.7'" onmouseleave="this.style.opacity='1'" onclick="openUserCard('${msg.user_id}')">${escHtml(msg.display_name||'Anonymous')}</span>
         <span style="font-size:.48rem;color:#333">${time}</span>
       </div>
       ${replyHtml}
@@ -4493,6 +4629,10 @@ else{renderOppPreview();}
 
 <!-- PRIVACY POLICY PAGE -->
 <div id="page-privacy" class="page" style="background:#fff;min-height:100vh;color:#000">
+  <div style="position:fixed;top:0;left:0;right:0;padding:1rem 2rem;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,.07);z-index:100;display:flex;align-items:center;justify-content:space-between">
+    <button onclick="history.back?history.back():showPage('home')" style="background:none;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:.55rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.5);padding:0;transition:color .2s" onmouseenter="this.style.color='#000'" onmouseleave="this.style.color='rgba(0,0,0,.5)'">← Back</button>
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(0,0,0,.3)">Neuropian · Legal</span>
+  </div>
   <div style="max-width:760px;margin:0 auto;padding:9rem 3rem 8rem">
 
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(0,0,0,.5);margin-bottom:1.4rem">Neuropian · Legal</div>
@@ -4549,7 +4689,7 @@ else{renderOppPreview();}
           <li><strong>Portability:</strong> request your data in a portable format.</li>
           <li><strong>Withdrawal of consent:</strong> uninstall EagleEyes and/or delete your account at any time.</li>
         </ul>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8);margin-top:1.2rem">To exercise any of these rights, email <strong>dylan@neuropian.com</strong>. We will respond within 30 days.</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8);margin-top:1.2rem">To exercise any of these rights, email <strong>dylan@neuropian.com</strong>. We will respond within 45 days.</p>
       </div>
 
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.5rem">
@@ -4593,6 +4733,10 @@ else{renderOppPreview();}
 
 <!-- TERMS OF SERVICE PAGE -->
 <div id="page-tos" class="page" style="background:#fff;min-height:100vh;color:#000">
+  <div style="position:fixed;top:0;left:0;right:0;padding:1rem 2rem;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,.07);z-index:100;display:flex;align-items:center;justify-content:space-between">
+    <button onclick="history.back?history.back():showPage('home')" style="background:none;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:.55rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.5);padding:0;transition:color .2s" onmouseenter="this.style.color='#000'" onmouseleave="this.style.color='rgba(0,0,0,.5)'">← Back</button>
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(0,0,0,.3)">Neuropian · Legal</span>
+  </div>
   <div style="max-width:760px;margin:0 auto;padding:9rem 3rem 8rem">
 
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(0,0,0,.5);margin-bottom:1.4rem">Neuropian · Legal</div>
@@ -4770,8 +4914,8 @@ else{renderOppPreview();}
       <div class="auth-title">Sign <em>In</em></div>
       <div class="auth-sub">Access your cognitive profile and opportunity matches</div>
       <div class="auth-err" id="li-err"></div>
-      <div class="auth-field"><label>Email Address</label><input type="email" id="li-email" placeholder="you@example.com"></div>
-      <div class="auth-field"><label>Password</label><input type="password" id="li-pass" placeholder="Your password"></div>
+      <div class="auth-field"><label>Email Address</label><input type="email" id="li-email" placeholder="you@example.com" autocomplete="email"></div>
+      <div class="auth-field"><label>Password</label><input type="password" id="li-pass" placeholder="Your password" autocomplete="current-password"></div>
       <button class="auth-sub-btn" id="li-btn" onclick="doLogin()">Sign In &amp; Continue</button>
       <div style="text-align:right;margin-top:.5rem"><a onclick="showResetView()" style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,226,214,.55);cursor:pointer;transition:color .2s" onmouseenter="this.style.color='#e8e2d6'" onmouseleave="this.style.color='rgba(232,226,214,.55)'">Forgot password?</a></div>
       <div class="auth-switch">Don't have an account? <a onclick="switchToRegister()">Create one, it's free</a></div>
@@ -4781,7 +4925,7 @@ else{renderOppPreview();}
       <div class="auth-sub">Enter your email and we'll send a reset link</div>
       <div class="auth-err" id="rs-err"></div>
       <div id="rs-success" style="display:none;background:rgba(0,200,40,.08);border:1px solid rgba(0,200,40,.25);color:#00cc44;font-family:'Barlow',sans-serif;font-size:.72rem;padding:.65rem .9rem;margin-bottom:.8rem">Reset link sent — check your inbox.</div>
-      <div class="auth-field"><label>Email Address</label><input type="email" id="rs-email" placeholder="you@example.com" onfocus="this.style.borderColor='#e8e2d6'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></div>
+      <div class="auth-field"><label>Email Address</label><input type="email" id="rs-email" placeholder="you@example.com" autocomplete="email" onfocus="this.style.borderColor='#e8e2d6'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></div>
       <button class="auth-sub-btn" id="rs-btn" onclick="doReset()">Send Reset Link</button>
       <div class="auth-switch"><a onclick="backToLogin()">← Back to Sign In</a></div>
     </div>
@@ -4790,8 +4934,8 @@ else{renderOppPreview();}
       <div class="auth-sub">Create your account to access the survey and opportunities</div>
       <div class="auth-err" id="rg-err"></div>
       <div class="auth-row">
-        <div class="auth-field"><label>First Name</label><input type="text" id="rg-fn" placeholder="Given name"></div>
-        <div class="auth-field"><label>Last Name</label><input type="text" id="rg-ln" placeholder="Family name"></div>
+        <div class="auth-field"><label>First Name</label><input type="text" id="rg-fn" placeholder="Given name" autocomplete="given-name"></div>
+        <div class="auth-field"><label>Last Name</label><input type="text" id="rg-ln" placeholder="Family name" autocomplete="family-name"></div>
       </div>
       <div class="auth-field"><label>Date of Birth</label><input type="date" id="rg-dob" onchange="checkDobConsent()" style="width:100%;padding:.75rem .95rem;border:1px solid rgba(255,255,255,.12);font-family:'Barlow',sans-serif;font-size:.84rem;color:var(--white);background:rgba(255,255,255,.05);outline:none;transition:border-color .25s;box-sizing:border-box;color-scheme:dark" onfocus="this.style.borderColor='#e8e2d6'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></div>
       <div id="rg-consent-section" style="display:none;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);padding:.85rem 1rem;margin-bottom:1rem">
@@ -4800,8 +4944,8 @@ else{renderOppPreview();}
           <span style="font-family:'Barlow',sans-serif;font-size:.72rem;color:#e8e2d6;line-height:1.6">My parent or guardian has read and agreed to Neuropian&rsquo;s <a onclick="showAuthLegal('tos')" style="color:#e8e2d6;text-decoration:underline;cursor:pointer">Terms of Service</a> and <a onclick="showAuthLegal('privacy')" style="color:#e8e2d6;text-decoration:underline;cursor:pointer">Privacy Policy</a> on my behalf and consents to my use of the platform.</span>
         </label>
       </div>
-      <div class="auth-field"><label>Email Address</label><input type="email" id="rg-email" placeholder="you@example.com"></div>
-      <div class="auth-field"><label>Password</label><input type="password" id="rg-pass" placeholder="Create a strong password"></div>
+      <div class="auth-field"><label>Email Address</label><input type="email" id="rg-email" placeholder="you@example.com" autocomplete="email"></div>
+      <div class="auth-field"><label>Password</label><input type="password" id="rg-pass" placeholder="Create a strong password" autocomplete="new-password"></div>
       <button class="auth-sub-btn" id="rg-btn" onclick="doRegister()">Create Account &amp; Continue</button>
       <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
     </div>
@@ -4810,7 +4954,7 @@ else{renderOppPreview();}
         <button onclick="hideAuthLegal()" style="background:none;border:none;color:#e8e2d6;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;padding:0;transition:color .2s" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='#e8e2d6'">← Back</button>
         <span id="auth-legal-title" style="font-family:'Barlow Condensed',sans-serif;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4)"></span>
       </div>
-      <div id="auth-legal-body" style="overflow-y:auto;padding:1.4rem;flex:1;font-family:'Barlow',sans-serif;font-size:.7rem;color:#aaa;line-height:1.75"></div>
+      <div id="auth-legal-body" style="overflow-y:auto;padding:1.4rem;flex:1;font-family:'Barlow',sans-serif;font-size:.7rem;color:#aaa;line-height:1.75;background:var(--off-black) !important;color-scheme:dark" class="auth-legal-content"></div>
     </div>
   </div>
 </div>
