@@ -1536,20 +1536,46 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 
 <!-- SERVER SETTINGS MODAL -->
 <div id="server-settings-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;align-items:center;justify-content:center">
-  <div style="background:#141414;border:1px solid rgba(0,200,40,.2);border-radius:8px;width:min(380px,94vw);padding:1.8rem">
+  <div style="background:#141414;border:1px solid rgba(0,200,40,.2);border-radius:8px;width:min(420px,94vw);padding:1.8rem;max-height:88vh;overflow-y:auto">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem">
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#eee;font-weight:400">Server Settings</h3>
       <button onclick="closeServerSettings()" style="background:none;border:none;color:#e8e2d6;cursor:pointer;font-size:1.1rem">✕</button>
     </div>
+    <!-- Logo -->
     <div style="display:flex;flex-direction:column;align-items:center;gap:.8rem;margin-bottom:1.4rem">
       <div id="ss-img-preview" style="width:64px;height:64px;border-radius:50%;background:#1a1a1a;border:2px dashed rgba(0,200,40,.25);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:#555;overflow:hidden;position:relative"></div>
       <label style="font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:#00aa38;cursor:pointer;border:1px solid rgba(0,200,40,.25);padding:.25rem .7rem;border-radius:3px;transition:background .15s" onmouseenter="this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.background='transparent'">
-        Upload Server Image (JPEG)
+        Upload Server Image
         <input id="ss-img-input" type="file" accept="image/*" style="display:none" onchange="previewSsImg(this)">
       </label>
     </div>
     <div id="ss-status" style="font-size:.65rem;text-align:center;margin-bottom:1rem;display:none"></div>
     <button onclick="saveServerImage()" style="width:100%;padding:.7rem;background:#00cc44;border:none;border-radius:4px;color:#000;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .2s" onmouseenter="this.style.background='#00aa38'" onmouseleave="this.style.background='#00cc44'">Save Image</button>
+    <!-- Roles -->
+    <div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.06)">
+      <div style="font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:#555;margin-bottom:.8rem">Roles</div>
+      <div id="ss-roles-list" style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:.9rem"></div>
+      <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+        <input id="ss-role-name" placeholder="Role name" maxlength="24" style="flex:1;min-width:100px;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;padding:.45rem .7rem;color:#ddd;font-family:'DM Sans',sans-serif;font-size:.72rem;outline:none;box-sizing:border-box">
+        <div id="ss-color-swatches" style="display:flex;gap:.35rem">
+          <div onclick="selectRoleColor('#00cc44',this)" style="width:16px;height:16px;border-radius:50%;background:#00cc44;cursor:pointer;outline:3px solid #00cc44;outline-offset:2px"></div>
+          <div onclick="selectRoleColor('#4488ff',this)" style="width:16px;height:16px;border-radius:50%;background:#4488ff;cursor:pointer"></div>
+          <div onclick="selectRoleColor('#ff4455',this)" style="width:16px;height:16px;border-radius:50%;background:#ff4455;cursor:pointer"></div>
+          <div onclick="selectRoleColor('#ffcc00',this)" style="width:16px;height:16px;border-radius:50%;background:#ffcc00;cursor:pointer"></div>
+          <div onclick="selectRoleColor('#9944ff',this)" style="width:16px;height:16px;border-radius:50%;background:#9944ff;cursor:pointer"></div>
+          <div onclick="selectRoleColor('#ff8822',this)" style="width:16px;height:16px;border-radius:50%;background:#ff8822;cursor:pointer"></div>
+          <div onclick="selectRoleColor('#ff44aa',this)" style="width:16px;height:16px;border-radius:50%;background:#ff44aa;cursor:pointer"></div>
+        </div>
+        <button onclick="createRole()" style="padding:.45rem .8rem;background:rgba(0,200,40,.1);border:1px solid rgba(0,200,40,.25);border-radius:4px;color:#00aa38;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap">+ Add</button>
+      </div>
+      <div id="ss-role-err" style="font-size:.6rem;color:#e55;margin-top:.4rem;display:none"></div>
+    </div>
+    <!-- Members -->
+    <div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.06)">
+      <div style="font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:#555;margin-bottom:.8rem">Members</div>
+      <div id="ss-members-list" style="display:flex;flex-direction:column;gap:.5rem"></div>
+    </div>
+    <!-- Danger -->
     <div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.06)">
       <div id="ss-delete-confirm" style="display:none;font-size:.68rem;color:#e55;margin-bottom:.8rem;line-height:1.6">Permanently delete this server and all its messages? This cannot be undone.</div>
       <div id="ss-delete-row" style="display:flex;gap:.6rem">
@@ -2710,7 +2736,127 @@ function openServerSettings(){
   }
   document.getElementById('ss-img-input').value='';
   document.getElementById('ss-status').style.display='none';
+  document.getElementById('ss-roles-list').innerHTML='';
+  document.getElementById('ss-members-list').innerHTML='<div style="font-size:.65rem;color:#444">Loading…</div>';
+  document.getElementById('ss-role-name').value='';
+  document.getElementById('ss-role-err').style.display='none';
+  window._selectedRoleColor='#00cc44';
   document.getElementById('server-settings-modal').style.display='flex';
+  loadServerRolesAndMembers(srv.id);
+}
+
+let _selectedRoleColor='#00cc44';
+function selectRoleColor(color, el){
+  _selectedRoleColor=color;
+  document.querySelectorAll('#ss-color-swatches div').forEach(d=>{d.style.outline='none';});
+  el.style.outline='3px solid '+color;
+  el.style.outlineOffset='2px';
+}
+
+async function loadServerRolesAndMembers(serverId){
+  if(!sb)return;
+  const [rolesRes, memberRolesRes, membersRes] = await Promise.all([
+    sb.from('server_roles').select('*').eq('server_id',serverId).order('created_at',{ascending:true}),
+    sb.from('server_member_roles').select('*').eq('server_id',serverId),
+    sb.from('server_members').select('user_id').eq('server_id',serverId)
+  ]);
+  const roles=rolesRes.data||[];
+  const memberRoles=memberRolesRes.data||[];
+  const memberIds=(membersRes.data||[]).map(m=>m.user_id);
+  window._serverRoles=roles;
+  window._serverMemberRoles=memberRoles;
+  renderRolesList(roles);
+  if(!memberIds.length){document.getElementById('ss-members-list').innerHTML='<div style="font-size:.65rem;color:#444">No members yet.</div>';return;}
+  const {data:profiles}=await sb.from('profiles').select('user_id,first_name,last_name,neuropian_id').in('user_id',memberIds);
+  renderMembersList(profiles||[], roles, memberRoles, serverId);
+}
+
+function renderRolesList(roles){
+  const el=document.getElementById('ss-roles-list');
+  if(!roles.length){el.innerHTML='<div style="font-size:.65rem;color:#444;font-style:italic">No roles yet.</div>';return;}
+  el.innerHTML=roles.map(r=>`
+    <div style="display:flex;align-items:center;gap:.6rem;padding:.4rem .6rem;background:rgba(255,255,255,.03);border-radius:4px">
+      <div style="width:10px;height:10px;border-radius:50%;background:${r.color};flex-shrink:0"></div>
+      <span style="flex:1;font-size:.72rem;color:#ddd">${escHtml(r.name)}</span>
+      <button onclick="deleteRole('${r.id}')" style="background:none;border:none;color:#555;cursor:pointer;font-size:.75rem;padding:0;line-height:1" onmouseenter="this.style.color='#e55'" onmouseleave="this.style.color='#555'">✕</button>
+    </div>`).join('');
+}
+
+function renderMembersList(profiles, roles, memberRoles, serverId){
+  const el=document.getElementById('ss-members-list');
+  if(!profiles.length){el.innerHTML='<div style="font-size:.65rem;color:#444">No members found.</div>';return;}
+  el.innerHTML=profiles.map(p=>{
+    const name=p.first_name?`${p.first_name} ${p.last_name||''}`.trim():p.neuropian_id||p.user_id.slice(0,8);
+    const userRoleIds=memberRoles.filter(mr=>mr.user_id===p.user_id).map(mr=>mr.role_id);
+    const badges=roles.filter(r=>userRoleIds.includes(r.id)).map(r=>
+      `<span style="font-size:.52rem;padding:.15rem .45rem;border-radius:20px;background:${r.color}22;color:${r.color};border:1px solid ${r.color}55">${escHtml(r.name)}</span>`
+    ).join('');
+    const roleToggles=roles.map(r=>{
+      const has=userRoleIds.includes(r.id);
+      return `<label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.68rem;color:#bbb">
+        <input type="checkbox" ${has?'checked':''} onchange="toggleMemberRole('${p.user_id}','${r.id}','${serverId}',this.checked)" style="accent-color:${r.color}">
+        <span style="color:${r.color}">${escHtml(r.name)}</span>
+      </label>`;
+    }).join('');
+    return `<div style="border:1px solid rgba(255,255,255,.06);border-radius:5px;overflow:hidden">
+      <div onclick="toggleMemberExpand('mem-${p.user_id}')" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;cursor:pointer;background:rgba(255,255,255,.02)" onmouseenter="this.style.background='rgba(255,255,255,.05)'" onmouseleave="this.style.background='rgba(255,255,255,.02)'">
+        <span style="flex:1;font-size:.72rem;color:#ddd;font-weight:500">${escHtml(name)}</span>
+        <div style="display:flex;gap:.3rem;flex-wrap:wrap">${badges||'<span style="font-size:.55rem;color:#444;font-style:italic">no roles</span>'}</div>
+        <span style="color:#444;font-size:.6rem">▾</span>
+      </div>
+      <div id="mem-${p.user_id}" style="display:none;padding:.6rem .9rem;border-top:1px solid rgba(255,255,255,.06);display:${roles.length?'flex':'none'};flex-direction:column;gap:.5rem">
+        ${roles.length?roleToggles:'<span style="font-size:.65rem;color:#444;font-style:italic">Create roles first.</span>'}
+      </div>
+    </div>`;
+  }).join('');
+  // start collapsed
+  profiles.forEach(p=>{ const d=document.getElementById('mem-'+p.user_id); if(d)d.style.display='none'; });
+}
+
+function toggleMemberExpand(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.style.display=el.style.display==='none'?'flex':'none';
+}
+
+async function createRole(){
+  const srv=window._currentServerData;
+  if(!srv||!sb)return;
+  const name=document.getElementById('ss-role-name').value.trim();
+  const errEl=document.getElementById('ss-role-err');
+  if(!name){errEl.textContent='Enter a role name.';errEl.style.display='block';return;}
+  errEl.style.display='none';
+  const {data,error}=await sb.from('server_roles').insert({server_id:srv.id,name,color:_selectedRoleColor}).select().single();
+  if(error){errEl.textContent='Failed to create role.';errEl.style.display='block';return;}
+  document.getElementById('ss-role-name').value='';
+  window._serverRoles=[...(window._serverRoles||[]),data];
+  window._serverMemberRoles=window._serverMemberRoles||[];
+  renderRolesList(window._serverRoles);
+  const membersEl=document.getElementById('ss-members-list');
+  if(membersEl.children.length)loadServerRolesAndMembers(srv.id);
+}
+
+async function deleteRole(roleId){
+  const srv=window._currentServerData;
+  if(!srv||!sb)return;
+  const {error}=await sb.from('server_roles').delete().eq('id',roleId).eq('server_id',srv.id);
+  if(error)return;
+  window._serverRoles=(window._serverRoles||[]).filter(r=>r.id!==roleId);
+  window._serverMemberRoles=(window._serverMemberRoles||[]).filter(mr=>mr.role_id!==roleId);
+  renderRolesList(window._serverRoles);
+  loadServerRolesAndMembers(srv.id);
+}
+
+async function toggleMemberRole(userId, roleId, serverId, assign){
+  if(!sb)return;
+  if(assign){
+    await sb.from('server_member_roles').upsert({server_id:serverId,user_id:userId,role_id:roleId},{onConflict:'server_id,user_id,role_id'});
+  } else {
+    await sb.from('server_member_roles').delete().eq('server_id',serverId).eq('user_id',userId).eq('role_id',roleId);
+  }
+  // Refresh member roles cache
+  const {data}=await sb.from('server_member_roles').select('*').eq('server_id',serverId);
+  window._serverMemberRoles=data||[];
 }
 function closeServerSettings(){
   document.getElementById('server-settings-modal').style.display='none';
