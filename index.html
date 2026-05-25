@@ -1566,8 +1566,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <span id="profile-avatar-initials">?</span>
       </div>
       <label style="font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:#00aa38;cursor:pointer;border:1px solid rgba(0,200,40,.25);padding:.25rem .7rem;border-radius:3px;transition:background .15s" onmouseenter="this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.background='transparent'">
-        Upload Photo (JPEG)
-        <input id="pf-img-input" type="file" accept="image/jpeg,image/jpg" style="display:none" onchange="uploadProfilePicture(this)">
+        Upload Photo
+        <input id="pf-img-input" type="file" accept="image/*" style="display:none" onchange="uploadProfilePicture(this)">
       </label>
       <div id="pf-upload-status" style="font-size:.6rem;color:#00aa38;display:none"></div>
     </div>
@@ -2524,6 +2524,15 @@ async function initChat(){
   const initials=name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
   document.getElementById('chat-username').textContent=name;
   document.getElementById('chat-avatar').textContent=initials;
+  if(sb){
+    sb.from('profiles').select('avatar_url').eq('user_id',currentUser.id).single().then(({data:pf})=>{
+      if(pf?.avatar_url){
+        sb.storage.from('profile_avatars').createSignedUrl(pf.avatar_url,3600).then(({data:sd})=>{
+          if(sd?.signedUrl){const av=document.getElementById('chat-avatar');av.style.background='url('+sd.signedUrl+') center/cover no-repeat';av.textContent='';}
+        });
+      }
+    }).catch(()=>{});
+  }
   await loadServerRail();
   await renderSidebarForServer('neuropian');
   if(window.innerWidth<=768)document.getElementById('mobile-sidebar-toggle').style.display='block';
@@ -2757,10 +2766,9 @@ function openProfile(){
       if(pf?.neuropian_id){window._myNeuropianId=pf.neuropian_id;idEl.textContent=pf.neuropian_id;}
       const disp=document.getElementById('profile-avatar-display');
       if(pf?.avatar_url){
-        disp.style.backgroundImage='url('+pf.avatar_url+')';
-        disp.style.backgroundSize='cover';
-        disp.style.backgroundPosition='center';
-        document.getElementById('profile-avatar-initials').textContent='';
+        sb.storage.from('profile_avatars').createSignedUrl(pf.avatar_url,3600).then(({data:sd})=>{
+          if(sd?.signedUrl){disp.style.background='url('+sd.signedUrl+') center/cover no-repeat';document.getElementById('profile-avatar-initials').textContent='';}
+        });
       }
     }).catch(()=>{});
   }
@@ -2783,21 +2791,24 @@ async function uploadProfilePicture(input){
   const status=document.getElementById('pf-upload-status');
   status.textContent='Uploading…';status.style.display='block';status.style.color='#00aa38';
   try{
-    const path=currentUser.id+'.jpg';
-    await sb.storage.from('profile-avatars').upload(path,file,{contentType:'image/jpeg',upsert:true});
-    const {data:urlData}=sb.storage.from('profile-avatars').getPublicUrl(path);
-    const url=urlData.publicUrl;
-    await sb.from('profiles').upsert({user_id:currentUser.id,avatar_url:url},{onConflict:'user_id'});
+    const ext=file.name.split('.').pop().toLowerCase()||'jpg';
+    const path=currentUser.id+'.'+ext;
+    const {error:upErr}=await sb.storage.from('profile_avatars').upload(path,file,{contentType:file.type||'image/jpeg',upsert:true});
+    if(upErr)throw upErr;
+    // Store path (not URL) so we can generate fresh signed URLs later
+    const {error:dbErr}=await sb.from('profiles').upsert({user_id:currentUser.id,avatar_url:path},{onConflict:'user_id'});
+    if(dbErr)throw dbErr;
+    const {data:signedData,error:signErr}=await sb.storage.from('profile_avatars').createSignedUrl(path,3600);
+    if(signErr)throw signErr;
+    const signedUrl=signedData.signedUrl;
     // Update displays
     const disp=document.getElementById('profile-avatar-display');
-    disp.style.backgroundImage='url('+url+'?t='+Date.now()+')';
-    disp.style.backgroundSize='cover';
-    disp.style.backgroundPosition='center';
+    disp.style.background='url('+signedUrl+') center/cover no-repeat';
     document.getElementById('profile-avatar-initials').textContent='';
     const av=document.getElementById('chat-avatar');
-    if(av){av.style.backgroundImage='url('+url+'?t='+Date.now()+')';av.style.backgroundSize='cover';av.style.backgroundPosition='center';av.textContent='';}
+    if(av){av.style.background='url('+signedUrl+') center/cover no-repeat';av.textContent='';}
     status.textContent='Profile photo updated!';
-  }catch(e){status.textContent='Upload failed. Try again.';status.style.color='#e55';}
+  }catch(e){console.error('Profile picture upload error:',e);status.textContent='Upload failed: '+(e?.message||'Try again.');status.style.color='#e55';}
 }
 
 function previewServerImg(input){
