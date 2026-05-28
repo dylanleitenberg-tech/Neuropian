@@ -88,7 +88,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow+Condensed:wght@200;300;400;500;600;700&family=Barlow:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -1298,7 +1297,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div class="spw"><div class="spf" id="sp" style="width:12%"></div></div>
     <div id="survey-welcome-banner" style="display:none;max-width:640px;margin:0 auto 0;padding:3rem 0 0">
       <div style="background:linear-gradient(135deg,rgba(0,200,40,.06),rgba(0,100,20,.04));border:1px solid rgba(0,200,40,.2);border-radius:8px;padding:1.2rem 1.6rem;margin-bottom:2rem;display:flex;align-items:flex-start;gap:1rem">
-        <div style="font-size:1.4rem;line-height:1;flex-shrink:0">🧠</div>
+        <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#005c1e,#00cc44);flex-shrink:0"></div>
         <div>
           <div id="survey-welcome-name" style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#00aa38;margin-bottom:.3rem">Welcome to Neuropian</div>
           <p style="font-family:'Cormorant Garamond',serif;font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.7;margin:0">You're about to complete your cognitive profile. This 8-question survey takes about 3 minutes and unlocks personalized opportunity matching, your Neuropian ID, and access to RoundTable.</p>
@@ -1455,6 +1454,11 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <span onclick="openPostProblem()" style="cursor:pointer;color:#00aa38;font-size:.7rem" title="Post a Problem">+</span>
       </div>
       <div id="problem-room-list"></div>
+      <div style="font-size:.42rem;letter-spacing:.28em;text-transform:uppercase;color:#444;font-weight:700;padding:.8rem 1rem .3rem;display:flex;align-items:center;justify-content:space-between" id="build-rooms-header">
+        <span>Build Rooms</span>
+        <span onclick="openPostBuild()" style="cursor:pointer;color:#00aa38;font-size:.7rem" title="Post a Build">+</span>
+      </div>
+      <div id="build-room-list"></div>
       <div style="font-size:.42rem;letter-spacing:.28em;text-transform:uppercase;color:#444;font-weight:700;padding:.8rem 1rem .3rem">Friends</div>
       <div id="friends-list"></div>
       <div onclick="openFriendRequest()" style="padding:.45rem 1rem;cursor:pointer;font-size:.68rem;color:#e8e2d6;transition:color .15s;display:flex;align-items:center;gap:.4rem"
@@ -1486,8 +1490,9 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       <div style="margin-left:auto;display:flex;align-items:center;gap:.8rem">
         <button onclick="openFriendRequest()" style="background:none;border:1px solid rgba(0,200,40,.25);color:#00aa38;padding:.3rem .7rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s" onmouseenter="this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.background='none'">+ Friend</button>
         <div id="online-count" style="font-size:.5rem;color:#00aa38;letter-spacing:.08em">● online</div>
-        <button id="search-toggle-btn" onclick="toggleSearch()" title="Search" style="background:none;border:none;color:#444;cursor:pointer;font-size:.85rem;padding:.2rem;transition:color .15s" onmouseenter="this.style.color='#00cc44'" onmouseleave="this.style.color='#444'">🔍</button>
-        <button id="members-toggle-btn" onclick="toggleMembersPanel()" title="Members" style="display:none;background:none;border:none;color:#444;cursor:pointer;font-size:.78rem;padding:.2rem;transition:color .15s" onmouseenter="this.style.color='#00cc44'" onmouseleave="this.style.color=membersOpen?'#00cc44':'#444'">👥</button>
+        <button id="search-toggle-btn" onclick="toggleSearch()" title="Search" style="background:none;border:none;color:#444;cursor:pointer;font-size:.52rem;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .4rem;transition:color .15s" onmouseenter="this.style.color='#00cc44'" onmouseleave="this.style.color='#444'">Search</button>
+        <button id="members-toggle-btn" onclick="toggleMembersPanel()" title="Members" style="display:none;background:none;border:none;color:#444;cursor:pointer;font-size:.52rem;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .4rem;transition:color .15s" onmouseenter="this.style.color='#00cc44'" onmouseleave="this.style.color=membersOpen?'#00cc44':'#444'">Members</button>
+        <button id="team-assemble-btn" onclick="openTeamAssembly()" title="Assemble Team" style="display:none;background:none;border:1px solid rgba(0,200,40,.25);color:#00aa38;padding:.3rem .7rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s" onmouseenter="this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.background='none'">Assemble Team</button>
       </div>
     </div>
     <!-- Search panel -->
@@ -1520,14 +1525,14 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
     <!-- Attachment preview bar -->
     <div id="attach-bar" style="display:none;padding:.35rem 1.4rem;background:#111;border-top:1px solid rgba(0,200,40,.08);flex-shrink:0;align-items:center;gap:.6rem">
-      <span style="font-size:.75rem;flex-shrink:0">📎</span>
+      <span style="font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:#555;flex-shrink:0">Attach</span>
       <div id="attach-bar-name" style="flex:1;font-size:.62rem;color:#bbb;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div>
       <span id="attach-bar-size" style="font-size:.55rem;color:#444;flex-shrink:0"></span>
       <button onclick="cancelAttachment()" style="background:none;border:none;color:#555;cursor:pointer;font-size:.75rem;flex-shrink:0;padding:.2rem;transition:color .15s" onmouseenter="this.style.color='#ccc'" onmouseleave="this.style.color='#555'">✕</button>
     </div>
     <!-- Input -->
     <div style="padding:.7rem 1rem;background:#111;border-top:1px solid rgba(0,200,40,.1);display:flex;gap:.6rem;align-items:flex-end">
-      <button onclick="document.getElementById('attach-file-input').click()" title="Attach file" style="background:none;border:none;color:#444;cursor:pointer;font-size:.95rem;padding:.2rem;flex-shrink:0;height:40px;transition:color .15s" onmouseenter="this.style.color='#00cc44'" onmouseleave="this.style.color='#444'">📎</button>
+      <button onclick="document.getElementById('attach-file-input').click()" title="Attach file" style="background:none;border:none;color:#444;cursor:pointer;font-size:.52rem;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .4rem;flex-shrink:0;height:40px;transition:color .15s" onmouseenter="this.style.color='#00cc44'" onmouseleave="this.style.color='#444'">+</button>
       <input id="attach-file-input" type="file" accept="image/jpeg,image/png,image/webp,image/gif,application/pdf,text/plain" style="display:none" onchange="selectAttachment(this)">
       <textarea id="chat-input" placeholder="Message RoundTable…" onkeydown="handleChatKey(event)" oninput="handleTyping()"
         style="flex:1;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:6px;padding:.6rem .85rem;color:#ddd;font-family:'DM Sans',sans-serif;font-size:.75rem;line-height:1.5;resize:none;min-height:40px;max-height:110px;outline:none;transition:border-color .2s"
@@ -1573,6 +1578,54 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       <div id="pp-err" style="font-size:.7rem;color:#e55;display:none"></div>
       <button id="pp-btn" onclick="submitProblem()" style="padding:.75rem;background:#00cc44;border:none;border-radius:4px;color:#000;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Post Problem</button>
     </div>
+  </div>
+</div>
+
+<!-- POST BUILD MODAL -->
+<div id="post-build-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:2000;align-items:center;justify-content:center">
+  <div style="background:#141414;border:1px solid rgba(0,200,40,.2);border-radius:6px;width:min(520px,92vw);padding:1.8rem;max-height:88vh;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#eee;font-weight:400">Post a Build</h3>
+      <button onclick="closePostBuild()" style="background:none;border:none;color:#e8e2d6;cursor:pointer;font-size:1.1rem">✕</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.9rem">
+      <div><label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.35rem">Title</label>
+        <input id="pb-title" type="text" placeholder="What are you building?" style="width:100%;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;padding:.6rem .85rem;color:#ddd;font-family:'DM Sans',sans-serif;font-size:.75rem;outline:none;box-sizing:border-box"></div>
+      <div><label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.35rem">Category</label>
+        <select id="pb-cat" style="width:100%;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;padding:.6rem .85rem;color:#ddd;font-family:'DM Sans',sans-serif;font-size:.75rem;outline:none">
+          <option value="app">App / Software</option>
+          <option value="hardware">Hardware / Device</option>
+          <option value="research">Research Project</option>
+          <option value="game">Game</option>
+          <option value="art">Art / Creative</option>
+          <option value="business">Business / Startup</option>
+          <option value="other">Other</option>
+        </select></div>
+      <div><label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.35rem">Description</label>
+        <textarea id="pb-desc" placeholder="What are you building and what do you need help with?" style="width:100%;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;padding:.6rem .85rem;color:#ddd;font-family:'DM Sans',sans-serif;font-size:.75rem;outline:none;resize:vertical;min-height:90px;box-sizing:border-box"></textarea></div>
+      <div><label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;display:block;margin-bottom:.35rem">Looking For (optional)</label>
+        <input id="pb-looking" type="text" placeholder="e.g. ML engineer, designer, co-founder…" style="width:100%;background:#1a1a1a;border:1px solid rgba(0,200,40,.15);border-radius:4px;padding:.6rem .85rem;color:#ddd;font-family:'DM Sans',sans-serif;font-size:.75rem;outline:none;box-sizing:border-box"></div>
+      <div id="pb-err" style="font-size:.7rem;color:#e55;display:none"></div>
+      <button id="pb-btn" onclick="submitBuild()" style="padding:.75rem;background:#00cc44;border:none;border-radius:4px;color:#000;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Post Build</button>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM ASSEMBLY MODAL -->
+<div id="team-assembly-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;align-items:center;justify-content:center">
+  <div style="background:#141414;border:1px solid rgba(0,200,40,.2);border-radius:6px;width:min(600px,94vw);padding:1.8rem;max-height:88vh;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem">
+      <div>
+        <h3 id="ta-title" style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#eee;font-weight:400;margin:0">Suggested Team</h3>
+        <div id="ta-project" style="font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:#00aa38;margin-top:.25rem"></div>
+      </div>
+      <button onclick="closeTeamAssembly()" style="background:none;border:none;color:#e8e2d6;cursor:pointer;font-size:1.1rem;flex-shrink:0;margin-left:1rem">✕</button>
+    </div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:.88rem;color:rgba(255,255,255,.5);font-style:italic;margin:0 0 1.4rem">Matched by cognitive alignment — complementary strengths, shared interest in this domain.</p>
+    <div id="ta-body" style="display:flex;flex-direction:column;gap:.75rem">
+      <div style="text-align:center;padding:2rem;color:#444;font-size:.72rem;font-style:italic">Analyzing profiles…</div>
+    </div>
+    <div id="ta-err" style="font-size:.7rem;color:#e55;display:none;margin-top:.8rem"></div>
   </div>
 </div>
 
@@ -1926,8 +1979,7 @@ function showAuth(mode,dest){
   } else {
     document.getElementById('auth-login-view').style.display='none';
     document.getElementById('auth-reg-view').style.display='';
-    _resetTurnstile();
-  }
+    }
 }
 function closeAuth(){document.getElementById('auth-gate').classList.remove('show');hideAuthLegal();document.getElementById('auth-reset-view').style.display='none';}
 function showAuthLegal(pageId){
@@ -1959,12 +2011,7 @@ async function doReset(){
 function openDoNotSell(){const m=document.getElementById('do-not-sell-modal');m.style.display='flex';}
 function closeDoNotSell(){document.getElementById('do-not-sell-modal').style.display='none';}
 document.addEventListener('click',function(e){if(e.target===document.getElementById('do-not-sell-modal'))closeDoNotSell();});
-// Turnstile callbacks
-window._turnstileToken=null;
-function onTurnstileSuccess(token){window._turnstileToken=token;}
-function onTurnstileExpire(){window._turnstileToken=null;}
 // Reset widget when register view opens
-function _resetTurnstile(){window._turnstileToken=null;if(window.turnstile){try{turnstile.reset('#turnstile-widget');}catch(e){}}}
 
 let _spFromProfile=false;
 function showSetPasswordModal(fromProfile){_spFromProfile=!!fromProfile;const m=document.getElementById('set-password-modal');m.style.display='flex';document.getElementById('sp-err').style.display='none';document.getElementById('sp-pass1').value='';document.getElementById('sp-pass2').value='';}
@@ -2094,15 +2141,11 @@ async function doRegister(){
   if(age<13){showErr('rg-err','You must be at least 13 years old to create an account.');return}
   if(age<18&&!document.getElementById('rg-consent').checked){showErr('rg-err','Parental consent is required for users under 18. Please check the consent box.');return}
   if(pass.length<6){showErr('rg-err','Password must be at least 6 characters.');return}
-  if(!window._turnstileToken){showErr('rg-err','Please complete the verification above.');return}
   authBtn('rg-btn',true,'Creating account…');
   showErr('rg-err','');
-  const captchaToken=window._turnstileToken;
-  window._turnstileToken=null;
-  _resetTurnstile();
   const {data,error}=await sb.auth.signUp({
     email,password:pass,
-    options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob},captchaToken}
+    options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob}}
   });
   authBtn('rg-btn',false,'Create Account &amp; Continue');
   if(error){showErr('rg-err',error.message);return}
@@ -2954,18 +2997,35 @@ function setupUnreadTracker(){
   if(!sb||!currentUser)return;
   if(unreadSubscription){try{sb.removeChannel(unreadSubscription);}catch(e){}}
   window._unreadRooms=new Set();
+  window._sessionStartMs=Date.now();
   unreadSubscription=sb.channel('unread-tracker')
     .on('postgres_changes',{event:'INSERT',schema:'public',table:'messages'},payload=>{
       const msg=payload.new;
       if(!msg||msg.room===currentRoom)return;
       if(msg.user_id===currentUser?.id)return;
+      // Ignore replayed events from before this session opened
+      if(msg.created_at&&new Date(msg.created_at).getTime()<window._sessionStartMs-3000)return;
       markRoomUnread(msg.room);
-      if('Notification' in window&&!document.hasFocus()){
-        if(Notification.permission==='default'){Notification.requestPermission();}
-        if(Notification.permission==='granted'){new Notification(msg.display_name||'New message',{body:(msg.content||'').slice(0,100),icon:'/favicon.ico'});}
-      }
+      showInAppNotif(msg.room,msg.display_name||'New message',(msg.content||'').slice(0,90));
     })
     .subscribe();
+}
+
+function showInAppNotif(roomId,senderName,preview){
+  const container=document.getElementById('notif-container');
+  if(!container)return;
+  const el=document.createElement('div');
+  el.style.cssText='background:#1a1a1a;border:1px solid rgba(0,200,40,.25);border-radius:6px;padding:.7rem .9rem;cursor:pointer;pointer-events:all;box-shadow:0 4px 20px rgba(0,0,0,.6);animation:notifSlideIn .22s ease;max-width:320px;width:100%';
+  el.innerHTML=`<div style="font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:#00aa38;font-weight:700;margin-bottom:.2rem">${escHtml(senderName)}</div><div style="font-size:.68rem;color:#bbb;line-height:1.45;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${escHtml(preview)}</div><div style="font-size:.45rem;color:#444;margin-top:.3rem;letter-spacing:.1em;text-transform:uppercase">Click to dismiss</div>`;
+  let autoTimer=setTimeout(()=>el.remove(),6000);
+  el.addEventListener('click',()=>{clearTimeout(autoTimer);el.remove();if(roomId&&typeof switchRoom==='function')switchRoom(roomId,senderName,'');});
+  container.appendChild(el);
+}
+
+if(!document.getElementById('notif-keyframes')){
+  const s=document.createElement('style');s.id='notif-keyframes';
+  s.textContent='@keyframes notifSlideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}';
+  document.head.appendChild(s);
 }
 
 function markRoomUnread(roomId){
@@ -3201,10 +3261,19 @@ async function renderSidebarForServer(serverId, serverData){
     if(problemHeader)problemHeader.style.display='';
     const prl=document.getElementById('problem-room-list');
     if(prl)prl.style.display='';
+    await loadBuildRooms();
+    const brlh=document.getElementById('build-rooms-header');
+    if(brlh)brlh.style.display='';
+    const brl=document.getElementById('build-room-list');
+    if(brl)brl.style.display='';
   } else {
     const prl=document.getElementById('problem-room-list');
     if(prl){prl.innerHTML='';prl.style.display='none';}
     if(problemHeader)problemHeader.style.display='none';
+    const brl=document.getElementById('build-room-list');
+    if(brl){brl.innerHTML='';brl.style.display='none';}
+    const brlh=document.getElementById('build-rooms-header');
+    if(brlh)brlh.style.display='none';
   }
 }
 
@@ -4002,13 +4071,13 @@ async function loadProblemRooms(){
       return;
     }
     prl.innerHTML=data.map(p=>`
-      <div onclick="switchRoom('problem_${p.id}','${escHtml(p.title)}','${escHtml(p.category||'')}${p.reward?' · 💰 '+escHtml(p.reward):''}')"
+      <div onclick="switchRoom('problem_${p.id}','${escHtml(p.title)}','${escHtml(p.category||'')}${p.reward?' · '+escHtml(p.reward):''}')"
         style="padding:.45rem 1rem;cursor:pointer;font-size:.68rem;color:#e8e2d6;transition:all .12s;display:flex;align-items:center;gap:.4rem;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem;line-height:1.3"
         onmouseenter="this.style.color='#bbb';this.style.background='rgba(255,255,255,.04)'"
         onmouseleave="this.style.color='#666';this.style.background='transparent'">
         <span style="color:#00aa38;font-size:.7rem">⬡</span>
         <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${escHtml(p.title)}</span>
-        ${p.reward?'<span style="color:#00aa38;font-size:.6rem">💰</span>':''}
+        ${p.reward?'<span style="color:#00aa38;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase">reward</span>':''}
       </div>`).join('');
   }catch(e){console.error('loadProblemRooms',e);}
 }
@@ -4037,13 +4106,259 @@ async function submitProblem(){
     closePostProblem();
     ['pp-title','pp-desc','pp-reward'].forEach(id=>document.getElementById(id).value='');
     // Auto-navigate into the new problem room
-    await switchRoom('problem_'+data.id, title, cat+(reward?' · 💰 '+reward:''));
+    await switchRoom('problem_'+data.id, title, cat+(reward?' · '+reward:''));
   }catch(e){
     console.error('submitProblem',e);
     err.textContent='Failed to post: '+(e.message||'unknown error');err.style.display='block';
   }
   btn.textContent='Post Problem';btn.disabled=false;
 }
+// ── BUILD ROOMS ──────────────────────────────────────────────────────
+const _DEFAULT_BUILDS=[
+  {id:'vr-ai-world',       title:'Persistent AI World VR Headset',       category:'hardware', looking_for:'ML engineers, game engine devs, hardware designers'},
+  {id:'jetpack',           title:'Personal Jetpack',                      category:'hardware', looking_for:'Aerospace engineers, propulsion specialists, embedded devs'},
+  {id:'robot-arms-pack',   title:'Extendable Robot Arms Backpack',        category:'hardware', looking_for:'Robotics engineers, mechanical designers, BCI researchers'},
+  {id:'flying-surfboard',  title:'Flying Surfboard',                      category:'hardware', looking_for:'Aerospace engineers, industrial designers, propulsion engineers'},
+  {id:'neural-interface',  title:'Non-Invasive Neural Interface',         category:'hardware', looking_for:'Neuroscientists, signal processing engineers, UX designers'},
+  {id:'drone-companion',   title:'Autonomous Drone Companion',            category:'hardware', looking_for:'Robotics engineers, computer vision researchers, embedded devs'},
+  {id:'ar-glasses',        title:'Real-Time AR Translation Glasses',      category:'hardware', looking_for:'Computer vision engineers, hardware designers, NLP researchers'},
+  {id:'gravity-boots',     title:'Magnetic Gravity Boots',                category:'hardware', looking_for:'Materials engineers, physicists, wearable tech designers'},
+  {id:'pocket-ai',         title:'Offline Pocket AI Device',             category:'hardware', looking_for:'ML engineers, embedded systems devs, product designers'},
+  {id:'health-patch',      title:'Continuous Biomarker Skin Patch',      category:'hardware', looking_for:'Bioengineers, materials scientists, signal processing engineers'},
+];
+
+function _buildRoomItem(b,idPrefix){
+  const roomId=idPrefix+(b.id||b._db_id);
+  return `<div onclick="switchRoom('${escHtml(roomId)}','${escHtml(b.title)}','${escHtml(b.category||'')}${b.looking_for?' · '+escHtml(b.looking_for):''}')"
+    style="padding:.45rem 1rem;cursor:pointer;font-size:.68rem;color:#e8e2d6;transition:all .12s;display:flex;align-items:center;gap:.4rem;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem;line-height:1.3"
+    onmouseenter="this.style.color='#bbb';this.style.background='rgba(255,255,255,.04)'"
+    onmouseleave="this.style.color='#666';this.style.background='transparent'">
+    <span style="color:#00aa38;font-size:.7rem">◈</span>
+    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${escHtml(b.title)}</span>
+  </div>`;
+}
+
+async function loadBuildRooms(){
+  const brl=document.getElementById('build-room-list');
+  if(!brl)return;
+  // Always render defaults first
+  let html=_DEFAULT_BUILDS.map(b=>_buildRoomItem(b,'build_')).join('');
+  brl.innerHTML=html;
+  // Append any user-posted builds from DB
+  try{
+    const {data,error}=await sb.from('builds').select('id,title,category,looking_for').order('created_at',{ascending:false}).limit(20);
+    if(!error&&data&&data.length){
+      const dbHtml=data.map(b=>_buildRoomItem({...b,_db_id:b.id},'build_')).join('');
+      brl.insertAdjacentHTML('beforeend',dbHtml);
+    }
+  }catch(e){/* builds table not yet created — defaults still show */}
+}
+
+function openPostBuild(){document.getElementById('post-build-modal').style.display='flex';}
+function closePostBuild(){document.getElementById('post-build-modal').style.display='none';}
+
+async function submitBuild(){
+  const title=document.getElementById('pb-title').value.trim();
+  const cat=document.getElementById('pb-cat').value;
+  const desc=document.getElementById('pb-desc').value.trim();
+  const looking=document.getElementById('pb-looking').value.trim();
+  const err=document.getElementById('pb-err');
+  if(!title||!desc){err.textContent='Please fill in the title and description.';err.style.display='block';return;}
+  err.style.display='none';
+  const btn=document.getElementById('pb-btn');btn.textContent='Posting…';btn.disabled=true;
+  try{
+    const {data,error}=await sb.from('builds').insert({
+      user_id:currentUser.id,
+      posted_by:getChatName(),
+      title,category:cat,description:desc,
+      looking_for:looking||null
+    }).select().single();
+    if(error)throw error;
+    await loadBuildRooms();
+    closePostBuild();
+    ['pb-title','pb-desc','pb-looking'].forEach(id=>document.getElementById(id).value='');
+    await switchRoom('build_'+data.id, title, cat+(looking?' · '+looking:''));
+  }catch(e){
+    console.error('submitBuild',e);
+    err.textContent='Failed to post: '+(e.message||'unknown error');err.style.display='block';
+  }
+  btn.textContent='Post Build';btn.disabled=false;
+}
+{const _e=document.getElementById('post-build-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closePostBuild();});}
+{const _e=document.getElementById('team-assembly-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeTeamAssembly();});}
+
+// ── TEAM ASSEMBLY ─────────────────────────────────────────────────────
+const _DOMAIN_TRAITS={
+  // Problem room categories
+  engineering:['tech','builder','logical','experiment','systems'],
+  physics:    ['science','data','pattern','focus','experiment'],
+  mystery:    ['pattern','puzzle','intuition','absorb','systems'],
+  math:       ['data','logical','focus','pattern'],
+  tech:       ['tech','builder','experiment','logical','systems'],
+  business:   ['business','social','people','strategy','ideas'],
+  // Build room categories
+  app:        ['tech','builder','logical','experiment','systems'],
+  hardware:   ['tech','builder','experiment','systems','logical'],
+  research:   ['science','data','absorb','focus','pattern'],
+  game:       ['build_g','narrative','tech','ideas','experiment'],
+  art:        ['art','ideas','visual','narrative','writing'],
+  other:      ['systems','ideas','builder','pattern'],
+};
+const _ROLES=[
+  {label:'Domain Expert',    keys:null,
+   desc:'Strongest match to this project\'s core domain'},
+  {label:'Systems Architect',keys:['systems','builder','logical','foresight'],
+   desc:'Sees the big picture, structures the work'},
+  {label:'Idea Engine',      keys:['ideas','pattern','intuition','creative'],
+   desc:'Generates novel approaches and unexpected angles'},
+  {label:'Executor',         keys:['builder','experiment','focus','real_ch'],
+   desc:'Ships work and drives things to completion'},
+  {label:'Communicator',     keys:['social','people','writing','psych'],
+   desc:'Bridges the team, explains the work to the world'},
+];
+const _FIELD_LABELS={
+  tech:'Technology',art:'Art/Design',science:'Science',data:'Mathematics',
+  psych:'Psychology',writing:'Writing',bio:'Biology',ops:'Operations',
+  business:'Business',law:'Law/Ethics',
+};
+
+function _traitScore(traits,keys){
+  if(!traits||!keys)return 0;
+  let s=0;
+  keys.forEach(k=>{
+    const v=traits[k];
+    if(v===true)s+=1;
+    else if(typeof v==='number')s+=v/10;
+  });
+  return s/keys.length;
+}
+
+function _topFields(traits){
+  const fields=['tech','art','science','data','psych','writing','bio','ops','business','law'];
+  return fields.filter(f=>traits&&traits[f]===true).map(f=>_FIELD_LABELS[f]||f);
+}
+
+function openTeamAssembly(){
+  const modal=document.getElementById('team-assembly-modal');
+  if(!modal)return;
+  const meta=window._currentRoomMeta||{};
+  const titleEl=document.getElementById('ta-title');
+  const projEl=document.getElementById('ta-project');
+  if(titleEl)titleEl.textContent='Suggested Team';
+  if(projEl)projEl.textContent=meta.roomName||'';
+  document.getElementById('ta-body').innerHTML='<div style="text-align:center;padding:2rem;color:#444;font-size:.72rem;font-style:italic">Analyzing profiles…</div>';
+  document.getElementById('ta-err').style.display='none';
+  modal.style.display='flex';
+  runTeamAssembly(meta.roomId,meta.roomDesc);
+}
+function closeTeamAssembly(){
+  const m=document.getElementById('team-assembly-modal');
+  if(m)m.style.display='none';
+}
+
+async function runTeamAssembly(roomId,roomDesc){
+  const body=document.getElementById('ta-body');
+  const errEl=document.getElementById('ta-err');
+  if(!sb||!roomId){body.innerHTML='<div style="text-align:center;padding:2rem;color:#444;font-size:.72rem;font-style:italic">Not connected.</div>';return;}
+  try{
+    // Resolve category from the room record
+    let category='other';
+    if(roomId.startsWith('problem_')){
+      const uuid=roomId.slice(8);
+      const {data}=await sb.from('problems').select('category').eq('id',uuid).single();
+      if(data?.category)category=data.category;
+    } else if(roomId.startsWith('build_')){
+      const slug=roomId.slice(6);
+      // Check default builds first (slug-based IDs)
+      const def=_DEFAULT_BUILDS.find(b=>b.id===slug);
+      if(def){category=def.category;}
+      else{
+        // UUID from DB
+        try{const {data}=await sb.from('builds').select('category').eq('id',slug).single();
+          if(data?.category)category=data.category;}catch(e){}
+      }
+    }
+    document.getElementById('ta-project').textContent+=category?' · '+category:'';
+
+    // Load all profiles with completed surveys
+    const {data:profiles,error}=await sb.from('profiles')
+      .select('user_id,first_name,last_name,neuropian_id,traits,accomplishment,hidden_ability,avatar_url')
+      .not('survey_completed_at','is',null)
+      .not('traits','is',null)
+      .limit(200);
+    if(error)throw error;
+    if(!profiles||profiles.length<1){
+      body.innerHTML='<div style="text-align:center;padding:2rem;color:#444;font-size:.72rem;font-style:italic">Not enough profiles to assemble a team yet.</div>';
+      return;
+    }
+    // Exclude the current user
+    const eligible=profiles.filter(p=>p.user_id!==currentUser?.id&&p.traits&&Object.keys(p.traits).length>0);
+    if(!eligible.length){
+      body.innerHTML='<div style="text-align:center;padding:2rem;color:#444;font-size:.72rem;font-style:italic">No other completed profiles to match against yet.</div>';
+      return;
+    }
+
+    const domainKeys=_DOMAIN_TRAITS[category]||_DOMAIN_TRAITS.other;
+    const roles=_ROLES.map((r,i)=>({...r,keys:i===0?domainKeys:r.keys}));
+
+    // Assign one best-fit person per role, no repeats
+    const assigned=new Set();
+    const team=[];
+    for(const role of roles){
+      if(team.length>=4)break;
+      let best=null,bestScore=-1;
+      for(const p of eligible){
+        if(assigned.has(p.user_id))continue;
+        // Domain fit
+        const domScore=_traitScore(p.traits,domainKeys);
+        // Role fit
+        const roleScore=_traitScore(p.traits,role.keys);
+        // Combined: weight role fit 60%, domain fit 40%
+        const score=0.6*roleScore+0.4*domScore;
+        if(score>bestScore){bestScore=score;best=p;}
+      }
+      if(best&&bestScore>0){
+        assigned.add(best.user_id);
+        team.push({profile:best,role,score:bestScore});
+      }
+    }
+    if(!team.length){
+      body.innerHTML='<div style="text-align:center;padding:2rem;color:#444;font-size:.72rem;font-style:italic">No strong matches found yet. Invite more members to complete their profiles.</div>';
+      return;
+    }
+
+    body.innerHTML=team.map(({profile:p,role,score})=>{
+      const name=p.first_name?`${p.first_name} ${p.last_name||''}`.trim():p.neuropian_id||p.user_id.slice(0,8);
+      const initials=name.split(' ').map(w=>w[0]||'').join('').slice(0,2).toUpperCase()||'?';
+      const fields=_topFields(p.traits);
+      const pct=Math.round(score*100);
+      const dmRoom='dm_'+[currentUser.id,p.user_id].sort().join('_');
+      return `<div style="background:#1a1a1a;border:1px solid rgba(0,200,40,.12);border-radius:6px;padding:1rem 1.1rem;display:flex;gap:.9rem;align-items:flex-start">
+        <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#005c1e,#00cc44);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;flex-shrink:0;overflow:hidden;cursor:pointer" onclick="showUserCard('${p.user_id}')">${p.avatar_url?`<img src="${escHtml(p.avatar_url)}" style="width:100%;height:100%;object-fit:cover">`:`${escHtml(initials)}`}</div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.15rem">
+            <span style="font-size:.76rem;font-weight:600;color:#eee;cursor:pointer" onclick="showUserCard('${p.user_id}')">${escHtml(name)}</span>
+            ${p.neuropian_id?`<span style="font-size:.48rem;color:#00aa38;letter-spacing:.1em;font-family:'DM Mono',monospace">${escHtml(p.neuropian_id)}</span>`:''}
+          </div>
+          <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem">
+            <span style="font-size:.6rem;color:#000;background:#00cc44;padding:.1rem .45rem;border-radius:2px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">${escHtml(role.label)}</span>
+            <span style="font-size:.5rem;color:#00aa38;letter-spacing:.08em">${pct}% fit</span>
+          </div>
+          <div style="font-size:.62rem;color:#888;font-style:italic;margin-bottom:.35rem">${escHtml(role.desc)}</div>
+          ${fields.length?`<div style="font-size:.55rem;color:#555;margin-bottom:.5rem">${fields.map(f=>`<span style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:.08rem .35rem;margin-right:.25rem">${escHtml(f)}</span>`).join('')}</div>`:''}
+          ${p.accomplishment?`<div style="font-size:.62rem;color:#bbb;font-family:'Cormorant Garamond',serif;font-style:italic;line-height:1.55;border-left:2px solid rgba(0,200,40,.2);padding-left:.6rem;margin-bottom:.5rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${escHtml(p.accomplishment)}</div>`:''}
+        </div>
+        <button onclick="closeTeamAssembly();switchRoom('${escHtml(dmRoom)}','${escHtml(name)}','Direct Message')" style="flex-shrink:0;background:none;border:1px solid rgba(0,200,40,.25);color:#00aa38;padding:.3rem .65rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap" onmouseenter="this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.background='none'">Message</button>
+      </div>`;
+    }).join('');
+  }catch(e){
+    console.error('runTeamAssembly',e);
+    errEl.textContent='Failed to assemble team: '+(e.message||'unknown error');
+    errEl.style.display='block';
+    body.innerHTML='';
+  }
+}
+
 {const _e=document.getElementById('post-problem-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closePostProblem();});}
 {const _e=document.getElementById('create-server-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeCreateServer();});}
 {const _e=document.getElementById('join-server-modal');if(_e)_e.addEventListener('click',function(e){if(e.target===this)closeJoinServer();});}
@@ -4088,6 +4403,10 @@ async function switchRoom(roomId,roomName,roomDesc){
   if(prefix)prefix.textContent=isDM?'@':'#';
   const inp=document.getElementById('chat-input');
   if(inp)inp.placeholder=isDM?`Message ${roomName}…`:`Message RoundTable…`;
+  const isProjectRoom=roomId.startsWith('problem_')||roomId.startsWith('build_');
+  const teamBtn=document.getElementById('team-assemble-btn');
+  if(teamBtn)teamBtn.style.display=isProjectRoom?'':'none';
+  window._currentRoomMeta={roomId,roomName,roomDesc};
   document.querySelectorAll('.chat-room-item').forEach(el=>{
     el.style.color='#666';el.style.borderLeft='2px solid transparent';el.style.background='transparent';
   });
@@ -4165,9 +4484,9 @@ function appendMessage(msg,scroll){
   const bs=`background:none;border:none;color:#555;cursor:pointer;padding:.28rem .45rem;font-size:.65rem;line-height:1;transition:all .12s`;
   bar.innerHTML=`
     <button data-msgid="${msg.id}" onclick="startReply(this.dataset.msgid)" title="Reply" style="${bs}" onmouseenter="this.style.color='#5b8aff';this.style.background='rgba(91,138,255,.08)'" onmouseleave="this.style.color='#555';this.style.background='none'">↩</button>
-    <button data-msgid="${msg.id}" onclick="showEmojiPicker(this.dataset.msgid,this)" title="React" style="${bs}" onmouseenter="this.style.color='#ffcc44';this.style.background='rgba(255,200,40,.08)'" onmouseleave="this.style.color='#555';this.style.background='none'">😀</button>
-    ${isMe?`<button onclick="editMessage('${msg.id}')" title="Edit" style="${bs}" onmouseenter="this.style.color='#00cc44';this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.color='#555';this.style.background='none'">✏</button>
-    <button onclick="deleteMessage('${msg.id}')" title="Delete" style="${bs}" onmouseenter="this.style.color='#e55';this.style.background='rgba(255,0,0,.08)'" onmouseleave="this.style.color='#555';this.style.background='none'">🗑</button>`
+    <button data-msgid="${msg.id}" onclick="showEmojiPicker(this.dataset.msgid,this)" title="React" style="${bs}" onmouseenter="this.style.color='#ffcc44';this.style.background='rgba(255,200,40,.08)'" onmouseleave="this.style.color='#555';this.style.background='none'">React</button>
+    ${isMe?`<button onclick="editMessage('${msg.id}')" title="Edit" style="${bs}" onmouseenter="this.style.color='#00cc44';this.style.background='rgba(0,200,40,.08)'" onmouseleave="this.style.color='#555';this.style.background='none'">Edit</button>
+    <button onclick="deleteMessage('${msg.id}')" title="Delete" style="${bs}" onmouseenter="this.style.color='#e55';this.style.background='rgba(255,0,0,.08)'" onmouseleave="this.style.color='#555';this.style.background='none'">Del</button>`
     :`<button data-msgid="${msg.id}" data-username="${escHtml(msg.display_name||'')}" onclick="reportMessage(this.dataset.msgid,this.dataset.username)" title="Report" style="${bs}" onmouseenter="this.style.color='#e55';this.style.background='rgba(255,0,0,.08)'" onmouseleave="this.style.color='#555';this.style.background='none'">⚑</button>`}`;
   div.appendChild(bar);
   div.addEventListener('mouseenter',()=>{bar.style.opacity='1';bar.style.pointerEvents='auto';});
@@ -5136,7 +5455,7 @@ else{renderOppPreview();}
       <div style="text-align:center;margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#e8e2d6">Already have an account? <a onclick="closeNextElonApply();showAuth('login')" style="color:#e8e2d6;cursor:pointer;font-weight:600;text-decoration:none">Sign in</a></div>
     </div>
     <div id="nextelon-success-view" style="display:none;text-align:center;padding:1rem 0">
-      <div style="font-size:2.5rem;margin-bottom:1rem">✦</div>
+      <div style="margin-bottom:1rem"></div>
       <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--white);margin-bottom:.6rem">Application Received</div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;line-height:1.75;color:#e8e2d6;margin-bottom:1.5rem">Check your email — click the link to activate your Neuropian account and sign in automatically. No password needed.</div>
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35)">One click and you're in.</div>
@@ -5314,7 +5633,6 @@ else{renderOppPreview();}
       </div>
       <div class="auth-field"><label>Email Address</label><input type="email" id="rg-email" placeholder="you@example.com" autocomplete="email"></div>
       <div class="auth-field"><label>Password</label><input type="password" id="rg-pass" placeholder="Create a strong password" autocomplete="new-password"><div style="font-size:.52rem;color:#444;margin-top:.3rem;line-height:1.5">At least 6 characters.</div></div>
-      <div id="turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAADWK4l1ABvL_xp1z" data-callback="onTurnstileSuccess" data-expired-callback="onTurnstileExpire" data-theme="dark" style="margin:.6rem 0"></div>
       <button class="auth-sub-btn" id="rg-btn" onclick="doRegister()">Create Account &amp; Continue</button>
       <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
     </div>
@@ -5340,5 +5658,6 @@ else{renderOppPreview();}
   </div>
 </div>
 
+<div id="notif-container" style="position:fixed;bottom:1.2rem;right:1.2rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;pointer-events:none;max-width:320px"></div>
 </body>
 </html>
