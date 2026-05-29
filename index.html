@@ -1820,7 +1820,7 @@ function toggleMobileNav(){
     if(currentUser){
       const mu=document.getElementById('mobile-nav-user');
       const ms=document.getElementById('mobile-nav-signout');
-      if(mu){mu.textContent=currentUser.user_metadata?.first_name||currentUser.email.split('@')[0];mu.style.display='';}
+      if(mu){mu.textContent=currentUser.user_metadata?.username||currentUser.user_metadata?.first_name||currentUser.email.split('@')[0];mu.style.display='';}
       if(ms)ms.style.display='';
     }
   }
@@ -1877,9 +1877,9 @@ function setNavUser(user){
   const ms=document.getElementById('mobile-nav-signout');
   const badge=document.getElementById('nav-friend-badge');
   if(user){
-    const name=user.user_metadata?.first_name||user.email.split('@')[0];
+    const name=user.user_metadata?.username||user.user_metadata?.first_name||user.email.split('@')[0];
     if(nu){
-      const initials=((user.user_metadata?.first_name||name).slice(0,1)+(user.user_metadata?.last_name||'').slice(0,1)).toUpperCase()||name.slice(0,2).toUpperCase();
+      const initials=name.slice(0,2).toUpperCase();
       const niEl=document.getElementById('nav-avatar-initials');
       const nnEl=document.getElementById('nav-user-name');
       if(niEl)niEl.textContent=initials;
@@ -1979,7 +1979,10 @@ function showAuth(mode,dest){
   } else {
     document.getElementById('auth-login-view').style.display='none';
     document.getElementById('auth-reg-view').style.display='';
-    }
+    // Init avatar picker
+    _rgInitSwatches();
+    _rgUpdatePreview();
+  }
 }
 function closeAuth(){document.getElementById('auth-gate').classList.remove('show');hideAuthLegal();document.getElementById('auth-reset-view').style.display='none';}
 function showAuthLegal(pageId){
@@ -2125,14 +2128,118 @@ function checkDobConsent(){
   else{section.style.display='none';document.getElementById('rg-consent').checked=false;}
 }
 
+let _usernameCheckTimer=null;
+function onUsernameInput(val){
+  const st=document.getElementById('rg-username-status');
+  clearTimeout(_usernameCheckTimer);
+  val=val.trim();
+  if(!val){st.textContent='Your public name in chat. Letters, numbers, underscores. More than 3 characters.';st.style.color='#666';return;}
+  if(val.length<=3){st.textContent='Must be more than 3 characters.';st.style.color='#e55';return;}
+  if(!/^[a-zA-Z0-9_]+$/.test(val)){st.textContent='Letters, numbers, and underscores only.';st.style.color='#e55';return;}
+  st.textContent='Checking…';st.style.color='#888';
+  _usernameCheckTimer=setTimeout(async()=>{
+    if(!sb){st.textContent='';return;}
+    try{
+      const{data}=await sb.from('profiles').select('user_id').eq('username',val).maybeSingle();
+      if(data){st.textContent='Username taken.';st.style.color='#e55';}
+      else{st.textContent='Available!';st.style.color='#00cc44';}
+    }catch(e){st.textContent='';}
+  },600);
+}
+
+// ── Avatar picker ──────────────────────────────────────────
+let _rgAvatarMode='brain';
+let _rgBrainColor='#0a2a14';
+let _rgUploadFile=null;
+
+const _RG_BRAIN_COLORS=[
+  {hex:'#0a2a14',label:'Forest'},
+  {hex:'#0d1a2e',label:'Navy'},
+  {hex:'#1a0d2e',label:'Violet'},
+  {hex:'#2e0d1a',label:'Crimson'},
+  {hex:'#0d2a2a',label:'Teal'},
+  {hex:'#2a1800',label:'Ember'},
+];
+
+const _BRAIN_PATH='M50 17C41 17 31 21 25 29C19 37 19 45 22 51C18 55 15 62 17 69C20 77 29 81 37 79C40 82 45 85 50 85C55 85 60 82 63 79C71 81 80 77 83 69C85 62 82 55 78 51C81 45 81 37 75 29C69 21 59 17 50 17Z';
+
+function _rgBrainSVG(bg){
+  return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="${bg}"/><path d="${_BRAIN_PATH}" fill="rgba(255,255,255,0.88)"/><line x1="50" y1="19" x2="50" y2="83" stroke="rgba(0,0,0,0.13)" stroke-width="2"/><path d="M34 36Q39 30 43 37" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/><path d="M29 51Q35 44 40 51" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/><path d="M32 65Q37 59 42 65" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/><path d="M57 36Q61 30 66 37" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/><path d="M60 51Q65 44 71 51" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/><path d="M58 65Q63 59 68 65" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/></svg>`;
+}
+
+function _rgInitSwatches(){
+  const wrap=document.getElementById('rg-color-swatches');
+  if(!wrap||wrap.children.length)return;
+  _RG_BRAIN_COLORS.forEach((c,i)=>{
+    const el=document.createElement('div');
+    el.className='rg-color-swatch';
+    el.title=c.label;
+    el.style.cssText=`width:22px;height:22px;border-radius:50%;background:${c.hex};cursor:pointer;transition:transform .15s;flex-shrink:0${i===0?';outline:2px solid #00cc44;outline-offset:2px':''}`;
+    el.onclick=()=>rgSelectColor(c.hex,el);
+    el.onmouseenter=()=>{el.style.transform='scale(1.18)';};
+    el.onmouseleave=()=>{el.style.transform='scale(1)';};
+    wrap.appendChild(el);
+  });
+}
+
+function _rgUpdatePreview(){
+  const prev=document.getElementById('rg-avatar-preview');
+  if(!prev)return;
+  if(_rgAvatarMode==='brain'||!_rgUploadFile){
+    const svg=_rgBrainSVG(_rgBrainColor);
+    prev.style.background=_rgBrainColor;
+    prev.innerHTML=`<img src="data:image/svg+xml,${encodeURIComponent(svg)}" style="width:74%;height:74%;object-fit:contain">`;
+  }else{
+    const url=URL.createObjectURL(_rgUploadFile);
+    prev.style.background='#111';
+    prev.innerHTML=`<img src="${url}" style="width:100%;height:100%;object-fit:cover">`;
+  }
+}
+
+function rgSetAvatarMode(mode){
+  _rgAvatarMode=mode;
+  const bt=document.getElementById('rg-brain-tab');
+  const ut=document.getElementById('rg-upload-tab');
+  if(bt){bt.style.color=mode==='brain'?'#00cc44':'#555';bt.style.borderBottomColor=mode==='brain'?'#00cc44':'transparent';}
+  if(ut){ut.style.color=mode==='upload'?'#00cc44':'#555';ut.style.borderBottomColor=mode==='upload'?'#00cc44':'transparent';}
+  const bp=document.getElementById('rg-brain-panel');
+  const up=document.getElementById('rg-upload-panel');
+  if(bp)bp.style.display=mode==='brain'?'':'none';
+  if(up)up.style.display=mode==='upload'?'':'none';
+  _rgUpdatePreview();
+}
+
+function rgSelectColor(hex,el){
+  _rgBrainColor=hex;
+  _rgAvatarMode='brain';
+  document.querySelectorAll('.rg-color-swatch').forEach(s=>{s.style.outline='none';s.style.outlineOffset='';});
+  el.style.outline='2px solid #00cc44';el.style.outlineOffset='2px';
+  _rgUpdatePreview();
+}
+
+function rgPreviewUpload(input){
+  if(input.files&&input.files[0]){
+    _rgUploadFile=input.files[0];
+    _rgAvatarMode='upload';
+    const nameEl=document.getElementById('rg-upload-name');
+    if(nameEl)nameEl.textContent=input.files[0].name;
+    _rgUpdatePreview();
+  }
+}
+
 async function doRegister(){
   if(!sb){showErr('rg-err','Service unavailable. Please try again later.');return}
+  // Avatar check
+  if(_rgAvatarMode==='upload'&&!_rgUploadFile){showErr('rg-err','Please choose a profile picture or select a brain avatar.');return}
+  const username=document.getElementById('rg-username').value.trim();
   const fn=document.getElementById('rg-fn').value.trim();
   const ln=document.getElementById('rg-ln').value.trim();
   const dob=document.getElementById('rg-dob').value;
   const email=document.getElementById('rg-email').value.trim();
   const pass=document.getElementById('rg-pass').value;
-  if(!fn||!ln||!dob||!email||!pass){showErr('rg-err','Please fill in all fields.');return}
+  if(!username||!fn||!ln||!dob||!email||!pass){showErr('rg-err','Please fill in all fields.');return}
+  if(username.length<=3){showErr('rg-err','Username must be more than 3 characters.');return}
+  if(!/^[a-zA-Z0-9_]+$/.test(username)){showErr('rg-err','Username can only contain letters, numbers, and underscores.');return}
   const today=new Date();
   const birth=new Date(dob);
   let age=today.getFullYear()-birth.getFullYear();
@@ -2141,18 +2248,23 @@ async function doRegister(){
   if(age<13){showErr('rg-err','You must be at least 13 years old to create an account.');return}
   if(age<18&&!document.getElementById('rg-consent').checked){showErr('rg-err','Parental consent is required for users under 18. Please check the consent box.');return}
   if(pass.length<6){showErr('rg-err','Password must be at least 6 characters.');return}
+  // Check username uniqueness
+  try{
+    const{data:taken}=await sb.from('profiles').select('user_id').eq('username',username).maybeSingle();
+    if(taken){showErr('rg-err','That username is already taken. Please choose another.');return}
+  }catch(e){/* column may not exist yet — proceed */}
   authBtn('rg-btn',true,'Creating account…');
   showErr('rg-err','');
   const {data,error}=await sb.auth.signUp({
     email,password:pass,
-    options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob}}
+    options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob,username}}
   });
   authBtn('rg-btn',false,'Create Account &amp; Continue');
   if(error){showErr('rg-err',error.message);return}
   currentUser=data.user;
   isAuthed=true;
   setNavUser(data.user);
-  // Create empty profile row so we can upsert traits later
+  // Create profile row
   let neuropianId;
   for(let i=0;i<10;i++){
     const candidate=String(Math.floor(1000000+Math.random()*9000000));
@@ -2160,9 +2272,33 @@ async function doRegister(){
     if(!existing){neuropianId=candidate;break;}
   }
   if(!neuropianId)neuropianId=String(Date.now()).slice(-7);
-  await sb.from('profiles').upsert({user_id:data.user.id,first_name:fn,last_name:ln,email,traits:{},neuropian_id:neuropianId},{onConflict:'user_id'});
+  await sb.from('profiles').upsert({user_id:data.user.id,first_name:fn,last_name:ln,username,email,traits:{},neuropian_id:neuropianId},{onConflict:'user_id'});
+  // Upload avatar
+  try{
+    let avatarBlob, avatarPath, avatarMime;
+    if(_rgAvatarMode==='upload'&&_rgUploadFile){
+      const ext=_rgUploadFile.name.split('.').pop().toLowerCase()||'jpg';
+      avatarBlob=_rgUploadFile;
+      avatarPath=`${data.user.id}/avatar.${ext}`;
+      avatarMime=_rgUploadFile.type||'image/jpeg';
+    }else{
+      const svg=_rgBrainSVG(_rgBrainColor);
+      avatarBlob=new Blob([svg],{type:'image/svg+xml'});
+      avatarPath=`${data.user.id}/avatar.svg`;
+      avatarMime='image/svg+xml';
+    }
+    const{error:upErr}=await sb.storage.from('profile_avatars').upload(avatarPath,avatarBlob,{contentType:avatarMime,upsert:true});
+    if(!upErr){
+      await sb.from('profiles').upsert({user_id:data.user.id,avatar_url:avatarPath},{onConflict:'user_id'});
+      // Update nav avatar immediately
+      const{data:sd}=await sb.storage.from('profile_avatars').createSignedUrl(avatarPath,3600);
+      if(sd?.signedUrl){
+        const av=document.getElementById('nav-avatar');
+        if(av){av.style.background=`url(${sd.signedUrl}) center/cover`;const ni=document.getElementById('nav-avatar-initials');if(ni)ni.textContent='';}
+      }
+    }
+  }catch(e){/* avatar upload failed silently — user can set it later in profile */}
   closeAuth();
-  // If they registered to get to RoundTable, send them there, otherwise survey first
   const dest=pendingPage==='eagleeyes'?'eagleeyes':(pendingPage==='collective'?'collective':'survey');
   showPage(dest);
   pendingPage=null;
@@ -2947,9 +3083,9 @@ let pendingAttachment=null;
 
 function getChatName(){
   if(!currentUser)return'Anonymous';
-  return currentUser.user_metadata?.first_name
-    ?`${currentUser.user_metadata.first_name} ${currentUser.user_metadata.last_name||''}`.trim()
-    :currentUser.email.split('@')[0];
+  if(currentUser.user_metadata?.username)return currentUser.user_metadata.username;
+  if(currentUser.user_metadata?.first_name)return`${currentUser.user_metadata.first_name} ${currentUser.user_metadata.last_name||''}`.trim();
+  return currentUser.email.split('@')[0];
 }
 
 async function initChat(){
@@ -3018,6 +3154,8 @@ function showInAppNotif(roomId,senderName,preview){
   el.style.cssText='background:#1a1a1a;border:1px solid rgba(0,200,40,.25);border-radius:6px;padding:.7rem .9rem;cursor:pointer;pointer-events:all;box-shadow:0 4px 20px rgba(0,0,0,.6);animation:notifSlideIn .22s ease;max-width:320px;width:100%';
   el.innerHTML=`<div style="font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:#00aa38;font-weight:700;margin-bottom:.2rem">${escHtml(senderName)}</div><div style="font-size:.68rem;color:#bbb;line-height:1.45;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${escHtml(preview)}</div><div style="font-size:.45rem;color:#444;margin-top:.3rem;letter-spacing:.1em;text-transform:uppercase">Click to dismiss</div>`;
   let autoTimer=setTimeout(()=>el.remove(),6000);
+  el.addEventListener('mouseenter',()=>clearTimeout(autoTimer));
+  el.addEventListener('mouseleave',()=>{autoTimer=setTimeout(()=>el.remove(),3000);});
   el.addEventListener('click',()=>{clearTimeout(autoTimer);el.remove();if(roomId&&typeof switchRoom==='function')switchRoom(roomId,senderName,'');});
   container.appendChild(el);
 }
@@ -3040,15 +3178,13 @@ function markRoomUnread(roomId){
     el.appendChild(dot);
     if(el.style.color!=='#00cc44')el.style.color='#bbb';
   }
-  // Dot on server rail icon
+  // Highlight server rail icon with box-shadow (avoids overflow:hidden clipping)
   if(roomId.startsWith('srv_')){
     const srvId=roomId.split('_')[1];
     const railEl=document.getElementById('srv-'+srvId);
-    if(railEl&&!railEl.querySelector('.rail-unread-dot')){
-      const d=document.createElement('span');
-      d.className='rail-unread-dot';
-      d.style.cssText='position:absolute;bottom:1px;right:1px;width:8px;height:8px;border-radius:50%;background:#00cc44;border:2px solid #0a0a0a;pointer-events:none';
-      railEl.appendChild(d);
+    if(railEl&&!railEl.dataset.railUnread){
+      railEl.dataset.railUnread='1';
+      railEl.style.boxShadow='0 0 0 2px #00cc44';
     }
   }
 }
@@ -3058,14 +3194,13 @@ function clearRoomUnread(roomId){
   if(window._unreadRooms)window._unreadRooms.delete(roomId);
   const el=document.getElementById('ri-'+roomId);
   if(el){const dot=el.querySelector('.unread-dot');if(dot)dot.remove();}
-  // Remove server rail dot if no other rooms in that server are unread
+  // Clear server rail highlight if no other rooms in that server are unread
   if(roomId.startsWith('srv_')){
     const srvId=roomId.split('_')[1];
     const stillUnread=window._unreadRooms&&[...window._unreadRooms].some(r=>r.startsWith('srv_'+srvId+'_'));
     if(!stillUnread){
       const railEl=document.getElementById('srv-'+srvId);
-      const railDot=railEl?.querySelector('.rail-unread-dot');
-      if(railDot)railDot.remove();
+      if(railEl){railEl.dataset.railUnread='';railEl.style.boxShadow='';}
     }
   }
 }
@@ -3139,6 +3274,10 @@ function renderMsgContent(content){
 // ── SERVERS ────────────────────────────────────────────────────────
 async function switchServer(serverId){
   currentServerId=serverId;
+  // Clear unread indicator for this server
+  const _srvRailEl=document.getElementById('srv-'+serverId);
+  if(_srvRailEl){_srvRailEl.dataset.railUnread='';_srvRailEl.style.boxShadow='';}
+  if(window._unreadRooms){[...window._unreadRooms].filter(r=>r.startsWith('srv_'+serverId+'_')).forEach(r=>window._unreadRooms.delete(r));}
   // Update rail highlight
   document.querySelectorAll('[id^="srv-"]').forEach(el=>{
     el.style.borderRadius=el.id==='srv-'+serverId?'12px':'50%';
@@ -5620,6 +5759,11 @@ else{renderOppPreview();}
       <div class="auth-title">Join <em>neuropian</em></div>
       <div class="auth-sub">Create your account to access the survey and opportunities</div>
       <div class="auth-err" id="rg-err"></div>
+      <div class="auth-field">
+        <label>Username</label>
+        <input type="text" id="rg-username" placeholder="yourhandle" autocomplete="username" oninput="onUsernameInput(this.value)" style="letter-spacing:.02em">
+        <div id="rg-username-status" style="font-size:.52rem;margin-top:.3rem;line-height:1.5;color:#666">Your public name in chat. Letters, numbers, underscores. More than 3 characters.</div>
+      </div>
       <div class="auth-row">
         <div class="auth-field"><label>First Name</label><input type="text" id="rg-fn" placeholder="Given name" autocomplete="given-name"></div>
         <div class="auth-field"><label>Last Name</label><input type="text" id="rg-ln" placeholder="Family name" autocomplete="family-name"></div>
@@ -5633,6 +5777,29 @@ else{renderOppPreview();}
       </div>
       <div class="auth-field"><label>Email Address</label><input type="email" id="rg-email" placeholder="you@example.com" autocomplete="email"></div>
       <div class="auth-field"><label>Password</label><input type="password" id="rg-pass" placeholder="Create a strong password" autocomplete="new-password"><div style="font-size:.52rem;color:#444;margin-top:.3rem;line-height:1.5">At least 6 characters.</div></div>
+      <div class="auth-field" style="margin-bottom:1.1rem">
+        <label style="display:block;margin-bottom:.55rem">Profile Picture <span style="color:#555;font-size:.65em;font-weight:400">— required</span></label>
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div id="rg-avatar-preview" style="width:64px;height:64px;border-radius:50%;background:#0a2a14;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border:2px solid rgba(0,200,40,.25);transition:background .2s"></div>
+          <div style="display:flex;gap:.4rem;flex-direction:column;flex:1">
+            <div style="display:flex;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:.5rem">
+              <button type="button" id="rg-brain-tab" onclick="rgSetAvatarMode('brain')" style="background:none;border:none;color:#00cc44;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:.3rem .6rem .4rem;border-bottom:2px solid #00cc44;margin-bottom:-1px;transition:color .15s">Brain Avatar</button>
+              <button type="button" id="rg-upload-tab" onclick="rgSetAvatarMode('upload')" style="background:none;border:none;color:#555;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:.3rem .6rem .4rem;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s">Upload Photo</button>
+            </div>
+            <div id="rg-brain-panel">
+              <div style="font-size:.56rem;color:#666;margin-bottom:.4rem;letter-spacing:.04em">Pick a background color</div>
+              <div style="display:flex;gap:.4rem;flex-wrap:wrap" id="rg-color-swatches"></div>
+            </div>
+            <div id="rg-upload-panel" style="display:none">
+              <label for="rg-avatar-upload" style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:3px;padding:.4rem .75rem;cursor:pointer;font-family:'Barlow',sans-serif;font-size:.65rem;color:#ccc;transition:background .15s" onmouseenter="this.style.background='rgba(255,255,255,.1)'" onmouseleave="this.style.background='rgba(255,255,255,.06)'">
+                <span style="font-size:.9rem">↑</span> Choose file
+              </label>
+              <input type="file" id="rg-avatar-upload" accept="image/*" style="display:none" onchange="rgPreviewUpload(this)">
+              <div id="rg-upload-name" style="font-size:.55rem;color:#555;margin-top:.3rem"></div>
+            </div>
+          </div>
+        </div>
+      </div>
       <button class="auth-sub-btn" id="rg-btn" onclick="doRegister()">Create Account &amp; Continue</button>
       <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
     </div>
