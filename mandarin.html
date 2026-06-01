@@ -3326,13 +3326,7 @@ async function translateToChinese(text){
     if(t&&t!==text){_translateCache[text]=t;_txSave_zh();return t;}
   }catch(e){}
   return text;
-}&langpair=en|zh`);
-    const json=await res.json();
-    const translated=json?.responseData?.translatedText;
-    if(translated&&translated!==text){_translateCache[text]=translated;return translated;}
-  }catch(e){}
-  return text;
-}
+
 async function switchServer(serverId){
   currentServerId=serverId;
   // Clear unread indicator for this server

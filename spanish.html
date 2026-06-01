@@ -3326,13 +3326,7 @@ async function translateToSpanish(text){
     if(t&&t!==text){_translateCache[text]=t;_txSave_es();return t;}
   }catch(e){}
   return text;
-}&langpair=en|es`);
-    const json=await res.json();
-    const translated=json?.responseData?.translatedText;
-    if(translated&&translated!==text){_translateCache[text]=translated;return translated;}
-  }catch(e){}
-  return text;
-}
+
 
 // ── SERVERS ────────────────────────────────────────────────────────
 async function switchServer(serverId){
