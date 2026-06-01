@@ -3306,26 +3306,19 @@ function renderMsgContent(content){
 }
 
 // ── SERVERS ────────────────────────────────────────────────────────
-const _translateCache=(()=>{try{return JSON.parse(localStorage.getItem('_txCache_zh')||'{}')}catch(e){return {}}})();
-function _txSave_zh(){try{localStorage.setItem('_txCache_zh',JSON.stringify(_translateCache))}catch(e){}}
+const _translateCache={};
 async function translateToChinese(text){
   if(!text||!text.trim())return text;
   if(_translateCache[text])return _translateCache[text];
-  // Google Translate unofficial API — high quality, no key required
+  if(/[一-鿿]/.test(text))return text;
   try{
-    const r=await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh&dt=t&q=${encodeURIComponent(text)}`);
-    const j=await r.json();
-    const t=j[0].map(x=>x[0]).join('');
-    if(t&&t!==text){_translateCache[text]=t;_txSave_zh();return t;}
-  }catch(e){}
-  // Fallback: MyMemory
-  try{
-    const r=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|zh`);
-    const j=await r.json();
-    const t=j?.responseData?.translatedText;
-    if(t&&t!==text){_translateCache[text]=t;_txSave_zh();return t;}
+    const res=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|zh`);
+    const json=await res.json();
+    const translated=json?.responseData?.translatedText;
+    if(translated&&translated!==text){_translateCache[text]=translated;return translated;}
   }catch(e){}
   return text;
+}
 
 async function switchServer(serverId){
   currentServerId=serverId;
