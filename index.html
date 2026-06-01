@@ -122,7 +122,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:600;height:56px;display:flex;ali
 .nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:.58rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--grey);cursor:pointer;text-decoration:none;transition:color .25s}
 .nav-links a:hover{color:var(--white)}
 .nav-apply{font-family:'Barlow Condensed',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--black);background:var(--white);border:none;padding:.5rem 1.4rem;cursor:pointer;transition:all .25s}
-.nav-apply:hover{background:var(--cream);color:var(--black)}
+.nav-apply:hover{background:var(--white);color:var(--black);transform:scale(1.06);box-shadow:0 0 0 2px rgba(255,255,255,.9),0 0 28px rgba(255,255,255,.45),0 0 60px rgba(255,255,255,.18)}
 
 /* HERO */
 .hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;justify-content:flex-start;overflow:hidden;background:var(--black)}
@@ -152,6 +152,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:600;height:56px;display:flex;ali
 .btn-primary::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.12);transform:translateX(-100%);transition:transform .35s cubic-bezier(.77,0,.175,1)}
 .btn-primary:hover{color:var(--black)}.btn-primary:hover::before{transform:translateX(0)}
 .btn-primary span{position:relative;z-index:1}
+#eagleeyes-intro:hover .btn-primary{transform:scale(1.05);box-shadow:0 0 0 2px rgba(255,255,255,.5),0 0 32px rgba(255,255,255,.22);transition:all .35s cubic-bezier(.77,0,.175,1)}
+#eagleeyes-intro:hover .btn-primary::before{transform:translateX(0)}
+#eagleeyes-intro .btn-primary:hover{transform:scale(1.08);box-shadow:0 0 0 2px rgba(255,255,255,.9),0 0 48px rgba(255,255,255,.4),0 0 80px rgba(255,255,255,.15)}
+#roundtable:hover .btn-primary{transform:scale(1.05);box-shadow:0 0 0 2px rgba(255,255,255,.5),0 0 32px rgba(255,255,255,.22);transition:all .35s cubic-bezier(.77,0,.175,1)}
+#roundtable:hover .btn-primary::before{transform:translateX(0)}
+#roundtable .btn-primary:hover{transform:scale(1.08);box-shadow:0 0 0 2px rgba(255,255,255,.9),0 0 48px rgba(255,255,255,.4),0 0 80px rgba(255,255,255,.15)}
+#opportunities-home:hover .btn-primary{transform:scale(1.05);box-shadow:0 0 0 2px rgba(255,255,255,.5),0 0 32px rgba(255,255,255,.22);transition:all .35s cubic-bezier(.77,0,.175,1)}
+#opportunities-home:hover .btn-primary::before{transform:translateX(0)}
+#opportunities-home .btn-primary:hover{transform:scale(1.08);box-shadow:0 0 0 2px rgba(255,255,255,.9),0 0 48px rgba(255,255,255,.4),0 0 80px rgba(255,255,255,.15)}
 .cta-submit:hover{background:var(--black)!important;color:var(--white)!important}.cta-submit:hover::before{transform:translateX(-100%)!important}
 .btn-secondary{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;background:transparent;color:#e8e2d6;border:1px solid rgba(255,255,255,.2);padding:.85rem 2.2rem;cursor:pointer;transition:all .25s}
 .btn-secondary:hover{border-color:#e8e2d6;color:var(--white)}
@@ -684,6 +693,23 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <button id="nav-signout" style="display:none;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,0.95);padding:.32rem .75rem;font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .22s" onmouseenter="this.style.borderColor='rgba(255,255,255,.5)';this.style.color='#fff'" onmouseleave="this.style.borderColor='rgba(255,255,255,.2)';this.style.color='rgba(255,255,255,.5)'" onclick="doSignOut()">Sign Out</button>
     <button class="nav-apply" onclick="openNextElonApply()">Apply Now</button>
   </div>
+
+<!-- LANGUAGE SWITCHER -->
+<div id="lang-sw" dir="ltr" style="position:relative;margin-left:.4rem;flex-shrink:0">
+  <button id="lang-btn"
+    onclick="(function(e){e.stopPropagation();var m=document.getElementById('lang-menu');m.style.display=m.style.display==='none'?'flex':'none';})(event)"
+    style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(232,226,214,.85);background:none;border:1px solid rgba(255,255,255,.12);padding:.3rem .72rem;cursor:pointer;display:flex;align-items:center;gap:.38rem;transition:border-color .2s"
+    onmouseenter="this.style.borderColor='rgba(255,255,255,.35)'"
+    onmouseleave="this.style.borderColor='rgba(255,255,255,.12)'">🌐 EN</button>
+  <div id="lang-menu" dir="ltr"
+    style="display:none;flex-direction:column;position:absolute;top:calc(100% + 7px);right:0;background:#0f0f0f;border:1px solid rgba(255,255,255,.1);z-index:9999;min-width:158px;box-shadow:0 12px 48px rgba(0,0,0,.8)">
+<a href="english.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#ffffff;font-weight:700;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇺🇸&nbsp;English<span style="width:5px;height:5px;border-radius:50%;background:#00cc44;display:inline-block;margin-left:auto"></span></a>
+<a href="spanish.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇪🇸&nbsp;Español</a>
+<a href="hindi.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇮🇳&nbsp;हिन्दी</a>
+<a href="hebrew.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇮🇱&nbsp;עברית</a>
+<a href="mandarin.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇨🇳&nbsp;中文</a>
+  </div>
+</div>
 </nav>
 
 <!-- Mobile Nav Drawer -->
@@ -775,10 +801,10 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   <div class="hero-content">
     <div class="hero-season">Founded by Dylan Leitenberg · Intellect Accelerator</div>
     <h1 class="hero-title" style="font-size:clamp(3.5rem,9vw,8rem);line-height:.85;margin-bottom:1.5rem">
-      Neuropian, <span class="outline">Intelligence</span><br>
+      <span style="display:block;margin-bottom:.15em">Neuropian,</span><span class="outline">Intelligence</span><br>
       <span style="font-size:.75em;-webkit-text-stroke:1.8px rgba(255,255,255,.7);color:transparent;font-style:italic;display:block;margin-top:-.9em;letter-spacing:-.02em;line-height:.85">Reimagined</span>
     </h1>
-    <p class="hero-desc">Neuropian has built the algorithms to find those whose potential the world never measured correctly, and those already moving fast who need a team capable of keeping up.</p>
+    <p class="hero-desc">A hub for geniuses. Neuropian has built the algorithms to find those whose potential the world never measured correctly, and those already moving fast who need a team capable of keeping up.</p>
     <div class="hero-btns">
       <button class="btn-primary" onclick=\"navScroll('cta')\"><span>Apply Now</span></button>
       <button class="btn-secondary" onclick=\"navScroll('find')\">How We Find You</button>
@@ -1870,6 +1896,15 @@ function showErr(id,msg){
   el.textContent=msg;
   el.classList.toggle('show',!!msg);
 }
+function _resolveAvatar(avatarUrl, cb){
+  if(!avatarUrl)return;
+  if(avatarUrl.startsWith('http')||avatarUrl.startsWith('data:')){cb(avatarUrl);return;}
+  if(!sb)return;
+  sb.storage.from('profile_avatars').createSignedUrl(avatarUrl,3600).then(({data:sd})=>{
+    if(sd?.signedUrl)cb(sd.signedUrl);
+  });
+}
+
 function setNavUser(user){
   const nu=document.getElementById('nav-user');
   const ns=document.getElementById('nav-signout');
@@ -1890,13 +1925,11 @@ function setNavUser(user){
       if(sna)sna.textContent=initials;
       if(pna)pna.textContent=initials;
       if(sb)sb.from('profiles').select('avatar_url').eq('user_id',user.id).maybeSingle().then(({data:pf})=>{
-        if(pf?.avatar_url)sb.storage.from('profile_avatars').createSignedUrl(pf.avatar_url,3600).then(({data:sd})=>{
-          if(sd?.signedUrl){
-            const bgUrl='url('+sd.signedUrl+') center/cover no-repeat';
-            const av=document.getElementById('nav-avatar');if(av){av.style.background=bgUrl;if(niEl)niEl.textContent='';}
-            if(sna){sna.style.background=bgUrl;sna.textContent='';}
-            if(pna){pna.style.background=bgUrl;pna.textContent='';}
-          }
+        if(pf?.avatar_url)_resolveAvatar(pf.avatar_url,url=>{
+          const bgUrl='url('+url+') center/cover no-repeat';
+          const av=document.getElementById('nav-avatar');if(av){av.style.background=bgUrl;if(niEl)niEl.textContent='';}
+          if(sna){sna.style.background=bgUrl;sna.textContent='';}
+          if(pna){pna.style.background=bgUrl;pna.textContent='';}
         });
       });
     }
@@ -3097,12 +3130,10 @@ async function initChat(){
   if(sb){
     sb.from('profiles').select('avatar_url').eq('user_id',currentUser.id).single().then(({data:pf,error:pfErr})=>{
       if(pfErr)return console.error('avatar load - profile error:',pfErr);
-      if(!pf?.avatar_url)return console.log('avatar load - no avatar_url in profile');
-      sb.storage.from('profile_avatars').createSignedUrl(pf.avatar_url,3600).then(({data:sd,error:sdErr})=>{
-        if(sdErr)return console.error('avatar load - signed URL error:',sdErr);
-        if(!sd?.signedUrl)return console.warn('avatar load - no signedUrl returned');
+      if(!pf?.avatar_url)return;
+      _resolveAvatar(pf.avatar_url,url=>{
         const av=document.getElementById('chat-avatar');
-        av.style.background='url('+sd.signedUrl+') center/cover no-repeat';
+        av.style.background='url('+url+') center/cover no-repeat';
         av.textContent='';
       });
     }).catch(e=>console.error('avatar load - exception:',e));
@@ -3150,13 +3181,15 @@ function setupUnreadTracker(){
 function showInAppNotif(roomId,senderName,preview){
   const container=document.getElementById('notif-container');
   if(!container)return;
+  const activePage=document.querySelector('.page.active');
+  if(!activePage||activePage.id!=='page-collective')return;
   const el=document.createElement('div');
   el.style.cssText='background:#1a1a1a;border:1px solid rgba(0,200,40,.25);border-radius:6px;padding:.7rem .9rem;cursor:pointer;pointer-events:all;box-shadow:0 4px 20px rgba(0,0,0,.6);animation:notifSlideIn .22s ease;max-width:320px;width:100%';
   el.innerHTML=`<div style="font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:#00aa38;font-weight:700;margin-bottom:.2rem">${escHtml(senderName)}</div><div style="font-size:.68rem;color:#bbb;line-height:1.45;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${escHtml(preview)}</div><div style="font-size:.45rem;color:#444;margin-top:.3rem;letter-spacing:.1em;text-transform:uppercase">Click to dismiss</div>`;
   let autoTimer=setTimeout(()=>el.remove(),6000);
   el.addEventListener('mouseenter',()=>clearTimeout(autoTimer));
   el.addEventListener('mouseleave',()=>{autoTimer=setTimeout(()=>el.remove(),3000);});
-  el.addEventListener('click',()=>{clearTimeout(autoTimer);el.remove();if(roomId&&typeof switchRoom==='function')switchRoom(roomId,senderName,'');});
+  el.addEventListener('click',()=>{clearTimeout(autoTimer);el.remove();if(roomId&&typeof switchRoom==='function'){const _nr=(typeof ROOMS!=='undefined'?ROOMS:[]).find(x=>x.id===roomId);switchRoom(roomId,_nr?_nr.name:roomId,_nr?_nr.desc:'');}});
   container.appendChild(el);
 }
 
@@ -3184,7 +3217,8 @@ function markRoomUnread(roomId){
     const railEl=document.getElementById('srv-'+srvId);
     if(railEl&&!railEl.dataset.railUnread){
       railEl.dataset.railUnread='1';
-      railEl.style.boxShadow='0 0 0 2px #00cc44';
+      railEl.style.outline='2px solid #00cc44';
+      railEl.style.outlineOffset='1px';
     }
   }
 }
@@ -3200,7 +3234,7 @@ function clearRoomUnread(roomId){
     const stillUnread=window._unreadRooms&&[...window._unreadRooms].some(r=>r.startsWith('srv_'+srvId+'_'));
     if(!stillUnread){
       const railEl=document.getElementById('srv-'+srvId);
-      if(railEl){railEl.dataset.railUnread='';railEl.style.boxShadow='';}
+      if(railEl){railEl.dataset.railUnread='';railEl.style.outline='';railEl.style.outlineOffset='';}
     }
   }
 }
@@ -3276,7 +3310,7 @@ async function switchServer(serverId){
   currentServerId=serverId;
   // Clear unread indicator for this server
   const _srvRailEl=document.getElementById('srv-'+serverId);
-  if(_srvRailEl){_srvRailEl.dataset.railUnread='';_srvRailEl.style.boxShadow='';}
+  if(_srvRailEl){_srvRailEl.dataset.railUnread='';_srvRailEl.style.outline='';_srvRailEl.style.outlineOffset='';}
   if(window._unreadRooms){[...window._unreadRooms].filter(r=>r.startsWith('srv_'+serverId+'_')).forEach(r=>window._unreadRooms.delete(r));}
   // Update rail highlight
   document.querySelectorAll('[id^="srv-"]').forEach(el=>{
@@ -3934,9 +3968,7 @@ function openProfile(){
       }
       const disp=document.getElementById('profile-avatar-display');
       if(pf?.avatar_url){
-        sb.storage.from('profile_avatars').createSignedUrl(pf.avatar_url,3600).then(({data:sd})=>{
-          if(sd?.signedUrl){disp.style.background='url('+sd.signedUrl+') center/cover no-repeat';document.getElementById('profile-avatar-initials').textContent='';}
-        });
+        _resolveAvatar(pf.avatar_url,url=>{disp.style.background='url('+url+') center/cover no-repeat';document.getElementById('profile-avatar-initials').textContent='';});
       }
     }).catch(()=>{});
   }
@@ -3969,9 +4001,7 @@ async function openUserCard(userId){
   av.style.background='linear-gradient(135deg,#005c1e,#00cc44)';
   document.getElementById('uc-initials').textContent=initials;
   if(prof.avatar_url){
-    sb.storage.from('profile_avatars').createSignedUrl(prof.avatar_url,3600).then(({data:sd})=>{
-      if(sd?.signedUrl){av.style.background='url('+sd.signedUrl+') center/cover no-repeat';document.getElementById('uc-initials').textContent='';}
-    });
+    _resolveAvatar(prof.avatar_url,url=>{av.style.background='url('+url+') center/cover no-repeat';document.getElementById('uc-initials').textContent='';});
   }
   // Friend status
   const{data:existing}=await sb.from('friends').select('status').eq('user_id',currentUser.id).eq('friend_id',userId).maybeSingle();
@@ -5216,8 +5246,16 @@ else{renderOppPreview();}
 <!-- EAGLEEYES PAGE -->
 <div id="page-eagleeyes" class="page" style="background:#fff;min-height:100vh;color:#000">
 
+  <!-- Back bar -->
+  <div style="position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid rgba(0,0,0,.06);padding:.75rem 3rem">
+    <button onclick="showPage('home')" style="display:inline-flex;align-items:center;gap:.55rem;font-family:'Barlow Condensed',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,0,0,.55);background:none;border:none;cursor:pointer;padding:0;transition:color .2s" onmouseenter="this.style.color='#000'" onmouseleave="this.style.color='rgba(0,0,0,.55)'">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Neuropian
+    </button>
+  </div>
+
   <!-- Hero -->
-  <div style="position:relative;padding:9rem 3rem 5rem;max-width:960px;margin:0 auto">
+  <div style="position:relative;padding:6rem 3rem 5rem;max-width:960px;margin:0 auto">
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(0,0,0,.85);margin-bottom:1.4rem;display:flex;align-items:center;gap:.8rem">
       <span style="display:block;width:28px;height:1px;background:rgba(0,0,0,.25)"></span>
       Neuropian Intelligence
@@ -5254,11 +5292,11 @@ else{renderOppPreview();}
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:3rem;margin-bottom:5rem">
       <div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#000;margin-bottom:.7rem">You Choose the Sites</div>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:.98rem;line-height:1.75;color:rgba(0,0,0,.75)">EagleEyes is off by default on every site. You activate it manually on pages where you want Neuropian to read your activity — a forum thread, a project, a repo, a competition.</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.98rem;line-height:1.75;color:rgba(0,0,0,.75)">EagleEyes is off by default on every site. You activate it manually on pages where you want Neuropian to read your activity: a forum thread, a project, a repo, a competition.</p>
       </div>
       <div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#000;margin-bottom:.7rem">The Algorithm Reads Signal</div>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:.98rem;line-height:1.75;color:rgba(0,0,0,.75)">Neuropian&rsquo;s engine reads what you write, build, and engage with. Not keywords — behavioral patterns. How you reason, what problems you gravitate toward, how deeply you go.</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.98rem;line-height:1.75;color:rgba(0,0,0,.75)">Neuropian&rsquo;s engine reads what you write, build, and engage with. Not keywords, behavioral patterns. How you reason, what problems you gravitate toward, how deeply you go.</p>
       </div>
       <div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#000;margin-bottom:.7rem">You Get Found</div>
@@ -5339,7 +5377,7 @@ else{renderOppPreview();}
         <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:rgba(0,0,0,.10);line-height:1;padding-top:.4rem">&#10022;</div>
         <div>
           <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;margin-bottom:.5rem">You're In</h3>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">Visit any page and click the <strong style="color:#000">&#10022; EagleEyes</strong> icon in your toolbar to opt that site in. The extension reads what you write and engage with — over time, your Platform feed starts surfacing opportunities and teams matched to how you actually think. The more signal you contribute, the sharper it gets.</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.78;color:rgba(0,0,0,.85)">Visit any page and click the <strong style="color:#000">&#10022; EagleEyes</strong> icon in your toolbar to opt that site in. The extension reads what you write and engage with. Over time, your Platform feed starts surfacing opportunities and teams matched to how you actually think. The more signal you contribute, the sharper it gets.</p>
         </div>
       </div>
 
@@ -5410,11 +5448,18 @@ else{renderOppPreview();}
 
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.5rem">
         <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">5. EagleEyes Extension</h2>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8)">EagleEyes is off by default on every website. You activate it manually on a per-site basis. When activated on a page, the extension may read page content you engage with and send a signal summary to Neuropian to build your cognitive profile. It does not read pages you have not activated it on. It does not transmit passwords, private messages on third-party platforms, payment information, or any content from pages where it is not enabled. You can disable or uninstall the extension at any time from <strong>chrome://extensions</strong>.</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8);margin-bottom:1.2rem">EagleEyes is a browser extension for Chrome, Edge, and Brave. It is off by default on every website. You activate it manually on a per-site basis — including gaming-related browser pages, web-based game launchers, or any other web application you choose to opt in to. When activated on a page, the extension reads visible page content and engagement signals (such as what you interact with, how long you engage, and text you enter in form fields on opted-in pages) and sends a behavioral summary to Neuropian to build your cognitive profile.</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8);margin-bottom:1.2rem"><strong>What EagleEyes does not do:</strong> It does not read any page you have not activated it on. It does not transmit passwords, payment information, or financial data. It does not capture private chat messages, direct messages, or communications on third-party platforms. It operates entirely within your browser — it does not inject into game clients or application processes, does not monitor your desktop or installed software, and does not record audio, video, or screen contents outside the browser tab where it is active.</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8)">Neuropian does not use EagleEyes signals to build medical or health profiles, infer protected characteristics such as race, religion, or sexual orientation, or make fully automated consequential decisions about you without human review. Behavioral signal data is retained for the duration of your account and deleted within 90 days of account closure. You can disable or uninstall the extension at any time from <strong>chrome://extensions</strong>, after which no further data is collected.</p>
       </div>
 
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.5rem">
-        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">6. Your Rights</h2>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">6. Data Retention</h2>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8)">We retain your account data and survey responses for as long as your account is active. EagleEyes behavioral signal data is retained for the duration of your account and deleted within 90 days of account closure. RoundTable message content may be retained for moderation and legal compliance purposes for up to 12 months after deletion. Upon account deletion, all remaining personal data is deleted within 90 days except where we are required to retain it by applicable law. You may request deletion of specific data at any time by emailing <strong>dylan@neuropian.com</strong>.</p>
+      </div>
+
+      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.5rem">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">7. Your Rights</h2>
         <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8);margin-bottom:1.2rem">You have the right to:</p>
         <ul style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8);padding-left:1.4rem;display:flex;flex-direction:column;gap:.4rem">
           <li><strong>Access:</strong> request a copy of the data we hold about you.</li>
@@ -5427,17 +5472,17 @@ else{renderOppPreview();}
       </div>
 
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.5rem">
-        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">7. Children</h2>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">8. Children</h2>
         <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8)">Neuropian is not directed at children under 13. We do not knowingly collect personal information from anyone under 13. If you believe a child under 13 has provided us data, please contact dylan@neuropian.com and we will delete it promptly. Users between 13 and 17 may use the platform only with verified parental or guardian consent, which is collected during account registration.</p>
       </div>
 
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.5rem">
-        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">8. Changes to This Policy</h2>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">9. Changes to This Policy</h2>
         <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8)">If we materially change this policy, we will update the date at the top and, where appropriate, notify registered users by email. Continued use of the platform after changes constitutes acceptance.</p>
       </div>
 
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.5rem">
-        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">9. California Privacy Rights (CCPA)</h2>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">10. California Privacy Rights (CCPA)</h2>
         <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8);margin-bottom:1rem">If you are a California resident, you have the following rights under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA):</p>
         <ul style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8);padding-left:1.4rem;display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem">
           <li><strong>Know</strong> what personal information we collect, use, and share.</li>
@@ -5450,7 +5495,7 @@ else{renderOppPreview();}
       </div>
 
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.5rem">
-        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">10. Contact</h2>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">11. Contact</h2>
         <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8)">Leitenberg Technologies · dylan@neuropian.com · neuropian.com</p>
       </div>
 
@@ -5515,7 +5560,10 @@ else{renderOppPreview();}
 
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.5rem">
         <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">6. EagleEyes Extension</h2>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8)">EagleEyes collects behavioral signal only from pages you explicitly opt in. You are responsible for ensuring your use of EagleEyes complies with the terms of service of any third-party website on which you activate it. Neuropian is not liable for any consequences arising from activating EagleEyes on sites that restrict automated data collection. You may uninstall the extension at any time.</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8);margin-bottom:1.2rem">EagleEyes collects behavioral signals only from pages and web applications — including gaming-related browser pages — that you explicitly opt in to. You are solely responsible for ensuring your use of EagleEyes complies with the terms of service, community guidelines, and applicable policies of any third-party website, game platform, or online service on which you activate it. Many online platforms, games, and game publishers expressly prohibit the use of third-party monitoring or data-collection tools. Activating EagleEyes on such platforms may result in consequences imposed by that platform, including account suspension, permanent ban, forfeiture of in-game currency or progress, or referral for legal action by that platform.</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8);margin-bottom:1.2rem"><strong>Anti-cheat and fraud detection systems:</strong> EagleEyes operates entirely within your browser. It does not inject into, modify, or interfere with any game client, game engine, or non-browser application process. However, some platforms run anti-cheat or fraud-detection software that may flag browser extensions. Neuropian makes no representation that EagleEyes will not be detected or flagged by such systems, and is not responsible for any account action, ban, or penalty imposed by a third-party platform's anti-cheat or security systems as a result of your use of EagleEyes.</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8);margin-bottom:1.2rem"><strong>Indemnification:</strong> By installing and using EagleEyes, you agree to indemnify, defend, and hold harmless Leitenberg Technologies and its officers, employees, and agents from and against any claims, losses, liabilities, damages, or expenses (including reasonable attorneys' fees) arising from or related to: (a) your use of EagleEyes on any third-party platform in violation of that platform's terms or policies; (b) any action taken against you or Neuropian by a third-party platform or publisher in connection with your use of EagleEyes; or (c) your violation of applicable law in connection with EagleEyes.</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.82;color:rgba(0,0,0,.8)">You may uninstall EagleEyes at any time from <strong>chrome://extensions</strong>. Uninstalling stops all data collection immediately.</p>
       </div>
 
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.5rem">
@@ -5826,5 +5874,6 @@ else{renderOppPreview();}
 </div>
 
 <div id="notif-container" style="position:fixed;bottom:1.2rem;right:1.2rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;pointer-events:none;max-width:320px"></div>
+<script>document.addEventListener("click",function(){var m=document.getElementById("lang-menu");if(m)m.style.display="none";});</script>
 </body>
 </html>
