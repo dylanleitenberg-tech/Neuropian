@@ -552,7 +552,10 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   .nav-logo{grid-column:2;justify-self:center}
   .nav-logo-sub{display:none}
   .nav-links{display:none}
-  nav > div:last-child{display:none!important}
+  nav > div:nth-last-child(2){display:none!important}
+  #lang-sw{display:flex!important;grid-column:3;justify-self:end}
+  #lang-sw button{padding:.28rem .5rem;font-size:.46rem}
+  #lang-sw #lang-menu{min-width:140px}
   .hero-content{padding:0 1.5rem 6rem}
   .hero-title{font-size:clamp(3.5rem,13vw,7rem)!important}
   .section{padding:5rem 1.5rem}
@@ -5428,12 +5431,12 @@ else{renderOppPreview();}
 <!-- PRIVACY POLICY PAGE -->
 <div id="page-privacy" class="page" style="background:#fff;min-height:100vh;color:#000">
   <div style="position:fixed;top:0;left:0;right:0;padding:1rem 2rem;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,.07);z-index:100;display:flex;align-items:center;justify-content:space-between">
-    <button onclick="history.back?history.back():showPage('home')" style="background:none;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:.55rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.5);padding:0;transition:color .2s" onmouseenter="this.style.color='#000'" onmouseleave="this.style.color='rgba(0,0,0,.5)'">← Back</button>
-    <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(0,0,0,.3)">Neuropian · Legal</span>
+    <button onclick="history.back?history.back():showPage('home')" style="background:none;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:.55rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.5);padding:0;transition:color .2s" onmouseenter="this.style.color='#000'" onmouseleave="this.style.color='rgba(0,0,0,.5)'">← 返回</button>
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(0,0,0,.3)">Neuropian · 法律</span>
   </div>
   <div style="max-width:760px;margin:0 auto;padding:9rem 3rem 8rem">
 
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(0,0,0,.5);margin-bottom:1.4rem">Neuropian · Legal</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(0,0,0,.5);margin-bottom:1.4rem">Neuropian · 法律</div>
     <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1;letter-spacing:-.03em;color:#000;margin-bottom:.8rem">隐私<em style="font-style:italic">政策</em></h1>
     <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(0,0,0,.5);margin-bottom:4rem">最后更新：2026年5月</p>
 
@@ -5539,12 +5542,12 @@ else{renderOppPreview();}
 <!-- TERMS OF SERVICE PAGE -->
 <div id="page-tos" class="page" style="background:#fff;min-height:100vh;color:#000">
   <div style="position:fixed;top:0;left:0;right:0;padding:1rem 2rem;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,.07);z-index:100;display:flex;align-items:center;justify-content:space-between">
-    <button onclick="history.back?history.back():showPage('home')" style="background:none;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:.55rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.5);padding:0;transition:color .2s" onmouseenter="this.style.color='#000'" onmouseleave="this.style.color='rgba(0,0,0,.5)'">← Back</button>
-    <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(0,0,0,.3)">Neuropian · Legal</span>
+    <button onclick="history.back?history.back():showPage('home')" style="background:none;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:.55rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.5);padding:0;transition:color .2s" onmouseenter="this.style.color='#000'" onmouseleave="this.style.color='rgba(0,0,0,.5)'">← 返回</button>
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(0,0,0,.3)">Neuropian · 法律</span>
   </div>
   <div style="max-width:760px;margin:0 auto;padding:9rem 3rem 8rem">
 
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(0,0,0,.5);margin-bottom:1.4rem">Neuropian · Legal</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:rgba(0,0,0,.5);margin-bottom:1.4rem">Neuropian · 法律</div>
     <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1;letter-spacing:-.03em;color:#000;margin-bottom:.8rem">服务<em style="font-style:italic">条款</em></h1>
     <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(0,0,0,.5);margin-bottom:4rem">最后更新：2026年5月</p>
 
