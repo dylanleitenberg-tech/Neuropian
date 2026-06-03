@@ -2403,14 +2403,24 @@ async function finSurvey(){
     const el=document.getElementById(id);
     if(el&&el.value.trim())extFields[id.replace('s-','').replace(/-/g,'_')]=el.value.trim();
   });
+  const allTraits={...TR,...extFields};
   if(currentUser&&sb){
+    // Save survey answers to profiles
     await sb.from('profiles').upsert({
       user_id:currentUser.id,
-      traits:{...TR,...extFields},
+      traits:allTraits,
       accomplishment,
       hidden_ability:hiddenAbility,
       survey_completed_at:new Date().toISOString()
     },{onConflict:'user_id'});
+    // Compile full survey answers for scoring
+    const surveyAnswers={...allTraits,accomplishment,hidden_ability:hiddenAbility};
+    // Call edge function to score with Ollama/AI (fire and forget — don't block UX)
+    try{
+      sb.functions.invoke('score-survey',{
+        body:{user_id:currentUser.id,survey_answers:surveyAnswers}
+      }).catch(e=>console.warn('Scoring unavailable:',e));
+    }catch(e){console.warn('Score invoke failed:',e);}
   }
   showPage('platform');
 }
