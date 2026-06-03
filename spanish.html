@@ -103,7 +103,18 @@
   --brush:rgba(255,255,255,0.06);
 }
 html{scroll-behavior:smooth;background:#000}
-body{background:var(--black);color:var(--white);font-family:'Barlow',sans-serif;overflow-x:hidden;cursor:auto}
+/* iOS status bar fill — belt + suspenders approach */
+#sb-fill{
+  position:fixed;top:0;left:0;right:0;
+  height:constant(safe-area-inset-top);
+  height:env(safe-area-inset-top,0px);
+  background:#000;
+  z-index:9999;
+  pointer-events:none;
+  -webkit-backface-visibility:hidden;
+}
+html,body{background:#000}
+body{background:var(--black);color:var(--white);-webkit-overflow-scrolling:touch;font-family:'Barlow',sans-serif;overflow-x:hidden;cursor:auto}
 
 /* Custom cursor removed   using default pointer */
 #cur{display:none}
@@ -114,7 +125,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
   background-size:220px;opacity:.055;mix-blend-mode:overlay}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:600;min-height:calc(90px + env(safe-area-inset-top, 0px));height:calc(90px + env(safe-area-inset-top, 0px));padding-top:env(safe-area-inset-top, 0px);display:flex;align-items:center;justify-content:flex-start;gap:1.6rem;padding-left:1.6rem;padding-right:1.6rem;border-bottom:1px solid rgba(255,255,255,.08);background:#000}
+nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(safe-area-inset-top, 0px));height:calc(90px + env(safe-area-inset-top, 0px));padding-top:env(safe-area-inset-top, 0px);display:flex;align-items:center;justify-content:flex-start;gap:1.6rem;padding-left:1.6rem;padding-right:1.6rem;border-bottom:1px solid rgba(255,255,255,.08);background:#000}
 
 .nav-logo{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--white);text-decoration:none;cursor:pointer}
 .nav-logo em{font-style:normal;color:#e8e2d6;font-weight:400}
@@ -688,6 +699,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 </style>
 </head>
 <body>
+<div id="sb-fill" style="position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:#000;z-index:9999;pointer-events:none"></div>
 <div id="cur"></div>
 <div id="page-overlay"></div>
 
@@ -723,12 +735,12 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     onmouseleave="this.style.borderColor='rgba(255,255,255,.12)'">🌐 ES</button>
   <div id="lang-menu" dir="ltr"
     style="display:none;flex-direction:column;position:absolute;top:calc(100% + 7px);right:0;background:#0f0f0f;border:1px solid rgba(255,255,255,.1);z-index:9999;min-width:158px;box-shadow:0 12px 48px rgba(0,0,0,.8)">
-<a href="index.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇺🇸&nbsp;English</a>
-<a href="spanish.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#ffffff;font-weight:700;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇪🇸&nbsp;Español<span style="width:5px;height:5px;border-radius:50%;background:#00cc44;display:inline-block;margin-left:auto"></span></a>
-<a href="hindi.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇮🇳&nbsp;हिन्दी</a>
-<a href="hebrew.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇮🇱&nbsp;עברית</a>
-<a href="mandarin.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇨🇳&nbsp;中文</a>
-<a href="french.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇫🇷&nbsp;Français</a>
+<a href="https://neuropian.com/" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇺🇸&nbsp;English</a>
+<a href="https://neuropian.com/spanish.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#ffffff;font-weight:700;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇪🇸&nbsp;Español<span style="width:5px;height:5px;border-radius:50%;background:#00cc44;display:inline-block;margin-left:auto"></span></a>
+<a href="https://neuropian.com/hindi.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇮🇳&nbsp;हिन्दी</a>
+<a href="https://neuropian.com/hebrew.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇮🇱&nbsp;עברית</a>
+<a href="https://neuropian.com/mandarin.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇨🇳&nbsp;中文</a>
+<a href="https://neuropian.com/french.html" dir="ltr" style="display:flex;align-items:center;gap:.55rem;padding:.52rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s;color:#c8c2b8;" onmouseenter="this.style.background='rgba(255,255,255,.06)'" onmouseleave="this.style.background='transparent'">🇫🇷&nbsp;Français</a>
   </div>
 </div>
 </nav>
