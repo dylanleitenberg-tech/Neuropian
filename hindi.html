@@ -474,6 +474,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 .page{display:none;width:100%}.page.active{display:block;min-height:100vh}
 #page-collective{height:100vh;overflow:hidden}
 #page-collective.active{display:block;height:100vh;overflow:hidden}
+@media(max-width:768px){#page-collective,#page-collective.active{height:calc(100vh - 90px - env(safe-area-inset-top,0px));margin-top:calc(90px + env(safe-area-inset-top,0px))}
+#page-collective>div{height:100%!important}}
 #page-overlay{position:fixed;inset:0;z-index:900;background:#000;opacity:0;pointer-events:none;transition:opacity .32s ease}
 
 /* ── HAMBURGER ── */
@@ -5950,5 +5952,33 @@ else{renderOppPreview();}
 
 <div id="notif-container" style="position:fixed;bottom:1.2rem;right:1.2rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;pointer-events:none;max-width:320px"></div>
 <script>document.addEventListener("click",function(){var m=document.getElementById("lang-menu");if(m)m.style.display="none";});</script>
+<script>
+// ── iOS status bar fill (JS measurement — more reliable than pure CSS) ──
+(function(){
+  function applySafeArea(){
+    var fill=document.getElementById('sb-fill');
+    if(!fill)return;
+    var t=document.createElement('div');
+    t.style.cssText='position:fixed;top:0;left:0;width:1px;pointer-events:none;visibility:hidden;'+
+      'height:constant(safe-area-inset-top);height:env(safe-area-inset-top,0px)';
+    document.body.appendChild(t);
+    var h=t.getBoundingClientRect().height||t.offsetHeight||0;
+    t.remove();
+    if(h>0){
+      fill.style.height=h+'px';
+      // also update nav and drawer
+      var nav=document.querySelector('nav');
+      if(nav){
+        nav.style.paddingTop=h+'px';
+        nav.style.height=(90+h)+'px';
+      }
+      var drawer=document.getElementById('mobile-nav-drawer');
+      if(drawer)drawer.style.top=(90+h)+'px';
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',applySafeArea);}
+  else{applySafeArea();}
+  window.addEventListener('resize',applySafeArea);
+})();</script>
 </body>
 </html>
