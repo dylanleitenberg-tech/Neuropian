@@ -675,7 +675,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   #chat-sidebar{position:absolute;left:0;top:0;bottom:0;z-index:200;transform:translateX(-110%);transition:transform .28s cubic-bezier(.4,0,.2,1)}
   #chat-sidebar.open{transform:translateX(0)}
   #mobile-sidebar-toggle{display:flex!important}
-  #rt-server-bar{display:block!important}
   #members-panel{display:none!important}
 }
 
@@ -5058,10 +5057,12 @@ function _buildMobileServerStrip(){
   // Show home immediately without waiting for Supabase
   function setAll(extra){
     const html=homeBtn+extra+addBtn;
+    const bar=document.getElementById('rt-server-bar');
     const a=document.getElementById('rt-server-bar-items');
     const b=document.getElementById('mobile-server-strip-items');
     if(a)a.innerHTML=html;
     if(b)b.innerHTML=html;
+    if(bar)bar.style.display='block';
   }
   setAll('');
   if(!sb||!currentUser)return;
