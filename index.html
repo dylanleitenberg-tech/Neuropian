@@ -1327,7 +1327,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#005c1e,#00cc44);flex-shrink:0"></div>
         <div>
           <div id="survey-welcome-name" style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#00aa38;margin-bottom:.3rem">Welcome to Neuropian</div>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.7;margin:0">You're about to complete your cognitive profile. This 8-question survey takes about 3 minutes and unlocks personalized opportunity matching, your Neuropian ID, and access to RoundTable.</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.7;margin:0">You're about to complete your cognitive profile. This 14-question survey takes about 8 minutes and unlocks personalized opportunity matching, your Neuropian ID, and access to RoundTable.</p>
         </div>
       </div>
     </div>
@@ -1343,47 +1343,84 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
 
     <div class="sst" id="step-1">
-      <div class="slbl">Question 1 of 8</div>
+      <div class="slbl">Question 1 of 14</div>
       <div class="sc"><div class="slb">How do you most naturally approach a difficult problem?</div><div class="og"><div class="opt" onclick="tag(this,'logical')">Break it into logical steps</div><div class="opt" onclick="tag(this,'visual')">Visualize or sketch it out</div><div class="opt" onclick="tag(this,'pattern')">Find patterns from other fields</div><div class="opt" onclick="tag(this,'social')">Talk it through with others</div><div class="opt" onclick="tag(this,'intuition')">Trust a gut intuitive feeling</div><div class="opt" onclick="tag(this,'experiment')">Experiment until something works</div></div></div>
       <div class="nb"><button class="btn-primary" onclick="ns(1)">Next</button></div>
     </div>
     <div class="sst" id="step-2">
-      <div class="slbl">Question 2 of 8</div>
+      <div class="slbl">Question 2 of 14</div>
       <div class="sc"><div class="slb">Which best describes a core strength you have?</div><div class="og"><div class="opt" onclick="tag(this,'systems')">Seeing connections others miss</div><div class="opt" onclick="tag(this,'builder')">Building systems from scratch</div><div class="opt" onclick="tag(this,'absorb')">Absorbing information rapidly</div><div class="opt" onclick="tag(this,'focus')">Hyper-focus on specific subjects</div><div class="opt" onclick="tag(this,'people')">Understanding human behavior</div><div class="opt" onclick="tag(this,'ideas')">Generating original ideas constantly</div></div></div>
       <div class="nb"><button class="bk" onclick="ps(2)">Back</button><button class="btn-primary" onclick="ns(2)">Next</button></div>
     </div>
     <div class="sst" id="step-3">
-      <div class="slbl">Question 3 of 8</div>
+      <div class="slbl">Question 3 of 14</div>
       <div class="sc"><div class="slb">What fields do you feel most gifted in? (Select all that apply)</div><div class="og"><div class="opt" onclick="tag(this,'tech')">Technology / Engineering</div><div class="opt" onclick="tag(this,'art')">Art / Design / Music</div><div class="opt" onclick="tag(this,'science')">Science / Research</div><div class="opt" onclick="tag(this,'data')">Data / Mathematics</div><div class="opt" onclick="tag(this,'psych')">Psychology / Human Behavior</div><div class="opt" onclick="tag(this,'writing')">Writing / Communication</div><div class="opt" onclick="tag(this,'bio')">Biology / Environment</div><div class="opt" onclick="tag(this,'ops')">Systems / Operations</div><div class="opt" onclick="tag(this,'business')">Business / Strategy</div><div class="opt" onclick="tag(this,'law')">Law / Ethics / Philosophy</div></div></div>
       <div class="nb"><button class="bk" onclick="ps(3)">Back</button><button class="btn-primary" onclick="ns(3)">Next</button></div>
     </div>
     <div class="sst" id="step-4">
-      <div class="slbl">Question 4 of 8</div>
+      <div class="slbl">Question 4 of 14</div>
       <div class="sc"><div class="slb">"I often think several steps ahead and see where things are going before others do."</div><div class="srow" id="sc1"><div class="scl" onclick="doS('sc1',this,'foresight',1)">1</div><div class="scl" onclick="doS('sc1',this,'foresight',2)">2</div><div class="scl" onclick="doS('sc1',this,'foresight',3)">3</div><div class="scl" onclick="doS('sc1',this,'foresight',4)">4</div><div class="scl" onclick="doS('sc1',this,'foresight',5)">5</div><div class="scl" onclick="doS('sc1',this,'foresight',6)">6</div><div class="scl" onclick="doS('sc1',this,'foresight',7)">7</div><div class="scl" onclick="doS('sc1',this,'foresight',8)">8</div><div class="scl" onclick="doS('sc1',this,'foresight',9)">9</div><div class="scl" onclick="doS('sc1',this,'foresight',10)">10</div></div><div class="slbs"><span>Not at all</span><span>Completely me</span></div></div>
       <div class="sc"><div class="slb">Did formal education feel limiting to you?</div><div class="srow" id="sc2"><div class="scl" onclick="doS('sc2',this,'edu_limit',1)">1</div><div class="scl" onclick="doS('sc2',this,'edu_limit',2)">2</div><div class="scl" onclick="doS('sc2',this,'edu_limit',3)">3</div><div class="scl" onclick="doS('sc2',this,'edu_limit',4)">4</div><div class="scl" onclick="doS('sc2',this,'edu_limit',5)">5</div><div class="scl" onclick="doS('sc2',this,'edu_limit',6)">6</div><div class="scl" onclick="doS('sc2',this,'edu_limit',7)">7</div><div class="scl" onclick="doS('sc2',this,'edu_limit',8)">8</div><div class="scl" onclick="doS('sc2',this,'edu_limit',9)">9</div><div class="scl" onclick="doS('sc2',this,'edu_limit',10)">10</div></div><div class="slbs"><span>Not at all</span><span>Extremely</span></div></div>
       <div class="nb"><button class="bk" onclick="ps(4)">Back</button><button class="btn-primary" onclick="ns(4)">Next</button></div>
     </div>
     <div class="sst" id="step-5">
-      <div class="slbl">Question 5 of 8</div>
+      <div class="slbl">Question 5 of 14</div>
       <div class="sc"><div class="slb">How do you engage with games, puzzles, or strategic challenges?</div><div class="og"><div class="opt" onclick="tag(this,'strategy')">Deep strategy games</div><div class="opt" onclick="tag(this,'puzzle')">I obsess over puzzles</div><div class="opt" onclick="tag(this,'compete')">Intensely competitive</div><div class="opt" onclick="tag(this,'build_g')">Building / simulation games</div><div class="opt" onclick="tag(this,'narrative')">Narrative / story-driven</div><div class="opt" onclick="tag(this,'real_ch')">I prefer real challenges</div></div></div>
       <div class="nb"><button class="bk" onclick="ps(5)">Back</button><button class="btn-primary" onclick="ns(5)">Next</button></div>
     </div>
     <div class="sst" id="step-6">
-      <div class="slbl">Question 6 of 8</div>
+      <div class="slbl">Question 6 of 14</div>
       <div class="sc"><div class="slb">Have you been told you think "too differently" or don't fit standard structures?</div><div class="og" style="grid-template-columns:1fr 1fr 1fr"><div class="opt" onclick="tag(this,'nd_high')">Yes, frequently</div><div class="opt" onclick="tag(this,'nd_some')">Sometimes</div><div class="opt" onclick="tag(this,'nd_low')">Rarely</div></div></div>
       <div class="sc"><div class="slb">How do you prefer to collaborate?</div><div class="og"><div class="opt" onclick="tag(this,'solo')">Solo deep work, then share</div><div class="opt" onclick="tag(this,'async')">Async collaboration</div><div class="opt" onclick="tag(this,'live_c')">Live real-time teamwork</div><div class="opt" onclick="tag(this,'flex_c')">Flexible, whatever works</div></div></div>
       <div class="nb"><button class="bk" onclick="ps(6)">Back</button><button class="btn-primary" onclick="ns(6)">Next</button></div>
     </div>
     <div class="sst" id="step-7">
-      <div class="slbl">Question 7 of 8</div>
+      <div class="slbl">Question 7 of 14</div>
       <div class="sc"><div class="slb">What type of opportunity interests you most?</div><div class="og"><div class="opt" onclick="tag(this,'opp_job')">Full-time employment</div><div class="opt" onclick="tag(this,'opp_free')">Freelance / contract</div><div class="opt" onclick="tag(this,'opp_prize')">Prize competitions</div><div class="opt" onclick="tag(this,'opp_res')">Research / fellowship</div><div class="opt" onclick="tag(this,'opp_start')">Startup / founding role</div><div class="opt" onclick="tag(this,'opp_open')">Open to anything</div></div></div>
       <div class="nb"><button class="bk" onclick="ps(7)">Back</button><button class="btn-primary" onclick="ns(7)">Next</button></div>
     </div>
     <div class="sst" id="step-8">
-      <div class="slbl">Question 8 of 8</div>
+      <div class="slbl">Question 8 of 14</div>
+      <div class="sc"><div class="slb">What are you currently building, researching, or obsessing over?</div><div class="field" style="margin-top:.72rem"><textarea id="s-current-project" oninput="_saveSurveyProgress()" placeholder="Describe what you're working on right now — a side project, research question, business, system, or idea you can't stop thinking about." style="min-height:110px"></textarea></div></div>
+      <div class="sc"><div class="slb">How long have you been working on it, and what stage is it at?</div><div class="field" style="margin-top:.72rem"><textarea id="s-current-stage" oninput="_saveSurveyProgress()" placeholder="e.g. 'Started 6 months ago, have a working prototype but no users yet.' Be honest — early stage is fine." style="min-height:80px"></textarea></div></div>
+      <div class="nb"><button class="bk" onclick="ps(8)">Back</button><button class="btn-p-ink" onclick="ns(8)">Next</button></div>
+    </div>
+    <div class="sst" id="step-9">
+      <div class="slbl">Question 9 of 14</div>
+      <div class="sc"><div class="slb">Describe the most impressive thing you have ever built, written, discovered, or solved.</div><div class="field" style="margin-top:.72rem"><textarea id="s-best-project" oninput="_saveSurveyProgress()" placeholder="What was it? What problem did it solve? What made it unusual or hard?" style="min-height:110px"></textarea></div></div>
+      <div class="sc"><div class="slb">What was the outcome or current status?</div><div class="field" style="margin-top:.72rem"><textarea id="s-best-outcome" oninput="_saveSurveyProgress()" placeholder="Did it work? Did anyone use it? Was it recognized? Is it ongoing?" style="min-height:80px"></textarea></div></div>
+      <div class="nb"><button class="bk" onclick="ps(9)">Back</button><button class="btn-p-ink" onclick="ns(9)">Next</button></div>
+    </div>
+    <div class="sst" id="step-10">
+      <div class="slbl">Question 10 of 14</div>
+      <div class="sc"><div class="slb">What tools, languages, frameworks, instruments, or equipment do you actually use?</div><div class="field" style="margin-top:.72rem"><textarea id="s-tools" oninput="_saveSurveyProgress()" placeholder="Be specific — list programming languages, hardware, instruments, design tools, research methods, whatever you actually use." style="min-height:98px"></textarea></div></div>
+      <div class="sc"><div class="slb">Which of these best describes your primary medium? (Select all that apply)</div><div class="og"><div class="opt" onclick="tag(this,'med_code')">Code / Software</div><div class="opt" onclick="tag(this,'med_hw')">Hardware / Electronics</div><div class="opt" onclick="tag(this,'med_math')">Mathematics / Theory</div><div class="opt" onclick="tag(this,'med_bio')">Biology / Wet Lab</div><div class="opt" onclick="tag(this,'med_design')">Design / Visual</div><div class="opt" onclick="tag(this,'med_write')">Writing / Language</div><div class="opt" onclick="tag(this,'med_music')">Music / Audio</div><div class="opt" onclick="tag(this,'med_research')">Research / Analysis</div></div></div>
+      <div class="nb"><button class="bk" onclick="ps(10)">Back</button><button class="btn-p-ink" onclick="ns(10)">Next</button></div>
+    </div>
+    <div class="sst" id="step-11">
+      <div class="slbl">Question 11 of 14</div>
+      <div class="sc"><div class="slb">"I regularly teach myself things that no one in my immediate environment understands."</div><div class="srow" id="sc3"><div class="scl" onclick="doS('sc3',this,'self_teach',1)">1</div><div class="scl" onclick="doS('sc3',this,'self_teach',2)">2</div><div class="scl" onclick="doS('sc3',this,'self_teach',3)">3</div><div class="scl" onclick="doS('sc3',this,'self_teach',4)">4</div><div class="scl" onclick="doS('sc3',this,'self_teach',5)">5</div><div class="scl" onclick="doS('sc3',this,'self_teach',6)">6</div><div class="scl" onclick="doS('sc3',this,'self_teach',7)">7</div><div class="scl" onclick="doS('sc3',this,'self_teach',8)">8</div><div class="scl" onclick="doS('sc3',this,'self_teach',9)">9</div><div class="scl" onclick="doS('sc3',this,'self_teach',10)">10</div></div><div class="slbs"><span>Not like me</span><span>Exactly me</span></div></div>
+      <div class="sc"><div class="slb">"I can hold several complex, contradictory models in my head simultaneously and navigate between them."</div><div class="srow" id="sc4"><div class="scl" onclick="doS('sc4',this,'multi_model',1)">1</div><div class="scl" onclick="doS('sc4',this,'multi_model',2)">2</div><div class="scl" onclick="doS('sc4',this,'multi_model',3)">3</div><div class="scl" onclick="doS('sc4',this,'multi_model',4)">4</div><div class="scl" onclick="doS('sc4',this,'multi_model',5)">5</div><div class="scl" onclick="doS('sc4',this,'multi_model',6)">6</div><div class="scl" onclick="doS('sc4',this,'multi_model',7)">7</div><div class="scl" onclick="doS('sc4',this,'multi_model',8)">8</div><div class="scl" onclick="doS('sc4',this,'multi_model',9)">9</div><div class="scl" onclick="doS('sc4',this,'multi_model',10)">10</div></div><div class="slbs"><span>Not like me</span><span>Exactly me</span></div></div>
+      <div class="sc"><div class="slb">"When I get obsessed with something, I go further than most people are willing to go."</div><div class="srow" id="sc5"><div class="scl" onclick="doS('sc5',this,'depth_drive',1)">1</div><div class="scl" onclick="doS('sc5',this,'depth_drive',2)">2</div><div class="scl" onclick="doS('sc5',this,'depth_drive',3)">3</div><div class="scl" onclick="doS('sc5',this,'depth_drive',4)">4</div><div class="scl" onclick="doS('sc5',this,'depth_drive',5)">5</div><div class="scl" onclick="doS('sc5',this,'depth_drive',6)">6</div><div class="scl" onclick="doS('sc5',this,'depth_drive',7)">7</div><div class="scl" onclick="doS('sc5',this,'depth_drive',8)">8</div><div class="scl" onclick="doS('sc5',this,'depth_drive',9)">9</div><div class="scl" onclick="doS('sc5',this,'depth_drive',10)">10</div></div><div class="slbs"><span>Not like me</span><span>Exactly me</span></div></div>
+      <div class="nb"><button class="bk" onclick="ps(11)">Back</button><button class="btn-p-ink" onclick="ns(11)">Next</button></div>
+    </div>
+    <div class="sst" id="step-12">
+      <div class="slbl">Question 12 of 14</div>
+      <div class="sc"><div class="slb">What is the biggest unsolved problem or question you find yourself thinking about — in any domain?</div><div class="field" style="margin-top:.72rem"><textarea id="s-unsolved" oninput="_saveSurveyProgress()" placeholder="Could be scientific, philosophical, technical, social, creative — anything that genuinely puzzles or drives you." style="min-height:110px"></textarea></div></div>
+      <div class="sc"><div class="slb">If you had unlimited resources for one year, what would you build or solve?</div><div class="field" style="margin-top:.72rem"><textarea id="s-unlimited" oninput="_saveSurveyProgress()" placeholder="Be specific and honest. Not what sounds impressive — what you would actually do." style="min-height:98px"></textarea></div></div>
+      <div class="nb"><button class="bk" onclick="ps(12)">Back</button><button class="btn-p-ink" onclick="ns(12)">Next</button></div>
+    </div>
+    <div class="sst" id="step-13">
+      <div class="slbl">Question 13 of 14</div>
+      <div class="sc"><div class="slb">Describe the person or team you would most want to work with.</div><div class="field" style="margin-top:.72rem"><textarea id="s-ideal-team" oninput="_saveSurveyProgress()" placeholder="What would they be like? What would they bring that you don't have? What would make the collaboration exceptional?" style="min-height:98px"></textarea></div></div>
+      <div class="sc"><div class="slb">What do you want to have built or achieved in the next 5 years?</div><div class="field" style="margin-top:.72rem"><textarea id="s-vision" oninput="_saveSurveyProgress()" placeholder="Not career goals — actual things you want to exist in the world, or that you want to have made happen." style="min-height:98px"></textarea></div></div>
+      <div class="nb"><button class="bk" onclick="ps(13)">Back</button><button class="btn-p-ink" onclick="ns(13)">Next</button></div>
+    </div>
+    <div class="sst" id="step-14">
+      <div class="slbl">Question 14 of 14</div>
       <div class="sc"><div class="slb">Describe your single most impressive accomplishment, recognized or not.</div><div class="field" style="margin-top:.72rem"><textarea id="s8-accomplishment" oninput="_saveSurveyProgress()" placeholder="Something you built, solved, discovered, or created. The more specific the better." style="min-height:98px"></textarea></div></div>
       <div class="sc"><div class="slb">Is there an ability the world hasn't fully seen yet?</div><div class="field" style="margin-top:.72rem"><textarea id="s8-hidden-ability" oninput="_saveSurveyProgress()" placeholder="Tell us the part of your mind nobody has given a proper stage to yet." style="min-height:86px"></textarea></div></div>
-      <div class="nb"><button class="bk" onclick="ps(8)">Back</button><button class="btn-primary" onclick="finSurvey()">See My Matches</button></div>
+      <div class="nb"><button class="bk" onclick="ps(13)">Back</button><button class="btn-primary" onclick="finSurvey()">See My Matches</button></div>
     </div>
   </div>
 </div>
@@ -2358,13 +2395,18 @@ async function doSignOut(){
 // ── save survey on completion ─────────────────────────────
 async function finSurvey(){
   surveyDone=true;
-  try{localStorage.removeItem('np_tr');localStorage.removeItem('np_s8a');localStorage.removeItem('np_s8h');}catch(e){}
+  try{localStorage.removeItem('np_tr');localStorage.removeItem('np_s8a');localStorage.removeItem('np_s8h');localStorage.removeItem('np_ext');}catch(e){}
   const accomplishment=document.getElementById('s8-accomplishment').value.trim();
   const hiddenAbility=document.getElementById('s8-hidden-ability').value.trim();
+  const extFields={};
+  ['s-current-project','s-current-stage','s-best-project','s-best-outcome','s-tools','s-unsolved','s-unlimited','s-ideal-team','s-vision'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&el.value.trim())extFields[id.replace('s-','').replace(/-/g,'_')]=el.value.trim();
+  });
   if(currentUser&&sb){
     await sb.from('profiles').upsert({
       user_id:currentUser.id,
-      traits:TR,
+      traits:{...TR,...extFields},
       accomplishment,
       hidden_ability:hiddenAbility,
       survey_completed_at:new Date().toISOString()
@@ -2406,7 +2448,7 @@ function recordApply(jobId,jobTitle,company,el){
 function surveyRetake(){
   surveyDone=false;
   Object.keys(TR).forEach(k=>delete TR[k]);
-  try{localStorage.removeItem('np_tr');localStorage.removeItem('np_s8a');localStorage.removeItem('np_s8h');}catch(e){}
+  try{localStorage.removeItem('np_tr');localStorage.removeItem('np_s8a');localStorage.removeItem('np_s8h');localStorage.removeItem('np_ext');}catch(e){}
   if(currentUser&&sb){sb.from('profiles').update({traits:{},survey_completed_at:null,accomplishment:null,hidden_ability:null}).eq('user_id',currentUser.id).then(()=>{});}
   document.querySelectorAll('.sst').forEach(s=>s.classList.remove('on'));
   const sc=document.getElementById('step-consent');
@@ -2906,7 +2948,7 @@ function showPage(id){
     if(id==='survey'){
       if(!surveyDone){try{
         const saved=localStorage.getItem('np_tr');if(saved){const p=JSON.parse(saved);Object.assign(TR,p);_restoreSurveyUI();}
-        const sa=localStorage.getItem('np_s8a');const sh=localStorage.getItem('np_s8h');
+        const sa=localStorage.getItem('np_s8a');const sh=localStorage.getItem('np_s8h');try{const ext=JSON.parse(localStorage.getItem('np_ext')||'{}');['s-current-project','s-current-stage','s-best-project','s-best-outcome','s-tools','s-unsolved','s-unlimited','s-ideal-team','s-vision'].forEach(id=>{const el=document.getElementById(id);if(el&&ext[id])el.value=ext[id];});}catch(e){}
         const accEl=document.getElementById('s8-accomplishment');const hidEl=document.getElementById('s8-hidden-ability');
         if(sa&&accEl)accEl.value=sa;if(sh&&hidEl)hidEl.value=sh;
       }catch(e){}}
@@ -2931,7 +2973,7 @@ function showPage(id){
 function navScroll(id){showPage('home');setTimeout(()=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'})},160)}
 
 // ═══ SURVEY ═══
-const TR={};const TOT=8;
+const TR={};const TOT=14;
 function _saveSurveyProgress(){
   try{
     const acc=document.getElementById('s8-accomplishment');
@@ -2939,6 +2981,8 @@ function _saveSurveyProgress(){
     localStorage.setItem('np_tr',JSON.stringify(TR));
     if(acc)localStorage.setItem('np_s8a',acc.value);
     if(hid)localStorage.setItem('np_s8h',hid.value);
+    const ext={};['s-current-project','s-current-stage','s-best-project','s-best-outcome','s-tools','s-unsolved','s-unlimited','s-ideal-team','s-vision'].forEach(id=>{const el=document.getElementById(id);if(el)ext[id]=el.value;});
+    localStorage.setItem('np_ext',JSON.stringify(ext));
   }catch(e){}
 }
 function _restoreSurveyUI(){
@@ -2950,6 +2994,7 @@ function _restoreSurveyUI(){
     const m=(el.getAttribute('onclick')||'').match(/doS\('[^']+',this,'([^']+)',(\d+)\)/);
     if(m&&TR[m[1]]===Number(m[2]))el.classList.add('sl');
   });
+  try{const ext=JSON.parse(localStorage.getItem('np_ext')||'{}');['s-current-project','s-current-stage','s-best-project','s-best-outcome','s-tools','s-unsolved','s-unlimited','s-ideal-team','s-vision'].forEach(id=>{const el=document.getElementById(id);if(el&&ext[id])el.value=ext[id];});}catch(e){}
 }
 function tag(el,t){el.classList.toggle('sl');TR[t]=el.classList.contains('sl');_saveSurveyProgress();}
 function doS(gid,el,t,v){document.querySelectorAll('#'+gid+' .scl').forEach(b=>b.classList.remove('sl'));el.classList.add('sl');TR[t]=v;_saveSurveyProgress();}
