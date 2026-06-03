@@ -2155,12 +2155,7 @@ function switchToLogin(){showAuth('login')}
 // ── NEXT ELON APPLICATION ─────────────────────────────────────────
 function openNextElonApply(){
   if(currentUser){showPage('survey');return;}
-  const modal=document.getElementById('nextelon-apply-modal');
-  document.getElementById('nextelon-form-view').style.display='';
-  document.getElementById('nextelon-success-view').style.display='none';
-  document.getElementById('nextelon-err').style.display='none';
-  ['ne-fn','ne-ln','ne-email','ne-why'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  modal.style.display='flex';
+  showAuth('reg','survey');
 }
 function closeNextElonApply(){
   document.getElementById('nextelon-apply-modal').style.display='none';
@@ -2263,26 +2258,26 @@ function onUsernameInput(val){
 
 // ── Avatar picker ──────────────────────────────────────────
 let _rgAvatarMode='brain';
-let _rgBrainColor='#f0ebe2';
+let _rgBrainColor='#f0e4d4';
 let _rgUploadFile=null;
 
 const _RG_BRAIN_COLORS=[
-  {hex:'#f0ebe2',label:'Cream'},
-  {hex:'#e2ead8',label:'Sage'},
-  {hex:'#d8e6f0',label:'Slate'},
-  {hex:'#e8d8f0',label:'Lavender'},
-  {hex:'#f0d8d8',label:'Rose'},
-  {hex:'#f0e8d8',label:'Sand'},
-  {hex:'#d8f0ea',label:'Mint'},
-  {hex:'#e8e4dc',label:'Stone'},
-  {hex:'#f4dcd0',label:'Peach'},
-  {hex:'#d8eaf0',label:'Sky'},
-  {hex:'#e0f0d8',label:'Pistachio'},
-  {hex:'#f0d8ea',label:'Blush'},
+  {hex:'#f0e4d4',label:'Cream'},
+  {hex:'#0d2240',label:'Navy'},
+  {hex:'#3a7868',label:'Teal'},
+  {hex:'#cc6633',label:'Terracotta'},
+  {hex:'#282828',label:'Charcoal'},
+  {hex:'#c0b0d8',label:'Lavender'},
+  {hex:'#de7a66',label:'Salmon'},
+  {hex:'#788050',label:'Sage'},
+  {hex:'#681820',label:'Crimson'},
+  {hex:'#e4a415',label:'Gold'},
 ];
 
 function _rgBrainSVG(bg){
-  return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="${bg}"/><path d="M50 20C47 13 43 11 40 14C37 9 31 11 28 16C21 11 16 18 14 25C8 32 10 43 16 49C9 56 10 67 16 72C12 79 20 85 30 85C34 89 43 91 48 87C49 89 50 91 50 91C50 91 51 89 52 87C57 91 66 89 70 85C80 85 88 79 84 72C90 67 91 56 84 49C90 43 92 32 86 25C84 18 79 11 72 16C69 11 63 9 60 14C57 11 53 13 50 20Z" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linejoin="round"/><line x1="50" y1="22" x2="50" y2="82" stroke="#1a1a1a" stroke-width="2"/><polyline points="50,33 43,33 39,27" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="39" cy="27" r="2.5" fill="#1a1a1a"/><polyline points="50,51 36,51" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/><circle cx="36" cy="51" r="2.5" fill="#1a1a1a"/><polyline points="50,68 43,68 39,74" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="39" cy="74" r="2.5" fill="#1a1a1a"/><polyline points="50,33 57,33 61,27" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="61" cy="27" r="2.5" fill="#1a1a1a"/><polyline points="50,51 64,51" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/><circle cx="64" cy="51" r="2.5" fill="#1a1a1a"/><polyline points="50,68 57,68 61,74" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="61" cy="74" r="2.5" fill="#1a1a1a"/></svg>`;
+  const r=parseInt(bg.slice(1,3),16),g=parseInt(bg.slice(3,5),16),b=parseInt(bg.slice(5,7),16);
+  const s=(0.299*r+0.587*g+0.114*b)>140?'#1a1a1a':'#ffffff';
+  return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="${bg}"/><path d="M50 14C49 8 46 6 43 9C40 5 36 7 34 12C30 7 26 10 23 16C18 10 13 17 12 24C7 31 8 42 14 48C8 55 8 64 14 70C11 77 18 84 28 85C32 89 40 91 46 88C48 90 50 90 50 90C50 90 52 90 54 88C60 91 68 89 72 85C82 84 89 77 86 70C92 64 92 55 86 48C92 42 93 31 88 24C87 17 82 10 77 16C74 10 70 7 66 12C64 7 61 8 57 9C54 6 51 8 50 14Z" fill="none" stroke="${s}" stroke-width="3.5" stroke-linejoin="round"/><line x1="50" y1="18" x2="50" y2="82" stroke="${s}" stroke-width="2.5"/><polyline points="50,34 50,26 42,26" fill="none" stroke="${s}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="42" cy="26" r="3" fill="${s}"/><line x1="50" y1="26" x2="58" y2="26" stroke="${s}" stroke-width="2.2" stroke-linecap="round"/><circle cx="58" cy="26" r="3" fill="${s}"/><polyline points="50,44 44,44 37,51" fill="none" stroke="${s}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="37" cy="51" r="3" fill="${s}"/><polyline points="50,55 44,55 44,62 37,62" fill="none" stroke="${s}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="37" cy="62" r="3" fill="${s}"/><polyline points="50,68 44,68 44,74 38,80" fill="none" stroke="${s}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="38" cy="80" r="3" fill="${s}"/><polyline points="50,44 56,44 63,51" fill="none" stroke="${s}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="63" cy="51" r="3" fill="${s}"/><polyline points="50,55 56,55 56,62 63,62" fill="none" stroke="${s}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="63" cy="62" r="3" fill="${s}"/><polyline points="50,68 56,68 56,74 62,80" fill="none" stroke="${s}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="62" cy="80" r="3" fill="${s}"/></svg>`;
 }
 
 function _rgInitSwatches(){
@@ -2306,7 +2301,7 @@ function _rgUpdatePreview(){
   if(_rgAvatarMode==='brain'||!_rgUploadFile){
     const svg=_rgBrainSVG(_rgBrainColor);
     prev.style.background=_rgBrainColor;
-    prev.innerHTML=`<img src="data:image/svg+xml,${encodeURIComponent(svg)}" style="width:74%;height:74%;object-fit:contain">`;
+    prev.innerHTML=`<img src="data:image/svg+xml,${encodeURIComponent(svg)}" style="width:90%;height:90%;object-fit:contain">`;
   }else{
     const url=URL.createObjectURL(_rgUploadFile);
     prev.style.background='#111';
@@ -5969,7 +5964,7 @@ else{renderOppPreview();}
       <div class="auth-field" style="margin-bottom:1.1rem">
         <label style="display:block;margin-bottom:.55rem">Profile Picture <span style="color:#555;font-size:.65em;font-weight:400">— required</span></label>
         <div style="display:flex;align-items:center;gap:1rem">
-          <div id="rg-avatar-preview" style="width:64px;height:64px;border-radius:50%;background:#f0ebe2;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border:2px solid rgba(0,0,0,.12);transition:background .2s"></div>
+          <div id="rg-avatar-preview" style="width:64px;height:64px;border-radius:50%;background:#f0e4d4;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border:2px solid rgba(0,0,0,.10);transition:background .2s"></div>
           <div style="display:flex;gap:.4rem;flex-direction:column;flex:1">
             <div style="display:flex;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:.5rem">
               <button type="button" id="rg-brain-tab" onclick="rgSetAvatarMode('brain')" style="background:none;border:none;color:#00cc44;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:.3rem .6rem .4rem;border-bottom:2px solid #00cc44;margin-bottom:-1px;transition:color .15s">Brain Avatar</button>
