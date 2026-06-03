@@ -474,7 +474,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 .page{display:none;width:100%}.page.active{display:block;min-height:100vh}
 #page-collective{height:100vh;overflow:hidden}
 #page-collective.active{display:block;height:100vh;overflow:hidden}
-@media(max-width:768px){#page-collective,#page-collective.active{height:calc(100vh - 90px - env(safe-area-inset-top,0px));margin-top:calc(90px + env(safe-area-inset-top,0px))}
+@media(max-width:768px){#page-collective,#page-collective.active{padding-top:calc(90px + env(safe-area-inset-top,0px));box-sizing:border-box}
 #page-collective>div{height:100%!important}}
 #page-overlay{position:fixed;inset:0;z-index:900;background:#000;opacity:0;pointer-events:none;transition:opacity .32s ease}
 
@@ -1485,6 +1485,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 
   <!-- SIDEBAR (channels + users) -->
   <div id="chat-sidebar" style="width:240px;min-width:240px;background:#111;border-right:1px solid rgba(0,200,40,.1);display:flex;flex-direction:column;transition:transform .3s">
+    <!-- Mobile server strip -->
+    <div id="mobile-server-strip" style="display:none;overflow-x:auto;overflow-y:hidden;white-space:nowrap;padding:.5rem .6rem;background:#0a0a0a;border-bottom:1px solid rgba(0,200,40,.08);flex-shrink:0;scrollbar-width:none;-webkit-overflow-scrolling:touch"><div id="mobile-server-strip-items" style="display:inline-flex;gap:.4rem;align-items:center"></div></div>
     <!-- Server name header -->
     <div id="sidebar-server-header" style="padding:1rem 1.2rem;border-bottom:1px solid rgba(0,200,40,.1);display:flex;align-items:center;justify-content:space-between;min-height:52px">
       <span id="sidebar-server-name" style="font-size:.82rem;font-weight:700;color:#eee;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">ROUNDTABLE</span>
@@ -3179,7 +3181,12 @@ async function initChat(){
   }
   await loadServerRail();
   await renderSidebarForServer('neuropian');
-  if(window.innerWidth<=768)document.getElementById('mobile-sidebar-toggle').style.display='block';
+  if(window.innerWidth<=768){
+    document.getElementById('mobile-sidebar-toggle').style.display='block';
+    const strip=document.getElementById('mobile-server-strip');
+    if(strip)strip.style.display='block';
+    _buildMobileServerStrip();
+  }
   await switchRoom('general','general','सभी सदस्यों के लिए खुली चर्चा');
   await loadFriends();
   await loadFriendRequests();
