@@ -475,7 +475,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 #page-collective{height:100vh;overflow:hidden}
 #page-collective.active{display:block;height:100vh;overflow:hidden}
 @media(max-width:768px){#page-collective,#page-collective.active{height:100vh}
-#page-collective>div{padding-top:calc(90px + env(safe-area-inset-top,0px))!important;height:100%!important;box-sizing:border-box!important}}
+#page-collective>div{height:100%!important}}
 #page-overlay{position:fixed;inset:0;z-index:900;background:#000;opacity:0;pointer-events:none;transition:opacity .32s ease}
 
 /* ── HAMBURGER ── */
@@ -2923,7 +2923,7 @@ function showPage(id){
     document.body.style.overflow=(id==='collective')?'hidden':'';
     document.body.scrollTop=0;
     document.documentElement.scrollTop=0;
-    if(nav)nav.style.display=(id==='home')?'':'none';
+    if(nav){if(window.innerWidth<=768){nav.style.display=(id==='collective')?'none':'';}else{nav.style.display=(id==='home')?'':'none';}}
     if(id==='platform'){
       if(typeof renderProblems==='function')renderProblems();
       _kw='';const kwEl=document.getElementById('jkw');if(kwEl)kwEl.value='';
