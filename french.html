@@ -580,11 +580,12 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   nav{padding-left:1.1rem;padding-right:1.1rem;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.5rem;min-height:calc(90px + env(safe-area-inset-top, 0px));height:calc(90px + env(safe-area-inset-top, 0px));padding-top:env(safe-area-inset-top, 0px)}
   #hamburger{display:flex!important;grid-column:1;justify-self:start}
   .nav-logo{grid-column:2;justify-self:center;font-size:1.15rem!important}
+  .nav-logo img{height:52px!important}
   .nav-logo-sub{display:none}
   .nav-links{display:none}
   nav > div:nth-last-child(2){display:none!important}
   #lang-sw{display:flex!important;grid-column:3;justify-self:end}
-  #lang-sw button{padding:.45rem .8rem;font-size:.54rem;letter-spacing:.12em}
+  #lang-sw button{padding:.6rem 1.1rem;font-size:.7rem;letter-spacing:.12em}
   #lang-sw #lang-menu{min-width:140px}
   .hero-content{padding:0 1.5rem 6rem}
   .hero-title{font-size:clamp(3.5rem,13vw,7rem)!important}
@@ -752,8 +753,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 <!-- Mobile Nav Drawer -->
 <div id="mobile-nav-overlay" onclick="closeMobileNav()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:998;opacity:0;transition:opacity .3s"></div>
 <div id="mobile-nav-drawer" style="display:none;position:fixed;top:calc(90px + env(safe-area-inset-top,0px));left:0;bottom:0;width:78vw;max-width:300px;background:#0a0a0a;z-index:999;transform:translateX(-100%);transition:transform .32s cubic-bezier(.4,0,.2,1);box-shadow:4px 0 32px rgba(0,0,0,.5);padding:0;flex-direction:column;border-right:1px solid rgba(255,255,255,.08)">
-  <div style="position:relative;height:44px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0">
-    <button onclick="closeMobileNav()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.1rem;color:rgba(255,255,255,0.5);cursor:pointer;line-height:1;padding:10px;margin:0;touch-action:manipulation">✕</button>
+  <div style="height:44px;display:flex;align-items:center;justify-content:flex-end;padding:0 14px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0">
+    <button onclick="closeMobileNav()" style="background:none;border:none;font-size:1.1rem;color:rgba(255,255,255,0.5);cursor:pointer;line-height:1;width:32px;height:32px;display:flex;align-items:center;justify-content:center;touch-action:manipulation;flex-shrink:0">✕</button>
   </div>
   <nav style="display:flex;flex-direction:column;padding:1rem 0">
     <a onclick="closeMobileNav();navScroll('find')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">Notre Méthode</a>
@@ -1542,6 +1543,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   <div id="chat-sidebar-overlay" onclick="closeChatSidebar()" style="display:none;position:absolute;inset:0;z-index:199;background:rgba(0,0,0,.5)"></div>
   <!-- MAIN CHAT AREA -->
   <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+    <!-- Mobile server bar: always visible on mobile in RoundTable -->
+    <div id="rt-server-bar" style="display:none;overflow-x:auto;overflow-y:hidden;background:#0a0a0a;border-bottom:1px solid rgba(0,200,40,.08);padding:.45rem .6rem;flex-shrink:0;scrollbar-width:none;-webkit-overflow-scrolling:touch"><div id="rt-server-bar-items" style="display:inline-flex;gap:.4rem;align-items:center;min-width:max-content"></div></div>
     <!-- Chat header -->
     <div style="height:52px;background:#111;border-bottom:1px solid rgba(0,200,40,.1);display:flex;align-items:center;padding:0 1.4rem;gap:.8rem;flex-shrink:0;padding-top:env(safe-area-inset-top,0px);box-sizing:content-box">
       <button id="mobile-sidebar-toggle" onclick="toggleChatSidebar()" style="display:none;background:none;border:none;color:#e8e2d6;cursor:pointer;font-size:1.1rem;padding:.2rem">☰</button>
@@ -2219,28 +2222,26 @@ function onUsernameInput(val){
 
 // ── Avatar picker ──────────────────────────────────────────
 let _rgAvatarMode='brain';
-let _rgBrainColor='#0a2a14';
+let _rgBrainColor='#f0ebe2';
 let _rgUploadFile=null;
 
 const _RG_BRAIN_COLORS=[
-  {hex:'#000000',label:'Black'},
-  {hex:'#0a2a14',label:'Forest'},
-  {hex:'#0d1a2e',label:'Navy'},
-  {hex:'#1a0d2e',label:'Violet'},
-  {hex:'#2e0d1a',label:'Crimson'},
-  {hex:'#0d2a2a',label:'Teal'},
-  {hex:'#2a1800',label:'Ember'},
-  {hex:'#1a1a00',label:'Olive'},
-  {hex:'#1a0a00',label:'Rust'},
-  {hex:'#001a2e',label:'Ocean'},
-  {hex:'#1a001a',label:'Plum'},
-  {hex:'#002a1a',label:'Jade'},
+  {hex:'#f0ebe2',label:'Cream'},
+  {hex:'#e2ead8',label:'Sage'},
+  {hex:'#d8e6f0',label:'Slate'},
+  {hex:'#e8d8f0',label:'Lavender'},
+  {hex:'#f0d8d8',label:'Rose'},
+  {hex:'#f0e8d8',label:'Sand'},
+  {hex:'#d8f0ea',label:'Mint'},
+  {hex:'#e8e4dc',label:'Stone'},
+  {hex:'#f4dcd0',label:'Peach'},
+  {hex:'#d8eaf0',label:'Sky'},
+  {hex:'#e0f0d8',label:'Pistachio'},
+  {hex:'#f0d8ea',label:'Blush'},
 ];
 
-const _BRAIN_PATH='M50 17C41 17 31 21 25 29C19 37 19 45 22 51C18 55 15 62 17 69C20 77 29 81 37 79C40 82 45 85 50 85C55 85 60 82 63 79C71 81 80 77 83 69C85 62 82 55 78 51C81 45 81 37 75 29C69 21 59 17 50 17Z';
-
 function _rgBrainSVG(bg){
-  return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="${bg}"/><path d="M50 18C47 12 40 11 35 14C28 17 24 13 19 18C13 23 13 31 17 37C12 42 10 51 14 58C10 63 11 72 18 76C24 80 32 79 38 77C42 82 46 85 50 85C54 85 58 82 62 77C68 79 76 80 82 76C89 72 90 63 86 58C90 51 88 42 83 37C87 31 87 23 81 18C76 13 72 17 65 14C60 11 53 12 50 18Z" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/><line x1="50" y1="19" x2="50" y2="83" stroke="white" stroke-width="2"/><polyline points="50,33 44,33 40,27" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="40" cy="27" r="2.5" fill="white"/><polyline points="50,39 40,39" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"/><circle cx="40" cy="39" r="2.5" fill="white"/><polyline points="50,51 44,51 44,45 36,45" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="36" cy="45" r="2.5" fill="white"/><polyline points="50,63 44,63 40,69" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="40" cy="69" r="2.5" fill="white"/><polyline points="50,33 56,33 60,27" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="27" r="2.5" fill="white"/><polyline points="50,39 60,39" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"/><circle cx="60" cy="39" r="2.5" fill="white"/><polyline points="50,51 56,51 56,45 64,45" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="64" cy="45" r="2.5" fill="white"/><polyline points="50,63 56,63 60,69" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="69" r="2.5" fill="white"/></svg>`;
+  return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="${bg}"/><path d="M50 20C47 13 43 11 40 14C37 9 31 11 28 16C21 11 16 18 14 25C8 32 10 43 16 49C9 56 10 67 16 72C12 79 20 85 30 85C34 89 43 91 48 87C49 89 50 91 50 91C50 91 51 89 52 87C57 91 66 89 70 85C80 85 88 79 84 72C90 67 91 56 84 49C90 43 92 32 86 25C84 18 79 11 72 16C69 11 63 9 60 14C57 11 53 13 50 20Z" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linejoin="round"/><line x1="50" y1="22" x2="50" y2="82" stroke="#1a1a1a" stroke-width="2"/><polyline points="50,33 43,33 39,27" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="39" cy="27" r="2.5" fill="#1a1a1a"/><polyline points="50,51 36,51" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/><circle cx="36" cy="51" r="2.5" fill="#1a1a1a"/><polyline points="50,68 43,68 39,74" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="39" cy="74" r="2.5" fill="#1a1a1a"/><polyline points="50,33 57,33 61,27" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="61" cy="27" r="2.5" fill="#1a1a1a"/><polyline points="50,51 64,51" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/><circle cx="64" cy="51" r="2.5" fill="#1a1a1a"/><polyline points="50,68 57,68 61,74" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="61" cy="74" r="2.5" fill="#1a1a1a"/></svg>`;
 }
 
 function _rgInitSwatches(){
@@ -3185,9 +3186,12 @@ async function initChat(){
   await renderSidebarForServer('neuropian');
   if(window.innerWidth<=768){
     document.getElementById('mobile-sidebar-toggle').style.display='block';
+    // Show server bar
+    const rtBar=document.getElementById('rt-server-bar');
+    if(rtBar)rtBar.style.display='block';
+    _buildMobileServerStrip();
     const strip=document.getElementById('mobile-server-strip');
     if(strip)strip.style.display='block';
-    _buildMobileServerStrip();
   }
   await switchRoom('general','general','Discussion ouverte pour tous les membres');
   await loadFriends();
@@ -5055,6 +5059,8 @@ function _buildMobileServerStrip(){
       }).join('');
       const addBtn=`<div onclick="openCreateServer()" style="width:34px;height:34px;border-radius:50%;background:rgba(0,200,40,.1);border:2px dashed rgba(0,200,40,.3);display:inline-flex;align-items:center;justify-content:center;font-size:1rem;color:#00aa38;cursor:pointer;flex-shrink:0;transition:all .2s" onmouseenter="this.style.background='rgba(0,200,40,.2)'" onmouseleave="this.style.background='rgba(0,200,40,.1)'">+</div>`;
       items.innerHTML=homeBtn+serverBtns+addBtn;
+      const bar=document.getElementById('rt-server-bar-items');
+      if(bar)bar.innerHTML=homeBtn+serverBtns+addBtn;
     });
   });
 }
@@ -5926,7 +5932,7 @@ else{renderOppPreview();}
       <div class="auth-field" style="margin-bottom:1.1rem">
         <label style="display:block;margin-bottom:.55rem">Photo de Profil <span style="color:#555;font-size:.65em;font-weight:400">— required</span></label>
         <div style="display:flex;align-items:center;gap:1rem">
-          <div id="rg-avatar-preview" style="width:64px;height:64px;border-radius:50%;background:#0a2a14;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border:2px solid rgba(0,200,40,.25);transition:background .2s"></div>
+          <div id="rg-avatar-preview" style="width:64px;height:64px;border-radius:50%;background:#f0ebe2;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border:2px solid rgba(0,0,0,.12);transition:background .2s"></div>
           <div style="display:flex;gap:.4rem;flex-direction:column;flex:1">
             <div style="display:flex;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:.5rem">
               <button type="button" id="rg-brain-tab" onclick="rgSetAvatarMode('brain')" style="background:none;border:none;color:#00cc44;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:.3rem .6rem .4rem;border-bottom:2px solid #00cc44;margin-bottom:-1px;transition:color .15s">Brain Avatar</button>

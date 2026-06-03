@@ -750,8 +750,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 <!-- Mobile Nav Drawer -->
 <div id="mobile-nav-overlay" onclick="closeMobileNav()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:998;opacity:0;transition:opacity .3s"></div>
 <div id="mobile-nav-drawer" style="display:none;position:fixed;top:calc(90px + env(safe-area-inset-top,0px));left:0;bottom:0;width:78vw;max-width:300px;background:#0a0a0a;z-index:999;transform:translateX(-100%);transition:transform .32s cubic-bezier(.4,0,.2,1);box-shadow:4px 0 32px rgba(0,0,0,.5);padding:0;flex-direction:column;border-right:1px solid rgba(255,255,255,.08)">
-  <div style="position:relative;height:44px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0">
-    <button onclick="closeMobileNav()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.1rem;color:rgba(255,255,255,0.5);cursor:pointer;line-height:1;padding:10px;margin:0;touch-action:manipulation">✕</button>
+  <div style="height:44px;display:flex;align-items:center;justify-content:flex-end;padding:0 14px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0">
+    <button onclick="closeMobileNav()" style="background:none;border:none;font-size:1.1rem;color:rgba(255,255,255,0.5);cursor:pointer;line-height:1;width:32px;height:32px;display:flex;align-items:center;justify-content:center;touch-action:manipulation;flex-shrink:0">✕</button>
   </div>
   <nav style="display:flex;flex-direction:column;padding:1rem 0">
     <a onclick="closeMobileNav();navScroll('find')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">हम कैसे खोजते हैं</a>
@@ -1540,6 +1540,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   <div id="chat-sidebar-overlay" onclick="closeChatSidebar()" style="display:none;position:absolute;inset:0;z-index:199;background:rgba(0,0,0,.5)"></div>
   <!-- MAIN CHAT AREA -->
   <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+    <!-- Mobile server bar: always visible on mobile in RoundTable -->
+    <div id="rt-server-bar" style="display:none;overflow-x:auto;overflow-y:hidden;background:#0a0a0a;border-bottom:1px solid rgba(0,200,40,.08);padding:.45rem .6rem;flex-shrink:0;scrollbar-width:none;-webkit-overflow-scrolling:touch"><div id="rt-server-bar-items" style="display:inline-flex;gap:.4rem;align-items:center;min-width:max-content"></div></div>
     <!-- Chat header -->
     <div style="height:52px;background:#111;border-bottom:1px solid rgba(0,200,40,.1);display:flex;align-items:center;padding:0 1.4rem;gap:.8rem;flex-shrink:0;padding-top:env(safe-area-inset-top,0px);box-sizing:content-box">
       <button id="mobile-sidebar-toggle" onclick="toggleChatSidebar()" style="display:none;background:none;border:none;color:#e8e2d6;cursor:pointer;font-size:1.1rem;padding:.2rem">☰</button>
@@ -3183,9 +3185,12 @@ async function initChat(){
   await renderSidebarForServer('neuropian');
   if(window.innerWidth<=768){
     document.getElementById('mobile-sidebar-toggle').style.display='block';
+    // Show server bar
+    const rtBar=document.getElementById('rt-server-bar');
+    if(rtBar)rtBar.style.display='block';
+    _buildMobileServerStrip();
     const strip=document.getElementById('mobile-server-strip');
     if(strip)strip.style.display='block';
-    _buildMobileServerStrip();
   }
   await switchRoom('general','general','सभी सदस्यों के लिए खुली चर्चा');
   await loadFriends();
@@ -5062,6 +5067,8 @@ function _buildMobileServerStrip(){
       }).join('');
       const addBtn=`<div onclick="openCreateServer()" style="width:34px;height:34px;border-radius:50%;background:rgba(0,200,40,.1);border:2px dashed rgba(0,200,40,.3);display:inline-flex;align-items:center;justify-content:center;font-size:1rem;color:#00aa38;cursor:pointer;flex-shrink:0;transition:all .2s" onmouseenter="this.style.background='rgba(0,200,40,.2)'" onmouseleave="this.style.background='rgba(0,200,40,.1)'">+</div>`;
       items.innerHTML=homeBtn+serverBtns+addBtn;
+      const bar=document.getElementById('rt-server-bar-items');
+      if(bar)bar.innerHTML=homeBtn+serverBtns+addBtn;
     });
   });
 }
