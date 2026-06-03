@@ -3715,10 +3715,10 @@ function renderMembersList(profiles, roles, memberRoles, serverId){
   const el=document.getElementById('ss-members-list');
   if(!profiles.length){el.innerHTML='<div style="font-size:.65rem;color:#444">No members found.</div>';return;}
   el.innerHTML=profiles.map(p=>{
-    const name=p.first_name?`${p.first_name} ${p.last_name||''}`.trim():p.neuropian_id||p.user_id.slice(0,8);
+    const name=escHtml(p.first_name?`${p.first_name} ${p.last_name||''}`.trim():p.neuropian_id||p.user_id.slice(0,8));
     const userRoleIds=memberRoles.filter(mr=>mr.user_id===p.user_id).map(mr=>mr.role_id);
     const badges=roles.filter(r=>userRoleIds.includes(r.id)).map(r=>
-      `<span style="font-size:.52rem;padding:.15rem .45rem;border-radius:20px;background:${r.color}22;color:${r.color};border:1px solid ${r.color}55">${escHtml(r.name)}</span>`
+      `<span style="font-size:.52rem;padding:.15rem .45rem;border-radius:20px;background:${(r.color||'#444').replace(/[^#a-zA-Z0-9]/g,'')}22;color:${(r.color||'#444').replace(/[^#a-zA-Z0-9]/g,'')};border:1px solid ${(r.color||'#444').replace(/[^#a-zA-Z0-9]/g,'')}55">${escHtml(r.name)}</span>`
     ).join('');
     const roleToggles=roles.map(r=>{
       const has=userRoleIds.includes(r.id);
@@ -4556,7 +4556,7 @@ async function runTeamAssembly(roomId,roomDesc){
     }
 
     body.innerHTML=team.map(({profile:p,role,score})=>{
-      const name=p.first_name?`${p.first_name} ${p.last_name||''}`.trim():p.neuropian_id||p.user_id.slice(0,8);
+      const name=escHtml(p.first_name?`${p.first_name} ${p.last_name||''}`.trim():p.neuropian_id||p.user_id.slice(0,8));
       const initials=name.split(' ').map(w=>w[0]||'').join('').slice(0,2).toUpperCase()||'?';
       const fields=_topFields(p.traits);
       const pct=Math.round(score*100);
@@ -5087,7 +5087,7 @@ async function loadServerRail(){
     if(!data||!data.length){return;}
     const topLevel=data.filter(s=>!s.parent_id);
     rail.innerHTML=topLevel.map(s=>{
-      const abbr=s.name.slice(0,2).toUpperCase();
+      const abbr=escHtml(s.name.slice(0,2).toUpperCase());
       const hue=Math.abs(s.name.split('').reduce((a,c)=>a+c.charCodeAt(0),0))%360;
       return `<div onclick="switchServer('${s.id}')" id="srv-${s.id}" title="${escHtml(s.name)}"
         style="width:44px;height:44px;border-radius:50%;background:hsl(${hue},55%,22%);border:2px solid hsl(${hue},55%,35%);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.62rem;font-weight:700;color:hsl(${hue},80%,72%);flex-shrink:0;transition:border-radius .2s;margin-bottom:.5rem;position:relative;overflow:hidden"
@@ -5122,12 +5122,12 @@ async function loadFriends(){
     if(!data||!data.length){fl.innerHTML=`<div style="padding:.45rem 1rem;font-size:.65rem;color:#444;font-style:italic">No friends yet</div>`;return;}
     fl.innerHTML=data.map(f=>`
       <div class="chat-room-item" id="ri-dm_${[currentUser.id,f.friend_id].sort().join('_')}"
-        onclick="openDM('${f.friend_id}','${escHtml(f.friend_name||'Member')}')"
+        onclick="openDM('${f.friend_id}','${escHtml(f.friend_name||'Member').replace(/'/g,'&#39;')}')"
         style="padding:.45rem 1rem;cursor:pointer;font-size:.7rem;color:#666;display:flex;align-items:center;gap:.5rem;transition:all .12s;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem"
         onmouseenter="if(currentRoom!=='dm_${[currentUser.id,f.friend_id].sort().join('_')}')this.style.color='#bbb';this.style.background='rgba(255,255,255,.04)'"
         onmouseleave="if(currentRoom!=='dm_${[currentUser.id,f.friend_id].sort().join('_')}')this.style.color='#666';this.style.background='transparent'">
         <div style="position:relative;flex-shrink:0">
-          <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#1a2e1a,#2a5a2a);display:flex;align-items:center;justify-content:center;font-size:.48rem;color:#e8e2d6;font-weight:700">${(f.friend_name||'?').slice(0,2).toUpperCase()}</div>
+          <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#1a2e1a,#2a5a2a);display:flex;align-items:center;justify-content:center;font-size:.48rem;color:#e8e2d6;font-weight:700">${escHtml((f.friend_name||'?').slice(0,2).toUpperCase())}</div>
           <span id="pd-${f.friend_id}" style="position:absolute;bottom:-1px;right:-1px;width:7px;height:7px;border-radius:50%;background:#333;border:1.5px solid #111"></span>
         </div>
         <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${escHtml(f.friend_name||'Member')}</span>
