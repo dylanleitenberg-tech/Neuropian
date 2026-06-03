@@ -574,7 +574,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   .jc{grid-template-columns:1fr}
   .jmp{text-align:left;font-size:1.8rem}
   .auth-row{grid-template-columns:1fr;gap:.6rem}
-  .auth-box{width:95vw;padding:1.8rem 1.2rem}
+  .auth-gate{align-items:flex-start;overflow-y:auto;padding:1.2rem 0}
+  .auth-box{width:95vw;padding:1.8rem 1.2rem;margin:auto}
 
   .dylan-bar{display:none!important}
   .nav-links{display:none!important}
@@ -2190,18 +2191,24 @@ let _rgBrainColor='#0a2a14';
 let _rgUploadFile=null;
 
 const _RG_BRAIN_COLORS=[
+  {hex:'#000000',label:'Black'},
   {hex:'#0a2a14',label:'Forest'},
   {hex:'#0d1a2e',label:'Navy'},
   {hex:'#1a0d2e',label:'Violet'},
   {hex:'#2e0d1a',label:'Crimson'},
   {hex:'#0d2a2a',label:'Teal'},
   {hex:'#2a1800',label:'Ember'},
+  {hex:'#1a1a00',label:'Olive'},
+  {hex:'#1a0a00',label:'Rust'},
+  {hex:'#001a2e',label:'Ocean'},
+  {hex:'#1a001a',label:'Plum'},
+  {hex:'#002a1a',label:'Jade'},
 ];
 
 const _BRAIN_PATH='M50 17C41 17 31 21 25 29C19 37 19 45 22 51C18 55 15 62 17 69C20 77 29 81 37 79C40 82 45 85 50 85C55 85 60 82 63 79C71 81 80 77 83 69C85 62 82 55 78 51C81 45 81 37 75 29C69 21 59 17 50 17Z';
 
 function _rgBrainSVG(bg){
-  return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="${bg}"/><path d="${_BRAIN_PATH}" fill="rgba(255,255,255,0.88)"/><line x1="50" y1="19" x2="50" y2="83" stroke="rgba(0,0,0,0.13)" stroke-width="2"/><path d="M34 36Q39 30 43 37" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/><path d="M29 51Q35 44 40 51" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/><path d="M32 65Q37 59 42 65" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/><path d="M57 36Q61 30 66 37" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/><path d="M60 51Q65 44 71 51" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/><path d="M58 65Q63 59 68 65" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.8" stroke-linecap="round"/></svg>`;
+  return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="${bg}"/><path d="M50 18C47 12 40 11 35 14C28 17 24 13 19 18C13 23 13 31 17 37C12 42 10 51 14 58C10 63 11 72 18 76C24 80 32 79 38 77C42 82 46 85 50 85C54 85 58 82 62 77C68 79 76 80 82 76C89 72 90 63 86 58C90 51 88 42 83 37C87 31 87 23 81 18C76 13 72 17 65 14C60 11 53 12 50 18Z" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/><line x1="50" y1="19" x2="50" y2="83" stroke="white" stroke-width="2"/><polyline points="50,33 44,33 40,27" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="40" cy="27" r="2.5" fill="white"/><polyline points="50,39 40,39" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"/><circle cx="40" cy="39" r="2.5" fill="white"/><polyline points="50,51 44,51 44,45 36,45" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="36" cy="45" r="2.5" fill="white"/><polyline points="50,63 44,63 40,69" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="40" cy="69" r="2.5" fill="white"/><polyline points="50,33 56,33 60,27" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="27" r="2.5" fill="white"/><polyline points="50,39 60,39" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"/><circle cx="60" cy="39" r="2.5" fill="white"/><polyline points="50,51 56,51 56,45 64,45" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="64" cy="45" r="2.5" fill="white"/><polyline points="50,63 56,63 60,69" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="69" r="2.5" fill="white"/></svg>`;
 }
 
 function _rgInitSwatches(){
