@@ -474,8 +474,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 .page{display:none;width:100%}.page.active{display:block;min-height:100vh}
 #page-collective{height:100vh;overflow:hidden}
 #page-collective.active{display:block;height:100vh;overflow:hidden}
-@media(max-width:768px){#page-collective,#page-collective.active{padding-top:calc(90px + env(safe-area-inset-top,0px));box-sizing:border-box}
-#page-collective>div{height:100%!important}}
+@media(max-width:768px){#page-collective,#page-collective.active{height:100vh}
+#page-collective>div{padding-top:calc(90px + env(safe-area-inset-top,0px))!important;height:100%!important;box-sizing:border-box!important}}
 #page-overlay{position:fixed;inset:0;z-index:900;background:#000;opacity:0;pointer-events:none;transition:opacity .32s ease}
 
 /* ── HAMBURGER ── */
