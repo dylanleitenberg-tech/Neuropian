@@ -2415,12 +2415,7 @@ async function finSurvey(){
     },{onConflict:'user_id'});
     // Compile full survey answers for scoring
     const surveyAnswers={...allTraits,accomplishment,hidden_ability:hiddenAbility};
-    // Call edge function to score with Ollama/AI (fire and forget — don't block UX)
-    try{
-      sb.functions.invoke('score-survey',{
-        body:{user_id:currentUser.id,survey_answers:surveyAnswers}
-      }).catch(e=>console.warn('Scoring unavailable:',e));
-    }catch(e){console.warn('Score invoke failed:',e);}
+    // Scoring handled by local score_surveys.py script
   }
   showPage('platform');
 }
