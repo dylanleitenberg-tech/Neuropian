@@ -2266,9 +2266,10 @@ function _rgInitSwatches(){
     const el=document.createElement('div');
     el.className='rg-color-swatch';
     el.title=c.label;
-    el.style.cssText=`width:22px;height:22px;border-radius:50%;background:${c.hex};cursor:pointer;transition:transform .15s;flex-shrink:0${i===0?';outline:2px solid #00cc44;outline-offset:2px':''}`;
+    el.style.cssText=`width:40px;height:40px;border-radius:50%;cursor:pointer;transition:transform .15s;flex-shrink:0;overflow:hidden${i===0?';outline:2px solid #00cc44;outline-offset:2px':''}`;
+    el.innerHTML=_rgBrainSVG(c.hex);
     el.onclick=()=>rgSelectColor(c.hex,el);
-    el.onmouseenter=()=>{el.style.transform='scale(1.18)';};
+    el.onmouseenter=()=>{el.style.transform='scale(1.15)';};
     el.onmouseleave=()=>{el.style.transform='scale(1)';};
     wrap.appendChild(el);
   });
@@ -5961,7 +5962,7 @@ else{renderOppPreview();}
               <button type="button" id="rg-upload-tab" onclick="rgSetAvatarMode('upload')" style="background:none;border:none;color:#555;font-family:'Barlow Condensed',sans-serif;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:.3rem .6rem .4rem;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s">Upload Photo</button>
             </div>
             <div id="rg-brain-panel">
-              <div style="font-size:.56rem;color:#666;margin-bottom:.4rem;letter-spacing:.04em">Pick a background color</div>
+              <div style="font-size:.56rem;color:#666;margin-bottom:.4rem;letter-spacing:.04em">选择徽标样式</div>
               <div style="display:flex;gap:.4rem;flex-wrap:wrap" id="rg-color-swatches"></div>
             </div>
             <div id="rg-upload-panel" style="display:none">
