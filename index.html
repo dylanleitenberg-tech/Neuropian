@@ -260,6 +260,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .live-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.75;color:#e8e2d6}
 .live-text strong{color:var(--white);font-style:normal;font-weight:400}
 .live-sub{font-family:'Barlow',sans-serif;font-size:.68rem;color:#e8e2d6;margin-top:.8rem;line-height:1.6}
+/* ── WHY BOXES ── */
+.why-box{transition:background .32s,box-shadow .38s,transform .4s cubic-bezier(.16,1,.3,1)}
+.why-box:hover{background:#191919!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 14px 44px rgba(0,0,0,.55);transform:translateY(-6px)}
 
 /* ── CRISIS IN EDUCATION (WASHI background) ── */
 .crisis-section{background:var(--washi);color:var(--off-black)}
@@ -847,12 +850,12 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <p class="section-body reveal" style="max-width:720px;margin-bottom:3.5rem">The world’s greatest breakthroughs weren’t the work of lone geniuses - they were the result of the right minds finding each other at the right moment. Neuropian exists to make that moment inevitable.</p>
 
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
-      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.8rem 2.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">I · The Genius Among Us</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">They are already here. Posting refinements to research no one asked for. Building systems in spare rooms. Thinking years ahead of the institutions that will eventually try to claim their work.</p>
         <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">Extraordinary minds are not rare - invisible infrastructure is. They don’t announce themselves on LinkedIn. They don’t apply to programs designed to select for credential and compliance. They exist in the corners of the internet, and the world, that no discovery system was ever built to reach. Neuropian was built to reach them.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.8rem 2.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">II · Schools Have Abandoned the Minds That Needed Them Most</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">The gifted programs closed. The advanced tracks flattened. The students who moved fastest were asked to slow down, and the ones who thought sideways were asked to think straight.</p>
         <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">Education was engineered for the average, and it optimized relentlessly for it. The minds that fell outside that design - neurodivergent, divergent, too fast, too lateral, too obsessed with a thing no teacher had a rubric for - were not served by the system. They were managed by it. Neuropian is the infrastructure education refused to build: not to teach what already exists, but to find those already ahead of it, and give them the people they were meant to work with.</p>
@@ -860,15 +863,15 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
 
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Meet</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Neuropian surfaces people whose intellect and ambition belong in the same room - people who would never have found each other through traditional networks or institutions.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Collaborate</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Through RoundTable and our team-matching system, members access curated project rooms and live channels built for people who think at this level - and nowhere else.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Innovate</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">When the right minds converge, breakthroughs follow. Neuropian’s infrastructure is designed to compress the distance between a great idea and its real-world impact.</p>
       </div>
