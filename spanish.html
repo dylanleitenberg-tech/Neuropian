@@ -103,7 +103,7 @@
   --brush:rgba(255,255,255,0.06);
 }
 html{scroll-behavior:smooth;background:#000}
-/* iOS status bar fill — belt + suspenders approach */
+/* iOS status bar fill - belt + suspenders approach */
 #sb-fill{
   position:fixed;top:0;left:0;right:0;
   height:constant(safe-area-inset-top);
@@ -250,8 +250,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .method-n{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;color:rgba(255,255,255,.05);line-height:1;margin-bottom:.85rem;letter-spacing:-.04em}
 .method-card h4{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem}
 .method-card p{font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:#e8e2d6;font-weight:300}
-.deviates-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
-@media(max-width:768px){.deviates-grid{grid-template-columns:1fr}}
 
 /* Live feed block */
 .live-block{margin-top:2.5rem;padding:2rem 2.5rem;border:1px solid rgba(255,255,255,.08);position:relative}
@@ -321,41 +319,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .qt{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.75;color:#e8e2d6;font-weight:300}
 .qa{font-family:'Barlow Condensed',sans-serif;font-size:.5rem;letter-spacing:.24em;text-transform:uppercase;color:#e8e2d6;margin-top:1rem;font-weight:600}
 
-/* ── FOUNDER ── */
-.founder-section{background:var(--black);color:var(--white)}
-.founder-layout{display:flex;gap:4rem;align-items:flex-start;margin-top:3rem}
-.founder-badge{width:80px;height:80px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#e8e2d6;flex-shrink:0}
-.founder-name{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--white);margin-bottom:.3rem}
-.founder-title{font-family:'Barlow Condensed',sans-serif;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:#e8e2d6;margin-bottom:1rem;font-weight:500}
-.founder-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
-.ftag{font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:#e8e2d6;padding:.2rem .55rem;font-weight:500}
-.founder-body p{font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.9;color:#e8e2d6;font-weight:300;margin-bottom:.95rem}
-.founder-body p strong{color:#e8e2d6;font-weight:400}
-.founder-quote{margin-top:2rem;padding:2rem 2.5rem;border-left:1px solid rgba(255,255,255,.15);position:relative}
-.founder-quote::before{content:'"';font-family:'Playfair Display',serif;font-size:4rem;color:rgba(255,255,255,.06);position:absolute;top:-1rem;left:2rem;line-height:1}
-.founder-quote p{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;line-height:1.8;color:#e8e2d6;margin-bottom:.8rem}
-.founder-quote p strong{color:var(--white);font-style:normal;font-weight:400}
-.fq-credit{font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:#e8e2d6;font-weight:600}
-
-/* ── ACADEMY ── */
-.academy-section{background:var(--washi);color:var(--off-black)}
-.academy-section .eyebrow{color:#0d0c0b}
-.academy-section .eyebrow::before{background:rgba(0,0,0,.2)}
-.academy-section .section-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.2rem);font-weight:700;line-height:.95;letter-spacing:-.025em;color:var(--off-black)}
-.academy-section .section-title em{font-style:italic;color:#0d0c0b}
-.academy-card{margin-top:3rem;border:1px solid rgba(0,0,0,.1)}
-.academy-top{background:var(--off-black);color:var(--white);padding:2.5rem 3rem;position:relative;overflow:hidden}
-.academy-top::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;opacity:.04;pointer-events:none}
-.academy-top h2{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;line-height:1;color:var(--white);position:relative}
-.academy-top h2 em{font-style:italic;color:#e8e2d6}
-.academy-top-sub{font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#e8e2d6;margin-top:.5rem;position:relative}
-.academy-body{background:var(--warm-white);padding:2.5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem}
-.academy-body h4{font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--off-black);margin-bottom:.7rem}
-.academy-body p{font-family:'Cormorant Garamond',serif;font-size:.98rem;line-height:1.85;color:rgba(13,12,11,0.7);font-weight:300;margin-bottom:.7rem}
-.academy-body p strong{color:var(--off-black);font-weight:600}
-.academy-inset-quote{margin-top:1rem;border-left:2px solid rgba(0,0,0,.15);padding-left:1rem;font-family:'Cormorant Garamond',serif;font-size:.98rem;font-style:italic;color:rgba(13,12,11,0.7);line-height:1.75}
-.academy-inset-quote div{font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(13,12,11,0.7);font-weight:600;margin-top:.5rem;font-style:normal}
-
 /* ── REALITY / NEXT ELON TEASER ── */
 .reality-section{background:var(--black);color:var(--white);padding:0}
 .reality-hero{padding:8rem 3rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
@@ -384,12 +347,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .tl-desc{font-family:'Cormorant Garamond',serif;font-size:.62rem;line-height:1.55;color:#e8e2d6;text-align:center;font-style:italic}
 
 /* ── CTA ── */
-.cta-section{background:var(--off-black);color:var(--white);padding:8rem 3rem;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+.cta-section{background:var(--washi);color:var(--off-black);padding:8rem 3rem;text-align:center;border-top:1px solid rgba(0,0,0,.06)}
 .cta-inner{max-width:800px;margin:0 auto}
-.cta-pre{font-family:'Barlow Condensed',sans-serif;font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:#e8e2d6;margin-bottom:1.5rem}
-.cta-h{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;line-height:.92;letter-spacing:-.03em;color:var(--white);margin-bottom:2rem}
-.cta-h em{font-style:italic;color:#e8e2d6}
-.cta-p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;line-height:1.8;color:#e8e2d6;max-width:580px;margin:0 auto 3rem}
+.cta-pre{font-family:'Barlow Condensed',sans-serif;font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(13,12,11,0.5);margin-bottom:1.5rem}
+.cta-h{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;line-height:.92;letter-spacing:-.03em;color:var(--off-black);margin-bottom:2rem}
+.cta-h em{font-style:italic;color:var(--off-black)}
+.cta-p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;line-height:1.8;color:rgba(13,12,11,0.65);max-width:580px;margin:0 auto 3rem}
 .cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
 
 /* ── TICKER BOTTOM ── */
@@ -449,8 +412,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   .tl-nodes{overflow-x:auto}
   .footer-top{grid-template-columns:1fr;gap:3rem}
   .footer-links{grid-template-columns:1fr 1fr}
-  .founder-layout{flex-direction:column;gap:2rem}
-  .academy-body{grid-template-columns:1fr}
 }
 
 /* ── WIDE DESKTOP NAV ── */
@@ -595,8 +556,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   .tl-nodes{overflow-x:auto}
   .footer-top{grid-template-columns:1fr;gap:3rem}
   .footer-links{grid-template-columns:1fr 1fr}
-  .founder-layout{flex-direction:column;gap:2rem}
-  .academy-body{grid-template-columns:1fr}
   .counter{grid-template-columns:1fr}
   .count-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}
   .count-item:last-child{border-bottom:none}
@@ -754,6 +713,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <button onclick="closeMobileNav()" style="background:none;border:none;font-size:1.1rem;color:rgba(255,255,255,0.5);cursor:pointer;line-height:1;width:32px;height:32px;display:flex;align-items:center;justify-content:center;touch-action:manipulation;flex-shrink:0">✕</button>
   </div>
   <nav style="display:flex;flex-direction:column;padding:1rem 0">
+    <a onclick="closeMobileNav();navScroll('why')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">Por Qué Encontramos</a>
     <a onclick="closeMobileNav();navScroll('find')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">Cómo Encontramos</a>
     <a onclick="closeMobileNav();navScroll('crisis')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">A Quiénes Encontramos</a>
     <a onclick="closeMobileNav();gatedPage('platform')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">Oportunidades</a>
@@ -871,6 +831,50 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 </section>
 
 
+
+
+<!-- WHY NEUROPIAN FINDS YOU -->
+<section class="sec" style="background:var(--near-black);border-top:1px solid rgba(255,255,255,.06)" id="why">
+  <div class="si">
+    <div class="section-eyebrow reveal">La Misión de Neuropian</div>
+    <h2 class="section-heading reveal">Por Qué Neuropian <em>Te Encuentra</em></h2>
+    <p class="section-body reveal" style="max-width:720px;margin-bottom:3.5rem">Los mayores avances de la humanidad nunca fueron obra de un genio solitario - surgieron cuando las personas correctas se encontraron en el momento justo. Neuropian existe para hacer ese momento inevitable.</p>
+
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
+      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">I · El Genio Entre Nosotros</div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">Ya están aquí. Publicando mejoras a investigaciones que nadie pidió. Construyendo sistemas en cuartos de uso secundario. Pensando años por delante de las instituciones que eventualmente intentarán reclamar su trabajo.</p>
+        <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">Las mentes extraordinarias no son raras - lo que es invisible es la infraestructura para encontrarlas. No se anuncian en LinkedIn. No aplican a programas diseñados para seleccionar por credencial y cumplimiento. Existen en los rincones de internet, y del mundo, que ningún sistema de descubrimiento fue construido para alcanzar. Neuropian fue construida para alcanzarlas.</p>
+      </div>
+      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">II · Las Escuelas Han Abandonado las Mentes Que Más las Necesitaban</div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">Los programas para dotados cerraron. Los tracks avanzados se nivelaron. A los estudiantes que avanzaban más rápido se les pidió que desaceleraran, y a los que pensaban de forma lateral se les pidió que pensaran de manera recta.</p>
+        <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">La educación fue diseñada para el promedio, y se optimizó sin descanso para ello. Las mentes que quedaron fuera de ese diseño - neurodivergentes, divergentes, demasiado rápidas, demasiado laterales, demasiado obsesionadas con algo para lo que ningún maestro tenía una rúbrica - no fueron atendidas por el sistema. Fueron administradas por él. Neuropian es la infraestructura que la educación se negó a construir: no para enseñar lo que ya existe, sino para encontrar a quienes ya van por delante, y darles las personas con las que estaban destinados a trabajar.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
+      <div style="background:var(--near-black);padding:2.2rem 2rem">
+        <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Encontrarse</div>
+        <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Neuropian identifica personas cuyo intelecto y ambición pertenecen al mismo espacio - personas que nunca se habrían encontrado a través de redes o instituciones tradicionales.</p>
+      </div>
+      <div style="background:var(--near-black);padding:2.2rem 2rem">
+        <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Colaborar</div>
+        <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">A través de RoundTable y nuestro sistema de equipos, los miembros acceden a salas de proyectos y canales en vivo diseñados para quienes piensan a este nivel - y en ningún otro lugar.</p>
+      </div>
+      <div style="background:var(--near-black);padding:2.2rem 2rem">
+        <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Innovar</div>
+        <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Cuando las mentes correctas convergen, los avances siguen. La infraestructura de Neuropian está diseñada para reducir la distancia entre una gran idea y su impacto real.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="border-left:2px solid rgba(255,255,255,.18);padding-left:2rem">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.75rem">Inteligencia de Equipo</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.8vw,2rem);font-weight:700;line-height:1.1;color:var(--white);margin-bottom:1rem">El algoritmo no solo encuentra personas extraordinarias - encuentra a las personas extraordinarias correctas <em style="font-style:italic;color:#e8e2d6">las unas para las otras.</em></h3>
+      <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.55);max-width:640px">No ensamblamos equipos por título o disciplina. Neuropian analiza firmas cognitivas, patrones de resolución de problemas y temperamento intelectual en toda su base de miembros para identificar combinaciones que producen resultados que ningún emparejamiento de currículum podría predecir. El resultado: equipos construidos para complementarse - no duplicarse - entre sí.</p>
+    </div>
+  </div>
+</section>
 
 <!-- HOW WE FIND YOU -->
 <section class="find-section section" id="find">
@@ -1070,45 +1074,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   </div>
 </section>
 
-<!-- PILLARS / PROFILES WE SEEK -->
-
-<section class="sec" style="background:var(--near-black);border-top:1px solid rgba(255,255,255,.06)">
-  <div class="si">
-    <div class="section-eyebrow reveal">El Panorama</div>
-    <h2 class="section-heading reveal">Cómo Neuropian Se Desvía <em>De La Norma</em></h2>
-    <p class="section-body reveal" style="max-width:680px;margin-bottom:2.5rem">SeekOut, hireEZ, AmazingHiring, Fetcher, Noon AI: las plataformas de talento más poderosas del mundo fueron construidas para la mayoría neurotípica. Neuropian absorbe cada técnica que ellas abrieron camino, las combina, y reconstruye desde cero para las mentes neurodivergentes que sistemáticamente filtraron.</p>
-    <div class="deviates-grid">
-      <div class="method-card reveal">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:.5rem">SeekOut &middot; LinkedIn</div>
-        <div style="font-size:.55rem;color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-style:italic">Escanea GitHub, artículos de investigación y perfiles públicos en busca de credenciales</div>
-        <h4 class="method-title">Neuropian perfila cómo piensan las mentes, no lo que enumeran</h4>
-        <p class="method-body">SeekOut encuentra quién tiene los títulos correctos. Neuropian encuentra quién tiene la arquitectura cognitiva para resolver problemas que nadie más puede enmarcar. Buscamos comportamiento, patrón e imaginación, no biografía.</p>
-        <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Perfilado Cognitivo</span>
-      </div>
-      <div class="method-card reveal" style="transition-delay:.08s">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:.5rem">hireEZ &middot; Noon AI</div>
-        <div style="font-size:.55rem;color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-style:italic">IA agéntica de alcance en LinkedIn, GitHub, Reddit, Slack</div>
-        <h4 class="method-title">Señal de lo que realmente haces, no de cómo te presentas</h4>
-        <p class="method-body">hireEZ busca en plataformas. Neuropian lee la señal que eliges compartir a través de EagleEyes: cómo razonas, qué construyes, dónde profundizas. Acepta una vez en cualquier sitio y tu perfil cognitivo se afila.</p>
-        <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Barrido de Toda la Internet</span>
-      </div>
-      <div class="method-card reveal" style="transition-delay:.04s">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:.5rem">AmazingHiring &middot; Fetcher</div>
-        <div style="font-size:.55rem;color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-style:italic">Talento de ingeniería de Stack Overflow, Kaggle, canales especializados</div>
-        <h4 class="method-title">Neuropian forja equipos interdisciplinarios que ninguna plataforma puede concebir</h4>
-        <p class="method-body">AmazingHiring encuentra ingenieros. Neuropian encuentra a la persona que también es poeta, teórico de juegos y neurocientífica autodidacta, y la une a otros cuyas fortalezas completan la ecuación.</p>
-        <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Inteligencia Interdisciplinaria</span>
-      </div>
-      <div class="method-card reveal" style="transition-delay:.12s">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:.5rem">HireVue &middot; Standard Boards</div>
-        <div style="font-size:.55rem;color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-style:italic">Cribado de IA calibrado para normas de rendimiento neurotípico</div>
-        <h4 class="method-title">Neuropian fue construido para encontrar a quienes cada filtro elimina</h4>
-        <p class="method-body">Cada filtro en cada bolsa de trabajo elimina otra mente extraordinaria. Neuropian fue diseñado desde primeros principios para identificar qué hace a alguien únicamente brillante, rompiendo todos los estereotipos de pensamiento.</p>
-        <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">IA Primero Neurodivergente</span>
-      </div>
-    </div>
-  </div>
-</section>
 <section class="timeline-section reveal" id="timeline">
   <div class="timeline-inner">
     <p style="text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:1.2rem">Dylan Leitenberg · Fundador y CEO · Neuropian</p>
@@ -1160,137 +1125,16 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   </div>
 </section>
 
-<section class="founder-section section" id="founder">
-  <div class="section-inner">
-    <div class="eyebrow reveal">El Fundador</div>
-    <div class="founder-layout reveal">
-      <div>
-        <div class="founder-badge">DL</div>
-      </div>
-      <div>
-        <div class="founder-name">Dylan Leitenberg</div>
-        <div class="founder-title">Fundador y Visionario · Neuropian / Leitenberg Technologies</div>
-        <div class="founder-tags">
-          <span class="ftag">Ciencia de Datos</span>
-          <span class="ftag">Robótica</span>
-          <span class="ftag">Psicología</span>
-          <span class="ftag">The Good Student (organización sin fines de lucro)</span>
-          <span class="ftag">YellowSwing (organización sin fines de lucro)</span>
-        </div>
-        <div class="founder-body">
-          <p>Dylan Leitenberg fue superdotado desde pequeño, y lo sabía. Podía sentir la brecha entre lo que su mente buscaba y lo que el aula era capaz de ofrecer. Podía sentir que avanzaba más rápido que el resto. Las preguntas que quería hacer no tenían lugar en el currículo. Los problemas que quería resolver no estaban en el programa. <strong>No construyó Neuropian porque fuera una buena idea de negocio. Lo construyó porque vivió la historia él mismo, y la vio sucederle a todos a su alrededor.</strong></p>
-          <p><strong>No era disruptivo. No era difícil. Simplemente estaba más adelante de lo que el sistema estaba diseñado para acomodar</strong>, y el sistema, en lugar de estirarse para alcanzarlo, le pidió en silencio que se encogiera.</p>
-          <p>Vio a maestros asignar calificaciones a la curiosidad. Vio el timbre cortar trenes de pensamiento que podrían haber llevado a algún lugar notable. Vio a compañeros, algunas de las personas más dotadas que jamás conocería, dejar gradualmente de levantar la mano, dejar de preguntar por qué, dejar de creer que su tipo particular de inteligencia tenía un lugar en el mundo.</p>
-          <p><strong>Dylan se negó a volverse manejable.</strong> Su trabajo con <strong>The Good Student</strong>, una organización sin fines de lucro con sede en Pasadena dedicada al bienestar estudiantil, le dio el vocabulario científico y humano para lo que siempre había entendido: que el bienestar de un estudiante es inseparable de su motivación y empuje. Esa idea se convirtió en la base de Neuropian.</p>
-        </div>
-
-<div class="founder-quote" style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.07)">
-          <p>"Desde pequeño, me di cuenta de que muchos de quienes tienen el mayor potencial se desaniman y son descartados por el sistema educativo. Los límites que sus maestros les imponen obstaculizan su éxito y empuje. Las pruebas estandarizadas ignoran a quienes tienen intelecto fuera de la norma. Abrazamos la evolución de la educación a medida que se expande a través de cada elevación potencial. Vivir en un mundo sin límites, eso es lo que Neuropian ha construido."</p>
-          <div class="fq-credit">  Dylan Leitenberg, Fundador y CEO</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ACADEMY -->
-<section class="academy-section section" id="academy">
-  <div class="section-inner">
-    <div class="eyebrow reveal">La Academia · Fundada por Dylan Leitenberg</div>
-    <h2 class="section-title reveal" style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.2rem);font-weight:700;line-height:.95;letter-spacing:-.025em;color:var(--off-black);margin-bottom:1rem"><span>Leitenberg</span> <em style="font-style:italic">Academy</em></h2>
-    <p class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.85;color:rgba(0,0,0,.5);font-weight:300;margin-bottom:2.5rem">Una escuela que se construye para las mentes que el sistema nunca fue diseñado para albergar.</p>
-    <div class="academy-card reveal">
-      <div class="academy-top">
-        <h2>Leitenberg <em>Academy</em></h2>
-        <div class="academy-top-sub">Est. Próximamente · Por Neuropian · Identificando a los más brillantes desde las edades más tempranas posibles</div>
-      </div>
-      <div class="academy-body">
-        <div>
-          <h4>Por Qué Existe la Academia</h4>
-          <p>El sistema educativo ha fallado a quienes piensan diferente. Los programas para superdotados han sido abandonados uno a uno. Los niños más brillantes del país están siendo procesados a través de un sistema construido para la media estadística. No son ellos quienes fracasan. <strong>El sistema los está fallando.</strong></p>
-          <p>Leitenberg Academy fue creada para acabar con eso. Nuestra IA identifica mentes extraordinarias temprano, más temprano que lo que cualquier institución pensó en mirar, y les proporciona una educación que realmente puede estar a la altura de quiénes son.</p>
-        </div>
-        <div>
-          <h4>Qué La Hace Diferente</h4>
-          <p>Sin recortes de programas para superdotados. Sin niveles de grado arbitrarios. Sin pruebas estandarizadas que penalicen el pensamiento original. Los estudiantes son identificados jóvenes, entrenados continuamente, y conectados a oportunidades en el momento en que están listos, no cuando una institución decide que tienen suficiente edad.</p>
-          <p>Abrazamos la evolución de la educación a medida que se expande a través de cada elevación potencial. Vivir en un mundo sin límites, eso es lo que Leitenberg Academy enseña desde el primer día.</p>
-          <div class="academy-inset-quote">Todos conocemos historias de quienes perdieron su oportunidad de liberar su potencial sin explotar. Ya no volveremos a escuchar la frase: "no puedes hacer eso."
-            <div>, Dylan Leitenberg</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" style="background:var(--black);border-top:1px solid rgba(255,255,255,.06)">
-  <div class="si" style="max-width:900px">
-    <div class="reveal">
-      <div class="section-eyebrow">La Historia Que Lo Inició Todo</div>
-      <h2 class="section-heading">El Genio<br><em>Entre Nosotros</em></h2>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;line-height:1.75;color:rgba(255,255,255,0.95);margin-bottom:1.5rem">A lo largo de su educación, Dylan conoció a unos pocos estudiantes selectos que pensaban diferente. Tenían mentes brillantes resolviendo <strong style="color:rgba(255,255,255,0.95)">cubos de Rubik de cinco dimensiones y jugando al ajedrez cuántico</strong>. Estudiantes que habían superado con creces a sus maestros, buscando alcanzar el siguiente nivel.</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;line-height:1.75;color:rgba(255,255,255,0.95);margin-bottom:1.5rem">Sin embargo, estos estudiantes pasaban sus días en aulas que <strong style="color:rgba(255,255,255,0.95)">no podían proporcionar una educación adecuada</strong> para tales mentes. Con su vasto conocimiento y habilidades, podrían haber estado trabajando para Apple, Microsoft, o dirigiendo sus propias empresas.</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;line-height:1.75;color:rgba(255,255,255,0.95);margin-bottom:1.5rem"><strong style="color:rgba(255,255,255,0.95)">Las escuelas han abandonado sus programas para superdotados</strong>, haciendo que quienes piensan diferente pierdan su creatividad y empuje. Sin apoyo suficiente, estos estudiantes lucharon, cuando podrían haber estado cambiando el mundo.</p>
-      <div style="margin-top:2rem;padding:1.5rem 2rem;background:rgba(255,255,255,.04);border-left:2px solid rgba(255,255,255,.2)">
-        <p style="font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.04em;color:rgba(255,255,255,0.95);line-height:1.6">Estos niños no son casos atípicos. <strong>Son uno de miles</strong>, personas extraordinarias, viviendo vidas ordinarias, destinadas a la grandeza. <strong>Ellos no son el problema. El sistema lo es.</strong></p>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="crisis-section section" id="crisis">
-  <div class="section-inner">
-    <div class="eyebrow reveal">Las Escuelas Han Abandonado a las Mentes Que Más Las Necesitaban</div>
-    <h2 class="section-title reveal" style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.2rem);font-weight:700;line-height:.95;letter-spacing:-.025em;color:var(--off-black);margin-bottom:2rem">Las Escuelas Han <em style="font-style:italic">Abandonado</em> las Mentes<br>Que Más Las Necesitaban</h2>
-    <p class="crisis-body reveal">En las últimas dos décadas, los programas de educación para superdotados han sido sistemáticamente desfinanciados y eliminados. Una generación de mentes extraordinarias que deambula, aburrida, ignorada, mal diagnosticada, medicada para la sumisión. Este sistema educativo destruye lo genuino y construye una sociedad homogeneizada sin espacio para el ingenio.</p>
-    <div class="crisis-stats reveal">
-      <div class="crisis-stat">
-        <span class="crisis-stat-n">6M+</span>
-        <span class="crisis-stat-l">estudiantes superdotados desatendidos en EE.UU. anualmente</span>
-      </div>
-      <div class="crisis-stat">
-        <span class="crisis-stat-n">3x</span>
-        <span class="crisis-stat-l">más probabilidades de abandonar sin desafío adecuado</span>
-      </div>
-      <div class="crisis-stat">
-        <span class="crisis-stat-n">72%</span>
-        <span class="crisis-stat-l">de los estados de EE.UU. han recortado programas para superdotados desde 2010</span>
-      </div>
-    </div>
-    <div class="crisis-cards reveal">
-      <div class="crisis-card">
-        <h4>El Aburrimiento Se Convierte en Fracaso</h4>
-        <p>Cuando una mente opera años por delante y recibe material años por detrás, se desconecta, etiquetada como difícil, disruptiva. Los límites que le imponen obstaculizan su éxito y empuje. La etiqueta siempre está equivocada. El sistema es el problema.</p>
-      </div>
-      <div class="crisis-card">
-        <h4>La Epidemia del Diagnóstico Erróneo</h4>
-        <p>&ldquo;Los resultados mostraron que quienes recibieron sugerencias de superdotación alejaron a los participantes del diagnóstico de TDAH.&rdquo; Los niños superdotados exhiben falta de atención principalmente en entornos de poca estimulación, no en todos los contextos. Los comportamientos son reales. La causa se malinterpreta.</p>
-        <p style="font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(13,12,11,0.45);margin-top:.8rem;line-height:1.6">Hartnett, Nelson &amp; Rinn, <em>Roeper Review</em> 26(2), 2004</p>
-      </div>
-      <div class="crisis-card">
-        <h4>Estandarizados hasta la Extinción</h4>
-        <p>Las pruebas estandarizadas ignoran a quienes tienen intelecto fuera de la norma. Cada mente genuinamente original recibe una calificación de deficiente, rastreada hacia abajo. Ya no volveremos a escuchar: "No, no puedes hacer eso." Esa era termina aquí.</p>
-      </div>
-    </div>
-    <div class="ink-ornament washi-ornament reveal"><div class="ink-line"></div><div class="ink-mark">◆ La Promesa ◆</div><div class="ink-line"></div></div>
-    <div class="crisis-promise reveal">
-      <div class="crisis-promise-lbl">Nuestra Misión</div>
-      <div class="crisis-promise-text"><strong>Cada programa para superdotados que cierra es una tragedia. Cada mente extraordinaria que pasa desapercibida es una pérdida que el mundo nunca calculará.</strong> Neuropian ha construido el sistema que la educación se negó a construir, uno que encuentra a los dotados, los divergentes, los diferentes, y les da el escenario que siempre merecieron.</div>
-    </div>
-  </div>
-</section>
-
 <section class="cta-section reveal" id="cta">
   <div class="cta-inner">
-    <div class="cta-pre">Neuropian · Aplicar</div>
-    <h2 class="cta-h">¿Eres Tú a Quien Hemos<br>Estado <em>Buscando?</em></h2>
-    <p class="cta-p">Encontraste esta página por una razón. Las personas con mentes ordinarias no terminan aquí. Nuestra IA ya sospecha que perteneces, ahora demuéstralo.</p>
+    <div class="cta-pre">Neuropian · Aplica</div>
+    <h2 class="cta-h">¿Eres Tú a Quien<br>Hemos Estado <em>Buscando?</em></h2>
+    <p class="cta-p">Encontraste esta página por una razón. Las personas con mentes ordinarias no llegan hasta aquí. Nuestra IA ya sospecha que perteneces. Ahora demuéstralo.</p>
     <div class="cta-btns">
       <button class="btn-primary cta-submit" onclick="openNextElonApply()"><span>Enviar Solicitud</span></button>
-      <button class="btn-secondary" onclick="gatedPage('collective')">Entrar a RoundTable</button>
-      <button class="btn-secondary" onclick="gatedPage('eagleeyes')">&#10022; EagleEyes</button>
+      <button class="btn-secondary" style="background:#0a0a0a;color:#fff;border-color:#0a0a0a;transition:background .2s,color .2s" onmouseenter="this.style.background='#fff';this.style.color='#0a0a0a'" onmouseleave="this.style.background='#0a0a0a';this.style.color='#fff'" onclick="gatedPage('collective')">Entrar a RoundTable</button>
+      <button class="btn-secondary" style="background:#0a0a0a;color:#fff;border-color:#0a0a0a;transition:background .2s,color .2s" onmouseenter="this.style.background='#fff';this.style.color='#0a0a0a'" onmouseleave="this.style.background='#0a0a0a';this.style.color='#fff'" onclick="gatedPage('eagleeyes')">&#10022; EagleEyes</button>
     </div>
-
   </div>
 </section>
 
@@ -2896,8 +2740,7 @@ const autoFadeObs = new IntersectionObserver(entries => {
 document.querySelectorAll(
   '.section-inner > h2, .section-inner > p, .si > h2, .si > p,' +
   '.method-grid, .pillars-grid, .crisis-cards, .crisis-stats,' +
-  '.manifesto-list, .quotes-grid, .reality-hero, .founder-layout,' +
-  '.academy-card, .timeline-inner, .cta-inner, .live-block'
+  '.manifesto-list, .quotes-grid, .reality-hero, .timeline-inner, .cta-inner, .live-block'
 ).forEach((el, i) => {
   if (!el.classList.contains('reveal') && !el.classList.contains('fade-in') && !el.classList.contains('in')) {
     el.classList.add('fade-in');
@@ -6000,7 +5843,7 @@ else{renderOppPreview();}
 <div id="notif-container" style="position:fixed;bottom:1.2rem;right:1.2rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;pointer-events:none;max-width:320px"></div>
 <script>document.addEventListener("click",function(){var m=document.getElementById("lang-menu");if(m)m.style.display="none";});</script>
 <script>
-// ── iOS status bar fill (JS measurement — more reliable than pure CSS) ──
+// ── iOS status bar fill (JS measurement - more reliable than pure CSS) ──
 (function(){
   function applySafeArea(){
     var fill=document.getElementById('sb-fill');
