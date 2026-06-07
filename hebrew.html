@@ -260,6 +260,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .live-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.75;color:#e8e2d6}
 .live-text strong{color:var(--white);font-style:normal;font-weight:400}
 .live-sub{font-family:'Barlow',sans-serif;font-size:.68rem;color:#e8e2d6;margin-top:.8rem;line-height:1.6}
+/* ── WHY BOXES ── */
+.why-box{transition:background .32s,box-shadow .38s,transform .4s cubic-bezier(.16,1,.3,1)}
+.why-box:hover{background:#191919!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 14px 44px rgba(0,0,0,.55);transform:translateY(-6px)}
 
 /* ── CRISIS IN EDUCATION (WASHI background) ── */
 .crisis-section{background:var(--washi);color:var(--off-black)}
@@ -841,12 +844,12 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <p class="section-body reveal" style="max-width:720px;margin-bottom:3.5rem">ההתקדמויות הגדולות בתולדות האנושות לא היו מעשה של גאון בודד - הן נבעו ממפגש של האנשים הנכונים ברגע הנכון. Neuropian קיימת כדי להפוך את הרגע הזה לבלתי נמנע.</p>
 
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
-      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.8rem 2.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">I · הגאון שבינינו</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">הם כבר כאן. מפרסמים שיפורים לחקר שאיש לא ביקש. בונים מערכות בחדרים פנויים. חושבים שנים לפני המוסדות שבסופו של דבר ינסו לנכס לעצמם את עבודתם.</p>
         <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">מוחות יוצאי דופן אינם נדירים - התשתית הבלתי נראית היא זו שנדירה. הם לא מכריזים על עצמם בלינקדאין. הם לא מגישים מועמדות לתוכניות שנועדו לסנן על בסיס תעודות וציות. הם קיימים בפינות של האינטרנט, ושל העולם, שאף מערכת גילוי לא נבנתה אי פעם להגיע אליהן. Neuropian נבנתה כדי להגיע אליהם.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.8rem 2.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">II · בתי הספר עזבו את המוחות שזקוקים להם ביותר</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">תוכניות המחוננים נסגרו. המסלולים המתקדמים הוחלקו. מהתלמידים שהתקדמו מהר ביותר ביקשו להאט, ומאלה שחשבו באלכסון ביקשו לחשוב ישר.</p>
         <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">החינוך תוכנן לממוצע, ואופטם בחריצות לשמו. המוחות שנפלו מחוץ לאותו עיצוב - נוירודיברגנטים, דיברגנטים, מהירים מדי, לטרליים מדי, אובססיבים מדי לדבר שאף מורה לא היה לו רובריקה - לא שורתו על ידי המערכת. הם נוהלו על ידיה. Neuropian היא התשתית שהחינוך סירב לבנות: לא כדי ללמד את מה שכבר קיים, אלא כדי למצוא את אלה שכבר קדימים לו, ולתת להם את האנשים שנועדו לעבוד איתם.</p>
@@ -854,15 +857,15 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
 
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">להיפגש</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Neuropian מגלה אנשים שהאינטלקט והשאיפות שלהם שייכים לאותו חדר - אנשים שלעולם לא היו מוצאים זה את זה דרך הרשתות או המוסדות המסורתיים.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">לשתף פעולה</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">דרך RoundTable ומערכת ההתאמה שלנו, החברים ניגשים לחדרי פרויקטים וערוצים חיים שנבנו לאנשים שחושבים ברמה הזו - ולא אחרת.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">לחדש</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">כשהמוחות הנכונים מתמזגים, פריצות הדרך באות. התשתית של Neuropian נועדה לקצר את המרחק בין רעיון גדול לבין השפעתו בעולם.</p>
       </div>
