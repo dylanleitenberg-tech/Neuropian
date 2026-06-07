@@ -260,6 +260,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .live-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.75;color:#e8e2d6}
 .live-text strong{color:var(--white);font-style:normal;font-weight:400}
 .live-sub{font-family:'Barlow',sans-serif;font-size:.68rem;color:#e8e2d6;margin-top:.8rem;line-height:1.6}
+/* ── WHY BOXES ── */
+.why-box{transition:background .32s,box-shadow .38s,transform .4s cubic-bezier(.16,1,.3,1)}
+.why-box:hover{background:#191919!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 14px 44px rgba(0,0,0,.55);transform:translateY(-6px)}
 
 /* ── CRISIS IN EDUCATION (WASHI background) ── */
 .crisis-section{background:var(--washi);color:var(--off-black)}
@@ -841,12 +844,12 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <p class="section-body reveal" style="max-width:720px;margin-bottom:3.5rem">दुनिया की सबसे बड़ी खोजें कभी भी किसी एकाकी प्रतिभाशाली व्यक्ति का काम नहीं थीं - वे सही लोगों के सही समय पर मिलने से उत्पन्न हुईं। Neuropian का अस्तित्व इस पल को अनिवार्य बनाने के लिए है।</p>
 
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
-      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.8rem 2.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">I · हमारे बीच का प्रतिभाशाली</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">वे पहले से यहाँ हैं। ऐसे शोध में सुधार प्रकाशित कर रहे हैं जो किसी ने नहीं माँगा। अपने कमरे में ऐसे सिस्टम बना रहे हैं जिनके बारे में अभी किसी ने नहीं सोचा। उन संस्थानों से वर्षों आगे सोच रहे हैं जो अंततः उनके काम पर दावा करने की कोशिश करेंगे।</p>
         <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">असाधारण मस्तिष्क दुर्लभ नहीं हैं - दुर्लभ है उन्हें खोजने का बुनियादी ढाँचा। वे LinkedIn पर खुद की घोषणा नहीं करते। वे उन कार्यक्रमों में आवेदन नहीं करते जो डिग्री और अनुपालन के लिए चुनने के लिए बनाए गए हैं। वे इंटरनेट और दुनिया के उन कोनों में मौजूद हैं जहाँ कोई भी खोज प्रणाली कभी नहीं पहुंची। Neuropian उन तक पहुँचने के लिए बनाया गया था।</p>
       </div>
-      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.8rem 2.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">II · स्कूलों ने उन मस्तिष्कों को छोड़ दिया जिन्हें सबसे अधिक उनकी ज़रूरत थी</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">प्रतिभाशाली छात्रों के कार्यक्रम बंद हो गए। उन्नत पाठ्यक्रम समतल हो गए। जो छात्र सबसे तेज़ आगे बढ़ रहे थे, उन्हें धीमा होने के लिए कहा गया, और जो तिरछा सोचते थे, उन्हें सीधा सोचने के लिए कहा गया।</p>
         <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">शिक्षा को औसत के लिए डिज़ाइन किया गया था, और इसे उसी के लिए अनवरत अनुकूलित किया गया। जो मस्तिष्क उस डिज़ाइन से बाहर थे - न्यूरोडाइवर्जंट, विचलित, बहुत तेज़, बहुत पार्श्व, किसी ऐसी चीज़ से बहुत ज़्यादा ग्रसित जिसके लिए किसी शिक्षक के पास कोई रूब्रिक नहीं थी - उन्हें सिस्टम ने सेवा नहीं दी। उन्हें सिस्टम ने प्रबंधित किया। Neuropian वह बुनियादी ढाँचा है जो शिक्षा ने बनाने से इनकार कर दिया: जो पहले से मौजूद है उसे सिखाने के लिए नहीं, बल्कि उन लोगों को खोजने के लिए जो पहले से आगे हैं, और उन्हें वे लोग देने के लिए जिनके साथ वे काम करने के लिए बने थे।</p>
@@ -854,15 +857,15 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
 
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">मिलना</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Neuropian उन लोगों को उजागर करता है जिनकी बुद्धि और महत्वाकांक्षा एक ही कमरे में होनी चाहिए - वे लोग जो पारंपरिक नेटवर्क या संस्थानों के माध्यम से कभी नहीं मिलते।</p>
       </div>
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">सहयोग करना</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">RoundTable और हमारी टीम-मिलान प्रणाली के माध्यम से, सदस्य इस स्तर पर सोचने वाले लोगों के लिए बने क्यूरेटेड प्रोजेक्ट रूम और लाइव चैनल तक पहुंच पाते हैं।</p>
       </div>
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">नवाचार करना</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">जब सही मस्तिष्क मिलते हैं, तो सफलताएं मिलती हैं। Neuropian का बुनियादी ढांचा एक महान विचार और उसके वास्तविक प्रभाव के बीच की दूरी को कम करने के लिए बनाया गया है।</p>
       </div>
