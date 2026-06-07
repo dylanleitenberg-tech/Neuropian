@@ -260,6 +260,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .live-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.75;color:#e8e2d6}
 .live-text strong{color:var(--white);font-style:normal;font-weight:400}
 .live-sub{font-family:'Barlow',sans-serif;font-size:.68rem;color:#e8e2d6;margin-top:.8rem;line-height:1.6}
+/* ── WHY BOXES ── */
+.why-box{transition:background .32s,box-shadow .38s,transform .4s cubic-bezier(.16,1,.3,1)}
+.why-box:hover{background:#191919!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 14px 44px rgba(0,0,0,.55);transform:translateY(-6px)}
 
 /* ── CRISIS IN EDUCATION (WASHI background) ── */
 .crisis-section{background:var(--washi);color:var(--off-black)}
@@ -844,12 +847,12 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <p class="section-body reveal" style="max-width:720px;margin-bottom:3.5rem">Les plus grandes avancées de l’humanité ne furent jamais l’œuvre d’un génie solitaire - elles naquirent de la rencontre des bonnes personnes au bon moment. Neuropian existe pour rendre cet instant inévitable.</p>
 
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
-      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.8rem 2.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">I · Le Génie Parmi Nous</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">Ils sont déjà là. Publiant des améliorations à des recherches que personne n’avait demandées. Construisant des systèmes dans des pièces inutilisées. Pensant des années en avance sur les institutions qui, un jour, tenteront de revendiquer leur travail.</p>
         <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">Les esprits extraordinaires ne sont pas rares - l’infrastructure invisible, elle, l’est. Ils ne s’annoncent pas sur LinkedIn. Ils ne postulent pas à des programmes conçus pour sélectionner sur la base des diplômes et de la conformité. Ils existent dans les recoins d’internet, et du monde, qu’aucun système de découverte n’a jamais été conçu pour atteindre. Neuropian a été conçu pour les atteindre.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.8rem 2.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">II · Les Écoles Ont Abandonné les Esprits Qui en Avaient le Plus Besoin</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">Les programmes pour surdoués ont fermé. Les filières avancées se sont aplaties. Les élèves qui avançaient le plus vite ont été invités à ralentir, et ceux qui pensaient de biais ont été invités à penser droit.</p>
         <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">L’éducation a été conçue pour la moyenne, et elle s’y est optimisée sans relâche. Les esprits qui tombaient en dehors de ce modèle - neurodivergents, divergents, trop rapides, trop latéraux, trop obsédés par quelque chose pour lequel aucun professeur n’avait de barème - n’ont pas été servis par le système. Ils ont été gérés par lui. Neuropian est l’infrastructure que l’éducation a refusé de construire : non pas pour enseigner ce qui existe déjà, mais pour trouver ceux qui sont déjà en avance, et leur donner les personnes avec lesquelles ils étaient destinés à travailler.</p>
@@ -857,15 +860,15 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
 
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Se Rencontrer</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Neuropian identifie des personnes dont l’intellect et l’ambition appartiennent à la même salle - des personnes qui ne se seraient jamais trouvées par les réseaux ou institutions traditionnels.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Collaborer</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Via RoundTable et notre système d’équipes, les membres accèdent à des espaces de projet et des canaux en direct conçus pour les personnes qui pensent à ce niveau - et nulle part ailleurs.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Innover</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Quand les bons esprits convergent, les percées suivent. L’infrastructure de Neuropian est conçue pour réduire la distance entre une grande idée et son impact réel.</p>
       </div>
