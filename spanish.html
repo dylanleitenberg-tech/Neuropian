@@ -260,6 +260,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .live-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.75;color:#e8e2d6}
 .live-text strong{color:var(--white);font-style:normal;font-weight:400}
 .live-sub{font-family:'Barlow',sans-serif;font-size:.68rem;color:#e8e2d6;margin-top:.8rem;line-height:1.6}
+/* ── WHY BOXES ── */
+.why-box{transition:background .32s,box-shadow .38s,transform .4s cubic-bezier(.16,1,.3,1)}
+.why-box:hover{background:#191919!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 14px 44px rgba(0,0,0,.55);transform:translateY(-6px)}
 
 /* ── CRISIS IN EDUCATION (WASHI background) ── */
 .crisis-section{background:var(--washi);color:var(--off-black)}
@@ -841,12 +844,12 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <p class="section-body reveal" style="max-width:720px;margin-bottom:3.5rem">Los mayores avances de la humanidad nunca fueron obra de un genio solitario - surgieron cuando las personas correctas se encontraron en el momento justo. Neuropian existe para hacer ese momento inevitable.</p>
 
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
-      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.8rem 2.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">I · El Genio Entre Nosotros</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">Ya están aquí. Publicando mejoras a investigaciones que nadie pidió. Construyendo sistemas en cuartos de uso secundario. Pensando años por delante de las instituciones que eventualmente intentarán reclamar su trabajo.</p>
         <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">Las mentes extraordinarias no son raras - lo que es invisible es la infraestructura para encontrarlas. No se anuncian en LinkedIn. No aplican a programas diseñados para seleccionar por credencial y cumplimiento. Existen en los rincones de internet, y del mundo, que ningún sistema de descubrimiento fue construido para alcanzar. Neuropian fue construida para alcanzarlas.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.8rem 2.5rem">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">II · Las Escuelas Han Abandonado las Mentes Que Más las Necesitaban</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">Los programas para dotados cerraron. Los tracks avanzados se nivelaron. A los estudiantes que avanzaban más rápido se les pidió que desaceleraran, y a los que pensaban de forma lateral se les pidió que pensaran de manera recta.</p>
         <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">La educación fue diseñada para el promedio, y se optimizó sin descanso para ello. Las mentes que quedaron fuera de ese diseño - neurodivergentes, divergentes, demasiado rápidas, demasiado laterales, demasiado obsesionadas con algo para lo que ningún maestro tenía una rúbrica - no fueron atendidas por el sistema. Fueron administradas por él. Neuropian es la infraestructura que la educación se negó a construir: no para enseñar lo que ya existe, sino para encontrar a quienes ya van por delante, y darles las personas con las que estaban destinados a trabajar.</p>
@@ -854,15 +857,15 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
 
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Encontrarse</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Neuropian identifica personas cuyo intelecto y ambición pertenecen al mismo espacio - personas que nunca se habrían encontrado a través de redes o instituciones tradicionales.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Colaborar</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">A través de RoundTable y nuestro sistema de equipos, los miembros acceden a salas de proyectos y canales en vivo diseñados para quienes piensan a este nivel - y en ningún otro lugar.</p>
       </div>
-      <div style="background:var(--near-black);padding:2.2rem 2rem">
+      <div class="why-box" style="background:var(--near-black);padding:2.2rem 2rem">
         <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">Innovar</div>
         <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Cuando las mentes correctas convergen, los avances siguen. La infraestructura de Neuropian está diseñada para reducir la distancia entre una gran idea y su impacto real.</p>
       </div>
