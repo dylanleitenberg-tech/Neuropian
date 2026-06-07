@@ -103,7 +103,7 @@
   --brush:rgba(255,255,255,0.06);
 }
 html{scroll-behavior:smooth;background:#000}
-/* iOS status bar fill — belt + suspenders approach */
+/* iOS status bar fill - belt + suspenders approach */
 #sb-fill{
   position:fixed;top:0;left:0;right:0;
   height:constant(safe-area-inset-top);
@@ -250,8 +250,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .method-n{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;color:rgba(255,255,255,.05);line-height:1;margin-bottom:.85rem;letter-spacing:-.04em}
 .method-card h4{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem}
 .method-card p{font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:#e8e2d6;font-weight:300}
-.deviates-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
-@media(max-width:768px){.deviates-grid{grid-template-columns:1fr}}
 
 /* Live feed block */
 .live-block{margin-top:2.5rem;padding:2rem 2.5rem;border:1px solid rgba(255,255,255,.08);position:relative}
@@ -321,41 +319,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .qt{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.75;color:#e8e2d6;font-weight:300}
 .qa{font-family:'Barlow Condensed',sans-serif;font-size:.5rem;letter-spacing:.24em;text-transform:uppercase;color:#e8e2d6;margin-top:1rem;font-weight:600}
 
-/* ── FOUNDER ── */
-.founder-section{background:var(--black);color:var(--white)}
-.founder-layout{display:flex;gap:4rem;align-items:flex-start;margin-top:3rem}
-.founder-badge{width:80px;height:80px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#e8e2d6;flex-shrink:0}
-.founder-name{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--white);margin-bottom:.3rem}
-.founder-title{font-family:'Barlow Condensed',sans-serif;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:#e8e2d6;margin-bottom:1rem;font-weight:500}
-.founder-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
-.ftag{font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:#e8e2d6;padding:.2rem .55rem;font-weight:500}
-.founder-body p{font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.9;color:#e8e2d6;font-weight:300;margin-bottom:.95rem}
-.founder-body p strong{color:#e8e2d6;font-weight:400}
-.founder-quote{margin-top:2rem;padding:2rem 2.5rem;border-left:1px solid rgba(255,255,255,.15);position:relative}
-.founder-quote::before{content:'"';font-family:'Playfair Display',serif;font-size:4rem;color:rgba(255,255,255,.06);position:absolute;top:-1rem;left:2rem;line-height:1}
-.founder-quote p{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;line-height:1.8;color:#e8e2d6;margin-bottom:.8rem}
-.founder-quote p strong{color:var(--white);font-style:normal;font-weight:400}
-.fq-credit{font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:#e8e2d6;font-weight:600}
-
-/* ── ACADEMY ── */
-.academy-section{background:var(--washi);color:var(--off-black)}
-.academy-section .eyebrow{color:#0d0c0b}
-.academy-section .eyebrow::before{background:rgba(0,0,0,.2)}
-.academy-section .section-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.2rem);font-weight:700;line-height:.95;letter-spacing:-.025em;color:var(--off-black)}
-.academy-section .section-title em{font-style:italic;color:#0d0c0b}
-.academy-card{margin-top:3rem;border:1px solid rgba(0,0,0,.1)}
-.academy-top{background:var(--off-black);color:var(--white);padding:2.5rem 3rem;position:relative;overflow:hidden}
-.academy-top::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;opacity:.04;pointer-events:none}
-.academy-top h2{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;line-height:1;color:var(--white);position:relative}
-.academy-top h2 em{font-style:italic;color:#e8e2d6}
-.academy-top-sub{font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#e8e2d6;margin-top:.5rem;position:relative}
-.academy-body{background:var(--warm-white);padding:2.5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem}
-.academy-body h4{font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--off-black);margin-bottom:.7rem}
-.academy-body p{font-family:'Cormorant Garamond',serif;font-size:.98rem;line-height:1.85;color:rgba(13,12,11,0.7);font-weight:300;margin-bottom:.7rem}
-.academy-body p strong{color:var(--off-black);font-weight:600}
-.academy-inset-quote{margin-top:1rem;border-left:2px solid rgba(0,0,0,.15);padding-left:1rem;font-family:'Cormorant Garamond',serif;font-size:.98rem;font-style:italic;color:rgba(13,12,11,0.7);line-height:1.75}
-.academy-inset-quote div{font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(13,12,11,0.7);font-weight:600;margin-top:.5rem;font-style:normal}
-
 /* ── REALITY / NEXT ELON TEASER ── */
 .reality-section{background:var(--black);color:var(--white);padding:0}
 .reality-hero{padding:8rem 3rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
@@ -384,12 +347,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .tl-desc{font-family:'Cormorant Garamond',serif;font-size:.62rem;line-height:1.55;color:#e8e2d6;text-align:center;font-style:italic}
 
 /* ── CTA ── */
-.cta-section{background:var(--off-black);color:var(--white);padding:8rem 3rem;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+.cta-section{background:var(--washi);color:var(--off-black);padding:8rem 3rem;text-align:center;border-top:1px solid rgba(0,0,0,.06)}
 .cta-inner{max-width:800px;margin:0 auto}
-.cta-pre{font-family:'Barlow Condensed',sans-serif;font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:#e8e2d6;margin-bottom:1.5rem}
-.cta-h{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;line-height:.92;letter-spacing:-.03em;color:var(--white);margin-bottom:2rem}
-.cta-h em{font-style:italic;color:#e8e2d6}
-.cta-p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;line-height:1.8;color:#e8e2d6;max-width:580px;margin:0 auto 3rem}
+.cta-pre{font-family:'Barlow Condensed',sans-serif;font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(13,12,11,0.5);margin-bottom:1.5rem}
+.cta-h{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;line-height:.92;letter-spacing:-.03em;color:var(--off-black);margin-bottom:2rem}
+.cta-h em{font-style:italic;color:var(--off-black)}
+.cta-p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;line-height:1.8;color:rgba(13,12,11,0.65);max-width:580px;margin:0 auto 3rem}
 .cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
 
 /* ── TICKER BOTTOM ── */
@@ -449,8 +412,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   .tl-nodes{overflow-x:auto}
   .footer-top{grid-template-columns:1fr;gap:3rem}
   .footer-links{grid-template-columns:1fr 1fr}
-  .founder-layout{flex-direction:column;gap:2rem}
-  .academy-body{grid-template-columns:1fr}
 }
 
 /* ── WIDE DESKTOP NAV ── */
@@ -595,8 +556,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   .tl-nodes{overflow-x:auto}
   .footer-top{grid-template-columns:1fr;gap:3rem}
   .footer-links{grid-template-columns:1fr 1fr}
-  .founder-layout{flex-direction:column;gap:2rem}
-  .academy-body{grid-template-columns:1fr}
   .counter{grid-template-columns:1fr}
   .count-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}
   .count-item:last-child{border-bottom:none}
@@ -754,6 +713,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <button onclick="closeMobileNav()" style="background:none;border:none;font-size:1.1rem;color:rgba(255,255,255,0.5);cursor:pointer;line-height:1;width:32px;height:32px;display:flex;align-items:center;justify-content:center;touch-action:manipulation;flex-shrink:0">✕</button>
   </div>
   <nav style="display:flex;flex-direction:column;padding:1rem 0">
+    <a onclick="closeMobileNav();navScroll('why')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">למה אנו מוצאים</a>
     <a onclick="closeMobileNav();navScroll('find')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">איך אנחנו מוצאים</a>
     <a onclick="closeMobileNav();navScroll('crisis')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">את מי אנחנו מוצאים</a>
     <a onclick="closeMobileNav();gatedPage('platform')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.95);border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer">הזדמנויות</a>
@@ -871,6 +831,50 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 </section>
 
 
+
+
+<!-- WHY NEUROPIAN FINDS YOU -->
+<section class="sec" style="background:var(--near-black);border-top:1px solid rgba(255,255,255,.06)" id="why">
+  <div class="si">
+    <div class="section-eyebrow reveal">השליחות של Neuropian</div>
+    <h2 class="section-heading reveal">למה Neuropian <em>מוצאת אתכם</em></h2>
+    <p class="section-body reveal" style="max-width:720px;margin-bottom:3.5rem">ההתקדמויות הגדולות בתולדות האנושות לא היו מעשה של גאון בודד - הן נבעו ממפגש של האנשים הנכונים ברגע הנכון. Neuropian קיימת כדי להפוך את הרגע הזה לבלתי נמנע.</p>
+
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
+      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">I · הגאון שבינינו</div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">הם כבר כאן. מפרסמים שיפורים לחקר שאיש לא ביקש. בונים מערכות בחדרים פנויים. חושבים שנים לפני המוסדות שבסופו של דבר ינסו לנכס לעצמם את עבודתם.</p>
+        <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">מוחות יוצאי דופן אינם נדירים - התשתית הבלתי נראית היא זו שנדירה. הם לא מכריזים על עצמם בלינקדאין. הם לא מגישים מועמדות לתוכניות שנועדו לסנן על בסיס תעודות וציות. הם קיימים בפינות של האינטרנט, ושל העולם, שאף מערכת גילוי לא נבנתה אי פעם להגיע אליהן. Neuropian נבנתה כדי להגיע אליהם.</p>
+      </div>
+      <div style="background:var(--near-black);padding:2.8rem 2.5rem">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.4rem">II · בתי הספר עזבו את המוחות שזקוקים להם ביותר</div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.28rem);font-style:italic;line-height:1.78;color:var(--white);margin-bottom:1.2rem">תוכניות המחוננים נסגרו. המסלולים המתקדמים הוחלקו. מהתלמידים שהתקדמו מהר ביותר ביקשו להאט, ומאלה שחשבו באלכסון ביקשו לחשוב ישר.</p>
+        <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.58)">החינוך תוכנן לממוצע, ואופטם בחריצות לשמו. המוחות שנפלו מחוץ לאותו עיצוב - נוירודיברגנטים, דיברגנטים, מהירים מדי, לטרליים מדי, אובססיבים מדי לדבר שאף מורה לא היה לו רובריקה - לא שורתו על ידי המערכת. הם נוהלו על ידיה. Neuropian היא התשתית שהחינוך סירב לבנות: לא כדי ללמד את מה שכבר קיים, אלא כדי למצוא את אלה שכבר קדימים לו, ולתת להם את האנשים שנועדו לעבוד איתם.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,.07);margin-bottom:3rem">
+      <div style="background:var(--near-black);padding:2.2rem 2rem">
+        <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">להיפגש</div>
+        <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">Neuropian מגלה אנשים שהאינטלקט והשאיפות שלהם שייכים לאותו חדר - אנשים שלעולם לא היו מוצאים זה את זה דרך הרשתות או המוסדות המסורתיים.</p>
+      </div>
+      <div style="background:var(--near-black);padding:2.2rem 2rem">
+        <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">לשתף פעולה</div>
+        <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">דרך RoundTable ומערכת ההתאמה שלנו, החברים ניגשים לחדרי פרויקטים וערוצים חיים שנבנו לאנשים שחושבים ברמה הזו - ולא אחרת.</p>
+      </div>
+      <div style="background:var(--near-black);padding:2.2rem 2rem">
+        <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;font-style:italic;color:var(--white);margin-bottom:.7rem">לחדש</div>
+        <p style="font-family:'Barlow',sans-serif;font-size:.68rem;line-height:1.78;color:rgba(255,255,255,.55)">כשהמוחות הנכונים מתמזגים, פריצות הדרך באות. התשתית של Neuropian נועדה לקצר את המרחק בין רעיון גדול לבין השפעתו בעולם.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="border-left:2px solid rgba(255,255,255,.18);padding-left:2rem">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.42rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.75rem">אינטליגנציית צוות</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.8vw,2rem);font-weight:700;line-height:1.1;color:var(--white);margin-bottom:1rem">האלגוריתם לא מוצא רק אנשים יוצאי דופן - הוא מוצא את האנשים היוצאי דופן הנכונים <em style="font-style:italic;color:#e8e2d6">זה לזה.</em></h3>
+      <p style="font-family:'Barlow',sans-serif;font-size:.72rem;line-height:1.82;color:rgba(255,255,255,.55);max-width:640px">אנחנו לא מרכיבים צוותות לפי תפקיד או תחום. Neuropian מנתחת חתימות קוגניטיביות, דפוסי פתרון בעיות ומזג אינטלקטואלי של כלל בסיס החברים שלה כדי לזהות שילובים המניבים תוצאות שאף התאמה על בסיס קורות חיים לא יכלה לחזות. התוצאה: צוותות שנבנו להשלים - לא לשכפל - את החוזקות זה של זה.</p>
+    </div>
+  </div>
+</section>
 
 <!-- HOW WE FIND YOU -->
 <section class="find-section section" id="find">
@@ -1070,45 +1074,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   </div>
 </section>
 
-<!-- PILLARS / PROFILES WE SEEK -->
-
-<section class="sec" style="background:var(--near-black);border-top:1px solid rgba(255,255,255,.06)">
-  <div class="si">
-    <div class="section-eyebrow reveal">הנוף</div>
-    <h2 class="section-heading reveal">כיצד Neuropian סוטה <em>מהנורמה</em></h2>
-    <p class="section-body reveal" style="max-width:680px;margin-bottom:2.5rem">SeekOut, hireEZ, AmazingHiring, Fetcher, Noon AI   פלטפורמות הכישרון החזקות ביותר בעולם נבנו עבור הרוב הנוירוטיפי. Neuropian קולטת כל טכניקה שהן חלצו, משלבת אותן, ובונה מחדש מהיסוד עבור המוחות הנוירודיברסנטיים שהן סינוו באופן שיטתי.</p>
-    <div class="deviates-grid">
-      <div class="method-card reveal">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:.5rem">SeekOut &middot; LinkedIn</div>
-        <div style="font-size:.55rem;color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-style:italic">סורקת GitHub, עבודות מחקר ופרופילים ציבוריים לאישורים</div>
-        <h4 class="method-title">Neuropian מפרטת כיצד מוחות חושבים, לא מה שהם מציגים</h4>
-        <p class="method-body">SeekOut מוצאת מי שיש לו את הכותרות הנכונות. Neuropian מוצאת מי שיש לו את הארכיטקטורה הקוגניטיבית לפתור בעיות שאף אחד אחר לא יכול לנסח. אנחנו מחפשים התנהגות, דפוס ודמיון   לא ביוגרפיה.</p>
-        <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">פרופיל קוגניטיבי</span>
-      </div>
-      <div class="method-card reveal" style="transition-delay:.08s">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:.5rem">hireEZ &middot; Noon AI</div>
-        <div style="font-size:.55rem;color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-style:italic">פנייה של בינה מלאכותית אג'נטית דרך LinkedIn, GitHub, Reddit, Slack</div>
-        <h4 class="method-title">אות ממה שאתה עושה באמת, לא ממה שאתה מציג</h4>
-        <p class="method-body">hireEZ מחפש בפלטפורמות. Neuropian קורא את האות שאתה בוחר לשתף דרך EagleEyes: כיצד אתה מנמק, מה אתה בונה, היכן אתה מעמיק. הצטרף פעם אחת בכל אתר ופרופילך הקוגניטיבי מתחדד.</p>
-        <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">סריקה של כל האינטרנט</span>
-      </div>
-      <div class="method-card reveal" style="transition-delay:.04s">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:.5rem">AmazingHiring &middot; Fetcher</div>
-        <div style="font-size:.55rem;color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-style:italic">כישרון הנדסי מ-Stack Overflow, Kaggle, ערוצי נישה</div>
-        <h4 class="method-title">Neuropian יוצרת צוותים בין-תחומיים שאף פלטפורמה לא יכולה לדמיין</h4>
-        <p class="method-body">AmazingHiring מוצאת מהנדסים. Neuropian מוצאת את האדם שהוא גם משורר, תיאורטיקן משחקים ונוירומדען שלמד עצמאית   ואז מחברת אותו עם אחרים שחוזקותיהם משלימות את המשוואה.</p>
-        <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">אינטליגנציה בין-תחומית</span>
-      </div>
-      <div class="method-card reveal" style="transition-delay:.12s">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:.5rem">HireVue &middot; Standard Boards</div>
-        <div style="font-size:.55rem;color:rgba(255,255,255,0.95);margin-bottom:.8rem;font-style:italic">סינון בינה מלאכותית מכוייל לנורמות ביצועים נוירוטיפיות</div>
-        <h4 class="method-title">Neuropian נבנתה למצוא את אלה שכל פילטר מסלק</h4>
-        <p class="method-body">כל פילטר בכל לוח דרושים מסלק מוח יוצא דופן נוסף. Neuropian תוכננה מעקרונות ראשוניים לזהות מה הופך מישהו לגאוני באופן ייחודי   שוברת כל סטריאוטיפ בחשיבה.</p>
-        <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">בינה מלאכותית הנוירודיברסנט-ראשונה</span>
-      </div>
-    </div>
-  </div>
-</section>
 <section class="timeline-section reveal" id="timeline">
   <div class="timeline-inner">
     <p style="text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:1.2rem">Dylan Leitenberg · Founder &amp; CEO · Neuropian</p>
@@ -1160,137 +1125,16 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   </div>
 </section>
 
-<section class="founder-section section" id="founder">
-  <div class="section-inner">
-    <div class="eyebrow reveal">המייסד</div>
-    <div class="founder-layout reveal">
-      <div>
-        <div class="founder-badge">DL</div>
-      </div>
-      <div>
-        <div class="founder-name">Dylan Leitenberg</div>
-        <div class="founder-title">מייסד וחזוני · Neuropian / Leitenberg Technologies</div>
-        <div class="founder-tags">
-          <span class="ftag">מדעי נתונים</span>
-          <span class="ftag">רובוטיקה</span>
-          <span class="ftag">פסיכולוגיה</span>
-          <span class="ftag">עמותת The Good Student</span>
-          <span class="ftag">עמותת YellowSwing</span>
-        </div>
-        <div class="founder-body">
-          <p>Dylan Leitenberg היה מחונן מגיל צעיר, והוא ידע זאת. הוא יכול היה לחוש את הפער בין מה שמוחו שאף אליו לבין מה שהכיתה יכלה להציע. הוא יכול היה לחוש שהוא זזים מהר מהחדר. לשאלות שרצה לשאול לא הייתה מקום בתכנית הלימודים. הבעיות שרצה לפתור לא היו על הסילבוס. <strong>הוא לא בנה את Neuropian כי זה היה רעיון עסקי טוב. הוא בנה אותה כי חי את הסיפור בעצמו, וראה אותו קורה לכולם סביבו.</strong></p>
-          <p><strong>הוא לא היה מפריע. הוא לא היה קשה. הוא פשוט היה קדימה יותר ממה שהמערכת תוכננה להכיל</strong>, והמערכת, במקום להתמתח לפגוש אותו, ביקשה ממנו בשקט להתכווץ.</p>
-          <p>הוא צפה במורים מקצים ציונים לסקרנות. הוא צפה בצלצול שמנתק רצפי מחשבה שיכלו להוביל למקום יוצא דופן. הוא צפה בחברים   חלקם מהאנשים המחוננים ביותר שיכיר אי פעם   שמפסיקים בהדרגה להרים את ידם, להפסיק לשאול למה, להפסיק להאמין שסוג האינטליגנציה המסוים שלהם יש לו מקום בעולם.</p>
-          <p><strong>Dylan סירב להפוך לניתן לניהול.</strong> עבודתו עם <strong>The Good Student</strong>, עמותה מפאסדינה המוקדשת לרווחת התלמידים, נתנה לו את האוצר מילים המדעי והאנושי למה שתמיד הבין: שרווחת הסטודנט בלתי נפרדת ממוטיבציה ומדחף. התובנה הזו הפכה לבסיס של Neuropian.</p>
-        </div>
-
-<div class="founder-quote" style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.07)">
-          <p>"מגיל צעיר, הבנתי שרבים מאלה שיש להם את הפוטנציאל הגדול ביותר מתייאשים ונדחים על ידי מערכת החינוך. המגבלות שמורים מטילים עליהם מעכבות את הצלחתם ואת דחפם. בחינות תקניות מתעלמות מאלה שאינטלקט שלהם חורג מהנורמה. אנחנו מאמצים את התפתחות החינוך כשהוא מתרחב דרך כל פוטנציאל. לחיות בעולם ללא מגבלות   זה מה ש-Neuropian בנתה."</p>
-          <div class="fq-credit">  Dylan Leitenberg, מייסד ומנכ'ל</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ACADEMY -->
-<section class="academy-section section" id="academy">
-  <div class="section-inner">
-    <div class="eyebrow reveal">האקדמיה · נוסדה על ידי Dylan Leitenberg</div>
-    <h2 class="section-title reveal" style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.2rem);font-weight:700;line-height:.95;letter-spacing:-.025em;color:var(--off-black);margin-bottom:1rem"><span>Leitenberg</span> <em style="font-style:italic">Academy</em></h2>
-    <p class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.85;color:rgba(0,0,0,.5);font-weight:300;margin-bottom:2.5rem">בית ספר שנבנה עבור מוחות שהמערכת לא תוכננה אף פעם להכיל.</p>
-    <div class="academy-card reveal">
-      <div class="academy-top">
-        <h2>Leitenberg <em>Academy</em></h2>
-        <div class="academy-top-sub">ייסוד בקרוב · על ידי Neuropian · זיהוי המחוננים מהגילאים הצעירים ביותר האפשריים</div>
-      </div>
-      <div class="academy-body">
-        <div>
-          <h4>מדוע האקדמיה קיימת</h4>
-          <p>מערכת החינוך כשלה באלה שחושבים שונה. תכניות מחוננים ננטשו אחת אחת. הילדים המבריקים ביותר במדינה עוברים דרך מערכת שנבנתה למרכז הסטטיסטי. הם לא נכשלים. <strong>המערכת היא שנכשלת בהם.</strong></p>
-          <p>Leitenberg Academy נוצרה כדי לסיים את זה. הבינה המלאכותית שלנו מזהה מוחות יוצאי דופן מוקדם   מוקדם יותר ממה שכל מוסד חשב לחפש   ומספקת להם חינוך שיכול באמת להתאים למי שהם.</p>
-        </div>
-        <div>
-          <h4>מה הופך אותה לשונה</h4>
-          <p>אין קיצוצים בתכניות מחוננים. אין רמות כיתה שרירותיות. אין מבחנים תקניים שמעניישים חשיבה מקורית. תלמידים מזוהים צעירים, מאומנים באופן רציף, ומחוברים להזדמנויות ברגע שהם מוכנים   לא כאשר מוסד מחליט שהם מבוגרים מספיק.</p>
-          <p>אנחנו מאמצים את התפתחות החינוך כשהוא מתרחב דרך כל פוטנציאל. לחיות בעולם ללא מגבלות   זה מה ש-Leitenberg Academy מלמדת מהיום הראשון ממש.</p>
-          <div class="academy-inset-quote">כולנו יודעים סיפורים על אלה שפספסו את הסיכוי לשחרר את הפוטנציאל הבלתי מנוצל שלהם. לא עוד נשמע את הביטוי: "אתה לא יכול לעשות את זה."
-            <div>, Dylan Leitenberg</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" style="background:var(--black);border-top:1px solid rgba(255,255,255,.06)">
-  <div class="si" style="max-width:900px">
-    <div class="reveal">
-      <div class="section-eyebrow">הסיפור שהתחיל את הכל</div>
-      <h2 class="section-heading">הגאון<br><em>שבתוכנו</em></h2>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;line-height:1.75;color:rgba(255,255,255,0.95);margin-bottom:1.5rem">לאורך לימודיו, Dylan ראה כמה סטודנטים נבחרים שחשבו שונה. היו להם מוחות מבריקים שפותרים <strong style="color:rgba(255,255,255,0.95)">קוביות רוביק בחמישה ממדים ומשחקים שחמט קוונטי</strong>. סטודנטים שעברו הרבה מעבר למוריהם, ומחפשים להגיע לרמה הבאה.</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;line-height:1.75;color:rgba(255,255,255,0.95);margin-bottom:1.5rem">ובכל זאת, הסטודנטים האלה בילו את ימיהם בכיתות ש<strong style="color:rgba(255,255,255,0.95)">לא יכלו לספק חינוך הולם</strong> למוחות כאלה. עם הידע והמיומנויות הנרחבים שלהם, הם יכלו היו לעבוד עבור Apple, Microsoft, או להפעיל חברות משלהם.</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;line-height:1.75;color:rgba(255,255,255,0.95);margin-bottom:1.5rem"><strong style="color:rgba(255,255,255,0.95)">בתי ספר נטשו את תכניות המחוננים שלהם</strong>, וגרמו לאלה שחושבים שונה לאבד את היצירתיות והדחף שלהם. ללא תמיכה מספקת, הסטודנטים האלה התמודדו בקושי   בעוד שהם יכלו להיות משנים את העולם.</p>
-      <div style="margin-top:2rem;padding:1.5rem 2rem;background:rgba(255,255,255,.04);border-left:2px solid rgba(255,255,255,.2)">
-        <p style="font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.04em;color:rgba(255,255,255,0.95);line-height:1.6">הילדים האלה אינם חריגים. <strong>הם אחד מאלפים</strong>   אנשים יוצאי דופן, חיים חיים רגילים, ייעודים לגדולה. <strong>הם אינם הבעיה. המערכת היא.</strong></p>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="crisis-section section" id="crisis">
-  <div class="section-inner">
-    <div class="eyebrow reveal">בתי הספר נטשו את המוחות שהיו זקוקים להם ביותר</div>
-    <h2 class="section-title reveal" style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.2rem);font-weight:700;line-height:.95;letter-spacing:-.025em;color:var(--off-black);margin-bottom:2rem">בתי הספר <em style="font-style:italic">נטשו</em> את המוחות<br>שהיו זקוקים להם ביותר</h2>
-    <p class="crisis-body reveal">בשני העשורים האחרונים, תכניות חינוך למחוננים נשללו מהמימון והוכחדו בצורה שיטתית. דור של מוחות יוצאי דופן שנשאר נודד, משועמם, מוזנח, מאובחן שגוי, מותמר לכניעה. מערכת החינוך הזו הורסת את האמיתי ובונה חברה מוחדת ללא מקום לחדשנות.</p>
-    <div class="crisis-stats reveal">
-      <div class="crisis-stat">
-        <span class="crisis-stat-n">6M+</span>
-        <span class="crisis-stat-l">תלמידים מחוננים שאינם מקבלים מענה מספק בארה"ב מדי שנה</span>
-      </div>
-      <div class="crisis-stat">
-        <span class="crisis-stat-n">3x</span>
-        <span class="crisis-stat-l">יותר סיכויים לנשור ללא אתגר מספק</span>
-      </div>
-      <div class="crisis-stat">
-        <span class="crisis-stat-n">72%</span>
-        <span class="crisis-stat-l">ממדינות ארה"ב קיצצו בתכניות מחוננים מאז 2010</span>
-      </div>
-    </div>
-    <div class="crisis-cards reveal">
-      <div class="crisis-card">
-        <h4>שעמום הופך לכישלון</h4>
-        <p>כשמוח פועל שנים קדימה ומקבל חומר שנים אחורה, הוא מתנתק   מסווג כקשה, כמפריע. המגבלות שמוטלות עליו מעכבות את הצלחתו ואת דחפו. התווית תמיד טועה. המערכת היא הבעיה.</p>
-      </div>
-      <div class="crisis-card">
-        <h4>מגפת האבחון השגוי</h4>
-        <p>&ldquo;התוצאות הראו שאלה שקיבלו רמזים לגאונות הובילו את המשתתפים הרחק מאבחנת הפרעת קשב.&rdquo; ילדים מחוננים מגלים חוסר קשב בעיקר בסביבות ממעיטות גירויים, לא בכל ההגדרות. ההתנהגויות אמיתיות. הגורם מוקרא שגוי.</p>
-        <p style="font-family:'Barlow Condensed',sans-serif;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(13,12,11,0.45);margin-top:.8rem;line-height:1.6">Hartnett, Nelson &amp; Rinn, <em>Roeper Review</em> 26(2), 2004</p>
-      </div>
-      <div class="crisis-card">
-        <h4>תיקן עד כדי הכחדה</h4>
-        <p>בחינות תקניות מתעלמות מאלה שאינטלקט שלהם חורג מהנורמה. כל מוח מקורי באמת מקבל ציון חסר, מנוטר כלפי מטה. לא עוד נשמע: "לא, אתה לא יכול לעשות את זה." העידן הזה מסתיים כאן.</p>
-      </div>
-    </div>
-    <div class="ink-ornament washi-ornament reveal"><div class="ink-line"></div><div class="ink-mark">◆ ההבטחה ◆</div><div class="ink-line"></div></div>
-    <div class="crisis-promise reveal">
-      <div class="crisis-promise-lbl">המשימה שלנו</div>
-      <div class="crisis-promise-text"><strong>כל תכנית מחוננים שנסגרת היא טרגדיה. כל מוח יוצא דופן שאינו מוכר הוא הפסד שהעולם לעולם לא יחשב.</strong> Neuropian בנתה את המערכת שהחינוך סירב לבנות   זו שמוצאת את המחוננים, השונים, הנבדלים, ונותנת להם את הבמה שהם תמיד הגיעו לה.</div>
-    </div>
-  </div>
-</section>
-
 <section class="cta-section reveal" id="cta">
   <div class="cta-inner">
     <div class="cta-pre">Neuropian · הגש מועמדות</div>
-    <h2 class="cta-h">האם אתה זה שחיפשנו<br><em>כל הזמן?</em></h2>
-    <p class="cta-p">מצאת את הדף הזה מסיבה. אנשים עם מוחות רגילים לא מגיעים לכאן. הבינה המלאכותית שלנו כבר חושדת שאתה שייך   עכשיו הוכח את זה.</p>
+    <h2 class="cta-h">האם אתה זה<br>שאנחנו <em>מחפשים?</em></h2>
+    <p class="cta-p">מצאת את הדף הזה מסיבה. מוחות רגילים לא מגיעים לכאן. ה-AI שלנו כבר חושד שאתה שייך. עכשיו הוכח את זה.</p>
     <div class="cta-btns">
       <button class="btn-primary cta-submit" onclick="openNextElonApply()"><span>שלח מועמדות</span></button>
-      <button class="btn-secondary" onclick="gatedPage('collective')">כנס ל-RoundTable</button>
-      <button class="btn-secondary" onclick="gatedPage('eagleeyes')">&#10022; EagleEyes</button>
+      <button class="btn-secondary" style="background:#0a0a0a;color:#fff;border-color:#0a0a0a;transition:background .2s,color .2s" onmouseenter="this.style.background='#fff';this.style.color='#0a0a0a'" onmouseleave="this.style.background='#0a0a0a';this.style.color='#fff'" onclick="gatedPage('collective')">כנס ל-RoundTable</button>
+      <button class="btn-secondary" style="background:#0a0a0a;color:#fff;border-color:#0a0a0a;transition:background .2s,color .2s" onmouseenter="this.style.background='#fff';this.style.color='#0a0a0a'" onmouseleave="this.style.background='#0a0a0a';this.style.color='#fff'" onclick="gatedPage('eagleeyes')">&#10022; EagleEyes</button>
     </div>
-
   </div>
 </section>
 
@@ -2896,8 +2740,7 @@ const autoFadeObs = new IntersectionObserver(entries => {
 document.querySelectorAll(
   '.section-inner > h2, .section-inner > p, .si > h2, .si > p,' +
   '.method-grid, .pillars-grid, .crisis-cards, .crisis-stats,' +
-  '.manifesto-list, .quotes-grid, .reality-hero, .founder-layout,' +
-  '.academy-card, .timeline-inner, .cta-inner, .live-block'
+  '.manifesto-list, .quotes-grid, .reality-hero, .timeline-inner, .cta-inner, .live-block'
 ).forEach((el, i) => {
   if (!el.classList.contains('reveal') && !el.classList.contains('fade-in') && !el.classList.contains('in')) {
     el.classList.add('fade-in');
@@ -5996,7 +5839,7 @@ else{renderOppPreview();}
 <div id="notif-container" style="position:fixed;bottom:1.2rem;right:1.2rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;pointer-events:none;max-width:320px"></div>
 <script>document.addEventListener("click",function(){var m=document.getElementById("lang-menu");if(m)m.style.display="none";});</script>
 <script>
-// ── iOS status bar fill (JS measurement — more reliable than pure CSS) ──
+// ── iOS status bar fill (JS measurement - more reliable than pure CSS) ──
 (function(){
   function applySafeArea(){
     var fill=document.getElementById('sb-fill');
