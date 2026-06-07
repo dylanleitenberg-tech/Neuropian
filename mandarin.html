@@ -333,6 +333,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .rstat{background:var(--near-black);padding:2rem 2.5rem;display:flex;align-items:baseline;gap:1.5rem}
 .rstat-n{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;color:var(--white);letter-spacing:-.04em;flex-shrink:0}
 .rstat-l{font-family:'Barlow Condensed',sans-serif;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:#e8e2d6;font-weight:500}
+.rstat{transition:background .3s,box-shadow .3s}
+.rstat-n{transition:color .3s,text-shadow .3s}
+.rstat-l{transition:color .3s}
+.rstat:hover{background:rgba(255,255,255,.06);box-shadow:inset 3px 0 0 rgba(255,255,255,.55),inset 0 1px 0 rgba(255,255,255,.06),0 8px 32px rgba(0,0,0,.4)}
+.rstat:hover .rstat-n{color:var(--white);text-shadow:0 0 48px rgba(255,255,255,.55)}
+.rstat:hover .rstat-l{color:rgba(255,255,255,.9)}
 
 /* ── TIMELINE ── */
 .timeline-section{background:var(--off-black);color:var(--white);padding:9rem 3rem}
