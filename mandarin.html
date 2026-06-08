@@ -797,7 +797,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </h1>
     <p class="hero-desc">天才的聚集地。Neuropian 已构建出一套算法，能够找到那些潜力从未被世界正确衡量的人，以及那些已在快速前行、只需一支能够跟上节奏的团队的人。</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="navScroll('cta')"><span>立即申请</span></button>
+      <button class="btn-primary" onclick="openNextElonApply()"><span>立即申请</span></button>
       <button class="btn-secondary" onclick="navScroll('find')">我们如何发现你</button>
     </div>
   </div>
@@ -892,10 +892,10 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <p>Neuropian 的浏览器扩展。一次安装，每个你加入的网站都将成为智能扫描的一部分。该算法在后台读取你的行为信号，构建认知画像，将你与命中注定的机会和人才相连接。</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">浏览器扩展</span>
       </div>
-      <div class="method-card" style="transition-delay:.08s">
+      <div class="method-card" style="transition-delay:.08s;cursor:pointer" onclick="document.getElementById('falcon-intro').scrollIntoView({behavior:'smooth'})">
         <div class="method-n">02</div>
         <h4>Falcon</h4>
-        <p>Neuropian 的数据扫描器。Falcon 持续爬取互联网，读取论坛、研究帖、开源贡献、竞争平台和小众社区的智识活动。在别人眼中是噪音的地方，Falcon 读取的是信号，从人们在网上真实的行为中挖掘出非凡头脑。</p>
+        <p>Neuropian 的数据扫描器。Falcon 扫描以智识内容为中心的平台，如 Reddit 和 Hacker News，读取人们在那里真正构建、解决和讨论的内容。在别人眼中是噪音的地方，Falcon 读取的是信号，挖掘出藏在众目睽睽之下的非凡头脑。</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">数据扫描</span>
       </div>
       <div class="method-card" style="transition-delay:.16s;cursor:pointer" onclick="document.getElementById('opportunities-home').scrollIntoView({behavior:'smooth'})">
@@ -963,6 +963,40 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
       <button class="btn-primary" onclick="gatedPage('eagleeyes')"><span>&#10022; &nbsp;获取 EagleEyes</span></button>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">Chrome &middot; Edge &middot; Brave &middot; 免费</span>
+    </div>
+  </div>
+</section>
+
+<!-- FALCON SECTION -->
+<section class="sec" style="background:var(--off-black);border-top:1px solid rgba(255,255,255,.06)" id="falcon-intro">
+  <div class="si">
+    <div class="section-eyebrow reveal">Neuropian 智能</div>
+    <h2 class="section-heading reveal">Falcon，<em>Neuropian 的侦察智能体</em></h2>
+    <p class="section-body reveal" style="max-width:660px;margin-bottom:3rem">Falcon 是 Neuropian 的数据扫描系统。它扫描以智识内容为中心的平台，如 Reddit 和 Hacker News，读取人们在那里真正构建、解决和讨论的内容，以发现那些大多数招聘者从未想到去寻找的隐藏天才。Falcon 发现的每一个信号，连同 EagleEyes 贡献的每一个信号，都汇入同一个匹配引擎，这套系统会评估认知特质、构建你的画像，并据此对人才、问题与机会之间的契合度进行排序。</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.05);margin-bottom:3.5rem" class="ee-grid">
+      <div class="method-card reveal">
+        <div class="method-n">01</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">精准扫描</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Falcon 扫描真正发生智识工作的平台——如 Reddit 和 Hacker News——读取人们在那里构建、解决和讨论的内容，而不是等待一份申请落入收件箱。</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.08s">
+        <div class="method-n">02</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">读懂信号，而非噪音</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">互联网上的大多数内容只是噪音。Falcon 的设计目的，就是从普通活动中分辨出真正的深度：凌晨两点反复推敲出的证明、无人能写出的开源补丁、比教科书讲得更清楚的论坛回帖。</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.16s">
+        <div class="method-n">03</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">匹配算法如何运作</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Falcon 与 EagleEyes 收集到的每一个信号，都会被转化为认知特质评分：模式识别、系统思维、创造性推理，以及其他数十项指标。匹配引擎将这些评分与问题、机会、团队和人才进行比对，依据认知契合度而非学历背景，对匹配程度进行排序。</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.24s">
+        <div class="method-n">04</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">持续进化</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">这一模型不断重新训练，学习真正卓越的样貌，涵盖每一个领域、每一个年龄段、互联网的每一个角落。它读取得越多，对于谁该归属何处的判断就越精准。</p>
+      </div>
+    </div>
+    <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">精准扫描 &middot; 认知评分 &middot; 基于信号的匹配</span>
     </div>
   </div>
 </section>
