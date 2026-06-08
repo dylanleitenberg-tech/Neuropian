@@ -799,7 +799,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </h1>
     <p class="hero-desc">Un hub pour les génies. Neuropian a construit les algorithmes pour trouver ceux dont le potentiel n'a jamais été correctement mesuré, et ceux qui avancent déjà vite et ont besoin d'une équipe capable de suivre.</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="navScroll('cta')"><span>Postuler Maintenant</span></button>
+      <button class="btn-primary" onclick="openNextElonApply()"><span>Postuler Maintenant</span></button>
       <button class="btn-secondary" onclick="navScroll('find')">Comment Nous Vous Trouvons</button>
     </div>
   </div>
@@ -894,10 +894,10 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <p>L'extension navigateur de Neuropian. Installez-la une fois et chaque site que vous activez devient partie du balayage d'intelligence. L'algorithme lit vos signaux comportementaux en arrière-plan, construisant un profil cognitif qui vous connecte aux opportunités et aux personnes pour lesquelles vous êtes fait.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Extension Navigateur</span>
       </div>
-      <div class="method-card" style="transition-delay:.08s">
+      <div class="method-card" style="transition-delay:.08s;cursor:pointer" onclick="document.getElementById('falcon-intro').scrollIntoView({behavior:'smooth'})">
         <div class="method-n">02</div>
         <h4>Falcon</h4>
-        <p>Le balayeur de données de Neuropian. Falcon parcourt internet en continu, lisant l'activité intellectuelle sur les forums, les fils de recherche, les contributions open-source, les plateformes compétitives et les communautés de niche. Là où les autres voient du bruit, Falcon lit le signal, faisant émerger les esprits extraordinaires de ce qu'ils font réellement en ligne.</p>
+        <p>Le balayeur de données de Neuropian. Falcon balaie les plateformes centrées sur l'activité intellectuelle, comme Reddit et Hacker News, lisant ce que les gens construisent, résolvent et discutent réellement là-bas. Là où les autres voient du bruit, Falcon lit le signal, faisant émerger les esprits extraordinaires cachés en pleine vue.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Balayage de Données</span>
       </div>
       <div class="method-card" style="transition-delay:.16s;cursor:pointer" onclick="document.getElementById('opportunities-home').scrollIntoView({behavior:'smooth'})">
@@ -965,6 +965,40 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
       <button class="btn-primary" onclick="gatedPage('eagleeyes')"><span>&#10022; &nbsp;Get EagleEyes</span></button>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">Chrome &middot; Edge &middot; Brave &middot; Gratuit</span>
+    </div>
+  </div>
+</section>
+
+<!-- FALCON SECTION -->
+<section class="sec" style="background:var(--off-black);border-top:1px solid rgba(255,255,255,.06)" id="falcon-intro">
+  <div class="si">
+    <div class="section-eyebrow reveal">Intelligence Neuropian</div>
+    <h2 class="section-heading reveal">Falcon, <em>l&rsquo;Agent de Détection de Neuropian</em></h2>
+    <p class="section-body reveal" style="max-width:660px;margin-bottom:3rem">Falcon est le système de balayage de données de Neuropian. Il balaie les plateformes centrées autour du contenu intellectuel, comme Reddit et Hacker News, lisant ce que les gens y construisent, résolvent et discutent réellement, pour faire émerger les génies cachés que la plupart des recruteurs ne pensent jamais à chercher. Chaque signal que Falcon découvre, aux côtés de chaque signal apporté par EagleEyes, alimente le même moteur de correspondance, le système qui évalue les traits cognitifs, construit votre profil et classe l&rsquo;alignement entre les personnes, les problèmes et les opportunités.</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.05);margin-bottom:3.5rem" class="ee-grid">
+      <div class="method-card reveal">
+        <div class="method-n">01</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">Balayage Ciblé</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Falcon scanne les plateformes où se déroule le vrai travail intellectuel — comme Reddit et Hacker News — lisant ce que les gens y construisent, résolvent et discutent, sans attendre qu&rsquo;une candidature n&rsquo;atterrisse dans une boîte de réception.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.08s">
+        <div class="method-n">02</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">Lire le Signal, Pas le Bruit</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">La majeure partie d&rsquo;internet n&rsquo;est que du bruit. Falcon est conçu pour distinguer la profondeur de la simple activité&nbsp;: la démonstration travaillée à 2 heures du matin, le correctif open-source que personne d&rsquo;autre n&rsquo;aurait pu écrire, la réponse de forum qui explique un concept mieux qu&rsquo;un manuel.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.16s">
+        <div class="method-n">03</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">Comment Fonctionne l&rsquo;Algorithme de Correspondance</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Chaque signal recueilli par Falcon et EagleEyes est converti en un score de traits cognitifs&nbsp;: reconnaissance de motifs, pensée systémique, raisonnement créatif, et bien d&rsquo;autres encore. Le moteur de correspondance compare ces scores aux problèmes, aux opportunités, aux équipes et aux personnes, classant l&rsquo;alignement selon l&rsquo;adéquation cognitive plutôt que les diplômes.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.24s">
+        <div class="method-n">04</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">Une Amélioration Constante</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Le modèle se réentraîne en continu sur ce à quoi ressemble réellement l&rsquo;extraordinaire, dans chaque domaine, à chaque âge, et dans chaque recoin d&rsquo;internet. Plus il lit, plus son sens de qui appartient où devient précis.</p>
+      </div>
+    </div>
+    <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">Balayage Ciblé &middot; Évaluation Cognitive &middot; Correspondance Basée sur le Signal</span>
     </div>
   </div>
 </section>
