@@ -796,7 +796,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </h1>
     <p class="hero-desc">מרכז לגאונים. Neuropian בנתה את האלגוריתמים למציאת אלה שהפוטנציאל שלהם לא נמדד אף פעם כראוי, ואלה שכבר זזים מהר ושצריכים צוות שמסוגל לעמוד בקצב.</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="navScroll('cta')"><span>הגש מועמדות</span></button>
+      <button class="btn-primary" onclick="openNextElonApply()"><span>הגש מועמדות</span></button>
       <button class="btn-secondary" onclick="navScroll('find')">איך אנחנו מוצאים אותך</button>
     </div>
   </div>
@@ -891,10 +891,10 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <p>תוסף הדפדפן של Neuropian. התקן פעם אחת וכל אתר שאתה מצרף נכנס לסריקת האינטליגנציה. האלגוריתם קורא את האותות ההתנהגותיים שלך ברקע, בונה פרופיל קוגניטיבי שמחבר אותך להזדמנויות ולאנשים שנבנית בשבילם.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">תוסף דפדפן</span>
       </div>
-      <div class="method-card" style="transition-delay:.08s">
+      <div class="method-card" style="transition-delay:.08s;cursor:pointer" onclick="document.getElementById('falcon-intro').scrollIntoView({behavior:'smooth'})">
         <div class="method-n">02</div>
         <h4>Falcon</h4>
-        <p>סורק הנתונים של Neuropian. Falcon סורק את האינטרנט ברציפות, קורא פעילות אינטלקטואלית בפורומים, שרשורי מחקר, תרומות לקוד פתוח, פלטפורמות תחרותיות וקהילות נישה. איפה שאחרים רואים רעש, Falcon קורא אות   ומצית מוחות יוצאי דופן ממה שהם עושים בפועל באינטרנט.</p>
+        <p>סורק הנתונים של Neuropian. Falcon סורק פלטפורמות המרוכזות סביב תוכן אינטלקטואלי, כמו Reddit ו-Hacker News, קורא מה שאנשים בנו, פתרו ודנו שם. איפה שאחרים רואים רעש, Falcon קורא אות, ומעלה אל פני השטח מוחות יוצאי דופן המסתתרים לנגד עיני כל.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">סריקת נתונים</span>
       </div>
       <div class="method-card" style="transition-delay:.16s;cursor:pointer" onclick="document.getElementById('opportunities-home').scrollIntoView({behavior:'smooth'})">
@@ -962,6 +962,40 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
       <button class="btn-primary" onclick="gatedPage('eagleeyes')"><span>&#10022; &nbsp;קבל את EagleEyes</span></button>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">Chrome &middot; Edge &middot; Brave &middot; חינם</span>
+    </div>
+  </div>
+</section>
+
+<!-- FALCON SECTION -->
+<section class="sec" style="background:var(--off-black);border-top:1px solid rgba(255,255,255,.06)" id="falcon-intro">
+  <div class="si">
+    <div class="section-eyebrow reveal">אינטליגנציית Neuropian</div>
+    <h2 class="section-heading reveal">Falcon, <em>סוכן הסיור של Neuropian</em></h2>
+    <p class="section-body reveal" style="max-width:660px;margin-bottom:3rem">Falcon הוא סורק הנתונים של Neuropian. הוא סורק פלטפורמות המרוכזות סביב תוכן אינטלקטואלי, כמו Reddit ו-Hacker News, קורא מה שאנשים בנו, פתרו ודנו שם, כדי לאתר את הגאונים הנסתרים שרוב המגייסים אף פעם לא חושבים לחפש. כל אות שFalcon מוצא, לצד כל אות שEagleEyes תורם, מזין את אותו מנוע ההתאמה, המערכת שמדרגת תכונות קוגניטיביות, בונה את הפרופיל שלך, ומדרגת את ההתאמה בין אנשים, בעיות והזדמנויות.</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.05);margin-bottom:3.5rem" class="ee-grid">
+      <div class="method-card reveal">
+        <div class="method-n">01</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">סריקה ממוקדת</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Falcon סורק את הפלטפורמות שבהן מתרחשת עבודה אינטלקטואלית אמיתית—כמו Reddit ו-Hacker News—קורא מה שאנשים בונים, פותרים ודנים שם, מבלי להמתין שמועמדות תנחת בתיבת דואר נכנס.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.08s">
+        <div class="method-n">02</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">קורא אות, לא רעש</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">רוב האינטרנט הוא רעש. Falcon נבנה כדי להפריד עומק מפעילות גרידא: ההוכחה שעובדה עליה בשעה שתיים בלילה, תיקון הקוד הפתוח שאף אחד אחר לא הצליח לכתוב, התגובה בפורום שמסבירה רעיון טוב יותר מספר לימוד.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.16s">
+        <div class="method-n">03</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">כיצד פועל אלגוריתם ההתאמה</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">כל אות שFalcon וEagleEyes אוספים מומר לציון תכונות קוגניטיביות: זיהוי דפוסים, חשיבה מערכתית, חשיבה יצירתית, ועוד עשרות תכונות נוספות. מנוע ההתאמה משווה את הציונים הללו מול בעיות, הזדמנויות, צוותים ואנשים, ומדרג את ההתאמה לפי ההתאמה הקוגניטיבית ולא לפי תארים.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.24s">
+        <div class="method-n">04</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">תמיד משתפר</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">המודל מתאמן מחדש ברציפות על איך נראה יוצא דופן באמת, בכל תחום, בכל גיל, ובכל פינה באינטרנט. ככל שהוא קורא יותר, כך חד יותר חושו לגבי מי שייך לאן.</p>
+      </div>
+    </div>
+    <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">סריקה ממוקדת &middot; דירוג קוגניטיבי &middot; התאמה מבוססת אותות</span>
     </div>
   </div>
 </section>
