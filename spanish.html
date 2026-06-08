@@ -891,7 +891,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <p>La extensión de navegador de Neuropian. Instálala una vez y cada sitio que aceptes se convierte en parte del barrido de inteligencia. El algoritmo lee tus señales conductuales en segundo plano, construyendo un perfil cognitivo que te conecta con las oportunidades y personas para las que fuiste creado.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Extensión de Navegador</span>
       </div>
-      <div class="method-card" style="transition-delay:.08s">
+      <div class="method-card" style="transition-delay:.08s;cursor:pointer" onclick="document.getElementById('falcon-intro').scrollIntoView({behavior:'smooth'})">
         <div class="method-n">02</div>
         <h4>Falcon</h4>
         <p>El rastreador de datos de Neuropian. Falcon barre plataformas centradas en actividad intelectual, como Reddit y Hacker News, leyendo lo que la gente realmente construye, resuelve y debate. Donde otros ven ruido, Falcon lee señal, descubriendo mentes extraordinarias escondidas a plena vista.</p>
@@ -962,6 +962,40 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
       <button class="btn-primary" onclick="gatedPage('eagleeyes')"><span>&#10022; &nbsp;Obtener EagleEyes</span></button>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">Chrome &middot; Edge &middot; Brave &middot; Gratis</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN FALCON -->
+<section class="sec" style="background:var(--off-black);border-top:1px solid rgba(255,255,255,.06)" id="falcon-intro">
+  <div class="si">
+    <div class="section-eyebrow reveal">Inteligencia Neuropian</div>
+    <h2 class="section-heading reveal">Falcon, <em>Nuestros Ojos en el Cielo</em></h2>
+    <p class="section-body reveal" style="max-width:660px;margin-bottom:3rem">Falcon es el rastreador de datos de Neuropian. Barre plataformas centradas en contenido intelectual, como Reddit y Hacker News, leyendo lo que la gente realmente construye, resuelve y debate para descubrir los genios ocultos que la mayoría de los reclutadores nunca piensa en buscar. Cada señal que Falcon encuentra, junto con cada señal que EagleEyes aporta, alimenta el mismo motor de coincidencia, el sistema que puntúa los rasgos cognitivos, construye tu perfil y clasifica la alineación entre personas, problemas y oportunidades.</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.05);margin-bottom:3.5rem" class="ee-grid">
+      <div class="method-card reveal">
+        <div class="method-n">01</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">Barrido Enfocado</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Falcon escanea las plataformas donde ocurre el verdadero trabajo intelectual, como Reddit y Hacker News, leyendo lo que la gente construye, resuelve y debate, sin esperar que una solicitud llegue a una bandeja de entrada.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.08s">
+        <div class="method-n">02</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">Leyendo Señal, No Ruido</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">La mayor parte de internet es ruido. Falcon está construido para separar la profundidad de la actividad: la demostración trabajada a las 2 de la madrugada, el parche de código abierto que nadie más podía escribir, la respuesta del foro que explica un concepto mejor que el libro de texto.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.16s">
+        <div class="method-n">03</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">Cómo Funciona el Algoritmo de Coincidencia</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Cada señal que recopilan Falcon y EagleEyes se convierte en una puntuación de rasgo cognitivo: reconocimiento de patrones, pensamiento sistémico, razonamiento creativo, y docenas más. El motor de coincidencia compara estas puntuaciones con problemas, oportunidades, equipos y personas, clasificando la alineación por adecuación cognitiva en lugar de credenciales.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.24s">
+        <div class="method-n">04</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">Siempre Refinando</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">El modelo se reentrena continuamente sobre cómo se ve realmente lo extraordinario, en cada dominio, cada edad y cada rincón de internet. Cuanto más lee, más agudo se vuelve su sentido de quién pertenece dónde.</p>
+      </div>
+    </div>
+    <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">Barrido Enfocado &middot; Puntuación Cognitiva &middot; Coincidencia Basada en Señales</span>
     </div>
   </div>
 </section>
