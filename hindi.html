@@ -796,7 +796,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </h1>
     <p class="hero-desc">प्रतिभाशाली लोगों का एक केंद्र। Neuropian ने वे एल्गोरिदम बनाए हैं जो उन लोगों को खोजते हैं जिनकी क्षमता दुनिया ने कभी सही नहीं मापी, और जो पहले से तेज़ गति से आगे बढ़ रहे हैं और उन्हें एक सक्षम टीम की ज़रूरत है।</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="navScroll('cta')"><span>अभी आवेदन करें</span></button>
+      <button class="btn-primary" onclick="openNextElonApply()"><span>अभी आवेदन करें</span></button>
       <button class="btn-secondary" onclick="navScroll('find')">हम आपको कैसे खोजते हैं</button>
     </div>
   </div>
@@ -891,10 +891,10 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <p>Neuropian का ब्राउज़र एक्सटेंशन। इसे एक बार इंस्टॉल करें और आप जो भी साइट अनुमति देते हैं वह इंटेलिजेंस स्वीप का हिस्सा बन जाती है। एल्गोरिदम पृष्ठभूमि में आपके व्यवहार संकेतों को पढ़ता है और एक संज्ञानात्मक प्रोफ़ाइल बनाता है जो आपको उन अवसरों और लोगों से जोड़ता है जिनके लिए आप बने हैं।</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">ब्राउज़र एक्सटेंशन</span>
       </div>
-      <div class="method-card" style="transition-delay:.08s">
+      <div class="method-card" style="transition-delay:.08s;cursor:pointer" onclick="document.getElementById('falcon-intro').scrollIntoView({behavior:'smooth'})">
         <div class="method-n">02</div>
         <h4>Falcon</h4>
-        <p>Neuropian का डेटा स्वीपर। Falcon लगातार इंटरनेट पर क्रॉल करता है, फोरम, शोध थ्रेड, ओपन-सोर्स योगदान, प्रतिस्पर्धी मंच, और विशेष समुदायों में बौद्धिक गतिविधि पढ़ता है। जहाँ दूसरे शोर देखते हैं, Falcon संकेत पढ़ता है और असाधारण प्रतिभाओं को उनकी वास्तविक ऑनलाइन गतिविधि से खोजता है।</p>
+        <p>Neuropian का डेटा स्वीपर। Falcon Reddit और Hacker News जैसी बौद्धिक सामग्री केंद्रित प्लेटफ़ॉर्म को स्वीप करता है, यह पढ़ता है कि लोग वहाँ वास्तव में क्या बनाते हैं, हल करते हैं और चर्चा करते हैं। जहाँ दूसरे शोर देखते हैं, Falcon संकेत पढ़ता है, सादे दृश्य में छिपी असाधारण प्रतिभाओं को सामने लाता है।</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">डेटा स्वीप</span>
       </div>
       <div class="method-card" style="transition-delay:.16s;cursor:pointer" onclick="document.getElementById('opportunities-home').scrollIntoView({behavior:'smooth'})">
@@ -962,6 +962,40 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
       <button class="btn-primary" onclick="gatedPage('eagleeyes')"><span>&#10022; &nbsp;EagleEyes पाएं</span></button>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">Chrome &middot; Edge &middot; Brave &middot; निःशुल्क</span>
+    </div>
+  </div>
+</section>
+
+<!-- FALCON SECTION -->
+<section class="sec" style="background:var(--off-black);border-top:1px solid rgba(255,255,255,.06)" id="falcon-intro">
+  <div class="si">
+    <div class="section-eyebrow reveal">Neuropian इंटेलिजेंस</div>
+    <h2 class="section-heading reveal">Falcon, <em>Neuropian का स्काउटिंग एजेंट</em></h2>
+    <p class="section-body reveal" style="max-width:660px;margin-bottom:3rem">Falcon, Neuropian का डेटा स्वीपर है। यह Reddit और Hacker News जैसी बौद्धिक सामग्री केंद्रित प्लेटफ़ॉर्म को स्वीप करता है, पढ़ता है कि लोग वहाँ वास्तव में क्या बनाते हैं, हल करते हैं और चर्चा करते हैं, ताकि उन छुपी प्रतिभाओं को सामने लाया जा सके जिन्हें अधिकांश भर्तीकर्ता कभी खोजते भी नहीं। Falcon जो भी संकेत खोजता है, और EagleEyes जो भी संकेत देता है, वे सभी उसी मिलान इंजन में जाते हैं, वह प्रणाली जो संज्ञानात्मक गुणों को आँकती है, आपकी प्रोफ़ाइल बनाती है, और लोगों, समस्याओं तथा अवसरों के बीच तालमेल को क्रमबद्ध करती है।</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.05);margin-bottom:3.5rem" class="ee-grid">
+      <div class="method-card reveal">
+        <div class="method-n">01</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">केंद्रित स्वीप</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Falcon उन प्लेटफ़ॉर्म को स्कैन करता है जहाँ वास्तविक बौद्धिक काम होता है—Reddit और Hacker News जैसे—यह पढ़ता है कि लोग वहाँ क्या बनाते हैं, हल करते हैं और चर्चा करते हैं, किसी आवेदन के इनबॉक्स में आने का इंतज़ार किए बिना।</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.08s">
+        <div class="method-n">02</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">शोर नहीं, संकेत पढ़ना</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">अधिकांश इंटरनेट केवल शोर है। Falcon को गहराई को सामान्य गतिविधि से अलग करने के लिए बनाया गया है: रात के दो बजे हल किया गया प्रमाण, वह ओपन-सोर्स पैच जिसे कोई और नहीं लिख सका, फ़ोरम का वह जवाब जो किसी अवधारणा को पाठ्यपुस्तक से बेहतर समझाता है।</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.16s">
+        <div class="method-n">03</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">मिलान एल्गोरिदम कैसे काम करता है</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Falcon और EagleEyes द्वारा एकत्र किया गया हर संकेत संज्ञानात्मक गुण स्कोर में बदल दिया जाता है: पैटर्न पहचान, सिस्टम सोच, रचनात्मक तर्क, और दर्जनों अन्य। मिलान इंजन इन स्कोर की तुलना समस्याओं, अवसरों, टीमों और लोगों से करता है, और प्रमाणपत्रों के बजाय संज्ञानात्मक अनुकूलता के आधार पर तालमेल को क्रमबद्ध करता है।</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.24s">
+        <div class="method-n">04</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">निरंतर परिष्करण</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">यह मॉडल लगातार इस बात पर फिर से प्रशिक्षित होता रहता है कि असाधारण वास्तव में कैसा दिखता है, हर क्षेत्र में, हर उम्र में, और इंटरनेट के हर कोने में। यह जितना अधिक पढ़ता है, यह समझने में उतना ही सटीक होता जाता है कि कौन कहाँ फिट बैठता है।</p>
+      </div>
+    </div>
+    <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">केंद्रित स्वीप &middot; संज्ञानात्मक स्कोरिंग &middot; संकेत-आधारित मिलान</span>
     </div>
   </div>
 </section>
