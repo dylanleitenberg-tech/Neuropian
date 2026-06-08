@@ -801,7 +801,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </h1>
     <p class="hero-desc">A hub for geniuses. Neuropian has built the algorithms to find those whose potential the world never measured correctly, and those already moving fast who need a team capable of keeping up.</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="navScroll('cta')"><span>Apply Now</span></button>
+      <button class="btn-primary" onclick="openNextElonApply()"><span>Apply Now</span></button>
       <button class="btn-secondary" onclick="navScroll('find')">How We Find You</button>
     </div>
   </div>
@@ -896,10 +896,10 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <p>Neuropian&rsquo;s browser extension. Install it once and every site you opt into becomes part of the intelligence sweep. The algorithm reads your behavioral signals in the background, building a cognitive profile that connects you to the opportunities and people you were built for.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Browser Extension</span>
       </div>
-      <div class="method-card" style="transition-delay:.08s">
+      <div class="method-card" style="transition-delay:.08s;cursor:pointer" onclick="document.getElementById('falcon-intro').scrollIntoView({behavior:'smooth'})">
         <div class="method-n">02</div>
         <h4>Falcon</h4>
-        <p>Neuropian&rsquo;s data sweeper. Falcon crawls the internet continuously, reading intellectual activity across forums, research threads, open-source contributions, competitive platforms, and niche communities. Where others see noise, Falcon reads signal, surfacing extraordinary minds from what they actually do online.</p>
+        <p>Neuropian&rsquo;s data sweeper. Falcon sweeps platforms centered on intellectual activity, like Reddit and Hacker News, reading what people actually build, solve, and discuss there. Where others see noise, Falcon reads signal, surfacing extraordinary minds hiding in plain sight.</p>
         <span style="display:inline-block;margin-top:.8rem;font-family:'Barlow Condensed',sans-serif;font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,0.95);padding:.15rem .5rem">Data Sweep</span>
       </div>
       <div class="method-card" style="transition-delay:.16s;cursor:pointer" onclick="document.getElementById('opportunities-home').scrollIntoView({behavior:'smooth'})">
@@ -967,6 +967,40 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
       <button class="btn-primary" onclick="gatedPage('eagleeyes')"><span>&#10022; &nbsp;Get EagleEyes</span></button>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">Chrome &middot; Edge &middot; Brave &middot; Free</span>
+    </div>
+  </div>
+</section>
+
+<!-- FALCON SECTION -->
+<section class="sec" style="background:var(--off-black);border-top:1px solid rgba(255,255,255,.06)" id="falcon-intro">
+  <div class="si">
+    <div class="section-eyebrow reveal">Neuropian Intelligence</div>
+    <h2 class="section-heading reveal">Falcon, <em>Neuropian&rsquo;s Scouting Agent</em></h2>
+    <p class="section-body reveal" style="max-width:660px;margin-bottom:3rem">Falcon is Neuropian&rsquo;s data sweeper. It sweeps platforms centered around intellectual content, like Reddit and Hacker News, reading what people actually build, solve, and discuss there to surface the hidden geniuses most recruiters never think to look for. Every signal Falcon finds, alongside every signal EagleEyes contributes, feeds the same matching engine, the system that scores cognitive traits, builds your profile, and ranks alignment between people, problems, and opportunities.</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.05);margin-bottom:3.5rem" class="ee-grid">
+      <div class="method-card reveal">
+        <div class="method-n">01</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">Focused Sweep</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Falcon scans the platforms where real intellectual work happens, like Reddit and Hacker News, reading what people build, solve, and discuss there, not waiting for an application to land in an inbox.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.08s">
+        <div class="method-n">02</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">Reading Signal, Not Noise</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Most of the internet is noise. Falcon is built to separate depth from activity, the proof worked through at 2am, the open-source patch nobody else could write, the forum reply that explains a concept better than the textbook.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.16s">
+        <div class="method-n">03</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">How the Matching Algorithm Works</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">Every signal Falcon and EagleEyes gather is converted into a cognitive trait score, pattern recognition, systems thinking, creative reasoning, and dozens more. The matching engine compares these scores against problems, opportunities, teams, and people, ranking alignment by cognitive fit rather than credentials.</p>
+      </div>
+      <div class="method-card reveal" style="transition-delay:.24s">
+        <div class="method-n">04</div>
+        <h4 class="method-title" style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.5rem">Always Refining</h4>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.82;color:rgba(255,255,255,0.95);font-weight:300">The model retrains continuously on what extraordinary actually looks like, across every domain, every age, and every corner of the internet. The more it reads, the sharper its sense of who belongs where becomes.</p>
+      </div>
+    </div>
+    <div class="reveal" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.95)">Focused Sweep &middot; Cognitive Scoring &middot; Signal-Based Matching</span>
     </div>
   </div>
 </section>
