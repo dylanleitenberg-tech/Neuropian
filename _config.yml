@@ -1,0 +1,4 @@
+# GitHub Pages mirror: never serve these
+exclude:
+  - archive
+  - scout

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neuropian</title>
+<meta name="description" content="Neuropian finds exceptional engineers and mathematicians in their public work: contest records, math answers, and code that maintainers merged.">
+<link rel="canonical" href="https://neuropian.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://neuropian.com/">
+<meta property="og:title" content="Neuropian">
+<meta property="og:description" content="Engineers and mathematicians, found by their work, not their résumés.">
+<meta property="og:image" content="https://neuropian.com/assets/water-worm-w1-1600.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Cpath d='M9 23V9h2.4l7.2 9.9V9H21v14h-2.4l-7.2-9.9V23z' fill='%23f2f1ed'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a;
+  --fg:#f2f1ed;
+  --dim:rgba(242,241,237,.62);
+  --faint:rgba(242,241,237,.38);
+  --line:rgba(242,241,237,.14);
+  --pad:clamp(16px,5vw,64px);
+  --max:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color:var(--fg);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;font-feature-settings:"tnum" 0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:.2em}
+a:hover{text-decoration-color:var(--fg)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+img{display:block;max-width:100%;height:auto}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;background:var(--fg);color:var(--bg);padding:8px 12px;z-index:10}
+
+/* header */
+.bar{position:sticky;top:0;z-index:5;background:rgba(10,10,10,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:24px}
+.mark{font-weight:600;letter-spacing:.22em;font-size:13px;text-decoration:none}
+.nav{display:flex;gap:28px;font-size:14px}
+.nav a{text-decoration:none;color:var(--dim)}
+.nav a:hover{color:var(--fg)}
+
+/* type */
+h1,h2,h3{font-weight:500;letter-spacing:-.035em;line-height:1.02}
+h1{font-size:clamp(38px,7.4vw,96px);max-width:14ch;overflow-wrap:break-word}
+h2{font-size:clamp(34px,5.6vw,72px);max-width:16ch}
+h3{font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;line-height:1.15}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:28px}
+.lede{font-size:clamp(18px,1.7vw,22px);color:var(--dim);max-width:38em}
+p+p{margin-top:1em}
+
+/* sections */
+section{border-top:1px solid var(--line);padding:clamp(72px,11vw,160px) 0}
+.hero{border-top:0;padding-top:clamp(88px,14vw,200px)}
+.hero .lede{margin-top:36px}
+.figures{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:clamp(56px,8vw,120px);border-top:1px solid var(--line);padding-top:28px}
+.fig b{display:block;font-size:clamp(34px,4.2vw,56px);font-weight:500;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.fig span{display:block;margin-top:12px;font-size:14px;color:var(--dim);max-width:22em}
+
+/* method blocks */
+.block{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,80px);padding:clamp(48px,6vw,80px) 0;border-top:1px solid var(--line)}
+.block:first-of-type{margin-top:clamp(48px,6vw,88px)}
+.idx{font-size:13px;letter-spacing:.16em;color:var(--faint);margin-bottom:14px}
+.block .what{margin-top:16px;color:var(--dim)}
+.stat b{display:block;font-size:clamp(56px,8vw,112px);font-weight:500;letter-spacing:-.04em;line-height:.95;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:14px;font-size:15px;color:var(--dim);max-width:30em}
+.finding{margin-top:28px;max-width:36em}
+details{margin-top:28px;border-top:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:16px 0;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:18px;line-height:1}
+details[open] summary::after{content:"\2212"}
+summary:hover{color:var(--fg)}
+details ul{list-style:none;font-size:15px;color:var(--dim);padding-bottom:8px}
+details li{padding:10px 0;border-top:1px solid var(--line)}
+details li strong{color:var(--fg);font-weight:500}
+
+/* principles */
+.rules{list-style:none;margin-top:clamp(40px,6vw,72px);counter-reset:r}
+.rules li{counter-increment:r;display:grid;grid-template-columns:56px 1fr;gap:16px;padding:22px 0;border-top:1px solid var(--line);font-size:clamp(20px,2.4vw,30px);letter-spacing:-.015em;line-height:1.25}
+.rules li::before{content:counter(r,decimal-leading-zero);font-size:13px;letter-spacing:.16em;color:var(--faint);padding-top:.5em}
+.rules li:last-child{border-bottom:1px solid var(--line)}
+
+/* work */
+.work .lede{margin-top:28px}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,24px);margin-top:clamp(40px,6vw,72px)}
+.gallery figure:first-child{grid-column:1 / -1}
+.gallery figure:first-child img{aspect-ratio:21/9}
+.gallery img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#000;filter:grayscale(1) contrast(1.06);transition:filter .5s ease}
+.gallery figure:hover img{filter:none}
+figcaption{margin-top:12px;font-size:14px;color:var(--dim);max-width:44em}
+.links{margin-top:32px;font-size:15px;color:var(--dim);display:flex;flex-wrap:wrap;gap:8px 28px}
+
+/* next */
+.next{list-style:none;margin-top:clamp(40px,6vw,72px)}
+.next li{display:grid;grid-template-columns:180px 1fr;gap:16px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line);font-size:clamp(18px,1.8vw,22px)}
+.next li:last-child{border-bottom:1px solid var(--line)}
+.tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:5px 12px;justify-self:start;white-space:nowrap}
+.next small{display:block;font-size:15px;color:var(--dim);margin-top:4px}
+
+/* contact */
+.asks{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);margin-top:clamp(40px,6vw,72px)}
+.ask{border-top:1px solid var(--line);padding-top:24px}
+.ask p{color:var(--dim);margin-top:12px;max-width:28em}
+.mail{display:inline-block;margin-top:24px;font-size:clamp(20px,2.2vw,28px);letter-spacing:-.02em;overflow-wrap:anywhere}
+
+footer{border-top:1px solid var(--line);padding:32px 0 48px;font-size:14px;color:var(--faint)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .nav a:not(:last-child){display:none}
+  .figures{grid-template-columns:1fr;gap:28px}
+  .block{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr}
+  .asks{grid-template-columns:1fr}
+  .next li{grid-template-columns:1fr;gap:10px}
+  .rules li{grid-template-columns:40px 1fr}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.gallery img{transition:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Neuropian, top of page">NEUROPIAN</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#method">Method</a>
+      <a href="#principles">Principles</a>
+      <a href="#work">Founder</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <h1>Engineers and mathematicians, found by their work, not their résumés.</h1>
+    <p class="lede">For firms hiring engineers and quantitative talent. For people who want their work to be found.</p>
+    <div class="figures">
+      <div class="fig"><b>11,088</b><span>Codeforces players in our two-year back-test</span></div>
+      <div class="fig"><b>150</b><span>open-source builders identified, half with 12 or fewer followers</span></div>
+      <div class="fig"><b>30</b><span>dossiers written, every one linked to the pull requests it describes</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <p class="kicker">Method</p>
+    <h2>Three kinds of evidence.</h2>
+
+    <div class="block">
+      <div>
+        <p class="idx">01</p>
+        <h3>Hidden reasoners</h3>
+        <p class="what">Contest and math records from Codeforces, AtCoder and Math Stack Exchange, standardized within each platform.</p>
+      </div>
+      <div>
+        <div class="stat"><b>0.655</b><span>AUC, among players of the same rating, for who reached 2400 within two years. 0.668 when repeated from a 2023 start. 0.5 is chance.</span></div>
+        <p class="finding">Rating already finds strong players, and our score does not beat it overall. What it adds is a tie-breaker among equally rated players, and that result held at a second start date.</p>
+        <details>
+          <summary>Method and numbers</summary>
+          <ul>
+            <li><strong>Cohort.</strong> Every Codeforces player rated 1600–2300 on 16 Oct 2024, with at least 15 rated contests and 3 in the year before: 11,088 players. 290 (2.6%) reached 2400 in the two years after.</li>
+            <li><strong>Overall.</strong> Rating alone ranks them with AUC 0.896 (95% CI 0.878–0.913). Our scout score: 0.879 (0.860–0.896). Rating wins.</li>
+            <li><strong>Among equals.</strong> AUC computed inside each 100-point rating band, then averaged, weighted by the number who broke through (bands with fewer than 3 skipped). Score = 12-month rating gain + months with a contest out of the last 12 + distance below the player's own peak − years active − contest count, each standardized: 0.655 for reaching 2400, 0.645 for 2600.</li>
+            <li><strong>Second start date.</strong> Same test from 18 Oct 2023 (10,139 players; 364 reached 2400 in three years): 0.668 and 0.699. The same three positive traits were selected.</li>
+            <li><strong>Caveat.</strong> At each date, traits were chosen and scored on the same players (kept if within-band AUC &gt; 0.55, reversed if &lt; 0.45). The 2023 run is a replication, not a held-out test.</li>
+            <li><strong>AUC</strong> = the probability that a randomly chosen player who broke through is ranked above one who did not.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+
+    <div class="block">
+      <div>
+        <p class="idx">02</p>
+        <h3>Hidden builders</h3>
+        <p class="what">People whose code maintainers merged into hard open-source projects, but whom few people follow. Identified by that evidence, not predicted.</p>
+      </div>
+      <div>
+        <div class="stat"><b>150</b><span>people identified, each with 6 or more merged pull requests in the past 12 months and under 150 GitHub followers.</span></div>
+        <p class="finding">Projects searched: LLVM, CPython, Julia, JAX, NumPy, SciPy, DuckDB, llama.cpp, Rust and tinygrad.</p>
+        <details>
+          <summary>Method and numbers</summary>
+          <ul>
+            <li><strong>Rules.</strong> Three or more merged pull requests in the 12 months to 17 Oct 2026; 150 GitHub followers or fewer; bots, people who have merged others' work, and people whose profile names a large tech company, elite university or top trading firm removed. Half of the 150 have 12 or fewer followers.</li>
+            <li><strong>Merge rights.</strong> 135 of the 150 have never merged a pull request in that project. Rust and tinygrad merge through a bot, so for their 15 people this cannot be checked.</li>
+            <li><strong>Why we don't call it prediction.</strong> In eight of the projects (not Rust or tinygrad), 2,958 people had merged pull requests between Oct 2023 and Oct 2024 and had never merged one themselves. 302 did so in the two years after, a sign of write access; 276 of them in LLVM. Merged-PR count alone ranks them with AUC 0.646. No other trait (lines changed, pull-request size, months active, recency) added information when chosen on half the projects and tested on the other half. So the list is ranked by count, and it shows the work.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+
+    <div class="block">
+      <div>
+        <p class="idx">03</p>
+        <h3>Dossiers</h3>
+        <p class="what">For each person, an open-source model running on our own machine reads 15 of their merged pull requests and writes what they work on. Each dossier links the pull requests it draws on, so a recruiter can check any line against the source.</p>
+      </div>
+      <div>
+        <div class="stat"><b>0 of 30</b><span>dossiers cited a pull request the model was not shown.</span></div>
+        <details>
+          <summary>Method and numbers</summary>
+          <ul>
+            <li><strong>Facts by code.</strong> Files touched, size, review rounds and reviewer comments are extracted directly from GitHub, not written by the model.</li>
+            <li><strong>Judgment by model.</strong> Specialty and summary come from Qwen3 8B running locally. Nothing about a candidate is sent to an outside AI service.</li>
+            <li><strong>Check.</strong> Every pull-request number the model cites is compared with the ones it was given. 30 dossiers so far; 0 invented citations.</li>
+            <li><strong>Not yet used.</strong> The model's difficulty ratings don't separate people yet, so they are not shown.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="principles">
+  <div class="wrap">
+    <p class="kicker">Principles</p>
+    <h2>Four rules.</h2>
+    <ol class="rules">
+      <li>Public, self-published data only.</li>
+      <li>Adults only.</li>
+      <li>Nobody's information goes to a client without their opt-in.</li>
+      <li>No scraping of sites that forbid it.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="work" class="work">
+  <div class="wrap">
+    <p class="kicker">Founder's work</p>
+    <h2>Designed by Neuropian's founder.</h2>
+    <p class="lede">Dylan Leitenberg designs machines. The astroworm is a burrowing anchor for asteroid mining; the Water Worm is its version for mine tailings ponds on Earth. Rendered from CAD. Neither has been built.</p>
+    <div class="gallery">
+      <figure>
+        <img src="assets/water-worm-w1-1600.jpg" srcset="assets/water-worm-w1-800.jpg 800w, assets/water-worm-w1-1600.jpg 1600w" sizes="(max-width:1280px) 100vw, 1152px" width="1600" height="900" alt="CAD render of the Water Worm W1 on black: a long white segmented body with a blue sealed vessel at the tail and a red cutting head with picks at the front" loading="lazy" decoding="async">
+        <figcaption>Water Worm W1, a tank-test model of the astroworm body, sealed for work under water.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/water-worm-w1-head-800.jpg" srcset="assets/water-worm-w1-head-800.jpg 800w, assets/water-worm-w1-head-1600.jpg 1600w" sizes="(max-width:860px) 100vw, 50vw" width="800" height="450" alt="Close CAD render of the Water Worm's red cutting head: a crown of picks around a threaded, cone-shaped screw point" loading="lazy" decoding="async">
+        <figcaption>Its cutting head: a crown of picks around a self-feeding screw point.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/astroworm-head-800.jpg" srcset="assets/astroworm-head-800.jpg 800w, assets/astroworm-head-1600.jpg 1600w" sizes="(max-width:860px) 100vw, 50vw" width="800" height="450" alt="CAD render of the astroworm's head section: a ribbed cylindrical body with helical flights and a ring of cutters around a central cone" loading="lazy" decoding="async">
+        <figcaption>The astroworm's cutting head.</figcaption>
+      </figure>
+    </div>
+    <p class="links"><a href="https://parahuman.net">parahuman.net</a><a href="https://github.com/dylanleitenberg-tech/astroworm">github.com/dylanleitenberg-tech/astroworm</a></p>
+  </div>
+</section>
+
+<section id="next">
+  <div class="wrap">
+    <p class="kicker">Next</p>
+    <h2>Not live yet.</h2>
+    <ul class="next">
+      <li><span class="tag">In development</span><span>Linking one person's accounts across platforms<small>Only through links they published themselves.</small></span></li>
+      <li><span class="tag">Planned</span><span>Opt-in profiles<small>People see their own record and choose who else sees it.</small></span></li>
+      <li><span class="tag">Planned</span><span>A pilot with one hiring firm<small>20 opted-in candidates, measured against the firm's usual pipeline.</small></span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <p class="kicker">Contact</p>
+    <h2>Write to us.</h2>
+    <div class="asks">
+      <div class="ask">
+        <h3>Hiring</h3>
+        <p>Tell us the role and what the work looks like.</p>
+        <!--email_off--><a class="mail" href="mailto:dylan@neuropian.com?subject=Hiring">dylan@neuropian.com</a><!--/email_off-->
+      </div>
+      <div class="ask">
+        <h3>Want to be found</h3>
+        <p>Tell us what you're working on, with a link to the work.</p>
+        <!--email_off--><a class="mail" href="mailto:dylan@neuropian.com?subject=What%20I%27m%20working%20on">dylan@neuropian.com</a><!--/email_off-->
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Neuropian</span>
+  </div>
+</footer>
+</body>
+</html>

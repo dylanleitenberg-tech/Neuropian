@@ -1,0 +1,4 @@
+# Cloudflare Workers static assets: never serve these on neuropian.com
+archive/
+scout/
+_config.yml
