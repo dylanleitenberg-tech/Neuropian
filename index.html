@@ -152,7 +152,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="figures">
       <div class="fig"><b>11,088</b><span>Codeforces players in our two-year back-test</span></div>
       <div class="fig"><b>150</b><span>open-source builders identified, half with 12 or fewer followers</span></div>
-      <div class="fig"><b>30</b><span>dossiers written, every one linked to the pull requests it describes</span></div>
+      <div class="fig"><b>30</b><span>dossiers written from those builders' merged pull requests</span></div>
     </div>
   </div>
 </section>
@@ -170,15 +170,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
       <div>
         <div class="stat"><b>0.655</b><span>AUC, among players of the same rating, for who reached 2400 within two years. 0.668 when repeated from a 2023 start. 0.5 is chance.</span></div>
-        <p class="finding">Rating already finds strong players, and our score does not beat it overall. What it adds is a tie-breaker among equally rated players, and that result held at a second start date.</p>
+        <p class="finding">Rating already finds strong players, and nothing we tested beats it overall. What three activity traits add is a tie-breaker among equally rated players, and that result held at a second start date.</p>
         <details>
           <summary>Method and numbers</summary>
           <ul>
             <li><strong>Cohort.</strong> Every Codeforces player rated 1600–2300 on 16 Oct 2024, with at least 15 rated contests and 3 in the year before: 11,088 players. 290 (2.6%) reached 2400 in the two years after.</li>
-            <li><strong>Overall.</strong> Rating alone ranks them with AUC 0.896 (95% CI 0.878–0.913). Our scout score: 0.879 (0.860–0.896). Rating wins.</li>
-            <li><strong>Among equals.</strong> AUC computed inside each 100-point rating band, then averaged, weighted by the number who broke through (bands with fewer than 3 skipped). Score = 12-month rating gain + months with a contest out of the last 12 + distance below the player's own peak − years active − contest count, each standardized: 0.655 for reaching 2400, 0.645 for 2600.</li>
-            <li><strong>Second start date.</strong> Same test from 18 Oct 2023 (10,139 players; 364 reached 2400 in three years): 0.668 and 0.699. The same three positive traits were selected.</li>
-            <li><strong>Caveat.</strong> At each date, traits were chosen and scored on the same players (kept if within-band AUC &gt; 0.55, reversed if &lt; 0.45). The 2023 run is a replication, not a held-out test.</li>
+            <li><strong>Overall.</strong> Rating alone ranks them with AUC 0.896 (95% CI 0.878–0.913). Neither of our scores beats it: our first formula (rating plus 12-month gain) gets 0.879 (0.860–0.896); rating plus the trait score below gets 0.753.</li>
+            <li><strong>Among equals.</strong> AUC computed inside each 100-point rating band, then averaged, weighted by the number who broke through (a band needs at least 3 who did and 3 who didn't). Score = 12-month rating gain + months with a contest in the past year + distance below the player's own peak − calendar years with a rated contest − contest count, each standardized: 0.655 for reaching 2400. For 2600 the same rule dropped 12-month gain: 0.645.</li>
+            <li><strong>Second start date.</strong> Same test from 18 Oct 2023 (10,139 players; 364 reached 2400 in three years): 0.668 for 2400, 0.699 for 2600. For 2400 the same three positive traits were selected.</li>
+            <li><strong>Caveats.</strong> At each date, traits were chosen and scored on the same players (kept if within-band AUC &gt; 0.55, reversed if &lt; 0.45), so the 2023 run is a replication, not a held-out test. This tests the signals; the scout's current ranking combines them differently and has not itself been back-tested.</li>
             <li><strong>AUC</strong> = the probability that a randomly chosen player who broke through is ranked above one who did not.</li>
           </ul>
         </details>
@@ -192,14 +192,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <p class="what">People whose code maintainers merged into hard open-source projects, but whom few people follow. Identified by that evidence, not predicted.</p>
       </div>
       <div>
-        <div class="stat"><b>150</b><span>people identified, each with 6 or more merged pull requests in the past 12 months and under 150 GitHub followers.</span></div>
-        <p class="finding">Projects searched: LLVM, CPython, Julia, JAX, NumPy, SciPy, DuckDB, llama.cpp, Rust and tinygrad.</p>
+        <div class="stat"><b>150</b><span>people identified. Each has 6 or more merged pull requests in the past 12 months; none has more than 148 GitHub followers.</span></div>
+        <p class="finding">From LLVM (68), llama.cpp (38), Rust (10), DuckDB (9), NumPy (7), SciPy (7), Julia (6) and tinygrad (5). CPython and JAX were searched too.</p>
         <details>
           <summary>Method and numbers</summary>
           <ul>
-            <li><strong>Rules.</strong> Three or more merged pull requests in the 12 months to 17 Oct 2026; 150 GitHub followers or fewer; bots, people who have merged others' work, and people whose profile names a large tech company, elite university or top trading firm removed. Half of the 150 have 12 or fewer followers.</li>
-            <li><strong>Merge rights.</strong> 135 of the 150 have never merged a pull request in that project. Rust and tinygrad merge through a bot, so for their 15 people this cannot be checked.</li>
-            <li><strong>Why we don't call it prediction.</strong> In eight of the projects (not Rust or tinygrad), 2,958 people had merged pull requests between Oct 2023 and Oct 2024 and had never merged one themselves. 302 did so in the two years after, a sign of write access; 276 of them in LLVM. Merged-PR count alone ranks them with AUC 0.646. No other trait (lines changed, pull-request size, months active, recency) added information when chosen on half the projects and tested on the other half. So the list is ranked by count, and it shows the work.</li>
+            <li><strong>Rules.</strong> 3 or more merged pull requests in the 12 months to 17 Oct 2026, and no more than 40 per active month; 150 GitHub followers or fewer. Removed: bots, anyone who has pressed merge in that project, and people whose profile or public organizations name a large tech company, elite university or top trading firm. Half of the 150 have 12 or fewer followers.</li>
+            <li><strong>Merge rights.</strong> The 140 outside Rust have not pressed merge on any pull request in their project in the history we fetched (since Oct 2023; tinygrad since Oct 2025). Rust merges through a bot, so its 10 can't be checked this way.</li>
+            <li><strong>Why we don't call it prediction.</strong> In eight of the projects (not Rust or tinygrad), 2,722 people had merged pull requests between Oct 2023 and Oct 2024 and had not pressed merge or approved anyone else's. 156 pressed merge in the two years after, a sign they had been given write access; 135 of them in LLVM. Merged-PR count alone ranks them with AUC 0.622. No other trait we tested (lines changed, pull-request size, share of large pull requests, months active, tenure, days to merge, recency) held up when chosen on half the projects and tested on the other half. LLVM holds most of the positives, so that check is weak. The list is ranked by count, and it shows the work.</li>
           </ul>
         </details>
       </div>
@@ -209,16 +209,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div>
         <p class="idx">03</p>
         <h3>Dossiers</h3>
-        <p class="what">For each person, an open-source model running on our own machine reads 15 of their merged pull requests and writes what they work on. Each dossier links the pull requests it draws on, so a recruiter can check any line against the source.</p>
+        <p class="what">For the top 30 so far, code pulls facts from 15 of each person's merged pull requests, and an open-source model running on our own machine reads 12 of them and writes what the person works on. Each dossier links to their pull requests, so a recruiter can check the work at the source.</p>
       </div>
       <div>
-        <div class="stat"><b>0 of 30</b><span>dossiers cited a pull request the model was not shown.</span></div>
+        <div class="stat"><b>0 of 30</b><span>dossiers cited a “#” pull-request number that isn't one of the person's own.</span></div>
         <details>
           <summary>Method and numbers</summary>
           <ul>
-            <li><strong>Facts by code.</strong> Files touched, size, review rounds and reviewer comments are extracted directly from GitHub, not written by the model.</li>
+            <li><strong>Facts by code.</strong> Files touched, size, review count and reviewer praise are extracted from GitHub, not written by the model.</li>
             <li><strong>Judgment by model.</strong> Specialty and summary come from Qwen3 8B running locally. Nothing about a candidate is sent to an outside AI service.</li>
-            <li><strong>Check.</strong> Every pull-request number the model cites is compared with the ones it was given. 30 dossiers so far; 0 invented citations.</li>
+            <li><strong>Check.</strong> Every “#” number the model cites is compared with the person's fetched pull requests: none invented in 30 dossiers. Numbers written without “#” weren't checked in this run; the check now catches them.</li>
+            <li><strong>Links.</strong> This run linked each person's 5 most recently updated pull requests, not always the ones the summary cites. From the next run, the links are the cited ones.</li>
             <li><strong>Not yet used.</strong> The model's difficulty ratings don't separate people yet, so they are not shown.</li>
           </ul>
         </details>
@@ -233,7 +234,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <h2>Four rules.</h2>
     <ol class="rules">
       <li>Public, self-published data only.</li>
-      <li>Adults only.</li>
+      <li>Adults only. Anyone we invite confirms they are 18 or older.</li>
       <li>Nobody's information goes to a client without their opt-in.</li>
       <li>No scraping of sites that forbid it.</li>
     </ol>
