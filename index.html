@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Neuropian</title>
-<meta name="description" content="Neuropian finds exceptional engineers and mathematicians in their public work: contest records, math answers, and code that maintainers merged.">
+<meta name="description" content="Neuropian ranks engineers and mathematicians by their public work: contest records, math answers, and code that maintainers merged. A research prototype.">
 <link rel="canonical" href="https://neuropian.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://neuropian.com/">
 <meta property="og:title" content="Neuropian">
 <meta property="og:description" content="Engineers and mathematicians, found by their work, not their résumés.">
-<meta property="og:image" content="https://neuropian.com/assets/water-worm-w1-1600.jpg">
-<meta property="og:image:width" content="1600">
-<meta property="og:image:height" content="900">
+<meta property="og:image" content="https://neuropian.com/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0a0a0a">
@@ -62,12 +62,13 @@ p+p{margin-top:1em}
 section{border-top:1px solid var(--line);padding:clamp(72px,11vw,160px) 0}
 .hero{border-top:0;padding-top:clamp(88px,14vw,200px)}
 .hero .lede{margin-top:36px}
+.status{margin-top:20px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
 .figures{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:clamp(56px,8vw,120px);border-top:1px solid var(--line);padding-top:28px}
 .fig b{display:block;font-size:clamp(34px,4.2vw,56px);font-weight:500;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
 .fig span{display:block;margin-top:12px;font-size:14px;color:var(--dim);max-width:22em}
 
 /* method blocks */
-.block{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,80px);padding:clamp(48px,6vw,80px) 0;border-top:1px solid var(--line)}
+.block{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,80px);padding:clamp(40px,4.5vw,64px) 0;border-top:1px solid var(--line)}
 .block:first-of-type{margin-top:clamp(48px,6vw,88px)}
 .idx{font-size:13px;letter-spacing:.16em;color:var(--faint);margin-bottom:14px}
 .block .what{margin-top:16px;color:var(--dim)}
@@ -95,8 +96,8 @@ details li strong{color:var(--fg);font-weight:500}
 .gallery{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,24px);margin-top:clamp(40px,6vw,72px)}
 .gallery figure:first-child{grid-column:1 / -1}
 .gallery figure:first-child img{aspect-ratio:21/9}
-.gallery img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#000;filter:grayscale(1) contrast(1.06);transition:filter .5s ease}
-.gallery figure:hover img{filter:none}
+.gallery img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#000}
+@media (hover:hover){.gallery img{filter:grayscale(1) contrast(1.06);transition:filter .5s ease}.gallery figure:hover img{filter:none}}
 figcaption{margin-top:12px;font-size:14px;color:var(--dim);max-width:44em}
 .links{margin-top:32px;font-size:15px;color:var(--dim);display:flex;flex-wrap:wrap;gap:8px 28px}
 
@@ -148,11 +149,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <section class="hero" id="top">
   <div class="wrap">
     <h1>Engineers and mathematicians, found by their work, not their résumés.</h1>
-    <p class="lede">For firms hiring engineers and quantitative talent. For people who want their work to be found.</p>
+    <p class="lede">Being built for firms that hire engineers and quantitative researchers, and for people who want their work found.</p>
+    <p class="status">Research prototype · one founder · no clients yet</p>
     <div class="figures">
-      <div class="fig"><b>11,088</b><span>Codeforces players in our two-year back-test</span></div>
-      <div class="fig"><b>150</b><span>open-source builders identified, half with 12 or fewer followers</span></div>
-      <div class="fig"><b>30</b><span>dossiers written from those builders' merged pull requests</span></div>
+      <div class="fig"><b>11,088</b><span>Codeforces players in a two-year back-test</span></div>
+      <div class="fig"><b>150</b><span>open-source contributors identified, half with 12 or fewer followers</span></div>
+      <div class="fig"><b>30</b><span>dossiers written from their merged pull requests</span></div>
     </div>
   </div>
 </section>
@@ -165,21 +167,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="block">
       <div>
         <p class="idx">01</p>
-        <h3>Hidden reasoners</h3>
-        <p class="what">Contest and math records from Codeforces, AtCoder and Math Stack Exchange, standardized within each platform.</p>
+        <h3>Reasoners</h3>
+        <p class="what">Contest and math records from Codeforces, AtCoder and Math Stack Exchange, standardized within each platform. Back-tested on Codeforces only.</p>
       </div>
       <div>
-        <div class="stat"><b>0.655</b><span>AUC, among players of the same rating, for who reached 2400 within two years. 0.668 when repeated from a 2023 start. 0.5 is chance.</span></div>
-        <p class="finding">Rating already finds strong players, and nothing we tested beats it overall. What three activity traits add is a tie-breaker among equally rated players, and that result held at a second start date.</p>
+        <div class="stat"><b>0.647</b><span>AUC among players within 100 rating points of each other, for who reached 2400 in the next two years. Score chosen on 2022–24, tested unchanged on 2024–26. Rating itself scores 0.599 here; 0.5 is chance.</span></div>
+        <p class="finding">Rating already finds strong players. Added to rating, the score lifts AUC from 0.896 to 0.908 (95% CI of the gain: +0.005 to +0.019). A tie-breaker, not a replacement, and part of it is predicting who keeps competing.</p>
         <details>
           <summary>Method and numbers</summary>
           <ul>
             <li><strong>Cohort.</strong> Every Codeforces player rated 1600–2300 on 16 Oct 2024, with at least 15 rated contests and 3 in the year before: 11,088 players. 290 (2.6%) reached 2400 in the two years after.</li>
-            <li><strong>Overall.</strong> Rating alone ranks them with AUC 0.896 (95% CI 0.878–0.913). Neither of our scores beats it: our first formula (rating plus 12-month gain) gets 0.879 (0.860–0.896); rating plus the trait score below gets 0.753.</li>
-            <li><strong>Among equals.</strong> AUC computed inside each 100-point rating band, then averaged, weighted by the number who broke through (a band needs at least 3 who did and 3 who didn't). Score = 12-month rating gain + months with a contest in the past year + distance below the player's own peak − calendar years with a rated contest − contest count, each standardized: 0.655 for reaching 2400. For 2600 the same rule dropped 12-month gain: 0.645.</li>
-            <li><strong>Second start date.</strong> Same test from 18 Oct 2023 (10,139 players; 364 reached 2400 in three years): 0.668 for 2400, 0.699 for 2600. For 2400 the same three positive traits were selected.</li>
-            <li><strong>Caveats.</strong> At each date, traits were chosen and scored on the same players (kept if within-band AUC &gt; 0.55, reversed if &lt; 0.45), so the 2023 run is a replication, not a held-out test. This tests the signals; the scout's current ranking combines them differently and has not itself been back-tested.</li>
-            <li><strong>AUC</strong> = the probability that a randomly chosen player who broke through is ranked above one who did not.</li>
+            <li><strong>Chosen on earlier data.</strong> Same rules on 16 Oct 2022: 9,305 players, 274 reached 2400 by Oct 2024, before the test period starts. Traits kept if their within-band AUC was above 0.55, reversed if below 0.45: 12-month rating gain, how few contests it took to reach 2000, months with a contest in the past year, distance below the player's own peak, minus calendar years with a rated contest. Weight on rating, 0.2, also chosen on 2022.</li>
+            <li><strong>Test.</strong> Frozen and applied to the 2024 cohort: 0.647 within 100-point bands (rating: 0.599), 0.632 within 10-point bands. Overall, rating alone scores 0.896 (95% CI 0.878–0.913) and rating + 0.2 × score 0.908. Paired bootstrap of the gain, 1,000 resamples: +0.005 to +0.019, none at or below zero.</li>
+            <li><strong>Who keeps competing.</strong> 37% of the 2024 cohort played no rated contest afterwards. Grouping players by contests played afterwards as well as by rating, the score's AUC falls to 0.613.</li>
+            <li><strong>Earlier, in-sample runs.</strong> Traits chosen and scored on the same players: 0.655 (2024 start), 0.668 (2023 start, three-year window). Our first formula, rating plus 12-month gain, scored 0.879 overall, below rating alone.</li>
+            <li><strong>Not yet tested.</strong> The AtCoder and Math Stack Exchange lists, and the scout's current ranking, which combines these signals differently.</li>
+            <li><strong>AUC</strong> = the probability that a randomly chosen player who broke through is ranked above one who did not. Within-band AUC is averaged across bands, weighted by the number who broke through; a band needs at least 3 who did and 3 who didn't.</li>
           </ul>
         </details>
       </div>
@@ -188,18 +191,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="block">
       <div>
         <p class="idx">02</p>
-        <h3>Hidden builders</h3>
-        <p class="what">People whose code maintainers merged into hard open-source projects, but whom few people follow. Identified by that evidence, not predicted.</p>
+        <h3>Builders</h3>
+        <p class="what">People whose code maintainers merged into major open-source projects, but whom few people follow. Identified by that evidence, not predicted.</p>
       </div>
       <div>
-        <div class="stat"><b>150</b><span>people identified. Each has 6 or more merged pull requests in the past 12 months; none has more than 148 GitHub followers.</span></div>
+        <div class="stat"><b>150</b><span>people identified. Each has 6 or more merged pull requests in the past 12 months (rule: 3 or more); none has more than 148 GitHub followers (rule: 150).</span></div>
         <p class="finding">From LLVM (68), llama.cpp (38), Rust (10), DuckDB (9), NumPy (7), SciPy (7), Julia (6) and tinygrad (5). CPython and JAX were searched too.</p>
         <details>
           <summary>Method and numbers</summary>
           <ul>
             <li><strong>Rules.</strong> 3 or more merged pull requests in the 12 months to 17 Oct 2026, and no more than 40 per active month; 150 GitHub followers or fewer. Removed: bots, anyone who has pressed merge in that project, and people whose profile or public organizations name a large tech company, elite university or top trading firm. Half of the 150 have 12 or fewer followers.</li>
-            <li><strong>Merge rights.</strong> The 140 outside Rust have not pressed merge on any pull request in their project in the history we fetched (since Oct 2023; tinygrad since Oct 2025). Rust merges through a bot, so its 10 can't be checked this way.</li>
-            <li><strong>Why we don't call it prediction.</strong> In eight of the projects (not Rust or tinygrad), 2,722 people had merged pull requests between Oct 2023 and Oct 2024 and had not pressed merge or approved anyone else's. 156 pressed merge in the two years after, a sign they had been given write access; 135 of them in LLVM. Merged-PR count alone ranks them with AUC 0.622. No other trait we tested (lines changed, pull-request size, share of large pull requests, months active, tenure, days to merge, recency) held up when chosen on half the projects and tested on the other half. LLVM holds most of the positives, so that check is weak. The list is ranked by count, and it shows the work.</li>
+            <li><strong>Merge rights.</strong> The 140 outside Rust have not pressed merge on any pull request in their project in the history fetched (since Oct 2023; tinygrad since Oct 2025). Committers who push directly would not show up this way, and Rust merges through a bot, so its 10 can't be checked at all.</li>
+            <li><strong>Why we don't call it prediction.</strong> In eight of the projects (not Rust or tinygrad), 2,722 people had merged pull requests between Oct 2023 and Oct 2024 and had not pressed merge or approved anyone else's. 156 pressed merge in the two years after, a sign they had been given write access; 135 of them in LLVM. Merged-PR count alone ranks them with AUC 0.622. Lines per pull request, and months active, tenure and days to merge (in reverse), looked informative in-sample but couldn't be tested out of sample: split by project, one half holds only 3 of the 156. So the list is ranked by merged-PR count, standardized within each project, and it shows the work.</li>
           </ul>
         </details>
       </div>
@@ -209,16 +212,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div>
         <p class="idx">03</p>
         <h3>Dossiers</h3>
-        <p class="what">For the top 30 so far, code pulls facts from 15 of each person's merged pull requests, and an open-source model running on our own machine reads 12 of them and writes what the person works on. Each dossier links to their pull requests, so a recruiter can check the work at the source.</p>
+        <p class="what">For the top 30 so far, code pulls facts from 15 of each person's merged pull requests, and an open-weight model running locally reads 12 of them and writes what the person works on. Each dossier links to their pull requests, so a recruiter can check the work at the source.</p>
       </div>
       <div>
         <div class="stat"><b>0 of 30</b><span>dossiers cited a “#” pull-request number that isn't one of the person's own.</span></div>
         <details>
           <summary>Method and numbers</summary>
           <ul>
-            <li><strong>Facts by code.</strong> Files touched, size, review count and reviewer praise are extracted from GitHub, not written by the model.</li>
-            <li><strong>Judgment by model.</strong> Specialty and summary come from Qwen3 8B running locally. Nothing about a candidate is sent to an outside AI service.</li>
-            <li><strong>Check.</strong> Every “#” number the model cites is compared with the person's fetched pull requests: none invented in 30 dossiers. Numbers written without “#” weren't checked in this run; the check now catches them.</li>
+            <li><strong>Facts by code.</strong> Files touched, size, number of reviews and praise words in review comments, extracted from GitHub, not written by the model.</li>
+            <li><strong>Judgment by model.</strong> Specialty and summary come from Qwen3 8B running on a laptop. Nothing about a candidate is sent to an outside AI service.</li>
+            <li><strong>Check.</strong> Every “#” number the model cites is compared with the person's fetched pull requests: none invented in 30 dossiers. Numbers written without “#” weren't checked in this run; the check now catches them. It tests citations, not whether a summary is right, so a person reads the pull requests before anyone is contacted.</li>
             <li><strong>Links.</strong> This run linked each person's 5 most recently updated pull requests, not always the ones the summary cites. From the next run, the links are the cited ones.</li>
             <li><strong>Not yet used.</strong> The model's difficulty ratings don't separate people yet, so they are not shown.</li>
           </ul>
@@ -233,8 +236,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <p class="kicker">Principles</p>
     <h2>Four rules.</h2>
     <ol class="rules">
-      <li>Public, self-published data only.</li>
-      <li>Adults only. Anyone we invite confirms they are 18 or older.</li>
+      <li>Public data only, from official APIs and public pages.</li>
+      <li>Adults only. Anyone who opts in confirms they are 18 or older.</li>
       <li>Nobody's information goes to a client without their opt-in.</li>
       <li>No scraping of sites that forbid it.</li>
     </ol>
@@ -248,8 +251,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <p class="lede">Dylan Leitenberg designs machines. The astroworm is a burrowing anchor for asteroid mining; the Water Worm is its version for mine tailings ponds on Earth. Rendered from CAD. Neither has been built.</p>
     <div class="gallery">
       <figure>
-        <img src="assets/water-worm-w1-1600.jpg" srcset="assets/water-worm-w1-800.jpg 800w, assets/water-worm-w1-1600.jpg 1600w" sizes="(max-width:1280px) 100vw, 1152px" width="1600" height="900" alt="CAD render of the Water Worm W1 on black: a long white segmented body with a blue sealed vessel at the tail and a red cutting head with picks at the front" loading="lazy" decoding="async">
-        <figcaption>Water Worm W1, a tank-test model of the astroworm body, sealed for work under water.</figcaption>
+        <img src="assets/water-worm-w1-1600.jpg" srcset="assets/water-worm-w1-800.jpg 800w, assets/water-worm-w1-1600.jpg 1600w" sizes="(max-width:1280px) 100vw, 1152px" width="1600" height="900" alt="CAD render of the Water Worm W1 on black: a long white segmented body with a blue vessel at the tail and a red cutting head with picks at the front" loading="lazy" decoding="async">
+        <figcaption>Water Worm W1, designed as a tank-test model of the astroworm body, for work under water.</figcaption>
       </figure>
       <figure>
         <img src="assets/water-worm-w1-head-800.jpg" srcset="assets/water-worm-w1-head-800.jpg 800w, assets/water-worm-w1-head-1600.jpg 1600w" sizes="(max-width:860px) 100vw, 50vw" width="800" height="450" alt="Close CAD render of the Water Worm's red cutting head: a crown of picks around a threaded, cone-shaped screw point" loading="lazy" decoding="async">
@@ -260,7 +263,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <figcaption>The astroworm's cutting head.</figcaption>
       </figure>
     </div>
-    <p class="links"><a href="https://parahuman.net">parahuman.net</a><a href="https://github.com/dylanleitenberg-tech/astroworm">github.com/dylanleitenberg-tech/astroworm</a></p>
+    <p class="links"><a href="https://github.com/dylanleitenberg-tech/astroworm">github.com/dylanleitenberg-tech/astroworm</a></p>
   </div>
 </section>
 
@@ -269,7 +272,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <p class="kicker">Next</p>
     <h2>Not live yet.</h2>
     <ul class="next">
-      <li><span class="tag">In development</span><span>Linking one person's accounts across platforms<small>Only through links they published themselves.</small></span></li>
+      <li><span class="tag">In development</span><span>Linking one person's accounts across platforms<small>Confirmed only by links the person published. Weaker matches (same handle, name or photo) are scored and kept unconfirmed.</small></span></li>
       <li><span class="tag">Planned</span><span>Opt-in profiles<small>People see their own record and choose who else sees it.</small></span></li>
       <li><span class="tag">Planned</span><span>A pilot with one hiring firm<small>20 opted-in candidates, measured against the firm's usual pipeline.</small></span></li>
     </ul>

@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /archive/
 
 User-agent: Googlebot
 Allow: /
