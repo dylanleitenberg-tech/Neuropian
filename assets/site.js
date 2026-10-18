@@ -55,6 +55,31 @@
     }, { threshold: 0.35 }).observe(v);
   });
 
+  /* Brain: lobes light in turn while it is on screen; hover or focus picks one; lobes and bubbles link to projects. */
+  var mind = document.getElementById("mind");
+  if (mind) {
+    var order = ["frontal", "parietal", "occipital", "temporal", "cerebellum"], at = 0, timer = null, held = false;
+    var parts = mind.querySelectorAll("[data-lobe]");
+    var setOn = function (k) { parts.forEach(function (el) { el.classList.toggle("on", el.getAttribute("data-lobe") === k); }); };
+    var tick = function () { if (!held) { setOn(order[at % order.length]); at++; } };
+    parts.forEach(function (el) {
+      var k = el.getAttribute("data-lobe");
+      el.addEventListener("mouseenter", function () { held = true; setOn(k); });
+      el.addEventListener("mouseleave", function () { held = false; });
+      el.addEventListener("focusin", function () { held = true; setOn(k); });
+      el.addEventListener("focusout", function () { held = false; });
+    });
+    if (io) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { mind.classList.add("in"); if (!timer && !reduce) { tick(); timer = setInterval(tick, 2600); } }
+          else if (timer) { clearInterval(timer); timer = null; }
+        });
+      }, { threshold: 0.2 }).observe(mind);
+      if (reduce) setOn("frontal");
+    } else { mind.classList.add("in"); setOn("frontal"); }
+  }
+
   /* Astroworm orbit: scroll turns it (72 pre-rendered frames, a 120-degree sweep), drag turns it within that sweep,
      the second half switches to a cyan "hologram" style (a CSS filter over the same frames). */
   var orbit = document.getElementById("orbit");
