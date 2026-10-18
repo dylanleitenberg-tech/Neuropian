@@ -74,7 +74,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <p class="kicker">Neuropian · Talent</p>
       <h1>Find a builder.</h1>
       <p class="lede">Profiles members published about their own work. Search by what you need done; AI ranks the profiles by meaning, not keywords.</p>
-      <form class="search" id="f" role="search"><input id="q" name="q" type="search" maxlength="200" placeholder="e.g. GPU kernels in Rust, or olympiad-level math" aria-label="Search talent" autocomplete="off"><button>Search</button></form>
+      <form class="search" id="f" role="search"><input id="q" name="q" type="search" maxlength="200" placeholder="e.g. a product designer who ships, a protein biologist, a Rust engineer" aria-label="Search talent" autocomplete="off"><button>Search</button></form>
       <p class="hint">Only members who signed up and approved their profile appear here.</p>
     </div>
     <p class="status" id="st" aria-live="polite"></p>
@@ -123,8 +123,8 @@ function show(id){
 '</div>'+
       (p.summary?'<p class="p-sum">'+esc(p.summary)+'</p>':'')+
       ((p.skills||[]).length?'<h2>Skills</h2><div class="chips">'+chips(p.skills)+'</div>':'')+
-      ((p.work||[]).length?'<h2>Built and solved</h2><ul class="work">'+(p.work||[]).map(function(w){var u=safeUrl(w.url);return '<li><span class="w-title">'+(u?'<a rel="nofollow ugc noopener" href="'+u+'">'+esc(w.title)+'</a>':esc(w.title))+'</span><span class="w-src">'+esc(w.source)+'</span><span class="w-detail">'+esc(w.detail)+'</span></li>';}).join("")+'</ul>':'')+
-      '<p class="note">'+(p.ai_drafted?'Drafted with AI from this member\'s public GitHub work, then edited and published by them.':'Published by this member.')+' Links go to the original work so you can check it.</p>';
+      ((p.work||[]).length?'<h2>Built and solved</h2><ul class="work">'+(p.work||[]).map(function(w){var u=safeUrl(w.url);return '<li><span class="w-title">'+(u?'<a rel="nofollow ugc noopener" href="'+u+'">'+esc(w.title)+'</a>':esc(w.title))+'</span><span class="w-src">'+(w.verified?'Verified from GitHub':'Added by member')+(w.source?' · '+esc(w.source):'')+'</span><span class="w-detail">'+esc(w.detail)+'</span></li>';}).join("")+'</ul>':'')+
+      '<p class="note">'+(p.ai_drafted?'Drafted with AI from this member\'s own description and work, then reviewed and published by them.':'Published by this member.')+' Links go to the original work so you can check it.</p>';
   }).catch(function(){ prof.hidden=false; list.hidden=true; prof.innerHTML='<a class="back" href="#">← All talent</a><p class="p-head" style="margin-top:24px">Could not load this profile.</p>'; });
 }
 function route(){

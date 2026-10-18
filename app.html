@@ -640,7 +640,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   <div class="m-grid">
     <a class="m-card" onclick="gatedPage('platform')"><b>Opportunities</b><span>Openings, ordered by how well they fit your survey answers. None listed yet.</span></a>
     <a class="m-card" onclick="gatedPage('collective')"><b>RoundTable</b><span>Neuropian's place and space for intellectual expansion: chat, problem and build rooms.</span></a>
-    <a class="m-card" onclick="openBuild()"><b>Your public profile</b><span>Connect GitHub, draft it from your work, approve it, publish it to Talent.</span></a>
+    <a class="m-card" onclick="openBuild()"><b>Your public profile</b><span>Describe what you've made, link to it, approve the draft, publish it to Talent. For any field.</span></a>
     <a class="m-card" onclick="showPage('eagleeyes')"><b>EagleEyes</b><span>Neuropian's scouting agent: a browser extension that records what you read, write and work on, on the sites you choose, and adds it to your profile. Built; not yet public.</span></a>
   </div>
   <p class="m-legal"><a onclick="showPage('tos')">Terms of Service</a> · <a onclick="showPage('privacy')">Privacy Policy</a> · <a href="/">neuropian.com</a></p>
@@ -667,28 +667,34 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 <div id="page-build" class="page" style="background:#0a0a0a;min-height:100vh;color:#f2f1ed">
 <section class="m-home b-wrap">
   <p class="m-kicker">Neuropian · Your public profile</p>
-  <h1 class="m-title">Show what you've built.</h1>
-  <p class="m-lede">Connect GitHub so we know the work is yours, let AI draft your profile from it, then edit and approve.
-  Published profiles appear on <a href="/talent" style="color:inherit">neuropian.com/talent</a> and in its search.</p>
-  <div class="b-step"><span class="b-n">1</span><div>
-    <b>Prove the work is yours</b>
+  <h1 class="m-title">Show what you've made.</h1>
+  <p class="m-lede">Engineering, science, design, art, music, writing, business: anything you've built, made or solved.
+  Describe it, link to it, and Neuropian drafts your profile. You edit and approve it; published profiles appear on
+  <a href="/talent" style="color:inherit">neuropian.com/talent</a> and in its search.</p>
+  <div class="b-step"><span class="b-n">1</span><div style="flex:1;min-width:0">
+    <b>What you've made</b>
+    <label class="b-l">In your own words<textarea id="b-about" rows="5" maxlength="2000" placeholder="What you've built, made or solved, and what it does. Projects, research, designs, music, writing, companies…"></textarea></label>
+    <div class="b-l">Links to your work<div id="b-work"></div><button class="m-btn ghost" style="margin-top:10px" onclick="addWork()">Add a link</button></div>
+  </div></div>
+  <div class="b-step"><span class="b-n">2</span><div>
+    <b>Code on GitHub? Connect it (optional)</b>
     <p id="b-gh" class="b-p">Checking…</p>
     <div class="m-actions" style="margin-top:12px"><button class="m-btn ghost" id="b-gh-btn" onclick="connectGitHub()">Connect GitHub</button></div>
   </div></div>
-  <div class="b-step"><span class="b-n">2</span><div>
-    <b>Draft it from your work</b>
-    <p class="b-p">Reads your public repositories and the pull requests that projects outside your account merged from you. Nothing is published yet.</p>
+  <div class="b-step"><span class="b-n">3</span><div>
+    <b>Draft it</b>
+    <p class="b-p">Neuropian turns what you wrote, your links and (if connected) your public GitHub work into a draft. Nothing is published yet.</p>
+    <div id="b-dob" class="b-l" hidden>Your date of birth (Neuropian is for adults)<input type="date" id="b-dob-in"><button class="m-btn ghost" style="margin-top:10px" onclick="saveBirthdate()">Save</button></div>
     <div class="m-actions" style="margin-top:12px"><button class="m-btn" id="b-draft" onclick="draftProfile()">Draft my profile</button></div>
   </div></div>
-  <div class="b-step"><span class="b-n">3</span><div style="flex:1;min-width:0">
+  <div class="b-step"><span class="b-n">4</span><div style="flex:1;min-width:0">
     <b>Edit and approve</b>
     <label class="b-l">Name<input id="b-name" maxlength="80"></label>
     <label class="b-c"><input type="checkbox" id="b-show"> Show my name on my public profile</label>
     <p class="b-p small">Links to your work usually point to your accounts, so hiding your name may not make you anonymous.</p>
-    <label class="b-l">Headline<input id="b-head" maxlength="120" placeholder="e.g. Compiler engineer · LLVM and Rust"></label>
+    <label class="b-l">Headline<input id="b-head" maxlength="120" placeholder="e.g. Product designer · Mobile health apps"></label>
     <label class="b-l">Summary<textarea id="b-sum" rows="4" maxlength="1200"></textarea></label>
-    <label class="b-l">Skills, separated by commas<input id="b-skills" maxlength="400"></label>
-    <div class="b-l">Built and solved<div id="b-work"></div><button class="m-btn ghost" style="margin-top:10px" onclick="addWork()">Add an item</button></div>
+    <label class="b-l">Skills, separated by commas<input id="b-skills" maxlength="480"></label>
     <p class="b-p small">Publishing makes this page public: anyone can see it and find it in search.</p>
     <div class="m-actions"><button class="m-btn" onclick="publishProfile()">Publish</button><button class="m-btn ghost" id="b-save" onclick="saveDraftProfile()">Save</button><button class="m-btn ghost" id="b-unpub" onclick="unpublishProfile()" hidden>Unpublish</button></div>
     <p id="b-pub" class="b-p"></p>
@@ -706,7 +712,8 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 .b-l input:focus,.b-l textarea:focus,.b-w input:focus{border-color:#6fd6f7}
 .b-c{display:flex;gap:8px;align-items:center;font-size:15px;margin-top:12px}
 .b-w{display:grid;grid-template-columns:1fr 1fr;gap:6px;border-top:1px solid rgba(242,241,237,.14);padding:10px 0;margin-top:8px}
-.b-w input:nth-child(3){grid-column:1/-1}.b-w button{justify-self:start;background:none;border:0;color:rgba(242,241,237,.62);font-size:13px;cursor:pointer;padding:0}
+.b-w input:nth-child(3){grid-column:1/-1}.b-w .b-row{grid-column:1/-1;display:flex;gap:12px;align-items:center;font-size:12.5px;color:rgba(242,241,237,.5)}
+.b-w button{background:none;border:0;color:rgba(242,241,237,.62);font-size:13px;cursor:pointer;padding:0}
 @media(max-width:600px){.b-w{grid-template-columns:1fr}}
 </style>
 </div>
@@ -5027,33 +5034,43 @@ else{renderOppPreview();}
 })();</script>
 <script>
 const TALENT_FN=SUPA_URL+'/functions/v1/talent';
-let _bPub=null;
+let _bPub=null, _bGhUrls=new Set();
 function _bMsg(t){document.getElementById('b-msg').textContent=t;}
 function openBuild(){ if(!currentUser){showAuth('reg','build');return;} showPage('build'); loadBuild(); }
 function _bWorkRow(w){
   const d=document.createElement('div'); d.className='b-w';
-  d.innerHTML='<input placeholder="Title" maxlength="120"><input placeholder="https:// link to the work" maxlength="400"><input placeholder="What it is, or what you did" maxlength="240"><button type="button">Remove</button>';
+  d.innerHTML='<input placeholder="Title" maxlength="120"><input placeholder="https:// link to the work" maxlength="400"><input placeholder="What it is, or what you did" maxlength="240"><div class="b-row"><span class="b-tag"></span><button type="button">Remove</button></div>';
   const [t,u,x]=d.querySelectorAll('input'); t.value=w.title||''; u.value=w.url||''; x.value=w.detail||'';
+  if(_bGhUrls.has(w.url))d.querySelector('.b-tag').textContent='From GitHub';
   d.querySelector('button').onclick=()=>d.remove(); return d;
 }
 function addWork(w){document.getElementById('b-work').appendChild(_bWorkRow(w||{}));}
 function _bFill(p){
-  p=p||{}; document.getElementById('b-name').value=p.display_name||''; document.getElementById('b-show').checked=!!p.show_name;
+  p=p||{}; _bGhUrls=new Set((p.github_work||[]).map(w=>w.url));
+  document.getElementById('b-about').value=p.about||'';
+  document.getElementById('b-name').value=p.display_name||''; document.getElementById('b-show').checked=!!p.show_name;
   document.getElementById('b-head').value=p.headline||''; document.getElementById('b-sum').value=p.summary||'';
   document.getElementById('b-skills').value=(p.skills||[]).join(', ');
   const wk=document.getElementById('b-work'); wk.innerHTML=''; (p.work||[]).forEach(addWork);
   _bShowPub();
 }
 function _bCollect(){
-  return {display_name:document.getElementById('b-name').value.trim(), show_name:document.getElementById('b-show').checked,
+  return {about:document.getElementById('b-about').value.trim(),
+    display_name:document.getElementById('b-name').value.trim(), show_name:document.getElementById('b-show').checked,
     headline:document.getElementById('b-head').value.trim(), summary:document.getElementById('b-sum').value.trim(),
     skills:document.getElementById('b-skills').value.split(',').map(s=>s.trim()).filter(Boolean).slice(0,12),
     work:[...document.querySelectorAll('#b-work .b-w')].map(d=>{const [t,u,x]=d.querySelectorAll('input');return {title:t.value.trim(),url:u.value.trim(),detail:x.value.trim()};}).filter(w=>w.title)};
 }
+function _bShowPub(){
+  document.getElementById('b-unpub').hidden=!_bPub;
+  const el=document.getElementById('b-pub'); el.innerHTML='';
+  if(_bPub){el.append('Public page: '); const a=document.createElement('a'); a.href='/talent#'+_bPub; a.textContent='neuropian.com/talent#'+_bPub.slice(0,8)+'…'; a.style.color='inherit'; el.append(a);}
+  else el.textContent='Not published.';
+}
 async function loadBuild(){
   const {data:{user}}=await sb.auth.getUser(); if(user)currentUser=user;
   const gh=(currentUser.identities||[]).find(i=>i.provider==='github');
-  document.getElementById('b-gh').textContent=gh?'GitHub connected: '+(gh.identity_data.user_name||'')+'. Your public profile will show "GitHub verified".':'Not connected. Connect GitHub to draft your profile; without it your profile shows "GitHub not verified".';
+  document.getElementById('b-gh').textContent=gh?'GitHub connected: '+(gh.identity_data.user_name||'')+'. After you publish, your profile shows "GitHub verified" and marks the work that came from GitHub.':'Not connected. Without GitHub your profile is still published; your links show as added by you.';
   document.getElementById('b-gh-btn').hidden=!!gh;
   const {data}=await sb.from('member_profiles').select('*').eq('user_id',currentUser.id).maybeSingle();
   const {data:pub}=await sb.from('published_profiles').select('public_id').eq('user_id',currentUser.id).maybeSingle();
@@ -5068,11 +5085,26 @@ async function _bCall(body){
   const {data:{session}}=await sb.auth.getSession();
   const r=await fetch(TALENT_FN,{method:'POST',headers:{'Content-Type':'application/json',apikey:SUPA_KEY,Authorization:'Bearer '+(session?session.access_token:'')},body:JSON.stringify(body)});
   let d={}; try{d=await r.json();}catch(e){d={error:'The profile service is not available yet.'};}
+  if(d.error==='NEED_BIRTHDATE'){document.getElementById('b-dob').hidden=false; throw new Error('Add your date of birth first (step 3).');}
   if(!r.ok||d.error)throw new Error(d.error||('Error '+r.status)); return d;
 }
+async function saveBirthdate(){
+  try{const d=await _bCall({action:'set_birthdate',date_of_birth:document.getElementById('b-dob-in').value});
+    document.getElementById('b-dob').hidden=true; _bMsg(d.adult?'Saved.':'Neuropian is for adults (18+), so profiles are not available on this account.');}
+  catch(e){_bMsg(e.message);}
+}
+async function _bSave(){
+  const p=_bCollect();
+  const {error}=await sb.from('member_profiles').upsert({user_id:currentUser.id,...p,updated_at:new Date().toISOString()},{onConflict:'user_id'});
+  if(error){_bMsg('Could not save: '+error.message);return false;} return true;
+}
+async function saveDraftProfile(){ if(await _bSave())_bMsg('Saved. Your public page changes only when you press Publish.'); }
 async function draftProfile(){
+  const p=_bCollect();
+  if((p.headline||p.summary)&&!confirm('Replace your headline, summary and skills with a new draft? Your name and the links you added are kept.'))return;
   const b=document.getElementById('b-draft'); b.disabled=true; b.textContent='Drafting…'; _bMsg('');
-  try{const d=await _bCall({action:'draft'}); _bFill(d.profile); _bMsg((d.profile.ai_drafted?'AI drafted this from your GitHub.':'Drafted from your GitHub data.')+' Check every line, then publish.');}
+  try{ if(!(await _bSave()))return; const d=await _bCall({action:'draft'}); _bFill(d.profile);
+       _bMsg((d.profile.ai_drafted?'AI drafted this from your work.':'Drafted from what you gave.')+' Check every line, then publish.'); }
   catch(e){_bMsg(e.message);} finally{b.disabled=false; b.textContent='Draft my profile';}
 }
 async function publishProfile(){
@@ -5083,18 +5115,6 @@ async function publishProfile(){
   catch(e){_bMsg(e.message);}
 }
 async function unpublishProfile(){ try{await _bCall({action:'unpublish'}); _bPub=null; _bShowPub(); _bMsg('Unpublished. Your page is no longer public.');}catch(e){_bMsg(e.message);} }
-async function _bSave(){
-  const p=_bCollect();
-  const {error}=await sb.from('member_profiles').upsert({user_id:currentUser.id,...p,updated_at:new Date().toISOString()},{onConflict:'user_id'});
-  if(error){_bMsg('Could not save: '+error.message);return false;} return true;
-}
-async function saveDraftProfile(){ if(await _bSave())_bMsg('Saved. Your public page changes only when you press Publish.'); }
-function _bShowPub(){
-  document.getElementById('b-unpub').hidden=!_bPub;
-  const el=document.getElementById('b-pub'); el.innerHTML='';
-  if(_bPub){el.append('Public page: '); const a=document.createElement('a'); a.href='/talent#'+_bPub; a.textContent='neuropian.com/talent#'+_bPub.slice(0,8)+'…'; a.style.color='inherit'; el.append(a);}
-  else el.textContent='Not published.';
-}
 
 // open the builder: after sign-up/sign-in (pendingPage 'build'), from links, and after returning from GitHub (?build=1)
 const _np_showPage=showPage; showPage=function(id){_np_showPage(id); if(id==='build'&&currentUser)setTimeout(loadBuild,300);};
@@ -5140,6 +5160,7 @@ async function acceptTerms(){
 }
 async function declineTerms(){
   document.getElementById('terms-gate').style.display='none';
+  try{const {data:{session}}=await sb.auth.getSession(); if(session)await fetch(SUPA_URL+'/functions/v1/talent',{method:'POST',headers:{'Content-Type':'application/json',apikey:SUPA_KEY,Authorization:'Bearer '+session.access_token},body:JSON.stringify({action:'unpublish'})});}catch(e){}
   try{await sb.auth.signOut();}catch(e){}
   showPage('home');
 }
