@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Talent · Neuropian</title>
-<meta name="description" content="Search Neuropian members by what they have built and solved. Every profile is drafted from the member's own work and approved by them.">
+<meta name="description" content="Search the profiles Neuropian members published about their own work: what they have built and solved.">
 <link rel="canonical" href="https://neuropian.com/talent">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0a0a0a">
@@ -73,7 +73,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="top">
       <p class="kicker">Neuropian · Talent</p>
       <h1>Find a builder.</h1>
-      <p class="lede">Members' profiles, drafted by AI from their own work and approved by them. Search by what you need done; the AI ranks profiles by meaning, not keywords.</p>
+      <p class="lede">Profiles members published about their own work. Search by what you need done; AI ranks the profiles by meaning, not keywords.</p>
       <form class="search" id="f" role="search"><input id="q" name="q" type="search" maxlength="200" placeholder="e.g. GPU kernels in Rust, or olympiad-level math" aria-label="Search talent" autocomplete="off"><button>Search</button></form>
       <p class="hint">Only members who signed up and approved their profile appear here.</p>
     </div>
@@ -119,12 +119,12 @@ function show(id){
     if(!p){prof.innerHTML='<a class="back" href="#">← All talent</a><p class="p-head" style="margin-top:24px">This profile is not published.</p>';return;}
     document.title=(p.name||"Member")+" · Neuropian Talent";
     prof.innerHTML='<a class="back" href="#">← All talent</a><h1 class="p-name">'+esc(p.name||"Member")+'</h1><p class="p-head">'+esc(p.headline)+'</p>'+
-      '<div class="badges">'+(p.github_verified?'<a class="badge ok" href="https://github.com/'+esc(p.github)+'">GitHub verified · '+esc(p.github)+'</a>':'<span class="badge">GitHub not verified</span>')+
-      (p.codeforces?'<a class="badge" href="https://codeforces.com/profile/'+esc(p.codeforces)+'">Codeforces · '+esc(p.codeforces)+'</a>':'')+'</div>'+
+      '<div class="badges">'+(p.github_verified?'<a class="badge ok" rel="nofollow ugc noopener" href="https://github.com/'+esc(p.github)+'">GitHub verified · '+esc(p.github)+'</a>':'<span class="badge">GitHub not verified</span>')+
+'</div>'+
       (p.summary?'<p class="p-sum">'+esc(p.summary)+'</p>':'')+
       ((p.skills||[]).length?'<h2>Skills</h2><div class="chips">'+chips(p.skills)+'</div>':'')+
-      ((p.work||[]).length?'<h2>Built and solved</h2><ul class="work">'+(p.work||[]).map(function(w){var u=safeUrl(w.url);return '<li><span class="w-title">'+(u?'<a href="'+u+'">'+esc(w.title)+'</a>':esc(w.title))+'</span><span class="w-src">'+esc(w.source)+'</span><span class="w-detail">'+esc(w.detail)+'</span></li>';}).join("")+'</ul>':'')+
-      '<p class="note">'+(p.ai_drafted?'Drafted by AI from this member\'s own public work, then edited and approved by them.':'Written and approved by this member.')+' Links go to the original work so you can check it.</p>';
+      ((p.work||[]).length?'<h2>Built and solved</h2><ul class="work">'+(p.work||[]).map(function(w){var u=safeUrl(w.url);return '<li><span class="w-title">'+(u?'<a rel="nofollow ugc noopener" href="'+u+'">'+esc(w.title)+'</a>':esc(w.title))+'</span><span class="w-src">'+esc(w.source)+'</span><span class="w-detail">'+esc(w.detail)+'</span></li>';}).join("")+'</ul>':'')+
+      '<p class="note">'+(p.ai_drafted?'Drafted with AI from this member\'s public GitHub work, then edited and published by them.':'Published by this member.')+' Links go to the original work so you can check it.</p>';
   }).catch(function(){ prof.hidden=false; list.hidden=true; prof.innerHTML='<a class="back" href="#">← All talent</a><p class="p-head" style="margin-top:24px">Could not load this profile.</p>'; });
 }
 function route(){
