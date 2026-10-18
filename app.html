@@ -5192,5 +5192,32 @@ button[style*="background:#6fd6f7"],button[style*="background:#5cc4e6"]{color:#0
 .auth-box,.auth-card{border-radius:16px!important}
 @media(max-width:600px){a+span[style*="letter-spacing:.32em"]{display:none!important}}   /* page label next to the logo: the title below says it */
 </style>
+<style>
+html.np-embed{color-scheme:dark}
+html.np-embed,html.np-embed body{background:transparent!important}
+html.np-embed body>*:not(#auth-gate):not(script):not(style){display:none!important}
+html.np-embed .auth-gate{background:rgba(0,0,0,.5)!important;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+</style>
+<script>
+(function(){
+  const q=new URLSearchParams(location.search);
+  const PAGES=['home','survey','platform','collective','build','eagleeyes'];
+  const go=q.get('go');
+  if(go&&PAGES.includes(go)&&!q.has('embed')){
+    const t=setInterval(()=>{ if(currentUser){clearInterval(t); history.replaceState(null,'','/app'); showPage(go);} },250);
+    setTimeout(()=>clearInterval(t),12000);
+  }
+  if(!q.has('embed')||window.parent===window)return;
+  document.documentElement.classList.add('np-embed');
+  const tell=m=>{ try{ parent.postMessage(m,location.origin); }catch(e){} };
+  const _show=showPage; showPage=function(id){ if(id==='home')return; tell({type:'np-auth-done',page:id}); };
+  const _close=closeAuth; closeAuth=function(){ _close(); if(!currentUser)tell({type:'np-auth-close'}); };
+  window.addEventListener('message',e=>{ if(e.origin!==location.origin||!e.data)return;
+    if(e.data.type==='np-auth-mode')showAuth(e.data.mode==='reg'?'reg':'login'); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeAuth(); });
+  setTimeout(()=>{ if(currentUser){tell({type:'np-auth-done',page:'home'});return;}
+    showAuth(q.get('auth')==='reg'?'reg':'login'); tell({type:'np-auth-ready'}); },60);
+})();
+</script>
 </body>
 </html>

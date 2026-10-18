@@ -45,7 +45,8 @@ img{display:block;max-width:100%;height:auto}
 /* header */
 .bar{position:sticky;top:0;z-index:5;background:rgba(10,10,10,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:24px}
-.mark{font-weight:600;letter-spacing:.22em;font-size:13px;text-decoration:none}
+.mark{font-weight:600;letter-spacing:.22em;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.mark img{display:block;width:28px;height:28px}
 .nav{display:flex;gap:28px;font-size:14px}
 .nav a{text-decoration:none;color:var(--dim)}
 .nav a:hover{color:var(--fg)}
@@ -326,13 +327,13 @@ figure video{display:block;width:100%;height:auto;background:#000}
 
 <header class="bar">
   <div class="wrap">
-    <a class="mark" href="#top" aria-label="Neuropian, top of page">NEUROPIAN</a>
+    <a class="mark" href="#top" aria-label="Neuropian, top of page"><img src="/assets/brain.png" srcset="/assets/brain@2x.png 2x" alt="" width="28" height="28">NEUROPIAN</a>
     <nav class="nav" aria-label="Sections">
       <a href="#plain">How it works</a>
       <a href="#method">Method</a>
       <a href="/talent">Talent</a>
       <a href="#contact">Contact</a>
-      <a class="login" href="/app.html">Log in</a>
+      <a class="login" href="/app" data-auth="login">Log in</a>
     </nav>
   </div>
 </header>
@@ -491,7 +492,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
       <div class="ask">
         <h3>Want to be found</h3>
         <p>Create an account and take the profile survey, or tell us what you're working on, with a link to the work.</p>
-        <a class="mail" href="/app.html">Create an account →</a><br>
+        <a class="mail" href="/app" data-auth="reg">Create an account →</a><br>
         <!--email_off--><a class="mail" href="mailto:dylan@neuropian.com?subject=What%20I%27m%20working%20on">dylan@neuropian.com</a><!--/email_off-->
       </div>
     </div>
@@ -507,5 +508,41 @@ figure video{display:block;width:100%;height:auto;background:#000}
   </div>
 </footer>
 <script src="assets/site.js?v=20261017g" defer></script>
+<script>
+/* Log in / Create an account: the Neuropian sign-in box pops up over this page (it lives in /app; same origin). */
+(function(){
+  var KEY="sb-qggduzzwvdkmekihwuav-auth-token", ov=null, fr=null, ready=false, want="login";
+  function signedIn(){ try{ return !!localStorage.getItem(KEY); }catch(e){ return false; } }
+  function build(mode){
+    ov=document.createElement("div");
+    ov.setAttribute("style","position:fixed;inset:0;z-index:9999;display:none;background:rgba(0,0,0,.55)");
+    fr=document.createElement("iframe");
+    fr.title="Sign in to Neuropian"; fr.src="/app?embed=1&auth="+mode;
+    fr.setAttribute("style","border:0;width:100%;height:100%;background:transparent;color-scheme:dark");
+    fr.setAttribute("allowtransparency","true");
+    ov.appendChild(fr); document.body.appendChild(ov);
+  }
+  function open(mode){
+    if(signedIn()){ location.href="/app"; return; }
+    want=mode; if(!ov) build(mode); else if(ready) fr.contentWindow.postMessage({type:"np-auth-mode",mode:mode},location.origin);
+    ov.style.display="block"; document.documentElement.style.overflow="hidden";
+  }
+  function close(){ if(ov){ ov.style.display="none"; } document.documentElement.style.overflow=""; }
+  window.addEventListener("message",function(e){
+    if(e.origin!==location.origin||!e.data) return;
+    if(e.data.type==="np-auth-ready"){ ready=true; ov.style.background="transparent";
+      if(want!=="login"||fr.src.indexOf("auth="+want)<0) fr.contentWindow.postMessage({type:"np-auth-mode",mode:want},location.origin); }
+    if(e.data.type==="np-auth-close") close();
+    if(e.data.type==="np-auth-done") location.href="/app"+(e.data.page&&e.data.page!=="home"?"?go="+encodeURIComponent(e.data.page):"");
+  });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&ov&&ov.style.display==="block") close(); });
+  document.addEventListener("click",function(e){
+    var a=e.target.closest&&e.target.closest("[data-auth]"); if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button) return;
+    e.preventDefault(); open(a.getAttribute("data-auth"));
+  });
+  function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov&&!signedIn()) build(a.getAttribute("data-auth")); }
+  document.addEventListener("pointerover",warm); document.addEventListener("touchstart",warm,{passive:true}); document.addEventListener("focusin",warm);
+})();
+</script>
 </body>
 </html>
