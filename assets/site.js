@@ -65,6 +65,7 @@
 
   /* The last run: lines type out one after another when the terminal comes into view. */
   var term = document.querySelector(".term");
+  if (term && io && !reduce) term.classList.add("armed");     /* hide lines only when this script will type them */
   if (term) {
     var lis = Array.prototype.slice.call(term.querySelectorAll("li"));
     var play = function () {
@@ -86,6 +87,10 @@
   /* Charts draw in when they scroll into view. */
   document.querySelectorAll(".chart").forEach(function (c) {
     if (!io || reduce) { c.classList.add("in"); return; }
+    c.classList.add("armed");
+    c.querySelectorAll(".ur-dots").forEach(function (row) {                /* one person at a time */
+      Array.prototype.forEach.call(row.children, function (d, k) { d.style.transitionDelay = (k * 14) + "ms"; });
+    });
     var co = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { c.classList.add("in"); co.disconnect(); } }, { threshold: 0.4 });
     co.observe(c);
   });
