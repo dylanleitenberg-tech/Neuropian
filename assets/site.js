@@ -55,30 +55,69 @@
     }, { threshold: 0.35 }).observe(v);
   });
 
-  /* Brain: lobes light in turn while it is on screen; hover or focus picks one; lobes and bubbles link to projects. */
-  var mind = document.getElementById("mind");
-  if (mind) {
-    var order = ["frontal", "parietal", "occipital", "temporal", "cerebellum"], at = 0, timer = null, held = false;
-    var parts = mind.querySelectorAll("[data-lobe]");
-    var setOn = function (k) { parts.forEach(function (el) { el.classList.toggle("on", el.getAttribute("data-lobe") === k); }); };
-    var tick = function () { if (!held) { setOn(order[at % order.length]); at++; } };
-    /* listeners only on the real links (lobe <a> and bubbles): SVG groups with focus listeners would become tab stops */
-    mind.querySelectorAll("a.lobe-link, a.bubble").forEach(function (el) {
-      var k = el.getAttribute("data-lobe") || el.querySelector("[data-lobe]").getAttribute("data-lobe");
-      el.addEventListener("mouseenter", function () { held = true; setOn(k); });
-      el.addEventListener("mouseleave", function () { held = false; });
-      el.addEventListener("focusin", function () { held = true; setOn(k); });
-      el.addEventListener("focusout", function () { held = false; });
+  /* Hero: the headline types in on load. */
+  var h1 = document.querySelector(".hero h1");
+  if (h1 && !reduce) {
+    var t1 = h1.textContent.trim();
+    h1.style.minHeight = h1.offsetHeight + "px";
+    setTimeout(function () { typeInto(h1, t1, 34); }, 250);
+  }
+
+  /* The last run: lines type out one after another when the terminal comes into view. */
+  var term = document.querySelector(".term");
+  if (term) {
+    var lis = Array.prototype.slice.call(term.querySelectorAll("li"));
+    var play = function () {
+      var k = 0;
+      (function next() {
+        if (k >= lis.length) return;
+        var li = lis[k++], txt = li.textContent;
+        li.classList.add("shown");
+        if (reduce) { next(); return; }
+        typeInto(li, txt, li.classList.contains("t-cmd") ? 26 : 8, function () { setTimeout(next, li.classList.contains("t-cmd") ? 260 : 90); });
+      })();
+    };
+    if (io && !reduce) {
+      var to = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { to.disconnect(); play(); } }, { threshold: 0.3 });
+      to.observe(term);
+    } else lis.forEach(function (li) { li.classList.add("shown"); });
+  }
+
+  /* Charts draw in when they scroll into view. */
+  document.querySelectorAll(".chart").forEach(function (c) {
+    if (!io || reduce) { c.classList.add("in"); return; }
+    var co = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { c.classList.add("in"); co.disconnect(); } }, { threshold: 0.4 });
+    co.observe(c);
+  });
+
+  /* Project index: hovering a row floats its preview beside the cursor (the miner row plays the orbit). */
+  var pindex = document.getElementById("pindex"), prev = document.querySelector(".pprev");
+  if (pindex && prev && window.matchMedia("(hover: hover)").matches) {
+    var pimg = prev.querySelector("img"), px = 0, py = 0, tx = 0, ty = 0, raf = null, spin = null;
+    var orbitEl = document.getElementById("orbit");
+    var frame = function (i) { return orbitEl.dataset.path + (i < 10 ? "0" : "") + i + ".webp"; };
+    var follow = function () {
+      px += (tx - px) * 0.18; py += (ty - py) * 0.18;
+      prev.style.transform = "translate(" + px + "px," + py + "px)";
+      raf = Math.abs(tx - px) + Math.abs(ty - py) > 0.5 ? requestAnimationFrame(follow) : null;
+    };
+    var show = function (a, x, y) {
+      clearInterval(spin);
+      if (a.hasAttribute("data-orbit") && orbitEl) {
+        var f = 0, n = +orbitEl.dataset.frames;
+        pimg.src = frame(0);
+        spin = setInterval(function () { f = (f + 1) % n; pimg.src = frame(f); }, 70);
+      } else pimg.src = a.getAttribute("data-preview");
+      tx = x; ty = y; if (!prev.classList.contains("on")) { px = tx; py = ty; }
+      prev.classList.add("on"); if (!raf) raf = requestAnimationFrame(follow);
+    };
+    pindex.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("mouseenter", function (e) { show(a, e.clientX + 56, e.clientY - 90); });
+      a.addEventListener("mousemove", function (e) { tx = e.clientX + 56; ty = e.clientY - 90; if (!raf) raf = requestAnimationFrame(follow); });
+      a.addEventListener("focus", function () { var r = a.getBoundingClientRect(); show(a, r.right - prev.offsetWidth - 8, r.top - 40); });
+      a.addEventListener("blur", function () { prev.classList.remove("on"); clearInterval(spin); });
     });
-    if (io) {
-      new IntersectionObserver(function (es) {
-        es.forEach(function (e) {
-          if (e.isIntersecting) { mind.classList.add("in"); if (!timer && !reduce) { tick(); timer = setInterval(tick, 2600); } }
-          else if (timer) { clearInterval(timer); timer = null; }
-        });
-      }, { threshold: 0.2 }).observe(mind);
-      if (reduce) setOn("frontal");
-    } else { mind.classList.add("in"); setOn("frontal"); }
+    pindex.addEventListener("mouseleave", function () { prev.classList.remove("on"); clearInterval(spin); });
   }
 
   /* Astroworm orbit: scroll turns it (72 pre-rendered frames, a 120-degree sweep), drag turns it within that sweep,
