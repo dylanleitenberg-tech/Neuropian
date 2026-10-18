@@ -66,29 +66,38 @@ p+p{margin-top:1em}
 section{border-top:1px solid var(--line);padding:clamp(72px,11vw,160px) 0}
 .hero{border-top:0;padding-top:clamp(64px,9vw,120px);padding-bottom:clamp(56px,7vw,96px);position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:70vw;height:120%;z-index:0;pointer-events:none;background:radial-gradient(38% 34% at 62% 38%,rgba(111,214,247,.20),transparent 70%),radial-gradient(34% 30% at 78% 62%,rgba(180,156,255,.18),transparent 70%),radial-gradient(30% 28% at 52% 72%,rgba(255,154,118,.14),transparent 70%)}
-.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,4vw,60px);align-items:center}
 .grad{background:linear-gradient(95deg,#6fd6f7 0%,#b49cff 52%,#ff9a76 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
 .cta{display:inline-flex;align-items:center;font-size:17px;font-weight:500;text-decoration:none;padding:14px 26px;border-radius:999px;background:#f2f1ed;color:#0a0a0a;border:1px solid #f2f1ed;transition:transform .15s ease,box-shadow .2s ease}
 .cta:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(180,156,255,.25)}
 .cta.ghost{background:transparent;color:#f2f1ed;border-color:var(--line)}.cta.ghost:hover{border-color:#f2f1ed}
-.mosaic{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mosaic{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding-bottom:36px}
 .ph{position:relative;margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 20px 50px rgba(0,0,0,.45)}
 .ph img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .ph:hover img{transform:scale(1.04)}
-.ph2,.ph4{transform:translateY(36px)}
+.ph2,.ph5{transform:translateY(36px)}
 .ph figcaption{position:absolute;left:12px;bottom:12px;font-size:13px;font-weight:500;letter-spacing:.04em;color:#0a0a0a;border-radius:999px;padding:5px 12px}
-.ph1 figcaption{background:#6fd6f7}.ph2 figcaption{background:#ff9a76}.ph3 figcaption{background:#b49cff}.ph4 figcaption{background:#f6d365}
+.ph-hit{position:absolute;inset:0;width:100%;border:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45));cursor:pointer;padding:0;text-align:left;font:inherit}
+.chip{position:absolute;left:10px;bottom:10px;font-size:13px;font-weight:500;color:#0a0a0a;border-radius:999px;padding:5px 12px}
+.plus{position:absolute;right:10px;bottom:10px;width:28px;height:28px;border-radius:999px;background:rgba(10,10,10,.6);color:#f2f1ed;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;transition:transform .25s ease}
+.ph:hover .plus{transform:scale(1.12)}.ph.open .plus{transform:rotate(45deg)}
+.ph1 .chip{background:#6fd6f7}.ph2 .chip{background:#ff9a76}.ph3 .chip{background:#b49cff}.ph4 .chip{background:#f6d365}.ph5 .chip{background:#7ee0b5}.ph6 .chip{background:#ffb3d1}
+.ph-more{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:16px;background:linear-gradient(180deg,rgba(10,10,10,.25),rgba(10,10,10,.92) 55%);opacity:0;pointer-events:none;transition:opacity .25s ease}
+.ph.open .ph-more{opacity:1;pointer-events:auto;cursor:pointer}.ph.open .ph-hit{pointer-events:none}.ph.open .chip{display:none}
+.ph-more b{font-size:17px;font-weight:600}.ph-more p{font-size:14px;line-height:1.45;color:#f2f1ed}
+.ph-cta{position:relative;z-index:4;align-self:flex-start;white-space:nowrap;font-size:13px;font-weight:500;text-decoration:none;color:#0a0a0a;background:#f2f1ed;border-radius:999px;padding:7px 12px}
 .proof{padding:clamp(56px,8vw,110px) 0}
 .proof .big{font-size:clamp(26px,3.4vw,46px);line-height:1.18;letter-spacing:-.025em;font-weight:500;max-width:22em}
 .proof .big.dim{color:var(--dim);margin-top:18px}.proof .big b{font-weight:600}
 .c1{color:#6fd6f7}.c3{color:#ff9a76}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,24px);margin-top:clamp(36px,5vw,56px)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,24px);margin-top:clamp(36px,5vw,56px)}
 .tile{border-radius:18px;padding:22px 24px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,0))}
 .tile b{display:block;font-size:clamp(40px,5vw,64px);font-weight:500;letter-spacing:-.04em;line-height:1}
 .tile span{display:block;color:var(--dim);margin-top:10px}
-.t1 b{color:#6fd6f7}.t2 b{color:#b49cff}.t3 b{color:#ff9a76}
-@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.mosaic{max-width:520px}.tiles{grid-template-columns:1fr}}
+.t1 b{color:#6fd6f7}.t2 b{color:#b49cff}.t3 b{color:#ff9a76}.t4 b{color:#7ee0b5}.c4{color:#7ee0b5}
+@media(max-width:1000px){.tiles{grid-template-columns:1fr 1fr}}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.mosaic{grid-template-columns:1fr 1fr;max-width:520px}.ph2,.ph5{transform:none}.ph2,.ph4,.ph6{transform:translateY(28px)}.tiles{grid-template-columns:1fr}}
 .hero .lede{margin-top:36px}
 .tagline{margin-top:28px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#9fefff}
 .status{margin-top:20px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
@@ -369,11 +378,11 @@ figure video{display:block;width:100%;height:auto;background:#000}
    <div class="hero-text">
     <p class="kicker">Neuropian · Intellect accelerator</p>
     <h1>Intelligence, <span class="grad">reimagined.</span></h1>
-    <p class="lede">Neuropian is where brilliant people get found by what they've built, made and solved, not what's on their résumé.</p>
+    <p class="lede">Neuropian is where brilliant people get found by what they've built, made and solved, and how they lead and work with others, not by what's on their résumé.</p>
     <div class="ctas"><a class="cta" href="/app" data-auth="reg">Create an account</a><a class="cta ghost" href="#contact">Hire with Neuropian</a></div>
     <p class="tagline">Signal, not résumés · No credentials required</p>
    </div>
-   <div class="mosaic" aria-label="People building in any field"><figure class="ph ph1"><img src="/assets/photos/code.webp" srcset="/assets/photos/code@2x.webp 2x" width="360" height="450" alt="Colourful code on a monitor in a dark room lit in teal and red" loading="eager" decoding="async"><figcaption>Code</figcaption></figure><figure class="ph ph2"><img src="/assets/photos/science.webp" srcset="/assets/photos/science@2x.webp 2x" width="360" height="450" alt="A researcher in a lab coat holding a sample vial over a tray of samples" loading="eager" decoding="async"><figcaption>Science</figcaption></figure><figure class="ph ph3"><img src="/assets/photos/hardware.webp" srcset="/assets/photos/hardware@2x.webp 2x" width="360" height="450" alt="Close-up of a blue circuit board with chips and orange components" loading="eager" decoding="async"><figcaption>Hardware</figcaption></figure><figure class="ph ph4"><img src="/assets/photos/design.webp" srcset="/assets/photos/design@2x.webp 2x" width="360" height="450" alt="Hands sketching a design on paper next to an orange ruler" loading="eager" decoding="async"><figcaption>Design</figcaption></figure></div>
+   <div class="mosaic" aria-label="People building in any field"><figure class="ph ph1"><img src="/assets/photos/code.webp" srcset="/assets/photos/code@2x.webp 2x" width="360" height="450" alt="Colourful code on a monitor in a dark room lit in teal and red" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip">Code</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>Code</b><p>Code that experts accepted into real software. Falcon reads it; members link to it.</p><a class="ph-cta" href="/app" data-auth="reg">Create your profile →</a></div></figure><figure class="ph ph2"><img src="/assets/photos/leadership.webp" srcset="/assets/photos/leadership@2x.webp 2x" width="360" height="450" alt="A woman leading her team at a whiteboard covered in sketches" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip">Leadership</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>Leadership</b><p>Who started something, led a build or brought people along with them.</p><a class="ph-cta" href="/app" data-auth="reg">Create your profile →</a></div></figure><figure class="ph ph3"><img src="/assets/photos/science.webp" srcset="/assets/photos/science@2x.webp 2x" width="360" height="450" alt="A researcher in a lab coat holding a sample vial over a tray of samples" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip">Science</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>Science</b><p>Research and results you can point to: papers, data, experiments.</p><a class="ph-cta" href="/app" data-auth="reg">Create your profile →</a></div></figure><figure class="ph ph4"><img src="/assets/photos/teamwork.webp" srcset="/assets/photos/teamwork@2x.webp 2x" width="360" height="450" alt="Four coworkers smiling around a laptop in a bright studio" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip">Teamwork</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>Teamwork</b><p>Who reviews, helps and builds with others, not only alone.</p><a class="ph-cta" href="/app" data-auth="reg">Create your profile →</a></div></figure><figure class="ph ph5"><img src="/assets/photos/hardware.webp" srcset="/assets/photos/hardware@2x.webp 2x" width="360" height="450" alt="Close-up of a blue circuit board with chips and orange components" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip">Hardware</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>Hardware</b><p>Things you designed and built, with photos and files to prove it.</p><a class="ph-cta" href="/app" data-auth="reg">Create your profile →</a></div></figure><figure class="ph ph6"><img src="/assets/photos/design.webp" srcset="/assets/photos/design@2x.webp 2x" width="360" height="450" alt="Hands sketching a design on paper next to an orange ruler" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip">Design</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>Design</b><p>Work you made and shipped, shown on your profile.</p><a class="ph-cta" href="/app" data-auth="reg">Create your profile →</a></div></figure></div>
   </div>
 </section>
 
@@ -381,10 +390,12 @@ figure video{display:block;width:100%;height:auto;background:#000}
   <div class="wrap">
     <p class="big">Falcon found <b class="c1">1,857 people</b> whose work is inside software millions of people use, like Python, Rust and LLVM.</p>
     <p class="big dim"><b class="c3">6 in 10</b> of them have 12 or fewer followers online. That's who résumé searches miss.</p>
+    <p class="big dim"><b class="c4">210</b> of them also reviewed and approved other people's work in the past year, for 684 other contributors. Teamwork you can see.</p>
     <div class="tiles">
       <div class="tile t1 reveal"><b data-count="1857">1,857</b><span>builders found</span></div>
       <div class="tile t2 reveal"><b data-count="31">31</b><span>major software projects searched</span></div>
       <div class="tile t3 reveal"><b>6 in 10</b><span>have 12 or fewer followers</span></div>
+      <div class="tile t4 reveal"><b data-count="210">210</b><span>also review and approve others' work</span></div>
     </div>
   </div>
 </section>
@@ -543,7 +554,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Neuropian · Beyond Limitless · Photos on Unsplash: Jakub Żerdzicki, Julia Koblitz, Yogesh Phuyal, Vitaly Gariev</span>
+    <span>© 2026 Neuropian · Beyond Limitless · Photos on Unsplash: Jakub Żerdzicki, Vitaly Gariev, Julia Koblitz, Jud Mackrill, Yogesh Phuyal</span>
     <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/app.html">Members</a></span>
   </div>
 </footer>
@@ -580,6 +591,21 @@ figure video{display:block;width:100%;height:auto;background:#000}
   });
   function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov) build(a.getAttribute("data-auth")); }
   document.addEventListener("pointerover",warm); document.addEventListener("touchstart",warm,{passive:true}); document.addEventListener("focusin",warm);
+})();
+</script>
+<script>
+/* photo tiles: click opens what we look for in that field; click again (or Esc) closes */
+(function(){
+  function closeAll(){ document.querySelectorAll(".ph.open").forEach(function(f){ f.classList.remove("open"); f.querySelector(".ph-hit").setAttribute("aria-expanded","false"); }); }
+  document.addEventListener("click", function(e){
+    var t = e.target; if (!t.closest) return;
+    var more = t.closest(".ph-more"), hit = t.closest(".ph-hit");
+    if (more && !t.closest("a")) { closeAll(); return; }
+    if (!hit) return;
+    var f = hit.parentElement, was = f.classList.contains("open"); closeAll();
+    if (!was) { f.classList.add("open"); hit.setAttribute("aria-expanded","true"); var a = f.querySelector(".ph-cta"); if (a) a.focus({preventScroll:true}); }
+  });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeAll(); });
 })();
 </script>
 </body>
