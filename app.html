@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>window.__npRecovery=/type=recovery/.test(location.hash)||/[?&]type=recovery/.test(location.search);</script>
 <meta name="robots" content="noindex">
 <meta name="description" content="Neuropian members: profile survey, opportunities and RoundTable.">
 <link rel="canonical" href="https://neuropian.com/app.html">
@@ -1337,6 +1338,7 @@ function closeMobileNav(){
 const SUPA_URL = 'https://qggduzzwvdkmekihwuav.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw';
 const sb = (typeof supabase !== 'undefined') ? supabase.createClient(SUPA_URL, SUPA_KEY) : null;
+if(sb)sb.auth.onAuthStateChange(function(ev){ if(ev==='PASSWORD_RECOVERY')setTimeout(function(){showSetPasswordModal();},0); });
 
 // ═══ AUTH STATE ═══
 let isAuthed = false;
@@ -1498,7 +1500,7 @@ async function doReset(){
   const email=document.getElementById('rs-email').value.trim();
   if(!email){showErr('rs-err','Please enter your email address.');return;}
   authBtn('rs-btn',true,'Sending…');
-  const{error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.href});
+  const{error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+'/app'});
   authBtn('rs-btn',false,'Send Reset Link');
   if(error){showErr('rs-err',error.message);return;}
   showErr('rs-err','');document.getElementById('rs-success').style.display='';
@@ -5215,6 +5217,11 @@ html.np-embed .auth-gate{background:rgba(0,0,0,.5)!important;-webkit-backdrop-fi
     else { b1.textContent='Create an account'; b2.textContent='Sign in'; b2.onclick=()=>showAuth('login'); } }
   const _snu=setNavUser; setNavUser=function(u){ _snu(u); npLanding(u); };
   [0,800,2500].forEach(ms=>setTimeout(()=>npLanding(currentUser),ms));
+  // a password-reset link: once its sign-in lands, ask for the new password (backup for the event above)
+  if(window.__npRecovery&&!q.has('embed')){
+    const t=setInterval(()=>{ if(currentUser){ clearInterval(t); const m=document.getElementById('set-password-modal'); if(m&&m.style.display!=='flex')showSetPasswordModal(); } },300);
+    setTimeout(()=>clearInterval(t),20000);
+  }
   if(!q.has('embed')||window.parent===window)return;
   document.documentElement.classList.add('np-embed');
   const tell=m=>{ try{ parent.postMessage(m,location.origin); }catch(e){} };
