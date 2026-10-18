@@ -692,7 +692,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <b>Edit and approve</b>
     <label class="b-l">Name<input id="b-name" maxlength="80"></label>
     <label class="b-c"><input type="checkbox" id="b-show"> Show my name on my public profile</label>
-    <p class="b-p small">Links to your work usually point to your accounts, so hiding your name may not make you anonymous.</p>
+    <p class="b-p small">Your GitHub username (if connected) is shown, and links to your work usually point to your accounts, so hiding your name may not make you anonymous.</p>
     <label class="b-l">Headline<input id="b-head" maxlength="120" placeholder="e.g. Product designer · Mobile health apps"></label>
     <label class="b-l">Summary<textarea id="b-sum" rows="4" maxlength="1200"></textarea></label>
     <label class="b-l">Skills, separated by commas<input id="b-skills" maxlength="480"></label>
@@ -4775,7 +4775,7 @@ else{renderOppPreview();}
       <h2>11. Ending</h2><div class="lg"><p>You can delete your account at any time by emailing <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>. We may suspend or close accounts that break these terms.</p></div>
       <h2>12. Changes</h2><div class="lg"><p>If we change these terms in a way that matters, we will ask you to accept them again before you continue.</p></div>
       <h2>13. Law</h2><div class="lg"><p>These terms are governed by the laws of the State of Hawaii, USA.</p></div>
-      <h2>14. Public profiles and Talent search</h2><div class="lg"><p>You can publish a profile to neuropian.com/talent. If you connect GitHub, it can be drafted from your public GitHub work, with AI; you edit and approve it, and nothing is public until you press Publish. A published profile can be seen and searched by anyone, and you can unpublish it at any time. Only connect a GitHub account that is yours, and only list work you did. Links to your work usually point to your accounts, so hiding your name may not make you anonymous.</p></div>
+      <h2>14. Public profiles and Talent search</h2><div class="lg"><p>You can publish a profile to neuropian.com/talent. Neuropian drafts it from what you write, your links and, if you connect GitHub, your public GitHub work, and may use AI to write it; you edit and approve it, and nothing is public until you press Publish. A published profile can be seen and searched by anyone, and you can unpublish it at any time. Only connect a GitHub account that is yours, and only list work you did. Your GitHub username is shown if you connect GitHub, and links to your work usually point to your accounts, so hiding your name may not make you anonymous.</p></div>
   </div>
   <style>
   #page-tos .lg-bar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 clamp(16px,5vw,64px);background:rgba(10,10,10,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(242,241,237,.14);font-size:14px;color:rgba(242,241,237,.38)}
@@ -5043,7 +5043,7 @@ else{renderOppPreview();}
 const TALENT_FN=SUPA_URL+'/functions/v1/talent';
 let _bPub=null, _bGhUrls=new Set();
 function _bMsg(t){document.getElementById('b-msg').textContent=t;}
-function openBuild(){ if(!currentUser){showAuth('reg','build');return;} showPage('build'); loadBuild(); }
+function openBuild(){ if(!currentUser){showAuth('reg','build');return;} showPage('build'); }
 function _bWorkRow(w){
   const d=document.createElement('div'); d.className='b-w';
   d.innerHTML='<input placeholder="Title" maxlength="120"><input placeholder="https:// link to the work" maxlength="400"><input placeholder="What it is, or what you did" maxlength="240"><div class="b-row"><span class="b-tag"></span><button type="button">Remove</button></div>';
@@ -5077,7 +5077,7 @@ function _bShowPub(){
 async function loadBuild(){
   const {data:{user}}=await sb.auth.getUser(); if(user)currentUser=user;
   const gh=(currentUser.identities||[]).find(i=>i.provider==='github');
-  document.getElementById('b-gh').textContent=gh?'GitHub connected: '+(gh.identity_data.user_name||'')+'. After you publish, your profile shows "GitHub verified" and marks the work that came from GitHub.':'Not connected. Without GitHub your profile is still published; your links show as added by you.';
+  document.getElementById('b-gh').textContent=gh?'GitHub connected: '+(gh.identity_data.user_name||'')+'. After you publish, your profile shows "GitHub verified" and marks the work that came from GitHub.':'Not connected. You can still publish without GitHub; your links will show as added by you.';
   document.getElementById('b-gh-btn').hidden=!!gh;
   const {data}=await sb.from('member_profiles').select('*').eq('user_id',currentUser.id).maybeSingle();
   const {data:pub}=await sb.from('published_profiles').select('public_id').eq('user_id',currentUser.id).maybeSingle();
@@ -5107,13 +5107,15 @@ async function _bSave(){
   if(error){_bMsg('Could not save: '+error.message);return false;} return true;
 }
 async function saveDraftProfile(){ if(await _bSave())_bMsg('Saved. Your public page changes only when you press Publish.'); }
+let _bBusy=false;
 async function draftProfile(){
+  if(_bBusy)return;
   const p=_bCollect();
   if((p.headline||p.summary)&&!confirm('Replace your headline, summary and skills with a new draft? Your name and the links you added are kept.'))return;
-  const b=document.getElementById('b-draft'); b.disabled=true; b.textContent='Drafting…'; _bMsg('');
+  _bBusy=true; const b=document.getElementById('b-draft'); b.disabled=true; b.textContent='Drafting…'; _bMsg('');
   try{ if(!(await _bSave()))return; const d=await _bCall({action:'draft'}); _bFill(d.profile);
        _bMsg((d.profile.ai_drafted?'AI drafted this from your work.':'Drafted from what you gave.')+' Check every line, then publish.'); }
-  catch(e){_bMsg(e.message);} finally{b.disabled=false; b.textContent='Draft my profile';}
+  catch(e){_bMsg(e.message);} finally{_bBusy=false; b.disabled=false; b.textContent='Draft my profile';}
 }
 async function publishProfile(){
   const p=_bCollect(); if(!p.headline){_bMsg('Add a headline first.');return;}

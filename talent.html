@@ -96,7 +96,7 @@ function card(p){
   var w=(p.work||[])[0];
   return '<a class="card" href="#'+esc(p.id)+'"><div class="c-name">'+esc(p.name||"Member")+'</div><div class="c-head">'+esc(p.headline)+'</div>'+
     '<div class="chips">'+chips(p.skills)+'</div>'+(w?'<div class="c-work">'+esc(w.title)+(w.detail?' · '+esc(w.detail):'')+'</div>':'')+
-    (p.match!=null?'<div class="c-match">'+Math.round(p.match*100)+'% match</div>':'')+'</a>';
+'</a>';
 }
 function render(rows,q){
   if(!rows.length){
@@ -104,7 +104,7 @@ function render(rows,q){
     grid.innerHTML='<div class="empty">'+(q?'No member profile matches that yet.':'No member has published a profile yet.')+' Builders: <a href="/app" data-auth="reg">create an account</a> and publish yours.</div>';
     return;
   }
-  st.textContent=q?rows.length+" closest matches for “"+q+"”":rows.length+" newest profiles";
+  st.textContent=q?"Closest first, for “"+q+"”":rows.length+" newest profiles";
   grid.innerHTML=rows.map(card).join("");
 }
 function search(q){
