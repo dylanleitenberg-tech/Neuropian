@@ -58,9 +58,9 @@
   /* Hero: the headline types in on load. */
   var h1 = document.querySelector(".hero h1");
   if (h1 && !reduce) {
-    var t1 = h1.textContent.trim();
+    var t1 = h1.textContent.trim(), h1html = h1.innerHTML;          /* typing uses plain text; the coloured word comes back after */
     h1.style.minHeight = h1.offsetHeight + "px";
-    setTimeout(function () { typeInto(h1, t1, 34); }, 250);
+    setTimeout(function () { typeInto(h1, t1, 34, function () { h1.innerHTML = h1html; }); }, 250);
   }
 
   /* The last run: lines type out one after another when the terminal comes into view. */
