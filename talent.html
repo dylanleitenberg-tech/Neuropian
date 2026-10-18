@@ -140,8 +140,7 @@ route(); search(q0);
 <script>
 /* Log in / Create an account: the Neuropian sign-in box pops up over this page (it lives in /app; same origin). */
 (function(){
-  var KEY="sb-qggduzzwvdkmekihwuav-auth-token", ov=null, fr=null, ready=false, want="login";
-  function signedIn(){ try{ return !!localStorage.getItem(KEY); }catch(e){ return false; } }
+  var ov=null, fr=null, ready=false, want="login";
   function build(mode){
     ov=document.createElement("div");
     ov.setAttribute("style","position:fixed;inset:0;z-index:9999;display:none;background:rgba(0,0,0,.55)");
@@ -152,7 +151,6 @@ route(); search(q0);
     ov.appendChild(fr); document.body.appendChild(ov);
   }
   function open(mode){
-    if(signedIn()){ location.href="/app"; return; }
     want=mode; if(!ov) build(mode); else if(ready) fr.contentWindow.postMessage({type:"np-auth-mode",mode:mode},location.origin);
     ov.style.display="block"; document.documentElement.style.overflow="hidden";
   }
@@ -169,7 +167,7 @@ route(); search(q0);
     var a=e.target.closest&&e.target.closest("[data-auth]"); if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button) return;
     e.preventDefault(); open(a.getAttribute("data-auth"));
   });
-  function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov&&!signedIn()) build(a.getAttribute("data-auth")); }
+  function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov) build(a.getAttribute("data-auth")); }
   document.addEventListener("pointerover",warm); document.addEventListener("touchstart",warm,{passive:true}); document.addEventListener("focusin",warm);
 })();
 </script>
