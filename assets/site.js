@@ -89,7 +89,7 @@
     if (!io || reduce) { c.classList.add("in"); return; }
     c.classList.add("armed");
     c.querySelectorAll(".ur-dots").forEach(function (row) {                /* one person at a time */
-      Array.prototype.forEach.call(row.children, function (d, k) { d.style.transitionDelay = (k * 14) + "ms"; });
+      Array.prototype.forEach.call(row.children, function (d, k) { d.style.transitionDelay = Math.min(k * 4, 1400) + "ms"; });
     });
     var co = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { c.classList.add("in"); co.disconnect(); } }, { threshold: 0.4 });
     co.observe(c);
