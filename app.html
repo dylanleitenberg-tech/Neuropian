@@ -1530,7 +1530,7 @@ function onUsernameInput(val){
   _usernameCheckTimer=setTimeout(async()=>{
     if(!sb){st.textContent='';return;}
     try{
-      const{data}=await sb.from('profiles').select('user_id').eq('username',val).maybeSingle();
+      const{data}=await sb.from('public_profiles').select('user_id').eq('username',val).maybeSingle();
       if(data){st.textContent='Username taken.';st.style.color='#e55';}
       else{st.textContent='Available!';st.style.color='#00cc44';}
     }catch(e){st.textContent='';}
@@ -1650,7 +1650,7 @@ async function doRegister(){
   if(pass.length<6){showErr('rg-err','Password must be at least 6 characters.');return}
   // Check username uniqueness
   try{
-    const{data:taken}=await sb.from('profiles').select('user_id').eq('username',username).maybeSingle();
+    const{data:taken}=await sb.from('public_profiles').select('user_id').eq('username',username).maybeSingle();
     if(taken){showErr('rg-err','That username is already taken. Please choose another.');return}
   }catch(e){/* column may not exist yet - proceed */}
   authBtn('rg-btn',true,'Creating account…');
@@ -1668,7 +1668,7 @@ async function doRegister(){
   let neuropianId;
   for(let i=0;i<10;i++){
     const candidate=String(Math.floor(1000000+Math.random()*9000000));
-    const{data:existing}=await sb.from('profiles').select('neuropian_id').eq('neuropian_id',candidate).maybeSingle();
+    const{data:existing}=await sb.from('public_profiles').select('neuropian_id').eq('neuropian_id',candidate).maybeSingle();
     if(!existing){neuropianId=candidate;break;}
   }
   if(!neuropianId)neuropianId=String(Date.now()).slice(-7);
@@ -2867,7 +2867,7 @@ async function loadMembersPanel(serverId){
     const roles=rolesRes.data||[];
     const memberRoles=memberRolesRes.data||[];
     if(!memberIds.length){list.innerHTML='<div style="padding:.5rem 1rem;font-size:.62rem;color:#444">No members.</div>';return;}
-    const {data:profiles}=await sb.from('profiles').select('user_id,first_name,last_name').in('user_id',memberIds);
+    const {data:profiles}=await sb.from('public_profiles').select('user_id,first_name,last_name').in('user_id',memberIds);
     const profs=profiles||[];
     // Group: members with roles first (by role), then ungrouped
     const rendered=new Set();
@@ -3030,7 +3030,7 @@ async function loadServerRolesAndMembers(serverId){
   renderRolesList(roles);
   renderChannelPermissions(channels, roles, perms, serverId);
   if(!memberIds.length){document.getElementById('ss-members-list').innerHTML='<div style="font-size:.65rem;color:#444">No members yet.</div>';return;}
-  const {data:profiles}=await sb.from('profiles').select('user_id,first_name,last_name,neuropian_id').in('user_id',memberIds);
+  const {data:profiles}=await sb.from('public_profiles').select('user_id,first_name,last_name,neuropian_id').in('user_id',memberIds);
   renderMembersList(profiles||[], roles, memberRoles, serverId);
 }
 
@@ -3369,7 +3369,7 @@ function openProfile(){
 async function openUserCard(userId){
   if(!sb||!currentUser)return;
   if(userId===currentUser.id){openProfile();return;}
-  const{data:prof}=await sb.from('profiles').select('first_name,last_name,bio,bio_visibility,avatar_url,neuropian_id,accomplishment,hidden_ability').eq('user_id',userId).maybeSingle();
+  const{data:prof}=await sb.from('public_profiles').select('first_name,last_name,bio,bio_visibility,avatar_url,neuropian_id,accomplishment,hidden_ability').eq('user_id',userId).maybeSingle();
   if(!prof)return;
   const name=[prof.first_name,prof.last_name].filter(Boolean).join(' ')||'Member';
   const initials=name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?';
@@ -4526,7 +4526,7 @@ async function submitFriendRequest(){
   if(!/^\d{7}$/.test(raw)){msg.textContent='Please enter a valid 7-digit Neuropian ID.';msg.style.color='#e55';msg.style.display='block';return;}
   btn.textContent='Sending…';btn.disabled=true;
   try{
-    const {data:prof,error}=await sb.from('profiles').select('user_id,first_name,last_name').eq('neuropian_id',raw).single();
+    const {data:prof,error}=await sb.from('public_profiles').select('user_id,first_name,last_name').eq('neuropian_id',raw).single();
     if(error||!prof){msg.textContent='No member found with that ID.';msg.style.color='#e55';msg.style.display='block';btn.textContent='Send Request';btn.disabled=false;return;}
     if(prof.user_id===currentUser.id){msg.textContent="You can't add yourself.";msg.style.color='#e55';msg.style.display='block';btn.textContent='Send Request';btn.disabled=false;return;}
     const friendName=`${prof.first_name||''} ${prof.last_name||''}`.trim()||'Member';
