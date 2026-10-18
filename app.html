@@ -1660,7 +1660,7 @@ async function doRegister(){
     options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob,username,tos_version:'2026-10-18',tos_accepted_at:new Date().toISOString()}}
   });
   authBtn('rg-btn',false,'Create Account &amp; Continue');
-  if(error){showErr('rg-err',error.message);return}
+  if(error){if(/already (registered|exists)/i.test(error.message)){switchToLogin();document.getElementById('li-email').value=email;showErr('li-err','This email already has an account. Sign in with your password, or use Forgot password.');return}showErr('rg-err',error.message);return}
   currentUser=data.user;
   isAuthed=true;
   setNavUser(data.user);
@@ -4868,6 +4868,7 @@ else{renderOppPreview();}
     <div id="auth-reg-view" style="display:none">
       <div class="auth-title">Join <em>neuropian</em></div>
       <div class="auth-sub">Create your account to access the survey and opportunities</div>
+      <div class="auth-switch" style="margin:.2rem 0 .9rem">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
       <div class="auth-err" id="rg-err"></div>
       <div class="auth-field">
         <label>Username</label>
