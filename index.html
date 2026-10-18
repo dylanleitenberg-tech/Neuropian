@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>(function(){var h=location.hash,q=location.search;if(/access_token=|error_description=|type=(recovery|signup|invite|magiclink|email_change)/.test(h)||/[?&](code|token_hash)=/.test(q))location.replace('/app.html'+q+h)})()</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Neuropian</title>
 <meta name="description" content="Neuropian finds engineers and mathematicians through their public work: contest records, math answers, and code that maintainers merged. A research prototype.">
@@ -48,6 +49,8 @@ img{display:block;max-width:100%;height:auto}
 .nav{display:flex;gap:28px;font-size:14px}
 .nav a{text-decoration:none;color:var(--dim)}
 .nav a:hover{color:var(--fg)}
+.nav a.login{color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:5px 14px;margin:-6px 0}
+.nav a.login:hover{border-color:var(--fg)}
 
 /* type */
 h1,h2,h3{font-weight:500;letter-spacing:-.035em;line-height:1.02}
@@ -296,7 +299,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
 .p-media img{width:100%;height:auto;background:#000;border:1px solid var(--line)}
 
 @media (max-width:860px){
-  .nav a:not(:last-child){display:none}
+  .nav a:not(:nth-last-child(-n+2)){display:none}
   .figures{grid-template-columns:1fr;gap:28px}
   .steps{grid-template-columns:1fr}
   .flow{grid-template-columns:1fr 1fr;row-gap:28px}.flow li:not(:last-child)::after{display:none}
@@ -328,6 +331,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
       <a href="#method">Method</a>
       <a href="#principles">Principles</a>
       <a href="#contact">Contact</a>
+      <a class="login" href="/app.html">Log in</a>
     </nav>
   </div>
 </header>
@@ -356,7 +360,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
 
 <section id="run">
   <div class="wrap">
-    <p class="kicker">One real search · 18 Oct 2026</p>
+    <p class="kicker">Falcon, our search tool · one real search · 18 Oct 2026</p>
     <h2>What one search found.</h2>
     <ol class="flow">
       <li class="reveal"><b data-count="31">31</b><span>major software projects searched, like Python, Rust and LLVM</span></li>
@@ -499,6 +503,8 @@ figure video{display:block;width:100%;height:auto;background:#000}
     <p class="kicker">Roadmap</p>
     <h2>Next.</h2>
     <ul class="next">
+      <li><span class="tag">Live</span><span>Member accounts and RoundTable<small>Sign up, take the profile survey and talk with other members. Signing up is the opt-in: members' profiles can be shared with companies hiring through Neuropian.</small></span></li>
+      <li><span class="tag">In development</span><span>EagleEyes<small>A browser extension that would add work a member chooses to share to their profile. Not available yet.</small></span></li>
       <li><span class="tag">In development</span><span>Linking one person's accounts across platforms<small>Confirmed only by links the person published. Weaker matches (same handle, name or photo) are scored, kept unconfirmed and never used to contact anyone.</small></span></li>
       <li><span class="tag">Planned</span><span>Opt-in profiles<small>People see their own record and choose who else sees it.</small></span></li>
       <li><span class="tag">Planned</span><span>A pilot with one hiring firm<small>20 opted-in candidates, measured against the firm's usual pipeline.</small></span></li>
@@ -518,7 +524,8 @@ figure video{display:block;width:100%;height:auto;background:#000}
       </div>
       <div class="ask">
         <h3>Want to be found</h3>
-        <p>Tell us what you're working on, with a link to the work.</p>
+        <p>Create an account and take the profile survey, or tell us what you're working on, with a link to the work.</p>
+        <a class="mail" href="/app.html">Create an account →</a><br>
         <!--email_off--><a class="mail" href="mailto:dylan@neuropian.com?subject=What%20I%27m%20working%20on">dylan@neuropian.com</a><!--/email_off-->
       </div>
     </div>
@@ -530,6 +537,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
 <footer>
   <div class="wrap">
     <span>© 2026 Neuropian</span>
+    <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/app.html">Members</a></span>
   </div>
 </footer>
 <script src="assets/site.js?v=20261017g" defer></script>
