@@ -153,7 +153,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <p class="status">Research prototype · one founder · no clients yet</p>
     <div class="figures">
       <div class="fig"><b>11,088</b><span>Codeforces players in a two-year back-test</span></div>
-      <div class="fig"><b>150</b><span>open-source contributors identified, half with 12 or fewer followers</span></div>
+      <div class="fig"><b>150</b><span>open-source contributors on the first list (its cap), half with 12 or fewer followers</span></div>
       <div class="fig"><b>30</b><span>dossiers written from their merged pull requests</span></div>
     </div>
   </div>
@@ -177,11 +177,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <summary>Method and numbers</summary>
           <ul>
             <li><strong>Cohort.</strong> Every Codeforces player rated 1600–2300 on 16 Oct 2024, with at least 15 rated contests and 3 in the year before: 11,088 players. 290 (2.6%) reached 2400 in the two years after.</li>
-            <li><strong>Chosen on earlier data.</strong> Same rules on 16 Oct 2022: 9,305 players, 274 reached 2400 by Oct 2024, before the test period starts. Traits kept if their within-band AUC was above 0.55, reversed if below 0.45: 12-month rating gain, how few contests it took to reach 2000, months with a contest in the past year, distance below the player's own peak, minus calendar years with a rated contest. Weight on rating, 0.2, also chosen on 2022.</li>
+            <li><strong>Chosen on earlier data.</strong> Same rules on 16 Oct 2022: 9,305 players, 274 reached 2400 by Oct 2024, before the test period starts. Traits kept if their within-band AUC was above 0.55, reversed if below 0.45: 12-month rating gain, how few contests it took to reach 2000, months with a contest in the past year, distance below the player's own peak, minus calendar years with a rated contest. Weight on the score, 0.2, also chosen on 2022.</li>
             <li><strong>Test.</strong> Frozen and applied to the 2024 cohort: 0.647 within 100-point bands (rating: 0.599), 0.632 within 10-point bands. Overall, rating alone scores 0.896 (95% CI 0.878–0.913) and rating + 0.2 × score 0.908. Paired bootstrap of the gain, 1,000 resamples: +0.005 to +0.019, none at or below zero.</li>
             <li><strong>Who keeps competing.</strong> 37% of the 2024 cohort played no rated contest afterwards. Grouping players by contests played afterwards as well as by rating, the score's AUC falls to 0.613.</li>
-            <li><strong>Earlier, in-sample runs.</strong> Traits chosen and scored on the same players: 0.655 (2024 start), 0.668 (2023 start, three-year window). Our first formula, rating plus 12-month gain, scored 0.879 overall, below rating alone.</li>
-            <li><strong>Live list.</strong> The scout's Codeforces list is ranked by this tested formula, among players rated 2100 or more with at most 60 followers. The test covered players rated 1600–2300, so the top of the list is beyond what was tested. The AtCoder and Math Stack Exchange lists are not back-tested.</li>
+            <li><strong>Earlier, in-sample runs.</strong> Traits chosen and scored on the same players: 0.655 (2024 start), 0.668 (2023 start, three-year window). Our first formula (rating, plus 0.6 × 12-month gain, plus a bonus for passing the climb filter) scored 0.879 overall, below rating alone.</li>
+            <li><strong>Live list.</strong> The scout's Codeforces list is ranked by this tested formula, among active players rated 2100 or more with at most 60 followers, plus filters the test didn't use, including 25 or more rated contests, an account no more than 5 years old, a climb of 300 or more from the first 10 contests, and a positive 12-month gain. The test covered ratings 1600–2300; 26 of the 65 now listed are above 2300. The AtCoder and Math Stack Exchange lists are not back-tested.</li>
             <li><strong>AUC</strong> = the probability that a randomly chosen player who broke through is ranked above one who did not. Within-band AUC is averaged across bands, weighted by the number who broke through; a band needs at least 3 who did and 3 who didn't.</li>
           </ul>
         </details>
@@ -195,14 +195,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <p class="what">People whose code maintainers merged into major open-source projects, but whom few people follow. Identified by that evidence, not predicted.</p>
       </div>
       <div>
-        <div class="stat"><b>150</b><span>people identified. Each has 6 or more merged pull requests in the past 12 months (rule: 3 or more); none has more than 148 GitHub followers (rule: 150).</span></div>
+        <div class="stat"><b>150</b><span>people on the list, which stops at 150. Each has 6 or more merged pull requests in the past 12 months (rule: 3 or more); none has more than 148 GitHub followers (rule: 150).</span></div>
         <p class="finding">From LLVM (67), llama.cpp (33), CPython (21), Rust (8), SciPy (6), NumPy (5), tinygrad (5), Julia (4) and DuckDB (1). JAX was searched too.</p>
         <details>
           <summary>Method and numbers</summary>
           <ul>
-            <li><strong>Rules.</strong> 3 or more merged pull requests in the 12 months to 17 Oct 2026, no more than 40 per active month, and 150 GitHub followers or fewer. Removed: bots; anyone who has pressed merge in that project or another one searched; public members of major open-source organizations, including the project's own; people whose profile names a large tech company, the project's sponsor, or an elite university or trading firm; owners of a repository with 1,000 or more stars; and profiles that suggest a minor. Of 268 profiles examined, 118 were removed: 59 for followers, 29 for organization membership, 28 for company or sponsor, 1 as a committer elsewhere, 1 as a possible minor. Half of the 150 have 12 or fewer followers.</li>
+            <li><strong>Rules.</strong> 3 or more merged pull requests in the 12 months to 17 Oct 2026, no more than 40 per active month, and 150 GitHub followers or fewer. Removed: bots; anyone who has pressed merge in that project or another one searched; public members of major open-source organizations, including the project's own; people whose profile names a large tech company, the project's sponsor, or an elite university or trading firm; owners of a repository with 1,000 or more stars; and profiles that suggest a minor. Of 266 people examined, 116 were removed, each counted under the first matching reason: 58 for followers, 29 for organization membership, 27 for company or sponsor, 1 as a committer elsewhere, 1 as a possible minor. Half of the 150 have 12 or fewer followers.</li>
             <li><strong>Merge rights.</strong> The 142 outside Rust have not pressed merge on any pull request in their project in the history fetched (since Oct 2023; tinygrad since Oct 2025), and none is a public member of the project's organization. A committer who pushes directly and keeps membership private would still slip through. Rust merges through a bot, so for its 8 only organization membership is checked.</li>
-            <li><strong>Why we don't call it prediction.</strong> In eight of the projects (not Rust or tinygrad), 2,721 people had merged pull requests between Oct 2023 and Oct 2024 and had not pressed merge or approved anyone else's. 156 pressed merge in the two years after, a sign they had been given write access; 135 of them in LLVM. Merged-PR count alone ranks them with AUC 0.641 (LLVM alone: 0.64). Lines per pull request, and months active, tenure and days to merge (in reverse), looked informative in-sample but couldn't be tested out of sample: split by project, one half holds only 3 of the 156. So the list is ranked by merged-PR count, standardized within each project, and it shows the work.</li>
+            <li><strong>Why we don't call it prediction.</strong> In eight of the projects (not Rust or tinygrad), 2,653 people (2,721 person-project records) had merged pull requests between Oct 2023 and Oct 2024 and had not pressed merge or approved anyone else's. 156 pressed merge in the two years after, a sign they had been given write access; 135 of them in LLVM. Merged-PR count alone ranks them with AUC 0.641 (LLVM alone: 0.64). Lines per pull request, and months active, tenure and days to merge (in reverse), looked informative in-sample within count bands. The one out-of-sample check possible, split by project, had only 3 positives and went the other way (0.394, against 0.717 for count alone). So the list is ranked by merged-PR count, standardized within each project, and it shows the work.</li>
           </ul>
         </details>
       </div>
@@ -212,7 +212,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div>
         <p class="idx">03</p>
         <h3>Dossiers</h3>
-        <p class="what">For the top 30 so far, code pulls facts from up to 15 of each person's merged pull requests, and an open-weight model running locally reads 12 of them and writes what the person works on. Each dossier links every pull request its summary cites, so a recruiter can check each claim at the source.</p>
+        <p class="what">For the top 30 so far, code pulls facts from up to 15 of each person's merged pull requests, and an open-weight model running locally reads 12 of them and writes what the person works on. Each dossier links every pull request the model's write-up cites, so a recruiter can check each claim at the source.</p>
       </div>
       <div>
         <div class="stat"><b>0 of 30</b><span>dossiers cited a pull request that isn't one of the person's own.</span></div>
@@ -222,7 +222,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <li><strong>Facts by code.</strong> Files touched, size, number of reviews, praise words in review comments, and the share of changed files that are core code rather than tests, docs or CI (0.00 to 0.93 across the 30), extracted from GitHub, not written by the model.</li>
             <li><strong>Judgment by model.</strong> Specialty and summary come from Qwen3 8B running on a laptop. Nothing about a candidate is sent to an outside AI service.</li>
             <li><strong>Check.</strong> Every pull-request number the model cites, with or without “#”, is compared with the person's fetched pull requests: none invented in 30 dossiers. It tests citations, not whether a summary is right, so a person reads the pull requests before anyone is contacted.</li>
-            <li><strong>Links.</strong> Each dossier links exactly the pull requests its summary cites, 2 to 10 per person.</li>
+            <li><strong>Links.</strong> Each dossier links exactly the pull requests its write-up cites, 2 to 10 per person.</li>
             <li><strong>Not used.</strong> The model's own difficulty ratings (28 of 30 are 4 or 5) don't separate people, so they are not shown; the core-code share is shown instead.</li>
           </ul>
         </details>
@@ -252,7 +252,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="gallery">
       <figure>
         <img src="assets/water-worm-w1-1600.jpg" srcset="assets/water-worm-w1-800.jpg 800w, assets/water-worm-w1-1600.jpg 1600w" sizes="(max-width:1280px) 100vw, 1152px" width="1600" height="900" alt="CAD render of the Water Worm W1 on black: a long white segmented body with a blue vessel at the tail and a red cutting head with picks at the front" loading="lazy" decoding="async">
-        <figcaption>Water Worm W1, designed as a tank-test model of the astroworm body, for work under water.</figcaption>
+        <figcaption>Water Worm W1, a tank-test model of the Water Worm, designed in CAD.</figcaption>
       </figure>
       <figure>
         <img src="assets/water-worm-w1-head-800.jpg" srcset="assets/water-worm-w1-head-800.jpg 800w, assets/water-worm-w1-head-1600.jpg 1600w" sizes="(max-width:860px) 100vw, 50vw" width="800" height="450" alt="Close CAD render of the Water Worm's red cutting head: a crown of picks around a threaded, cone-shaped screw point" loading="lazy" decoding="async">
