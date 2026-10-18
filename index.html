@@ -187,6 +187,17 @@ figure video{display:block;width:100%;height:auto;background:#000}
 .steps p{margin-top:10px;color:var(--dim)}
 .steps-end{margin-top:clamp(28px,4vw,44px);font-size:clamp(20px,2vw,26px);letter-spacing:-.015em;max-width:30em}
 .lede.plain{margin-top:24px}
+
+/* what one search found: plain numbers that count up */
+.flow{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.5vw,32px);margin-top:clamp(36px,5vw,56px);counter-reset:f}
+.flow li{position:relative;border-top:1px solid var(--line);padding-top:20px}
+.flow li:not(:last-child)::after{content:"\2192";position:absolute;right:-6px;top:22px;color:var(--faint);font-size:20px}
+.flow b{display:block;font-size:clamp(44px,5.6vw,80px);font-weight:500;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.flow span{display:block;margin-top:12px;color:var(--dim);max-width:16em}
+.flow .hit b{color:#9fefff}.flow .hit span{color:var(--fg)}
+.flow-end{margin-top:clamp(24px,3.5vw,40px);font-size:clamp(18px,1.8vw,22px);color:var(--dim)}
+.cmds{margin-top:clamp(28px,4vw,44px);border-top:1px solid var(--line)}
+.cmds .term{margin-top:8px}
 /* the last run: a terminal that types out the real (summarized) output */
 #run .term{margin-top:clamp(36px,5vw,56px);border:1px solid var(--line);border-radius:12px;background:#050708;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .term-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:#0d1012}
@@ -288,6 +299,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
   .nav a:not(:last-child){display:none}
   .figures{grid-template-columns:1fr;gap:28px}
   .steps{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr;row-gap:28px}.flow li:not(:last-child)::after{display:none}
   .p-head{grid-template-columns:1fr}.p-facts div{grid-template-columns:1fr;gap:4px}
   .pindex a{grid-template-columns:40px 1fr auto;grid-template-areas:"n name thumb" "n meta thumb" "n st thumb";gap:4px 14px;align-items:center}
   .i-num{grid-area:n}.i-name{grid-area:name;font-size:26px}.i-meta{grid-area:meta;font-size:14px}.i-status{grid-area:st;font-size:11px}
@@ -326,7 +338,6 @@ figure video{display:block;width:100%;height:auto;background:#000}
   <div class="wrap">
     <h1>Find the people résumés miss.</h1>
     <p class="lede">Neuropian is software being built to find skilled engineers and mathematicians from work they have already put online, so companies can hire the people résumé searches miss.</p>
-    <p class="status">Research prototype · one founder · not incorporated · no clients yet</p>
   </div>
 </section>
 
@@ -345,9 +356,17 @@ figure video{display:block;width:100%;height:auto;background:#000}
 
 <section id="run">
   <div class="wrap">
-    <p class="kicker">The last run</p>
-    <h2>Watch it work.</h2>
-    <p class="lede plain">One real run of the search, on 17 Oct 2026. Of 2,482 people whose code was accepted three or more times this past year into 21 major software projects, it found 1,540 whom few people follow online; half have 9 or fewer followers.</p>
+    <p class="kicker">One real search · 17 Oct 2026</p>
+    <h2>What one search found.</h2>
+    <ol class="flow">
+      <li class="reveal"><b data-count="21">21</b><span>major software projects searched, like Python, Rust and LLVM</span></li>
+      <li class="reveal"><b data-count="2482">2,482</b><span>people whose code the experts accepted at least three times this year</span></li>
+      <li class="reveal"><b data-count="942" data-prefix="−">−942</b><span>removed as already easy to find (big followings, big-company jobs, project insiders) or not eligible</span></li>
+      <li class="reveal hit"><b data-count="1540">1,540</b><span>found: proven builders few people know about</span></li>
+    </ol>
+    <p class="flow-end reveal">For the strongest, a short report links straight to their work. 30 written so far.</p>
+    <details class="cmds">
+      <summary>Show the actual commands</summary>
     <div class="term reveal" role="group" aria-label="Summary of the 17 Oct 2026 scout run, names removed">
       <div class="term-bar"><span></span><span></span><span></span><b>scout · 17 Oct 2026 · names removed</b></div>
       <ol class="term-body">
@@ -370,6 +389,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
       </ol>
     </div>
     <p class="term-note">The real commands, with their output summarized from the run’s result files. Nobody’s name or profile appears on this site.</p>
+    </details>
   </div>
 </section>
 
@@ -512,6 +532,6 @@ figure video{display:block;width:100%;height:auto;background:#000}
     <span>© 2026 Neuropian</span>
   </div>
 </footer>
-<script src="assets/site.js?v=20261017e" defer></script>
+<script src="assets/site.js?v=20261017g" defer></script>
 </body>
 </html>

@@ -68,7 +68,9 @@
   if (term && io && !reduce) term.classList.add("armed");     /* hide lines only when this script will type them */
   if (term) {
     var lis = Array.prototype.slice.call(term.querySelectorAll("li"));
+    var played = false;
     var play = function () {
+      if (played) return; played = true;
       var k = 0;
       (function next() {
         if (k >= lis.length) return;
@@ -81,8 +83,30 @@
     if (io && !reduce) {
       var to = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { to.disconnect(); play(); } }, { threshold: 0.3 });
       to.observe(term);
+      var fold = term.closest("details");                                   /* folded away: start as soon as it is opened */
+      if (fold) fold.addEventListener("toggle", function () { if (fold.open) { to.disconnect(); play(); } });
     } else lis.forEach(function (li) { li.classList.add("shown"); });
   }
+
+  /* Plain numbers count up when they come into view. */
+  document.querySelectorAll("[data-count]").forEach(function (el) {
+    var end = +el.getAttribute("data-count"), pre = el.getAttribute("data-prefix") || "";
+    var fmt = function (v) { return pre + Math.round(v).toLocaleString("en-US"); };
+    if (!io || reduce) { el.textContent = fmt(end); return; }
+    el.textContent = fmt(0);
+    var co = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return;
+      co.disconnect();
+      var t0 = null, dur = 1400;
+      (function step(t) {
+        if (t0 === null) t0 = t;
+        var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = fmt(end * e);
+        if (k < 1) requestAnimationFrame(step);
+      })(performance.now());
+    }, { threshold: 0.6 });
+    co.observe(el);
+  });
 
   /* Charts draw in when they scroll into view. */
   document.querySelectorAll(".chart").forEach(function (c) {
