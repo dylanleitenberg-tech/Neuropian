@@ -1,6 +1,8 @@
 /* Neuropian: small touches. Everything on the page is readable without this file. */
 (function () {
   "use strict";
+  /* only once this script runs do reveals hide and the orbit become a tall scroll stage; if it fails, the page is static */
+  document.documentElement.classList.add("js", "ready");
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var io = "IntersectionObserver" in window;
 
@@ -13,7 +15,7 @@
       i += Math.max(1, Math.round(text.length / 60));
       el.textContent = text.slice(0, i);
       if (i < text.length) setTimeout(step, speed);
-      else { el.classList.remove("typing"); if (done) done(); }
+      else { el.classList.remove("typing"); el.style.minHeight = ""; if (done) done(); }
     })();
   }
 
@@ -53,7 +55,8 @@
     }, { threshold: 0.35 }).observe(v);
   });
 
-  /* Astroworm orbit: scroll turns it, drag spins it, second half switches to the hologram view. */
+  /* Astroworm orbit: scroll turns it (72 pre-rendered frames, a 120-degree sweep), drag turns it within that sweep,
+     the second half switches to a cyan "hologram" style (a CSS filter over the same frames). */
   var orbit = document.getElementById("orbit");
   if (!orbit) return;
   var canvas = orbit.querySelector("canvas"), ctx = canvas.getContext("2d");
@@ -86,20 +89,19 @@
   }
   function draw(force) {
     var p = progress();
-    var f = Math.round(p * (N - 1) + drag);
-    f = ((f % N) + N) % N;
+    var f = Math.max(0, Math.min(N - 1, Math.round(p * (N - 1) + drag)));
     if (f !== current || force) {
       var im = nearest(f);
       if (im) { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.drawImage(im, 0, 0, canvas.width, canvas.height); }
       current = f;
-      if (azEl) azEl.textContent = "View " + ("00" + Math.round(az0 + (az1 - az0) * f / (N - 1))).slice(-3) + "°";
+      if (azEl) azEl.textContent = "Camera " + ("00" + Math.round(az0 + (az1 - az0) * f / (N - 1))).slice(-3) + "°";
     }
     var holo = manualMode === null ? p > 0.5 : manualMode;
     orbit.classList.toggle("holo", holo);
-    if (modeLabel) modeLabel.textContent = holo ? "Hologram" : "Render";
-    if (modeBtn) modeBtn.textContent = holo ? "Render view" : "Hologram view";
+    if (modeLabel) modeLabel.textContent = holo ? "Hologram style" : "Render";
+    if (modeBtn) modeBtn.textContent = holo ? "Render style" : "Hologram style";
     notes.forEach(function (li) {
-      if (!li.dataset.shown && p >= +li.dataset.at) { li.dataset.shown = "1"; typeInto(li, li.dataset.note, 18); }
+      if (!li.dataset.shown && p >= +li.dataset.at) { li.dataset.shown = "1"; li.parentNode.classList.add("has"); typeInto(li, li.dataset.note, 18); }
     });
   }
 
@@ -113,7 +115,11 @@
   /* drag to spin (mouse or touch, horizontal only so vertical swipes still scroll) */
   var x0 = null, d0 = 0;
   canvas.addEventListener("pointerdown", function (e) { x0 = e.clientX; d0 = drag; canvas.setPointerCapture(e.pointerId); });
-  canvas.addEventListener("pointermove", function (e) { if (x0 === null) return; drag = d0 - (e.clientX - x0) / 12; draw(); });
+  canvas.addEventListener("pointermove", function (e) {
+    if (x0 === null) return;
+    var p = progress() * (N - 1);                            /* keep the dragged frame inside the rendered sweep */
+    drag = Math.max(-p, Math.min(N - 1 - p, d0 - (e.clientX - x0) / 12)); draw();
+  });
   canvas.addEventListener("pointerup", function () { x0 = null; });
   canvas.addEventListener("pointercancel", function () { x0 = null; });
   if (modeBtn) modeBtn.addEventListener("click", function () { manualMode = !orbit.classList.contains("holo"); draw(true); });

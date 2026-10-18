@@ -15,7 +15,6 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="dark">
-<script>document.documentElement.classList.add("js")</script>
 <meta name="theme-color" content="#0a0a0a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Cpath d='M9 23V9h2.4l7.2 9.9V9H21v14h-2.4l-7.2-9.9V23z' fill='%23f2f1ed'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,23 +121,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 /* motion: typing, reveals (only when JS runs; without it everything is simply there) */
 .js [data-type].typing::after{content:"\258C";margin-left:2px;color:var(--dim);animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
-.js .reveal.in{opacity:1;transform:none}
+.ready .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
+.ready .reveal.in{opacity:1;transform:none}
 
 /* astroworm orbit: scroll to turn, drag to spin, CAD -> hologram */
 .orbit{position:relative;margin-top:clamp(40px,6vw,72px)}
-.js .orbit{height:340vh}
+.ready .orbit{height:340vh}
 .orbit-stick{position:relative}
-.js .orbit-stick{position:sticky;top:60px;height:calc(100vh - 60px);overflow:hidden}
+.ready .orbit-stick{position:sticky;top:60px;height:calc(100vh - 60px);overflow:hidden}
 .orbit-stage{position:relative;height:100%;display:grid;place-items:center;background:#0a0a0a}
 .orbit-stage::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .8s ease;
   background:radial-gradient(ellipse at 50% 55%,rgba(40,170,220,.18),transparent 60%),
              linear-gradient(rgba(70,200,255,.08) 1px,transparent 1px) 0 0/48px 48px,
              linear-gradient(90deg,rgba(70,200,255,.08) 1px,transparent 1px) 0 0/48px 48px,#02080d}
 .orbit-poster,.orbit canvas{width:100%;height:auto;max-height:100%;object-fit:contain;position:relative}
+@media (min-width:861px){.ready .orbit-stage{place-items:start center}.ready .orbit canvas{height:calc(100% - 200px);width:auto;max-width:100%;margin-top:24px}}
 .orbit-poster{display:block}.orbit canvas{display:none}
-.js .orbit-poster{display:none}
-.js .orbit canvas{display:block;cursor:grab;touch-action:pan-y;transition:filter .8s ease}
+.ready .orbit-poster{display:none}
+.ready .orbit canvas{display:block;cursor:grab;touch-action:pan-y;transition:filter .8s ease}
 .orbit canvas:active{cursor:grabbing}
 .orbit.holo .orbit-stage::before{opacity:1}
 .orbit.holo canvas{mix-blend-mode:screen;filter:grayscale(1) sepia(1) hue-rotate(152deg) saturate(5) brightness(1.25) contrast(1.15)}
@@ -156,19 +156,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .hud-notes{position:absolute;left:40px;bottom:56px;padding:10px 16px 12px;background:linear-gradient(90deg,rgba(0,0,0,.62),rgba(0,0,0,.35) 75%,transparent);list-style:none;max-width:min(32em,72%);font-family:Inter,system-ui,sans-serif;font-size:clamp(15px,1.6vw,20px);letter-spacing:0;line-height:1.35;color:var(--fg)}
 .orbit.holo .hud-notes{color:#d9f7ff;background:linear-gradient(90deg,rgba(2,10,16,.7),rgba(2,10,16,.4) 75%,transparent)}
 .hud-notes li{min-height:1.35em;margin-top:6px}
+.hud-notes:not(.has){visibility:hidden}
+.ready .hud-notes li:not([data-shown]){display:none}
 .hud-hint{position:absolute;right:56px;bottom:28px;text-transform:uppercase;opacity:.7}
 .hud-cap{position:absolute;left:56px;bottom:28px;text-transform:uppercase;opacity:.7}
-.hud button{pointer-events:auto;font:inherit;color:inherit;background:transparent;border:1px solid currentColor;padding:6px 10px;margin-top:10px;cursor:pointer;text-transform:uppercase;letter-spacing:.12em}
-.hud button:hover{background:rgba(255,255,255,.06)}
-html:not(.js) .hud{display:none}
+.hud-ctl{position:absolute;top:84px;left:56px}
+.hud-ctl button{pointer-events:auto;font:inherit;color:inherit;background:transparent;border:1px solid currentColor;padding:6px 10px;margin-top:10px;cursor:pointer;text-transform:uppercase;letter-spacing:.12em}
+.hud-ctl button{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:rgba(242,241,237,.78)}
+.orbit.holo .hud-ctl button{color:#9fe9ff}
+.hud-ctl button:hover{background:rgba(255,255,255,.06)}
+html:not(.ready) .hud,html:not(.ready) .hud-ctl{display:none}
 figure video{display:block;width:100%;height:auto;background:#000}
 .gallery video{aspect-ratio:16/9;object-fit:contain}
 @media (max-width:860px){
   .hud-title,.hud-notes,.hud-cap{left:24px}.hud-read,.hud-hint{right:24px}
   .hud-notes{left:12px;bottom:56px;max-width:calc(100% - 24px)}
-  .js .orbit{height:260vh}
-  .js .orbit canvas{width:150%;max-width:none;margin-left:-25%}
-  .hud-title span.sub,.hud-hint{display:none}
+  .ready .orbit{height:260vh}
+  .ready .orbit canvas{width:125%;max-width:none;margin-left:-12.5%}
+  .hud-title span.sub{display:none}.hud-ctl{left:24px;top:64px}.hud-hint{display:none}
   .hud-title{top:24px}.hud-read{top:24px}
 }
 
@@ -181,7 +186,8 @@ figure video{display:block;width:100%;height:auto;background:#000}
   .next li{grid-template-columns:1fr;gap:10px}
   .rules li{grid-template-columns:40px 1fr}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.gallery img{transition:none}.js .reveal{opacity:1;transform:none;transition:none}.orbit.holo .orbit-stage::after{animation:none}}
+@media print{.reveal{opacity:1!important;transform:none!important;transition:none!important}.orbit{height:auto!important}.orbit-stick{position:static!important;height:auto!important}.orbit-poster{display:block!important}.orbit canvas,.hud,.hud-ctl,video{display:none!important}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orbit canvas{transition:none!important}.gallery img{transition:none}.js .reveal{opacity:1;transform:none;transition:none}.orbit.holo .orbit-stage::after{animation:none}}
 </style>
 </head>
 <body>
@@ -247,7 +253,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
     <div class="block">
       <div>
         <p class="idx">02</p>
-        <h3>Builders</h3>
+        <h3>Contributors</h3>
         <p class="what">People whose code maintainers merged into major open-source projects, but whom few people follow. Identified by that evidence, not predicted.</p>
       </div>
       <div>
@@ -310,21 +316,22 @@ figure video{display:block;width:100%;height:auto;background:#000}
   <div class="orbit" id="orbit" data-frames="72" data-path="assets/astroworm/orbit/f" data-az0="15" data-az1="135">
     <div class="orbit-stick">
       <div class="orbit-stage">
-        <img class="orbit-poster" src="assets/astroworm/orbit-poster.jpg" width="1280" height="720" alt="Blender render of the astroworm from CAD: the intake nose in front, a string of dark segmented casing sections receding behind it">
-        <canvas width="1280" height="720" role="img" aria-label="The astroworm, rendered from CAD in Blender, turning as you scroll; drag to spin it"></canvas>
+        <img class="orbit-poster" src="assets/astroworm/orbit-poster.jpg" width="1920" height="1080" alt="Blender render of the astroworm from CAD: the intake nose in front, a string of dark segmented casing sections receding behind it">
+        <canvas width="1920" height="1080" role="img" aria-label="The astroworm design, pre-rendered from CAD in Blender, turning as you scroll"></canvas>
         <div class="hud" aria-hidden="true">
           <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-          <div class="hud-title"><b>Astroworm</b><span class="sub">Rev E14 · CAD, rendered in Blender<br></span><button type="button" class="hud-mode">Hologram view</button></div>
-          <div class="hud-read"><span class="hud-az">View 015°</span><br><span class="hud-mode-label">Render</span></div>
+          <div class="hud-title"><b>Astroworm</b><span class="sub">Design rev E14 · 72 frames pre-rendered in Blender</span></div>
+          <div class="hud-read"><span class="hud-az">Camera 015°</span><br><span class="hud-mode-label">Render</span></div>
           <ol class="hud-notes">
-            <li data-at="0.04" data-note="A burrowing anchor for asteroid mining."></li>
-            <li data-at="0.30" data-note="A string of identical units. Each presses three setae shoes against the bore wall."></li>
-            <li data-at="0.55" data-note="An auger runs through the string and drives the intake nose."></li>
-            <li data-at="0.78" data-note="The buried body is the anchor."></li>
+            <li data-at="0.04" data-note="A design for a burrowing anchor for asteroid mining."></li>
+            <li data-at="0.30" data-note="A string of units, one design except the unit at the nose. Each is designed to press three setae shoes against the bore wall."></li>
+            <li data-at="0.55" data-note="In the design, an auger runs through the string and drives the intake nose."></li>
+            <li data-at="0.78" data-note="Designed so the buried body is the anchor."></li>
           </ol>
-          <div class="hud-cap">CAD model, not hardware</div>
-          <div class="hud-hint">Scroll to turn · drag to spin</div>
+          <div class="hud-cap">Pre-rendered from CAD, not hardware</div>
+          <div class="hud-hint">Scroll to turn · drag to turn</div>
         </div>
+        <div class="hud-ctl"><button type="button" class="hud-mode">Hologram style</button></div>
       </div>
     </div>
   </div>
@@ -332,27 +339,26 @@ figure video{display:block;width:100%;height:auto;background:#000}
   <div class="wrap">
     <div class="gallery">
       <figure class="reveal">
-        <img src="assets/astroworm/bore-1600.jpg" srcset="assets/astroworm/bore-800.jpg 800w, assets/astroworm/bore-1600.jpg 1600w" sizes="(max-width:1280px) 100vw, 1152px" width="1600" height="900" alt="Blender render: the astroworm string lying in a trench in rocky regolith, intake nose toward the camera" decoding="async">
-        <figcaption>The astroworm in its own bore, grown to twelve units. Rendered from CAD.</figcaption>
+        <img src="assets/astroworm/bore-1600.jpg" srcset="assets/astroworm/bore-800.jpg 800w, assets/astroworm/bore-1600.jpg 1600w, assets/astroworm/bore-1920.jpg 1920w" sizes="(max-width:1280px) 100vw, 1152px" width="1600" height="900" alt="Blender render of the astroworm design: a string of units in a bore cut open to show them, intake nose toward the camera" decoding="async">
+        <figcaption>Twelve units in a bore, cut open to show them. Rendered from CAD; the design starts with four units and adds units made on site.</figcaption>
       </figure>
       <figure class="reveal">
-        <img src="assets/astroworm/space-800.jpg" srcset="assets/astroworm/space-800.jpg 800w, assets/astroworm/space-1600.jpg 1600w" sizes="(max-width:860px) 100vw, 50vw" width="800" height="450" alt="Blender render: the astroworm as launched, lying on a rocky surface under a starry sky" decoding="async">
-        <figcaption>As launched, on an asteroid's surface.</figcaption>
+        <img src="assets/astroworm/space-800.jpg" srcset="assets/astroworm/space-800.jpg 800w, assets/astroworm/space-1600.jpg 1600w, assets/astroworm/space-1920.jpg 1920w" sizes="(max-width:860px) 100vw, 50vw" width="800" height="450" alt="Blender render of the astroworm design: the four-unit starter string on a rocky surface under a starry sky" decoding="async">
+        <figcaption>The four-unit starter string, rendered on a rocky surface.</figcaption>
       </figure>
       <figure class="reveal">
-        <img src="assets/astroworm/nose-800.jpg" srcset="assets/astroworm/nose-800.jpg 800w, assets/astroworm/nose-1600.jpg 1600w" sizes="(max-width:860px) 100vw, 50vw" width="800" height="450" alt="Blender render: close view of the astroworm's intake nose, a ring with three swept arms around a central hub" decoding="async">
-        <figcaption>The intake nose.</figcaption>
+        <img src="assets/astroworm/nose-800.jpg" srcset="assets/astroworm/nose-800.jpg 800w, assets/astroworm/nose-1600.jpg 1600w, assets/astroworm/nose-1920.jpg 1920w" sizes="(max-width:860px) 100vw, 50vw" width="800" height="450" alt="Blender render of the astroworm design: close view of the intake nose, a ring with three swept arms around a central hub" decoding="async">
+        <figcaption>The intake nose, rendered from CAD.</figcaption>
       </figure>
       <figure class="reveal">
-        <video src="assets/jarvis-hand-loop.mp4" poster="assets/jarvis-hand-poster.jpg" width="960" height="624" muted loop playsinline preload="none" aria-label="Screen recording of JARVIS: a holographic CAD model of the miner's aft engine turned by an open hand"></video>
-        <figcaption>JARVIS, recorded live: holographic CAD of the miner's aft engine, turned by an open hand in front of a webcam. No mouse.</figcaption>
+        <video src="assets/jarvis-hand-loop.mp4" poster="assets/jarvis-hand-poster.jpg" width="960" height="624" muted loop playsinline preload="none" aria-label="Screen recording of JARVIS: a cyan-shaded CAD model of an aft engine from an earlier asteroid-miner design, turned by an open hand"></video>
+        <figcaption>JARVIS, screen-recorded live on 23 Sep 2026: CAD of an aft engine from an earlier asteroid-miner design, shaded cyan and turned by an open hand in front of a webcam (corner box).</figcaption>
       </figure>
       <figure class="reveal">
         <img src="assets/water-worm-w1-head-800.jpg" srcset="assets/water-worm-w1-head-800.jpg 800w, assets/water-worm-w1-head-1600.jpg 1600w" sizes="(max-width:860px) 100vw, 50vw" width="800" height="450" alt="Close CAD render of the Water Worm's red cutting head: a crown of picks around a threaded, cone-shaped screw point" decoding="async">
         <figcaption>Water Worm W1, the tank-test model for tailings ponds: its cutting head.</figcaption>
       </figure>
     </div>
-    <p class="links reveal"><a href="https://github.com/dylanleitenberg-tech/astroworm">github.com/dylanleitenberg-tech/astroworm</a></p>
   </div>
 </section>
 
