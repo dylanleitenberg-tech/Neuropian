@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talent · Neuropian</title>
+<meta name="description" content="Search Neuropian members by what they have built and solved. Every profile is drafted from the member's own work and approved by them.">
+<link rel="canonical" href="https://neuropian.com/talent">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--fg:#f2f1ed;--dim:rgba(242,241,237,.62);--faint:rgba(242,241,237,.38);--line:rgba(242,241,237,.14);--acc:#6fd6f7;--pad:clamp(16px,5vw,64px);--max:1280px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:.2em}
+a:hover{text-decoration-color:var(--fg)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.bar{position:sticky;top:0;z-index:5;background:rgba(10,10,10,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:24px}
+.mark{font-weight:600;letter-spacing:.22em;font-size:13px;text-decoration:none}
+.nav{display:flex;gap:24px;font-size:14px;align-items:center}
+.nav a{text-decoration:none;color:var(--dim)}.nav a:hover,.nav a[aria-current]{color:var(--fg)}
+.nav a.login{color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:5px 14px;margin:-6px 0}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:20px}
+h1{font-size:clamp(40px,6.5vw,88px);font-weight:500;letter-spacing:-.04em;line-height:1}
+.lede{font-size:clamp(17px,1.6vw,21px);color:var(--dim);max-width:38em;margin-top:24px}
+.top{padding:clamp(64px,10vw,140px) 0 clamp(28px,4vw,48px)}
+.search{display:flex;gap:10px;margin-top:36px;max-width:760px}
+.search input{flex:1;min-width:0;font:inherit;font-size:18px;color:var(--fg);background:#121212;border:1px solid var(--line);border-radius:999px;padding:14px 22px;outline:none}
+.search input:focus{border-color:var(--acc)}
+.search button{font:inherit;font-size:15px;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:0 24px;cursor:pointer}
+.hint{font-size:14px;color:var(--faint);margin-top:12px}
+.status{font-size:14px;color:var(--dim);margin:28px 0 8px;min-height:1.2em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:clamp(16px,2vw,24px);padding-bottom:96px}
+.card{border-top:1px solid var(--line);padding-top:20px;cursor:pointer;text-decoration:none;display:block}
+.card:hover .c-name{color:#9fefff}
+.c-name{font-size:20px;font-weight:500;letter-spacing:-.01em}
+.c-head{color:var(--dim);margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{font-size:12.5px;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.c-work{font-size:14px;color:var(--faint);margin-top:12px}
+.c-match{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-top:10px}
+.empty{grid-column:1/-1;border-top:1px solid var(--line);padding:28px 0 96px;color:var(--dim);max-width:40em}
+.empty a{color:var(--fg)}
+.prof{padding:clamp(48px,8vw,110px) 0 96px;max-width:860px}
+.back{font-size:14px;color:var(--dim);text-decoration:none;cursor:pointer}
+.p-name{font-size:clamp(36px,5.5vw,64px);font-weight:500;letter-spacing:-.035em;line-height:1.05;margin-top:24px}
+.p-head{font-size:clamp(18px,1.8vw,22px);color:var(--dim);margin-top:10px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--dim)}
+.badge.ok{color:#9fefff;border-color:rgba(111,214,247,.4)}
+.p-sum{font-size:18px;line-height:1.65;margin-top:32px;max-width:40em}
+h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:500;margin-top:44px}
+.work{list-style:none;margin-top:14px}
+.work li{border-top:1px solid var(--line);padding:16px 0;display:grid;grid-template-columns:1fr auto;gap:4px 16px}
+.work li:last-child{border-bottom:1px solid var(--line)}
+.w-title{font-weight:500}.w-detail{color:var(--dim);font-size:15px;grid-column:1}.w-src{color:var(--faint);font-size:13px;grid-row:1;grid-column:2}
+.note{font-size:14px;color:var(--faint);margin-top:36px;max-width:42em}
+footer{border-top:1px solid var(--line);padding:32px 0 48px;font-size:14px;color:var(--faint)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media(max-width:720px){.nav a:not(:nth-last-child(-n+2)){display:none}.search button{padding:0 18px}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="mark" href="/">NEUROPIAN</a>
+  <nav class="nav"><a href="/#plain">How it works</a><a href="/#method">Method</a><a href="/talent" aria-current="page">Talent</a><a class="login" href="/app">Log in</a></nav>
+</div></header>
+<main id="main" class="wrap">
+  <section id="list">
+    <div class="top">
+      <p class="kicker">Neuropian · Talent</p>
+      <h1>Find a builder.</h1>
+      <p class="lede">Members' profiles, drafted by AI from their own work and approved by them. Search by what you need done; the AI ranks profiles by meaning, not keywords.</p>
+      <form class="search" id="f" role="search"><input id="q" name="q" type="search" maxlength="200" placeholder="e.g. GPU kernels in Rust, or olympiad-level math" aria-label="Search talent" autocomplete="off"><button>Search</button></form>
+      <p class="hint">Only members who signed up and approved their profile appear here.</p>
+    </div>
+    <p class="status" id="st" aria-live="polite"></p>
+    <div class="grid" id="grid"></div>
+  </section>
+  <section id="profile" class="prof" hidden></section>
+</main>
+<footer><div class="wrap"><span>© 2026 Neuropian · Beyond Limitless</span><span><a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href="/app">Members</a></span></div></footer>
+<script>
+(function(){
+"use strict";
+var SB="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw", FN=SB+"/functions/v1/talent";
+var grid=document.getElementById("grid"), st=document.getElementById("st"), list=document.getElementById("list"), prof=document.getElementById("profile");
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function safeUrl(u){return /^https:\/\//.test(String(u||""))?esc(u):"";}
+function chips(a){return (a||[]).slice(0,6).map(function(s){return '<span class="chip">'+esc(s)+'</span>';}).join("");}
+function call(body){return fetch(FN,{method:"POST",headers:{"Content-Type":"application/json","apikey":KEY,"Authorization":"Bearer "+KEY},body:JSON.stringify(body)}).then(function(r){return r.json();});}
+function card(p){
+  var w=(p.work||[])[0];
+  return '<a class="card" href="#'+esc(p.id)+'"><div class="c-name">'+esc(p.name||"Member")+'</div><div class="c-head">'+esc(p.headline)+'</div>'+
+    '<div class="chips">'+chips(p.skills)+'</div>'+(w?'<div class="c-work">'+esc(w.title)+(w.detail?' · '+esc(w.detail):'')+'</div>':'')+
+    (p.match!=null?'<div class="c-match">'+Math.round(p.match*100)+'% match</div>':'')+'</a>';
+}
+function render(rows,q){
+  if(!rows.length){
+    grid.innerHTML=""; st.textContent="";
+    grid.innerHTML='<div class="empty">'+(q?'No member profile matches that yet.':'No member has published a profile yet.')+' Builders: <a href="/app">create an account</a> and publish yours.</div>';
+    return;
+  }
+  st.textContent=q?rows.length+" closest matches for “"+q+"”":rows.length+" newest profiles";
+  grid.innerHTML=rows.map(card).join("");
+}
+function search(q){
+  st.textContent=q?"Searching…":"Loading…";
+  (q?call({action:"search",q:q}):fetch(SB+"/rest/v1/talent?select=*&order=published_at.desc&limit=30",{headers:{"apikey":KEY,"Authorization":"Bearer "+KEY}}).then(function(r){return r.json();}).then(function(rows){return Array.isArray(rows)?{results:rows}:{error:"unavailable"};})).then(function(d){ if(d.error)throw new Error(d.error); render(d.results||[],q); })
+  .catch(function(){ st.textContent="Search is unavailable right now."; grid.innerHTML=""; });
+}
+function show(id){
+  fetch(SB+"/rest/v1/talent?id=eq."+encodeURIComponent(id)+"&select=*",{headers:{"apikey":KEY,"Authorization":"Bearer "+KEY}})
+  .then(function(r){return r.json();}).then(function(rows){
+    var p=rows&&rows[0]; list.hidden=true; prof.hidden=false; window.scrollTo(0,0);
+    if(!p){prof.innerHTML='<a class="back" href="#">← All talent</a><p class="p-head" style="margin-top:24px">This profile is not published.</p>';return;}
+    document.title=(p.name||"Member")+" · Neuropian Talent";
+    prof.innerHTML='<a class="back" href="#">← All talent</a><h1 class="p-name">'+esc(p.name||"Member")+'</h1><p class="p-head">'+esc(p.headline)+'</p>'+
+      '<div class="badges">'+(p.github_verified?'<a class="badge ok" href="https://github.com/'+esc(p.github)+'">GitHub verified · '+esc(p.github)+'</a>':'<span class="badge">GitHub not verified</span>')+
+      (p.codeforces?'<a class="badge" href="https://codeforces.com/profile/'+esc(p.codeforces)+'">Codeforces · '+esc(p.codeforces)+'</a>':'')+'</div>'+
+      (p.summary?'<p class="p-sum">'+esc(p.summary)+'</p>':'')+
+      ((p.skills||[]).length?'<h2>Skills</h2><div class="chips">'+chips(p.skills)+'</div>':'')+
+      ((p.work||[]).length?'<h2>Built and solved</h2><ul class="work">'+(p.work||[]).map(function(w){var u=safeUrl(w.url);return '<li><span class="w-title">'+(u?'<a href="'+u+'">'+esc(w.title)+'</a>':esc(w.title))+'</span><span class="w-src">'+esc(w.source)+'</span><span class="w-detail">'+esc(w.detail)+'</span></li>';}).join("")+'</ul>':'')+
+      '<p class="note">'+(p.ai_drafted?'Drafted by AI from this member\'s own public work, then edited and approved by them.':'Written and approved by this member.')+' Links go to the original work so you can check it.</p>';
+  }).catch(function(){ prof.hidden=false; list.hidden=true; prof.innerHTML='<a class="back" href="#">← All talent</a><p class="p-head" style="margin-top:24px">Could not load this profile.</p>'; });
+}
+function route(){
+  var id=location.hash.slice(1);
+  if(id){show(id);}else{prof.hidden=true;list.hidden=false;document.title="Talent · Neuropian";}
+}
+document.getElementById("f").addEventListener("submit",function(e){e.preventDefault();var q=document.getElementById("q").value.trim();history.replaceState(null,"","?q="+encodeURIComponent(q));search(q);});
+window.addEventListener("hashchange",route);
+var q0=new URLSearchParams(location.search).get("q")||""; document.getElementById("q").value=q0;
+route(); search(q0);
+})();
+</script>
+</body>
+</html>
