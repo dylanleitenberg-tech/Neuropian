@@ -1645,7 +1645,7 @@ async function doRegister(){
   let age=today.getFullYear()-birth.getFullYear();
   const m=today.getMonth()-birth.getMonth();
   if(m<0||(m===0&&today.getDate()<birth.getDate()))age--;
-  if(age<18){showErr('rg-err','You must be 18 or older to create an account.');return}
+  if(isNaN(age)||age>110){showErr('rg-err','Please enter your real date of birth.');return}if(age<18){showErr('rg-err','You must be 18 or older to create an account.');return}
   
   if(pass.length<6){showErr('rg-err','Password must be at least 6 characters.');return}
   // Check username uniqueness
