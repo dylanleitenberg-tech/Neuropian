@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow+Condensed:wght@200;300;400;500;600;700&family=Barlow:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.106.2/dist/umd/supabase.js" integrity="sha384-m/8UHFJHeU6nrCKP2hBnAseuvAKUmLF+8e5bWos5CJL023vuxX7kiVL5t8yjsJhV" crossorigin="anonymous"></script>
 <style>
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -577,6 +577,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 /* Stagger animation handled via .fade-in class added by JS - elements visible by default */
 
 </style>
+<style>#team-assemble-btn{display:none!important}</style>
 </head>
 <body>
 <div id="sb-fill" style="position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);z-index:9999;pointer-events:none"></div>
@@ -629,13 +630,13 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   <p class="m-kicker">Neuropian · Members</p>
   <h1 class="m-title">Your profile, opportunities and RoundTable.</h1>
   <p class="m-lede">Create an account to take the profile survey, browse opportunities and talk with other members.
-  Companies and funds hiring through Neuropian may see your profile; that is how members get found.</p>
+  Companies and funds that hire through Neuropian may see your profile; that is how members will be found. The first hiring pilot is planned.</p>
   <div class="m-actions">
     <button class="m-btn" onclick="currentUser?showPage(surveyDone?'platform':'survey'):showAuth('reg','survey')">Create an account</button>
     <button class="m-btn ghost" onclick="currentUser?showPage(surveyDone?'platform':'survey'):showAuth('login')">Sign in</button>
   </div>
   <div class="m-grid">
-    <a class="m-card" onclick="gatedPage('platform')"><b>Opportunities</b><span>Openings and problems, ordered by how well they fit your survey profile.</span></a>
+    <a class="m-card" onclick="gatedPage('platform')"><b>Opportunities</b><span>Openings, ordered by how well they fit your survey answers. None listed yet.</span></a>
     <a class="m-card" onclick="gatedPage('collective')"><b>RoundTable</b><span>Chat rooms, problem rooms and build rooms for members.</span></a>
     <a class="m-card" onclick="showPage('eagleeyes')"><b>EagleEyes</b><span>A browser extension, in development. Not available yet.</span></a>
   </div>
@@ -682,14 +683,14 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
         <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#005c1e,#00cc44);flex-shrink:0"></div>
         <div>
           <div id="survey-welcome-name" style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#00aa38;margin-bottom:.3rem">Welcome to Neuropian</div>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.7;margin:0">You're about to complete your cognitive profile. This 14-question survey takes about 8 minutes and unlocks personalized opportunity matching, your Neuropian ID, and access to RoundTable.</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.7;margin:0">You're about to complete your profile. This 14-question survey takes about 8 minutes and lets us match you with opportunities.</p>
         </div>
       </div>
     </div>
     <div class="sst on" id="step-consent" style="max-width:640px;margin:0 auto;padding:3rem 0 2rem">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.36em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.2rem">Neuropian · Cognitive Survey</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.36em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.2rem">Neuropian · Profile Survey</div>
       <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1;letter-spacing:-.03em;color:var(--white);margin-bottom:1rem">Before we begin</h2>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;line-height:1.82;color:rgba(255,255,255,.75);margin-bottom:2rem">This survey builds a cognitive profile from your responses. That profile is used to match you with opportunities, teams, and people on the Neuropian platform. You can request deletion of your profile at any time by emailing dylan@neuropian.com.</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;line-height:1.82;color:rgba(255,255,255,.75);margin-bottom:2rem">This survey builds a profile from your responses. That profile is used to match you with opportunities, teams, and people on the Neuropian platform. You can request deletion of your profile at any time by emailing dylan@neuropian.com.</p>
       <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;margin-bottom:2rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:1.1rem 1.2rem">
         <input type="checkbox" id="survey-consent-check" onchange="document.getElementById('survey-begin-btn').disabled=!this.checked;document.getElementById('survey-begin-btn').style.opacity=this.checked?'1':'.35'" style="margin-top:.2rem;flex-shrink:0;accent-color:#00cc44;width:16px;height:16px">
         <span style="font-family:'Barlow',sans-serif;font-size:.78rem;line-height:1.65;color:#e8e2d6">I consent to Neuropian building a profile from my survey responses, using it to match me with opportunities and people on the platform, and sharing it with companies and funds hiring through Neuropian.</span>
@@ -793,9 +794,9 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     </div>
   </div>
   <div class="plhdr" style="padding-top:5rem">
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.44em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem"><span style="display:block;width:28px;height:1px;background:rgba(255,255,255,.2)"></span>Your Intelligence Profile<span style="display:block;width:28px;height:1px;background:rgba(255,255,255,.2)"></span></div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.44em;text-transform:uppercase;color:rgba(255,255,255,0.95);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem"><span style="display:block;width:28px;height:1px;background:rgba(255,255,255,.2)"></span>Your Profile<span style="display:block;width:28px;height:1px;background:rgba(255,255,255,.2)"></span></div>
     <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5.5vw,4.5rem);font-weight:900;color:var(--white);line-height:.95;letter-spacing:-.03em">Your Opportunity <em style="font-style:italic;color:rgba(255,255,255,0.95);display:block">Matches</em></h1>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(255,255,255,0.95);margin-top:.6rem;font-weight:300;font-style:italic">Ranked by cognitive alignment, not by résumé</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(255,255,255,0.95);margin-top:.6rem;font-weight:300;font-style:italic">Ordered by how well they fit your survey answers</p>
     <div class="mbn"><div class="mbt" id="msumm">Take the survey and this shows what your answers signal. Opportunities are ordered by how well they fit it.</div></div>
     <div id="retake-row" style="display:none;margin-top:.8rem"><button onclick="surveyRetake()" style="background:none;border:1px solid rgba(255,255,255,.2);padding:.4rem 1.1rem;color:rgba(255,255,255,.6);font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .2s" onmouseenter="this.style.borderColor='rgba(255,255,255,.5)';this.style.color='#fff'" onmouseleave="this.style.borderColor='rgba(255,255,255,.2)';this.style.color='rgba(255,255,255,.6)'">Retake Survey</button></div>
   </div>
@@ -803,7 +804,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   <!-- Collective CTA in platform page -->
   <div style="margin:1.2rem 2rem;padding:1rem 1.5rem;background:linear-gradient(135deg,#001a00,#0a1a0a);border:1px solid rgba(0,200,40,.25);border-radius:4px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
     <div>
-      <div style="font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;color:#00aa38;font-weight:700;margin-bottom:.3rem">RoundTable · The Genius Collective</div>
+      <div style="font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;color:#00aa38;font-weight:700;margin-bottom:.3rem">RoundTable · Member chat</div>
       <p style="font-size:.72rem;color:rgba(200,255,200,.8);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.5;max-width:480px">Connect with other members, form teams, and take on problem rooms. Your next collaborator is already here.</p>
     </div>
     <button onclick="gatedPage('collective')" style="padding:.7rem 1.6rem;background:#00cc44;border:none;border-radius:3px;color:#000;font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background .2s" onmouseenter="this.style.background='#00aa38'" onmouseleave="this.style.background='#00cc44'">Enter RoundTable →</button>
@@ -811,9 +812,9 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div style="padding:0 2.5rem;margin-bottom:1rem"><div style="position:relative;max-width:400px"><svg style="position:absolute;left:.7rem;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.35" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="jkw" type="text" placeholder="Search opportunities…" oninput="filterByKeyword(this.value)" style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#e8e2d6;font-family:'Barlow',sans-serif;font-size:.74rem;padding:.52rem .7rem .52rem 2rem;outline:none;transition:border-color .2s;box-sizing:border-box" onfocus="this.style.borderColor='rgba(0,200,40,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'"></div></div>
     <div class="fr"><span class="flb">Filter:</span><button class="fb on" onclick="fj(this,'all')">All</button><button class="fb" onclick="fj(this,'tech')">Tech</button><button class="fb" onclick="fj(this,'science')">Science</button><button class="fb" onclick="fj(this,'data')">Data</button><button class="fb" onclick="fj(this,'design')">Design</button><button class="fb" onclick="fj(this,'art')">Art &amp; Music</button><button class="fb" onclick="fj(this,'prize')">Prize</button><button class="fb" onclick="fj(this,'research')">Research</button><button class="fb" onclick="fj(this,'startup')">Startup</button><button class="fb" onclick="fj(this,'psych')">Psychology</button><button class="fb" id="fb-saved" onclick="fj(this,'saved')" style="border-color:rgba(0,200,40,.3);color:#00aa38">Saved ✓</button></div>
     <div id="jlist"></div>
-    <div class="nr" id="nores">No opportunities found.</div>
+    <div class="nr" id="nores">No openings listed yet.</div>
     <div style="text-align:center;margin-top:2.5rem;padding:2.4rem;border-top:1px solid rgba(255,255,255,.07)">
-      <p style="font-size:.76rem;color:#333333;margin-bottom:1.15rem;font-weight:300;font-style:italic">Complete the talent survey for more precise matches tailored to your cognitive profile.</p>
+      <p style="font-size:.76rem;color:#333333;margin-bottom:1.15rem;font-weight:300;font-style:italic">Complete the talent survey for more precise matches tailored to your profile.</p>
     </div>
   </div>
 </div>
@@ -936,7 +937,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       <div style="text-align:center;padding:2.5rem 0 1.5rem">
         <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#005c1e,#00cc44);display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;color:#000;margin:0 auto .8rem">N</div>
         <div style="font-size:.88rem;font-weight:700;color:#eee;letter-spacing:.04em">Welcome to ROUNDTABLE</div>
-        <div style="font-size:.66rem;color:#e8e2d6;margin-top:.4rem">RoundTable · RoundTable · Where extraordinary minds find each other</div>
+        <div style="font-size:.66rem;color:#e8e2d6;margin-top:.4rem">RoundTable · Chat, problem rooms and build rooms</div>
       </div>
     </div>
     <!-- Typing indicator -->
@@ -1048,7 +1049,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
       </div>
       <button onclick="closeTeamAssembly()" style="background:none;border:none;color:#e8e2d6;cursor:pointer;font-size:1.1rem;flex-shrink:0;margin-left:1rem">✕</button>
     </div>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:.88rem;color:rgba(255,255,255,.5);font-style:italic;margin:0 0 1.4rem">Matched by cognitive alignment, complementary strengths, shared interest in this domain.</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:.88rem;color:rgba(255,255,255,.5);font-style:italic;margin:0 0 1.4rem">Suggested from survey answers and shared interest in this domain.</p>
     <div id="ta-body" style="display:flex;flex-direction:column;gap:.75rem">
       <div style="text-align:center;padding:2rem;color:#444;font-size:.72rem;font-style:italic">Analyzing profiles…</div>
     </div>
@@ -1443,8 +1444,8 @@ async function doReset(){
   if(error){showErr('rs-err',error.message);return;}
   showErr('rs-err','');document.getElementById('rs-success').style.display='';
 }
-function openDoNotSell(){const m=document.getElementById('do-not-sell-modal');m.style.display='flex';}
-function closeDoNotSell(){document.getElementById('do-not-sell-modal').style.display='none';}
+function openDoNotSell(){showPage('privacy');}
+function closeDoNotSell(){}
 document.addEventListener('click',function(e){if(e.target===document.getElementById('do-not-sell-modal'))closeDoNotSell();});
 // Reset widget when register view opens
 
@@ -2369,7 +2370,7 @@ function scJ(j){
     maxPossible+=2;
   }
 
-  // Field category alignment - user's cognitive profile vs job's domain
+  // Field category alignment - user's profile vs job's domain
   var catTraitMap={tech:['tech','systems','logical','builder'],data:['data','pattern','logical'],research:['experiment','absorb','pattern'],design:['visual'],art:['art','visual'],psych:['empathy'],startup:['builder','ideas'],prize:['focus','pattern']};
   var relevantTraits=catTraitMap[j.cat]||[];
   if(relevantTraits.length>0){
@@ -2432,7 +2433,7 @@ function renderJobs(){
   if(surv){
     const nm={tech:'technical aptitude',data:'quantitative reasoning',pattern:'pattern recognition',systems:'systems thinking',art:'creative intelligence',psych:'psychological insight',builder:'builder mentality',ideas:'original ideation',focus:'deep focus',visual:'visual thinking'};
     const top=Object.entries(TR).filter(([k,v])=>v===true||v>7).map(([k])=>nm[k]).filter(Boolean).slice(0,3);
-    if(top.length)document.getElementById('msumm').innerHTML=`Your profile signals <strong>${top.join(', ')}.</strong> Opportunities ranked by alignment with your unique cognitive signature.`
+    if(top.length)document.getElementById('msumm').innerHTML=`Your profile signals <strong>${top.join(', ')}.</strong> Opportunities are ordered by how well they fit your answers.`
   }
   const rr=document.getElementById('retake-row');if(rr)rr.style.display=surveyDone?'':'none';
   applyF(CF);
@@ -3425,7 +3426,7 @@ function genOgImage(){
     a.click();document.body.removeChild(c);
   },1200);
 }
-async function uploadOgImage(file){
+async function uploadOgImage(file){return;
   if(!file||!sb){alert(!sb?'Not connected to Supabase':'No file selected');return;}
   const lbl=document.getElementById('og-upload-label');
   const orig=lbl.childNodes[0].textContent;
@@ -3675,18 +3676,7 @@ async function submitProblem(){
   btn.textContent='Post Problem';btn.disabled=false;
 }
 // ── BUILD ROOMS ──────────────────────────────────────────────────────
-const _DEFAULT_BUILDS=[
-  {id:'vr-ai-world',       title:'Persistent AI World VR Headset',       category:'hardware', looking_for:'ML engineers, game engine devs, hardware designers'},
-  {id:'jetpack',           title:'Personal Jetpack',                      category:'hardware', looking_for:'Aerospace engineers, propulsion specialists, embedded devs'},
-  {id:'robot-arms-pack',   title:'Extendable Robot Arms Backpack',        category:'hardware', looking_for:'Robotics engineers, mechanical designers, BCI researchers'},
-  {id:'flying-surfboard',  title:'Flying Surfboard',                      category:'hardware', looking_for:'Aerospace engineers, industrial designers, propulsion engineers'},
-  {id:'neural-interface',  title:'Non-Invasive Neural Interface',         category:'hardware', looking_for:'Neuroscientists, signal processing engineers, UX designers'},
-  {id:'drone-companion',   title:'Autonomous Drone Companion',            category:'hardware', looking_for:'Robotics engineers, computer vision researchers, embedded devs'},
-  {id:'ar-glasses',        title:'Real-Time AR Translation Glasses',      category:'hardware', looking_for:'Computer vision engineers, hardware designers, NLP researchers'},
-  {id:'gravity-boots',     title:'Magnetic Gravity Boots',                category:'hardware', looking_for:'Materials engineers, physicists, wearable tech designers'},
-  {id:'pocket-ai',         title:'Offline Pocket AI Device',             category:'hardware', looking_for:'ML engineers, embedded systems devs, product designers'},
-  {id:'health-patch',      title:'Continuous Biomarker Skin Patch',      category:'hardware', looking_for:'Bioengineers, materials scientists, signal processing engineers'},
-];
+const _DEFAULT_BUILDS=[];
 
 function _buildRoomItem(b,idPrefix){
   const roomId=idPrefix+(b.id||b._db_id);
@@ -3817,7 +3807,7 @@ function closeTeamAssembly(){
   if(m)m.style.display='none';
 }
 
-async function runTeamAssembly(roomId,roomDesc){
+async function runTeamAssembly(roomId,roomDesc){return;
   const body=document.getElementById('ta-body');
   const errEl=document.getElementById('ta-err');
   if(!sb||!roomId){body.innerHTML='<div style="text-align:center;padding:2rem;color:#444;font-size:.72rem;font-style:italic">Not connected.</div>';return;}
@@ -4690,13 +4680,13 @@ else{renderOppPreview();}
     <p style="font-family:'Barlow',sans-serif;font-size:.95rem;color:rgba(0,0,0,.5);margin-bottom:3rem">Last updated: 18 October 2026 · <a href="/privacy.html" style="color:inherit">Open as a page</a></p>
     <div style="display:flex;flex-direction:column;gap:2.2rem">
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">1. Who we are</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><p>Neuropian is run by Dylan Leitenberg (not yet incorporated). Questions and requests: <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p></div></div>
-      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">2. What we collect from members</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><ul><li><strong>Account:</strong> name, username, email address, date of birth and profile picture.</li><li><strong>Survey:</strong> your answers and the profile built from them.</li><li><strong>RoundTable:</strong> messages, files you upload, reactions, servers, friends and reports.</li><li><strong>Opportunities:</strong> what you save or apply to.</li><li><strong>Technical:</strong> what our hosting provider logs to run sign-in securely, such as IP address and browser.</li></ul></div></div>
+      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">2. What we collect from members</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><ul><li><strong>Account:</strong> name, username, email address, date of birth, profile picture and your Neuropian ID.</li><li><strong>Survey and profile:</strong> your answers, including written ones such as your top accomplishment, the profile built from them, and your bio.</li><li><strong>RoundTable:</strong> messages, files you upload, reactions, problems and builds you post, servers, friends, reports and whether you are online.</li><li><strong>Opportunities:</strong> what you save or apply to.</li><li><strong>Technical:</strong> what our hosting provider logs to run sign-in securely, such as IP address and browser.</li></ul></div></div>
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">3. How we use it</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><p>To run your account and RoundTable, to match you with opportunities, to share your profile with companies and funds hiring through Neuropian (section 4), to keep the service secure, and to send account emails such as confirmations and password resets. No marketing email without your consent.</p></div></div>
-      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">4. Who we share it with</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><ul><li><strong>Companies and funds hiring through Neuropian:</strong> your profile (name, username, email, survey results and what you add to your profile) when you may fit what they are looking for. They may pay us. Under California law this can count as selling or sharing personal information. You can opt out at any time: email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a> with “Do not share my profile” and we stop within 7 days.</li><li><strong>Service providers</strong> that host the service for us: Supabase (database, sign-in and file storage, in the United States) and Cloudflare (the website).</li><li><strong>If the law requires it.</strong></li></ul><p>Never shared: your password and your private messages. Never sold to data brokers or advertisers.</p><p>Accounts created before 18 October 2026 were made under a policy that did not include sharing. Nothing from those accounts is shared until the member accepts these terms.</p></div></div>
-      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">5. People we find through public work</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><p>Neuropian's search tool, Falcon, reads public, self-published work from official data feeds and public pages: GitHub, Codeforces, AtCoder and Math Stack Exchange. It does not scrape sites that forbid it. From this we keep lists and short internal reports. We publish only totals, never anyone's name or profile, and we share no one's information with a hiring company unless they have signed up. To have your data removed from our lists, email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p></div></div>
-      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">6. Storage and how long we keep it</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><p>Your data is stored with Supabase in the United States, encrypted in transit and at rest. We keep it while your account is open and delete it within 90 days after you close it.</p></div></div>
-      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">7. Your rights</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><p>You can ask to see, correct, download or delete your data, or to stop sharing, by emailing <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>. We answer within 30 days. If you are in the EU or UK, we rely on your consent and on providing the service you signed up for, and you may complain to your data-protection authority.</p></div></div>
-      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">8. Age</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><p>Neuropian is for adults (18+). If we learn we hold data from someone under 18, we don't share it and we delete it.</p></div></div>
+      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">4. Who we share it with</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><ul><li><strong>Companies and funds hiring through Neuropian:</strong> your profile (name, username, email, survey results and what you add to your profile) when you may fit what they are looking for. They may pay us. Under California law this can count as selling or sharing personal information. You can opt out at any time: email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a> with “Do not share my profile” and we stop within 7 days.</li><li><strong>Service providers</strong> that run the service for us: Supabase (database, sign-in and file storage) and Cloudflare (the website). Pages also load fonts from Google Fonts and code from jsDelivr, which see your IP address.</li><li><strong>If the law requires it.</strong></li></ul><p>Never shared with hiring companies: your password and your private messages. Never sold to data brokers or advertisers.</p><p><strong>Other members</strong> can see your username, name, profile picture, Neuropian ID, whether you are online, your bio and profile-card answers (unless you set them to friends only) and the messages you post in rooms and servers.</p><p>Accounts created before 18 October 2026 were made under a policy that did not include sharing. Nothing from those accounts is shared until the member accepts these terms.</p></div></div>
+      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">5. People we find through public work</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><p>Neuropian's search tool, Falcon, reads public, self-published information through official data feeds and public pages: GitHub (profiles, merged pull requests and code search), Codeforces, AtCoder, Math Stack Exchange and other Stack Exchange sites, Kaggle's public Meta Kaggle dataset, the Online Go Server, and personal websites linked from those profiles. Every page fetch checks the site's robots.txt first.</p><p>What it keeps: usernames; the name, location, company, bio and website shown on public profiles; follower counts; contest results, answers and merged pull requests; a short fingerprint of public profile photos, used only to tell whether two accounts belong to the same person (not the photo itself); and contact details people published themselves, such as a public profile email or the email and social-media links on their own website.</p><p>From this we keep lists and short internal reports. We publish only totals and one redacted example, never anyone's name or profile, and we share no one's information with a hiring company unless they have signed up. To see what we hold about you or to have it removed, email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p></div></div>
+      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">6. Storage and how long we keep it</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><p>Your data is stored with Supabase, encrypted in transit and at rest. We keep it while your account is open and delete it within 30 days of your request to close it.</p></div></div>
+      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">7. Your rights</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><p>You can ask to see, correct, download or delete your data, or to stop sharing, by emailing <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>. We answer within 30 days. If you are in the EU or UK: for members, the legal basis is the service you sign up for, which is being matched with hiring companies; for people Falcon finds, it is our legitimate interest in finding people through work they made public, and you may object at any time. You may also complain to your data-protection authority.</p></div></div>
+      <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">8. Age</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><p>Neuropian is for adults (18+). Before 18 October 2026 members could join from 13; those accounts are paused, nothing from them is shared, and we are deleting them. If we learn we hold data from anyone else under 18, we don't share it and we delete it.</p></div></div>
       <div style="border-top:1px solid rgba(0,0,0,.08);padding-top:2.2rem"><h2 style="font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#000;margin-bottom:1rem">9. Changes</h2><div class="lg" style="font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.75;color:rgba(0,0,0,.82)"><p>If this policy changes in a way that matters, we will ask you to accept it again.</p></div></div>
     </div>
   </div>
@@ -4850,16 +4840,7 @@ else{renderOppPreview();}
 </div>
 
 <!-- DO NOT SELL MODAL -->
-<div id="do-not-sell-modal" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);align-items:center;justify-content:center">
-  <div style="background:#0f0e0d;border:1px solid rgba(255,255,255,.1);width:100%;max-width:480px;padding:2.5rem;position:relative">
-    <button onclick="closeDoNotSell()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:#e8e2d6;font-size:1.1rem;cursor:pointer">✕</button>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:.48rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.8rem">California Privacy Rights</div>
-    <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#e8e2d6;margin-bottom:1.2rem;line-height:1.1">Do Not Sell or Share<br><em>My Personal Information</em></div>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.75;color:rgba(255,255,255,.75);margin-bottom:1.2rem">Neuropian does not sell your personal information and does not share it for cross-context behavioral advertising. Your data is used solely to operate the platform and build your cognitive profile.</p>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;line-height:1.75;color:rgba(255,255,255,.75);margin-bottom:1.8rem">To request deletion of your data or to exercise any other California privacy right, email us directly:</p>
-    <a href="mailto:dylan@neuropian.com?subject=California Privacy Rights Request" style="display:block;text-align:center;padding:.85rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);font-family:'Barlow Condensed',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#e8e2d6;text-decoration:none;transition:background .2s" onmouseenter="this.style.background='rgba(255,255,255,.14)'" onmouseleave="this.style.background='rgba(255,255,255,.08)'">Email dylan@neuropian.com</a>
-  </div>
-</div>
+
 
 <!-- AUTH GATE MODAL -->
 <div class="auth-gate" id="auth-gate">
@@ -4867,7 +4848,7 @@ else{renderOppPreview();}
     <button class="auth-close" onclick="closeAuth()" title="Close">✕</button>
     <div id="auth-login-view">
       <div class="auth-title">Sign <em>In</em></div>
-      <div class="auth-sub">Access your cognitive profile and opportunity matches</div>
+      <div class="auth-sub">Access your profile and opportunities</div>
       <div class="auth-err" id="li-err"></div>
       <div class="auth-field"><label>Email Address</label><input type="email" id="li-email" placeholder="you@example.com" autocomplete="email"></div>
       <div class="auth-field"><label>Password</label><input type="password" id="li-pass" placeholder="Your password" autocomplete="current-password"></div>
@@ -4924,7 +4905,7 @@ else{renderOppPreview();}
           </div>
         </div>
       </div>
-      <p class="rg-notice" style="font-family:'Barlow',sans-serif;font-size:.74rem;line-height:1.6;color:rgba(232,226,214,.8);margin:0 0 .9rem">Neuropian shares your profile with companies and funds hiring through us. By creating an account you agree to the <a onclick="showAuthLegal('tos')" style="color:#e8e2d6;text-decoration:underline;cursor:pointer">Terms of Service</a> and <a onclick="showAuthLegal('privacy')" style="color:#e8e2d6;text-decoration:underline;cursor:pointer">Privacy Policy</a>. You must be 18 or older.</p>
+      <p class="rg-notice" style="font-family:'Barlow',sans-serif;font-size:.74rem;line-height:1.6;color:rgba(232,226,214,.8);margin:0 0 .9rem">Neuropian may share your profile with companies and funds that hire through us. By creating an account you agree to the <a onclick="showAuthLegal('tos')" style="color:#e8e2d6;text-decoration:underline;cursor:pointer">Terms of Service</a> and <a onclick="showAuthLegal('privacy')" style="color:#e8e2d6;text-decoration:underline;cursor:pointer">Privacy Policy</a>. You must be 18 or older.</p>
       <button class="auth-sub-btn" id="rg-btn" onclick="doRegister()">Create Account &amp; Continue</button>
       <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
     </div>
@@ -5003,7 +4984,7 @@ function checkTerms(user){
     t.innerHTML='Neuropian is now for adults (18+), so this account is paused. Nothing from it is shared. To download or delete your data, email <a href="mailto:dylan@neuropian.com" style="color:#e8e2d6">dylan@neuropian.com</a>.';
     ok.style.display='none';
   }else{
-    t.innerHTML='Neuropian now shares member profiles with companies and funds hiring through us. Nothing from your account is shared unless you accept. Read the <a href="/terms.html" target="_blank" style="color:#e8e2d6">Terms</a> and <a href="/privacy.html" target="_blank" style="color:#e8e2d6">Privacy Policy</a>.';
+    t.innerHTML='Neuropian may now share member profiles with companies and funds that hire through us. Nothing from your account is shared unless you accept. Read the <a href="/terms.html" target="_blank" style="color:#e8e2d6">Terms</a> and <a href="/privacy.html" target="_blank" style="color:#e8e2d6">Privacy Policy</a>.';
     ok.style.display='';
   }
   g.style.display='flex';

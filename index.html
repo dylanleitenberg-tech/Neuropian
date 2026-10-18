@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>(function(){var h=location.hash,q=location.search;if(/access_token=|error_description=|type=(recovery|signup|invite|magiclink|email_change)/.test(h)||/[?&](code|token_hash)=/.test(q))location.replace('/app.html'+q+h)})()</script>
+<script>(function(){var h=location.hash,q=location.search,p=location.pathname;if((p==="/"||p==="/index.html")&&(/access_token=|error_description=|type=(recovery|signup|invite|magiclink|email_change)/.test(h)||/[?&](code|token_hash)=/.test(q)))location.replace('/app.html'+q+h)})()</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Neuropian</title>
 <meta name="description" content="Neuropian finds engineers and mathematicians through their public work: contest records, math answers, and code that maintainers merged. A research prototype.">
@@ -392,7 +392,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
           <li class="t-hit">among equally rated players: AUC 0.647 (rating 0.599)</li>
       </ol>
     </div>
-    <p class="term-note">The real commands, with their output summarized from the run’s result files. Nobody’s name or profile appears on this site.</p>
+    <p class="term-note">The real commands, with their output summarized from the run’s result files. No one Falcon finds appears on this site by name or profile.</p>
     </details>
   </div>
 </section>
@@ -490,7 +490,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
     <p class="kicker">Principles</p>
     <h2>Four rules.</h2>
     <ol class="rules">
-      <li>Public information only, from official data feeds and public pages.</li>
+      <li>People we find: public information only, from official data feeds and public pages.</li>
       <li>Adults only. Only people who confirm they are 18 or older can opt in or be shown to a client; the lists are screened for minors by profile text and handles.</li>
       <li>Nobody's information goes to a client without their opt-in.</li>
       <li>No scraping of sites that forbid it: every page fetch checks robots.txt first.</li>
@@ -503,10 +503,10 @@ figure video{display:block;width:100%;height:auto;background:#000}
     <p class="kicker">Roadmap</p>
     <h2>Next.</h2>
     <ul class="next">
-      <li><span class="tag">Live</span><span>Member accounts and RoundTable<small>Sign up, take the profile survey and talk with other members. Signing up is the opt-in: members' profiles can be shared with companies hiring through Neuropian.</small></span></li>
+      <li><span class="tag">Live</span><span>Member accounts and RoundTable<small>Sign up, take the profile survey and talk with other members. Signing up is the opt-in: members' profiles can be shared with companies that hire through Neuropian (none yet).</small></span></li>
       <li><span class="tag">In development</span><span>EagleEyes<small>A browser extension that would add work a member chooses to share to their profile. Not available yet.</small></span></li>
       <li><span class="tag">In development</span><span>Linking one person's accounts across platforms<small>Confirmed only by links the person published. Weaker matches (same handle, name or photo) are scored, kept unconfirmed and never used to contact anyone.</small></span></li>
-      <li><span class="tag">Planned</span><span>Opt-in profiles<small>People see their own record and choose who else sees it.</small></span></li>
+      <li><span class="tag">Planned</span><span>Found people can see and claim their record<small>Someone Falcon found can see what it holds about them and choose whether to join.</small></span></li>
       <li><span class="tag">Planned</span><span>A pilot with one hiring firm<small>20 opted-in candidates, measured against the firm's usual pipeline.</small></span></li>
     </ul>
   </div>
