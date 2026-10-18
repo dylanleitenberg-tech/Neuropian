@@ -62,8 +62,9 @@
     var parts = mind.querySelectorAll("[data-lobe]");
     var setOn = function (k) { parts.forEach(function (el) { el.classList.toggle("on", el.getAttribute("data-lobe") === k); }); };
     var tick = function () { if (!held) { setOn(order[at % order.length]); at++; } };
-    parts.forEach(function (el) {
-      var k = el.getAttribute("data-lobe");
+    /* listeners only on the real links (lobe <a> and bubbles): SVG groups with focus listeners would become tab stops */
+    mind.querySelectorAll("a.lobe-link, a.bubble").forEach(function (el) {
+      var k = el.getAttribute("data-lobe") || el.querySelector("[data-lobe]").getAttribute("data-lobe");
       el.addEventListener("mouseenter", function () { held = true; setOn(k); });
       el.addEventListener("mouseleave", function () { held = false; });
       el.addEventListener("focusin", function () { held = true; setOn(k); });
