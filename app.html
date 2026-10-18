@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>window.__npRecovery=/type=recovery/.test(location.hash)||/[?&]type=recovery/.test(location.search);</script>
+<script>window.__npRecovery=/type=recovery/.test(location.hash)||/[?&]type=recovery/.test(location.search);window.__npFresh=!window.__npRecovery&&(/access_token=/.test(location.hash)||/[?&]code=/.test(location.search));</script>
 <meta name="robots" content="noindex">
 <meta name="description" content="Neuropian members: profile survey, opportunities and RoundTable.">
 <link rel="canonical" href="https://neuropian.com/app.html">
@@ -5083,6 +5083,7 @@ async function loadBuild(){
   const {data:pub}=await sb.from('published_profiles').select('public_id').eq('user_id',currentUser.id).maybeSingle();
   _bPub=pub?pub.public_id:null;
   _bFill(data||{display_name:[currentUser.user_metadata?.first_name,currentUser.user_metadata?.last_name].filter(Boolean).join(' ')});
+  if(gh&&!data&&(currentUser.user_metadata||{}).tos_version===TOS_VERSION)draftProfile();   // first visit with GitHub: research them now
 }
 async function connectGitHub(){
   const {error}=await sb.auth.linkIdentity({provider:'github',options:{redirectTo:location.origin+'/app?build=1'}});
@@ -5125,6 +5126,8 @@ async function unpublishProfile(){ try{await _bCall({action:'unpublish'}); _bPub
 
 // open the builder: after sign-up/sign-in (pendingPage 'build'), from links, and after returning from GitHub (?build=1)
 const _np_showPage=showPage; showPage=function(id){_np_showPage(id); if(id==='build'&&currentUser)setTimeout(loadBuild,300);};
+// a fresh sign-in (e.g. Continue with GitHub) goes straight to the profile, which drafts itself from their GitHub
+if(window.__npFresh){ const _ft=setInterval(()=>{ if(currentUser){clearInterval(_ft); showPage('build');} },300); setTimeout(()=>clearInterval(_ft),15000); }
 if(new URLSearchParams(location.search).has('build')){
   const _bt=setInterval(()=>{ if(currentUser){clearInterval(_bt); history.replaceState(null,'','/app'); showPage('build');} },300);
   setTimeout(()=>clearInterval(_bt),12000);
@@ -5193,6 +5196,7 @@ async function acceptTerms(){
   if(error){document.getElementById('tg-text').textContent='Could not save that: '+error.message;return;}
   if(data&&data.user)currentUser=data.user;
   document.getElementById('terms-gate').style.display='none';
+  const pb=document.getElementById('page-build'); if(pb&&pb.classList.contains('active')&&typeof loadBuild==='function')loadBuild();
 }
 async function declineTerms(){
   document.getElementById('terms-gate').style.display='none';
