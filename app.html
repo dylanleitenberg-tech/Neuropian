@@ -627,18 +627,18 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 <!-- PAGE: HOME -->
 <div id="page-home" class="page active">
 <section class="m-home">
-  <p class="m-kicker">Neuropian · Members</p>
+  <p class="m-kicker">Neuropian · Intellect accelerator</p>
   <h1 class="m-title">Your profile, opportunities and RoundTable.</h1>
   <p class="m-lede">Create an account to take the profile survey, browse opportunities and talk with other members.
-  Companies and funds that hire through Neuropian may see your profile; that is how members will be found. The first hiring pilot is planned.</p>
+  Signing up is the opt-in that lets Neuropian share your profile with the companies and funds that hire through it.</p>
   <div class="m-actions">
     <button class="m-btn" onclick="currentUser?showPage(surveyDone?'platform':'survey'):showAuth('reg','survey')">Create an account</button>
     <button class="m-btn ghost" onclick="currentUser?showPage(surveyDone?'platform':'survey'):showAuth('login')">Sign in</button>
   </div>
   <div class="m-grid">
     <a class="m-card" onclick="gatedPage('platform')"><b>Opportunities</b><span>Openings, ordered by how well they fit your survey answers. None listed yet.</span></a>
-    <a class="m-card" onclick="gatedPage('collective')"><b>RoundTable</b><span>Chat rooms, problem rooms and build rooms for members.</span></a>
-    <a class="m-card" onclick="showPage('eagleeyes')"><b>EagleEyes</b><span>A browser extension, in development. Not available yet.</span></a>
+    <a class="m-card" onclick="gatedPage('collective')"><b>RoundTable</b><span>Neuropian's place and space for intellectual expansion: chat, problem and build rooms.</span></a>
+    <a class="m-card" onclick="showPage('eagleeyes')"><b>EagleEyes</b><span>Neuropian's scouting agent: a browser extension that adds your work on the sites you choose to your profile. Built; not yet public.</span></a>
   </div>
   <p class="m-legal"><a onclick="showPage('tos')">Terms of Service</a> · <a onclick="showPage('privacy')">Privacy Policy</a> · <a href="/">neuropian.com</a></p>
 </section>
@@ -4663,10 +4663,10 @@ else{renderOppPreview();}
 <!-- EAGLEEYES PAGE -->
 <div id="page-eagleeyes" class="page" style="background:#000;min-height:100vh;color:#f2f1ed">
   <section class="m-home">
-    <p class="m-kicker">Neuropian · EagleEyes</p>
-    <h1 class="m-title">EagleEyes is in development.</h1>
-    <p class="m-lede">A browser extension that would add work you choose to share, from sites you choose, to your Neuropian
-    profile. It is not available yet, and nothing is collected until it is released and you install it.</p>
+    <p class="m-kicker">EagleEyes · Neuropian’s scouting agent</p>
+    <h1 class="m-title">EagleEyes</h1>
+    <p class="m-lede">A browser extension, built and not yet public. You turn it on site by site. On those sites it records
+    what you read, write and work on, and adds it to your Neuropian profile. It does nothing on any other site.</p>
     <div class="m-actions"><button class="m-btn ghost" onclick="showPage('home')">Back</button></div>
   </section>
 </div><!-- /page-eagleeyes -->
@@ -4678,7 +4678,7 @@ else{renderOppPreview();}
     <h1>Privacy Policy</h1>
     <p class="lg-upd">Last updated: 18 October 2026 · <a href="/privacy">Open as a page</a></p>
       <h2>1. Who we are</h2><div class="lg"><p>Neuropian is run by Dylan Leitenberg (not yet incorporated). Questions and requests: <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p></div>
-      <h2>2. What we collect from members</h2><div class="lg"><ul><li><strong>Account:</strong> name, username, email address, date of birth, profile picture and your Neuropian ID.</li><li><strong>Survey and profile:</strong> your answers, including written ones such as your top accomplishment, the profile built from them, and your bio.</li><li><strong>RoundTable:</strong> messages, files you upload, reactions, problems and builds you post, servers, friends, reports and whether you are online.</li><li><strong>Opportunities:</strong> what you save or apply to.</li><li><strong>Technical:</strong> what our hosting provider logs to run sign-in securely, such as IP address and browser.</li></ul></div>
+      <h2>2. What we collect from members</h2><div class="lg"><ul><li><strong>Account:</strong> name, username, email address, date of birth, profile picture and your Neuropian ID.</li><li><strong>Survey and profile:</strong> your answers, including written ones such as your top accomplishment, the profile built from them, and your bio.</li><li><strong>RoundTable:</strong> messages, files you upload, reactions, problems and builds you post, servers, friends, reports and whether you are online.</li><li><strong>Opportunities:</strong> what you save or apply to.</li><li><strong>EagleEyes, if you use it:</strong> on the sites you turn it on for, what you read, write and engage with there. Nothing from any other site.</li><li><strong>Technical:</strong> what our hosting provider logs to run sign-in securely, such as IP address and browser.</li></ul></div>
       <h2>3. How we use it</h2><div class="lg"><p>To run your account and RoundTable, to match you with opportunities, to share your profile with companies and funds hiring through Neuropian (section 4), to keep the service secure, and to send account emails such as confirmations and password resets. No marketing email without your consent.</p></div>
       <h2>4. Who we share it with</h2><div class="lg"><ul><li><strong>Companies and funds hiring through Neuropian:</strong> your profile (name, username, email, survey results and what you add to your profile) when you may fit what they are looking for. They may pay us. Under California law this can count as selling or sharing personal information. You can opt out at any time: email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a> with “Do not share my profile” and we stop within 7 days.</li><li><strong>Service providers</strong> that run the service for us: Supabase (database, sign-in and file storage, in the United States) and Cloudflare (the website). Pages also load fonts from Google Fonts and code from jsDelivr, which see your IP address.</li><li><strong>If the law requires it.</strong></li></ul><p>Never shared with hiring companies: your password and your private messages. Never sold to data brokers or advertisers.</p><p><strong>Other members</strong> can see your username, name, profile picture, Neuropian ID, whether you are online, your bio and profile-card answers (unless you set them to friends only) and the messages you post in rooms and servers.</p><p>Accounts created before 18 October 2026 were made under a policy that did not include sharing. Nothing from those accounts is shared until the member accepts these terms.</p></div>
       <h2>5. People we find through public work</h2><div class="lg"><p>Neuropian's search tool, Falcon, reads public, self-published information through official data feeds and public pages: GitHub (profiles, merged pull requests and code search), Codeforces, AtCoder, Math Stack Exchange and other Stack Exchange sites, Kaggle's public Meta Kaggle dataset, the Online Go Server, and personal websites linked from those profiles. Every page fetch checks the site's robots.txt first.</p><p>What it keeps: usernames; the name, location, company, bio and website shown on public profiles; follower counts; contest results, answers and merged pull requests; a short fingerprint of public profile photos, used only to tell whether two accounts belong to the same person (not the photo itself); and contact details people published themselves, such as a public profile email or the email and social-media links on their own website.</p><p>From this we keep lists and short internal reports. We publish only totals and one redacted example, never anyone's name or profile, and we share no one's information with a hiring company unless they have signed up. To see what we hold about you or to have it removed, email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p></div>
@@ -4713,7 +4713,7 @@ else{renderOppPreview();}
       <h2>5. Rules</h2><div class="lg"><p>Don't post anything harassing, threatening, defamatory, obscene or illegal; don't impersonate anyone; don't try to get into other accounts or our systems; don't send spam or malware; don't scrape or copy other members' content or data; don't break the law. We may remove content or suspend accounts that break these rules, without notice in serious cases.</p></div>
       <h2>6. Your content</h2><div class="lg"><p>You own what you post. You let Neuropian store, display and use it to run and improve the service. Don't post other people's confidential information or material you don't have the rights to.</p></div>
       <h2>7. RoundTable</h2><div class="lg"><p>Messages in RoundTable rooms and servers can be seen by the members of that room or server. Report anything that breaks these rules from the message menu.</p></div>
-      <h2>8. EagleEyes</h2><div class="lg"><p>EagleEyes, our browser extension, is in development and not available. If it is released, it will have its own terms and you will choose whether to use it.</p></div>
+      <h2>8. EagleEyes</h2><div class="lg"><p>EagleEyes is our browser extension. It is off on every site until you turn it on for that site. On those sites it records what you read, write and engage with and adds it to your Neuropian profile. It is not yet public. Don't turn it on for sites whose rules forbid monitoring tools; you are responsible for that.</p></div>
       <h2>9. No promises about results</h2><div class="lg"><p>We don't guarantee a job, an introduction or any other result. The service is provided as it is, and we may change or stop any part of it.</p></div>
       <h2>10. Limits on liability</h2><div class="lg"><p>As far as the law allows, Neuropian is not liable for indirect or consequential losses, or for what other members or hiring companies do.</p></div>
       <h2>11. Ending</h2><div class="lg"><p>You can delete your account at any time by emailing <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>. We may suspend or close accounts that break these terms.</p></div>
