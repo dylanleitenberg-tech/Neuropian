@@ -64,7 +64,20 @@ p+p{margin-top:1em}
 
 /* sections */
 section{border-top:1px solid var(--line);padding:clamp(72px,11vw,160px) 0}
-.hero{border-top:0;padding-top:clamp(88px,14vw,200px)}
+.hero{border-top:0;padding-top:clamp(88px,14vw,200px);position:relative;overflow:hidden;min-height:calc(100vh - 60px);min-height:calc(100svh - 60px);display:flex;flex-direction:column;justify-content:center;padding-bottom:clamp(72px,9vw,120px)}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero canvas.field{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(10,10,10,.92) 0%,rgba(10,10,10,.6) 42%,rgba(10,10,10,0) 70%)}
+.hero h1{background:linear-gradient(100deg,#f2f1ed 0%,#f2f1ed 38%,#9fefff 50%,#f2f1ed 62%,#f2f1ed 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 7s ease-in-out infinite}
+@keyframes sheen{0%{background-position:100% 0}60%,100%{background-position:0 0}}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+.cta{display:inline-flex;align-items:center;font-size:17px;font-weight:500;text-decoration:none;padding:14px 26px;border-radius:999px;background:#f2f1ed;color:#0a0a0a;border:1px solid #f2f1ed;transition:transform .15s ease,box-shadow .2s ease}
+.cta:hover{transform:translateY(-1px);box-shadow:0 0 0 4px rgba(111,214,247,.18),0 8px 30px rgba(111,214,247,.18)}
+.cta.ghost{background:transparent;color:#f2f1ed;border-color:var(--line)}.cta.ghost:hover{border-color:#f2f1ed}
+.field-note{position:absolute;right:var(--pad);bottom:20px;z-index:2;font-size:12.5px;color:var(--faint);max-width:30em;text-align:right}
+.field-label{position:absolute;left:0;top:0;z-index:2;pointer-events:none;font-size:13px;letter-spacing:.06em;color:#d6f8ff;background:rgba(10,10,10,.7);border:1px solid rgba(111,214,247,.35);border-radius:999px;padding:4px 12px;opacity:0;transition:opacity .25s ease;white-space:nowrap}
+@media(max-width:760px){.hero::after{background:linear-gradient(180deg,rgba(10,10,10,.55) 0%,rgba(10,10,10,.82) 55%,rgba(10,10,10,.9) 100%)}.field-note{left:var(--pad);text-align:left}}
+@media(prefers-reduced-motion:reduce){.hero h1{animation:none}}
 .hero .lede{margin-top:36px}
 .tagline{margin-top:28px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#9fefff}
 .status{margin-top:20px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
@@ -340,12 +353,16 @@ figure video{display:block;width:100%;height:auto;background:#000}
 <main id="main">
 
 <section class="hero" id="top">
+  <canvas class="field" aria-hidden="true"></canvas>
+  <div class="field-label" aria-hidden="true"></div>
   <div class="wrap">
     <p class="kicker">Neuropian · Intellect accelerator</p>
     <h1>Intelligence, reimagined.</h1>
     <p class="lede">Neuropian is where brilliant people get found by what they've built, made and solved, not what's on their résumé.</p>
+    <div class="ctas"><a class="cta" href="/app" data-auth="reg">Create an account</a><a class="cta ghost" href="#contact">Hire with Neuropian</a></div>
     <p class="tagline">Signal, not résumés · No credentials required</p>
   </div>
+  <p class="field-note">Each light is one of the 1,857 people Falcon found on 18 Oct 2026, grouped by project. Names withheld.</p>
 </section>
 
 <section id="plain">
@@ -505,12 +522,12 @@ figure video{display:block;width:100%;height:auto;background:#000}
     <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/app.html">Members</a></span>
   </div>
 </footer>
+<script src="assets/hero.js?v=20261018a" defer></script>
 <script src="assets/site.js?v=20261017g" defer></script>
 <script>
 /* Log in / Create an account: the Neuropian sign-in box pops up over this page (it lives in /app; same origin). */
 (function(){
-  var KEY="sb-qggduzzwvdkmekihwuav-auth-token", ov=null, fr=null, ready=false, want="login";
-  function signedIn(){ try{ return !!localStorage.getItem(KEY); }catch(e){ return false; } }
+  var ov=null, fr=null, ready=false, want="login";
   function build(mode){
     ov=document.createElement("div");
     ov.setAttribute("style","position:fixed;inset:0;z-index:9999;display:none;background:rgba(0,0,0,.55)");
@@ -521,7 +538,6 @@ figure video{display:block;width:100%;height:auto;background:#000}
     ov.appendChild(fr); document.body.appendChild(ov);
   }
   function open(mode){
-    if(signedIn()){ location.href="/app"; return; }
     want=mode; if(!ov) build(mode); else if(ready) fr.contentWindow.postMessage({type:"np-auth-mode",mode:mode},location.origin);
     ov.style.display="block"; document.documentElement.style.overflow="hidden";
   }
@@ -538,7 +554,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
     var a=e.target.closest&&e.target.closest("[data-auth]"); if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button) return;
     e.preventDefault(); open(a.getAttribute("data-auth"));
   });
-  function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov&&!signedIn()) build(a.getAttribute("data-auth")); }
+  function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov) build(a.getAttribute("data-auth")); }
   document.addEventListener("pointerover",warm); document.addEventListener("touchstart",warm,{passive:true}); document.addEventListener("focusin",warm);
 })();
 </script>

@@ -5057,6 +5057,12 @@ html.np-embed .auth-gate{background:rgba(0,0,0,.5)!important;-webkit-backdrop-fi
     const t=setInterval(()=>{ if(currentUser){clearInterval(t); history.replaceState(null,'','/app'); showPage(go);} },250);
     setTimeout(()=>clearInterval(t),12000);
   }
+  // members home: once signed in, the two buttons say where they go (no second 'Create an account')
+  function npLanding(u){ const a=document.querySelector('#page-home .m-actions'); if(!a)return; const [b1,b2]=a.querySelectorAll('button'); if(!b1||!b2)return;
+    if(u){ b1.textContent='Go to your profile'; b2.textContent='Open RoundTable'; b2.onclick=()=>gatedPage('collective'); }
+    else { b1.textContent='Create an account'; b2.textContent='Sign in'; b2.onclick=()=>showAuth('login'); } }
+  const _snu=setNavUser; setNavUser=function(u){ _snu(u); npLanding(u); };
+  [0,800,2500].forEach(ms=>setTimeout(()=>npLanding(currentUser),ms));
   if(!q.has('embed')||window.parent===window)return;
   document.documentElement.classList.add('np-embed');
   const tell=m=>{ try{ parent.postMessage(m,location.origin); }catch(e){} };
@@ -5065,8 +5071,9 @@ html.np-embed .auth-gate{background:rgba(0,0,0,.5)!important;-webkit-backdrop-fi
   window.addEventListener('message',e=>{ if(e.origin!==location.origin||!e.data)return;
     if(e.data.type==='np-auth-mode')showAuth(e.data.mode==='reg'?'reg':'login'); });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeAuth(); });
-  setTimeout(()=>{ if(currentUser){tell({type:'np-auth-done',page:'home'});return;}
-    showAuth(q.get('auth')==='reg'?'reg':'login'); tell({type:'np-auth-ready'}); },60);
+  setTimeout(async()=>{ let ses=null; try{ ses=(await sb.auth.getSession()).data.session; }catch(e){}
+    if(ses){tell({type:'np-auth-done',page:'home'});return;}            // really signed in: straight to the app
+    showAuth(q.get('auth')==='reg'?'reg':'login'); tell({type:'np-auth-ready'}); },30);
 })();
 </script>
 </body>
