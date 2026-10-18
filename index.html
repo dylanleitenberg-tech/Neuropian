@@ -212,18 +212,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div>
         <p class="idx">03</p>
         <h3>Dossiers</h3>
-        <p class="what">For the top 30 so far, code pulls facts from 15 of each person's merged pull requests, and an open-weight model running locally reads 12 of them and writes what the person works on. Each dossier links to their pull requests, so a recruiter can check the work at the source.</p>
+        <p class="what">For the top 30 so far, code pulls facts from up to 15 of each person's merged pull requests, and an open-weight model running locally reads 12 of them and writes what the person works on. Each dossier links every pull request its summary cites, so a recruiter can check each claim at the source.</p>
       </div>
       <div>
-        <div class="stat"><b>0 of 30</b><span>dossiers cited a “#” pull-request number that isn't one of the person's own.</span></div>
+        <div class="stat"><b>0 of 30</b><span>dossiers cited a pull request that isn't one of the person's own.</span></div>
         <details>
           <summary>Method and numbers</summary>
           <ul>
-            <li><strong>Facts by code.</strong> Files touched, size, number of reviews and praise words in review comments, extracted from GitHub, not written by the model.</li>
+            <li><strong>Facts by code.</strong> Files touched, size, number of reviews, praise words in review comments, and the share of changed files that are core code rather than tests, docs or CI (0.00 to 0.93 across the 30), extracted from GitHub, not written by the model.</li>
             <li><strong>Judgment by model.</strong> Specialty and summary come from Qwen3 8B running on a laptop. Nothing about a candidate is sent to an outside AI service.</li>
-            <li><strong>Check.</strong> Every “#” number the model cites is compared with the person's fetched pull requests: none invented in 30 dossiers. Numbers written without “#” weren't checked in this run; the check now catches them. It tests citations, not whether a summary is right, so a person reads the pull requests before anyone is contacted.</li>
-            <li><strong>Links.</strong> This run linked each person's 5 most recently updated pull requests, not always the ones the summary cites. From the next run, the links are the cited ones.</li>
-            <li><strong>Not yet used.</strong> The model's difficulty ratings don't separate people yet, so they are not shown.</li>
+            <li><strong>Check.</strong> Every pull-request number the model cites, with or without “#”, is compared with the person's fetched pull requests: none invented in 30 dossiers. It tests citations, not whether a summary is right, so a person reads the pull requests before anyone is contacted.</li>
+            <li><strong>Links.</strong> Each dossier links exactly the pull requests its summary cites, 2 to 10 per person.</li>
+            <li><strong>Not used.</strong> The model's own difficulty ratings (all 4 or 5) don't separate people, so they are not shown; the core-code share is shown instead.</li>
           </ul>
         </details>
       </div>
