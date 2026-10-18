@@ -19,7 +19,7 @@ a:hover{text-decoration-color:var(--fg)}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
 .bar{position:sticky;top:0;z-index:5;background:rgba(10,10,10,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:24px}
-.mark{font-weight:600;letter-spacing:.22em;font-size:13px;text-decoration:none}
+.mark{font-weight:600;letter-spacing:.22em;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
 .nav{display:flex;gap:24px;font-size:14px;align-items:center}
 .nav a{text-decoration:none;color:var(--dim)}.nav a:hover,.nav a[aria-current]{color:var(--fg)}
 .nav a.login{color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:5px 14px;margin:-6px 0}
@@ -65,8 +65,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </head>
 <body>
 <header class="bar"><div class="wrap">
-  <a class="mark" href="/">NEUROPIAN</a>
-  <nav class="nav"><a href="/#plain">How it works</a><a href="/#method">Method</a><a href="/talent" aria-current="page">Talent</a><a class="login" href="/app">Log in</a></nav>
+  <a class="mark" href="/"><img src="/assets/brain.png" srcset="/assets/brain@2x.png 2x" alt="" width="28" height="28">NEUROPIAN</a>
+  <nav class="nav"><a href="/#plain">How it works</a><a href="/#method">Method</a><a href="/talent" aria-current="page">Talent</a><a class="login" href="/app" data-auth="login">Log in</a></nav>
 </div></header>
 <main id="main" class="wrap">
   <section id="list">
@@ -101,7 +101,7 @@ function card(p){
 function render(rows,q){
   if(!rows.length){
     grid.innerHTML=""; st.textContent="";
-    grid.innerHTML='<div class="empty">'+(q?'No member profile matches that yet.':'No member has published a profile yet.')+' Builders: <a href="/app">create an account</a> and publish yours.</div>';
+    grid.innerHTML='<div class="empty">'+(q?'No member profile matches that yet.':'No member has published a profile yet.')+' Builders: <a href="/app" data-auth="reg">create an account</a> and publish yours.</div>';
     return;
   }
   st.textContent=q?rows.length+" closest matches for “"+q+"”":rows.length+" newest profiles";
@@ -135,6 +135,42 @@ document.getElementById("f").addEventListener("submit",function(e){e.preventDefa
 window.addEventListener("hashchange",route);
 var q0=new URLSearchParams(location.search).get("q")||""; document.getElementById("q").value=q0;
 route(); search(q0);
+})();
+</script>
+<script>
+/* Log in / Create an account: the Neuropian sign-in box pops up over this page (it lives in /app; same origin). */
+(function(){
+  var KEY="sb-qggduzzwvdkmekihwuav-auth-token", ov=null, fr=null, ready=false, want="login";
+  function signedIn(){ try{ return !!localStorage.getItem(KEY); }catch(e){ return false; } }
+  function build(mode){
+    ov=document.createElement("div");
+    ov.setAttribute("style","position:fixed;inset:0;z-index:9999;display:none;background:rgba(0,0,0,.55)");
+    fr=document.createElement("iframe");
+    fr.title="Sign in to Neuropian"; fr.src="/app?embed=1&auth="+mode;
+    fr.setAttribute("style","border:0;width:100%;height:100%;background:transparent;color-scheme:dark");
+    fr.setAttribute("allowtransparency","true");
+    ov.appendChild(fr); document.body.appendChild(ov);
+  }
+  function open(mode){
+    if(signedIn()){ location.href="/app"; return; }
+    want=mode; if(!ov) build(mode); else if(ready) fr.contentWindow.postMessage({type:"np-auth-mode",mode:mode},location.origin);
+    ov.style.display="block"; document.documentElement.style.overflow="hidden";
+  }
+  function close(){ if(ov){ ov.style.display="none"; } document.documentElement.style.overflow=""; }
+  window.addEventListener("message",function(e){
+    if(e.origin!==location.origin||!e.data) return;
+    if(e.data.type==="np-auth-ready"){ ready=true; ov.style.background="transparent";
+      if(want!=="login"||fr.src.indexOf("auth="+want)<0) fr.contentWindow.postMessage({type:"np-auth-mode",mode:want},location.origin); }
+    if(e.data.type==="np-auth-close") close();
+    if(e.data.type==="np-auth-done") location.href="/app"+(e.data.page&&e.data.page!=="home"?"?go="+encodeURIComponent(e.data.page):"");
+  });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&ov&&ov.style.display==="block") close(); });
+  document.addEventListener("click",function(e){
+    var a=e.target.closest&&e.target.closest("[data-auth]"); if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button) return;
+    e.preventDefault(); open(a.getAttribute("data-auth"));
+  });
+  function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov&&!signedIn()) build(a.getAttribute("data-auth")); }
+  document.addEventListener("pointerover",warm); document.addEventListener("touchstart",warm,{passive:true}); document.addEventListener("focusin",warm);
 })();
 </script>
 </body>
