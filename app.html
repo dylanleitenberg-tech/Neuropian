@@ -5190,6 +5190,8 @@ button[style*="background:#6fd6f7"],button[style*="background:#5cc4e6"]{color:#0
 /* fields */
 .auth-field input,.auth-field select,input[type=text],input[type=email],input[type=password],input[type=date],textarea{border-radius:10px!important}
 .auth-box,.auth-card{border-radius:16px!important}
+/* a tall sign-up box scrolls from its top instead of being cut off (centred when it fits) */
+.auth-gate{align-items:flex-start!important;overflow-y:auto!important;padding:24px 0!important}.auth-box{margin:auto!important}
 @media(max-width:600px){a+span[style*="letter-spacing:.32em"]{display:none!important}}   /* page label next to the logo: the title below says it */
 </style>
 <style>
