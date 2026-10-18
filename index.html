@@ -178,6 +178,15 @@ figure video{display:block;width:100%;height:auto;background:#000}
 }
 
 
+
+/* plain-English steps */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,32px);margin-top:clamp(36px,5vw,56px)}
+.steps li{border-top:1px solid var(--line);padding-top:22px}
+.s-num{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid rgba(111,214,247,.5);color:#9fefff;font-weight:500}
+.steps h3{margin-top:18px;font-size:clamp(24px,2.4vw,30px)}
+.steps p{margin-top:10px;color:var(--dim)}
+.steps-end{margin-top:clamp(28px,4vw,44px);font-size:clamp(20px,2vw,26px);letter-spacing:-.015em;max-width:30em}
+.lede.plain{margin-top:24px}
 /* the last run: a terminal that types out the real (summarized) output */
 #run .term{margin-top:clamp(36px,5vw,56px);border:1px solid var(--line);border-radius:12px;background:#050708;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .term-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:#0d1012}
@@ -278,6 +287,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
 @media (max-width:860px){
   .nav a:not(:last-child){display:none}
   .figures{grid-template-columns:1fr;gap:28px}
+  .steps{grid-template-columns:1fr}
   .p-head{grid-template-columns:1fr}.p-facts div{grid-template-columns:1fr;gap:4px}
   .pindex a{grid-template-columns:40px 1fr auto;grid-template-areas:"n name thumb" "n meta thumb" "n st thumb";gap:4px 14px;align-items:center}
   .i-num{grid-area:n}.i-name{grid-area:name;font-size:26px}.i-meta{grid-area:meta;font-size:14px}.i-status{grid-area:st;font-size:11px}
@@ -302,9 +312,9 @@ figure video{display:block;width:100%;height:auto;background:#000}
   <div class="wrap">
     <a class="mark" href="#top" aria-label="Neuropian, top of page">NEUROPIAN</a>
     <nav class="nav" aria-label="Sections">
+      <a href="#plain">How it works</a>
       <a href="#method">Method</a>
       <a href="#principles">Principles</a>
-      <a href="#work">Work</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -315,8 +325,21 @@ figure video{display:block;width:100%;height:auto;background:#000}
 <section class="hero" id="top">
   <div class="wrap">
     <h1>Find the people résumés miss.</h1>
-    <p class="lede">Being built for firms that hire engineers and quantitative researchers, and for people who want their work found.</p>
+    <p class="lede">Neuropian is software being built to find skilled engineers and mathematicians from work they have already put online, so companies can hire the people résumé searches miss.</p>
     <p class="status">Research prototype · one founder · not incorporated · no clients yet</p>
+  </div>
+</section>
+
+<section id="plain">
+  <div class="wrap">
+    <p class="kicker">In plain English</p>
+    <h2>Three steps.</h2>
+    <ol class="steps">
+      <li class="reveal"><span class="s-num">1</span><h3>Look at real work.</h3><p>Code that experts accepted into major software, results from programming contests, answers to hard math questions. All of it public.</p></li>
+      <li class="reveal"><span class="s-num">2</span><h3>Skip the famous.</h3><p>Remove anyone a recruiter can already find: people with big online followings, jobs at big companies, or a leading role in their project.</p></li>
+      <li class="reveal"><span class="s-num">3</span><h3>Show the proof.</h3><p>Write a short report on each person, with links to the actual work, so an employer can check it for themselves.</p></li>
+    </ol>
+    <p class="steps-end reveal">What is left: people whose work has been checked by experts, but whom few people follow.</p>
   </div>
 </section>
 
@@ -324,6 +347,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
   <div class="wrap">
     <p class="kicker">The last run</p>
     <h2>Watch it work.</h2>
+    <p class="lede plain">One real run of the search, on 17 Oct 2026. Of 2,482 people whose code was accepted three or more times this past year into 21 major software projects, it found 1,540 whom few people follow online; half have 9 or fewer followers.</p>
     <div class="term reveal" role="group" aria-label="Summary of the 17 Oct 2026 scout run, names removed">
       <div class="term-bar"><span></span><span></span><span></span><b>scout · 17 Oct 2026 · names removed</b></div>
       <ol class="term-body">
@@ -358,10 +382,10 @@ figure video{display:block;width:100%;height:auto;background:#000}
       <div>
         <p class="idx">01</p>
         <h3>Reasoners</h3>
-        <p class="what">Contest and math records, standardized within each platform. Back-tested on Codeforces.</p>
+        <p class="what">Competitive programmers and mathematicians. Neuropian reads their contest results and math answers, and among people with the same score it is better at spotting who will reach the top level next.</p>
       </div>
       <div>
-        <div class="stat"><b>1.5×</b><span>the ranking signal of rating alone, among Codeforces players of the same rating, tested on a later period the score was never fitted to.</span></div>
+        <div class="stat"><b>1.5×</b><span>the predictive signal of the score alone, for spotting who reaches the top level (a 2400 rating) among Codeforces players with the same score. Tested on two later years the system had never seen.</span></div>
         <figure class="chart dotplot reveal" role="group" aria-label="Among Codeforces players of the same rating, AUC for who reached 2400 within two years: chance 0.5, rating alone 0.599, Neuropian score 0.647"><div class="dp-row chance" tabindex="0" title="Chance: AUC 0.500"><span class="dp-lab">Chance</span><span class="dp-track"><i class="dp-stem" style="--x:0.0%"></i><b class="dp-dot" style="--x:0.0%"></b></span><span class="dp-val">0.500</span></div><div class="dp-row base" tabindex="0" title="Rating alone: AUC 0.599"><span class="dp-lab">Rating alone</span><span class="dp-track"><i class="dp-stem" style="--x:49.5%"></i><b class="dp-dot" style="--x:49.5%"></b></span><span class="dp-val">0.599</span></div><div class="dp-row ours" tabindex="0" title="Neuropian score: AUC 0.647"><span class="dp-lab">Neuropian score</span><span class="dp-track"><i class="dp-stem" style="--x:73.5%"></i><b class="dp-dot" style="--x:73.5%"></b></span><span class="dp-val">0.647</span></div><div class="dp-row dp-axis" aria-hidden="true"><span class="dp-lab"></span><span class="dp-ticks"><span style="--x:0.0%">0.50</span><span style="--x:25.0%">0.55</span><span style="--x:50.0%">0.60</span><span style="--x:75.0%">0.65</span><span style="--x:100.0%">0.70</span></span><span class="dp-val"></span></div><figcaption>Who reached 2400 within two years, among players of the same rating (AUC; 0.5 is chance). Signal above chance: rating 0.099, Neuropian 0.147, 1.48×. Chosen on 2022–24, tested unchanged on 2024–26.</figcaption></figure>
         
         <details>
@@ -384,10 +408,10 @@ figure video{display:block;width:100%;height:auto;background:#000}
       <div>
         <p class="idx">02</p>
         <h3>Contributors</h3>
-        <p class="what">Code that maintainers merged into major open-source projects, by people few follow. Identified, not predicted.</p>
+        <p class="what">Software engineers. The experts who run major open-source projects, the free software behind much of the internet such as Python and Rust, accepted their code, yet few people follow them online.</p>
       </div>
       <div>
-        <div class="stat"><b>1,540</b><span>people found. Maintainers merged their code; few people follow them.</span></div>
+        <div class="stat"><b>1,540</b><span>people found so far. Experts accepted their code; few people follow them.</span></div>
         <figure class="chart units reveal" role="group" aria-label="The 1,540 people by project: LLVM 352, vLLM 350, Rust 171, llama.cpp 101, CPython 92, 16 other projects 474"><div class="ur-row" title="LLVM: 352"><span class="ur-lab">LLVM</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">352</span></div><div class="ur-row" title="vLLM: 350"><span class="ur-lab">vLLM</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">350</span></div><div class="ur-row" title="Rust: 171"><span class="ur-lab">Rust</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">171</span></div><div class="ur-row" title="llama.cpp: 101"><span class="ur-lab">llama.cpp</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">101</span></div><div class="ur-row" title="CPython: 92"><span class="ur-lab">CPython</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">92</span></div><div class="ur-row" title="16 other projects: 474"><span class="ur-lab">16 other projects</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">474</span></div>
           <figcaption>One dot per person. Other projects: ClickHouse 81, DuckDB 59, pandas 50, Ruff 46, Ladybird 32, Triton 31, Polars 29, JAX 24, NumPy 24, Arrow 23, SciPy 17, Tokio 16, Julia 15, tinygrad 15, scikit-learn 11, mathlib 1. Searched 2,482 contributors; each person listed has 3 or more merged pull requests in the past year; median 9 followers.</figcaption></figure>
         <details>
@@ -405,7 +429,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
       <div>
         <p class="idx">03</p>
         <h3>Dossiers</h3>
-        <p class="what">Code reads the pull requests; a model running on a laptop writes the summary; every citation is checked and linked.</p>
+        <p class="what">A short report on each person: what they built and where, with links to the proof. Written by software running on a laptop, and every piece of work it cites is checked to be real.</p>
       </div>
       <div>
         <figure class="dossier reveal" aria-label="A real dossier from the 17 Oct run, identity redacted">
@@ -442,147 +466,12 @@ figure video{display:block;width:100%;height:auto;background:#000}
     <p class="kicker">Principles</p>
     <h2>Four rules.</h2>
     <ol class="rules">
-      <li>Public data only, from official APIs and public pages.</li>
+      <li>Public information only, from official data feeds and public pages.</li>
       <li>Adults only. Only people who confirm they are 18 or older can opt in or be shown to a client; the lists are screened for minors by profile text and handles.</li>
       <li>Nobody's information goes to a client without their opt-in.</li>
       <li>No scraping of sites that forbid it: every page fetch checks robots.txt first.</li>
     </ol>
   </div>
-</section>
-
-<section id="work" class="work">
-  <div class="wrap">
-    <p class="kicker" data-type>Neuropian minds</p>
-    <h2 data-type>Made by Neuropian minds.</h2>
-    <p class="lede reveal">Five projects, from asteroid mining to trading AI access.</p>
-    <ol class="pindex" id="pindex">
-        <li><a href="#p-miner" data-preview="assets/astroworm/orbit-poster.jpg" data-orbit><span class="i-num">01</span><span class="i-name">Asteroid miner</span><span class="i-meta">Builds a copy of itself, by design</span><span class="i-status">Design · CAD</span><img class="i-thumb" src="assets/astroworm/orbit-poster.jpg" alt="" width="160" height="90" loading="lazy" decoding="async"></a></li>
-        <li><a href="#p-waterworm" data-preview="assets/water-worm-w1-800.jpg"><span class="i-num">02</span><span class="i-name">Water Worm</span><span class="i-meta">Burrows through mine tailings, by design</span><span class="i-status">CAD · not built</span><img class="i-thumb" src="assets/water-worm-w1-800.jpg" alt="" width="160" height="90" loading="lazy" decoding="async"></a></li>
-        <li><a href="#p-glasses" data-preview="assets/projects/glasses-translate-600.jpg"><span class="i-num">03</span><span class="i-name">AR glasses rig</span><span class="i-meta">Graphics placed on real things</span><span class="i-status">Built and worn</span><img class="i-thumb" src="assets/projects/glasses-translate-600.jpg" alt="" width="160" height="90" loading="lazy" decoding="async"></a></li>
-        <li><a href="#p-jarvis" data-preview="assets/projects/jarvis-holo-600.jpg"><span class="i-num">04</span><span class="i-name">JARVIS</span><span class="i-meta">Hands and voice instead of a keyboard</span><span class="i-status">Runs on macOS</span><img class="i-thumb" src="assets/projects/jarvis-holo-600.jpg" alt="" width="160" height="90" loading="lazy" decoding="async"></a></li>
-        <li><a href="#p-toknx" data-preview="assets/projects/toknx-live-600.jpg"><span class="i-num">05</span><span class="i-name">Toknx</span><span class="i-meta">Trade AI access, no money</span><span class="i-status">Live · no outside users yet</span><img class="i-thumb" src="assets/projects/toknx-live-600.jpg" alt="" width="160" height="90" loading="lazy" decoding="async"></a></li>
-    </ol>
-    <div class="pprev" aria-hidden="true"><img src="assets/astroworm/orbit-poster.jpg" alt="" width="480" height="270" loading="lazy" decoding="async"></div>
-  </div>
-
-  <article class="project" id="p-miner">
-    <div class="wrap">
-      <div class="p-head">
-        <div>
-          <h3 class="p-name" data-type>Asteroid miner</h3>
-          <p class="p-status">Design program · CAD, not hardware</p>
-          <p class="p-what">A solar-powered machine designed to land on an asteroid, anchor with a burrowing worm, process what it digs, and build a copy of itself.</p>
-        </div>
-        <details class="p-more"><summary>Details</summary><dl class="p-facts"><div><dt>Target</dt><dd>162173 Ryugu, a carbonaceous asteroid with the iron, nickel and water a near-closed replication loop needs.</dd></div><div><dt>Process</dt><dd>Crush, magnetic separation, hydrogen reduction, carbonyl nickel, press-and-sinter powder metallurgy, cast basalt.</dd></div><div><dt>Power</dt><dd>A launched solar-panel wing to start, then a mirror field into thermophotovoltaics with a silicon thermal store. No batteries anywhere in the design.</dd></div><div><dt>Replication</dt><dd>Design target about 100 days; the current plant model does not reach it yet.</dd></div></dl></details>
-      </div>
-    </div>
-  <div class="orbit" id="orbit" data-frames="72" data-path="assets/astroworm/orbit/f" data-az0="15" data-az1="135">
-    <div class="orbit-stick">
-      <div class="orbit-stage">
-        <img class="orbit-poster" src="assets/astroworm/orbit-poster.jpg" width="1920" height="1080" alt="Blender render of the astroworm from CAD: the intake nose in front, a string of dark segmented casing sections receding behind it">
-        <canvas width="1920" height="1080" role="img" aria-label="The astroworm design, pre-rendered from CAD in Blender, turning as you scroll"></canvas>
-        <div class="hud" aria-hidden="true">
-          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-          <div class="hud-title"><b>Astroworm</b><span class="sub">Design rev E14 · 72 frames pre-rendered in Blender</span></div>
-          <div class="hud-read"><span class="hud-az">Camera 015°</span><br><span class="hud-mode-label">Render</span></div>
-          <ol class="hud-notes">
-            <li data-at="0.04" data-note="A design for a burrowing anchor for asteroid mining."></li>
-            <li data-at="0.30" data-note="A string of units, one design except the unit at the nose. Each is designed to press three setae shoes against the bore wall."></li>
-            <li data-at="0.55" data-note="In the design, an auger runs through the string and drives the intake nose."></li>
-            <li data-at="0.78" data-note="Designed so the buried body is the anchor."></li>
-          </ol>
-          <div class="hud-cap">Pre-rendered from CAD, not hardware</div>
-          <div class="hud-hint">Scroll to turn · drag to turn</div>
-        </div>
-        <div class="hud-ctl"><button type="button" class="hud-mode">Hologram style</button></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="gallery">
-      <figure class="reveal">
-        <img src="assets/astroworm/bore-1600.jpg" srcset="assets/astroworm/bore-800.jpg 800w, assets/astroworm/bore-1600.jpg 1600w, assets/astroworm/bore-1920.jpg 1920w" sizes="(max-width:1280px) 100vw, 1152px" width="1600" height="900" alt="Blender render of the astroworm design: a string of units in a bore cut open to show them, intake nose toward the camera" decoding="async">
-        <figcaption>Twelve units in a bore, cut open to show them. Rendered from CAD; the design starts with four units and adds units made on site.</figcaption>
-      </figure>
-      <figure class="reveal">
-        <img src="assets/astroworm/space-800.jpg" srcset="assets/astroworm/space-800.jpg 800w, assets/astroworm/space-1600.jpg 1600w, assets/astroworm/space-1920.jpg 1920w" sizes="(max-width:860px) 100vw, 50vw" width="800" height="450" alt="Blender render of the astroworm design: the four-unit starter string on a rocky surface under a starry sky" decoding="async">
-        <figcaption>The four-unit starter string, rendered on a rocky surface.</figcaption>
-      </figure>
-      <figure class="reveal">
-        <img src="assets/astroworm/nose-800.jpg" srcset="assets/astroworm/nose-800.jpg 800w, assets/astroworm/nose-1600.jpg 1600w, assets/astroworm/nose-1920.jpg 1920w" sizes="(max-width:860px) 100vw, 50vw" width="800" height="450" alt="Blender render of the astroworm design: close view of the intake nose, a ring with three swept arms around a central hub" decoding="async">
-        <figcaption>The intake nose, rendered from CAD.</figcaption>
-      </figure>
-    </div>
-    </div>
-  </article>
-
-  <article class="project" id="p-waterworm">
-    <div class="wrap">
-      <div class="p-head">
-        <div>
-          <h3 class="p-name" data-type>Water Worm</h3>
-          <p class="p-status">CAD, checked by script · not yet built</p>
-          <p class="p-what">The miner’s burrowing worm, designed to be waterproof: to burrow through flooded mine-tailings ponds and pump the cut to the surface as slurry, for reprocessing.</p>
-        </div>
-        <details class="p-more"><summary>Details</summary><dl class="p-facts"><div><dt>Model</dt><dd>Water Worm W1, a tank-test model: 38 parts, hand-cranked from the surface.</dd></div><div><dt>Checks</dt><dd>158 interference runs clear, with 41 controls that must fail and do. A leak model of 29 cases finds the leak when any one seal is removed.</dd></div><div><dt>Status</dt><dd>Designed and checked by script. Not yet printed or put in water.</dd></div></dl></details>
-      </div>
-      <div class="p-media two">
-        <figure class="reveal wide"><img src="assets/water-worm-w1-1600.jpg" width="1600" height="900" alt="CAD render of the Water Worm W1 on black: a long white segmented body with a blue sealed vessel at the tail and a red cutting head at the front" loading="lazy" decoding="async"><figcaption>Water Worm W1, rendered from CAD.</figcaption></figure>
-        <figure class="reveal "><img src="assets/water-worm-w1-head-1600.jpg" width="1600" height="900" alt="Close CAD render of the Water Worm’s red cutting head: a crown of picks around a threaded, cone-shaped screw point" loading="lazy" decoding="async"><figcaption>Its cutting head: a crown of picks around a self-feeding screw point.</figcaption></figure>
-      </div>
-    </div>
-  </article>
-
-  <article class="project" id="p-glasses">
-    <div class="wrap">
-      <div class="p-head">
-        <div>
-          <h3 class="p-name" data-type>AR glasses rig</h3>
-          <p class="p-status">Built and worn · last worn run 4 Oct 2026</p>
-          <p class="p-what">Graphics placed on real things through see-through glasses: a printed page shown translated where it lies, a person replaced by a rendered character.</p>
-        </div>
-        <details class="p-more"><summary>Details</summary><dl class="p-facts"><div><dt>Hardware</dt><dd>XREAL One Pro see-through glasses, two global-shutter world cameras and two eye cameras on a 3D-printed carrier.</dd></div><div><dt>Overlay accuracy</dt><dd>About 4 px within one wearing (measured 18 Aug); 18.6 px when re-worn on 3 Oct, before recalibration.</dd></div><div><dt>Reading</dt><dd>Live translation of a printed page, drawn over the printed lines at the distance the stereo cameras measure.</dd></div><div><dt>People</dt><dd>A tracked person replaced by a rendered character in both eyes, at about 30 fps.</dd></div></dl></details>
-      </div>
-      <div class="p-media three">
-        <figure class="reveal tall"><img src="assets/projects/glasses-translate-1200.jpg" srcset="assets/projects/glasses-translate-600.jpg 600w, assets/projects/glasses-translate-1200.jpg 900w" sizes="(max-width:860px) 100vw, 60vw" width="900" height="1200" alt="Phone photo through the glasses eyepiece: a printed German page with an English translation drawn over the text" loading="lazy" decoding="async"><figcaption>A printed German page through the eyepiece, phone photo, unedited. The English covers the printed lines at the distance the stereo cameras measure. The bars at top and bottom are the Mac’s menu bar and Dock, and the yellow line is the rig’s distance hint; the glasses show those too. The mirrored text below is the display reflecting in the glass.</figcaption></figure>
-        <figure class="reveal "><img src="assets/projects/glasses-rig-1200.jpg" srcset="assets/projects/glasses-rig-600.jpg 600w, assets/projects/glasses-rig-1200.jpg 1200w" sizes="(max-width:860px) 100vw, 60vw" width="1200" height="900" alt="The complete rig off the face: four camera boards on the printed carrier zip-tied to the glasses, cables routed back" loading="lazy" decoding="async"><figcaption>The rig off the face: four cameras, one carrier, one USB hub.</figcaption></figure>
-      </div>
-    </div>
-  </article>
-
-  <article class="project" id="p-jarvis">
-    <div class="wrap">
-      <div class="p-head">
-        <div>
-          <h3 class="p-name" data-type>JARVIS</h3>
-          <p class="p-status">Runs on macOS · computer control waits on a macOS permission</p>
-          <p class="p-what">Built to control a computer without touching it: hands tracked by the camera, voice for everything else. Installed and run only on macOS so far; cursor, click and window control are built but do nothing until the macOS Accessibility permission is granted.</p>
-        </div>
-        <details class="p-more"><summary>Details</summary><dl class="p-facts"><div><dt>Gestures</dt><dd>Point to move the cursor, pinch to click, swipe to switch apps, open palm for a menu (these need that permission); hands tracked at up to about 30 fps.</dd></div><div><dt>CAD by voice</dt><dd>“Show the worm” calls the model up in the interface; an open hand turns it.</dd></div><div><dt>Files</dt><dd>STL read directly, OpenSCAD compiled live, STEP converted on first use, so the part on screen is the current source.</dd></div></dl></details>
-      </div>
-      <div class="p-media two">
-        <figure class="reveal wide"><img src="assets/projects/jarvis-holo-1200.jpg" srcset="assets/projects/jarvis-holo-600.jpg 600w, assets/projects/jarvis-holo-1200.jpg 1200w" sizes="(max-width:860px) 100vw, 60vw" width="1200" height="687" alt="The JARVIS model viewer showing a carbonyl batch skid, two reactor vessels with piping on a frame, as a cyan hologram" loading="lazy" decoding="async"><figcaption>A carbonyl batch skid from an earlier miner design, called up by name: 1,109,544 triangles.</figcaption></figure>
-        <figure class="reveal "><img src="assets/projects/jarvis-gestures-1200.jpg" width="577" height="714" alt="The gesture control panel: armed, with the binding table from point and pinch through swipe, open palm, fist and thumbs" loading="lazy" decoding="async"><figcaption>Gesture control, armed.</figcaption></figure>
-      </div>
-    </div>
-  </article>
-
-  <article class="project" id="p-toknx">
-    <div class="wrap">
-      <div class="p-head">
-        <div>
-          <h3 class="p-name" data-type>Toknx</h3>
-          <p class="p-status">Live at <a href="https://toknx.ai">toknx.ai</a> · no outside users yet</p>
-          <p class="p-what">Answer other people’s prompts on the AI you already pay for, earn request tokens, and spend them on models you don’t have. No money and no crypto move.</p>
-        </div>
-        <details class="p-more"><summary>Details</summary><dl class="p-facts"><div><dt>Routing</dt><dd>Each request goes to the cheapest verified member agent that fits; if none is online, an open-weight Qwen3 model on Toknx’s own server answers when it has capacity.</dd></div><div><dt>Ledger</dt><dd>Append-only, enforced by the database, with an hourly audit that journal sums equal balances.</dd></div><div><dt>API</dt><dd>OpenAI-compatible: existing code changes only its address and key.</dd></div></dl></details>
-      </div>
-      <div class="p-media one">
-        <figure class="reveal wide"><img src="assets/projects/toknx-live-1200.jpg" srcset="assets/projects/toknx-live-600.jpg 600w, assets/projects/toknx-live-1200.jpg 1200w" sizes="(max-width:860px) 100vw, 60vw" width="1200" height="750" alt="The Toknx home page at toknx.ai: Ask any AI. Free to try, with a question box and a choice of Claude, ChatGPT or Gemini" loading="lazy" decoding="async"><figcaption>toknx.ai, 17 Oct 2026.</figcaption></figure>
-      </div>
-    </div>
-  </article>
 </section>
 
 <section id="next">
