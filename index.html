@@ -26,7 +26,7 @@
   --bg:#ECE8E3;
   --fg:#2B2A28;
   --dim:rgba(43,42,40,.76);
-  --faint:rgba(43,42,40,.64);
+  --faint:rgba(43,42,40,.70);
   --line:rgba(43,42,40,.16);
   --acc:#2B4C7E;
   --night:#1D2128;
@@ -85,7 +85,7 @@ section{border-top:1px solid var(--line);padding:clamp(72px,11vw,160px) 0}
 .hero-art{position:relative;padding-top:4px}
 .ticker{position:relative;padding-left:44px;font-family:var(--mono);color:var(--fg)}
 .ticker::before{content:"";position:absolute;left:0;top:4px;width:18px;height:118px;background:linear-gradient(var(--fg),var(--fg)) 0 0/18px 1.5px no-repeat,linear-gradient(var(--fg),var(--fg)) 0 39px/18px 1.5px no-repeat,linear-gradient(var(--fg),var(--fg)) 0 78px/18px 1.5px no-repeat,linear-gradient(var(--fg),var(--fg)) 0 116px/18px 1.5px no-repeat}
-.tk-path{display:block;font-size:11px;letter-spacing:.02em;color:var(--dim);overflow-wrap:anywhere}
+.tk-path{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
 .ticker b{display:block;font-weight:500;font-size:clamp(52px,6.4vw,96px);line-height:1.05;letter-spacing:.02em;font-variant-numeric:tabular-nums;margin-top:6px}
 .tk-cap{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:6px}
 .engr{mix-blend-mode:multiply}
@@ -97,13 +97,14 @@ section{border-top:1px solid var(--line);padding:clamp(72px,11vw,160px) 0}
 .ph{position:relative;margin:0;aspect-ratio:1/1;overflow:hidden;border:1px solid rgba(43,42,40,.55);outline:1px solid rgba(43,42,40,.2);outline-offset:-7px;background:rgba(255,255,255,.18)}
 .ph img{position:absolute;inset:8% 10% 18%;width:80%;height:74%;object-fit:contain;transition:transform .6s ease}
 .ph:hover img{transform:scale(1.035)}
+.ph-hit:focus-visible{outline:2px solid var(--acc);outline-offset:-6px}
 .ph-hit{position:absolute;inset:0;width:100%;border:0;background:transparent;cursor:pointer;padding:0;text-align:left;font:inherit;color:inherit}
 .chip{position:absolute;left:0;right:0;bottom:4.5%;text-align:center;font-family:var(--display);font-size:clamp(19px,1.9vw,26px);line-height:1.1;color:var(--fg)}
 .chip i{font-style:normal;font-family:var(--mono);font-size:.5em;letter-spacing:.1em;vertical-align:.35em;margin-right:4px;color:var(--dim)}
 .plus{position:absolute;right:14px;top:14px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(43,42,40,.5);color:var(--fg);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:17px;line-height:1;background:rgba(236,232,227,.7);z-index:3;transition:transform .25s ease,background .2s ease}
 .ph:hover .plus{transform:scale(1.1);background:var(--bg)}.ph.open .plus{transform:rotate(45deg)}
-.ph-more{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:22px;background:rgba(236,232,227,.95);opacity:0;pointer-events:none;transition:opacity .25s ease}
-.ph.open .ph-more{opacity:1;pointer-events:auto;cursor:pointer}.ph.open .ph-hit{pointer-events:none}.ph.open .chip{display:none}
+.ph-more{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:22px;background:rgba(236,232,227,.95);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility 0s linear .25s}
+.ph.open .ph-more{opacity:1;visibility:visible;pointer-events:auto;cursor:pointer;transition-delay:0s}.ph.open .ph-hit{pointer-events:none}.ph.open .chip{display:none}
 .ph-more b{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.3vw,32px);line-height:1.05}.ph-more p{font-size:17px;line-height:1.4;color:var(--fg)}
 .ph-cta{position:relative;z-index:4;align-self:flex-start;white-space:nowrap;font-size:16px;font-weight:500;text-decoration:none;color:#F3F0EB;background:var(--acc);padding:8px 14px}
 .proof{padding:clamp(64px,9vw,120px) 0}
@@ -115,6 +116,7 @@ section{border-top:1px solid var(--line);padding:clamp(72px,11vw,160px) 0}
 .tile b{display:block;font-family:var(--mono);font-size:clamp(40px,4.6vw,62px);font-weight:500;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
 .tile span{display:block;color:var(--dim);margin-top:12px}
 @media(max-width:1000px){.tiles{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.ph-more{justify-content:flex-start;padding-top:40px!important}.ph.open{aspect-ratio:auto}.ph.open img{visibility:hidden}.ph.open .ph-more{position:relative;inset:auto;min-height:100%}}
 @media(max-width:600px){.ph-more{padding:12px;gap:6px}.ph-more b{font-size:20px}.ph-more p{font-size:14px;line-height:1.35}.ph-cta{white-space:normal;text-align:center;align-self:stretch;font-size:14px;padding:7px 8px}.plus{right:9px;top:9px;width:26px;height:26px;font-size:15px}.chip{font-size:18px}}
 @media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-art{display:grid;grid-template-columns:1fr minmax(0,190px);gap:16px;align-items:end;margin-top:8px}.hero .brain{width:100%;margin:0}.ticker b{font-size:clamp(40px,12vw,64px)}.plates{grid-template-columns:1fr 1fr}.ph{aspect-ratio:4/5}.ph img{inset:9% 9% 17%;width:82%;height:74%}}
 .status{margin-top:20px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
@@ -445,16 +447,16 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
     <p class="kicker">Neuropian · Intellect accelerator</p>
     <h1>Intelligence, <span class="brush">reimagined.</span></h1>
     <p class="lede">Neuropian is where brilliant people get found by <b>what they've built, made and solved</b>, and <b>how they lead and work with others</b>, not by what's on their résumé.</p>
-    <div class="ctas"><a class="cta" href="/app" data-auth="reg"><span class="ast" aria-hidden="true">✳</span>Create an account</a><a class="cta ghost" href="#contact">Hire with Neuropian →</a></div>
+    <div class="ctas"><a class="cta" href="/app" data-auth="reg"><span class="ast" aria-hidden="true">✳︎</span>Create an account</a><a class="cta ghost" href="#contact">Hire with Neuropian →</a></div>
     <p class="tagline">Signal, not résumés · No credentials required</p>
    </div>
    <div class="hero-art">
-    <div class="ticker" aria-label="1,857 builders found in one Falcon search, 2026-10-18">
-     <span class="tk-path" aria-hidden="true">falcon/search/2026-10-18/found</span>
+    <div class="ticker" role="img" aria-label="1,857 builders found in one Falcon search, 18 Oct 2026">
+     <span class="tk-path" aria-hidden="true">Falcon · one search · 18 Oct 2026</span>
      <b data-count="1857" aria-hidden="true">1,857</b>
      <span class="tk-cap" aria-hidden="true">builders found in one search</span>
     </div>
-    <img class="engr brain" src="/assets/engr/brain.webp" width="857" height="960" alt="Engraving of the base of the human brain from Andreas Vesalius's anatomy, 1543" decoding="async">
+    <img class="engr brain" src="/assets/engr/brain.webp" width="857" height="960" alt="Woodcut of the base of the human brain from Andreas Vesalius's anatomy, 1543" decoding="async">
    </div>
   </div>
 </section>
@@ -462,9 +464,9 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
 <section id="fields" class="plates-sec">
   <div class="wrap">
     <p class="kicker">Plates I–VI · Any field</p>
-    <h2>Every kind of work counts.</h2>
-    <p class="lede">Tap a plate to see what we look for in each field.</p>
-    <div class="plates"><figure class="ph ph1"><img class="engr" src="/assets/engr/code.webp" width="549" height="703" alt="Engraving of part of a difference engine, a mechanical calculator, after a drawing by Benjamin Herschel Babbage, 1853" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip"><i>I.</i> Code</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>Code</b><p>Code that experts accepted into real software. Falcon reads it; members link to it.</p><a class="ph-cta" href="/app" data-auth="reg">Show your code →</a></div></figure><figure class="ph ph2"><img class="engr" src="/assets/engr/leadership.webp" width="240" height="720" alt="Engraved cross-section of the new Eddystone Lighthouse, 1884" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip"><i>II.</i> Leadership</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>Leadership</b><p>Who started something, led a build or brought people along with them.</p><a class="ph-cta" href="/app" data-auth="reg">Tell us what you led →</a></div></figure><figure class="ph ph3"><img class="engr" src="/assets/engr/science.webp" width="625" height="693" alt="Robert Hooke's microscope, engraved for his Micrographia, 1665" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip"><i>III.</i> Science</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>Science</b><p>Research and results you can point to: papers, data, experiments.</p><a class="ph-cta" href="/app" data-auth="reg">Share your research →</a></div></figure><figure class="ph ph4"><img class="engr" src="/assets/engr/teamwork.webp" width="900" height="706" alt="Engraving of hundreds of workers and horses raising the Vatican obelisk in Rome in 1586" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip"><i>IV.</i> Teamwork</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>Teamwork</b><p>Who reviews, helps and builds with others, not only alone.</p><a class="ph-cta" href="/app" data-auth="reg">Find your team →</a></div></figure><figure class="ph ph5"><img class="engr" src="/assets/engr/hardware.webp" width="617" height="760" alt="Engraved plate of James Watt's double-acting steam engine, 1822" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip"><i>V.</i> Hardware</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>Hardware</b><p>Things you designed and built, with photos and files to prove it.</p><a class="ph-cta" href="/app" data-auth="reg">Show what you built →</a></div></figure><figure class="ph ph6"><img class="engr" src="/assets/engr/design.webp" width="900" height="644" alt="Albrecht Dürer's woodcut of two men drawing a lute with a perspective frame, 1525" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip"><i>VI.</i> Design</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>Design</b><p>Work you made and shipped, shown on your profile.</p><a class="ph-cta" href="/app" data-auth="reg">Show your designs →</a></div></figure></div>
+    <h2>Work in any field.</h2>
+    <p class="lede">Open a plate to see what to show us in each field.</p>
+    <div class="plates"><figure class="ph ph1"><img class="engr" src="/assets/engr/code.webp" width="549" height="703" alt="Woodcut of part of a difference engine, a mechanical calculator, after a drawing by Benjamin Herschel Babbage, 1853" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip"><i>I.</i> Code</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>Code</b><p>Code that experts accepted into real software. Falcon reads it; members link to it.</p><a class="ph-cta" href="/app" data-auth="reg">Show your code →</a></div></figure><figure class="ph ph2"><img class="engr" src="/assets/engr/leadership.webp" width="434" height="760" alt="Cross-section of the new Eddystone Lighthouse, room by room, 1884" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip"><i>II.</i> Leadership</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>Leadership</b><p>Who started something, led a build or brought people along with them.</p><a class="ph-cta" href="/app" data-auth="reg">Tell us what you led →</a></div></figure><figure class="ph ph3"><img class="engr" src="/assets/engr/science.webp" width="625" height="693" alt="Robert Hooke's microscope, engraved for his Micrographia, 1665" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip"><i>III.</i> Science</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>Science</b><p>Research and results you can point to: papers, data, experiments.</p><a class="ph-cta" href="/app" data-auth="reg">Share your research →</a></div></figure><figure class="ph ph4"><img class="engr" src="/assets/engr/teamwork.webp" width="900" height="706" alt="Engraving of the Vatican obelisk being raised in Rome in 1586 by about 900 workers and 75 horses" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip"><i>IV.</i> Teamwork</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>Teamwork</b><p>Who reviews, helps and builds with others, not only alone.</p><a class="ph-cta" href="/app" data-auth="reg">Find your team →</a></div></figure><figure class="ph ph5"><img class="engr" src="/assets/engr/hardware.webp" width="617" height="760" alt="Engraved plate of James Watt's double-acting steam engine, 1822" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip"><i>V.</i> Hardware</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>Hardware</b><p>Things you designed and built, with photos and files to prove it.</p><a class="ph-cta" href="/app" data-auth="reg">Show what you built →</a></div></figure><figure class="ph ph6"><img class="engr" src="/assets/engr/design.webp" width="900" height="644" alt="Albrecht Dürer's woodcut of two men drawing a lute with a perspective frame, 1525" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip"><i>VI.</i> Design</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>Design</b><p>Work you made and shipped, shown on your profile.</p><a class="ph-cta" href="/app" data-auth="reg">Show your designs →</a></div></figure></div>
   </div>
 </section>
 
@@ -636,7 +638,7 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Neuropian · Beyond Limitless · Engravings, all public domain: Vesalius 1543, B. H. Babbage 1853, Eddystone Lighthouse 1884, Hooke 1665, Zabaglia 1743, Robison 1822, Dürer 1525 (Rijksmuseum)</span>
+    <span>© 2026 Neuropian · Beyond Limitless · Prints, all public domain: Vesalius 1543, B. H. Babbage 1853, Eddystone Lighthouse 1884, Hooke 1665, Zabaglia 1743, Robison 1822, Dürer 1525 (Rijksmuseum)</span>
     <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/app.html">Members</a></span>
   </div>
 </footer>
@@ -678,7 +680,7 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
 <script>
 /* photo tiles: click opens what we look for in that field; click again (or Esc) closes */
 (function(){
-  function closeAll(){ document.querySelectorAll(".ph.open").forEach(function(f){ f.classList.remove("open"); f.querySelector(".ph-hit").setAttribute("aria-expanded","false"); }); }
+  function closeAll(){ document.querySelectorAll(".ph.open").forEach(function(f){ var h = f.querySelector(".ph-hit"); f.classList.remove("open"); h.setAttribute("aria-expanded","false"); if (f.contains(document.activeElement)) h.focus({preventScroll:true}); }); }
   document.addEventListener("click", function(e){
     var t = e.target; if (!t.closest) return;
     var more = t.closest(".ph-more"), hit = t.closest(".ph-hit");
