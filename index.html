@@ -643,10 +643,43 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
   </div>
 </footer>
 <script src="assets/site.js?v=20261018b" defer></script>
+<style>
+/* account card: opens over the page when you're signed in (Log in / Create an account never leave the page) */
+a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+.npac-ov{position:fixed;inset:0;z-index:9998;display:flex;align-items:flex-start;justify-content:center;padding:76px 16px 16px;overflow:auto;background:rgba(18,18,20,.42)}
+.npac:focus{outline:none}
+.npac{position:relative;width:min(440px,100%);background:var(--bg,#ECE8E3);color:var(--fg,#2B2A28);border:1px solid var(--line,rgba(43,42,40,.2));box-shadow:0 30px 80px rgba(0,0,0,.35);padding:26px 28px 20px}
+.npac-k{font-family:var(--mono,ui-monospace,Menlo,monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim,rgba(43,42,40,.76))}
+.npac h2{font-family:var(--display,inherit);font-weight:400;text-transform:none;color:inherit;font-size:clamp(30px,6vw,40px);line-height:1.05;margin-top:10px;overflow-wrap:anywhere;letter-spacing:-.01em;max-width:none}
+.npac-e{margin-top:6px;font-size:15px;color:var(--dim,rgba(43,42,40,.76));overflow-wrap:anywhere}
+.npac-l{margin-top:18px;border-top:1px solid var(--line,rgba(43,42,40,.2))}
+.npac-l a{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:13px 0;border-bottom:1px solid var(--line,rgba(43,42,40,.2));text-decoration:none;color:inherit;font-size:19px;line-height:1.25}
+.npac-l a::after{content:"\2192";grid-column:2;grid-row:1/3;align-self:center;color:var(--dim,rgba(43,42,40,.76))}
+.npac-l a span{grid-column:1;font-size:14px;color:var(--dim,rgba(43,42,40,.76))}
+.npac-l a:hover::after{color:inherit}.npac-l a:hover{padding-left:6px;transition:padding .2s ease}
+.npac-f{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:14px;color:var(--dim,rgba(43,42,40,.76))}
+.npac-out{font:inherit;font-size:15px;color:inherit;background:none;border:0;padding:4px 0;cursor:pointer;text-decoration:underline;text-underline-offset:.2em}
+.npac-x{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line,rgba(43,42,40,.3));background:transparent;color:inherit;font-size:20px;line-height:1;cursor:pointer}
+.npac a:focus-visible,.npac button:focus-visible{outline:2px solid var(--acc,currentColor);outline-offset:2px}
+</style>
 <script>
-/* Log in / Create an account: the Neuropian sign-in box pops up over this page (it lives in /app; same origin). */
+/* Log in / Create an account: the Neuropian sign-in box pops up over this page (it lives in /app; same origin).
+   Once you're signed in you stay on this page: the nav shows your name and opens your account card, and nothing
+   navigates away until you pick where to go. */
 (function(){
-  var ov=null, fr=null, ready=false, want="login";
+  var K="sb-qggduzzwvdkmekihwuav-auth-token", API="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
+  var ov=null, fr=null, ready=false, want="login", card=null, opener=null;
+  function session(){ try{ var s=JSON.parse(localStorage.getItem(K)||"null"); s=s&&(s.currentSession||s); return s&&s.refresh_token&&s.user?s:null; }catch(e){ return null; } }
+  function nameOf(u){ var m=u.user_metadata||{}; return m.username||m.user_name||m.first_name||m.full_name||(u.email||"").split("@")[0]||"Member"; }
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function paint(){
+    var s=session();
+    document.querySelectorAll("[data-auth]").forEach(function(a){
+      if(a.dataset.t0===undefined) a.dataset.t0=a.innerHTML;
+      if(a.classList.contains("login")){ a.textContent=s?nameOf(s.user):"Log in"; if(s){ a.setAttribute("aria-haspopup","dialog"); a.title="Your account"; } else { a.removeAttribute("aria-haspopup"); a.removeAttribute("title"); } }
+      else a.innerHTML=s?a.dataset.t0.replace("Create an account","Your account").replace("create an account","open your account"):a.dataset.t0;
+    });
+  }
   function build(mode){
     ov=document.createElement("div");
     ov.setAttribute("style","position:fixed;inset:0;z-index:9999;display:none;background:rgba(0,0,0,.55)");
@@ -656,25 +689,62 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
     fr.setAttribute("allowtransparency","true");
     ov.appendChild(fr); document.body.appendChild(ov);
   }
+  function drop(){ if(ov){ ov.remove(); } ov=null; fr=null; ready=false; }
   function open(mode){
     want=mode; if(!ov) build(mode); else if(ready) fr.contentWindow.postMessage({type:"np-auth-mode",mode:mode},location.origin);
     ov.style.display="block"; document.documentElement.style.overflow="hidden";
   }
-  function close(){ if(ov){ ov.style.display="none"; } document.documentElement.style.overflow=""; }
+  function close(){ if(ov){ ov.style.display="none"; } if(!card) document.documentElement.style.overflow=""; }
+  function closeCard(){ if(card){ card.remove(); card=null; } document.documentElement.style.overflow=""; if(opener&&opener.focus) opener.focus(); opener=null; }
+  function openCard(isNew){
+    var s=session(); if(!s) return false;
+    closeCard(); var u=s.user, T=!!document.querySelector('a[href="/talent"]');
+    card=document.createElement("div"); card.className="npac-ov";
+    card.innerHTML='<div class="npac" role="dialog" aria-modal="true" aria-labelledby="npac-n" tabindex="-1">'
+      +'<button class="npac-x" type="button" aria-label="Close">×</button>'
+      +'<p class="npac-k">'+(isNew?"Welcome to Neuropian":"Signed in")+'</p>'
+      +'<h2 id="npac-n">'+esc(nameOf(u))+'</h2>'+(u.email?'<p class="npac-e">'+esc(u.email)+'</p>':"")
+      +'<nav class="npac-l" aria-label="Your account">'
+      +'<a href="/app?go=build">Your public profile<span>'+(isNew?"Start here: show what you've made, then publish it":"Describe what you've made and publish it to Talent")+'</span></a>'
+      +'<a href="/app?go=collective">RoundTable<span>Chat, problem and build rooms</span></a>'
+      +'<a href="/app?go=platform">Opportunities<span>Openings for members</span></a>'
+      +(T?'<a href="/talent">Talent<span>Search member profiles</span></a>':"")
+      +'</nav><div class="npac-f"><span>Not you?</span><button class="npac-out" type="button">Sign out</button></div></div>';
+    document.body.appendChild(card); document.documentElement.style.overflow="hidden";
+    card.addEventListener("click",function(e){ if(e.target===card||e.target.closest(".npac-x")) closeCard(); else if(e.target.closest(".npac-out")) signOut(); });
+    card.querySelector(".npac").focus({preventScroll:true});
+    return true;
+  }
+  function signOut(){
+    var s=session(), done=function(){ try{ localStorage.removeItem(K); }catch(e){} drop(); closeCard(); paint(); };
+    if(!s) return done();
+    fetch(API+"/auth/v1/logout?scope=local",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+s.access_token}}).catch(function(){}).then(done);
+  }
   window.addEventListener("message",function(e){
     if(e.origin!==location.origin||!e.data) return;
     if(e.data.type==="np-auth-ready"){ ready=true; ov.style.background="transparent";
       if(want!=="login"||fr.src.indexOf("auth="+want)<0) fr.contentWindow.postMessage({type:"np-auth-mode",mode:want},location.origin); }
     if(e.data.type==="np-auth-close") close();
-    if(e.data.type==="np-auth-done") location.href="/app"+(e.data.page&&e.data.page!=="home"?"?go="+encodeURIComponent(e.data.page):"");
+    if(e.data.type==="np-auth-done"){                      // signed in: stay here, show the account card
+      var tries=0;
+      (function show(){ var s=session();
+        if(!s&&tries++<10) return setTimeout(show,150);
+        close(); paint();
+        var made=s&&s.user&&Date.parse(s.user.created_at||0);
+        if(!openCard(made&&Date.now()-made<15*60*1000)) location.href="/app";   // no saved session (storage blocked): the app has it
+      })();
+    }
   });
-  document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&ov&&ov.style.display==="block") close(); });
+  document.addEventListener("keydown",function(e){ if(e.key!=="Escape") return; if(card) closeCard(); else if(ov&&ov.style.display==="block") close(); });
   document.addEventListener("click",function(e){
     var a=e.target.closest&&e.target.closest("[data-auth]"); if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button) return;
-    e.preventDefault(); open(a.getAttribute("data-auth"));
+    e.preventDefault(); opener=a;
+    if(session()) openCard(false); else open(a.getAttribute("data-auth"));
   });
-  function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov) build(a.getAttribute("data-auth")); }
+  function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov&&!session()) build(a.getAttribute("data-auth")); }
   document.addEventListener("pointerover",warm); document.addEventListener("touchstart",warm,{passive:true}); document.addEventListener("focusin",warm);
+  window.addEventListener("storage",function(e){ if(e.key===K){ paint(); if(!session()){ drop(); closeCard(); } } });
+  paint();
 })();
 </script>
 <script>
