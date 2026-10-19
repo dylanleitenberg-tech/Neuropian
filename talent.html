@@ -6,18 +6,18 @@
 <title>Talent · Neuropian</title>
 <meta name="description" content="Search the profiles Neuropian members published about their own work: what they have built and solved.">
 <link rel="canonical" href="https://neuropian.com/talent">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#0a0a0a">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ECE8E3">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0a;--fg:#f2f1ed;--dim:rgba(242,241,237,.62);--faint:rgba(242,241,237,.38);--line:rgba(242,241,237,.14);--acc:#6fd6f7;--pad:clamp(16px,5vw,64px);--max:1280px}
+:root{--bg:#ECE8E3;--fg:#2B2A28;--dim:rgba(43,42,40,.76);--faint:rgba(43,42,40,.70);--line:rgba(43,42,40,.16);--acc:#2B4C7E;--pad:clamp(16px,5vw,64px);--max:1280px}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg);color:var(--fg)}
 body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:.2em}
 a:hover{text-decoration-color:var(--fg)}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
-.bar{position:sticky;top:0;z-index:5;background:rgba(10,10,10,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{position:sticky;top:0;z-index:5;background:rgba(236,232,227,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:24px}
 .mark{font-weight:600;letter-spacing:.22em;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
 .nav{display:flex;gap:24px;font-size:14px;align-items:center}
@@ -28,14 +28,14 @@ h1{font-size:clamp(40px,6.5vw,88px);font-weight:500;letter-spacing:-.04em;line-h
 .lede{font-size:clamp(17px,1.6vw,21px);color:var(--dim);max-width:38em;margin-top:24px}
 .top{padding:clamp(64px,10vw,140px) 0 clamp(28px,4vw,48px)}
 .search{display:flex;gap:10px;margin-top:36px;max-width:760px}
-.search input{flex:1;min-width:0;font:inherit;font-size:18px;color:var(--fg);background:#121212;border:1px solid var(--line);border-radius:999px;padding:14px 22px;outline:none}
+.search input{flex:1;min-width:0;font:inherit;font-size:18px;color:var(--fg);background:#e4e0db;border:1px solid var(--line);border-radius:999px;padding:14px 22px;outline:none}
 .search input:focus{border-color:var(--acc)}
 .search button{font:inherit;font-size:15px;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:0 24px;cursor:pointer}
 .hint{font-size:14px;color:var(--faint);margin-top:12px}
 .status{font-size:14px;color:var(--dim);margin:28px 0 8px;min-height:1.2em}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:clamp(16px,2vw,24px);padding-bottom:96px}
 .card{border-top:1px solid var(--line);padding-top:20px;cursor:pointer;text-decoration:none;display:block}
-.card:hover .c-name{color:#9fefff}
+.card:hover .c-name{color:#2b4c7e}
 .c-name{font-size:20px;font-weight:500;letter-spacing:-.01em}
 .c-head{color:var(--dim);margin-top:4px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
@@ -50,7 +50,7 @@ h1{font-size:clamp(40px,6.5vw,88px);font-weight:500;letter-spacing:-.04em;line-h
 .p-head{font-size:clamp(18px,1.8vw,22px);color:var(--dim);margin-top:10px}
 .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .badge{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--dim)}
-.badge.ok{color:#9fefff;border-color:rgba(111,214,247,.4)}
+.badge.ok{color:#2b4c7e;border-color:rgba(43,76,126,.4)}
 .p-sum{font-size:18px;line-height:1.65;margin-top:32px;max-width:40em}
 h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:500;margin-top:44px}
 .work{list-style:none;margin-top:14px}
@@ -61,11 +61,26 @@ h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)
 footer{border-top:1px solid var(--line);padding:32px 0 48px;font-size:14px;color:var(--faint)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media(max-width:720px){.nav a:not(:nth-last-child(-n+2)){display:none}.search button{padding:0 18px}}
+
+/* paper edition, as neuropian.com */
+:root{--serif:"EB Garamond",Garamond,Georgia,"Times New Roman",serif;--display:"DM Serif Display",Georgia,"Times New Roman",serif;--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;--acc:#2B4C7E}
+html,body{background:#ECE8E3 url(/assets/paper.webp) 0 0/900px 900px}
+body{font-family:var(--serif);font-size:19px}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.01em}
+.kicker,.badge,.chip,.tag{font-family:var(--mono);letter-spacing:.08em}
+.kicker{font-size:12px;letter-spacing:.12em}
+.mark{font-family:var(--display);font-weight:400;letter-spacing:.01em;font-size:25px}
+.bar{background:rgba(236,232,227,.92)!important}
+.nav a.login{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);border-radius:0;padding:6px 16px}
+.search input{border-radius:0;background:rgba(255,255,255,.45)}
+.search button{border-radius:0;background:var(--acc);color:#F3F0EB}
+.chip,.badge{border-radius:0}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 </style>
 </head>
 <body>
 <header class="bar"><div class="wrap">
-  <a class="mark" href="/"><img src="/assets/brain.png" srcset="/assets/brain@2x.png 2x" alt="" width="28" height="28">NEUROPIAN</a>
+  <a class="mark" href="/"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
   <nav class="nav"><a href="/#plain">How it works</a><a href="/#method">Method</a><a href="/talent" aria-current="page">Talent</a><a class="login" href="/app" data-auth="login">Log in</a></nav>
 </div></header>
 <main id="main" class="wrap">
@@ -140,8 +155,9 @@ route(); search(q0);
 <style>
 /* account card: opens over the page when you're signed in (Log in / Create an account never leave the page) */
 a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
-.npac-ov{position:fixed;inset:0;z-index:9998;display:flex;align-items:flex-start;justify-content:center;padding:76px 16px 16px;overflow:auto;background:rgba(18,18,20,.42)}
+.npac-ov{position:fixed;inset:0;z-index:9998;display:flex;align-items:flex-start;justify-content:center;padding:76px 16px 16px;overflow:auto;background:rgba(236,232,227,.62);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
 .npac:focus{outline:none}
+.npld{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);margin:0;padding:14px 22px;background:var(--bg,#ECE8E3);color:var(--fg,#2B2A28);border:1px solid var(--line,rgba(43,42,40,.25));font-family:var(--mono,ui-monospace,Menlo,monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 20px 50px rgba(0,0,0,.25)}
 .npac{position:relative;width:min(440px,100%);background:var(--bg,#ECE8E3);color:var(--fg,#2B2A28);border:1px solid var(--line,rgba(43,42,40,.2));box-shadow:0 30px 80px rgba(0,0,0,.35);padding:26px 28px 20px}
 .npac-k{font-family:var(--mono,ui-monospace,Menlo,monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim,rgba(43,42,40,.76))}
 .npac h2{font-family:var(--display,inherit);font-weight:400;text-transform:none;color:inherit;font-size:clamp(30px,6vw,40px);line-height:1.05;margin-top:10px;overflow-wrap:anywhere;letter-spacing:-.01em;max-width:none}
@@ -176,10 +192,11 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   }
   function build(mode){
     ov=document.createElement("div");
-    ov.setAttribute("style","position:fixed;inset:0;z-index:9999;display:none;background:rgba(0,0,0,.55)");
+    ov.setAttribute("style","position:fixed;inset:0;z-index:9999;display:none;background:rgba(236,232,227,.62);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)");
+    ov.innerHTML='<p class="npld" role="status">Opening…</p>';
     fr=document.createElement("iframe");
     fr.title="Sign in to Neuropian"; fr.src="/app?embed=1&auth="+mode;
-    fr.setAttribute("style","border:0;width:100%;height:100%;background:transparent;color-scheme:dark");
+    fr.setAttribute("style","position:absolute;inset:0;border:0;width:100%;height:100%;background:transparent;color-scheme:light");
     fr.setAttribute("allowtransparency","true");
     ov.appendChild(fr); document.body.appendChild(ov);
   }
@@ -216,7 +233,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   }
   window.addEventListener("message",function(e){
     if(e.origin!==location.origin||!e.data) return;
-    if(e.data.type==="np-auth-ready"){ ready=true; ov.style.background="transparent";
+    if(e.data.type==="np-auth-ready"){ ready=true; ov.style.background="transparent"; ov.style.webkitBackdropFilter=ov.style.backdropFilter="none"; var ld=ov.querySelector(".npld"); if(ld) ld.remove();
       if(want!=="login"||fr.src.indexOf("auth="+want)<0) fr.contentWindow.postMessage({type:"np-auth-mode",mode:want},location.origin); }
     if(e.data.type==="np-auth-close") close();
     if(e.data.type==="np-auth-done"){                      // signed in: stay here, show the account card
