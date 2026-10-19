@@ -608,6 +608,7 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
       <li><span class="tag">Built</span><span>Falcon, our eyes in the sky<small>Reads public work in major open-source projects, programming contests and math Q&amp;A, and finds engineers and mathematicians whose work experts accepted but few people follow.</small></span></li>
       <li><span class="tag">Testing</span><span>Linking one person's accounts across platforms<small>Falcon links accounts only through links the person published. Weaker matches (same handle, name or photo) are scored, kept unconfirmed and never used to contact anyone.</small></span></li>
       <li><span class="tag">Live</span><span>RoundTable, Neuropian's place and space for intellectual expansion<small>Members sign up, build a profile and talk in chat, problem and build rooms. Signing up is the opt-in that lets Neuropian share a member's profile with companies and funds that hire through Neuropian.</small></span></li>
+      <li><span class="tag">Live</span><span>Projects and credits<small>Members post projects with a credit reward and others join. A Neuropian reviewer checks each contributor's work before anyone is credited, and everyone on a verified project gets a bonus. Credits are points inside Neuropian with no cash value.</small></span></li>
       <li><span class="tag">Live</span><span>Talent<small>Profiles for people in any field, drafted from their own description and work, approved by them, and searchable by meaning at <a href="/talent">neuropian.com/talent</a>.</small></span></li>
       <li><span class="tag">Built</span><span>EagleEyes, Neuropian's scouting agent<small>A browser extension. On the sites a member turns it on for, it adds what they read, write and work on to their Neuropian profile. Not yet public.</small></span></li>
     </ul>
@@ -708,6 +709,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
       +'<h2 id="npac-n">'+esc(nameOf(u))+'</h2>'+(u.email?'<p class="npac-e">'+esc(u.email)+'</p>':"")
       +'<nav class="npac-l" aria-label="Your account">'
       +'<a href="/app?go=build">Your public profile<span>'+(isNew?"Start here: show what you've made, then publish it":"Describe what you've made and publish it to Talent")+'</span></a>'
+      +'<a href="/app?go=projects">Projects and credits<span>Post work, join projects, get credited once a reviewer checks it</span></a>'
       +'<a href="/app?go=collective">RoundTable<span>Chat, problem and build rooms</span></a>'
       +'<a href="/app?go=platform">Opportunities<span>Openings for members</span></a>'
       +(T?'<a href="/talent">Talent<span>Search member profiles</span></a>':"")
