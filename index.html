@@ -15,25 +15,30 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#0a0a0a">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Cpath d='M9 23V9h2.4l7.2 9.9V9H21v14h-2.4l-7.2-9.9V23z' fill='%23f2f1ed'/%3E%3C/svg%3E">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ECE8E3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ECE8E3'/%3E%3Cpath d='M9 23V9h2.4l7.2 9.9V9H21v14h-2.4l-7.2-9.9V23z' fill='%232B2A28'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0a0a0a;
-  --fg:#f2f1ed;
-  --dim:rgba(242,241,237,.62);
-  --faint:rgba(242,241,237,.38);
-  --line:rgba(242,241,237,.14);
+  --bg:#ECE8E3;
+  --fg:#2B2A28;
+  --dim:rgba(43,42,40,.76);
+  --faint:rgba(43,42,40,.64);
+  --line:rgba(43,42,40,.16);
+  --acc:#2B4C7E;
+  --night:#1D2128;
+  --serif:"EB Garamond",Garamond,Georgia,"Times New Roman",serif;
+  --display:"DM Serif Display",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --pad:clamp(16px,5vw,64px);
   --max:1280px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--bg);color:var(--fg);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;font-feature-settings:"tnum" 0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{background:var(--bg) url(/assets/paper.webp) 0 0/900px 900px;color:var(--fg);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg) url(/assets/paper.webp) 0 0/900px 900px;color:var(--fg);font-family:var(--serif);font-size:19px;line-height:1.5;font-feature-settings:"tnum" 0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:.2em}
 a:hover{text-decoration-color:var(--fg)}
 a:focus-visible,summary:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
@@ -64,43 +69,54 @@ p+p{margin-top:1em}
 
 /* sections */
 section{border-top:1px solid var(--line);padding:clamp(72px,11vw,160px) 0}
-.hero{border-top:0;padding-top:clamp(64px,9vw,120px);padding-bottom:clamp(56px,7vw,96px);position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:70vw;height:120%;z-index:0;pointer-events:none;background:radial-gradient(38% 34% at 62% 38%,rgba(111,214,247,.20),transparent 70%),radial-gradient(34% 30% at 78% 62%,rgba(180,156,255,.18),transparent 70%),radial-gradient(30% 28% at 52% 72%,rgba(255,154,118,.14),transparent 70%)}
-.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,4vw,60px);align-items:center}
-.grad{background:linear-gradient(95deg,#6fd6f7 0%,#b49cff 52%,#ff9a76 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
-.cta{display:inline-flex;align-items:center;font-size:17px;font-weight:500;text-decoration:none;padding:14px 26px;border-radius:999px;background:#f2f1ed;color:#0a0a0a;border:1px solid #f2f1ed;transition:transform .15s ease,box-shadow .2s ease}
-.cta:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(180,156,255,.25)}
-.cta.ghost{background:transparent;color:#f2f1ed;border-color:var(--line)}.cta.ghost:hover{border-color:#f2f1ed}
-.mosaic{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding-bottom:36px}
-.ph{position:relative;margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 20px 50px rgba(0,0,0,.45)}
-.ph img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
-.ph:hover img{transform:scale(1.04)}
-.ph2,.ph5{transform:translateY(36px)}
-.ph figcaption{position:absolute;left:12px;bottom:12px;font-size:13px;font-weight:500;letter-spacing:.04em;color:#0a0a0a;border-radius:999px;padding:5px 12px}
-.ph-hit{position:absolute;inset:0;width:100%;border:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45));cursor:pointer;padding:0;text-align:left;font:inherit}
-.chip{position:absolute;left:10px;bottom:10px;font-size:13px;font-weight:500;color:#0a0a0a;border-radius:999px;padding:5px 12px}
-.plus{position:absolute;right:10px;bottom:10px;width:28px;height:28px;border-radius:999px;background:rgba(10,10,10,.6);color:#f2f1ed;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;transition:transform .25s ease}
-.ph:hover .plus{transform:scale(1.12)}.ph.open .plus{transform:rotate(45deg)}
-.ph1 .chip{background:#6fd6f7}.ph2 .chip{background:#ff9a76}.ph3 .chip{background:#b49cff}.ph4 .chip{background:#f6d365}.ph5 .chip{background:#7ee0b5}.ph6 .chip{background:#ffb3d1}
-.ph-more{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:16px;background:linear-gradient(180deg,rgba(10,10,10,.25),rgba(10,10,10,.92) 55%);opacity:0;pointer-events:none;transition:opacity .25s ease}
+.hero{border-top:0;padding-top:clamp(40px,6vw,88px);padding-bottom:clamp(64px,8vw,120px);position:relative;overflow:hidden}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start}
+.hero h1{font-size:clamp(44px,6.9vw,108px);line-height:.94;letter-spacing:-.015em;max-width:none;overflow-wrap:normal;margin-top:8px}
+.brush{position:relative;display:inline-block;white-space:nowrap}
+.brush::after{content:"";position:absolute;left:-.04em;right:-.08em;bottom:-.17em;height:.16em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 30' preserveAspectRatio='none'%3E%3Cpath fill='%232B4C7E' d='M0 5.9 L6 9.0 L12 7.1 L18 6.4 L24 8.8 L30 7.3 L36 6.6 L42 9.1 L48 8.0 L54 9.1 L60 8.5 L66 8.7 L72 7.9 L78 9.9 L84 10.3 L90 8.9 L96 9.0 L102 8.5 L108 8.3 L114 9.8 L120 10.9 L126 9.4 L132 10.7 L138 8.6 L144 9.7 L150 9.7 L156 11.2 L162 9.3 L168 8.7 L174 10.0 L180 11.4 L186 10.0 L192 11.2 L198 11.0 L204 10.0 L210 8.7 L216 9.9 L222 10.9 L228 9.3 L234 9.1 L240 11.4 L246 10.0 L252 7.9 L258 9.1 L264 7.8 L270 9.1 L276 8.8 L282 7.7 L288 8.6 L294 8.5 L300 7.7 L306 8.5 L312 8.5 L318 8.8 L324 10.1 L330 6.5 L336 6.5 L342 8.6 L348 7.7 L354 7.8 L360 9.5 L366 9.2 L372 7.0 L378 6.6 L384 7.2 L390 7.4 L396 8.3 L402 6.0 L408 7.0 L414 7.1 L420 7.1 L426 7.9 L432 7.1 L438 7.1 L444 6.3 L450 7.7 L456 7.7 L462 6.8 L468 6.0 L474 6.4 L480 8.6 L486 6.4 L492 9.0 L498 9.8 L504 6.6 L510 7.4 L516 9.0 L522 9.0 L528 7.6 L534 9.0 L540 8.8 L546 9.4 L552 8.6 L558 9.2 L564 10.9 L570 8.9 L576 11.4 L582 10.9 L588 9.6 L594 9.8 L600 12.3 L600 14.7 L594 15.4 L588 14.3 L582 15.1 L576 15.3 L570 16.1 L564 15.2 L558 17.2 L552 17.1 L546 14.6 L540 17.8 L534 16.2 L528 16.9 L522 18.8 L516 19.0 L510 18.7 L504 19.1 L498 17.7 L492 17.7 L486 17.2 L480 17.9 L474 20.1 L468 20.1 L462 19.9 L456 20.8 L450 19.5 L444 20.5 L438 20.0 L432 21.3 L426 22.8 L420 23.6 L414 21.7 L408 23.4 L402 20.8 L396 21.7 L390 20.9 L384 22.1 L378 22.9 L372 23.1 L366 22.5 L360 22.4 L354 22.4 L348 23.1 L342 23.6 L336 21.5 L330 23.6 L324 25.1 L318 24.4 L312 23.1 L306 22.4 L300 22.6 L294 22.5 L288 25.7 L282 23.1 L276 25.0 L270 23.1 L264 22.9 L258 25.6 L252 24.3 L246 25.6 L240 25.4 L234 25.6 L228 24.0 L222 26.0 L216 25.8 L210 25.8 L204 26.0 L198 25.6 L192 25.6 L186 24.1 L180 24.2 L174 23.8 L168 24.9 L162 23.4 L156 23.9 L150 24.1 L144 25.9 L138 23.1 L132 23.0 L126 24.6 L120 25.9 L114 23.8 L108 25.3 L102 23.6 L96 23.5 L90 22.3 L84 24.2 L78 22.6 L72 24.2 L66 23.3 L60 23.2 L54 24.2 L48 22.2 L42 22.2 L36 22.5 L30 24.5 L24 21.5 L18 21.6 L12 23.0 L6 21.5 L0 23.6ZM520.8 20.2m-1.7 0a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0 -3.4 0M471.3 23.1m-1.8 0a1.8 1.8 0 1 0 3.6 0a1.8 1.8 0 1 0 -3.6 0M432.5 13.7m-0.6 0a0.6 0.6 0 1 0 1.3 0a0.6 0.6 0 1 0 -1.3 0M530.2 19.5m-1.4 0a1.4 1.4 0 1 0 2.9 0a1.4 1.4 0 1 0 -2.9 0M569.6 8.5m-1.0 0a1.0 1.0 0 1 0 1.9 0a1.0 1.0 0 1 0 -1.9 0M519.0 9.8m-1.5 0a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0M439.9 10.0m-1.5 0a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0M449.8 21.4m-1.2 0a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0M559.3 18.1m-0.8 0a0.8 0.8 0 1 0 1.5 0a0.8 0.8 0 1 0 -1.5 0M597.9 23.8m-1.5 0a1.5 1.5 0 1 0 2.9 0a1.5 1.5 0 1 0 -2.9 0M461.1 18.0m-1.3 0a1.3 1.3 0 1 0 2.5 0a1.3 1.3 0 1 0 -2.5 0M452.2 20.3m-0.9 0a0.9 0.9 0 1 0 1.8 0a0.9 0.9 0 1 0 -1.8 0M541.6 15.4m-0.9 0a0.9 0.9 0 1 0 1.9 0a0.9 0.9 0 1 0 -1.9 0M464.3 12.5m-1.3 0a1.3 1.3 0 1 0 2.6 0a1.3 1.3 0 1 0 -2.6 0M598.2 11.4m-1.8 0a1.8 1.8 0 1 0 3.6 0a1.8 1.8 0 1 0 -3.6 0M541.5 10.1m-1.2 0a1.2 1.2 0 1 0 2.5 0a1.2 1.2 0 1 0 -2.5 0M567.5 11.2m-1.7 0a1.7 1.7 0 1 0 3.3 0a1.7 1.7 0 1 0 -3.3 0M484.2 16.8m-0.8 0a0.8 0.8 0 1 0 1.7 0a0.8 0.8 0 1 0 -1.7 0M537.5 22.0m-0.9 0a0.9 0.9 0 1 0 1.9 0a0.9 0.9 0 1 0 -1.9 0M567.7 21.6m-1.1 0a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 1 0 -2.2 0M439.0 14.8m-1.5 0a1.5 1.5 0 1 0 2.9 0a1.5 1.5 0 1 0 -2.9 0M521.3 8.8m-1.0 0a1.0 1.0 0 1 0 2.1 0a1.0 1.0 0 1 0 -2.1 0M571.7 19.1m-1.2 0a1.2 1.2 0 1 0 2.3 0a1.2 1.2 0 1 0 -2.3 0M558.8 19.4m-1.3 0a1.3 1.3 0 1 0 2.5 0a1.3 1.3 0 1 0 -2.5 0M438.5 10.5m-1.6 0a1.6 1.6 0 1 0 3.1 0a1.6 1.6 0 1 0 -3.1 0M518.8 10.0m-1.2 0a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;pointer-events:none}
+.hero .lede{margin-top:clamp(36px,4vw,52px);color:var(--fg);font-size:clamp(20px,1.8vw,25px);line-height:1.38;max-width:27em}
+.hero .lede b{font-weight:600}
+.ctas{display:flex;gap:14px 26px;flex-wrap:wrap;align-items:center;margin-top:36px}
+.cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--serif);font-size:20px;font-weight:500;text-decoration:none;padding:13px 24px 14px;background:var(--acc);color:#F3F0EB;border:1px solid var(--acc);transition:background .2s ease,transform .15s ease}
+.cta:hover{background:#22406c;transform:translateY(-1px)}
+.cta .ast{font-size:18px;line-height:1}
+.cta.ghost{background:transparent;color:var(--fg);border:0;padding:0;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:.25em}
+.cta.ghost:hover{transform:none;text-decoration-color:var(--fg)}
+.hero-art{position:relative;padding-top:4px}
+.ticker{position:relative;padding-left:44px;font-family:var(--mono);color:var(--fg)}
+.ticker::before{content:"";position:absolute;left:0;top:4px;width:18px;height:118px;background:linear-gradient(var(--fg),var(--fg)) 0 0/18px 1.5px no-repeat,linear-gradient(var(--fg),var(--fg)) 0 39px/18px 1.5px no-repeat,linear-gradient(var(--fg),var(--fg)) 0 78px/18px 1.5px no-repeat,linear-gradient(var(--fg),var(--fg)) 0 116px/18px 1.5px no-repeat}
+.tk-path{display:block;font-size:11px;letter-spacing:.02em;color:var(--dim);overflow-wrap:anywhere}
+.ticker b{display:block;font-weight:500;font-size:clamp(52px,6.4vw,96px);line-height:1.05;letter-spacing:.02em;font-variant-numeric:tabular-nums;margin-top:6px}
+.tk-cap{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:6px}
+.engr{mix-blend-mode:multiply}
+.hero .brain{width:min(100%,520px);margin:clamp(12px,2vw,28px) 0 0 auto}
+.tagline{margin-top:30px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+/* plates: one engraving per field; a tap opens what counts there */
+.plates-sec .lede{margin-top:18px}
+.plates{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.2vw,28px);margin-top:clamp(36px,5vw,56px)}
+.ph{position:relative;margin:0;aspect-ratio:1/1;overflow:hidden;border:1px solid rgba(43,42,40,.55);outline:1px solid rgba(43,42,40,.2);outline-offset:-7px;background:rgba(255,255,255,.18)}
+.ph img{position:absolute;inset:8% 10% 18%;width:80%;height:74%;object-fit:contain;transition:transform .6s ease}
+.ph:hover img{transform:scale(1.035)}
+.ph-hit{position:absolute;inset:0;width:100%;border:0;background:transparent;cursor:pointer;padding:0;text-align:left;font:inherit;color:inherit}
+.chip{position:absolute;left:0;right:0;bottom:4.5%;text-align:center;font-family:var(--display);font-size:clamp(19px,1.9vw,26px);line-height:1.1;color:var(--fg)}
+.chip i{font-style:normal;font-family:var(--mono);font-size:.5em;letter-spacing:.1em;vertical-align:.35em;margin-right:4px;color:var(--dim)}
+.plus{position:absolute;right:14px;top:14px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(43,42,40,.5);color:var(--fg);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:17px;line-height:1;background:rgba(236,232,227,.7);z-index:3;transition:transform .25s ease,background .2s ease}
+.ph:hover .plus{transform:scale(1.1);background:var(--bg)}.ph.open .plus{transform:rotate(45deg)}
+.ph-more{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:22px;background:rgba(236,232,227,.95);opacity:0;pointer-events:none;transition:opacity .25s ease}
 .ph.open .ph-more{opacity:1;pointer-events:auto;cursor:pointer}.ph.open .ph-hit{pointer-events:none}.ph.open .chip{display:none}
-.ph-more b{font-size:17px;font-weight:600}.ph-more p{font-size:14px;line-height:1.45;color:#f2f1ed}
-.ph-cta{position:relative;z-index:4;align-self:flex-start;white-space:nowrap;font-size:13px;font-weight:500;text-decoration:none;color:#0a0a0a;background:#f2f1ed;border-radius:999px;padding:7px 12px}
-.proof{padding:clamp(56px,8vw,110px) 0}
-.proof .big{font-size:clamp(26px,3.4vw,46px);line-height:1.18;letter-spacing:-.025em;font-weight:500;max-width:22em}
-.proof .big.dim{color:var(--dim);margin-top:18px}.proof .big b{font-weight:600}
-.c1{color:#6fd6f7}.c3{color:#ff9a76}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,24px);margin-top:clamp(36px,5vw,56px)}
-.tile{border-radius:18px;padding:22px 24px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,0))}
-.tile b{display:block;font-size:clamp(40px,5vw,64px);font-weight:500;letter-spacing:-.04em;line-height:1}
-.tile span{display:block;color:var(--dim);margin-top:10px}
-.t1 b{color:#6fd6f7}.t2 b{color:#b49cff}.t3 b{color:#ff9a76}.t4 b{color:#7ee0b5}.c4{color:#7ee0b5}
+.ph-more b{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.3vw,32px);line-height:1.05}.ph-more p{font-size:17px;line-height:1.4;color:var(--fg)}
+.ph-cta{position:relative;z-index:4;align-self:flex-start;white-space:nowrap;font-size:16px;font-weight:500;text-decoration:none;color:#F3F0EB;background:var(--acc);padding:8px 14px}
+.proof{padding:clamp(64px,9vw,120px) 0}
+.proof .big{font-size:clamp(26px,3.3vw,44px);line-height:1.2;letter-spacing:-.01em;font-weight:400;max-width:23em}
+.proof .big.dim{color:var(--dim);margin-top:18px}.proof .big b{font-weight:600;color:var(--fg)}
+.proof .big b.c1{color:var(--acc)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,28px);margin-top:clamp(40px,5vw,64px)}
+.tile{border-top:2px solid var(--fg);padding:18px 0 0}
+.tile b{display:block;font-family:var(--mono);font-size:clamp(40px,4.6vw,62px);font-weight:500;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.tile span{display:block;color:var(--dim);margin-top:12px}
 @media(max-width:1000px){.tiles{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.ph-more{padding:10px;gap:6px}.ph-more b{font-size:15px}.ph-more p{font-size:12.5px;line-height:1.4}.ph-cta{white-space:normal;text-align:center;align-self:stretch;font-size:12.5px;padding:7px 8px}}
-@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.mosaic{grid-template-columns:1fr 1fr;max-width:520px}.ph2,.ph5{transform:none}.ph2,.ph4,.ph6{transform:translateY(28px)}.tiles{grid-template-columns:1fr}}
-.hero .lede{margin-top:36px}
-.tagline{margin-top:28px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#9fefff}
+@media(max-width:600px){.ph-more{padding:12px;gap:6px}.ph-more b{font-size:20px}.ph-more p{font-size:14px;line-height:1.35}.ph-cta{white-space:normal;text-align:center;align-self:stretch;font-size:14px;padding:7px 8px}.plus{right:9px;top:9px;width:26px;height:26px;font-size:15px}.chip{font-size:18px}}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-art{display:grid;grid-template-columns:1fr minmax(0,190px);gap:16px;align-items:end;margin-top:8px}.hero .brain{width:100%;margin:0}.ticker b{font-size:clamp(40px,12vw,64px)}.plates{grid-template-columns:1fr 1fr}.ph{aspect-ratio:4/5}.ph img{inset:9% 9% 17%;width:82%;height:74%}}
 .status{margin-top:20px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 .figures{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:clamp(56px,8vw,120px);border-top:1px solid var(--line);padding-top:28px}
 .fig b{display:block;font-size:clamp(34px,4.2vw,56px);font-weight:500;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
@@ -352,6 +368,55 @@ figure video{display:block;width:100%;height:auto;background:#000}
   .next li{grid-template-columns:1fr;gap:10px}
   .rules li{grid-template-columns:40px 1fr}
 }
+
+/* paper edition (1517-style): ink, one accent, torn edges */
+.skip:focus{background:var(--fg);color:var(--bg)}
+.bar{background:rgba(236,232,227,.9);border-bottom:1px solid var(--line)}
+.mark{font-family:var(--display);font-weight:400;letter-spacing:.01em;font-size:25px}
+.mark img{width:30px;height:30px}
+.nav{font-size:17px;align-items:center}
+.nav a.login{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);border-radius:0;padding:6px 16px;margin:-7px 0}
+.nav a.login:hover{background:#22406c;border-color:#22406c}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.01em}
+h2{font-size:clamp(40px,6vw,84px);line-height:.98;max-width:15ch}
+h3{letter-spacing:0}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--dim)}
+.lede{font-size:clamp(20px,1.8vw,24px)}
+section{position:relative;border-top:0}
+section:not(.hero)::before{content:"";position:absolute;left:0;right:0;top:-6px;height:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 12' preserveAspectRatio='none'%3E%3Cpath d='M0 5.0 L4 7.5 L8 5.6 L12 5.1 L16 7.7 L20 8.0 L24 5.9 L28 6.1 L32 5.5 L36 7.1 L40 6.8 L44 8.1 L48 6.0 L52 7.0 L56 6.5 L60 7.5 L64 6.9 L68 7.1 L72 7.5 L76 7.4 L80 6.3 L84 5.7 L88 7.3 L92 6.6 L96 6.9 L100 7.6 L104 6.0 L108 6.8 L112 7.2 L116 6.0 L120 5.2 L124 7.0 L128 4.3 L132 5.6 L136 6.8 L140 6.2 L144 4.6 L148 6.2 L152 4.1 L156 5.6 L160 5.4 L164 4.0 L168 4.8 L172 3.6 L176 4.6 L180 5.2 L184 4.3 L188 5.0 L192 4.9 L196 6.0 L200 4.4 L204 3.9 L208 4.4 L212 4.7 L216 5.7 L220 6.6 L224 6.3 L228 6.6 L232 6.3 L236 7.3 L240 6.7 L244 5.0 L248 7.6 L252 7.1 L256 5.9 L260 7.7 L264 8.2 L268 6.8 L272 7.3 L276 7.6 L280 8.3 L284 7.4 L288 7.4 L292 7.8 L296 7.1 L300 8.4 L304 7.9 L308 7.1 L312 7.4 L316 7.4 L320 6.0 L324 7.0 L328 5.5 L332 5.9 L336 6.7 L340 5.9 L344 7.5 L348 5.5 L352 5.3 L356 5.7 L360 6.2 L364 4.4 L368 6.8 L372 6.3 L376 3.8 L380 4.7 L384 6.4 L388 5.6 L392 5.6 L396 4.9 L400 3.8 L404 3.5 L408 4.9 L412 6.0 L416 5.0 L420 5.9 L424 6.2 L428 5.7 L432 5.5 L436 5.8 L440 6.4 L444 4.9 L448 6.2 L452 4.5 L456 5.3 L460 5.3 L464 7.0 L468 6.8 L472 7.4 L476 5.3 L480 5.7 L484 5.6 L488 6.1 L492 6.3 L496 7.4 L500 8.2 L504 7.4 L508 6.8 L512 8.5 L516 6.1 L520 7.3 L524 8.1 L528 7.4 L532 8.4 L536 8.0 L540 7.2 L544 7.3 L548 7.8 L552 5.6 L556 6.2 L560 7.0 L564 5.5 L568 6.5 L572 7.1 L576 7.3 L580 5.6 L584 4.8 L588 6.8 L592 6.5 L596 4.8 L600 4.6 L604 6.6 L608 4.4 L612 4.6 L616 4.4 L620 5.6 L624 3.6 L628 3.9 L632 5.1 L636 4.4 L640 5.7 L644 4.5 L648 4.4 L652 3.6 L656 5.4 L660 5.4 L664 3.9 L668 5.7 L672 5.6 L676 5.5 L680 4.9 L684 6.9 L688 4.3 L692 6.8 L696 6.4 L700 5.0 L704 5.5 L708 5.0 L712 7.7 L716 5.9 L720 5.5 L724 7.6 L728 8.2 L732 5.7 L736 8.1 L740 6.3 L744 8.2 L748 8.5 L752 6.9 L756 6.2 L760 7.4 L764 8.4 L768 6.0 L772 7.7 L776 6.8 L780 6.4 L784 7.4 L788 7.1 L792 7.1 L796 6.7 L800 7.1 L804 5.0 L808 5.7 L812 6.9 L816 6.2 L820 6.7 L824 6.4 L828 4.8 L832 4.7 L836 4.1 L840 5.8 L844 3.9 L848 4.0 L852 4.8 L856 4.2 L860 6.2 L864 3.7 L868 5.5 L872 4.5 L876 5.1 L880 3.5 L884 4.7 L888 4.2 L892 5.5 L896 4.8 L900 4.8 L904 6.0 L908 6.0 L912 5.1 L916 5.4 L920 6.6 L924 6.1 L928 6.7 L932 6.1 L936 5.8 L940 5.7 L944 5.2 L948 7.5 L952 5.6 L956 7.2 L960 8.0 L964 6.2 L968 7.8 L972 7.6 L976 5.8 L980 8.2 L984 7.0 L988 7.0 L992 6.2 L996 8.1 L1000 6.9 L1004 5.9 L1008 7.8 L1012 8.1 L1016 5.9 L1020 6.7 L1024 7.1 L1028 5.2 L1032 5.8 L1036 6.5 L1040 5.3 L1044 6.7 L1048 6.8 L1052 5.8 L1056 6.9 L1060 5.0 L1064 5.2 L1068 4.2 L1072 4.5 L1076 3.8 L1080 4.9 L1084 5.5 L1088 4.2 L1092 4.3 L1096 4.4 L1100 5.6 L1104 4.1 L1108 4.0 L1112 5.5 L1116 4.4 L1120 3.8 L1124 4.6 L1128 5.5 L1132 6.5 L1136 5.6 L1140 4.9 L1144 6.1 L1148 5.1 L1152 5.9 L1156 4.9 L1160 5.9 L1164 5.1 L1168 4.8 L1172 7.1 L1176 6.9 L1180 7.3 L1184 5.7 L1188 7.8 L1192 5.6 L1196 7.7 L1200 7.7' fill='none' stroke='rgba%2843%2C42%2C40%2C.28%29' stroke-width='1'/%3E%3Cpath d='M0 5.0 L4 7.5 L8 5.6 L12 5.1 L16 7.7 L20 8.0 L24 5.9 L28 6.1 L32 5.5 L36 7.1 L40 6.8 L44 8.1 L48 6.0 L52 7.0 L56 6.5 L60 7.5 L64 6.9 L68 7.1 L72 7.5 L76 7.4 L80 6.3 L84 5.7 L88 7.3 L92 6.6 L96 6.9 L100 7.6 L104 6.0 L108 6.8 L112 7.2 L116 6.0 L120 5.2 L124 7.0 L128 4.3 L132 5.6 L136 6.8 L140 6.2 L144 4.6 L148 6.2 L152 4.1 L156 5.6 L160 5.4 L164 4.0 L168 4.8 L172 3.6 L176 4.6 L180 5.2 L184 4.3 L188 5.0 L192 4.9 L196 6.0 L200 4.4 L204 3.9 L208 4.4 L212 4.7 L216 5.7 L220 6.6 L224 6.3 L228 6.6 L232 6.3 L236 7.3 L240 6.7 L244 5.0 L248 7.6 L252 7.1 L256 5.9 L260 7.7 L264 8.2 L268 6.8 L272 7.3 L276 7.6 L280 8.3 L284 7.4 L288 7.4 L292 7.8 L296 7.1 L300 8.4 L304 7.9 L308 7.1 L312 7.4 L316 7.4 L320 6.0 L324 7.0 L328 5.5 L332 5.9 L336 6.7 L340 5.9 L344 7.5 L348 5.5 L352 5.3 L356 5.7 L360 6.2 L364 4.4 L368 6.8 L372 6.3 L376 3.8 L380 4.7 L384 6.4 L388 5.6 L392 5.6 L396 4.9 L400 3.8 L404 3.5 L408 4.9 L412 6.0 L416 5.0 L420 5.9 L424 6.2 L428 5.7 L432 5.5 L436 5.8 L440 6.4 L444 4.9 L448 6.2 L452 4.5 L456 5.3 L460 5.3 L464 7.0 L468 6.8 L472 7.4 L476 5.3 L480 5.7 L484 5.6 L488 6.1 L492 6.3 L496 7.4 L500 8.2 L504 7.4 L508 6.8 L512 8.5 L516 6.1 L520 7.3 L524 8.1 L528 7.4 L532 8.4 L536 8.0 L540 7.2 L544 7.3 L548 7.8 L552 5.6 L556 6.2 L560 7.0 L564 5.5 L568 6.5 L572 7.1 L576 7.3 L580 5.6 L584 4.8 L588 6.8 L592 6.5 L596 4.8 L600 4.6 L604 6.6 L608 4.4 L612 4.6 L616 4.4 L620 5.6 L624 3.6 L628 3.9 L632 5.1 L636 4.4 L640 5.7 L644 4.5 L648 4.4 L652 3.6 L656 5.4 L660 5.4 L664 3.9 L668 5.7 L672 5.6 L676 5.5 L680 4.9 L684 6.9 L688 4.3 L692 6.8 L696 6.4 L700 5.0 L704 5.5 L708 5.0 L712 7.7 L716 5.9 L720 5.5 L724 7.6 L728 8.2 L732 5.7 L736 8.1 L740 6.3 L744 8.2 L748 8.5 L752 6.9 L756 6.2 L760 7.4 L764 8.4 L768 6.0 L772 7.7 L776 6.8 L780 6.4 L784 7.4 L788 7.1 L792 7.1 L796 6.7 L800 7.1 L804 5.0 L808 5.7 L812 6.9 L816 6.2 L820 6.7 L824 6.4 L828 4.8 L832 4.7 L836 4.1 L840 5.8 L844 3.9 L848 4.0 L852 4.8 L856 4.2 L860 6.2 L864 3.7 L868 5.5 L872 4.5 L876 5.1 L880 3.5 L884 4.7 L888 4.2 L892 5.5 L896 4.8 L900 4.8 L904 6.0 L908 6.0 L912 5.1 L916 5.4 L920 6.6 L924 6.1 L928 6.7 L932 6.1 L936 5.8 L940 5.7 L944 5.2 L948 7.5 L952 5.6 L956 7.2 L960 8.0 L964 6.2 L968 7.8 L972 7.6 L976 5.8 L980 8.2 L984 7.0 L988 7.0 L992 6.2 L996 8.1 L1000 6.9 L1004 5.9 L1008 7.8 L1012 8.1 L1016 5.9 L1020 6.7 L1024 7.1 L1028 5.2 L1032 5.8 L1036 6.5 L1040 5.3 L1044 6.7 L1048 6.8 L1052 5.8 L1056 6.9 L1060 5.0 L1064 5.2 L1068 4.2 L1072 4.5 L1076 3.8 L1080 4.9 L1084 5.5 L1088 4.2 L1092 4.3 L1096 4.4 L1100 5.6 L1104 4.1 L1108 4.0 L1112 5.5 L1116 4.4 L1120 3.8 L1124 4.6 L1128 5.5 L1132 6.5 L1136 5.6 L1140 4.9 L1144 6.1 L1148 5.1 L1152 5.9 L1156 4.9 L1160 5.9 L1164 5.1 L1168 4.8 L1172 7.1 L1176 6.9 L1180 7.3 L1184 5.7 L1188 7.8 L1192 5.6 L1196 7.7 L1200 7.7' transform='translate%280 1.3%29' fill='none' stroke='rgba%28255%2C255%2C255%2C.75%29' stroke-width='1.2'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;pointer-events:none}
+.s-num{border:1px solid rgba(43,42,40,.55);color:var(--fg);font-family:var(--mono);font-size:15px}
+.flow b,.stat b,.fig b{font-family:var(--mono);font-weight:500;letter-spacing:-.03em}
+.flow b{font-size:clamp(34px,4.2vw,60px)}
+.flow .hit b{color:var(--acc)}
+.flow li:not(:last-child)::after{color:var(--dim)}
+.idx,.p-lobe,.i-num{font-family:var(--mono)}
+.dp-track{background:linear-gradient(90deg,rgba(43,42,40,.12) 1px,transparent 1px) 0 0/25% 100%}
+.dp-stem{background:rgba(43,42,40,.35)}
+.dp-dot{background:#8C8983;box-shadow:0 0 0 2px var(--bg)}
+.dp-row.ours .dp-dot,.dp-row.ours .dp-stem{background:var(--acc)}
+.dp-ticks span,.d-top{font-family:var(--mono)}
+.fb-track i,.fb-row:nth-child(n) i{background:var(--acc)}
+.ur-dots i{background:var(--acc)}
+.ur-row:nth-child(n+4) .ur-dots i{background:rgba(43,42,40,.42)}
+.dossier{border:1px solid rgba(43,42,40,.4);border-radius:0;background:rgba(255,255,255,.28)}
+.d-red{color:var(--acc)}
+.d-name{font-family:var(--display)}
+.redact{background:#1f1e1c}
+.d-sum .redact{background:rgba(31,30,28,.85)}
+.meter{background:rgba(43,74,126,.16)}.meter i{background:var(--acc)}
+summary{font-family:var(--mono);font-size:12px;letter-spacing:.1em}
+.tag{font-family:var(--mono);font-size:11px;border-color:rgba(43,42,40,.4);border-radius:0;color:var(--fg)}
+.next li{font-size:clamp(19px,1.9vw,23px)}
+#contact,footer{background:var(--night);color:#ECE8E3;--fg:#ECE8E3;--dim:rgba(236,232,227,.74);--faint:rgba(236,232,227,.6);--line:rgba(236,232,227,.16)}
+#contact::before{top:0;height:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 12' preserveAspectRatio='none'%3E%3Cpath d='M0 5.0 L4 7.5 L8 5.6 L12 5.1 L16 7.7 L20 8.0 L24 5.9 L28 6.1 L32 5.5 L36 7.1 L40 6.8 L44 8.1 L48 6.0 L52 7.0 L56 6.5 L60 7.5 L64 6.9 L68 7.1 L72 7.5 L76 7.4 L80 6.3 L84 5.7 L88 7.3 L92 6.6 L96 6.9 L100 7.6 L104 6.0 L108 6.8 L112 7.2 L116 6.0 L120 5.2 L124 7.0 L128 4.3 L132 5.6 L136 6.8 L140 6.2 L144 4.6 L148 6.2 L152 4.1 L156 5.6 L160 5.4 L164 4.0 L168 4.8 L172 3.6 L176 4.6 L180 5.2 L184 4.3 L188 5.0 L192 4.9 L196 6.0 L200 4.4 L204 3.9 L208 4.4 L212 4.7 L216 5.7 L220 6.6 L224 6.3 L228 6.6 L232 6.3 L236 7.3 L240 6.7 L244 5.0 L248 7.6 L252 7.1 L256 5.9 L260 7.7 L264 8.2 L268 6.8 L272 7.3 L276 7.6 L280 8.3 L284 7.4 L288 7.4 L292 7.8 L296 7.1 L300 8.4 L304 7.9 L308 7.1 L312 7.4 L316 7.4 L320 6.0 L324 7.0 L328 5.5 L332 5.9 L336 6.7 L340 5.9 L344 7.5 L348 5.5 L352 5.3 L356 5.7 L360 6.2 L364 4.4 L368 6.8 L372 6.3 L376 3.8 L380 4.7 L384 6.4 L388 5.6 L392 5.6 L396 4.9 L400 3.8 L404 3.5 L408 4.9 L412 6.0 L416 5.0 L420 5.9 L424 6.2 L428 5.7 L432 5.5 L436 5.8 L440 6.4 L444 4.9 L448 6.2 L452 4.5 L456 5.3 L460 5.3 L464 7.0 L468 6.8 L472 7.4 L476 5.3 L480 5.7 L484 5.6 L488 6.1 L492 6.3 L496 7.4 L500 8.2 L504 7.4 L508 6.8 L512 8.5 L516 6.1 L520 7.3 L524 8.1 L528 7.4 L532 8.4 L536 8.0 L540 7.2 L544 7.3 L548 7.8 L552 5.6 L556 6.2 L560 7.0 L564 5.5 L568 6.5 L572 7.1 L576 7.3 L580 5.6 L584 4.8 L588 6.8 L592 6.5 L596 4.8 L600 4.6 L604 6.6 L608 4.4 L612 4.6 L616 4.4 L620 5.6 L624 3.6 L628 3.9 L632 5.1 L636 4.4 L640 5.7 L644 4.5 L648 4.4 L652 3.6 L656 5.4 L660 5.4 L664 3.9 L668 5.7 L672 5.6 L676 5.5 L680 4.9 L684 6.9 L688 4.3 L692 6.8 L696 6.4 L700 5.0 L704 5.5 L708 5.0 L712 7.7 L716 5.9 L720 5.5 L724 7.6 L728 8.2 L732 5.7 L736 8.1 L740 6.3 L744 8.2 L748 8.5 L752 6.9 L756 6.2 L760 7.4 L764 8.4 L768 6.0 L772 7.7 L776 6.8 L780 6.4 L784 7.4 L788 7.1 L792 7.1 L796 6.7 L800 7.1 L804 5.0 L808 5.7 L812 6.9 L816 6.2 L820 6.7 L824 6.4 L828 4.8 L832 4.7 L836 4.1 L840 5.8 L844 3.9 L848 4.0 L852 4.8 L856 4.2 L860 6.2 L864 3.7 L868 5.5 L872 4.5 L876 5.1 L880 3.5 L884 4.7 L888 4.2 L892 5.5 L896 4.8 L900 4.8 L904 6.0 L908 6.0 L912 5.1 L916 5.4 L920 6.6 L924 6.1 L928 6.7 L932 6.1 L936 5.8 L940 5.7 L944 5.2 L948 7.5 L952 5.6 L956 7.2 L960 8.0 L964 6.2 L968 7.8 L972 7.6 L976 5.8 L980 8.2 L984 7.0 L988 7.0 L992 6.2 L996 8.1 L1000 6.9 L1004 5.9 L1008 7.8 L1012 8.1 L1016 5.9 L1020 6.7 L1024 7.1 L1028 5.2 L1032 5.8 L1036 6.5 L1040 5.3 L1044 6.7 L1048 6.8 L1052 5.8 L1056 6.9 L1060 5.0 L1064 5.2 L1068 4.2 L1072 4.5 L1076 3.8 L1080 4.9 L1084 5.5 L1088 4.2 L1092 4.3 L1096 4.4 L1100 5.6 L1104 4.1 L1108 4.0 L1112 5.5 L1116 4.4 L1120 3.8 L1124 4.6 L1128 5.5 L1132 6.5 L1136 5.6 L1140 4.9 L1144 6.1 L1148 5.1 L1152 5.9 L1156 4.9 L1160 5.9 L1164 5.1 L1168 4.8 L1172 7.1 L1176 6.9 L1180 7.3 L1184 5.7 L1188 7.8 L1192 5.6 L1196 7.7 L1200 7.7 L1200 0 L0 0Z' fill='%23ECE8E3'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
+#contact h2{color:#ECE8E3}
+#contact .mail{font-family:var(--display);text-decoration-color:rgba(236,232,227,.4)}
+footer{border-top:1px solid var(--line);color:var(--faint)}
+footer a{text-decoration-color:rgba(236,232,227,.4)}
+a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
+#contact a:focus-visible,footer a:focus-visible{outline-color:#ECE8E3}
+.js [data-type].typing::after{color:var(--acc)}
+@media (max-width:860px){.block{grid-template-columns:minmax(0,1fr)}.d-top{flex-wrap:wrap}.d-grid dd{overflow-wrap:anywhere}}
 @media print{.reveal{opacity:1!important;transform:none!important;transition:none!important}.orbit{height:auto!important}.orbit-stick{position:static!important;height:auto!important}.orbit-poster{display:block!important}.orbit canvas,.hud,.hud-ctl,video{display:none!important}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orbit canvas{transition:none!important}.gallery img{transition:none}.js .reveal{opacity:1;transform:none;transition:none}.orbit.holo .orbit-stage::after{animation:none}.term li{opacity:1!important}}
 </style>
@@ -361,7 +426,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
 
 <header class="bar">
   <div class="wrap">
-    <a class="mark" href="#top" aria-label="Neuropian, top of page"><img src="/assets/brain.png" srcset="/assets/brain@2x.png 2x" alt="" width="28" height="28">NEUROPIAN</a>
+    <a class="mark" href="#top" aria-label="Neuropian, top of page"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
     <nav class="nav" aria-label="Sections">
       <a href="#plain">How it works</a>
       <a href="#method">Method</a>
@@ -378,12 +443,28 @@ figure video{display:block;width:100%;height:auto;background:#000}
   <div class="wrap hero-grid">
    <div class="hero-text">
     <p class="kicker">Neuropian · Intellect accelerator</p>
-    <h1>Intelligence, <span class="grad">reimagined.</span></h1>
-    <p class="lede">Neuropian is where brilliant people get found by what they've built, made and solved, and how they lead and work with others, not by what's on their résumé.</p>
-    <div class="ctas"><a class="cta" href="/app" data-auth="reg">Create an account</a><a class="cta ghost" href="#contact">Hire with Neuropian</a></div>
+    <h1>Intelligence, <span class="brush">reimagined.</span></h1>
+    <p class="lede">Neuropian is where brilliant people get found by <b>what they've built, made and solved</b>, and <b>how they lead and work with others</b>, not by what's on their résumé.</p>
+    <div class="ctas"><a class="cta" href="/app" data-auth="reg"><span class="ast" aria-hidden="true">✳</span>Create an account</a><a class="cta ghost" href="#contact">Hire with Neuropian →</a></div>
     <p class="tagline">Signal, not résumés · No credentials required</p>
    </div>
-   <div class="mosaic" aria-label="People building in any field"><figure class="ph ph1"><img src="/assets/photos/code.webp" srcset="/assets/photos/code@2x.webp 2x" width="360" height="450" alt="Colourful code on a monitor in a dark room lit in teal and red" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip">Code</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>Code</b><p>Code that experts accepted into real software. Falcon reads it; members link to it.</p><a class="ph-cta" href="/app" data-auth="reg">Show your code →</a></div></figure><figure class="ph ph2"><img src="/assets/photos/leadership.webp" srcset="/assets/photos/leadership@2x.webp 2x" width="360" height="450" alt="A woman leading her team at a whiteboard covered in sketches" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip">Leadership</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>Leadership</b><p>Who started something, led a build or brought people along with them.</p><a class="ph-cta" href="/app" data-auth="reg">Tell us what you led →</a></div></figure><figure class="ph ph3"><img src="/assets/photos/science.webp" srcset="/assets/photos/science@2x.webp 2x" width="360" height="450" alt="A researcher in a lab coat holding a sample vial over a tray of samples" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip">Science</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>Science</b><p>Research and results you can point to: papers, data, experiments.</p><a class="ph-cta" href="/app" data-auth="reg">Share your research →</a></div></figure><figure class="ph ph4"><img src="/assets/photos/teamwork.webp" srcset="/assets/photos/teamwork@2x.webp 2x" width="360" height="450" alt="Four coworkers smiling around a laptop in a bright studio" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip">Teamwork</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>Teamwork</b><p>Who reviews, helps and builds with others, not only alone.</p><a class="ph-cta" href="/app" data-auth="reg">Find your team →</a></div></figure><figure class="ph ph5"><img src="/assets/photos/hardware.webp" srcset="/assets/photos/hardware@2x.webp 2x" width="360" height="450" alt="Close-up of a blue circuit board with chips and orange components" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip">Hardware</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>Hardware</b><p>Things you designed and built, with photos and files to prove it.</p><a class="ph-cta" href="/app" data-auth="reg">Show what you built →</a></div></figure><figure class="ph ph6"><img src="/assets/photos/design.webp" srcset="/assets/photos/design@2x.webp 2x" width="360" height="450" alt="Hands sketching a design on paper next to an orange ruler" loading="eager" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip">Design</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>Design</b><p>Work you made and shipped, shown on your profile.</p><a class="ph-cta" href="/app" data-auth="reg">Show your designs →</a></div></figure></div>
+   <div class="hero-art">
+    <div class="ticker" aria-label="1,857 builders found in one Falcon search, 2026-10-18">
+     <span class="tk-path" aria-hidden="true">falcon/search/2026-10-18/found</span>
+     <b data-count="1857" aria-hidden="true">1,857</b>
+     <span class="tk-cap" aria-hidden="true">builders found in one search</span>
+    </div>
+    <img class="engr brain" src="/assets/engr/brain.webp" width="857" height="960" alt="Engraving of the base of the human brain from Andreas Vesalius's anatomy, 1543" decoding="async">
+   </div>
+  </div>
+</section>
+
+<section id="fields" class="plates-sec">
+  <div class="wrap">
+    <p class="kicker">Plates I–VI · Any field</p>
+    <h2>Every kind of work counts.</h2>
+    <p class="lede">Tap a plate to see what we look for in each field.</p>
+    <div class="plates"><figure class="ph ph1"><img class="engr" src="/assets/engr/code.webp" width="549" height="703" alt="Engraving of part of a difference engine, a mechanical calculator, after a drawing by Benjamin Herschel Babbage, 1853" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip"><i>I.</i> Code</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>Code</b><p>Code that experts accepted into real software. Falcon reads it; members link to it.</p><a class="ph-cta" href="/app" data-auth="reg">Show your code →</a></div></figure><figure class="ph ph2"><img class="engr" src="/assets/engr/leadership.webp" width="240" height="720" alt="Engraved cross-section of the new Eddystone Lighthouse, 1884" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip"><i>II.</i> Leadership</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>Leadership</b><p>Who started something, led a build or brought people along with them.</p><a class="ph-cta" href="/app" data-auth="reg">Tell us what you led →</a></div></figure><figure class="ph ph3"><img class="engr" src="/assets/engr/science.webp" width="625" height="693" alt="Robert Hooke's microscope, engraved for his Micrographia, 1665" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip"><i>III.</i> Science</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>Science</b><p>Research and results you can point to: papers, data, experiments.</p><a class="ph-cta" href="/app" data-auth="reg">Share your research →</a></div></figure><figure class="ph ph4"><img class="engr" src="/assets/engr/teamwork.webp" width="900" height="706" alt="Engraving of hundreds of workers and horses raising the Vatican obelisk in Rome in 1586" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip"><i>IV.</i> Teamwork</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>Teamwork</b><p>Who reviews, helps and builds with others, not only alone.</p><a class="ph-cta" href="/app" data-auth="reg">Find your team →</a></div></figure><figure class="ph ph5"><img class="engr" src="/assets/engr/hardware.webp" width="617" height="760" alt="Engraved plate of James Watt's double-acting steam engine, 1822" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip"><i>V.</i> Hardware</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>Hardware</b><p>Things you designed and built, with photos and files to prove it.</p><a class="ph-cta" href="/app" data-auth="reg">Show what you built →</a></div></figure><figure class="ph ph6"><img class="engr" src="/assets/engr/design.webp" width="900" height="644" alt="Albrecht Dürer's woodcut of two men drawing a lute with a perspective frame, 1525" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip"><i>VI.</i> Design</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>Design</b><p>Work you made and shipped, shown on your profile.</p><a class="ph-cta" href="/app" data-auth="reg">Show your designs →</a></div></figure></div>
   </div>
 </section>
 
@@ -524,7 +605,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
     <ul class="next">
       <li><span class="tag">Built</span><span>Falcon, our eyes in the sky<small>Reads public work in major open-source projects, programming contests and math Q&amp;A, and finds engineers and mathematicians whose work experts accepted but few people follow.</small></span></li>
       <li><span class="tag">Testing</span><span>Linking one person's accounts across platforms<small>Falcon links accounts only through links the person published. Weaker matches (same handle, name or photo) are scored, kept unconfirmed and never used to contact anyone.</small></span></li>
-      <li><span class="tag">Live</span><span>RoundTable, Neuropian's place and space for intellectual expansion<small>Members sign up, take the profile survey and talk in chat, problem and build rooms. Signing up is the opt-in that lets Neuropian share a member's profile with companies and funds that hire through Neuropian.</small></span></li>
+      <li><span class="tag">Live</span><span>RoundTable, Neuropian's place and space for intellectual expansion<small>Members sign up, build a profile and talk in chat, problem and build rooms. Signing up is the opt-in that lets Neuropian share a member's profile with companies and funds that hire through Neuropian.</small></span></li>
       <li><span class="tag">Live</span><span>Talent<small>Profiles for people in any field, drafted from their own description and work, approved by them, and searchable by meaning at <a href="/talent">neuropian.com/talent</a>.</small></span></li>
       <li><span class="tag">Built</span><span>EagleEyes, Neuropian's scouting agent<small>A browser extension. On the sites a member turns it on for, it adds what they read, write and work on to their Neuropian profile. Not yet public.</small></span></li>
     </ul>
@@ -543,7 +624,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
       </div>
       <div class="ask">
         <h3>Want to be found</h3>
-        <p>Create an account and take the profile survey, or tell us what you're working on, with a link to the work.</p>
+        <p>Create an account and build your profile, or tell us what you're working on, with a link to the work.</p>
         <a class="mail" href="/app" data-auth="reg">Create an account →</a><br>
         <!--email_off--><a class="mail" href="mailto:dylan@neuropian.com?subject=What%20I%27m%20working%20on">dylan@neuropian.com</a><!--/email_off-->
       </div>
@@ -555,7 +636,7 @@ figure video{display:block;width:100%;height:auto;background:#000}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Neuropian · Beyond Limitless · Photos on Unsplash: Jakub Żerdzicki, Vitaly Gariev, Julia Koblitz, Jud Mackrill, Yogesh Phuyal</span>
+    <span>© 2026 Neuropian · Beyond Limitless · Engravings, all public domain: Vesalius 1543, B. H. Babbage 1853, Eddystone Lighthouse 1884, Hooke 1665, Zabaglia 1743, Robison 1822, Dürer 1525 (Rijksmuseum)</span>
     <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/app.html">Members</a></span>
   </div>
 </footer>
