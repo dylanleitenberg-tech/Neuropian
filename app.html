@@ -2812,7 +2812,7 @@ async function renderSidebarForServer(serverId, serverData){
   const rl=document.getElementById('room-list');
   if(serverId==='neuropian'){
     rl.innerHTML=CHAT_ROOMS.map(r=>`
-      <div class="chat-room-item" id="ri-${r.id}" onclick="switchRoom('${r.id}','${r.name}','${r.desc}')"
+      <div class="chat-room-item" id="ri-${r.id}" onclick="switchRoom('${r.id}','${jsa(r.name)}','${jsa(r.desc)}')"
         style="padding:.45rem 1rem;cursor:pointer;font-size:.72rem;color:#33312f;transition:all .12s;display:flex;align-items:center;gap:.4rem;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem"
         onmouseenter="if('${r.id}'!==currentRoom)this.style.color='#545250';if('${r.id}'!==currentRoom)this.style.background='rgba(43,42,40,.04)'"
         onmouseleave="if('${r.id}'!==currentRoom)this.style.color='#928f8c';if('${r.id}'!==currentRoom)this.style.background='transparent'">
@@ -2840,7 +2840,7 @@ async function renderSidebarForServer(serverId, serverData){
       let html='';
       if(visibleChannels.length){
         html+=visibleChannels.map(c=>`
-          <div class="chat-room-item" id="ri-srv_${serverId}_${c.id}" onclick="switchRoom('srv_${serverId}_${c.id}','${escHtml(c.name)}','${escHtml(c.description||'')}')"
+          <div class="chat-room-item" id="ri-srv_${serverId}_${c.id}" onclick="switchRoom('srv_${serverId}_${c.id}','${jsa(c.name)}','${jsa(c.description||'')}')"
             style="padding:.45rem 1rem;cursor:pointer;font-size:.72rem;color:#33312f;transition:all .12s;display:flex;align-items:center;gap:.4rem;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem"
             onmouseenter="this.style.color='#545250';this.style.background='rgba(43,42,40,.04)'"
             onmouseleave="this.style.color='#928f8c';this.style.background='transparent'">
@@ -2859,7 +2859,7 @@ async function renderSidebarForServer(serverId, serverData){
       if(visibleSubServers.length){
         html+=`<div style="font-size:.4rem;letter-spacing:.26em;text-transform:uppercase;color:#bfbcb7;font-weight:700;padding:.7rem 1rem .3rem;display:flex;align-items:center;justify-content:space-between">
           <span>Sub-servers</span>
-          <span onclick="openCreateSubServer('${serverId}','${escHtml(serverData?.name||'')}')" style="cursor:pointer;color:#22406c;font-size:.7rem" title="Add Sub-server">+</span>
+          <span onclick="openCreateSubServer('${serverId}','${jsa(serverData?.name||'')}')" style="cursor:pointer;color:#22406c;font-size:.7rem" title="Add Sub-server">+</span>
         </div>`;
         html+=visibleSubServers.map(ss=>`
           <div onclick="switchServer('${ss.id}')"
@@ -2868,7 +2868,7 @@ async function renderSidebarForServer(serverId, serverData){
             <span style="color:#22406c;font-size:.62rem">▸</span>${escHtml(ss.name)}
           </div>`).join('');
       }
-      html+=`<div onclick="openCreateSubServer('${serverId}','${escHtml(serverData?.name||'')}')"
+      html+=`<div onclick="openCreateSubServer('${serverId}','${jsa(serverData?.name||'')}')"
         style="padding:.4rem 1rem;cursor:pointer;font-size:.62rem;color:#b0aca8;display:flex;align-items:center;gap:.4rem;margin-top:.3rem"
         onmouseenter="this.style.color='#22406c'" onmouseleave="this.style.color='#b0aca8'">
         <span>＋</span> Add Sub-server
@@ -2932,7 +2932,7 @@ async function loadMembersPanel(serverId){
     for(const role of roles){
       const roleMembers=profs.filter(p=>memberRoles.some(mr=>mr.user_id===p.user_id&&mr.role_id===role.id));
       if(!roleMembers.length)continue;
-      html+=`<div style="font-size:.38rem;letter-spacing:.24em;text-transform:uppercase;color:${role.color};font-weight:700;padding:.6rem .8rem .2rem">${escHtml(role.name)} - ${roleMembers.length}</div>`;
+      html+=`<div style="font-size:.38rem;letter-spacing:.24em;text-transform:uppercase;color:${hexc(role.color)};font-weight:700;padding:.6rem .8rem .2rem">${escHtml(role.name)} - ${roleMembers.length}</div>`;
       for(const p of roleMembers){
         rendered.add(p.user_id);
         html+=memberRow(p,roles,memberRoles);
@@ -2953,7 +2953,7 @@ function memberRow(p,roles,memberRoles){
   const name=p.first_name?`${p.first_name} ${p.last_name||''}`.trim():p.user_id.slice(0,8);
   const initials=name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?';
   const userRoles=roles.filter(r=>memberRoles.some(mr=>mr.user_id===p.user_id&&mr.role_id===r.id));
-  const badges=userRoles.map(r=>`<span style="font-size:.44rem;padding:.1rem .35rem;border-radius:20px;background:${r.color}22;color:${r.color};border:1px solid ${r.color}44">${escHtml(r.name)}</span>`).join('');
+  const badges=userRoles.map(r=>`<span style="font-size:.44rem;padding:.1rem .35rem;border-radius:20px;background:${hexc(r.color)}22;color:${hexc(r.color)};border:1px solid ${hexc(r.color)}44">${escHtml(r.name)}</span>`).join('');
   const actions=canModerate?`<div class="mbr-actions" style="display:flex;gap:.25rem;flex-shrink:0;opacity:0;transition:opacity .12s">
     <button onclick="kickMember('${p.user_id}')" style="background:rgba(255,180,0,.08);border:1px solid rgba(255,180,0,.2);border-radius:3px;color:#ffb400;cursor:pointer;font-size:.5rem;padding:.15rem .35rem;font-family:'DM Sans',sans-serif" onmouseenter="this.style.background='rgba(255,180,0,.2)'" onmouseleave="this.style.background='rgba(255,180,0,.08)'">Kick</button>
     <button onclick="banMember('${p.user_id}')" style="background:rgba(163,58,47,.06);border:1px solid rgba(163,58,47,.2);border-radius:3px;color:#a33a2f;cursor:pointer;font-size:.5rem;padding:.15rem .35rem;font-family:'DM Sans',sans-serif" onmouseenter="this.style.background='rgba(163,58,47,.15)'" onmouseleave="this.style.background='rgba(163,58,47,.06)'">Ban</button>
@@ -3096,7 +3096,7 @@ function renderRolesList(roles){
   if(!roles.length){el.innerHTML='<div style="font-size:.65rem;color:#b0aca8;font-style:italic">No roles yet.</div>';return;}
   el.innerHTML=roles.map(r=>`
     <div style="display:flex;align-items:center;gap:.6rem;padding:.4rem .6rem;background:rgba(43,42,40,.03);border-radius:4px">
-      <div style="width:10px;height:10px;border-radius:50%;background:${r.color};flex-shrink:0"></div>
+      <div style="width:10px;height:10px;border-radius:50%;background:${hexc(r.color)};flex-shrink:0"></div>
       <span style="flex:1;font-size:.72rem;color:#3f3d3b">${escHtml(r.name)}</span>
       <button onclick="deleteRole('${r.id}')" style="background:none;border:none;color:#a09d9a;cursor:pointer;font-size:.75rem;padding:0;line-height:1" onmouseenter="this.style.color='#a33a2f'" onmouseleave="this.style.color='#a09d9a'">✕</button>
     </div>`).join('');
@@ -3114,8 +3114,8 @@ function renderMembersList(profiles, roles, memberRoles, serverId){
     const roleToggles=roles.map(r=>{
       const has=userRoleIds.includes(r.id);
       return `<label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.68rem;color:#545250">
-        <input type="checkbox" ${has?'checked':''} onchange="toggleMemberRole('${p.user_id}','${r.id}','${serverId}',this.checked)" style="accent-color:${r.color}">
-        <span style="color:${r.color}">${escHtml(r.name)}</span>
+        <input type="checkbox" ${has?'checked':''} onchange="toggleMemberRole('${p.user_id}','${r.id}','${serverId}',this.checked)" style="accent-color:${hexc(r.color)}">
+        <span style="color:${hexc(r.color)}">${escHtml(r.name)}</span>
       </label>`;
     }).join('');
     return `<div style="border:1px solid rgba(43,42,40,.06);border-radius:5px;overflow:hidden">
@@ -3148,8 +3148,8 @@ function renderChannelPermissions(channels, roles, perms, serverId){
     const roleCheckboxes=roles.map(r=>{
       const checked=restrictedRoleIds.has(r.id);
       return `<label style="display:flex;align-items:center;gap:.35rem;cursor:pointer;font-size:.65rem;color:#545250">
-        <input type="checkbox" ${checked?'checked':''} onchange="toggleChannelPermission('${c.id}','${r.id}','${serverId}',this.checked)" style="accent-color:${r.color}">
-        <span style="color:${r.color}">${escHtml(r.name)}</span>
+        <input type="checkbox" ${checked?'checked':''} onchange="toggleChannelPermission('${c.id}','${r.id}','${serverId}',this.checked)" style="accent-color:${hexc(r.color)}">
+        <span style="color:${hexc(r.color)}">${escHtml(r.name)}</span>
       </label>`;
     }).join('');
     const lockedLabel=restrictedRoleIds.size?`<span style="font-size:.52rem;color:#787672">🔒 ${restrictedRoleIds.size} role${restrictedRoleIds.size>1?'s':''}</span>`:'<span style="font-size:.52rem;color:#b0aca8">open</span>';
@@ -3661,16 +3661,8 @@ async function submitJoinServer(){
   err.style.display='none';
   btn.textContent='Joining…';btn.disabled=true;
   try{
-    const {data:srv,error}=await sb.from('servers').select('id,name').eq('join_code',code).single();
-    if(error||!srv){err.textContent='Invalid code. Check with the server owner.';err.style.display='block';btn.textContent='Join Server';btn.disabled=false;return;}
-    // Check not banned
-    const {data:ban}=await sb.from('server_bans').select('id').eq('server_id',srv.id).eq('user_id',currentUser.id).single();
-    if(ban){err.textContent='You are banned from this server.';err.style.display='block';btn.textContent='Join Server';btn.disabled=false;return;}
-    // Check not already a member
-    const {data:existing}=await sb.from('server_members').select('id').eq('server_id',srv.id).eq('user_id',currentUser.id).single();
-    if(!existing){
-      await sb.from('server_members').insert({server_id:srv.id,user_id:currentUser.id});
-    }
+    const {data:srv,error}=await sb.rpc('join_server',{p_code:code});
+    if(error||!srv){err.textContent=(error&&error.message)||'Invalid code. Check with the server owner.';err.style.display='block';btn.textContent='Join Server';btn.disabled=false;return;}
     await loadServerRail();
     addServerIconToRail(srv.id, srv.name);
     closeJoinServer();
@@ -3690,7 +3682,7 @@ async function loadProblemRooms(){
       return;
     }
     prl.innerHTML=data.map(p=>`
-      <div onclick="switchRoom('problem_${p.id}','${escHtml(p.title)}','${escHtml(p.category||'')}${p.reward?' · '+escHtml(p.reward):''}')"
+      <div onclick="switchRoom('problem_${p.id}','${jsa(p.title)}','${jsa(p.category||'')}${p.reward?' · '+jsa(p.reward):''}')"
         style="padding:.45rem 1rem;cursor:pointer;font-size:.68rem;color:#33312f;transition:all .12s;display:flex;align-items:center;gap:.4rem;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem;line-height:1.3"
         onmouseenter="this.style.color='#545250';this.style.background='rgba(43,42,40,.04)'"
         onmouseleave="this.style.color='#928f8c';this.style.background='transparent'">
@@ -3737,7 +3729,7 @@ const _DEFAULT_BUILDS=[];
 
 function _buildRoomItem(b,idPrefix){
   const roomId=idPrefix+(b.id||b._db_id);
-  return `<div onclick="switchRoom('${escHtml(roomId)}','${escHtml(b.title)}','${escHtml(b.category||'')}${b.looking_for?' · '+escHtml(b.looking_for):''}')"
+  return `<div onclick="switchRoom('${jsa(roomId)}','${jsa(b.title)}','${jsa(b.category||'')}${b.looking_for?' · '+jsa(b.looking_for):''}')"
     style="padding:.45rem 1rem;cursor:pointer;font-size:.68rem;color:#33312f;transition:all .12s;display:flex;align-items:center;gap:.4rem;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem;line-height:1.3"
     onmouseenter="this.style.color='#545250';this.style.background='rgba(43,42,40,.04)'"
     onmouseleave="this.style.color='#928f8c';this.style.background='transparent'">
@@ -3956,7 +3948,7 @@ async function runTeamAssembly(roomId,roomDesc){return;
           ${fields.length?`<div style="font-size:.55rem;color:#a09d9a;margin-bottom:.5rem">${fields.map(f=>`<span style="background:rgba(43,42,40,.04);border:1px solid rgba(43,42,40,.08);border-radius:2px;padding:.08rem .35rem;margin-right:.25rem">${escHtml(f)}</span>`).join('')}</div>`:''}
           ${p.accomplishment?`<div style="font-size:.62rem;color:#545250;font-family:'Cormorant Garamond',serif;font-style:italic;line-height:1.55;border-left:2px solid rgba(43,76,126,.2);padding-left:.6rem;margin-bottom:.5rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${escHtml(p.accomplishment)}</div>`:''}
         </div>
-        <button onclick="closeTeamAssembly();switchRoom('${escHtml(dmRoom)}','${escHtml(name)}','Direct Message')" style="flex-shrink:0;background:none;border:1px solid rgba(43,76,126,.25);color:#22406c;padding:.3rem .65rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap" onmouseenter="this.style.background='rgba(43,76,126,.08)'" onmouseleave="this.style.background='none'">Message</button>
+        <button onclick="closeTeamAssembly();switchRoom('${jsa(dmRoom)}','${jsa(name)}','Direct Message')" style="flex-shrink:0;background:none;border:1px solid rgba(43,76,126,.25);color:#22406c;padding:.3rem .65rem;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap" onmouseenter="this.style.background='rgba(43,76,126,.08)'" onmouseleave="this.style.background='none'">Message</button>
       </div>`;
     }).join('');
   }catch(e){
@@ -4225,7 +4217,7 @@ function showEmojiPicker(msgId,btn){
   const picker=document.createElement('div');
   picker.id='emoji-picker';
   picker.style.cssText='position:fixed;background:#d4d1cc;border:1px solid rgba(43,42,40,.12);border-radius:6px;padding:.4rem;z-index:9999;display:flex;flex-wrap:wrap;gap:.15rem;width:168px;box-shadow:0 4px 16px rgba(0,0,0,0.27)';
-  picker.innerHTML=EMOJIS.map(e=>`<span onclick="toggleReaction('${msgId}','${e}');document.getElementById('emoji-picker')?.remove()" style="cursor:pointer;font-size:1.15rem;padding:.2rem .25rem;border-radius:3px;line-height:1" onmouseenter="this.style.background='rgba(43,42,40,.1)'" onmouseleave="this.style.background='none'">${e}</span>`).join('');
+  picker.innerHTML=EMOJIS.map(e=>`<span onclick="toggleReaction('${msgId}','${jsa(e)}');document.getElementById('emoji-picker')?.remove()" style="cursor:pointer;font-size:1.15rem;padding:.2rem .25rem;border-radius:3px;line-height:1" onmouseenter="this.style.background='rgba(43,42,40,.1)'" onmouseleave="this.style.background='none'">${e}</span>`).join('');
   const rect=btn.getBoundingClientRect();
   picker.style.left=Math.min(rect.left,window.innerWidth-180)+'px';
   picker.style.top=(rect.bottom+4)+'px';
@@ -4272,7 +4264,7 @@ function renderReactions(msgId,reactions){
     if(r.user_id===currentUser?.id)byMe[r.reaction]=true;
   });
   el.innerHTML=Object.entries(counts).map(([emoji,count])=>`
-    <span onclick="toggleReaction('${msgId}','${emoji}')" style="display:inline-flex;align-items:center;gap:.2rem;padding:.18rem .45rem;border-radius:20px;background:${byMe[emoji]?'rgba(43,76,126,.15)':'rgba(43,42,40,.05)'};border:1px solid ${byMe[emoji]?'rgba(43,76,126,.3)':'rgba(43,42,40,.08)'};cursor:pointer;font-size:.72rem;transition:all .12s" onmouseenter="this.style.background='rgba(43,42,40,.1)'" onmouseleave="this.style.background='${byMe[emoji]?'rgba(43,76,126,.15)':'rgba(43,42,40,.05)'}'">
+    <span onclick="toggleReaction('${msgId}','${jsa(emoji)}')" style="display:inline-flex;align-items:center;gap:.2rem;padding:.18rem .45rem;border-radius:20px;background:${byMe[emoji]?'rgba(43,76,126,.15)':'rgba(43,42,40,.05)'};border:1px solid ${byMe[emoji]?'rgba(43,76,126,.3)':'rgba(43,42,40,.08)'};cursor:pointer;font-size:.72rem;transition:all .12s" onmouseenter="this.style.background='rgba(43,42,40,.1)'" onmouseleave="this.style.background='${byMe[emoji]?'rgba(43,76,126,.15)':'rgba(43,42,40,.05)'}'">
       ${emoji} <span style="font-size:.58rem;color:#5f5e5b">${count}</span>
     </span>`).join('');
 }
@@ -4346,13 +4338,15 @@ function renderAttachment(containerId,url,type,path){
   if(!el)return;
   const name=path?path.split('/').pop().replace(/^\d+_/,''):'file';
   if(type&&type.startsWith('image/')){
-    el.innerHTML=`<img src="${url}" alt="${escHtml(name)}" style="max-width:240px;max-height:180px;border-radius:6px;border:1px solid rgba(43,42,40,.08);display:block;cursor:pointer" onclick="window.open('${url}','_blank')" onerror="this.style.display='none'">`;
+    el.innerHTML=`<img src="${url}" alt="${escHtml(name)}" style="max-width:240px;max-height:180px;border-radius:6px;border:1px solid rgba(43,42,40,.08);display:block;cursor:pointer" onclick="window.open('${jsa(url)}','_blank')" onerror="this.style.display='none'">`;
   } else {
     el.innerHTML=`<a href="${url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .65rem;background:rgba(43,42,40,.05);border:1px solid rgba(43,42,40,.1);border-radius:5px;color:#545250;font-size:.65rem;text-decoration:none;transition:background .12s" onmouseenter="this.style.background='rgba(43,42,40,.1)'" onmouseleave="this.style.background='rgba(43,42,40,.05)'">📄 ${escHtml(name)}</a>`;
   }
 }
 
 function escHtml(t){if(!t)return'';return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function jsa(t){if(t==null)return'';return escHtml(String(t).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\r/g,'\\r').replace(/\n/g,'\\n').replace(/</g,'\\x3c'));}
+function hexc(c){return/^#[0-9a-f]{3,8}$/i.test(c||'')?c:'#8c8983';}
 function safeUrl(u){return(u&&/^https?:\/\//i.test(u))?u:'#';}
 
 let _lastSend=0;
@@ -4471,8 +4465,8 @@ async function openCreateSubServer(parentId,parentName){
     } else {
       rolesList.innerHTML=roles.map(r=>`
         <label style="display:flex;align-items:center;gap:.45rem;cursor:pointer;font-size:.68rem;color:#545250">
-          <input type="checkbox" value="${r.id}" style="accent-color:${r.color}">
-          <span style="color:${r.color}">${escHtml(r.name)}</span>
+          <input type="checkbox" value="${r.id}" style="accent-color:${hexc(r.color)}">
+          <span style="color:${hexc(r.color)}">${escHtml(r.name)}</span>
         </label>`).join('');
     }
   }
@@ -4531,7 +4525,7 @@ async function loadFriends(){
     if(!data||!data.length){fl.innerHTML=`<div style="padding:.45rem 1rem;font-size:.65rem;color:#b0aca8;font-style:italic">No friends yet</div>`;return;}
     fl.innerHTML=data.map(f=>`
       <div class="chat-room-item" id="ri-dm_${[currentUser.id,f.friend_id].sort().join('_')}"
-        onclick="openDM('${f.friend_id}','${escHtml(f.friend_name||'Member').replace(/'/g,'&#39;')}')"
+        onclick="openDM('${f.friend_id}','${jsa(f.friend_name||'Member')}')"
         style="padding:.45rem 1rem;cursor:pointer;font-size:.7rem;color:#928f8c;display:flex;align-items:center;gap:.5rem;transition:all .12s;border-left:2px solid transparent;border-radius:0 4px 4px 0;margin:1px .4rem"
         onmouseenter="if(currentRoom!=='dm_${[currentUser.id,f.friend_id].sort().join('_')}')this.style.color='#545250';this.style.background='rgba(43,42,40,.04)'"
         onmouseleave="if(currentRoom!=='dm_${[currentUser.id,f.friend_id].sort().join('_')}')this.style.color='#928f8c';this.style.background='transparent'">
@@ -5399,7 +5393,7 @@ html:not(#np-x) a:focus-visible,html:not(#np-x) button:focus-visible,html:not(#n
     } finally { busy=false; btns.forEach(b=>{ if(b.isConnected) b.disabled=false; }); }
   }
   const STATUS={open:'Open',in_review:'In review',succeeded:'Verified',unverified:'Not verified',cancelled:'Cancelled'};
-  const MSTATUS={requested:'Asked to join',accepted:'Accepted',declined:'Declined',submitted:'Work submitted',approved:'Approved',rejected:'Not approved',left:'Left'};
+  const MSTATUS={requested:'Asked to join',accepted:'Accepted',declined:'Not accepted',submitted:'Work submitted',approved:'Approved',rejected:'Not approved',left:'No work submitted before it closed'};
 
   window.npcLoad=async function(keep){
     if(!currentUser)return;
@@ -5444,7 +5438,7 @@ html:not(#np-x) a:focus-visible,html:not(#np-x) button:focus-visible,html:not(#n
       +review.map(p=>'<article class="pc-card">'+head(p)+membersOf(p.id).filter(m=>['submitted','approved','rejected'].includes(m.status)).map(m=>
       '<div class="pc-row"><b>'+who(m.user_id)+'</b> · '+MSTATUS[m.status]+proof(m)
       +(m.status==='submitted'?'<label class="b-l">Note (required to reject)<input id="rn-'+p.id+m.user_id+'" maxlength="600"></label><div class="m-actions"><button class="m-btn" onclick="npcReview(\''+p.id+'\',\''+m.user_id+'\',true)">Approve: the work is done</button><button class="m-btn ghost" onclick="npcReview(\''+p.id+'\',\''+m.user_id+'\',false)">Reject</button></div>':(m.review_note?'<p class="pc-meta">'+esc(m.review_note)+'</p>':''))
-      +'</div>').join('')+'<div class="m-actions"><button class="m-btn ghost" onclick="npcClose(\''+p.id+'\')">Close the review now</button></div></article>').join('');
+      +'</div>').join('')+((p.sent_for_review_at&&Date.now()-Date.parse(p.sent_for_review_at)>14*864e5)?'<div class="m-actions" style="margin-top:22px"><button class="m-btn ghost" onclick="npcClose(\''+p.id+'\')">Waited 14 days: close the review</button></div>':'')+'</article>').join('');
     if(!me.terms)return;
     // owner
     $('pc-mine').innerHTML=mine.length?mine.map(p=>{
