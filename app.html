@@ -668,6 +668,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 </div>
 <div id="page-build" class="page" style="background:#e6e2de;min-height:100vh;color:#33312f">
 <section class="m-home b-wrap">
+  <button class="pc-back" onclick="showPage('home')">← Members home</button>
   <p class="m-kicker">Neuropian · Your public profile</p>
   <h1 class="m-title">Show what you've made.</h1>
   <p class="m-lede">Engineering, science, design, art, music, writing, business: anything you've built, made or solved.
@@ -702,6 +703,11 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <p id="b-pub" class="b-p"></p>
     <p id="b-msg" class="b-p" aria-live="polite"></p>
   </div></div>
+  <div class="b-step"><span class="b-n">5</span><div>
+    <b>What next</b>
+    <p class="b-p">Once it's published, startups searching Talent can find you. Browse it, or go back to the members home.</p>
+    <div class="m-actions" style="margin-top:12px"><button class="m-btn ghost" onclick="location.href='/talent'">Browse Talent</button><button class="m-btn ghost" onclick="showPage('home')">Members home</button></div>
+  </div></div>
 </section>
 <style>
 .b-wrap{max-width:820px}
@@ -713,6 +719,9 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 .b-l input,.b-l textarea,.b-w input{display:block;width:100%;margin-top:6px;font-size:15px;color:#33312f;background:#e0ddd8;border:1px solid rgba(43,42,40,.14);border-radius:10px;padding:10px 12px;outline:none}
 .b-l input:focus,.b-l textarea:focus,.b-w input:focus{border-color:#2b4c7e}
 .b-c{display:flex;gap:8px;align-items:center;font-size:15px;margin-top:12px}
+.dob-sel{display:flex;gap:8px;margin-top:6px}
+.dob-sel select{flex:1;min-width:0;font:inherit;font-size:15px;color:#33312f;background:#e0ddd8;border:1px solid rgba(43,42,40,.14);border-radius:10px;padding:10px 8px;outline:none}
+.auth-field .dob-sel select{font-family:'Barlow',sans-serif;font-size:.84rem;color:var(--white);background:rgba(43,42,40,.05);border:1px solid rgba(43,42,40,.12);border-radius:0;padding:.75rem .6rem}
 .b-w{display:grid;grid-template-columns:1fr 1fr;gap:6px;border-top:1px solid rgba(43,42,40,.14);padding:10px 0;margin-top:8px}
 .b-w input:nth-child(3){grid-column:1/-1}.b-w .b-row{grid-column:1/-1;display:flex;gap:12px;align-items:center;font-size:12.5px;color:rgba(43,42,40,.5)}
 .b-w button{background:none;border:0;color:rgba(43,42,40,.62);font-size:13px;cursor:pointer;padding:0}
@@ -5036,6 +5045,23 @@ else{renderOppPreview();}
 const TALENT_FN=SUPA_URL+'/functions/v1/talent';
 let _bPub=null, _bGhUrls=new Set();
 function _bMsg(t){document.getElementById('b-msg').textContent=t;}
+// Month/day/year pickers in place of <input type="date">: Safari's date box keeps stray year digits ("0008") and
+// won't take a retyped year (Dylan, 2026-10-25). The original input stays, hidden, and holds YYYY-MM-DD for the code that reads it.
+function _dobSelects(id){
+  const inp=document.getElementById(id); if(!inp||inp.dataset.sel)return; inp.dataset.sel='1'; inp.type='hidden';
+  const y=new Date().getFullYear(), M=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const o=(v,t)=>'<option value="'+v+'">'+t+'</option>', p=n=>String(n).padStart(2,'0');
+  const w=document.createElement('div'); w.className='dob-sel';
+  w.innerHTML='<select aria-label="Month">'+o('','Month')+M.map((m,i)=>o(p(i+1),m)).join('')+'</select>'
+    +'<select aria-label="Day">'+o('','Day')+Array.from({length:31},(_,i)=>o(p(i+1),i+1)).join('')+'</select>'
+    +'<select aria-label="Year">'+o('','Year')+Array.from({length:111},(_,i)=>o(y-i,y-i)).join('')+'</select>';
+  const [m,d,yy]=w.querySelectorAll('select');
+  w.onchange=()=>{const ok=m.value&&d.value&&yy.value&&new Date(+yy.value,+m.value-1,+d.value).getDate()===+d.value;
+    inp.value=ok?yy.value+'-'+m.value+'-'+d.value:''; inp.dispatchEvent(new Event('change'));};
+  inp.after(w);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{_dobSelects('b-dob-in');_dobSelects('rg-dob');});
+else{_dobSelects('b-dob-in');_dobSelects('rg-dob');}
 function openBuild(){ if(!currentUser){showAuth('reg','build');return;} showPage('build'); }
 function _bWorkRow(w){
   const d=document.createElement('div'); d.className='b-w';
