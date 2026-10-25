@@ -434,12 +434,14 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
 <style>
 /* language switcher (site_i18n.py) */
-footer .langs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 20px;margin-bottom:10px;font-size:15px;font-family:var(--serif),"Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",serif}
+footer .langs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 20px;margin-bottom:10px;font-size:15px;font-family:"EB Garamond","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif}
 footer .langs a{color:var(--dim);text-decoration:none}
 footer .langs a:hover{color:#ECE8E3;text-decoration:underline}
 footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decoration-color:rgba(236,232,227,.6)}
 /* es */
 @media(max-width:480px){.bar .wrap{gap:12px}.nav{gap:16px;font-size:16px}.nav a.login{padding:6px 12px}}
+@media(max-width:380px){.nav a:not(.login){display:none}}
+h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
 </style>
 <!--/i18n:head-->
 </head>
@@ -498,7 +500,7 @@ footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decor
     <div class="tiles">
       <div class="tile t1 reveal"><b data-count="5693">5,693</b><span>constructores encontrados</span></div>
       <div class="tile t2 reveal"><b data-count="202">202</b><span>grandes proyectos de software analizados</span></div>
-      <div class="tile t3 reveal"><b>6 de cada 10</b><span>tienen 12 seguidores en GitHub o menos</span></div>
+      <div class="tile t3 reveal"><b>6 de 10</b><span>tienen 12 seguidores en GitHub o menos</span></div>
       <div class="tile t4 reveal"><b data-count="1033">1,033</b><span>también revisan y aprueban el trabajo de otros</span></div>
     </div>
   </div>
@@ -519,7 +521,7 @@ footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decor
 
 <section id="run">
   <div class="wrap">
-    <p class="kicker">Falcon, nuestros ojos en el cielo · una búsqueda real · 20 oct. 2026</p>
+    <p class="kicker">Falcon, nuestros ojos en el cielo · una búsqueda real · 20 oct. 2026</p>
     <h2>Lo que encontró una búsqueda.</h2>
     <ol class="flow">
       <li class="reveal"><b data-count="202">202</b><span>grandes proyectos de software analizados, como Python, Rust, LLVM, Zephyr y Home Assistant</span></li>
@@ -533,7 +535,7 @@ footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decor
 
 <section id="method">
   <div class="wrap">
-    <p class="kicker">Método · cifras al 20 oct. 2026</p>
+    <p class="kicker">Método · cifras al 20 oct. 2026</p>
     <h2>Dos tipos de evidencia, un informe.</h2>
 
     <div class="block">
@@ -549,8 +551,8 @@ footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decor
         <details>
           <summary>Método y cifras</summary>
           <ul>
-            <li><strong>Cohorte.</strong> Todos los jugadores de Codeforces con rating 1600–2300 el 16 oct. 2024, con al menos 15 concursos puntuables y 3 en el año anterior: 11,088 jugadores. 290 (2.6%) llegaron a 2400 en los dos años siguientes.</li>
-            <li><strong>Elegido con datos anteriores.</strong> Mismas reglas el 16 oct. 2022: 9,305 jugadores, de los que 274 habían llegado a 2400 para oct. 2024, antes de que empiece el periodo de prueba. Rasgos conservados si su AUC dentro de cada franja era mayor que 0.55, invertidos si era menor que 0.45: ganancia de rating en 12 meses, cuán pocos concursos necesitó para llegar a 2000 (0 si nunca llegó), meses con un concurso en los 12 meses anteriores al último, distancia por debajo de su propio máximo y, restando, los años naturales con un concurso puntuable.</li>
+            <li><strong>Cohorte.</strong> Todos los jugadores de Codeforces con rating 1600–2300 el 16 oct. 2024, con al menos 15 concursos puntuables y 3 en el año anterior: 11,088 jugadores. 290 (2.6%) llegaron a 2400 en los dos años siguientes.</li>
+            <li><strong>Elegido con datos anteriores.</strong> Mismas reglas el 16 oct. 2022: 9,305 jugadores, de los que 274 habían llegado a 2400 para oct. 2024, antes de que empiece el periodo de prueba. Rasgos conservados si su AUC dentro de cada franja era mayor que 0.55, invertidos si era menor que 0.45: ganancia de rating en 12 meses, cuán pocos concursos necesitó para llegar a 2000 (0 si nunca llegó), meses con un concurso en los 12 meses anteriores al último, distancia por debajo de su propio máximo y, restando, los años naturales con un concurso puntuable.</li>
             <li><strong>Clasificación, también elegida con 2022–24.</strong> Candidatos: solo el rating; el rating más 0.05, 0.1 o 0.2 × la puntuación; franjas de rating de 10, 25, 50 o 100 puntos con la puntuación ordenando cada franja. Las franjas de 25 puntos encontraron la mayor cantidad de futuros 2400 en el top 50, 100 y 290.</li>
             <li><strong>Prueba.</strong> Congelado y aplicado a la cohorte de 2024: la puntuación sola obtiene 0.647 dentro de franjas de 100 puntos (rating: 0.599) y 0.632 dentro de franjas de 10 puntos. La clasificación desplegada obtiene un AUC de 0.899 en total, frente a 0.896 del rating solo (IC del 95% 0.878–0.913). Rating + 0.2 × puntuación tuvo el AUC más alto, 0.908 (ganancia por bootstrap pareado sobre el rating de +0.005 a +0.019), pero solo 13, 28 y 81 futuros 2400 en su top 50, 100 y 290, así que no se usa. En lo más alto de una lista, el rating sigue siendo difícil de superar: el top 50, 100 y 290 de la clasificación desplegada contenía 18, 40 y 92 futuros 2400, frente a 21, 40 y 89 del rating solo.</li>
             <li><strong>Quién sigue compitiendo.</strong> El 37% de la cohorte de 2024 no jugó ningún concurso puntuable después. Agrupando a los jugadores por concursos jugados después además de por rating, el AUC de la puntuación baja a 0.613.</li>
@@ -575,9 +577,9 @@ footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decor
         <details>
           <summary>Método y cifras</summary>
           <ul>
-            <li><strong>Reglas.</strong> 3 o más pull requests fusionados en los 12 meses hasta el 20 oct. 2026, no más de 40 por mes activo, y 150 seguidores en GitHub o menos. Descartados: bots; cualquiera que haya hecho merge en ese proyecto o en otro de los analizados; miembros públicos de grandes organizaciones de código abierto, incluida la del propio proyecto; personas cuyo perfil menciona una empresa o institución de una lista fija (grandes tecnológicas y fabricantes de chips, laboratorios de IA, firmas de trading, laboratorios nacionales, los patrocinadores de cada proyecto, algunas universidades); dueños de un repositorio con 1,000 estrellas o más; y perfiles que sugieren que se trata de un menor. Se revisaron los 8,160 candidatos; se descartaron 2,467, cada uno contado bajo el primer motivo que aplicaba: 1,141 por empresa o institución, 798 por seguidores, 365 por pertenecer a una organización, 138 por ser committers en otro proyecto, 18 por un repositorio de 1,000+ estrellas, 7 como posibles menores. 3,444 de las 5,693 personas tienen 12 seguidores en GitHub o menos; la mediana es 8.</li>
-            <li><strong>Permisos de merge.</strong> Las 5,529 personas fuera de Rust y mathlib no han hecho merge de ningún pull request en su proyecto en el historial obtenido (desde oct. 2023 para LLVM, CPython, Julia, JAX, NumPy, SciPy, DuckDB y llama.cpp; desde oct. 2025 para el resto), y ninguna es miembro público de la organización del proyecto. En los proyectos donde de una a cinco personas hacen el merge por todos (Godot, Helix, Klipper, Marlin, OpenSCAD, Scanpy, Bevy, Sage, tmux, ripgrep), también se descarta a cualquiera que haya aprobado el pull request de otra persona. Un committer que sube cambios directamente y mantiene privada su membresía aún podría colarse. Rust y mathlib hacen merge mediante un bot, así que para sus 164 personas solo se comprueba la pertenencia a la organización.</li>
-            <li><strong>Por qué no se llama predicción.</strong> En ocho de los proyectos (ni Rust ni tinygrad), 2,653 personas (2,721 registros persona-proyecto) tuvieron pull requests fusionados entre oct. 2023 y oct. 2024 sin haber hecho merge ni aprobado los de otros. 156 hicieron merge en los dos años siguientes, señal de que se les había dado acceso de escritura; 135 de ellas en LLVM, así que esto es sobre todo una medición de LLVM. El número de PR fusionados las ordena con un AUC de 0.641, pero eso separa sobre todo a quienes contribuyeron una sola vez de quienes repiten: entre los registros con 3 o más pull requests fusionados es 0.556, y entre los que tienen 6 o más, como 2,522 de las 5,693 de la lista y las 100 con informe, 0.518 (33 de 159 hicieron merge, 28 en LLVM), lo que equivale al azar. Otros rasgos parecían informativos dentro de la muestra, dentro de franjas por número de PR; la única comprobación fuera de la muestra posible, dividida por proyecto, tenía solo 3 casos positivos y fue en sentido contrario (0.394, frente a 0.717 del número solo). Así que el orden de la lista aporta poca información. Lo que ofrece es evidencia de trabajo aceptado, para que la lea una persona.</li>
+            <li><strong>Reglas.</strong> 3 o más pull requests fusionados en los 12 meses hasta el 20 oct. 2026, no más de 40 por mes activo, y 150 seguidores en GitHub o menos. Descartados: bots; cualquiera que haya hecho merge en ese proyecto o en otro de los analizados; miembros públicos de grandes organizaciones de código abierto, incluida la del propio proyecto; personas cuyo perfil menciona una empresa o institución de una lista fija (grandes tecnológicas y fabricantes de chips, laboratorios de IA, firmas de trading, laboratorios nacionales, los patrocinadores de cada proyecto, algunas universidades); dueños de un repositorio con 1,000 estrellas o más; y perfiles que sugieren que se trata de un menor. Se revisaron los 8,160 candidatos; se descartaron 2,467, cada uno contado bajo el primer motivo que aplicaba: 1,141 por empresa o institución, 798 por seguidores, 365 por pertenecer a una organización, 138 por ser committers en otro proyecto, 18 por un repositorio de 1,000+ estrellas, 7 como posibles menores. 3,444 de las 5,693 personas tienen 12 seguidores en GitHub o menos; la mediana es 8.</li>
+            <li><strong>Permisos de merge.</strong> Las 5,529 personas fuera de Rust y mathlib no han hecho merge de ningún pull request en su proyecto en el historial obtenido (desde oct. 2023 para LLVM, CPython, Julia, JAX, NumPy, SciPy, DuckDB y llama.cpp; desde oct. 2025 para el resto), y ninguna es miembro público de la organización del proyecto. En los proyectos donde de una a cinco personas hacen el merge por todos (Godot, Helix, Klipper, Marlin, OpenSCAD, Scanpy, Bevy, Sage, tmux, ripgrep), también se descarta a cualquiera que haya aprobado el pull request de otra persona. Un committer que sube cambios directamente y mantiene privada su membresía aún podría colarse. Rust y mathlib hacen merge mediante un bot, así que para sus 164 personas solo se comprueba la pertenencia a la organización.</li>
+            <li><strong>Por qué no se llama predicción.</strong> En ocho de los proyectos (ni Rust ni tinygrad), 2,653 personas (2,721 registros persona-proyecto) tuvieron pull requests fusionados entre oct. 2023 y oct. 2024 sin haber hecho merge ni aprobado los de otros. 156 hicieron merge en los dos años siguientes, señal de que se les había dado acceso de escritura; 135 de ellas en LLVM, así que esto es sobre todo una medición de LLVM. El número de PR fusionados las ordena con un AUC de 0.641, pero eso separa sobre todo a quienes contribuyeron una sola vez de quienes repiten: entre los registros con 3 o más pull requests fusionados es 0.556, y entre los que tienen 6 o más, como 2,522 de las 5,693 de la lista y las 100 con informe, 0.518 (33 de 159 hicieron merge, 28 en LLVM), lo que equivale al azar. Otros rasgos parecían informativos dentro de la muestra, dentro de franjas por número de PR; la única comprobación fuera de la muestra posible, dividida por proyecto, tenía solo 3 casos positivos y fue en sentido contrario (0.394, frente a 0.717 del número solo). Así que el orden de la lista aporta poca información. Lo que ofrece es evidencia de trabajo aceptado, para que la lea una persona.</li>
           </ul>
         </details>
       </div>
@@ -590,8 +592,8 @@ footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decor
         <p class="what">Un informe breve sobre cada persona: qué construyó y dónde, con enlaces a la prueba. Lo escribe un software que corre en un portátil, y cada pull request que cita se comprueba con los pull requests reales de la persona.</p>
       </div>
       <div>
-        <figure class="dossier reveal" aria-label="Un expediente real escrito el 17 oct. 2026, identidad oculta">
-          <div class="d-top"><span class="d-tag">Expediente · 17 oct. 2026</span><span class="d-red">identidad oculta</span></div>
+        <figure class="dossier reveal" aria-label="Un expediente real escrito el 17 oct. 2026, identidad oculta">
+          <div class="d-top"><span class="d-tag">Expediente · 17 oct. 2026</span><span class="d-red">identidad oculta</span></div>
           <p class="d-name"><span class="redact" style="width:11em"></span></p>
           <p class="d-sub"><span class="redact" style="width:7em"></span> · pull requests fusionados en un gran proyecto de código abierto</p>
           <dl class="d-grid">

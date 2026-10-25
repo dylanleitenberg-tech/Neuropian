@@ -435,19 +435,22 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* language switcher (site_i18n.py) */
-footer .langs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 20px;margin-bottom:10px;font-size:15px;font-family:var(--serif),"Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",serif}
+footer .langs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 20px;margin-bottom:10px;font-size:15px;font-family:"EB Garamond","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif}
 footer .langs a{color:var(--dim);text-decoration:none}
 footer .langs a:hover{color:#ECE8E3;text-decoration:underline}
 footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decoration-color:rgba(236,232,227,.6)}
 /* zh */
 @media(max-width:480px){.bar .wrap{gap:12px}.nav{gap:16px;font-size:16px}.nav a.login{padding:6px 12px}}
+@media(max-width:380px){.nav a:not(.login){display:none}}
+h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
 :root{--serif:"EB Garamond","Noto Serif SC",Garamond,Georgia,serif;--display:"DM Serif Display","Noto Serif SC",Georgia,serif;--mono:"JetBrains Mono","Noto Sans SC",ui-monospace,SFMono-Regular,Menlo,monospace}
 body{line-height:1.7}
 h1,h2,h3,.chip,.ph-more b,.d-name,.npac h2{font-weight:600;font-synthesis:none;letter-spacing:0}
 h2{line-height:1.15;max-width:12em}.hero h1{line-height:1.12}h3{line-height:1.3}
 .chip,.ph-more b{line-height:1.25}
 .proof .big{line-height:1.45;letter-spacing:0}.steps-end,.next li,.mail{letter-spacing:0}
-.kicker,.tk-path,.tk-cap,.tag,summary,.idx,.d-top,.d-grid dt{letter-spacing:.06em}
+.kicker,.tk-path,.tk-cap,.tagline,.tag,summary,.idx,.d-top,.d-grid dt{letter-spacing:.06em}
+html .npac-k,html .npld{letter-spacing:.06em}
 </style>
 <!--/i18n:head-->
 </head>
@@ -494,7 +497,7 @@ h2{line-height:1.15;max-width:12em}.hero h1{line-height:1.12}h3{line-height:1.3}
     <p class="kicker">图版 I–VI · 任何领域</p>
     <h2>任何领域的作品。</h2>
     <p class="lede">打开一块图版，看看每个领域该给我们看什么。</p>
-    <div class="plates"><figure class="ph ph1"><img class="engr" src="/assets/engr/code.webp" width="549" height="703" alt="差分机（一种机械计算器）局部的木刻版画，根据 Benjamin Herschel Babbage 的绘图制作，1853" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip"><i>I.</i> 代码</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>代码</b><p>被专家接受、进入真实软件的代码。Falcon 会读它；成员会附上它的链接。</p><a class="ph-cta" href="/app" data-auth="reg">展示你的代码 →</a></div></figure><figure class="ph ph2"><img class="engr" src="/assets/engr/leadership.webp" width="434" height="760" alt="新 Eddystone 灯塔的剖面图，逐个房间展示，1884" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip"><i>II.</i> 领导力</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>领导力</b><p>谁发起过什么、带领过一次构建，或带动别人一起做事。</p><a class="ph-cta" href="/app" data-auth="reg">告诉我们你领导过什么 →</a></div></figure><figure class="ph ph3"><img class="engr" src="/assets/engr/science.webp" width="625" height="693" alt="Robert Hooke 的显微镜，为其《Micrographia》雕版，1665" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip"><i>III.</i> 科学</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>科学</b><p>拿得出手的研究和成果：论文、数据、实验。</p><a class="ph-cta" href="/app" data-auth="reg">分享你的研究 →</a></div></figure><figure class="ph ph4"><img class="engr" src="/assets/engr/teamwork.webp" width="900" height="706" alt="1586 年约 900 名工人和 75 匹马在罗马竖起梵蒂冈方尖碑的版画" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip"><i>IV.</i> 团队协作</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>团队协作</b><p>谁会审阅、帮助他人并与别人一起构建，而不只是单打独斗。</p><a class="ph-cta" href="/app" data-auth="reg">找到你的团队 →</a></div></figure><figure class="ph ph5"><img class="engr" src="/assets/engr/hardware.webp" width="617" height="760" alt="James Watt 双作用蒸汽机的雕版图，1822" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip"><i>V.</i> 硬件</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>硬件</b><p>你设计并制造的东西，附上照片和文件作为证明。</p><a class="ph-cta" href="/app" data-auth="reg">展示你造了什么 →</a></div></figure><figure class="ph ph6"><img class="engr" src="/assets/engr/design.webp" width="900" height="644" alt="Albrecht Dürer 的木刻版画：两个人借助透视框描绘一把鲁特琴，1525" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip"><i>VI.</i> 设计</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>设计</b><p>你做出并发布的作品，展示在你的个人主页上。</p><a class="ph-cta" href="/app" data-auth="reg">展示你的设计 →</a></div></figure></div>
+    <div class="plates"><figure class="ph ph1"><img class="engr" src="/assets/engr/code.webp" width="549" height="703" alt="差分机（一种机械计算器）局部的木刻版画，根据 Benjamin Herschel Babbage 的绘图制作，1853" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip"><i>I.</i> 代码</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>代码</b><p>被专家接受、进入真实软件的代码。Falcon 会读它；成员会附上它的链接。</p><a class="ph-cta" href="/app" data-auth="reg">展示你的代码 →</a></div></figure><figure class="ph ph2"><img class="engr" src="/assets/engr/leadership.webp" width="434" height="760" alt="新 Eddystone 灯塔的剖面图，逐个房间展示，1884" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip"><i>II.</i> 领导力</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>领导力</b><p>谁发起过什么、带领过一次构建，或带动别人一起做事。</p><a class="ph-cta" href="/app" data-auth="reg">告诉我们你领导过什么 →</a></div></figure><figure class="ph ph3"><img class="engr" src="/assets/engr/science.webp" width="625" height="693" alt="Robert Hooke 的显微镜，为其《Micrographia》雕版，1665" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip"><i>III.</i> 科学</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>科学</b><p>拿得出手的研究和成果：论文、数据、实验。</p><a class="ph-cta" href="/app" data-auth="reg">分享你的研究 →</a></div></figure><figure class="ph ph4"><img class="engr" src="/assets/engr/teamwork.webp" width="900" height="706" alt="1586 年约 900 名工人和 75 匹马在罗马竖起梵蒂冈方尖碑的版画" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip"><i>IV.</i> 团队协作</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>团队协作</b><p>谁会审阅、帮助他人并与别人一起构建，而不只是单打独斗。</p><a class="ph-cta" href="/app" data-auth="reg">找到你的团队 →</a></div></figure><figure class="ph ph5"><img class="engr" src="/assets/engr/hardware.webp" width="617" height="760" alt="James Watt 双作用蒸汽机的雕版图，1822" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip"><i>V.</i> 硬件</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>硬件</b><p>你设计并制造的东西，附上照片和文件作为证明。</p><a class="ph-cta" href="/app" data-auth="reg">展示你造了什么 →</a></div></figure><figure class="ph ph6"><img class="engr" src="/assets/engr/design.webp" width="900" height="644" alt="Albrecht Dürer 的木刻版画：两个人借助透视框描绘一把鲁特琴，1525" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip"><i>VI.</i> 设计</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>设计</b><p>你做出并发布的作品，展示在你的个人主页上。</p><a class="ph-cta" href="/app" data-auth="reg">展示你的设计 →</a></div></figure></div>
   </div>
 </section>
 
@@ -506,7 +509,7 @@ h2{line-height:1.15;max-width:12em}.hero h1{line-height:1.12}h3{line-height:1.3}
     <div class="tiles">
       <div class="tile t1 reveal"><b data-count="5693">5,693</b><span>找到的建造者</span></div>
       <div class="tile t2 reveal"><b data-count="202">202</b><span>搜索过的大型软件项目</span></div>
-      <div class="tile t3 reveal"><b>10 人中 6 人</b><span>GitHub 关注者不超过 12 个</span></div>
+      <div class="tile t3 reveal"><b>10人中6人</b><span>GitHub 关注者不超过 12 个</span></div>
       <div class="tile t4 reveal"><b data-count="1033">1,033</b><span>也会审阅并批准别人的工作</span></div>
     </div>
   </div>
@@ -527,7 +530,7 @@ h2{line-height:1.15;max-width:12em}.hero h1{line-height:1.12}h3{line-height:1.3}
 
 <section id="run">
   <div class="wrap">
-    <p class="kicker">Falcon，我们的空中之眼 · 一次真实搜索 · 2026 年 10 月 20 日</p>
+    <p class="kicker">Falcon，我们的空中之眼 · 一次真实搜索 · 2026 年 10 月 20 日</p>
     <h2>一次搜索找到了什么。</h2>
     <ol class="flow">
       <li class="reveal"><b data-count="202">202</b><span>搜索过的大型软件项目，比如 Python、Rust、LLVM、Zephyr 和 Home Assistant</span></li>
@@ -541,7 +544,7 @@ h2{line-height:1.15;max-width:12em}.hero h1{line-height:1.12}h3{line-height:1.3}
 
 <section id="method">
   <div class="wrap">
-    <p class="kicker">方法 · 数据截至 2026 年 10 月 20 日</p>
+    <p class="kicker">方法 · 数据截至 2026 年 10 月 20 日</p>
     <h2>两类证据，一份报告。</h2>
 
     <div class="block">
@@ -551,18 +554,18 @@ h2{line-height:1.15;max-width:12em}.hero h1{line-height:1.12}h3{line-height:1.3}
         <p class="what">竞赛程序员和数学家。Neuropian 读取他们的竞赛成绩和数学解答；在分数相同的人当中，它更善于看出谁会是下一个达到 Grandmaster（2400）的人。</p>
       </div>
       <div>
-        <div class="stat"><b>1.5×</b><span>仅凭等级分时预测信号的倍数：用于在等级分相同的 Codeforces 选手中找出谁会达到 Grandmaster（等级分 2400）。在 2022–24 年的数据上选定，在 2024–26 年上原样测试；该群组此前已被探索过，所以它不是一个完全干净的保留测试集。</span></div>
-        <figure class="chart dotplot reveal" role="group" aria-label="在等级分相同的 Codeforces 选手中，两年内谁达到 2400 的 AUC：随机 0.5，仅等级分 0.599，Neuropian 评分 0.647"><div class="dp-row chance" tabindex="0" title="随机：AUC 0.500"><span class="dp-lab">随机</span><span class="dp-track"><i class="dp-stem" style="--x:0.0%"></i><b class="dp-dot" style="--x:0.0%"></b></span><span class="dp-val">0.500</span></div><div class="dp-row base" tabindex="0" title="仅等级分：AUC 0.599"><span class="dp-lab">仅等级分</span><span class="dp-track"><i class="dp-stem" style="--x:49.5%"></i><b class="dp-dot" style="--x:49.5%"></b></span><span class="dp-val">0.599</span></div><div class="dp-row ours" tabindex="0" title="Neuropian 评分：AUC 0.647"><span class="dp-lab">Neuropian 评分</span><span class="dp-track"><i class="dp-stem" style="--x:73.5%"></i><b class="dp-dot" style="--x:73.5%"></b></span><span class="dp-val">0.647</span></div><div class="dp-row dp-axis" aria-hidden="true"><span class="dp-lab"></span><span class="dp-ticks"><span style="--x:0.0%">0.50</span><span style="--x:25.0%">0.55</span><span style="--x:50.0%">0.60</span><span style="--x:75.0%">0.65</span><span style="--x:100.0%">0.70</span></span><span class="dp-val"></span></div><figcaption>在等级分相同的选手中，谁在两年内达到了 2400（AUC；0.5 为随机水平）。高于随机的信号：等级分 0.099，Neuropian 0.147，1.48×。在 2022–24 年上选定，在 2024–26 年上原样测试。</figcaption></figure>
+        <div class="stat"><b>1.5×</b><span>仅凭等级分时预测信号的倍数：用于在等级分相同的 Codeforces 选手中找出谁会达到 Grandmaster（等级分 2400）。在 2022–24 年的数据上选定，在 2024–26 年上原样测试；该群组此前已被探索过，所以它不是一个完全干净的保留测试集。</span></div>
+        <figure class="chart dotplot reveal" role="group" aria-label="在等级分相同的 Codeforces 选手中，两年内谁达到 2400 的 AUC：随机 0.5，仅等级分 0.599，Neuropian 评分 0.647"><div class="dp-row chance" tabindex="0" title="随机：AUC 0.500"><span class="dp-lab">随机</span><span class="dp-track"><i class="dp-stem" style="--x:0.0%"></i><b class="dp-dot" style="--x:0.0%"></b></span><span class="dp-val">0.500</span></div><div class="dp-row base" tabindex="0" title="仅等级分：AUC 0.599"><span class="dp-lab">仅等级分</span><span class="dp-track"><i class="dp-stem" style="--x:49.5%"></i><b class="dp-dot" style="--x:49.5%"></b></span><span class="dp-val">0.599</span></div><div class="dp-row ours" tabindex="0" title="Neuropian 评分：AUC 0.647"><span class="dp-lab">Neuropian 评分</span><span class="dp-track"><i class="dp-stem" style="--x:73.5%"></i><b class="dp-dot" style="--x:73.5%"></b></span><span class="dp-val">0.647</span></div><div class="dp-row dp-axis" aria-hidden="true"><span class="dp-lab"></span><span class="dp-ticks"><span style="--x:0.0%">0.50</span><span style="--x:25.0%">0.55</span><span style="--x:50.0%">0.60</span><span style="--x:75.0%">0.65</span><span style="--x:100.0%">0.70</span></span><span class="dp-val"></span></div><figcaption>在等级分相同的选手中，谁在两年内达到了 2400（AUC；0.5 为随机水平）。高于随机的信号：等级分 0.099，Neuropian 0.147，1.48×。在 2022–24 年上选定，在 2024–26 年上原样测试。</figcaption></figure>
         
         <details>
           <summary>方法与数据</summary>
           <ul>
-            <li><strong>群组。</strong>2024 年 10 月 16 日等级分在 1600–2300 之间、至少参加过 15 场计分比赛且在此前一年中参加过 3 场的每一位 Codeforces 选手：共 11,088 人。其中 290 人（2.6%）在之后两年内达到 2400。</li>
-            <li><strong>在更早的数据上选定。</strong>同样的规则用于 2022 年 10 月 16 日：9,305 名选手，其中 274 人在 2024 年 10 月前达到 2400，即测试期开始之前。若某项特征在区间内的 AUC 高于 0.55 就保留，低于 0.45 就反向使用：12 个月的等级分涨幅、达到 2000 所用比赛场数之少（从未达到则为 0）、最后一场比赛前 12 个月中有比赛的月数、距离本人峰值的差距，以及有计分比赛的自然年数（取负）。</li>
-            <li><strong>排序方式，同样在 2022–24 年上选定。</strong>候选方案：仅等级分；等级分加 0.05、0.1 或 0.2 × 评分；按 10、25、50 或 100 分划分等级分区间，在每个区间内按评分排序。25 分区间在前 50、100 和 290 名中找到的未来 2400 选手最多。</li>
-            <li><strong>测试。</strong>冻结后应用于 2024 年群组：仅评分在 100 分区间内得到 0.647（等级分：0.599），在 10 分区间内得到 0.632。实际采用的排序整体 AUC 为 0.899，仅等级分为 0.896（95% 置信区间 0.878–0.913）。等级分 + 0.2 × 评分的 AUC 最高，为 0.908（配对自助法测得相对等级分的提升为 +0.005 到 +0.019），但它的前 50、100 和 290 名中只有 13、28 和 81 名未来 2400 选手，所以没有采用。在名单的最顶端，等级分仍然很难被超越：实际采用的排序在前 50、100 和 290 名中有 18、40 和 92 名未来 2400 选手，仅等级分则为 21、40 和 89 名。</li>
-            <li><strong>谁会继续参赛。</strong>2024 年群组中有 37% 的人之后没有再参加任何计分比赛。如果除了等级分之外，再按之后参加的比赛场数对选手分组，评分的 AUC 降到 0.613。</li>
-            <li><strong>注意事项。</strong>在这次测试之前，2024 年群组已在样本内被探索过（在同一批选手上选定特征并打分：0.655；从 2023 年起、三年窗口：0.668），所以它不是一个完全干净的保留测试集。最初的公式（等级分，加 0.6 × 12 个月涨幅，再加通过爬升筛选的奖励分）整体得分 0.879，低于仅等级分。</li>
+            <li><strong>群组。</strong>2024 年 10 月 16 日等级分在 1600–2300 之间、至少参加过 15 场计分比赛且在此前一年中参加过 3 场的每一位 Codeforces 选手：共 11,088 人。其中 290 人（2.6%）在之后两年内达到 2400。</li>
+            <li><strong>在更早的数据上选定。</strong>同样的规则用于 2022 年 10 月 16 日：9,305 名选手，其中 274 人在 2024 年 10 月前达到 2400，即测试期开始之前。若某项特征在区间内的 AUC 高于 0.55 就保留，低于 0.45 就反向使用：12 个月的等级分涨幅、达到 2000 所用比赛场数之少（从未达到则为 0）、最后一场比赛前 12 个月中有比赛的月数、距离本人峰值的差距，以及有计分比赛的自然年数（取负）。</li>
+            <li><strong>排序方式，同样在 2022–24 年上选定。</strong>候选方案：仅等级分；等级分加 0.05、0.1 或 0.2 × 评分；按 10、25、50 或 100 分划分等级分区间，在每个区间内按评分排序。25 分区间在前 50、100 和 290 名中找到的未来 2400 选手最多。</li>
+            <li><strong>测试。</strong>冻结后应用于 2024 年群组：仅评分在 100 分区间内得到 0.647（等级分：0.599），在 10 分区间内得到 0.632。实际采用的排序整体 AUC 为 0.899，仅等级分为 0.896（95% 置信区间 0.878–0.913）。等级分 + 0.2 × 评分的 AUC 最高，为 0.908（配对自助法测得相对等级分的提升为 +0.005 到 +0.019），但它的前 50、100 和 290 名中只有 13、28 和 81 名未来 2400 选手，所以没有采用。在名单的最顶端，等级分仍然很难被超越：实际采用的排序在前 50、100 和 290 名中有 18、40 和 92 名未来 2400 选手，仅等级分则为 21、40 和 89 名。</li>
+            <li><strong>谁会继续参赛。</strong>2024 年群组中有 37% 的人之后没有再参加任何计分比赛。如果除了等级分之外，再按之后参加的比赛场数对选手分组，评分的 AUC 降到 0.613。</li>
+            <li><strong>注意事项。</strong>在这次测试之前，2024 年群组已在样本内被探索过（在同一批选手上选定特征并打分：0.655；从 2023 年起、三年窗口：0.668），所以它不是一个完全干净的保留测试集。最初的公式（等级分，加 0.6 × 12 个月涨幅，再加通过爬升筛选的奖励分）整体得分 0.879，低于仅等级分。</li>
             <li><strong>当前名单。</strong>等级分 2100 及以上的活跃选手，关注者最多 60 个，账号注册不满五年，且用户名不带奥赛风格或出生年份；他们选自按“等级分减去关注者惩罚”排名最高的 1,200 人。他们还必须通过测试中未使用的筛选条件，包括至少 25 场计分比赛、比最初 10 场比赛时上升 300，以及 12 个月涨幅为正。测试覆盖的等级分范围是 1600–2300；目前名单上的 64 人中有 25 人高于 2300。AtCoder 和 Math Stack Exchange 名单没有做过回测。</li>
             <li><strong>AUC</strong> = 随机选一名达到 2400 的选手，其排名高于一名未达到者的概率。区间内 AUC 是对各区间取平均，按达到 2400 的人数加权；一个区间至少需要 3 名达到者和 3 名未达到者。</li>
           </ul>
@@ -583,9 +586,9 @@ h2{line-height:1.15;max-width:12em}.hero h1{line-height:1.12}h3{line-height:1.3}
         <details>
           <summary>方法与数据</summary>
           <ul>
-            <li><strong>规则。</strong>截至 2026 年 10 月 20 日的 12 个月内有 3 个或以上被合并的拉取请求，每个活跃月不超过 40 个，GitHub 关注者 150 个或以下。去掉：机器人；在该项目或其他被搜索项目中亲自执行过合并的人；大型开源组织的公开成员，包括项目自己的组织；个人资料中写有固定名单上的公司或机构的人（大型科技和芯片公司、AI 实验室、交易公司、国家实验室、各项目的赞助方、部分大学）；拥有 1,000 星及以上仓库的人；以及资料显示可能是未成年人的账号。全部 8,160 名候选人都经过检查；共去掉 2,467 人，每人按第一个符合的原因计数：公司或机构 1,141 人，关注者 798 人，组织成员 365 人，在其他项目有提交权限 138 人，拥有 1,000+ 星仓库 18 人，可能是未成年人 7 人。5,693 人中有 3,444 人的 GitHub 关注者不超过 12 个；中位数为 8。</li>
-            <li><strong>合并权限。</strong>Rust 和 mathlib 之外的 5,529 人，在抓取到的历史记录中（LLVM、CPython、Julia、JAX、NumPy、SciPy、DuckDB 和 llama.cpp 自 2023 年 10 月起；其余项目自 2025 年 10 月起）从未在自己的项目里亲自合并过任何拉取请求，也都不是该项目组织的公开成员。在由一到五个人替所有人执行合并的项目中（Godot、Helix、Klipper、Marlin、OpenSCAD、Scanpy、Bevy、Sage、tmux、ripgrep），批准过他人拉取请求的人也会被去掉。直接推送代码、又把成员身份设为私密的提交者，仍可能漏网。Rust 和 mathlib 通过机器人合并，所以对它们的 164 人只检查组织成员身份。</li>
-            <li><strong>为什么不叫预测。</strong>在其中八个项目里（不含 Rust 和 tinygrad），有 2,653 人（2,721 条“人-项目”记录）在 2023 年 10 月到 2024 年 10 月之间有被合并的拉取请求，且既没有亲自执行过合并，也没有批准过他人的拉取请求。其中 156 人在之后两年内执行过合并，说明他们获得了写入权限；其中 135 人在 LLVM，所以这主要是对 LLVM 的测量。被合并 PR 的数量对他们排序的 AUC 为 0.641，但这主要是在区分一次性贡献者和重复贡献者：在有 3 个或以上被合并拉取请求的记录中为 0.556，而在有 6 个或以上的记录中（名单上 5,693 人中的 2,522 人以及全部 100 位有报告的人都属于这种情况）为 0.518（159 人中 33 人执行过合并，其中 28 人在 LLVM），也就是随机水平。在按数量划分的区间内，其他特征在样本内看起来有信息量；唯一可行的样本外检验（按项目拆分）只有 3 个正例，而且结果方向相反（0.394，仅数量为 0.717）。所以名单的排序几乎不携带信息。它提供的是被接受工作的证据，供人阅读。</li>
+            <li><strong>规则。</strong>截至 2026 年 10 月 20 日的 12 个月内有 3 个或以上被合并的拉取请求，每个活跃月不超过 40 个，GitHub 关注者 150 个或以下。去掉：机器人；在该项目或其他被搜索项目中亲自执行过合并的人；大型开源组织的公开成员，包括项目自己的组织；个人资料中写有固定名单上的公司或机构的人（大型科技和芯片公司、AI 实验室、交易公司、国家实验室、各项目的赞助方、部分大学）；拥有 1,000 星及以上仓库的人；以及资料显示可能是未成年人的账号。全部 8,160 名候选人都经过检查；共去掉 2,467 人，每人按第一个符合的原因计数：公司或机构 1,141 人，关注者 798 人，组织成员 365 人，在其他项目有提交权限 138 人，拥有 1,000+ 星仓库 18 人，可能是未成年人 7 人。5,693 人中有 3,444 人的 GitHub 关注者不超过 12 个；中位数为 8。</li>
+            <li><strong>合并权限。</strong>Rust 和 mathlib 之外的 5,529 人，在抓取到的历史记录中（LLVM、CPython、Julia、JAX、NumPy、SciPy、DuckDB 和 llama.cpp 自 2023 年 10 月起；其余项目自 2025 年 10 月起）从未在自己的项目里亲自合并过任何拉取请求，也都不是该项目组织的公开成员。在由一到五个人替所有人执行合并的项目中（Godot、Helix、Klipper、Marlin、OpenSCAD、Scanpy、Bevy、Sage、tmux、ripgrep），批准过他人拉取请求的人也会被去掉。直接推送代码、又把成员身份设为私密的提交者，仍可能漏网。Rust 和 mathlib 通过机器人合并，所以对它们的 164 人只检查组织成员身份。</li>
+            <li><strong>为什么不叫预测。</strong>在其中八个项目里（不含 Rust 和 tinygrad），有 2,653 人（2,721 条“人-项目”记录）在 2023 年 10 月到 2024 年 10 月之间有被合并的拉取请求，且既没有亲自执行过合并，也没有批准过他人的拉取请求。其中 156 人在之后两年内执行过合并，说明他们获得了写入权限；其中 135 人在 LLVM，所以这主要是对 LLVM 的测量。被合并 PR 的数量对他们排序的 AUC 为 0.641，但这主要是在区分一次性贡献者和重复贡献者：在有 3 个或以上被合并拉取请求的记录中为 0.556，而在有 6 个或以上的记录中（名单上 5,693 人中的 2,522 人以及全部 100 位有报告的人都属于这种情况）为 0.518（159 人中 33 人执行过合并，其中 28 人在 LLVM），也就是随机水平。在按数量划分的区间内，其他特征在样本内看起来有信息量；唯一可行的样本外检验（按项目拆分）只有 3 个正例，而且结果方向相反（0.394，仅数量为 0.717）。所以名单的排序几乎不携带信息。它提供的是被接受工作的证据，供人阅读。</li>
           </ul>
         </details>
       </div>
@@ -598,8 +601,8 @@ h2{line-height:1.15;max-width:12em}.hero h1{line-height:1.12}h3{line-height:1.3}
         <p class="what">每个人一份简短报告：他们在哪里构建了什么，并附上证据链接。由一台笔记本电脑上运行的软件撰写，它引用的每个拉取请求都会与此人真实的拉取请求核对。</p>
       </div>
       <div>
-        <figure class="dossier reveal" aria-label="一份写于 2026 年 10 月 17 日的真实档案，身份已隐去">
-          <div class="d-top"><span class="d-tag">档案 · 2026 年 10 月 17 日</span><span class="d-red">身份已隐去</span></div>
+        <figure class="dossier reveal" aria-label="一份写于 2026 年 10 月 17 日的真实档案，身份已隐去">
+          <div class="d-top"><span class="d-tag">档案 · 2026 年 10 月 17 日</span><span class="d-red">身份已隐去</span></div>
           <p class="d-name"><span class="redact" style="width:11em"></span></p>
           <p class="d-sub"><span class="redact" style="width:7em"></span> · 在一个大型开源项目中被合并的拉取请求</p>
           <dl class="d-grid">
