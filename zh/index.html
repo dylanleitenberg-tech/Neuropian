@@ -463,7 +463,7 @@ html .npac-k,html .npld{letter-spacing:.06em}
     <nav class="nav" aria-label="栏目">
       <a href="#plain">运作方式</a>
       <a href="#method">方法</a>
-      <a href="/talent">Talent</a>
+      <a href="/talent?lang=zh">Talent</a>
       <a href="#contact">联系</a>
       <a class="login" href="/app?lang=zh" data-auth="login">登录</a>
     </nav>
@@ -640,7 +640,7 @@ html .npac-k,html .npld{letter-spacing:.06em}
       <li><span class="tag">测试中</span><span>把同一个人在不同平台上的账号关联起来<small>Falcon 只通过此人自己公布的链接来关联账号。较弱的匹配（相同的用户名、姓名或照片）会被打分，保持未确认状态，并且绝不用于联系任何人。</small></span></li>
       <li><span class="tag">已上线</span><span>RoundTable，Neuropian 用于智识拓展的场所与空间<small>成员注册、建立个人资料，并在聊天、难题和构建房间里交流。注册即表示同意 Neuropian 将成员的个人资料分享给通过 Neuropian 招聘的公司和基金。</small></span></li>
       <li><span class="tag">已上线</span><span>项目与积分<small>成员发布带有积分奖励的项目，其他人加入。在任何人获得积分之前，Neuropian 的审核者会检查每位贡献者的工作，获批的贡献者还可以获得额外奖励。积分是 Neuropian 内部的点数，没有现金价值。</small></span></li>
-      <li><span class="tag">已上线</span><span>Talent<small>面向任何领域的人的个人资料，根据他们自己的描述和作品起草，经本人批准，并可在 <a href="/talent">neuropian.com/talent</a> 按语义搜索。</small></span></li>
+      <li><span class="tag">已上线</span><span>Talent<small>面向任何领域的人的个人资料，根据他们自己的描述和作品起草，经本人批准，并可在 <a href="/talent?lang=zh">neuropian.com/talent</a> 按语义搜索。</small></span></li>
       <li><span class="tag">已完成</span><span>EagleEyes，Neuropian 的人才发掘代理<small>一个浏览器扩展。在成员为它开启的网站上，它会把成员阅读、撰写和从事的内容添加到其 Neuropian 个人资料中。尚未公开。</small></span></li>
     </ul>
   </div>
@@ -672,7 +672,7 @@ html .npac-k,html .npld{letter-spacing:.06em}
   <div class="wrap">
     <!--i18n:langs--><nav class="langs" aria-label="语言"><a href="/" hreflang="en" lang="en" translate="no">English</a><a href="/fr/" hreflang="fr" lang="fr" translate="no">Français</a><a href="/es/" hreflang="es" lang="es" translate="no">Español</a><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a><a href="/hi/" hreflang="hi" lang="hi" translate="no">हिन्दी</a><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no" aria-current="page">中文</a></nav><!--/i18n:langs-->
     <span>© 2026 Neuropian · 超越无限 · 版画均属公有领域：Vesalius 1543、B. H. Babbage 1853、Eddystone 灯塔 1884、Hooke 1665、Zabaglia 1743、Robison 1822、Dürer 1525（Rijksmuseum）</span>
-    <span><a href="/terms.html">条款</a> · <a href="/privacy.html">隐私</a> · <a href="/app?lang=zh">成员</a><!--i18n:en--> <span class="en-note">（英文）</span><!--/i18n:en--></span>
+    <span><a href="/terms.html">条款</a> · <a href="/privacy.html">隐私</a><!--i18n:en--> <span class="en-note">（英文）</span><!--/i18n:en--> · <a href="/app?lang=zh">成员</a></span>
   </div>
 </footer>
 <script src="/assets/site.js?v=20261025a" defer></script>
@@ -733,7 +733,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   function closeCard(){ if(card){ card.remove(); card=null; } document.documentElement.style.overflow=""; if(opener&&opener.focus) opener.focus(); opener=null; }
   function openCard(isNew){
     var s=session(); if(!s) return false;
-    closeCard(); var u=s.user, T=!!document.querySelector('a[href="/talent"]');
+    closeCard(); var u=s.user, T=!!document.querySelector('a[href^="/talent"]');
     card=document.createElement("div"); card.className="npac-ov";
     card.innerHTML='<div class="npac" role="dialog" aria-modal="true" aria-labelledby="npac-n" tabindex="-1">'
       +'<button class="npac-x" type="button" aria-label="关闭">×</button>'
@@ -744,7 +744,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
       +'<a href="/app?lang=zh&go=projects">项目与积分<span>发布作品、加入项目，审核者检查通过后获得积分</span></a>'
       +'<a href="/app?lang=zh&go=collective">RoundTable<span>聊天、难题和构建房间</span></a>'
       +'<a href="/app?lang=zh&go=platform">机会<span>面向成员的职位</span></a>'
-      +(T?'<a href="/talent">Talent<span>搜索成员资料</span></a>':"")
+      +(T?'<a href="/talent?lang=zh">Talent<span>搜索成员资料</span></a>':"")
       +'</nav><div class="npac-f"><span>不是你？</span><button class="npac-out" type="button">退出登录</button></div></div>';
     document.body.appendChild(card); document.documentElement.style.overflow="hidden";
     card.addEventListener("click",function(e){ if(e.target===card||e.target.closest(".npac-x")) closeCard(); else if(e.target.closest(".npac-out")) signOut(); });

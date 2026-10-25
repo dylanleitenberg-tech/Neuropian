@@ -478,7 +478,7 @@ html .npac-k,html .npld{letter-spacing:.02em}
     <nav class="nav" aria-label="מקטעים">
       <a href="#plain">איך זה עובד</a>
       <a href="#method">שיטה</a>
-      <a href="/talent">Talent</a>
+      <a href="/talent?lang=he">Talent</a>
       <a href="#contact">יצירת קשר</a>
       <a class="login" href="/app?lang=he" data-auth="login">התחברות</a>
     </nav>
@@ -655,7 +655,7 @@ html .npac-k,html .npld{letter-spacing:.02em}
       <li><span class="tag">בבדיקה</span><span>קישור החשבונות של אדם אחד בין פלטפורמות<small>Falcon מקשר חשבונות רק דרך קישורים שהאדם עצמו פרסם. התאמות חלשות יותר (אותו כינוי, שם או תמונה) מקבלות ציון, נשארות לא מאומתות ולעולם לא משמשות כדי לפנות למישהו.</small></span></li>
       <li><span class="tag">פעיל</span><span>RoundTable, המקום והמרחב של Neuropian להתרחבות אינטלקטואלית<small>חברים נרשמים, בונים פרופיל ומשוחחים בחדרי צ׳אט, בעיות ובנייה. ההרשמה היא ההסכמה שמאפשרת ל-⁠Neuropian לשתף את הפרופיל של חבר עם חברות וקרנות שמגייסות דרך Neuropian.</small></span></li>
       <li><span class="tag">פעיל</span><span>פרויקטים וקרדיטים<small>חברים מפרסמים פרויקטים עם תגמול בקרדיטים, ואחרים מצטרפים. סוקר של Neuropian בודק את העבודה של כל תורם לפני שמישהו מקבל קרדיט, ותורמים שאושרו יכולים לקבל בונוס. קרדיטים הם נקודות בתוך Neuropian ללא ערך כספי.</small></span></li>
-      <li><span class="tag">פעיל</span><span>Talent<small>פרופילים של אנשים מכל תחום, שנוסחו על סמך התיאור והעבודה שלהם, אושרו על ידם, וניתן לחפש בהם לפי משמעות ב-⁠<a href="/talent">neuropian.com/talent</a>.</small></span></li>
+      <li><span class="tag">פעיל</span><span>Talent<small>פרופילים של אנשים מכל תחום, שנוסחו על סמך התיאור והעבודה שלהם, אושרו על ידם, וניתן לחפש בהם לפי משמעות ב-⁠<a href="/talent?lang=he">neuropian.com/talent</a>.</small></span></li>
       <li><span class="tag">מוכן</span><span>EagleEyes, סוכן הגילוי של Neuropian<small>תוסף לדפדפן. באתרים שחבר מפעיל אותו בהם, הוא מוסיף לפרופיל Neuropian שלו את מה שהוא קורא, כותב ועובד עליו. עדיין לא פומבי.</small></span></li>
     </ul>
   </div>
@@ -687,7 +687,7 @@ html .npac-k,html .npld{letter-spacing:.02em}
   <div class="wrap">
     <!--i18n:langs--><nav class="langs" aria-label="שפה"><a href="/" hreflang="en" lang="en" translate="no">English</a><a href="/fr/" hreflang="fr" lang="fr" translate="no">Français</a><a href="/es/" hreflang="es" lang="es" translate="no">Español</a><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no" aria-current="page">עברית</a><a href="/hi/" hreflang="hi" lang="hi" translate="no">हिन्दी</a><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></nav><!--/i18n:langs-->
     <span>© 2026 Neuropian · מעבר לבלתי מוגבל · תחריטים, כולם בנחלת הכלל: Vesalius 1543, B. H. Babbage 1853, Eddystone Lighthouse 1884, Hooke 1665, Zabaglia 1743, Robison 1822, Dürer 1525 (Rijksmuseum)</span>
-    <span><a href="/terms.html">תנאים</a> · <a href="/privacy.html">פרטיות</a> · <a href="/app?lang=he">חברים</a><!--i18n:en--> <span class="en-note">(באנגלית)</span><!--/i18n:en--></span>
+    <span><a href="/terms.html">תנאים</a> · <a href="/privacy.html">פרטיות</a><!--i18n:en--> <span class="en-note">(באנגלית)</span><!--/i18n:en--> · <a href="/app?lang=he">חברים</a></span>
   </div>
 </footer>
 <script src="/assets/site.js?v=20261025a" defer></script>
@@ -748,7 +748,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   function closeCard(){ if(card){ card.remove(); card=null; } document.documentElement.style.overflow=""; if(opener&&opener.focus) opener.focus(); opener=null; }
   function openCard(isNew){
     var s=session(); if(!s) return false;
-    closeCard(); var u=s.user, T=!!document.querySelector('a[href="/talent"]');
+    closeCard(); var u=s.user, T=!!document.querySelector('a[href^="/talent"]');
     card=document.createElement("div"); card.className="npac-ov";
     card.innerHTML='<div class="npac" role="dialog" aria-modal="true" aria-labelledby="npac-n" tabindex="-1">'
       +'<button class="npac-x" type="button" aria-label="סגירה">×</button>'
@@ -759,7 +759,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
       +'<a href="/app?lang=he&go=projects">פרויקטים וקרדיטים<span>פרסמו עבודה, הצטרפו לפרויקטים, וקבלו קרדיט אחרי שסוקר בודק אותה</span></a>'
       +'<a href="/app?lang=he&go=collective">RoundTable<span>חדרי צ׳אט, בעיות ובנייה</span></a>'
       +'<a href="/app?lang=he&go=platform">הזדמנויות<span>משרות פתוחות לחברים</span></a>'
-      +(T?'<a href="/talent">Talent<span>חיפוש בפרופילים של חברים</span></a>':"")
+      +(T?'<a href="/talent?lang=he">Talent<span>חיפוש בפרופילים של חברים</span></a>':"")
       +'</nav><div class="npac-f"><span>זה לא אתם?</span><button class="npac-out" type="button">התנתקות</button></div></div>';
     document.body.appendChild(card); document.documentElement.style.overflow="hidden";
     card.addEventListener("click",function(e){ if(e.target===card||e.target.closest(".npac-x")) closeCard(); else if(e.target.closest(".npac-out")) signOut(); });

@@ -454,7 +454,7 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
     <nav class="nav" aria-label="Sections">
       <a href="#plain">Comment ça marche</a>
       <a href="#method">Méthode</a>
-      <a href="/talent">Talent</a>
+      <a href="/talent?lang=fr">Talent</a>
       <a href="#contact">Contact</a>
       <a class="login" href="/app?lang=fr" data-auth="login">Connexion</a>
     </nav>
@@ -631,7 +631,7 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
       <li><span class="tag">En test</span><span>Relier les comptes d’une même personne sur plusieurs plateformes<small>Falcon ne relie des comptes que par des liens que la personne a publiés. Les correspondances plus faibles (même pseudonyme, nom ou photo) sont notées, restent non confirmées et ne servent jamais à contacter qui que ce soit.</small></span></li>
       <li><span class="tag">En ligne</span><span>RoundTable, le lieu et l’espace d’expansion intellectuelle de Neuropian<small>Les membres s’inscrivent, créent un profil et échangent dans des salons de discussion, de résolution de problèmes et de création. L’inscription vaut consentement : elle permet à Neuropian de partager le profil d’un membre avec les entreprises et les fonds qui recrutent via Neuropian.</small></span></li>
       <li><span class="tag">En ligne</span><span>Projets et crédits<small>Les membres publient des projets assortis d’une récompense en crédits, et d’autres les rejoignent. Un relecteur de Neuropian vérifie le travail de chaque contributeur avant que quiconque ne soit crédité, et les contributeurs approuvés peuvent gagner un bonus. Les crédits sont des points internes à Neuropian, sans valeur monétaire.</small></span></li>
-      <li><span class="tag">En ligne</span><span>Talent<small>Des profils pour des personnes de tous les domaines, rédigés à partir de leur propre description et de leur travail, approuvés par elles, et consultables par recherche sémantique sur <a href="/talent">neuropian.com/talent</a>.</small></span></li>
+      <li><span class="tag">En ligne</span><span>Talent<small>Des profils pour des personnes de tous les domaines, rédigés à partir de leur propre description et de leur travail, approuvés par elles, et consultables par recherche sémantique sur <a href="/talent?lang=fr">neuropian.com/talent</a>.</small></span></li>
       <li><span class="tag">Réalisé</span><span>EagleEyes, l’agent de repérage de Neuropian<small>Une extension de navigateur. Sur les sites où un membre l’active, elle ajoute à son profil Neuropian ce qu’il lit, écrit et réalise. Pas encore publique.</small></span></li>
     </ul>
   </div>
@@ -663,7 +663,7 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
   <div class="wrap">
     <!--i18n:langs--><nav class="langs" aria-label="Langue"><a href="/" hreflang="en" lang="en" translate="no">English</a><a href="/fr/" hreflang="fr" lang="fr" translate="no" aria-current="page">Français</a><a href="/es/" hreflang="es" lang="es" translate="no">Español</a><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a><a href="/hi/" hreflang="hi" lang="hi" translate="no">हिन्दी</a><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></nav><!--/i18n:langs-->
     <span>© 2026 Neuropian · Au-delà des limites · Gravures, toutes du domaine public : Vesalius 1543, B. H. Babbage 1853, phare d’Eddystone 1884, Hooke 1665, Zabaglia 1743, Robison 1822, Dürer 1525 (Rijksmuseum)</span>
-    <span><a href="/terms.html">Conditions</a> · <a href="/privacy.html">Confidentialité</a> · <a href="/app?lang=fr">Membres</a><!--i18n:en--> <span class="en-note">(en anglais)</span><!--/i18n:en--></span>
+    <span><a href="/terms.html">Conditions</a> · <a href="/privacy.html">Confidentialité</a><!--i18n:en--> <span class="en-note">(en anglais)</span><!--/i18n:en--> · <a href="/app?lang=fr">Membres</a></span>
   </div>
 </footer>
 <script src="/assets/site.js?v=20261025a" defer></script>
@@ -724,7 +724,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   function closeCard(){ if(card){ card.remove(); card=null; } document.documentElement.style.overflow=""; if(opener&&opener.focus) opener.focus(); opener=null; }
   function openCard(isNew){
     var s=session(); if(!s) return false;
-    closeCard(); var u=s.user, T=!!document.querySelector('a[href="/talent"]');
+    closeCard(); var u=s.user, T=!!document.querySelector('a[href^="/talent"]');
     card=document.createElement("div"); card.className="npac-ov";
     card.innerHTML='<div class="npac" role="dialog" aria-modal="true" aria-labelledby="npac-n" tabindex="-1">'
       +'<button class="npac-x" type="button" aria-label="Fermer">×</button>'
@@ -735,7 +735,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
       +'<a href="/app?lang=fr&go=projects">Projets et crédits<span>Publiez du travail, rejoignez des projets, soyez crédité une fois qu’un relecteur l’a vérifié</span></a>'
       +'<a href="/app?lang=fr&go=collective">RoundTable<span>Salons de discussion, de résolution de problèmes et de création</span></a>'
       +'<a href="/app?lang=fr&go=platform">Opportunités<span>Offres pour les membres</span></a>'
-      +(T?'<a href="/talent">Talent<span>Rechercher des profils de membres</span></a>':"")
+      +(T?'<a href="/talent?lang=fr">Talent<span>Rechercher des profils de membres</span></a>':"")
       +'</nav><div class="npac-f"><span>Ce n’est pas vous ?</span><button class="npac-out" type="button">Se déconnecter</button></div></div>';
     document.body.appendChild(card); document.documentElement.style.overflow="hidden";
     card.addEventListener("click",function(e){ if(e.target===card||e.target.closest(".npac-x")) closeCard(); else if(e.target.closest(".npac-out")) signOut(); });

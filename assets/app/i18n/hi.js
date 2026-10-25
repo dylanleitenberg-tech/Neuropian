@@ -567,7 +567,26 @@ window.__npAppDict = {
     "Chat, problem and build rooms": "चैट, समस्या और निर्माण रूम",
     "Search member profiles": "सदस्य प्रोफ़ाइल खोजें",
     "Not you?": "आप नहीं हैं?",
-    "Sign out": "साइन आउट"
+    "Sign out": "साइन आउट",
+
+    // Talent page: 'Hire or contact' on each profile (hire_request in ~/neuropian-tools/hire.sql)
+    "Hiring?": "भर्ती कर रहे हैं?",
+    "Your name": "आपका नाम",
+    "Company": "कंपनी",
+    "Your work email": "आपका ऑफ़िस ईमेल",
+    "The role": "भूमिका",
+    "e.g. Founding compiler engineer": "जैसे, फ़ाउंडिंग कंपाइलर इंजीनियर",
+    "About the role: the work, the team, pay or equity if you can share it": "भूमिका के बारे में: काम, टीम, और अगर बता सकें तो वेतन या इक्विटी",
+    "Link to the job or company (optional)": "नौकरी या कंपनी का लिंक (वैकल्पिक)",
+    "Send to Neuropian": "Neuropian को भेजें",
+    "Could not send. Please try again.": "भेजा नहीं जा सका। कृपया फिर कोशिश करें।",
+    "Add your name.": "अपना नाम जोड़ें।",
+    "Add your company.": "अपनी कंपनी का नाम जोड़ें।",
+    "Add a valid email address.": "एक मान्य ईमेल पता डालें।",
+    "Add the role.": "भूमिका जोड़ें।",
+    "Describe the role in a few sentences.": "भूमिका का कुछ वाक्यों में वर्णन करें।",
+    "That link is too long.": "यह लिंक बहुत लंबा है।",
+    "Too many requests today. Please try again tomorrow.": "आज बहुत ज़्यादा अनुरोध हो गए। कृपया कल फिर कोशिश करें।"
   },
   rx: {
     invited: "$1 ने आपको Neuropian पर आमंत्रित किया है।",
@@ -602,7 +621,11 @@ window.__npAppDict = {
     newest: "$1 सबसे नई प्रोफ़ाइल",
     ghVerified: "GitHub सत्यापित · $1",
     fromGh: "GitHub से सत्यापित · $1",
-    byMember: "सदस्य द्वारा जोड़ा गया · $1"
+    byMember: "सदस्य द्वारा जोड़ा गया · $1",
+    hireIntro: function (m) { var n = m[1] === 'this member' ? 'इस सदस्य' : m[1]; return 'Neuropian को इस भूमिका के बारे में बताएँ। हम इसे ' + n + ' तक पहुँचाते हैं, और अगर वे बात करना चाहें तो आपका परिचय कराते हैं। उनका ईमेल कभी नहीं दिखाया जाता।'; },
+    hireBtn: function (m) { return (m[1] === 'this' ? 'इस सदस्य' : m[1]) + ' को नियुक्त करें या संपर्क करें'; },
+    hireSent: function (m) { return 'भेज दिया गया। Neuropian इसे आगे भेजेगा और अगर ' + (m[1] === 'they' ? 'वे' : m[1]) + ' बात करना चाहें तो आपको ईमेल करेगा।'; },
+    talentTitle: "$1 · Neuropian Talent"
   },
   ctx: []
 };

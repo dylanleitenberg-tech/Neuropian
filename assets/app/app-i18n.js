@@ -58,7 +58,12 @@
     newest: /^(\d+) newest profiles?$/,
     ghVerified: /^GitHub verified · (\S+)$/,
     fromGh: /^Verified from GitHub · (.+)$/,
-    byMember: /^Added by member · (.+)$/
+    byMember: /^Added by member · (.+)$/,
+    // Talent's "Hire or contact" block: $1 is the member's name, or the page's own stand-ins "this member" / "this" / "they"
+    hireIntro: /^Tell Neuropian about the role\. We pass it on to (.+) and introduce you if they want to talk\. Their email is never shown\.$/,
+    hireBtn: /^Hire or contact (.+)$/,
+    hireSent: /^Sent\. Neuropian will pass it on and email you if (.+) wants to talk\.$/,
+    talentTitle: /^(.+) · Neuropian Talent$/             // the browser tab on a profile ("Member" when the name is hidden)
   };
   var NESTED = { uploadFailed: 1, postFailed: 1, ghFailed: 1, couldNotSave: 1, you: 1 };
 
@@ -317,7 +322,7 @@
     zh: ':root{--serif:"EB Garamond","Noto Serif SC",Garamond,Georgia,serif;--display:"DM Serif Display","Noto Serif SC",Georgia,serif;--mono:"JetBrains Mono","Noto Sans SC",ui-monospace,SFMono-Regular,Menlo,monospace}\n' +
         'body{line-height:1.7}h1,h2,h3,.npac h2{font-weight:600;font-synthesis:none;letter-spacing:0}.kicker,.npac-k,.npld{letter-spacing:.06em}\n'
   };
-  /* in a right-to-left area, what people wrote (names, titles, messages, bios) keeps its own direction per paragraph */
+  /* in a right-to-left area, what people wrote (names, titles, bios) keeps its own direction per paragraph, aligned right with the page */
   var OWN = ['.pc-sum', '.pc-top > b', '.pc-proof', '.pc-row > b', '.chat-room-item', '[onclick^="switchServer"]', '[onclick^="switchRoom"] > span',
     '#friend-requests-list span', '#members-panel-list div', '#members-panel-list span', '#ss-roles-list span', '#ss-members-list span', '#ss-channels-list span',
     '#cs-roles-list label span', '#cs-parent-label', '#uc-name', '#uc-bio', '#uc-accomplishment', '#uc-hidden-ability', '#pf-accomplishment', '#pf-hidden-ability',
@@ -342,12 +347,15 @@
       css += '@media(max-width:480px){.bar .wrap{gap:12px}.nav{gap:16px;font-size:16px}.nav a.login{padding:6px 12px}}\n';
     } else {
       css += '.np-en-note{color:rgba(43,42,40,.38)}\n';
+      // phones, signed in: the translated Sign out / Apply labels don't fit the top bar next to the name (English wraps
+      // to two lines); Sign out is still in the phone menu and the profile box
+      css += '@media(max-width:600px){html:not(#np-x) body #nav-signout{display:none!important}}\n';
       if (RTL) css += 'html:not(#np-x) #mobile-nav-drawer > div[dir=rtl] a{text-align:right}\n' +
                       'html:not(#np-x) #page-projects [dir=rtl] .pc-ledger .d{text-align:left}\n' +
                       'html:not(#np-x) [dir=rtl] #pc-welcome{margin-left:0;margin-right:auto}\n';
     }
     if (RTL) css += (TALENT ? 'html[dir=rtl]' : 'html:not(#np-x) [dir=rtl]') + ' :is(input,textarea)[dir=auto]:placeholder-shown{direction:rtl;text-align:right}\n';
-    if (RTL) css += OWN.map(function (o) { return (TALENT ? 'html[dir=rtl] ' : 'html:not(#np-x) [dir=rtl] ') + o; }).join(',') + '{unicode-bidi:plaintext}\n';
+    if (RTL) css += OWN.map(function (o) { return (TALENT ? 'html[dir=rtl] ' : 'html:not(#np-x) [dir=rtl] ') + o; }).join(',') + '{unicode-bidi:plaintext;text-align:right}\n';
     var st = document.createElement('style');
     st.id = 'np-app-i18n';
     st.textContent = css;

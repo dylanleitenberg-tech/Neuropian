@@ -567,7 +567,26 @@ window.__npAppDict = {
     "Chat, problem and build rooms": "Salons de discussion, de résolution de problèmes et de création",
     "Search member profiles": "Rechercher des profils de membres",
     "Not you?": "Ce n’est pas vous\u00a0?",
-    "Sign out": "Se déconnecter"
+    "Sign out": "Se déconnecter",
+
+    // Talent page: 'Hire or contact' on each profile (hire_request in ~/neuropian-tools/hire.sql)
+    "Hiring?": "Vous recrutez\u00a0?",
+    "Your name": "Votre nom",
+    "Company": "Entreprise",
+    "Your work email": "Votre e-mail professionnel",
+    "The role": "Le poste",
+    "e.g. Founding compiler engineer": "ex. Ingénieur compilateur, équipe fondatrice",
+    "About the role: the work, the team, pay or equity if you can share it": "À propos du poste\u00a0: le travail, l’équipe, la rémunération ou les parts si vous pouvez les indiquer",
+    "Link to the job or company (optional)": "Lien vers l’offre ou l’entreprise (facultatif)",
+    "Send to Neuropian": "Envoyer à Neuropian",
+    "Could not send. Please try again.": "Envoi impossible. Veuillez réessayer.",
+    "Add your name.": "Indiquez votre nom.",
+    "Add your company.": "Indiquez votre entreprise.",
+    "Add a valid email address.": "Indiquez une adresse e-mail valide.",
+    "Add the role.": "Indiquez le poste.",
+    "Describe the role in a few sentences.": "Décrivez le poste en quelques phrases.",
+    "That link is too long.": "Ce lien est trop long.",
+    "Too many requests today. Please try again tomorrow.": "Trop de demandes aujourd’hui. Veuillez réessayer demain."
   },
   rx: {
     invited: "$1 vous invite à rejoindre Neuropian.",
@@ -602,7 +621,11 @@ window.__npAppDict = {
     newest: function (m, h) { return +m[1] === 1 ? 'Le profil le plus récent' : 'Les ' + m[1] + ' profils les plus récents'; },
     ghVerified: "GitHub vérifié · $1",
     fromGh: "Vérifié depuis GitHub · $1",
-    byMember: "Ajouté par le membre · $1"
+    byMember: "Ajouté par le membre · $1",
+    hireIntro: function (m) { var n = m[1] === 'this member' ? 'ce membre' : m[1]; return 'Présentez le poste à Neuropian. Nous transmettons votre demande à ' + n + ' et vous mettons en relation si cette personne souhaite échanger. Son adresse e-mail n’est jamais affichée.'; },
+    hireBtn: function (m) { return 'Recruter ou contacter ' + (m[1] === 'this' ? 'ce membre' : m[1]); },
+    hireSent: function (m) { return 'Envoyé. Neuropian transmet votre demande et vous écrira si ' + (m[1] === 'they' ? 'cette personne' : m[1]) + ' souhaite échanger.'; },
+    talentTitle: "$1 · Neuropian Talent"
   },
   ctx: []
 };

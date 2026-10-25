@@ -567,7 +567,26 @@ window.__npAppDict = {
     "Chat, problem and build rooms": "聊天、难题和构建房间",
     "Search member profiles": "搜索成员资料",
     "Not you?": "不是你？",
-    "Sign out": "退出登录"
+    "Sign out": "退出登录",
+
+    // Talent page: 'Hire or contact' on each profile (hire_request in ~/neuropian-tools/hire.sql)
+    "Hiring?": "在招聘？",
+    "Your name": "你的姓名",
+    "Company": "公司",
+    "Your work email": "你的工作邮箱",
+    "The role": "职位",
+    "e.g. Founding compiler engineer": "例如：创始团队编译器工程师",
+    "About the role: the work, the team, pay or equity if you can share it": "关于这个职位：工作内容、团队，如方便也请说明薪酬或股权",
+    "Link to the job or company (optional)": "职位或公司链接（可选）",
+    "Send to Neuropian": "发送给 Neuropian",
+    "Could not send. Please try again.": "发送失败，请重试。",
+    "Add your name.": "请填写你的姓名。",
+    "Add your company.": "请填写你的公司。",
+    "Add a valid email address.": "请填写有效的邮箱地址。",
+    "Add the role.": "请填写职位。",
+    "Describe the role in a few sentences.": "请用几句话描述这个职位。",
+    "That link is too long.": "链接太长了。",
+    "Too many requests today. Please try again tomorrow.": "今天的请求太多了，请明天再试。"
   },
   rx: {
     invited: "$1 邀请你加入 Neuropian。",
@@ -602,7 +621,11 @@ window.__npAppDict = {
     newest: "最新的 $1 份资料",
     ghVerified: "GitHub 已验证 · $1",
     fromGh: "经 GitHub 验证 · $1",
-    byMember: "由成员添加 · $1"
+    byMember: "由成员添加 · $1",
+    hireIntro: function (m) { var n = m[1] === 'this member' ? '这位成员' : ' ' + m[1] + ' '; return '向 Neuropian 介绍这个职位。我们会把信息转告' + n + '，如果对方愿意交流，我们再为你们牵线。对方的邮箱永远不会公开。'; },
+    hireBtn: function (m) { return '招聘或联系' + (m[1] === 'this' ? '这位成员' : ' ' + m[1]); },
+    hireSent: function (m) { return '已发送。Neuropian 会转达你的请求，如果' + (m[1] === 'they' ? '对方' : ' ' + m[1] + ' ') + '愿意交流，会发邮件告诉你。'; },
+    talentTitle: "$1 · Neuropian Talent"
   },
   ctx: []
 };

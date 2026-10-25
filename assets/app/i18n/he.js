@@ -568,7 +568,26 @@ window.__npAppDict = {
     "Chat, problem and build rooms": "חדרי צ׳אט, בעיות ובנייה",
     "Search member profiles": "חיפוש בפרופילים של חברים",
     "Not you?": "זה לא אתם?",
-    "Sign out": "התנתקות"
+    "Sign out": "התנתקות",
+
+    // Talent page: 'Hire or contact' on each profile (hire_request in ~/neuropian-tools/hire.sql)
+    "Hiring?": "מגייסים?",
+    "Your name": "השם שלכם",
+    "Company": "חברה",
+    "Your work email": "האימייל שלכם בעבודה",
+    "The role": "התפקיד",
+    "e.g. Founding compiler engineer": "למשל: מהנדס קומפיילרים בצוות המייסד",
+    "About the role: the work, the team, pay or equity if you can share it": "על התפקיד: העבודה, הצוות, השכר או המניות אם אפשר לשתף",
+    "Link to the job or company (optional)": "קישור למשרה או לחברה (לא חובה)",
+    "Send to Neuropian": "שליחה ל-\u2060Neuropian",
+    "Could not send. Please try again.": "לא ניתן היה לשלוח. נסו שוב.",
+    "Add your name.": "הוסיפו את השם שלכם.",
+    "Add your company.": "הוסיפו את שם החברה.",
+    "Add a valid email address.": "הוסיפו כתובת אימייל תקינה.",
+    "Add the role.": "הוסיפו את התפקיד.",
+    "Describe the role in a few sentences.": "תארו את התפקיד בכמה משפטים.",
+    "That link is too long.": "הקישור ארוך מדי.",
+    "Too many requests today. Please try again tomorrow.": "יותר מדי פניות היום. נסו שוב מחר."
   },
   rx: {
     invited: "קיבלתם הזמנה מ-\u2060$1 להצטרף ל-\u2060Neuropian.",
@@ -603,7 +622,11 @@ window.__npAppDict = {
     newest: function (m, h) { return +m[1] === 1 ? 'הפרופיל החדש ביותר' : m[1] + ' הפרופילים החדשים ביותר'; },
     ghVerified: "GitHub מאומת · $1",
     fromGh: "אומת מ-\u2060GitHub · $1",
-    byMember: "נוסף על ידי החבר · $1"
+    byMember: "נוסף על ידי החבר · $1",
+    hireIntro: function (m) { var n = m[1] === 'this member' ? 'החבר הזה' : m[1]; return 'ספרו ל-⁠Neuropian על התפקיד. נעביר את הפנייה אל ' + n + ' ונפגיש ביניכם אם יהיה עניין לדבר. כתובת האימייל לא מוצגת לעולם.'; },
+    hireBtn: function (m) { return 'גיוס או יצירת קשר עם ' + (m[1] === 'this' ? 'החבר הזה' : m[1]); },
+    hireSent: function (m) { return 'נשלח. Neuropian תעביר את הפנייה ותכתוב לכם אם יהיה עניין מצד ' + (m[1] === 'they' ? 'החבר' : m[1]) + '.'; },
+    talentTitle: "$1 · Neuropian Talent"
   },
   ctx: [["footer a[href^=\"/app\"]", {"Members": "חברים"}]]
 };
