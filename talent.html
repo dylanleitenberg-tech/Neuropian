@@ -148,7 +148,7 @@ function show(id){
       ((p.work||[]).length?'<h2>Built and solved</h2><ul class="work">'+(p.work||[]).map(function(w){var u=safeUrl(w.url);return '<li><span class="w-title">'+(u?'<a rel="nofollow ugc noopener" href="'+u+'">'+esc(w.title)+'</a>':esc(w.title))+'</span><span class="w-src">'+(w.verified?'Verified from GitHub':'Added by member')+(w.source?' · '+esc(w.source):'')+'</span><span class="w-detail">'+esc(w.detail)+'</span></li>';}).join("")+'</ul>':'')+
       '<p class="note">'+(p.ai_drafted?'Drafted with AI from this member\'s own description and work, then reviewed and published by them.':'Published by this member.')+' Links go to the original work so you can check it.</p>'+
       '<div class="hire"><h2>Hiring?</h2><p>Tell Neuropian about the role. We pass it on to '+esc(p.name||"this member")+' and introduce you if they want to talk. Their email is never shown.</p>'+
-      '<button class="hire-btn" type="button">Hire or contact '+esc((p.name||"this member").split(" ")[0])+'</button>'+
+      '<button class="hire-btn" type="button">Hire or contact '+esc(p.name?p.name.split(" ")[0]:"this member")+'</button>'+
       '<form class="hire-f" hidden><label>Your name<input name="name" maxlength="120" required autocomplete="name"></label>'+
       '<label>Company<input name="company" maxlength="120" required autocomplete="organization"></label>'+
       '<label>Your work email<input name="email" type="email" maxlength="254" required autocomplete="email"></label>'+
@@ -176,7 +176,7 @@ function hireForm(p){
       body:JSON.stringify({p_profile:p.id,p_name:d.get("name"),p_company:d.get("company"),p_email:d.get("email"),p_role:d.get("role"),p_details:d.get("details"),p_link:d.get("link")||null,p_compensation:d.get("compensation"),p_work_mode:d.get("work_mode"),p_location:d.get("location")||null,p_employment:d.get("employment")})})
     .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
     .then(function(x){ if(!x.ok)throw new Error((x.j&&x.j.message)||"Could not send. Please try again.");
-      f.hidden=true; msg.textContent="Sent. Neuropian will pass it on and email you if "+(p.name?p.name.split(" ")[0]:"they")+" wants to talk."; })
+      f.hidden=true; msg.textContent="Sent. Neuropian will pass it on and email you if "+(p.name?p.name.split(" ")[0]+" wants":"they want")+" to talk."; })
     .catch(function(err){ sub.disabled=false; msg.textContent=err.message; });
   });
 }
