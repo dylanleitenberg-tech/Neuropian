@@ -627,6 +627,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 <!-- PAGE: HOME -->
 <div id="page-home" class="page active">
 <section class="m-home">
+  <p id="np-invited" class="m-invited" hidden></p>
   <p class="m-kicker">Neuropian · Intellect accelerator</p>
   <h1 class="m-title">Your profile, opportunities and RoundTable.</h1>
   <p class="m-lede">Create an account to show what you've built, browse opportunities and talk with other members.
@@ -646,6 +647,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 <style>
 .m-home{max-width:880px;margin:0 auto;padding:9rem 2rem 6rem;color:#33312f}
 .m-kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(43,42,40,.62);margin-bottom:1.2rem}
+.m-invited{display:inline-block;margin:0 0 1.4rem;padding:8px 16px;border:1px solid rgba(43,42,40,.2);border-radius:999px;font-size:15px;color:#33312f}
 .m-title{font-size:clamp(40px,6vw,72px);font-weight:500;line-height:1.02;letter-spacing:-.035em;color:#33312f}
 .m-lede{font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:rgba(43,42,40,.62);max-width:36em;margin-top:1.4rem}
 .m-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:2rem}
@@ -1430,6 +1432,14 @@ async function claimInvite(){
   const {error}=await sb.rpc('invite_claim',{p_code:r});
   if(!error){try{localStorage.removeItem('np_ref');}catch(e){}}
 }
+// "X invited you": shown to signed-out visitors who arrive on an invite link (invite_who returns a display name only)
+(function(){
+  let r=null; try{r=new URLSearchParams(location.search).get('ref');}catch(e){}
+  if(!r||!sb)return;
+  sb.auth.getSession().then(({data:{session}})=>{ if(session)return;
+    sb.rpc('invite_who',{p_code:r}).then(({data})=>{ const el=document.getElementById('np-invited');
+      if(data&&el){ el.textContent=data+' invited you to Neuropian.'; el.hidden=false; } }); });
+})();
 (async function initSession(){
   if(!sb)return;
   const {data:{session}}=await sb.auth.getSession();
