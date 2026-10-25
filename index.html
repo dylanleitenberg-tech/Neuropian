@@ -423,6 +423,23 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
 @media print{.reveal{opacity:1!important;transform:none!important;transition:none!important}.orbit{height:auto!important}.orbit-stick{position:static!important;height:auto!important}.orbit-poster{display:block!important}.orbit canvas,.hud,.hud-ctl,video{display:none!important}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orbit canvas{transition:none!important}.gallery img{transition:none}.js .reveal{opacity:1;transform:none;transition:none}.orbit.holo .orbit-stage::after{animation:none}.term li{opacity:1!important}}
 </style>
+<!--i18n:head-->
+<link rel="alternate" hreflang="en" href="https://neuropian.com/">
+<link rel="alternate" hreflang="fr" href="https://neuropian.com/fr/">
+<link rel="alternate" hreflang="es" href="https://neuropian.com/es/">
+<link rel="alternate" hreflang="he" href="https://neuropian.com/he/">
+<link rel="alternate" hreflang="hi" href="https://neuropian.com/hi/">
+<link rel="alternate" hreflang="zh-Hans" href="https://neuropian.com/zh/">
+<link rel="alternate" hreflang="x-default" href="https://neuropian.com/">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
+<style>
+/* language switcher (site_i18n.py) */
+footer .langs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 20px;margin-bottom:10px;font-size:15px;font-family:var(--serif),"Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",serif}
+footer .langs a{color:var(--dim);text-decoration:none}
+footer .langs a:hover{color:#ECE8E3;text-decoration:underline}
+footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decoration-color:rgba(236,232,227,.6)}
+</style>
+<!--/i18n:head-->
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -640,6 +657,7 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
 
 <footer>
   <div class="wrap">
+    <!--i18n:langs--><nav class="langs" aria-label="Language"><a href="/" hreflang="en" lang="en" translate="no" aria-current="page">English</a><a href="/fr/" hreflang="fr" lang="fr" translate="no">Français</a><a href="/es/" hreflang="es" lang="es" translate="no">Español</a><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a><a href="/hi/" hreflang="hi" lang="hi" translate="no">हिन्दी</a><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></nav><!--/i18n:langs-->
     <span>© 2026 Neuropian · Beyond Limitless · Prints, all public domain: Vesalius 1543, B. H. Babbage 1853, Eddystone Lighthouse 1884, Hooke 1665, Zabaglia 1743, Robison 1822, Dürer 1525 (Rijksmuseum)</span>
     <span><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/app.html">Members</a></span>
   </div>

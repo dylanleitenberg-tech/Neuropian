@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<script>(function(){var h=location.hash,q=location.search,p=location.pathname,n=location.hostname,a=/access_token=|error_description=|type=(recovery|signup|invite|magiclink|email_change)/.test(h)||/[?&](code|token_hash)=/.test(q);if(/github\.io$/.test(n)){location.replace('https://neuropian.com/'+(a?'app':'')+q+h);return;}if(a&&(p==='/'||p==='/index.html'))location.replace('/app'+q+h)})()</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neuropian · बुद्धिमत्ता, नए सिरे से</title>
+<meta name="description" content="Neuropian, बुद्धि त्वरक: किसी भी क्षेत्र के प्रतिभाशाली लोग, जिन्हें उनके बनाए, रचे और हल किए काम से पहचाना जाता है।">
+<link rel="canonical" href="https://neuropian.com/hi/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://neuropian.com/hi/">
+<meta property="og:title" content="Neuropian">
+<meta property="og:description" content="बुद्धिमत्ता, नए सिरे से। Neuropian वह जगह है जहाँ प्रतिभाशाली लोग अपने बनाए, रचे और हल किए काम से पहचाने जाते हैं।">
+<meta property="og:image" content="https://neuropian.com/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ECE8E3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ECE8E3'/%3E%3Cpath d='M9 23V9h2.4l7.2 9.9V9H21v14h-2.4l-7.2-9.9V23z' fill='%232B2A28'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ECE8E3;
+  --fg:#2B2A28;
+  --dim:rgba(43,42,40,.76);
+  --faint:rgba(43,42,40,.70);
+  --line:rgba(43,42,40,.16);
+  --acc:#2B4C7E;
+  --night:#1D2128;
+  --serif:"EB Garamond",Garamond,Georgia,"Times New Roman",serif;
+  --display:"DM Serif Display",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --pad:clamp(16px,5vw,64px);
+  --max:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg) url(/assets/paper.webp) 0 0/900px 900px;color:var(--fg);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg) url(/assets/paper.webp) 0 0/900px 900px;color:var(--fg);font-family:var(--serif);font-size:19px;line-height:1.5;font-feature-settings:"tnum" 0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:.2em}
+a:hover{text-decoration-color:var(--fg)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+img{display:block;max-width:100%;height:auto}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;background:var(--fg);color:var(--bg);padding:8px 12px;z-index:10}
+
+/* header */
+.bar{position:sticky;top:0;z-index:5;background:rgba(10,10,10,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:24px}
+.mark{font-weight:600;letter-spacing:.22em;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.mark img{display:block;width:28px;height:28px}
+.nav{display:flex;gap:28px;font-size:14px}
+.nav a{text-decoration:none;color:var(--dim)}
+.nav a:hover{color:var(--fg)}
+.nav a.login{color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:5px 14px;margin:-6px 0}
+.nav a.login:hover{border-color:var(--fg)}
+
+/* type */
+h1,h2,h3{font-weight:500;letter-spacing:-.035em;line-height:1.02}
+h1{font-size:clamp(38px,7.4vw,96px);max-width:14ch;overflow-wrap:break-word}
+h2{font-size:clamp(34px,5.6vw,72px);max-width:16ch}
+h3{font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;line-height:1.15}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:28px}
+.lede{font-size:clamp(18px,1.7vw,22px);color:var(--dim);max-width:38em}
+p+p{margin-top:1em}
+
+/* sections */
+section{border-top:1px solid var(--line);padding:clamp(72px,11vw,160px) 0}
+.hero{border-top:0;padding-top:clamp(40px,6vw,88px);padding-bottom:clamp(64px,8vw,120px);position:relative;overflow:hidden}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start}
+.hero h1{font-size:clamp(44px,6.9vw,108px);line-height:.94;letter-spacing:-.015em;max-width:none;overflow-wrap:normal;margin-top:8px}
+.brush{position:relative;display:inline-block;white-space:nowrap}
+.brush::after{content:"";position:absolute;left:-.04em;right:-.08em;bottom:-.17em;height:.16em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 30' preserveAspectRatio='none'%3E%3Cpath fill='%232B4C7E' d='M0 5.9 L6 9.0 L12 7.1 L18 6.4 L24 8.8 L30 7.3 L36 6.6 L42 9.1 L48 8.0 L54 9.1 L60 8.5 L66 8.7 L72 7.9 L78 9.9 L84 10.3 L90 8.9 L96 9.0 L102 8.5 L108 8.3 L114 9.8 L120 10.9 L126 9.4 L132 10.7 L138 8.6 L144 9.7 L150 9.7 L156 11.2 L162 9.3 L168 8.7 L174 10.0 L180 11.4 L186 10.0 L192 11.2 L198 11.0 L204 10.0 L210 8.7 L216 9.9 L222 10.9 L228 9.3 L234 9.1 L240 11.4 L246 10.0 L252 7.9 L258 9.1 L264 7.8 L270 9.1 L276 8.8 L282 7.7 L288 8.6 L294 8.5 L300 7.7 L306 8.5 L312 8.5 L318 8.8 L324 10.1 L330 6.5 L336 6.5 L342 8.6 L348 7.7 L354 7.8 L360 9.5 L366 9.2 L372 7.0 L378 6.6 L384 7.2 L390 7.4 L396 8.3 L402 6.0 L408 7.0 L414 7.1 L420 7.1 L426 7.9 L432 7.1 L438 7.1 L444 6.3 L450 7.7 L456 7.7 L462 6.8 L468 6.0 L474 6.4 L480 8.6 L486 6.4 L492 9.0 L498 9.8 L504 6.6 L510 7.4 L516 9.0 L522 9.0 L528 7.6 L534 9.0 L540 8.8 L546 9.4 L552 8.6 L558 9.2 L564 10.9 L570 8.9 L576 11.4 L582 10.9 L588 9.6 L594 9.8 L600 12.3 L600 14.7 L594 15.4 L588 14.3 L582 15.1 L576 15.3 L570 16.1 L564 15.2 L558 17.2 L552 17.1 L546 14.6 L540 17.8 L534 16.2 L528 16.9 L522 18.8 L516 19.0 L510 18.7 L504 19.1 L498 17.7 L492 17.7 L486 17.2 L480 17.9 L474 20.1 L468 20.1 L462 19.9 L456 20.8 L450 19.5 L444 20.5 L438 20.0 L432 21.3 L426 22.8 L420 23.6 L414 21.7 L408 23.4 L402 20.8 L396 21.7 L390 20.9 L384 22.1 L378 22.9 L372 23.1 L366 22.5 L360 22.4 L354 22.4 L348 23.1 L342 23.6 L336 21.5 L330 23.6 L324 25.1 L318 24.4 L312 23.1 L306 22.4 L300 22.6 L294 22.5 L288 25.7 L282 23.1 L276 25.0 L270 23.1 L264 22.9 L258 25.6 L252 24.3 L246 25.6 L240 25.4 L234 25.6 L228 24.0 L222 26.0 L216 25.8 L210 25.8 L204 26.0 L198 25.6 L192 25.6 L186 24.1 L180 24.2 L174 23.8 L168 24.9 L162 23.4 L156 23.9 L150 24.1 L144 25.9 L138 23.1 L132 23.0 L126 24.6 L120 25.9 L114 23.8 L108 25.3 L102 23.6 L96 23.5 L90 22.3 L84 24.2 L78 22.6 L72 24.2 L66 23.3 L60 23.2 L54 24.2 L48 22.2 L42 22.2 L36 22.5 L30 24.5 L24 21.5 L18 21.6 L12 23.0 L6 21.5 L0 23.6ZM520.8 20.2m-1.7 0a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0 -3.4 0M471.3 23.1m-1.8 0a1.8 1.8 0 1 0 3.6 0a1.8 1.8 0 1 0 -3.6 0M432.5 13.7m-0.6 0a0.6 0.6 0 1 0 1.3 0a0.6 0.6 0 1 0 -1.3 0M530.2 19.5m-1.4 0a1.4 1.4 0 1 0 2.9 0a1.4 1.4 0 1 0 -2.9 0M569.6 8.5m-1.0 0a1.0 1.0 0 1 0 1.9 0a1.0 1.0 0 1 0 -1.9 0M519.0 9.8m-1.5 0a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0M439.9 10.0m-1.5 0a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0M449.8 21.4m-1.2 0a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0M559.3 18.1m-0.8 0a0.8 0.8 0 1 0 1.5 0a0.8 0.8 0 1 0 -1.5 0M597.9 23.8m-1.5 0a1.5 1.5 0 1 0 2.9 0a1.5 1.5 0 1 0 -2.9 0M461.1 18.0m-1.3 0a1.3 1.3 0 1 0 2.5 0a1.3 1.3 0 1 0 -2.5 0M452.2 20.3m-0.9 0a0.9 0.9 0 1 0 1.8 0a0.9 0.9 0 1 0 -1.8 0M541.6 15.4m-0.9 0a0.9 0.9 0 1 0 1.9 0a0.9 0.9 0 1 0 -1.9 0M464.3 12.5m-1.3 0a1.3 1.3 0 1 0 2.6 0a1.3 1.3 0 1 0 -2.6 0M598.2 11.4m-1.8 0a1.8 1.8 0 1 0 3.6 0a1.8 1.8 0 1 0 -3.6 0M541.5 10.1m-1.2 0a1.2 1.2 0 1 0 2.5 0a1.2 1.2 0 1 0 -2.5 0M567.5 11.2m-1.7 0a1.7 1.7 0 1 0 3.3 0a1.7 1.7 0 1 0 -3.3 0M484.2 16.8m-0.8 0a0.8 0.8 0 1 0 1.7 0a0.8 0.8 0 1 0 -1.7 0M537.5 22.0m-0.9 0a0.9 0.9 0 1 0 1.9 0a0.9 0.9 0 1 0 -1.9 0M567.7 21.6m-1.1 0a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 1 0 -2.2 0M439.0 14.8m-1.5 0a1.5 1.5 0 1 0 2.9 0a1.5 1.5 0 1 0 -2.9 0M521.3 8.8m-1.0 0a1.0 1.0 0 1 0 2.1 0a1.0 1.0 0 1 0 -2.1 0M571.7 19.1m-1.2 0a1.2 1.2 0 1 0 2.3 0a1.2 1.2 0 1 0 -2.3 0M558.8 19.4m-1.3 0a1.3 1.3 0 1 0 2.5 0a1.3 1.3 0 1 0 -2.5 0M438.5 10.5m-1.6 0a1.6 1.6 0 1 0 3.1 0a1.6 1.6 0 1 0 -3.1 0M518.8 10.0m-1.2 0a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;pointer-events:none}
+.hero .lede{margin-top:clamp(36px,4vw,52px);color:var(--fg);font-size:clamp(20px,1.8vw,25px);line-height:1.38;max-width:27em}
+.hero .lede b{font-weight:600}
+.ctas{display:flex;gap:14px 26px;flex-wrap:wrap;align-items:center;margin-top:36px}
+.cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--serif);font-size:20px;font-weight:500;text-decoration:none;padding:13px 24px 14px;background:var(--acc);color:#F3F0EB;border:1px solid var(--acc);transition:background .2s ease,transform .15s ease}
+.cta:hover{background:#22406c;transform:translateY(-1px)}
+.cta .ast{font-size:18px;line-height:1}
+.cta-mark{display:block;width:20px;height:20px;flex:none}
+.cta.ghost{background:transparent;color:var(--fg);border:0;padding:0;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:.25em}
+.cta.ghost:hover{transform:none;text-decoration-color:var(--fg)}
+.hero-art{position:relative;padding-top:4px}
+.ticker{position:relative;padding-left:44px;font-family:var(--mono);color:var(--fg)}
+.ticker::before{content:"";position:absolute;left:0;top:4px;width:18px;height:118px;background:linear-gradient(var(--fg),var(--fg)) 0 0/18px 1.5px no-repeat,linear-gradient(var(--fg),var(--fg)) 0 39px/18px 1.5px no-repeat,linear-gradient(var(--fg),var(--fg)) 0 78px/18px 1.5px no-repeat,linear-gradient(var(--fg),var(--fg)) 0 116px/18px 1.5px no-repeat}
+.tk-path{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.ticker b{display:block;font-weight:500;font-size:clamp(52px,6.4vw,96px);line-height:1.05;letter-spacing:.02em;font-variant-numeric:tabular-nums;margin-top:6px}
+.tk-cap{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:6px}
+.engr{mix-blend-mode:multiply}
+.hero .brain{width:min(100%,520px);margin:clamp(12px,2vw,28px) 0 0 auto}
+.tagline{margin-top:30px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+/* plates: one engraving per field; a tap opens what counts there */
+.plates-sec .lede{margin-top:18px}
+.plates{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.2vw,28px);margin-top:clamp(36px,5vw,56px)}
+.ph{position:relative;margin:0;aspect-ratio:1/1;overflow:hidden;border:1px solid rgba(43,42,40,.55);outline:1px solid rgba(43,42,40,.2);outline-offset:-7px;background:rgba(255,255,255,.18)}
+.ph img{position:absolute;inset:8% 10% 18%;width:80%;height:74%;object-fit:contain;transition:transform .6s ease}
+.ph:hover img{transform:scale(1.035)}
+.ph-hit:focus-visible{outline:2px solid var(--acc);outline-offset:-6px}
+.ph-hit{position:absolute;inset:0;width:100%;border:0;background:transparent;cursor:pointer;padding:0;text-align:left;font:inherit;color:inherit}
+.chip{position:absolute;left:0;right:0;bottom:4.5%;text-align:center;font-family:var(--display);font-size:clamp(19px,1.9vw,26px);line-height:1.1;color:var(--fg)}
+.chip i{font-style:normal;font-family:var(--mono);font-size:.5em;letter-spacing:.1em;vertical-align:.35em;margin-right:4px;color:var(--dim)}
+.plus{position:absolute;right:14px;top:14px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(43,42,40,.5);color:var(--fg);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:17px;line-height:1;background:rgba(236,232,227,.7);z-index:3;transition:transform .25s ease,background .2s ease}
+.ph:hover .plus{transform:scale(1.1);background:var(--bg)}.ph.open .plus{transform:rotate(45deg)}
+.ph-more{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:22px;background:rgba(236,232,227,.95);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility 0s linear .25s}
+.ph.open .ph-more{opacity:1;visibility:visible;pointer-events:auto;cursor:pointer;transition-delay:0s}.ph.open .ph-hit{pointer-events:none}.ph.open .chip{display:none}
+.ph-more b{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.3vw,32px);line-height:1.05}.ph-more p{font-size:17px;line-height:1.4;color:var(--fg)}
+.ph-cta{position:relative;z-index:4;align-self:flex-start;white-space:nowrap;font-size:16px;font-weight:500;text-decoration:none;color:#F3F0EB;background:var(--acc);padding:8px 14px}
+.proof{padding:clamp(64px,9vw,120px) 0}
+.proof .big{font-size:clamp(26px,3.3vw,44px);line-height:1.2;letter-spacing:-.01em;font-weight:400;max-width:23em}
+.proof .big.dim{color:var(--dim);margin-top:18px}.proof .big b{font-weight:600;color:var(--fg)}
+.proof .big b.c1{color:var(--acc)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,28px);margin-top:clamp(40px,5vw,64px)}
+.tile{border-top:2px solid var(--fg);padding:18px 0 0}
+.tile b{display:block;font-family:var(--mono);font-size:clamp(40px,4.6vw,62px);font-weight:500;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.tile span{display:block;color:var(--dim);margin-top:12px}
+@media(max-width:1000px){.tiles{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.ph-more{justify-content:flex-start;padding-top:40px!important}.ph.open{aspect-ratio:auto}.ph.open img{visibility:hidden}.ph.open .ph-more{position:relative;inset:auto;min-height:100%}}
+@media(max-width:600px){.ph-more{padding:12px;gap:6px}.ph-more b{font-size:20px}.ph-more p{font-size:14px;line-height:1.35}.ph-cta{white-space:normal;text-align:center;align-self:stretch;font-size:14px;padding:7px 8px}.plus{right:9px;top:9px;width:26px;height:26px;font-size:15px}.chip{font-size:18px}}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-art{display:grid;grid-template-columns:1fr minmax(0,190px);gap:16px;align-items:end;margin-top:8px}.hero .brain{width:100%;margin:0}.ticker b{font-size:clamp(40px,12vw,64px)}.plates{grid-template-columns:1fr 1fr}.ph{aspect-ratio:4/5}.ph img{inset:9% 9% 17%;width:82%;height:74%}}
+.status{margin-top:20px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.figures{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:clamp(56px,8vw,120px);border-top:1px solid var(--line);padding-top:28px}
+.fig b{display:block;font-size:clamp(34px,4.2vw,56px);font-weight:500;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.fig span{display:block;margin-top:12px;font-size:14px;color:var(--dim);max-width:22em}
+
+/* method blocks */
+.block{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,80px);padding:clamp(40px,4.5vw,64px) 0;border-top:1px solid var(--line)}
+.block:first-of-type{margin-top:clamp(48px,6vw,88px)}
+.idx{font-size:13px;letter-spacing:.16em;color:var(--faint);margin-bottom:14px}
+.block .what{margin-top:16px;color:var(--dim)}
+.stat b{display:block;font-size:clamp(56px,8vw,112px);font-weight:500;letter-spacing:-.04em;line-height:.95;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:14px;font-size:15px;color:var(--dim);max-width:30em}
+.finding{margin-top:28px;max-width:36em}
+details{margin-top:28px;border-top:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:16px 0;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:18px;line-height:1}
+details[open] summary::after{content:"\2212"}
+summary:hover{color:var(--fg)}
+details ul{list-style:none;font-size:15px;color:var(--dim);padding-bottom:8px}
+details li{padding:10px 0;border-top:1px solid var(--line)}
+details li strong{color:var(--fg);font-weight:500}
+
+/* principles */
+.rules{list-style:none;margin-top:clamp(40px,6vw,72px);counter-reset:r}
+.rules li{text-wrap:pretty;counter-increment:r;display:grid;grid-template-columns:56px 1fr;gap:16px;padding:22px 0;border-top:1px solid var(--line);font-size:clamp(20px,2.4vw,30px);letter-spacing:-.015em;line-height:1.25}
+.rules li::before{content:counter(r,decimal-leading-zero);font-size:13px;letter-spacing:.16em;color:var(--faint);padding-top:.5em}
+.rules li:last-child{border-bottom:1px solid var(--line)}
+
+/* work */
+.work .lede{margin-top:28px}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,24px);margin-top:clamp(40px,6vw,72px)}
+.gallery figure:first-child{grid-column:1 / -1}
+.gallery figure:first-child img{aspect-ratio:21/9}
+.gallery img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#000}
+@media (hover:hover){.gallery img{filter:grayscale(1) contrast(1.06);transition:filter .5s ease}.gallery figure:hover img{filter:none}}
+figcaption{margin-top:12px;font-size:14px;color:var(--dim);max-width:44em}
+.links{margin-top:32px;font-size:15px;color:var(--dim);display:flex;flex-wrap:wrap;gap:8px 28px}
+
+/* next */
+.next{list-style:none;margin-top:clamp(40px,6vw,72px)}
+.next li{display:grid;grid-template-columns:180px 1fr;gap:16px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line);font-size:clamp(18px,1.8vw,22px)}
+.next li:last-child{border-bottom:1px solid var(--line)}
+.tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:5px 12px;justify-self:start;white-space:nowrap}
+.next small{display:block;font-size:15px;color:var(--dim);margin-top:4px}
+
+/* contact */
+.asks{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);margin-top:clamp(40px,6vw,72px)}
+.ask{border-top:1px solid var(--line);padding-top:24px}
+.ask p{color:var(--dim);margin-top:12px;max-width:28em}
+.mail{display:inline-block;margin-top:24px;font-size:clamp(20px,2.2vw,28px);letter-spacing:-.02em;overflow-wrap:anywhere}
+
+footer{border-top:1px solid var(--line);padding:32px 0 48px;font-size:14px;color:var(--faint)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+
+/* motion: typing, reveals (only when JS runs; without it everything is simply there) */
+.js [data-type].typing::after{content:"\258C";margin-left:2px;color:var(--dim);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.ready .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
+.ready .reveal.in{opacity:1;transform:none}
+
+/* astroworm orbit: scroll to turn, drag to spin, CAD -> hologram */
+.orbit{position:relative;margin-top:clamp(40px,6vw,72px)}
+.ready .orbit{height:340vh}
+.orbit-stick{position:relative}
+.ready .orbit-stick{position:sticky;top:60px;height:calc(100vh - 60px);overflow:hidden}
+.orbit-stage{position:relative;height:100%;display:grid;place-items:center;background:#0a0a0a}
+.orbit-stage::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .8s ease;
+  background:radial-gradient(ellipse at 50% 55%,rgba(40,170,220,.18),transparent 60%),
+             linear-gradient(rgba(70,200,255,.08) 1px,transparent 1px) 0 0/48px 48px,
+             linear-gradient(90deg,rgba(70,200,255,.08) 1px,transparent 1px) 0 0/48px 48px,#02080d}
+.orbit-poster,.orbit canvas{width:100%;height:auto;max-height:100%;object-fit:contain;position:relative}
+@media (min-width:861px){.ready .orbit-stage{place-items:start center}.ready .orbit canvas{height:calc(100% - 200px);width:auto;max-width:100%;margin-top:24px}}
+.orbit-poster{display:block}.orbit canvas{display:none}
+.ready .orbit-poster{display:none}
+.ready .orbit canvas{display:block;cursor:grab;touch-action:pan-y;transition:filter .8s ease}
+.orbit canvas:active{cursor:grabbing}
+.orbit.holo .orbit-stage::before{opacity:1}
+.orbit.holo canvas{mix-blend-mode:screen;filter:grayscale(1) sepia(1) hue-rotate(152deg) saturate(5) brightness(1.25) contrast(1.15)}
+.orbit.holo .orbit-stage::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(120,230,255,.05) 0 1px,transparent 1px 3px);animation:scan 6s linear infinite}
+@keyframes scan{to{background-position:0 120px}}
+.hud{position:absolute;inset:0;pointer-events:none;font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:.08em;color:rgba(242,241,237,.78)}
+.orbit.holo .hud{color:#9fe9ff;text-shadow:0 0 8px rgba(90,220,255,.6)}
+.hud .corner{position:absolute;width:28px;height:28px;border:1px solid currentColor;opacity:.55}
+.hud .tl{top:16px;left:16px;border-right:0;border-bottom:0}.hud .tr{top:16px;right:16px;border-left:0;border-bottom:0}
+.hud .bl{bottom:16px;left:16px;border-right:0;border-top:0}.hud .br{bottom:16px;right:16px;border-left:0;border-top:0}
+.hud-title{position:absolute;top:28px;left:56px;text-transform:uppercase}
+.hud-title b{display:block;font-family:Inter,system-ui,sans-serif;font-weight:500;letter-spacing:.2em;font-size:15px;margin-bottom:4px}
+.hud-read{position:absolute;top:28px;right:56px;text-align:right;text-transform:uppercase}
+.hud-notes{position:absolute;left:40px;bottom:56px;padding:10px 16px 12px;background:linear-gradient(90deg,rgba(0,0,0,.62),rgba(0,0,0,.35) 75%,transparent);list-style:none;max-width:min(32em,72%);font-family:Inter,system-ui,sans-serif;font-size:clamp(15px,1.6vw,20px);letter-spacing:0;line-height:1.35;color:var(--fg)}
+.orbit.holo .hud-notes{color:#d9f7ff;background:linear-gradient(90deg,rgba(2,10,16,.7),rgba(2,10,16,.4) 75%,transparent)}
+.hud-notes li{min-height:1.35em;margin-top:6px}
+.hud-notes:not(.has){visibility:hidden}
+.ready .hud-notes li:not([data-shown]){display:none}
+.hud-hint{position:absolute;right:56px;bottom:28px;text-transform:uppercase;opacity:.7}
+.hud-cap{position:absolute;left:56px;bottom:28px;text-transform:uppercase;opacity:.7}
+.hud-ctl{position:absolute;top:84px;left:56px}
+.hud-ctl button{pointer-events:auto;font:inherit;color:inherit;background:transparent;border:1px solid currentColor;padding:6px 10px;margin-top:10px;cursor:pointer;text-transform:uppercase;letter-spacing:.12em}
+.hud-ctl button{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:rgba(242,241,237,.78)}
+.orbit.holo .hud-ctl button{color:#9fe9ff}
+.hud-ctl button:hover{background:rgba(255,255,255,.06)}
+html:not(.ready) .hud,html:not(.ready) .hud-ctl{display:none}
+figure video{display:block;width:100%;height:auto;background:#000}
+.gallery video{aspect-ratio:16/9;object-fit:contain}
+@media (max-width:860px){
+  .hud-title,.hud-notes,.hud-cap{left:24px}.hud-read,.hud-hint{right:24px}
+  .hud-notes{left:12px;bottom:56px;max-width:calc(100% - 24px)}
+  .ready .orbit{height:260vh}
+  .ready .orbit canvas{width:125%;max-width:none;margin-left:-12.5%}
+  .hud-title span.sub{display:none}.hud-ctl{left:24px;top:64px}.hud-hint{display:none}
+  .hud-title{top:24px}.hud-read{top:24px}
+}
+
+
+
+/* plain-English steps */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,32px);margin-top:clamp(36px,5vw,56px)}
+.steps li{border-top:1px solid var(--line);padding-top:22px}
+.s-num{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid rgba(111,214,247,.5);color:#9fefff;font-weight:500}
+.steps h3{margin-top:18px;font-size:clamp(24px,2.4vw,30px)}
+.steps p{margin-top:10px;color:var(--dim)}
+.steps-end{margin-top:clamp(28px,4vw,44px);font-size:clamp(20px,2vw,26px);letter-spacing:-.015em;max-width:30em}
+.lede.plain{margin-top:24px}
+
+/* what one search found: plain numbers that count up */
+.flow{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.5vw,32px);margin-top:clamp(36px,5vw,56px);counter-reset:f}
+.flow li{position:relative;border-top:1px solid var(--line);padding-top:20px}
+.flow li:not(:last-child)::after{content:"\2192";position:absolute;right:-6px;top:22px;color:var(--faint);font-size:20px}
+.flow b{display:block;font-size:clamp(44px,5.6vw,80px);font-weight:500;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.flow span{display:block;margin-top:12px;color:var(--dim);max-width:16em}
+.flow .hit b{color:#9fefff}.flow .hit span{color:var(--fg)}
+.flow-end{margin-top:clamp(24px,3.5vw,40px);font-size:clamp(18px,1.8vw,22px);color:var(--dim)}
+.cmds{margin-top:clamp(28px,4vw,44px);border-top:1px solid var(--line)}
+.cmds .term{margin-top:8px}
+/* the last run: a terminal that types out the real (summarized) output */
+#run .term{margin-top:clamp(36px,5vw,56px);border:1px solid var(--line);border-radius:12px;background:#050708;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.term-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:#0d1012}
+.term-bar span{width:10px;height:10px;border-radius:50%;background:#2a2f33}
+.term-bar b{margin-left:10px;font:500 12px "JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:var(--faint)}
+.term-body{list-style:none;padding:22px clamp(16px,3vw,28px) 26px;font:14px/1.75 "JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d1d6}
+.term-body li{white-space:pre-wrap;overflow-wrap:anywhere}
+.term-body .t-cmd{color:#fff;margin-top:12px}.term-body .t-cmd:first-child{margin-top:0}
+.term-body .t-cmd::before{content:"$ ";color:#7fd8f2}
+.term-body .t-dim{color:#7d878d}
+.term-body .t-hit{color:#9fefff}
+.term.armed li:not(.shown){opacity:0}
+.term li.typing::after{content:"\258C";color:#7fd8f2;animation:blink 1s steps(1) infinite}
+.term-note{margin-top:14px;font-size:14px;color:var(--faint);max-width:44em}
+
+/* charts: one accent, text in text colors, hairline grid; HTML so text stays full size on phones */
+.chart{margin:0}
+.dp-row,.fb-row{display:grid;grid-template-columns:minmax(120px,190px) 1fr 64px;align-items:center;gap:14px;padding:9px 0}
+.dp-lab,.fb-lab{font-size:15px;color:var(--dim)}
+.dp-val,.fb-val{font-size:15px;font-weight:500;font-variant-numeric:tabular-nums}
+.dp-track{position:relative;height:14px;background:linear-gradient(90deg,rgba(242,241,237,.1) 1px,transparent 1px) 0 0/25% 100%}
+.dp-stem{position:absolute;left:0;top:6px;height:2px;width:var(--x);background:rgba(242,241,237,.35);border-radius:2px}
+.dp-dot{position:absolute;left:var(--x);top:0;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#9aa3a8;box-shadow:0 0 0 2px var(--bg)}
+.dp-row.ours .dp-lab{color:var(--fg)}.dp-row.ours .dp-dot{background:#6fd6f7}.dp-row.ours .dp-stem{background:#6fd6f7}
+.dp-row.chance .dp-dot{background:transparent;border:1.5px solid var(--faint)}.dp-row.chance .dp-stem{display:none}
+.dp-axis{padding-top:2px}.dp-ticks{position:relative;height:16px}
+.dp-ticks span{position:absolute;left:var(--x);transform:translateX(-50%);font:12px "JetBrains Mono",ui-monospace,Menlo,monospace;color:var(--faint)}
+.fb-track{position:relative;height:20px}
+.fb-track i{position:absolute;left:0;top:0;height:20px;width:var(--w);background:#6fd6f7;border-radius:0 4px 4px 0}
+.fb-row:nth-child(2) i{background:#4aa9c7}.fb-row:nth-child(3) i{background:#3a93b0}.fb-row:nth-child(4) i{background:#9fefff}
+.dp-row:hover .dp-lab,.fb-row:hover .fb-lab,.dp-row:focus .dp-lab,.fb-row:focus .fb-lab{color:var(--fg)}
+.dp-row:focus,.fb-row:focus{outline:none}
+.chart.armed .fb-track i{transform-origin:left;transform:scaleX(0);transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.chart.armed.in .fb-track i{transform:none}
+.chart.armed .fb-row:nth-child(2) i{transition-delay:.15s}.chart.armed .fb-row:nth-child(3) i{transition-delay:.3s}.chart.armed .fb-row:nth-child(4) i{transition-delay:.45s}
+.chart.armed .dp-stem{transform-origin:left;transform:scaleX(0);transition:transform 1s ease .1s}.chart.armed.in .dp-stem{transform:none}
+.chart.armed .dp-dot,.chart.armed .dp-row .dp-val{opacity:0;transition:opacity .6s ease .8s}.chart.armed.in .dp-dot,.chart.armed.in .dp-row .dp-val{opacity:1}
+.chart figcaption{margin-top:12px;font-size:14px;color:var(--faint)}
+.ur-row{display:grid;grid-template-columns:minmax(110px,150px) 1fr 40px;align-items:center;gap:14px;padding:8px 0}
+.ur-lab{font-size:15px;color:var(--dim)}.ur-val{font-size:15px;font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
+.ur-dots{display:flex;flex-wrap:wrap;gap:3px}
+.ur-dots i{width:7px;height:7px;border-radius:50%;background:#6fd6f7}
+.ur-row:nth-child(n+4) .ur-dots i{background:#4f8fa6}
+.chart.armed .ur-dots i{opacity:0;transform:scale(.3);transition:opacity .4s ease,transform .4s ease}
+.chart.armed.in .ur-dots i{opacity:1;transform:none}
+
+
+/* a real dossier, identity blacked out */
+.dossier{margin:0;border:1px solid var(--line);border-radius:12px;padding:22px 24px;background:linear-gradient(180deg,#0e1113,#0a0a0a)}
+.d-top{display:flex;justify-content:space-between;gap:12px;font:12px "JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.d-red{color:#e7a37a}
+.d-name{margin-top:16px;font-size:24px}.d-sub{margin-top:6px;font-size:14px;color:var(--dim)}
+.redact{display:inline-block;height:.95em;vertical-align:-.12em;background:#e9e7e1;border-radius:2px}
+.d-sum .redact{display:block;height:.8em;margin-top:9px;background:rgba(233,231,225,.75)}
+.d-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;margin-top:18px;border-top:1px solid var(--line)}
+.d-grid div{padding:11px 0;border-bottom:1px solid var(--line)}
+.d-grid dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.d-grid dd{margin-top:4px;font-size:15px}
+.meter{display:inline-block;width:90px;height:6px;border-radius:3px;background:rgba(111,214,247,.18);vertical-align:middle;margin-right:8px;overflow:hidden}
+.meter i{display:block;height:100%;width:calc(var(--v)*100%);background:#6fd6f7;border-radius:3px}
+.dossier figcaption{margin-top:16px;font-size:14px;color:var(--faint)}
+
+/* project index: large titles; hover floats a preview (touch gets thumbnails) */
+.pindex{list-style:none;margin-top:clamp(40px,6vw,72px);border-top:1px solid var(--line)}
+.pindex a{display:grid;grid-template-columns:56px minmax(0,1.2fr) minmax(0,1fr) auto;align-items:baseline;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);text-decoration:none;transition:opacity .3s ease,padding .3s ease}
+.i-num{font:12px "JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;color:var(--faint)}
+.i-name{font-size:clamp(28px,4vw,52px);font-weight:500;letter-spacing:-.035em;line-height:1.05}
+.i-meta{color:var(--dim);font-size:16px}
+.i-status{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.i-thumb{display:none}
+@media (hover:hover){.pindex:hover a{opacity:.35}.pindex a:hover,.pindex a:focus-visible{opacity:1;padding-left:12px}}
+.pprev{position:fixed;left:0;top:0;width:min(420px,32vw);aspect-ratio:16/9;pointer-events:none;z-index:4;opacity:0;transform:translate(-9999px,0);transition:opacity .25s ease;border:1px solid rgba(255,255,255,.12);background:#000;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.pprev img{width:100%;height:100%;object-fit:cover;display:block}
+.pprev.on{opacity:1}
+.p-more{margin-top:24px;border-top:1px solid var(--line)}
+.p-more .p-facts{border-top:0}
+
+/* one article per project */
+.project{border-top:1px solid var(--line);padding:clamp(56px,8vw,112px) 0;scroll-margin-top:60px}
+#p-miner{margin-top:clamp(56px,8vw,96px)}
+.p-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,80px)}
+.p-lobe{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7fd8f2;margin-bottom:14px}
+.p-name{font-size:clamp(34px,4.4vw,56px);letter-spacing:-.035em;line-height:1.02;font-weight:500}
+.p-status{display:inline-block;margin-top:16px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.p-status a{color:inherit}
+.p-what{margin-top:20px;color:var(--dim);max-width:30em}
+.p-facts{border-top:1px solid var(--line)}
+.p-facts div{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.p-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);padding-top:2px}
+.p-facts dd{font-size:16px}
+.p-media{display:grid;gap:clamp(16px,2vw,24px);margin-top:clamp(36px,5vw,56px);align-items:start}
+.p-media.one{grid-template-columns:1fr}
+.p-media.two{grid-template-columns:2fr 1fr}
+.p-media.three{grid-template-columns:1fr 1.6fr}
+.p-media.three .tall{grid-row:span 2}
+.p-media img{width:100%;height:auto;background:#000;border:1px solid var(--line)}
+
+@media (max-width:860px){
+  .nav a:not(:nth-last-child(-n+2)){display:none}
+  .figures{grid-template-columns:1fr;gap:28px}
+  .steps{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr;row-gap:28px}.flow li:not(:last-child)::after{display:none}
+  .p-head{grid-template-columns:1fr}.p-facts div{grid-template-columns:1fr;gap:4px}
+  .pindex a{grid-template-columns:40px 1fr auto;grid-template-areas:"n name thumb" "n meta thumb" "n st thumb";gap:4px 14px;align-items:center}
+  .i-num{grid-area:n}.i-name{grid-area:name;font-size:26px}.i-meta{grid-area:meta;font-size:14px}.i-status{grid-area:st;font-size:11px}
+  .i-thumb{display:block;grid-area:thumb;width:96px;height:auto;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line)}
+  .term-body{font-size:12px}.d-grid{grid-template-columns:1fr}
+  .dp-row,.fb-row{grid-template-columns:104px 1fr 48px;gap:10px}.ur-row{grid-template-columns:84px 1fr 30px;gap:10px}.ur-lab{font-size:13px}.ur-dots i{width:5px;height:5px}.dp-lab,.fb-lab,.dp-val,.fb-val{font-size:13px}
+  .p-media.two,.p-media.three{grid-template-columns:1fr}.p-media.three .tall{grid-row:auto}
+  .block{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr}
+  .asks{grid-template-columns:1fr}
+  .next li{grid-template-columns:1fr;gap:10px}
+  .rules li{grid-template-columns:40px 1fr}
+}
+
+/* paper edition (1517-style): ink, one accent, torn edges */
+.skip:focus{background:var(--fg);color:var(--bg)}
+.bar{background:rgba(236,232,227,.9);border-bottom:1px solid var(--line)}
+.mark{font-family:var(--display);font-weight:400;letter-spacing:.01em;font-size:25px}
+.mark img{width:30px;height:30px}
+.nav{font-size:17px;align-items:center}
+.nav a.login{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);border-radius:0;padding:6px 16px;margin:-7px 0}
+.nav a.login:hover{background:#22406c;border-color:#22406c}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.01em}
+h2{font-size:clamp(40px,6vw,84px);line-height:.98;max-width:15ch}
+h3{letter-spacing:0}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--dim)}
+.lede{font-size:clamp(20px,1.8vw,24px)}
+section{position:relative;border-top:0}
+section:not(.hero)::before{content:"";position:absolute;left:0;right:0;top:-6px;height:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 12' preserveAspectRatio='none'%3E%3Cpath d='M0 5.0 L4 7.5 L8 5.6 L12 5.1 L16 7.7 L20 8.0 L24 5.9 L28 6.1 L32 5.5 L36 7.1 L40 6.8 L44 8.1 L48 6.0 L52 7.0 L56 6.5 L60 7.5 L64 6.9 L68 7.1 L72 7.5 L76 7.4 L80 6.3 L84 5.7 L88 7.3 L92 6.6 L96 6.9 L100 7.6 L104 6.0 L108 6.8 L112 7.2 L116 6.0 L120 5.2 L124 7.0 L128 4.3 L132 5.6 L136 6.8 L140 6.2 L144 4.6 L148 6.2 L152 4.1 L156 5.6 L160 5.4 L164 4.0 L168 4.8 L172 3.6 L176 4.6 L180 5.2 L184 4.3 L188 5.0 L192 4.9 L196 6.0 L200 4.4 L204 3.9 L208 4.4 L212 4.7 L216 5.7 L220 6.6 L224 6.3 L228 6.6 L232 6.3 L236 7.3 L240 6.7 L244 5.0 L248 7.6 L252 7.1 L256 5.9 L260 7.7 L264 8.2 L268 6.8 L272 7.3 L276 7.6 L280 8.3 L284 7.4 L288 7.4 L292 7.8 L296 7.1 L300 8.4 L304 7.9 L308 7.1 L312 7.4 L316 7.4 L320 6.0 L324 7.0 L328 5.5 L332 5.9 L336 6.7 L340 5.9 L344 7.5 L348 5.5 L352 5.3 L356 5.7 L360 6.2 L364 4.4 L368 6.8 L372 6.3 L376 3.8 L380 4.7 L384 6.4 L388 5.6 L392 5.6 L396 4.9 L400 3.8 L404 3.5 L408 4.9 L412 6.0 L416 5.0 L420 5.9 L424 6.2 L428 5.7 L432 5.5 L436 5.8 L440 6.4 L444 4.9 L448 6.2 L452 4.5 L456 5.3 L460 5.3 L464 7.0 L468 6.8 L472 7.4 L476 5.3 L480 5.7 L484 5.6 L488 6.1 L492 6.3 L496 7.4 L500 8.2 L504 7.4 L508 6.8 L512 8.5 L516 6.1 L520 7.3 L524 8.1 L528 7.4 L532 8.4 L536 8.0 L540 7.2 L544 7.3 L548 7.8 L552 5.6 L556 6.2 L560 7.0 L564 5.5 L568 6.5 L572 7.1 L576 7.3 L580 5.6 L584 4.8 L588 6.8 L592 6.5 L596 4.8 L600 4.6 L604 6.6 L608 4.4 L612 4.6 L616 4.4 L620 5.6 L624 3.6 L628 3.9 L632 5.1 L636 4.4 L640 5.7 L644 4.5 L648 4.4 L652 3.6 L656 5.4 L660 5.4 L664 3.9 L668 5.7 L672 5.6 L676 5.5 L680 4.9 L684 6.9 L688 4.3 L692 6.8 L696 6.4 L700 5.0 L704 5.5 L708 5.0 L712 7.7 L716 5.9 L720 5.5 L724 7.6 L728 8.2 L732 5.7 L736 8.1 L740 6.3 L744 8.2 L748 8.5 L752 6.9 L756 6.2 L760 7.4 L764 8.4 L768 6.0 L772 7.7 L776 6.8 L780 6.4 L784 7.4 L788 7.1 L792 7.1 L796 6.7 L800 7.1 L804 5.0 L808 5.7 L812 6.9 L816 6.2 L820 6.7 L824 6.4 L828 4.8 L832 4.7 L836 4.1 L840 5.8 L844 3.9 L848 4.0 L852 4.8 L856 4.2 L860 6.2 L864 3.7 L868 5.5 L872 4.5 L876 5.1 L880 3.5 L884 4.7 L888 4.2 L892 5.5 L896 4.8 L900 4.8 L904 6.0 L908 6.0 L912 5.1 L916 5.4 L920 6.6 L924 6.1 L928 6.7 L932 6.1 L936 5.8 L940 5.7 L944 5.2 L948 7.5 L952 5.6 L956 7.2 L960 8.0 L964 6.2 L968 7.8 L972 7.6 L976 5.8 L980 8.2 L984 7.0 L988 7.0 L992 6.2 L996 8.1 L1000 6.9 L1004 5.9 L1008 7.8 L1012 8.1 L1016 5.9 L1020 6.7 L1024 7.1 L1028 5.2 L1032 5.8 L1036 6.5 L1040 5.3 L1044 6.7 L1048 6.8 L1052 5.8 L1056 6.9 L1060 5.0 L1064 5.2 L1068 4.2 L1072 4.5 L1076 3.8 L1080 4.9 L1084 5.5 L1088 4.2 L1092 4.3 L1096 4.4 L1100 5.6 L1104 4.1 L1108 4.0 L1112 5.5 L1116 4.4 L1120 3.8 L1124 4.6 L1128 5.5 L1132 6.5 L1136 5.6 L1140 4.9 L1144 6.1 L1148 5.1 L1152 5.9 L1156 4.9 L1160 5.9 L1164 5.1 L1168 4.8 L1172 7.1 L1176 6.9 L1180 7.3 L1184 5.7 L1188 7.8 L1192 5.6 L1196 7.7 L1200 7.7' fill='none' stroke='rgba%2843%2C42%2C40%2C.28%29' stroke-width='1'/%3E%3Cpath d='M0 5.0 L4 7.5 L8 5.6 L12 5.1 L16 7.7 L20 8.0 L24 5.9 L28 6.1 L32 5.5 L36 7.1 L40 6.8 L44 8.1 L48 6.0 L52 7.0 L56 6.5 L60 7.5 L64 6.9 L68 7.1 L72 7.5 L76 7.4 L80 6.3 L84 5.7 L88 7.3 L92 6.6 L96 6.9 L100 7.6 L104 6.0 L108 6.8 L112 7.2 L116 6.0 L120 5.2 L124 7.0 L128 4.3 L132 5.6 L136 6.8 L140 6.2 L144 4.6 L148 6.2 L152 4.1 L156 5.6 L160 5.4 L164 4.0 L168 4.8 L172 3.6 L176 4.6 L180 5.2 L184 4.3 L188 5.0 L192 4.9 L196 6.0 L200 4.4 L204 3.9 L208 4.4 L212 4.7 L216 5.7 L220 6.6 L224 6.3 L228 6.6 L232 6.3 L236 7.3 L240 6.7 L244 5.0 L248 7.6 L252 7.1 L256 5.9 L260 7.7 L264 8.2 L268 6.8 L272 7.3 L276 7.6 L280 8.3 L284 7.4 L288 7.4 L292 7.8 L296 7.1 L300 8.4 L304 7.9 L308 7.1 L312 7.4 L316 7.4 L320 6.0 L324 7.0 L328 5.5 L332 5.9 L336 6.7 L340 5.9 L344 7.5 L348 5.5 L352 5.3 L356 5.7 L360 6.2 L364 4.4 L368 6.8 L372 6.3 L376 3.8 L380 4.7 L384 6.4 L388 5.6 L392 5.6 L396 4.9 L400 3.8 L404 3.5 L408 4.9 L412 6.0 L416 5.0 L420 5.9 L424 6.2 L428 5.7 L432 5.5 L436 5.8 L440 6.4 L444 4.9 L448 6.2 L452 4.5 L456 5.3 L460 5.3 L464 7.0 L468 6.8 L472 7.4 L476 5.3 L480 5.7 L484 5.6 L488 6.1 L492 6.3 L496 7.4 L500 8.2 L504 7.4 L508 6.8 L512 8.5 L516 6.1 L520 7.3 L524 8.1 L528 7.4 L532 8.4 L536 8.0 L540 7.2 L544 7.3 L548 7.8 L552 5.6 L556 6.2 L560 7.0 L564 5.5 L568 6.5 L572 7.1 L576 7.3 L580 5.6 L584 4.8 L588 6.8 L592 6.5 L596 4.8 L600 4.6 L604 6.6 L608 4.4 L612 4.6 L616 4.4 L620 5.6 L624 3.6 L628 3.9 L632 5.1 L636 4.4 L640 5.7 L644 4.5 L648 4.4 L652 3.6 L656 5.4 L660 5.4 L664 3.9 L668 5.7 L672 5.6 L676 5.5 L680 4.9 L684 6.9 L688 4.3 L692 6.8 L696 6.4 L700 5.0 L704 5.5 L708 5.0 L712 7.7 L716 5.9 L720 5.5 L724 7.6 L728 8.2 L732 5.7 L736 8.1 L740 6.3 L744 8.2 L748 8.5 L752 6.9 L756 6.2 L760 7.4 L764 8.4 L768 6.0 L772 7.7 L776 6.8 L780 6.4 L784 7.4 L788 7.1 L792 7.1 L796 6.7 L800 7.1 L804 5.0 L808 5.7 L812 6.9 L816 6.2 L820 6.7 L824 6.4 L828 4.8 L832 4.7 L836 4.1 L840 5.8 L844 3.9 L848 4.0 L852 4.8 L856 4.2 L860 6.2 L864 3.7 L868 5.5 L872 4.5 L876 5.1 L880 3.5 L884 4.7 L888 4.2 L892 5.5 L896 4.8 L900 4.8 L904 6.0 L908 6.0 L912 5.1 L916 5.4 L920 6.6 L924 6.1 L928 6.7 L932 6.1 L936 5.8 L940 5.7 L944 5.2 L948 7.5 L952 5.6 L956 7.2 L960 8.0 L964 6.2 L968 7.8 L972 7.6 L976 5.8 L980 8.2 L984 7.0 L988 7.0 L992 6.2 L996 8.1 L1000 6.9 L1004 5.9 L1008 7.8 L1012 8.1 L1016 5.9 L1020 6.7 L1024 7.1 L1028 5.2 L1032 5.8 L1036 6.5 L1040 5.3 L1044 6.7 L1048 6.8 L1052 5.8 L1056 6.9 L1060 5.0 L1064 5.2 L1068 4.2 L1072 4.5 L1076 3.8 L1080 4.9 L1084 5.5 L1088 4.2 L1092 4.3 L1096 4.4 L1100 5.6 L1104 4.1 L1108 4.0 L1112 5.5 L1116 4.4 L1120 3.8 L1124 4.6 L1128 5.5 L1132 6.5 L1136 5.6 L1140 4.9 L1144 6.1 L1148 5.1 L1152 5.9 L1156 4.9 L1160 5.9 L1164 5.1 L1168 4.8 L1172 7.1 L1176 6.9 L1180 7.3 L1184 5.7 L1188 7.8 L1192 5.6 L1196 7.7 L1200 7.7' transform='translate%280 1.3%29' fill='none' stroke='rgba%28255%2C255%2C255%2C.75%29' stroke-width='1.2'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;pointer-events:none}
+.s-num{border:1px solid rgba(43,42,40,.55);color:var(--fg);font-family:var(--mono);font-size:15px}
+.flow b,.stat b,.fig b{font-family:var(--mono);font-weight:500;letter-spacing:-.03em}
+.flow b{font-size:clamp(34px,4.2vw,60px)}
+.flow .hit b{color:var(--acc)}
+.flow li:not(:last-child)::after{color:var(--dim)}
+.idx,.p-lobe,.i-num{font-family:var(--mono)}
+.dp-track{background:linear-gradient(90deg,rgba(43,42,40,.12) 1px,transparent 1px) 0 0/25% 100%}
+.dp-stem{background:rgba(43,42,40,.35)}
+.dp-dot{background:#8C8983;box-shadow:0 0 0 2px var(--bg)}
+.dp-row.ours .dp-dot,.dp-row.ours .dp-stem{background:var(--acc)}
+.dp-ticks span,.d-top{font-family:var(--mono)}
+.fb-track i,.fb-row:nth-child(n) i{background:var(--acc)}
+.ur-dots i{background:var(--acc)}
+.ur-row:nth-child(n+4) .ur-dots i{background:rgba(43,42,40,.42)}
+.dossier{border:1px solid rgba(43,42,40,.4);border-radius:0;background:rgba(255,255,255,.28)}
+.d-red{color:var(--acc)}
+.d-name{font-family:var(--display)}
+.redact{background:#1f1e1c}
+.d-sum .redact{background:rgba(31,30,28,.85)}
+.meter{background:rgba(43,74,126,.16)}.meter i{background:var(--acc)}
+summary{font-family:var(--mono);font-size:12px;letter-spacing:.1em}
+.tag{font-family:var(--mono);font-size:11px;border-color:rgba(43,42,40,.4);border-radius:0;color:var(--fg)}
+.next li{font-size:clamp(19px,1.9vw,23px)}
+#contact,footer{background:var(--night);color:#ECE8E3;--fg:#ECE8E3;--dim:rgba(236,232,227,.74);--faint:rgba(236,232,227,.6);--line:rgba(236,232,227,.16)}
+#contact::before{top:0;height:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 12' preserveAspectRatio='none'%3E%3Cpath d='M0 5.0 L4 7.5 L8 5.6 L12 5.1 L16 7.7 L20 8.0 L24 5.9 L28 6.1 L32 5.5 L36 7.1 L40 6.8 L44 8.1 L48 6.0 L52 7.0 L56 6.5 L60 7.5 L64 6.9 L68 7.1 L72 7.5 L76 7.4 L80 6.3 L84 5.7 L88 7.3 L92 6.6 L96 6.9 L100 7.6 L104 6.0 L108 6.8 L112 7.2 L116 6.0 L120 5.2 L124 7.0 L128 4.3 L132 5.6 L136 6.8 L140 6.2 L144 4.6 L148 6.2 L152 4.1 L156 5.6 L160 5.4 L164 4.0 L168 4.8 L172 3.6 L176 4.6 L180 5.2 L184 4.3 L188 5.0 L192 4.9 L196 6.0 L200 4.4 L204 3.9 L208 4.4 L212 4.7 L216 5.7 L220 6.6 L224 6.3 L228 6.6 L232 6.3 L236 7.3 L240 6.7 L244 5.0 L248 7.6 L252 7.1 L256 5.9 L260 7.7 L264 8.2 L268 6.8 L272 7.3 L276 7.6 L280 8.3 L284 7.4 L288 7.4 L292 7.8 L296 7.1 L300 8.4 L304 7.9 L308 7.1 L312 7.4 L316 7.4 L320 6.0 L324 7.0 L328 5.5 L332 5.9 L336 6.7 L340 5.9 L344 7.5 L348 5.5 L352 5.3 L356 5.7 L360 6.2 L364 4.4 L368 6.8 L372 6.3 L376 3.8 L380 4.7 L384 6.4 L388 5.6 L392 5.6 L396 4.9 L400 3.8 L404 3.5 L408 4.9 L412 6.0 L416 5.0 L420 5.9 L424 6.2 L428 5.7 L432 5.5 L436 5.8 L440 6.4 L444 4.9 L448 6.2 L452 4.5 L456 5.3 L460 5.3 L464 7.0 L468 6.8 L472 7.4 L476 5.3 L480 5.7 L484 5.6 L488 6.1 L492 6.3 L496 7.4 L500 8.2 L504 7.4 L508 6.8 L512 8.5 L516 6.1 L520 7.3 L524 8.1 L528 7.4 L532 8.4 L536 8.0 L540 7.2 L544 7.3 L548 7.8 L552 5.6 L556 6.2 L560 7.0 L564 5.5 L568 6.5 L572 7.1 L576 7.3 L580 5.6 L584 4.8 L588 6.8 L592 6.5 L596 4.8 L600 4.6 L604 6.6 L608 4.4 L612 4.6 L616 4.4 L620 5.6 L624 3.6 L628 3.9 L632 5.1 L636 4.4 L640 5.7 L644 4.5 L648 4.4 L652 3.6 L656 5.4 L660 5.4 L664 3.9 L668 5.7 L672 5.6 L676 5.5 L680 4.9 L684 6.9 L688 4.3 L692 6.8 L696 6.4 L700 5.0 L704 5.5 L708 5.0 L712 7.7 L716 5.9 L720 5.5 L724 7.6 L728 8.2 L732 5.7 L736 8.1 L740 6.3 L744 8.2 L748 8.5 L752 6.9 L756 6.2 L760 7.4 L764 8.4 L768 6.0 L772 7.7 L776 6.8 L780 6.4 L784 7.4 L788 7.1 L792 7.1 L796 6.7 L800 7.1 L804 5.0 L808 5.7 L812 6.9 L816 6.2 L820 6.7 L824 6.4 L828 4.8 L832 4.7 L836 4.1 L840 5.8 L844 3.9 L848 4.0 L852 4.8 L856 4.2 L860 6.2 L864 3.7 L868 5.5 L872 4.5 L876 5.1 L880 3.5 L884 4.7 L888 4.2 L892 5.5 L896 4.8 L900 4.8 L904 6.0 L908 6.0 L912 5.1 L916 5.4 L920 6.6 L924 6.1 L928 6.7 L932 6.1 L936 5.8 L940 5.7 L944 5.2 L948 7.5 L952 5.6 L956 7.2 L960 8.0 L964 6.2 L968 7.8 L972 7.6 L976 5.8 L980 8.2 L984 7.0 L988 7.0 L992 6.2 L996 8.1 L1000 6.9 L1004 5.9 L1008 7.8 L1012 8.1 L1016 5.9 L1020 6.7 L1024 7.1 L1028 5.2 L1032 5.8 L1036 6.5 L1040 5.3 L1044 6.7 L1048 6.8 L1052 5.8 L1056 6.9 L1060 5.0 L1064 5.2 L1068 4.2 L1072 4.5 L1076 3.8 L1080 4.9 L1084 5.5 L1088 4.2 L1092 4.3 L1096 4.4 L1100 5.6 L1104 4.1 L1108 4.0 L1112 5.5 L1116 4.4 L1120 3.8 L1124 4.6 L1128 5.5 L1132 6.5 L1136 5.6 L1140 4.9 L1144 6.1 L1148 5.1 L1152 5.9 L1156 4.9 L1160 5.9 L1164 5.1 L1168 4.8 L1172 7.1 L1176 6.9 L1180 7.3 L1184 5.7 L1188 7.8 L1192 5.6 L1196 7.7 L1200 7.7 L1200 0 L0 0Z' fill='%23ECE8E3'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
+#contact h2{color:#ECE8E3}
+#contact .mail{font-family:var(--display);text-decoration-color:rgba(236,232,227,.4)}
+footer{border-top:1px solid var(--line);color:var(--faint)}
+footer a{text-decoration-color:rgba(236,232,227,.4)}
+a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
+#contact a:focus-visible,footer a:focus-visible{outline-color:#ECE8E3}
+.js [data-type].typing::after{color:var(--acc)}
+@media (max-width:860px){.block{grid-template-columns:minmax(0,1fr)}.d-top{flex-wrap:wrap}.d-grid dd{overflow-wrap:anywhere}}
+@media print{.reveal{opacity:1!important;transform:none!important;transition:none!important}.orbit{height:auto!important}.orbit-stick{position:static!important;height:auto!important}.orbit-poster{display:block!important}.orbit canvas,.hud,.hud-ctl,video{display:none!important}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orbit canvas{transition:none!important}.gallery img{transition:none}.js .reveal{opacity:1;transform:none;transition:none}.orbit.holo .orbit-stage::after{animation:none}.term li{opacity:1!important}}
+</style>
+<!--i18n:head-->
+<link rel="alternate" hreflang="en" href="https://neuropian.com/">
+<link rel="alternate" hreflang="fr" href="https://neuropian.com/fr/">
+<link rel="alternate" hreflang="es" href="https://neuropian.com/es/">
+<link rel="alternate" hreflang="he" href="https://neuropian.com/he/">
+<link rel="alternate" hreflang="hi" href="https://neuropian.com/hi/">
+<link rel="alternate" hreflang="zh-Hans" href="https://neuropian.com/zh/">
+<link rel="alternate" hreflang="x-default" href="https://neuropian.com/">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Serif+Devanagari:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* language switcher (site_i18n.py) */
+footer .langs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 20px;margin-bottom:10px;font-size:15px;font-family:var(--serif),"Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",serif}
+footer .langs a{color:var(--dim);text-decoration:none}
+footer .langs a:hover{color:#ECE8E3;text-decoration:underline}
+footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decoration-color:rgba(236,232,227,.6)}
+/* hi */
+@media(max-width:480px){.bar .wrap{gap:12px}.nav{gap:16px;font-size:16px}.nav a.login{padding:6px 12px}}
+:root{--serif:"EB Garamond","Noto Serif Devanagari",Garamond,Georgia,serif;--display:"DM Serif Display","Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;--mono:"JetBrains Mono","Noto Sans Devanagari",ui-monospace,SFMono-Regular,Menlo,monospace}
+body{line-height:1.65}
+h1,h2,h3{letter-spacing:0;line-height:1.3}.hero h1{line-height:1.22}
+.chip,.ph-more b,.d-name,.npac h2{line-height:1.3}
+.proof .big{line-height:1.45;letter-spacing:0}.steps-end,.next li,.mail,.lede{letter-spacing:0}
+.kicker,.tk-path,.tk-cap,.tag,summary,.idx,.d-top,.d-grid dt,.p-lobe,.status,.npac-k,.npld{letter-spacing:0}
+</style>
+<!--/i18n:head-->
+</head>
+<body>
+<a class="skip" href="#main">सामग्री पर जाएँ</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Neuropian, पेज के ऊपर जाएँ"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
+    <nav class="nav" aria-label="अनुभाग">
+      <a href="#plain">यह कैसे काम करता है</a>
+      <a href="#method">पद्धति</a>
+      <a href="/talent">Talent</a>
+      <a href="#contact">संपर्क</a>
+      <a class="login" href="/app" data-auth="login">लॉग इन</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+   <div class="hero-text">
+    <p class="kicker">Neuropian · बुद्धि त्वरक</p>
+    <h1>बुद्धिमत्ता, <span class="brush">नए सिरे से।</span></h1>
+    <p class="lede">Neuropian वह जगह है जहाँ प्रतिभाशाली लोग अपने रिज़्यूमे से नहीं, बल्कि <b>जो उन्होंने बनाया, रचा और हल किया</b> उससे, और <b>वे कैसे नेतृत्व करते हैं और दूसरों के साथ काम करते हैं</b> उससे पहचाने जाते हैं।</p>
+    <div class="ctas"><a class="cta" href="/app" data-auth="reg"><img class="cta-mark" src="/assets/brain.png" srcset="/assets/brain@2x.png 2x" width="20" height="20" alt="">खाता बनाएँ</a><a class="cta ghost" href="#contact">Neuropian के साथ भर्ती करें →</a></div>
+    <p class="tagline">संकेत, रिज़्यूमे नहीं · कोई प्रमाणपत्र ज़रूरी नहीं</p>
+   </div>
+   <div class="hero-art">
+    <div class="ticker" role="img" aria-label="Falcon द्वारा खोजे गए 5,693 छिपे हुए निर्माता">
+     <span class="tk-path" aria-hidden="true">Falcon ने खोजे</span>
+     <b data-count="5693" aria-hidden="true">5,693</b>
+     <span class="tk-cap" aria-hidden="true">छिपे हुए निर्माता</span>
+    </div>
+    <img class="engr brain" src="/assets/engr/brain.webp" width="857" height="960" alt="Andreas Vesalius की शरीर-रचना पुस्तक से मानव मस्तिष्क के निचले हिस्से का काष्ठ-चित्र, 1543" decoding="async">
+   </div>
+  </div>
+</section>
+
+<section id="fields" class="plates-sec">
+  <div class="wrap">
+    <p class="kicker">प्लेट I–VI · कोई भी क्षेत्र</p>
+    <h2>किसी भी क्षेत्र का काम।</h2>
+    <p class="lede">हर क्षेत्र में हमें क्या दिखाना है, यह देखने के लिए कोई प्लेट खोलें।</p>
+    <div class="plates"><figure class="ph ph1"><img class="engr" src="/assets/engr/code.webp" width="549" height="703" alt="एक यांत्रिक कैलकुलेटर, डिफ़रेंस इंजन के एक हिस्से का काष्ठ-चित्र, Benjamin Herschel Babbage के एक चित्र पर आधारित, 1853" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip"><i>I.</i> कोड</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>कोड</b><p>वह कोड जिसे विशेषज्ञों ने असली सॉफ़्टवेयर में स्वीकार किया। Falcon उसे पढ़ता है; सदस्य उसका लिंक देते हैं।</p><a class="ph-cta" href="/app" data-auth="reg">अपना कोड दिखाएँ →</a></div></figure><figure class="ph ph2"><img class="engr" src="/assets/engr/leadership.webp" width="434" height="760" alt="नए Eddystone लाइटहाउस का कमरा-दर-कमरा अनुप्रस्थ काट, 1884" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip"><i>II.</i> नेतृत्व</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>नेतृत्व</b><p>किसने कुछ शुरू किया, किसी निर्माण की अगुवाई की या लोगों को साथ लेकर चले।</p><a class="ph-cta" href="/app" data-auth="reg">बताइए आपने किसकी अगुवाई की →</a></div></figure><figure class="ph ph3"><img class="engr" src="/assets/engr/science.webp" width="625" height="693" alt="Robert Hooke का सूक्ष्मदर्शी, उनकी Micrographia के लिए उकेरा गया, 1665" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip"><i>III.</i> विज्ञान</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>विज्ञान</b><p>ऐसे शोध और नतीजे जिन्हें आप दिखा सकें: शोधपत्र, डेटा, प्रयोग।</p><a class="ph-cta" href="/app" data-auth="reg">अपना शोध साझा करें →</a></div></figure><figure class="ph ph4"><img class="engr" src="/assets/engr/teamwork.webp" width="900" height="706" alt="1586 में रोम में लगभग 900 मज़दूरों और 75 घोड़ों द्वारा वैटिकन ओबिलिस्क खड़ा किए जाने की नक़्क़ाशी" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip"><i>IV.</i> टीमवर्क</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>टीमवर्क</b><p>कौन दूसरों के काम की समीक्षा करता है, मदद करता है और उनके साथ मिलकर बनाता है, सिर्फ़ अकेले नहीं।</p><a class="ph-cta" href="/app" data-auth="reg">अपनी टीम खोजें →</a></div></figure><figure class="ph ph5"><img class="engr" src="/assets/engr/hardware.webp" width="617" height="760" alt="James Watt के डबल-एक्टिंग भाप इंजन की उकेरी गई प्लेट, 1822" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip"><i>V.</i> हार्डवेयर</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>हार्डवेयर</b><p>आपकी डिज़ाइन की और बनाई हुई चीज़ें, साबित करने के लिए फ़ोटो और फ़ाइलों के साथ।</p><a class="ph-cta" href="/app" data-auth="reg">दिखाएँ आपने क्या बनाया →</a></div></figure><figure class="ph ph6"><img class="engr" src="/assets/engr/design.webp" width="900" height="644" alt="Albrecht Dürer का काष्ठ-चित्र, जिसमें दो आदमी एक परिप्रेक्ष्य फ़्रेम की मदद से ल्यूट का चित्र बना रहे हैं, 1525" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip"><i>VI.</i> डिज़ाइन</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>डिज़ाइन</b><p>आपका बनाया और जारी किया हुआ काम, आपकी प्रोफ़ाइल पर।</p><a class="ph-cta" href="/app" data-auth="reg">अपने डिज़ाइन दिखाएँ →</a></div></figure></div>
+  </div>
+</section>
+
+<section id="proof" class="proof">
+  <div class="wrap">
+    <p class="big">Falcon ने ऐसे <b class="c1">5,693 लोग</b> खोजे जिनका काम उस सॉफ़्टवेयर के भीतर है जिसे लाखों लोग इस्तेमाल करते हैं, जैसे Python, Rust और LLVM।</p>
+    <p class="big dim">इनमें से <b class="c3">10 में से 6</b> के GitHub पर 12 या उससे कम फ़ॉलोअर हैं। रिज़्यूमे से खोजने वाले ठीक इन्हीं लोगों को नहीं देख पाते।</p>
+    <p class="big dim">इनमें से <b class="c4">1,033</b> ने पिछले साल दूसरों के काम की समीक्षा करके उसे मंज़ूरी भी दी, 3,840 अन्य लोगों के लिए। ऐसा टीमवर्क जो दिखता है।</p>
+    <div class="tiles">
+      <div class="tile t1 reveal"><b data-count="5693">5,693</b><span>निर्माता मिले</span></div>
+      <div class="tile t2 reveal"><b data-count="202">202</b><span>बड़े सॉफ़्टवेयर प्रोजेक्ट खोजे गए</span></div>
+      <div class="tile t3 reveal"><b>10 में से 6</b><span>GitHub पर 12 या उससे कम फ़ॉलोअर वाले</span></div>
+      <div class="tile t4 reveal"><b data-count="1033">1,033</b><span>दूसरों के काम की समीक्षा और मंज़ूरी भी करते हैं</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="plain">
+  <div class="wrap">
+    <p class="kicker">आसान शब्दों में</p>
+    <h2>तीन कदम।</h2>
+    <ol class="steps">
+      <li class="reveal"><span class="s-num">1</span><h3>असली काम देखें।</h3><p>वह कोड जिसे विशेषज्ञों ने बड़े सॉफ़्टवेयर में स्वीकार किया, प्रोग्रामिंग प्रतियोगिताओं के नतीजे, गणित के कठिन सवालों के जवाब। सब कुछ सार्वजनिक।</p></li>
+      <li class="reveal"><span class="s-num">2</span><h3>मशहूर लोगों को छोड़ दें।</h3><p>हर उस व्यक्ति को हटा दें जिसे कोई रिक्रूटर पहले से ढूँढ सकता है: ऑनलाइन बड़ी फ़ॉलोइंग वाले लोग, बड़ी कंपनियों में नौकरी करने वाले, या अपने प्रोजेक्ट में अग्रणी भूमिका वाले।</p></li>
+      <li class="reveal"><span class="s-num">3</span><h3>सबूत दिखाएँ।</h3><p>हर व्यक्ति पर एक छोटी रिपोर्ट लिखें, असली काम के लिंक के साथ, ताकि कोई नियोक्ता ख़ुद जाँच सके।</p></li>
+    </ol>
+    <p class="steps-end reveal">जो बचता है: ऐसे लोग जिनके काम को विशेषज्ञों ने परखा है, पर जिन्हें कम ही लोग फ़ॉलो करते हैं।</p>
+  </div>
+</section>
+
+<section id="run">
+  <div class="wrap">
+    <p class="kicker">Falcon, आसमान में हमारी आँखें · एक असली खोज · 20 अक्टूबर 2026</p>
+    <h2>एक खोज में क्या मिला।</h2>
+    <ol class="flow">
+      <li class="reveal"><b data-count="202">202</b><span>बड़े सॉफ़्टवेयर प्रोजेक्ट खोजे गए, जैसे Python, Rust, LLVM, Zephyr और Home Assistant</span></li>
+      <li class="reveal"><b data-count="8160">8,160</b><span>प्रोजेक्ट की मुख्य टीमों से बाहर के लोग, जिनका काम विशेषज्ञों ने पिछले साल कम से कम तीन बार स्वीकार किया</span></li>
+      <li class="reveal"><b data-count="2467" data-prefix="−">−2,467</b><span>हटाए गए, क्योंकि उन्हें ढूँढना पहले से आसान है (बड़ी फ़ॉलोइंग, बड़ी कंपनी की नौकरी, प्रोजेक्ट के अंदरूनी लोग) या वे पात्र नहीं थे</span></li>
+      <li class="reveal hit"><b data-count="5693">5,693</b><span>मिले: उनका काम स्वीकार हुआ, फिर भी उन्हें कम ही लोग फ़ॉलो करते हैं</span></li>
+    </ol>
+    <p class="flow-end reveal">अब तक इनमें से 100 लोगों के लिए एक छोटी रिपोर्ट सीधे उनके काम तक ले जाती है।</p>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <p class="kicker">पद्धति · आँकड़े 20 अक्टूबर 2026 तक</p>
+    <h2>दो तरह के सबूत, एक रिपोर्ट।</h2>
+
+    <div class="block">
+      <div>
+        <p class="idx">01</p>
+        <h3>तर्कशील</h3>
+        <p class="what">प्रतिस्पर्धी प्रोग्रामर और गणितज्ञ। Neuropian उनकी प्रतियोगिताओं के नतीजे और गणित के जवाब पढ़ता है, और एक जैसे स्कोर वाले लोगों में यह बेहतर पहचानता है कि आगे Grandmaster (2400) तक कौन पहुँचेगा।</p>
+      </div>
+      <div>
+        <div class="stat"><b>1.5×</b><span>सिर्फ़ रेटिंग के भविष्यसूचक संकेत के मुक़ाबले, यह पहचानने में कि एक जैसी रेटिंग वाले Codeforces खिलाड़ियों में से कौन Grandmaster (2400 रेटिंग) तक पहुँचता है। 2022–24 के डेटा पर चुना गया और 2024–26 पर बिना बदलाव के परखा गया; उस समूह को पहले खंगाला जा चुका था, इसलिए यह पूरी तरह साफ़ होल्डआउट नहीं है।</span></div>
+        <figure class="chart dotplot reveal" role="group" aria-label="एक जैसी रेटिंग वाले Codeforces खिलाड़ियों में, दो साल के भीतर 2400 तक कौन पहुँचा, इसका AUC: संयोग 0.5, सिर्फ़ रेटिंग 0.599, Neuropian स्कोर 0.647"><div class="dp-row chance" tabindex="0" title="संयोग: AUC 0.500"><span class="dp-lab">संयोग</span><span class="dp-track"><i class="dp-stem" style="--x:0.0%"></i><b class="dp-dot" style="--x:0.0%"></b></span><span class="dp-val">0.500</span></div><div class="dp-row base" tabindex="0" title="सिर्फ़ रेटिंग: AUC 0.599"><span class="dp-lab">सिर्फ़ रेटिंग</span><span class="dp-track"><i class="dp-stem" style="--x:49.5%"></i><b class="dp-dot" style="--x:49.5%"></b></span><span class="dp-val">0.599</span></div><div class="dp-row ours" tabindex="0" title="Neuropian स्कोर: AUC 0.647"><span class="dp-lab">Neuropian स्कोर</span><span class="dp-track"><i class="dp-stem" style="--x:73.5%"></i><b class="dp-dot" style="--x:73.5%"></b></span><span class="dp-val">0.647</span></div><div class="dp-row dp-axis" aria-hidden="true"><span class="dp-lab"></span><span class="dp-ticks"><span style="--x:0.0%">0.50</span><span style="--x:25.0%">0.55</span><span style="--x:50.0%">0.60</span><span style="--x:75.0%">0.65</span><span style="--x:100.0%">0.70</span></span><span class="dp-val"></span></div><figcaption>एक जैसी रेटिंग वाले खिलाड़ियों में से दो साल के भीतर 2400 तक कौन पहुँचा (AUC; 0.5 संयोग है)। संयोग से ऊपर संकेत: रेटिंग 0.099, Neuropian 0.147, 1.48×। 2022–24 पर चुना गया, 2024–26 पर बिना बदलाव के परखा गया।</figcaption></figure>
+        
+        <details>
+          <summary>पद्धति और आँकड़े</summary>
+          <ul>
+            <li><strong>समूह।</strong> 16 अक्टूबर 2024 को 1600–2300 रेटिंग वाला हर Codeforces खिलाड़ी, जिसने कम से कम 15 रेटेड प्रतियोगिताएँ खेली हों और उससे पहले के साल में 3: कुल 11,088 खिलाड़ी। इनमें से 290 (2.6%) अगले दो साल में 2400 तक पहुँचे।</li>
+            <li><strong>पहले के डेटा पर चुना गया।</strong> 16 अक्टूबर 2022 को वही नियम: 9,305 खिलाड़ी, जिनमें से 274 अक्टूबर 2024 तक 2400 पर पहुँचे, यानी परीक्षण अवधि शुरू होने से पहले। गुण तब रखे गए जब उनका बैंड के भीतर का AUC 0.55 से ऊपर था, और उलटे गए जब 0.45 से नीचे था: 12 महीने में रेटिंग की बढ़त, 2000 तक पहुँचने में कितनी कम प्रतियोगिताएँ लगीं (कभी न पहुँचे तो 0), आख़िरी प्रतियोगिता से पहले के 12 महीनों में कितने महीनों में प्रतियोगिता खेली, अपने ही शिखर से कितना नीचे, और ऋणात्मक रूप में, रेटेड प्रतियोगिता वाले कैलेंडर वर्षों की संख्या।</li>
+            <li><strong>रैंकिंग, यह भी 2022–24 पर चुनी गई।</strong> विकल्प: सिर्फ़ रेटिंग; रेटिंग में 0.05, 0.1 या 0.2 × स्कोर जोड़कर; 10, 25, 50 या 100 अंकों के रेटिंग बैंड, जिनमें हर बैंड के भीतर का क्रम स्कोर तय करे। 25 अंकों वाले बैंड ने टॉप 50, 100 और 290 में सबसे ज़्यादा भावी 2400 खिलाड़ी खोजे।</li>
+            <li><strong>परीक्षण।</strong> स्थिर करके 2024 के समूह पर लागू किया गया: सिर्फ़ स्कोर को 100 अंकों के बैंड के भीतर 0.647 मिलता है (रेटिंग: 0.599) और 10 अंकों के बैंड के भीतर 0.632। लागू की गई रैंकिंग को कुल मिलाकर AUC 0.899 मिलता है, जबकि सिर्फ़ रेटिंग को 0.896 (95% CI 0.878–0.913)। रेटिंग + 0.2 × स्कोर का AUC सबसे ऊँचा था, 0.908 (रेटिंग के मुक़ाबले पेयर्ड बूटस्ट्रैप बढ़त +0.005 से +0.019), लेकिन उसके टॉप 50, 100 और 290 में सिर्फ़ 13, 28 और 81 भावी 2400 खिलाड़ी थे, इसलिए उसे इस्तेमाल नहीं किया जाता। सूची के बिल्कुल ऊपर रेटिंग को हराना अब भी कठिन है: लागू की गई रैंकिंग के टॉप 50, 100 और 290 में 18, 40 और 92 भावी 2400 खिलाड़ी थे, जबकि सिर्फ़ रेटिंग में 21, 40 और 89।</li>
+            <li><strong>कौन मुक़ाबला जारी रखता है।</strong> 2024 के समूह के 37% ने उसके बाद कोई रेटेड प्रतियोगिता नहीं खेली। खिलाड़ियों को रेटिंग के साथ-साथ बाद में खेली गई प्रतियोगिताओं के आधार पर भी समूहों में बाँटने पर स्कोर का AUC गिरकर 0.613 हो जाता है।</li>
+            <li><strong>सीमाएँ।</strong> इस परीक्षण से पहले 2024 के समूह को इन-सैंपल खंगाला जा चुका था (उन्हीं खिलाड़ियों पर गुण चुने और आँके गए: 0.655; 2023 से शुरुआत और तीन साल की अवधि के साथ: 0.668), इसलिए यह पूरी तरह साफ़ होल्डआउट नहीं है। पहला फ़ॉर्मूला (रेटिंग, साथ में 0.6 × 12 महीने की बढ़त, साथ में चढ़ाई फ़िल्टर पार करने का बोनस) कुल मिलाकर 0.879 पर रहा, सिर्फ़ रेटिंग से नीचे।</li>
+            <li><strong>लाइव सूची।</strong> 2100 या उससे ज़्यादा रेटिंग वाले सक्रिय खिलाड़ी, जिनके अधिकतम 60 फ़ॉलोअर हों, जिनके खाते पाँच साल से कम पुराने हों और जिनके हैंडल ओलंपियाड जैसे या जन्म-वर्ष वाले न हों; इन्हें उन 1,200 खिलाड़ियों में से लिया गया जो रेटिंग में से फ़ॉलोअर पेनल्टी घटाने पर सबसे ऊपर हैं। उन्हें ऐसे फ़िल्टर भी पार करने होते हैं जो परीक्षण में इस्तेमाल नहीं हुए, जिनमें 25 या ज़्यादा रेटेड प्रतियोगिताएँ, अपनी पहली 10 प्रतियोगिताओं के बाद से 300 की चढ़ाई और 12 महीने में सकारात्मक बढ़त शामिल हैं। परीक्षण में 1600–2300 रेटिंग शामिल थी; अभी सूची में मौजूद 64 में से 25 की रेटिंग 2300 से ऊपर है। AtCoder और Math Stack Exchange की सूचियों का बैक-टेस्ट नहीं किया गया है।</li>
+            <li><strong>AUC</strong> = यह संभावना कि 2400 तक पहुँचा कोई यादृच्छिक रूप से चुना गया खिलाड़ी, न पहुँचे किसी खिलाड़ी से ऊपर रैंक हो। बैंड के भीतर के AUC का सभी बैंड पर औसत निकाला जाता है, 2400 तक पहुँचे खिलाड़ियों की संख्या से भारित; किसी बैंड में कम से कम 3 पहुँचे और 3 न पहुँचे खिलाड़ी होने चाहिए।</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+
+    <div class="block">
+      <div>
+        <p class="idx">02</p>
+        <h3>योगदानकर्ता</h3>
+        <p class="what">सॉफ़्टवेयर इंजीनियर। बड़े ओपन-सोर्स प्रोजेक्ट, यानी Python और Rust जैसे मुफ़्त सॉफ़्टवेयर जिन पर इंटरनेट का बड़ा हिस्सा चलता है, उन्हें चलाने वाले विशेषज्ञों ने इनका काम स्वीकार किया, फिर भी ऑनलाइन इन्हें कम ही लोग फ़ॉलो करते हैं।</p>
+      </div>
+      <div>
+        <div class="stat"><b>5,693</b><span>लोग अब तक मिले। विशेषज्ञों ने उनका काम स्वीकार किया; उन्हें कम ही लोग फ़ॉलो करते हैं।</span></div>
+        <figure class="chart units reveal" role="group" aria-label="प्रोजेक्ट के अनुसार 5,693 लोग: Zephyr 484, LLVM 349, Home Assistant 340, vLLM 338, SGLang 308, 187 अन्य प्रोजेक्ट 3,874"><div class="ur-row" title="Zephyr: 484"><span class="ur-lab">Zephyr</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">484</span></div><div class="ur-row" title="LLVM: 349"><span class="ur-lab">LLVM</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">349</span></div><div class="ur-row" title="Home Assistant: 340"><span class="ur-lab">Home Assistant</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">340</span></div><div class="ur-row" title="vLLM: 338"><span class="ur-lab">vLLM</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">338</span></div><div class="ur-row" title="SGLang: 308"><span class="ur-lab">SGLang</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">308</span></div><div class="ur-row" title="187 अन्य प्रोजेक्ट: 3,874"><span class="ur-lab">187 अन्य प्रोजेक्ट</span><span class="ur-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ur-val">3,874</span></div>
+          <figcaption>एक बिंदु = 10 लोग। इसके बाद सबसे बड़े: Airflow 187, Rust 163, Zed 156, DataFusion 112, llama.cpp 101, Godot 96, CPython 87, Kafka 81, ClickHouse 79, FreeCAD 72, Laravel 71, Ray 67, Servo 66, ESPHome 65, OpenCV 59, और 172 अन्य प्रोजेक्ट। 202 प्रोजेक्ट में 8,160 योगदानकर्ताओं को खोजा गया (4 और प्रोजेक्ट छोड़ दिए गए क्योंकि उनके ज़्यादातर मर्ज बॉट करते हैं, इसलिए अंदरूनी लोगों को अलग नहीं पहचाना जा सकता); सूची के हर व्यक्ति के पिछले साल 3 या ज़्यादा पुल रिक्वेस्ट मर्ज हुए हैं; GitHub फ़ॉलोअर की माध्यिका 8।</figcaption></figure>
+        <details>
+          <summary>पद्धति और आँकड़े</summary>
+          <ul>
+            <li><strong>नियम।</strong> 20 अक्टूबर 2026 तक के 12 महीनों में 3 या ज़्यादा मर्ज हुए पुल रिक्वेस्ट, हर सक्रिय महीने में 40 से ज़्यादा नहीं, और 150 या कम GitHub फ़ॉलोअर। हटाए गए: बॉट; हर वह व्यक्ति जिसने उस प्रोजेक्ट में या खोजे गए किसी दूसरे प्रोजेक्ट में ख़ुद मर्ज किया हो; बड़े ओपन-सोर्स संगठनों के सार्वजनिक सदस्य, जिनमें प्रोजेक्ट का अपना संगठन भी शामिल है; वे लोग जिनकी प्रोफ़ाइल में किसी तय सूची की कोई कंपनी या संस्था लिखी हो (बड़ी टेक और चिप कंपनियाँ, AI लैब, ट्रेडिंग फ़र्म, राष्ट्रीय प्रयोगशालाएँ, हर प्रोजेक्ट के प्रायोजक, कुछ विश्वविद्यालय); 1,000 या ज़्यादा स्टार वाली रिपॉज़िटरी के मालिक; और ऐसी प्रोफ़ाइल जिनसे नाबालिग होने का संकेत मिले। सभी 8,160 उम्मीदवारों की जाँच हुई; 2,467 हटाए गए, हर एक को पहले लागू होने वाले कारण के तहत गिना गया: 1,141 कंपनी या संस्था के कारण, 798 फ़ॉलोअर के कारण, 365 संगठन की सदस्यता के कारण, 138 कहीं और कमिटर होने के कारण, 18 लोग 1,000+ स्टार वाली रिपॉज़िटरी के कारण, 7 संभावित नाबालिग के रूप में। 5,693 में से 3,444 के 12 या कम GitHub फ़ॉलोअर हैं; माध्यिका 8 है।</li>
+            <li><strong>मर्ज के अधिकार।</strong> Rust और mathlib के बाहर के 5,529 लोगों ने प्राप्त इतिहास में (LLVM, CPython, Julia, JAX, NumPy, SciPy, DuckDB और llama.cpp के लिए अक्टूबर 2023 से; बाक़ी के लिए अक्टूबर 2025 से) अपने प्रोजेक्ट में किसी भी पुल रिक्वेस्ट को ख़ुद मर्ज नहीं किया है, और कोई भी प्रोजेक्ट के संगठन का सार्वजनिक सदस्य नहीं है। जिन प्रोजेक्ट में एक से पाँच लोग सबके लिए मर्ज करते हैं (Godot, Helix, Klipper, Marlin, OpenSCAD, Scanpy, Bevy, Sage, tmux, ripgrep), उनमें किसी और का पुल रिक्वेस्ट मंज़ूर करने वाले हर व्यक्ति को भी हटाया गया है। जो कमिटर सीधे पुश करता है और अपनी सदस्यता निजी रखता है, वह फिर भी छूट सकता है। Rust और mathlib एक बॉट के ज़रिए मर्ज करते हैं, इसलिए उनके 164 लोगों के लिए सिर्फ़ संगठन की सदस्यता जाँची जाती है।</li>
+            <li><strong>इसे भविष्यवाणी क्यों नहीं कहा जाता।</strong> आठ प्रोजेक्ट में (Rust या tinygrad नहीं), 2,653 लोगों (2,721 व्यक्ति-प्रोजेक्ट रिकॉर्ड) के अक्टूबर 2023 और अक्टूबर 2024 के बीच पुल रिक्वेस्ट मर्ज हुए थे, और उन्होंने न ख़ुद मर्ज किया था, न किसी और का पुल रिक्वेस्ट मंज़ूर किया था। इनमें से 156 ने अगले दो साल में मर्ज किया, जो इस बात का संकेत है कि उन्हें लिखने की पहुँच दी गई थी; इनमें से 135 LLVM में थे, इसलिए यह मुख्य रूप से LLVM का माप है। मर्ज हुए PR की संख्या उन्हें AUC 0.641 के साथ रैंक करती है, लेकिन यह ज़्यादातर एक बार योगदान करने वालों को बार-बार करने वालों से अलग करती है: 3 या ज़्यादा मर्ज हुए पुल रिक्वेस्ट वाले रिकॉर्ड में यह 0.556 है, और 6 या ज़्यादा वालों में, जैसे सूची के 5,693 में से 2,522 और रिपोर्ट वाले सभी 100, यह 0.518 है (159 में से 33 ने मर्ज किया, 28 LLVM में), यानी संयोग। संख्या के बैंड के भीतर दूसरे गुण इन-सैंपल जानकारीपूर्ण लगे; प्रोजेक्ट के आधार पर बाँटकर जो एकमात्र आउट-ऑफ़-सैंपल जाँच संभव थी, उसमें सिर्फ़ 3 पॉज़िटिव थे और नतीजा उलटी दिशा में गया (0.394, जबकि सिर्फ़ संख्या का 0.717)। इसलिए सूची का क्रम बहुत कम जानकारी देता है। यह जो देती है, वह स्वीकार हुए काम का सबूत है, जिसे कोई व्यक्ति पढ़े।</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+
+    <div class="block">
+      <div>
+        <p class="idx">03</p>
+        <h3>डोज़ियर</h3>
+        <p class="what">हर व्यक्ति पर एक छोटी रिपोर्ट: उसने क्या और कहाँ बनाया, सबूत के लिंक के साथ। इसे लैपटॉप पर चलने वाला सॉफ़्टवेयर लिखता है, और इसमें उद्धृत हर पुल रिक्वेस्ट को उस व्यक्ति के असली पुल रिक्वेस्ट से मिलाकर जाँचा जाता है।</p>
+      </div>
+      <div>
+        <figure class="dossier reveal" aria-label="17 अक्टूबर 2026 को लिखा गया एक असली डोज़ियर, पहचान छिपाई गई">
+          <div class="d-top"><span class="d-tag">डोज़ियर · 17 अक्टूबर 2026</span><span class="d-red">पहचान छिपाई गई</span></div>
+          <p class="d-name"><span class="redact" style="width:11em"></span></p>
+          <p class="d-sub"><span class="redact" style="width:7em"></span> · किसी बड़े ओपन-सोर्स प्रोजेक्ट में मर्ज हुए पुल रिक्वेस्ट</p>
+          <dl class="d-grid">
+            <div><dt>उपयुक्तता</dt><dd>लो-लेटेंसी/कंपाइलर · सिस्टम · टूलिंग/डॉक्स</dd></div>
+            <div><dt>कोर-कोड हिस्सा</dt><dd><span class="meter"><i style="--v:0.82"></i></span> 0.82</dd></div>
+            <div><dt>पढ़े गए पुल रिक्वेस्ट</dt><dd>15</dd></div>
+            <div><dt>उन पर समीक्षाएँ</dt><dd>54</dd></div>
+            <div><dt>उद्धृत और लिंक किए गए</dt><dd>4 में से 4</dd></div>
+            <div><dt>गढ़े गए उद्धरण</dt><dd>0</dd></div>
+          </dl>
+          <p class="d-sum"><span class="redact" style="width:100%"></span><span class="redact" style="width:82%"></span></p>
+          <figcaption>सूची का एक असली डोज़ियर। सारांश और वह सब कुछ जिससे व्यक्ति की पहचान हो सकती है, काला कर दिया गया है।</figcaption>
+        </figure>
+        <details>
+          <summary>पद्धति और आँकड़े</summary>
+          <ul>
+            <li><strong>कोड से तथ्य।</strong> बदली गई फ़ाइलें, आकार, समीक्षाओं की संख्या, समीक्षाओं में मंज़ूरी के शब्द (“thanks” और “LGTM” सहित), और कोर-कोड हिस्सा: बदली गई फ़ाइलों में से टेस्ट, डॉक्स, CI और उदाहरणों के बाहर की फ़ाइलों का हिस्सा। GitHub से निकाले गए, मॉडल ने नहीं लिखे।</li>
+            <li><strong>मॉडल का आकलन।</strong> विशेषज्ञता और सारांश लैपटॉप पर चलने वाले Qwen3 8B से आते हैं। डोज़ियर पाइपलाइन किसी उम्मीदवार के बारे में कुछ भी किसी बाहरी AI सेवा को नहीं भेजती।</li>
+            <li><strong>जाँच।</strong> मॉडल जिस भी पुल-रिक्वेस्ट नंबर का हवाला देता है, “#” के साथ या उसके बिना, उसे व्यक्ति के प्राप्त पुल रिक्वेस्ट से मिलाया जाता है: 100 डोज़ियर में इसने 2 ऐसे नंबर पकड़े जो उस व्यक्ति के पुल रिक्वेस्ट नहीं हैं, और दोनों में से किसी का लिंक नहीं है: एक पंक्ति-गिनती (+1,307 पंक्तियाँ), जिसे जाँच अब छोड़ देती है, और 50934, जो उनके पुल रिक्वेस्ट में से नहीं है। यह उद्धरणों की जाँच करती है, सारांश सही है या नहीं इसकी नहीं, इसलिए किसी से संपर्क करने से पहले कोई व्यक्ति पुल रिक्वेस्ट पढ़ता है।</li>
+            <li><strong>इस्तेमाल नहीं किया गया।</strong> मॉडल की कठिनाई रेटिंग, क्योंकि वे लोगों में फ़र्क़ नहीं करतीं।</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="next">
+  <div class="wrap">
+    <p class="kicker">आज</p>
+    <h2>हमने क्या बनाया है।</h2>
+    <ul class="next">
+      <li><span class="tag">बना हुआ</span><span>Falcon, आसमान में हमारी आँखें<small>बड़े ओपन-सोर्स प्रोजेक्ट, प्रोग्रामिंग प्रतियोगिताओं और गणित के सवाल-जवाब में सार्वजनिक काम पढ़ता है, और ऐसे इंजीनियर और गणितज्ञ खोजता है जिनका काम विशेषज्ञों ने स्वीकार किया, पर जिन्हें कम ही लोग फ़ॉलो करते हैं।</small></span></li>
+      <li><span class="tag">परीक्षण में</span><span>एक व्यक्ति के अलग-अलग प्लेटफ़ॉर्म के खातों को जोड़ना<small>Falcon खातों को सिर्फ़ उन लिंक के ज़रिए जोड़ता है जो व्यक्ति ने ख़ुद प्रकाशित किए हों। कमज़ोर मिलान (वही हैंडल, नाम या फ़ोटो) को अंक दिए जाते हैं, उन्हें अपुष्ट रखा जाता है और कभी किसी से संपर्क के लिए इस्तेमाल नहीं किया जाता।</small></span></li>
+      <li><span class="tag">लाइव</span><span>RoundTable, बौद्धिक विस्तार के लिए Neuropian की जगह और मंच<small>सदस्य साइन अप करते हैं, प्रोफ़ाइल बनाते हैं और चैट, समस्या और निर्माण रूम में बात करते हैं। साइन अप करना ही वह सहमति है जिससे Neuropian किसी सदस्य की प्रोफ़ाइल उन कंपनियों और फ़ंड के साथ साझा कर सकता है जो Neuropian के ज़रिए भर्ती करते हैं।</small></span></li>
+      <li><span class="tag">लाइव</span><span>प्रोजेक्ट और क्रेडिट<small>सदस्य क्रेडिट इनाम के साथ प्रोजेक्ट पोस्ट करते हैं और दूसरे उनसे जुड़ते हैं। किसी को क्रेडिट मिलने से पहले Neuropian का एक समीक्षक हर योगदानकर्ता के काम की जाँच करता है, और मंज़ूर हुए योगदानकर्ता बोनस कमा सकते हैं। क्रेडिट Neuropian के भीतर के अंक हैं, जिनका कोई नकद मूल्य नहीं है।</small></span></li>
+      <li><span class="tag">लाइव</span><span>Talent<small>किसी भी क्षेत्र के लोगों की प्रोफ़ाइल, जो उनके अपने विवरण और काम से तैयार की जाती हैं, उनकी मंज़ूरी के बाद, और जिन्हें <a href="/talent">neuropian.com/talent</a> पर अर्थ के आधार पर खोजा जा सकता है।</small></span></li>
+      <li><span class="tag">बना हुआ</span><span>EagleEyes, Neuropian का स्काउटिंग एजेंट<small>एक ब्राउज़र एक्सटेंशन। जिन साइटों पर कोई सदस्य इसे चालू करता है, वहाँ वह जो पढ़ता, लिखता और जिस पर काम करता है, उसे यह उसकी Neuropian प्रोफ़ाइल में जोड़ देता है। अभी सार्वजनिक नहीं।</small></span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <p class="kicker">संपर्क</p>
+    <h2>हमें लिखें।</h2>
+    <div class="asks">
+      <div class="ask">
+        <h3>भर्ती कर रहे हैं?</h3>
+        <p>हमें भूमिका और उसके लिए ज़रूरी काम बताइए। जैसे ही लोग मिलने के लिए राज़ी होते हैं, हम आपको ऐसे लोगों से मिलवाते हैं जो पहले ही उस तरह का काम कर चुके हैं, सबूत के लिंक के साथ।</p>
+        <!--email_off--><a class="mail" href="mailto:dylan@neuropian.com?subject=Hiring%20through%20Neuropian">dylan@neuropian.com</a><!--/email_off-->
+      </div>
+      <div class="ask">
+        <h3>चाहते हैं कि आपको खोजा जाए</h3>
+        <p>खाता बनाएँ और अपनी प्रोफ़ाइल तैयार करें, या हमें बताएँ कि आप किस पर काम कर रहे हैं, काम के लिंक के साथ।</p>
+        <a class="mail" href="/app" data-auth="reg">खाता बनाएँ →</a><br>
+        <!--email_off--><a class="mail" href="mailto:dylan@neuropian.com?subject=What%20I%27m%20working%20on">dylan@neuropian.com</a><!--/email_off-->
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <!--i18n:langs--><nav class="langs" aria-label="भाषा"><a href="/" hreflang="en" lang="en" translate="no">English</a><a href="/fr/" hreflang="fr" lang="fr" translate="no">Français</a><a href="/es/" hreflang="es" lang="es" translate="no">Español</a><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a><a href="/hi/" hreflang="hi" lang="hi" translate="no" aria-current="page">हिन्दी</a><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></nav><!--/i18n:langs-->
+    <span>© 2026 Neuropian · असीम से परे · चित्र, सभी सार्वजनिक डोमेन में: Vesalius 1543, B. H. Babbage 1853, Eddystone Lighthouse 1884, Hooke 1665, Zabaglia 1743, Robison 1822, Dürer 1525 (Rijksmuseum)</span>
+    <span><a href="/terms.html">शर्तें</a> · <a href="/privacy.html">गोपनीयता</a> · <a href="/app.html">सदस्य</a><!--i18n:en--> <span class="en-note">(अंग्रेज़ी में)</span><!--/i18n:en--></span>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261018b" defer></script>
+<style>
+/* account card: opens over the page when you're signed in (Log in / Create an account never leave the page) */
+a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+.npac-ov{position:fixed;inset:0;z-index:9998;display:flex;align-items:flex-start;justify-content:center;padding:76px 16px 16px;overflow:auto;background:rgba(236,232,227,.62);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.npac:focus{outline:none}
+.npld{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);margin:0;padding:14px 22px;background:var(--bg,#ECE8E3);color:var(--fg,#2B2A28);border:1px solid var(--line,rgba(43,42,40,.25));font-family:var(--mono,ui-monospace,Menlo,monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.npac{position:relative;width:min(440px,100%);background:var(--bg,#ECE8E3);color:var(--fg,#2B2A28);border:1px solid var(--line,rgba(43,42,40,.2));box-shadow:0 30px 80px rgba(0,0,0,.35);padding:26px 28px 20px}
+.npac-k{font-family:var(--mono,ui-monospace,Menlo,monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim,rgba(43,42,40,.76))}
+.npac h2{font-family:var(--display,inherit);font-weight:400;text-transform:none;color:inherit;font-size:clamp(30px,6vw,40px);line-height:1.05;margin-top:10px;overflow-wrap:anywhere;letter-spacing:-.01em;max-width:none}
+.npac-e{margin-top:6px;font-size:15px;color:var(--dim,rgba(43,42,40,.76));overflow-wrap:anywhere}
+.npac-l{margin-top:18px;border-top:1px solid var(--line,rgba(43,42,40,.2))}
+.npac-l a{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:13px 0;border-bottom:1px solid var(--line,rgba(43,42,40,.2));text-decoration:none;color:inherit;font-size:19px;line-height:1.25}
+.npac-l a::after{content:"\2192";grid-column:2;grid-row:1/3;align-self:center;color:var(--dim,rgba(43,42,40,.76))}
+.npac-l a span{grid-column:1;font-size:14px;color:var(--dim,rgba(43,42,40,.76))}
+.npac-l a:hover::after{color:inherit}.npac-l a:hover{padding-left:6px;transition:padding .2s ease}
+.npac-f{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:14px;color:var(--dim,rgba(43,42,40,.76))}
+.npac-out{font:inherit;font-size:15px;color:inherit;background:none;border:0;padding:4px 0;cursor:pointer;text-decoration:underline;text-underline-offset:.2em}
+.npac-x{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line,rgba(43,42,40,.3));background:transparent;color:inherit;font-size:20px;line-height:1;cursor:pointer}
+.npac a:focus-visible,.npac button:focus-visible{outline:2px solid var(--acc,currentColor);outline-offset:2px}
+</style>
+<script>
+/* Log in / Create an account: the Neuropian sign-in box pops up over this page (it lives in /app; same origin).
+   Once you're signed in you stay on this page: the nav shows your name and opens your account card, and nothing
+   navigates away until you pick where to go. */
+(function(){
+  var K="sb-qggduzzwvdkmekihwuav-auth-token", API="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
+  var ov=null, fr=null, ready=false, want="login", card=null, opener=null;
+  function session(){ try{ var s=JSON.parse(localStorage.getItem(K)||"null"); s=s&&(s.currentSession||s); return s&&s.refresh_token&&s.user?s:null; }catch(e){ return null; } }
+  function nameOf(u){ var m=u.user_metadata||{}; return m.username||m.user_name||m.first_name||m.full_name||(u.email||"").split("@")[0]||"सदस्य"; }
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function paint(){
+    var s=session();
+    document.querySelectorAll("[data-auth]").forEach(function(a){
+      if(a.dataset.t0===undefined) a.dataset.t0=a.innerHTML;
+      if(a.classList.contains("login")){ a.textContent=s?nameOf(s.user):"लॉग इन"; if(s){ a.setAttribute("aria-haspopup","dialog"); a.title="आपका खाता"; } else { a.removeAttribute("aria-haspopup"); a.removeAttribute("title"); } }
+      else a.innerHTML=s?a.dataset.t0.replace("खाता बनाएँ","आपका खाता").replace("खाता बनाएँ","अपना खाता खोलें"):a.dataset.t0;
+    });
+  }
+  function build(mode){
+    ov=document.createElement("div");
+    ov.setAttribute("style","position:fixed;inset:0;z-index:9999;display:none;background:rgba(236,232,227,.62);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)");
+    ov.innerHTML='<p class="npld" role="status">खुल रहा है…</p>';
+    fr=document.createElement("iframe");
+    fr.title="Neuropian में साइन इन करें"; fr.src="/app?embed=1&auth="+mode;
+    fr.setAttribute("style","position:absolute;inset:0;border:0;width:100%;height:100%;background:transparent;color-scheme:light");
+    fr.setAttribute("allowtransparency","true");
+    ov.appendChild(fr); document.body.appendChild(ov);
+  }
+  function drop(){ if(ov){ ov.remove(); } ov=null; fr=null; ready=false; }
+  function open(mode){
+    want=mode; if(!ov) build(mode); else if(ready) fr.contentWindow.postMessage({type:"np-auth-mode",mode:mode},location.origin);
+    ov.style.display="block"; document.documentElement.style.overflow="hidden";
+  }
+  function close(){ if(ov){ ov.style.display="none"; } if(!card) document.documentElement.style.overflow=""; }
+  function closeCard(){ if(card){ card.remove(); card=null; } document.documentElement.style.overflow=""; if(opener&&opener.focus) opener.focus(); opener=null; }
+  function openCard(isNew){
+    var s=session(); if(!s) return false;
+    closeCard(); var u=s.user, T=!!document.querySelector('a[href="/talent"]');
+    card=document.createElement("div"); card.className="npac-ov";
+    card.innerHTML='<div class="npac" role="dialog" aria-modal="true" aria-labelledby="npac-n" tabindex="-1">'
+      +'<button class="npac-x" type="button" aria-label="बंद करें">×</button>'
+      +'<p class="npac-k">'+(isNew?"Neuropian में आपका स्वागत है":"आप साइन इन हैं")+'</p>'
+      +'<h2 id="npac-n">'+esc(nameOf(u))+'</h2>'+(u.email?'<p class="npac-e">'+esc(u.email)+'</p>':"")
+      +'<nav class="npac-l" aria-label="आपका खाता">'
+      +'<a href="/app?go=build">आपकी सार्वजनिक प्रोफ़ाइल<span>'+(isNew?"यहाँ से शुरू करें: दिखाएँ कि आपने क्या बनाया है, फिर उसे प्रकाशित करें":"बताएँ कि आपने क्या बनाया है और उसे Talent पर प्रकाशित करें")+'</span></a>'
+      +'<a href="/app?go=projects">प्रोजेक्ट और क्रेडिट<span>काम पोस्ट करें, प्रोजेक्ट से जुड़ें, समीक्षक की जाँच के बाद क्रेडिट पाएँ</span></a>'
+      +'<a href="/app?go=collective">RoundTable<span>चैट, समस्या और निर्माण रूम</span></a>'
+      +'<a href="/app?go=platform">अवसर<span>सदस्यों के लिए रिक्तियाँ</span></a>'
+      +(T?'<a href="/talent">Talent<span>सदस्य प्रोफ़ाइल खोजें</span></a>':"")
+      +'</nav><div class="npac-f"><span>आप नहीं हैं?</span><button class="npac-out" type="button">साइन आउट</button></div></div>';
+    document.body.appendChild(card); document.documentElement.style.overflow="hidden";
+    card.addEventListener("click",function(e){ if(e.target===card||e.target.closest(".npac-x")) closeCard(); else if(e.target.closest(".npac-out")) signOut(); });
+    card.querySelector(".npac").focus({preventScroll:true});
+    return true;
+  }
+  function signOut(){
+    var s=session(), done=function(){ try{ localStorage.removeItem(K); }catch(e){} drop(); closeCard(); paint(); };
+    if(!s) return done();
+    fetch(API+"/auth/v1/logout?scope=local",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+s.access_token}}).catch(function(){}).then(done);
+  }
+  window.addEventListener("message",function(e){
+    if(e.origin!==location.origin||!e.data) return;
+    if(e.data.type==="np-auth-ready"){ ready=true; ov.style.background="transparent"; ov.style.webkitBackdropFilter=ov.style.backdropFilter="none"; var ld=ov.querySelector(".npld"); if(ld) ld.remove();
+      if(want!=="login"||fr.src.indexOf("auth="+want)<0) fr.contentWindow.postMessage({type:"np-auth-mode",mode:want},location.origin); }
+    if(e.data.type==="np-auth-close") close();
+    if(e.data.type==="np-auth-done"){                      // signed in: stay here, show the account card
+      var tries=0;
+      (function show(){ var s=session();
+        if(!s&&tries++<10) return setTimeout(show,150);
+        close(); paint();
+        var made=s&&s.user&&Date.parse(s.user.created_at||0);
+        if(!openCard(made&&Date.now()-made<15*60*1000)) location.href="/app";   // no saved session (storage blocked): the app has it
+      })();
+    }
+  });
+  document.addEventListener("keydown",function(e){ if(e.key!=="Escape") return; if(card) closeCard(); else if(ov&&ov.style.display==="block") close(); });
+  document.addEventListener("click",function(e){
+    var a=e.target.closest&&e.target.closest("[data-auth]"); if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button) return;
+    e.preventDefault(); opener=a;
+    if(session()) openCard(false); else open(a.getAttribute("data-auth"));
+  });
+  function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov&&!session()) build(a.getAttribute("data-auth")); }
+  document.addEventListener("pointerover",warm); document.addEventListener("touchstart",warm,{passive:true}); document.addEventListener("focusin",warm);
+  window.addEventListener("storage",function(e){ if(e.key===K){ paint(); if(!session()){ drop(); closeCard(); } } });
+  paint();
+})();
+</script>
+<script>
+/* photo tiles: click opens what we look for in that field; click again (or Esc) closes */
+(function(){
+  function closeAll(){ document.querySelectorAll(".ph.open").forEach(function(f){ var h = f.querySelector(".ph-hit"); f.classList.remove("open"); h.setAttribute("aria-expanded","false"); if (f.contains(document.activeElement)) h.focus({preventScroll:true}); }); }
+  document.addEventListener("click", function(e){
+    var t = e.target; if (!t.closest) return;
+    var more = t.closest(".ph-more"), hit = t.closest(".ph-hit");
+    if (more && !t.closest("a")) { closeAll(); return; }
+    if (!hit) return;
+    var f = hit.parentElement, was = f.classList.contains("open"); closeAll();
+    if (!was) { f.classList.add("open"); hit.setAttribute("aria-expanded","true"); var a = f.querySelector(".ph-cta"); if (a) a.focus({preventScroll:true}); }
+  });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeAll(); });
+})();
+</script>
+</body>
+</html>
