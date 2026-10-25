@@ -2,6 +2,15 @@
 <html lang="en">
 <head>
 <script>window.__npRecovery=/type=recovery/.test(location.hash)||/[?&]type=recovery/.test(location.search);window.__npFresh=!window.__npRecovery&&(/access_token=/.test(location.hash)||/[?&]code=/.test(location.search));</script>
+<script>/* Language of the sign-in pop-up, the terms step and the set-password box (2026-10-25): ?lang=fr|es|he|hi|zh (the
+   translated home pages add it), else the framing page's <html lang>, else a GitHub sign-in started from a translated
+   page (np_lang, set by npOAuth). No language = English, and the table in /assets/app/auth-i18n.js is never loaded. */
+(function(){var L=['fr','es','he','hi','zh'],l=null,f=function(v){v=String(v||'').toLowerCase().split('-')[0];return L.indexOf(v)>=0?v:null;};
+try{var q=new URLSearchParams(location.search);if(q.has('lang'))l=f(q.get('lang'));else{
+  try{if(window.parent!==window)l=f(parent.document.documentElement.lang);}catch(e){}
+  if(!l&&window.__npFresh){var s=JSON.parse(sessionStorage.getItem('np_lang')||'null');sessionStorage.removeItem('np_lang');if(s&&Date.now()-s.t<36e5)l=f(s.l);}}}catch(e){}
+if(!l)return;window.__npLang=l;
+window.__npI18n=new Promise(function(r){var s=document.createElement('script');s.src='/assets/app/auth-i18n.js?v=20261025a';s.onload=s.onerror=function(){r();};setTimeout(r,4000);document.head.appendChild(s);});})();</script>
 <meta name="robots" content="noindex">
 <meta name="description" content="Neuropian members: profile survey, opportunities and RoundTable.">
 <link rel="canonical" href="https://neuropian.com/app.html">
@@ -1520,7 +1529,7 @@ async function doReset(){
   const email=document.getElementById('rs-email').value.trim();
   if(!email){showErr('rs-err','Please enter your email address.');return;}
   authBtn('rs-btn',true,'Sending…');
-  const{error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+'/app'});
+  const{error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+'/app'+(window.__npLang?'?lang='+window.__npLang:'')});
   authBtn('rs-btn',false,'Send Reset Link');
   if(error){showErr('rs-err',error.message);return;}
   showErr('rs-err','');document.getElementById('rs-success').style.display='';
@@ -5171,6 +5180,7 @@ if(new URLSearchParams(location.search).has('build')){
   window.npOAuth=async function(provider){
     const {data,error}=await sb.auth.signInWithOAuth({provider,options:{redirectTo:location.origin+'/app?go=build',skipBrowserRedirect:true}});
     if(error){ showErr('li-err',error.message); showErr('rg-err',error.message); return; }
+    try{ if(window.__npLang)sessionStorage.setItem('np_lang',JSON.stringify({l:window.__npLang,t:Date.now()})); else sessionStorage.removeItem('np_lang'); }catch(e){}   // the terms step after GitHub speaks the same language
     try{ (window.top||window).location.href=data.url; }catch(e){ location.href=data.url; }     // GitHub refuses to load inside a frame
   };
   fetch(SUPA_URL+'/auth/v1/settings',{headers:{apikey:SUPA_KEY}}).then(r=>r.json()).then(st=>{
@@ -5292,6 +5302,7 @@ html.np-embed .auth-gate{background:rgba(236,232,227,.5)!important;-webkit-backd
   document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeAuth(); });
   setTimeout(async()=>{ let ses=null; try{ ses=(await sb.auth.getSession()).data.session; }catch(e){}
     if(ses){tell({type:'np-auth-done',page:'home'});return;}            // really signed in: straight to the app
+    if(window.__npI18n)await window.__npI18n;                          // translated pop-up: the parent's "Opening…" stays up until the strings are in
     showAuth(q.get('auth')==='reg'?'reg':'login'); tell({type:'np-auth-ready'}); },30);
 })();
 </script>
