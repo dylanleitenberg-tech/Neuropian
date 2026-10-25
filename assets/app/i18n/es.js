@@ -152,8 +152,8 @@ window.__npAppDict = {
     "Psychology & Human Behavior": "Psicología y comportamiento humano",
     "Prize Competitions": "Concursos con premios",
     "Startups & Founding Roles": "Startups y puestos fundadores",
-    "Match": "Coincidencia",
-    "Est.": "Est.",
+    "Match": "Afinidad",
+    "Est.": "Aprox.",
     "No saved opportunities yet.": "Aún no has guardado oportunidades.",
 
     // Profile and settings box
@@ -448,8 +448,8 @@ window.__npAppDict = {
     // Projects: what the page checks, and the messages after each action
     "Links must start with http:// or https://": "Los enlaces deben empezar por http:// o https://",
     "What needs doing: 3 to 120 characters": "Qué hay que hacer: de 3 a 120 caracteres",
-    "Details: 10 to 2,000 characters": "Detalles: de 10 a 2,000 caracteres",
-    "The reward must be between 10 and 100,000 credits": "La recompensa debe estar entre 10 y 100,000 créditos",
+    "Details: 10 to 2,000 characters": "Detalles: de 10 a 2000 caracteres",
+    "The reward must be between 10 and 100,000 credits": "La recompensa debe estar entre 10 y 100\u00a0000 créditos",
     "That text is too long": "Ese texto es demasiado largo",
     "Something went wrong. Please try again.": "Algo salió mal. Inténtalo de nuevo.",
     "Thanks. You can use credits now.": "Gracias. Ya puedes usar créditos.",
@@ -532,7 +532,7 @@ window.__npAppDict = {
     "Privacy": "Privacidad",
     "Find a builder.": "Encuentra a un constructor.",
     "Profiles members published about their own work. Search by what you need done; AI ranks the profiles by meaning, not keywords.": "Perfiles que los miembros publicaron sobre su propio trabajo. Busca según lo que necesitas que se haga; la IA ordena los perfiles por significado, no por palabras clave.",
-    "e.g. a product designer who ships, a protein biologist, a Rust engineer": "p. ej., diseño de producto que se lanza, biología de proteínas, ingeniería en Rust",
+    "e.g. a product designer who ships, a protein biologist, a Rust engineer": "p. ej., diseño de producto con lanzamientos reales, biología de proteínas, ingeniería en Rust",
     "Search talent": "Buscar talento",
     "Only members who signed up and approved their profile appear here.": "Aquí solo aparecen los miembros que se registraron y aprobaron su perfil.",
     "© 2026 Neuropian · Beyond Limitless": "© 2026 Neuropian · Más allá de lo ilimitado",
@@ -642,7 +642,7 @@ window.__npAppDict = {
     fromGh: "Verificado desde GitHub · $1",
     byMember: "Añadido por el miembro · $1",
     hireIntro: function (m) { var n = m[1] === 'this member' ? 'este miembro' : m[1]; return 'Cuéntale a Neuropian sobre el puesto. Se lo hacemos llegar a ' + n + ' y, si quiere hablar, los ponemos en contacto. Su correo nunca se muestra.'; },
-    hireBtn: function (m) { return 'Contratar o contactar a ' + (m[1] === 'this' ? 'este miembro' : m[1]); },
+    hireBtn: function (m) { return 'Contratar o contactar a ' + ((m[1] === 'this' || m[1] === 'this member') ? 'este miembro' : m[1]); },
     hireSent: function (m) { return 'Enviado. Neuropian se lo hará llegar y te escribirá si ' + (m[1] === 'they' ? 'esa persona' : m[1]) + ' quiere hablar.'; },
     talentTitle: "$1 · Neuropian Talent"
   },

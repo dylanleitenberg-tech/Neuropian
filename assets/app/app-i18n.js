@@ -62,7 +62,7 @@
     // Talent's "Hire or contact" block: $1 is the member's name, or the page's own stand-ins "this member" / "this" / "they"
     hireIntro: /^Tell Neuropian about the role\. We pass it on to (.+) and introduce you if they want to talk\. Their email is never shown\.$/,
     hireBtn: /^Hire or contact (.+)$/,
-    hireSent: /^Sent\. Neuropian will pass it on and email you if (.+) wants to talk\.$/,
+    hireSent: /^Sent\. Neuropian will pass it on and email you if (.+?) wants? to talk\.$/,   // "if Ana wants" / "if they want"
     talentTitle: /^(.+) · Neuropian Talent$/             // the browser tab on a profile ("Member" when the name is hidden)
   };
   var NESTED = { uploadFailed: 1, postFailed: 1, ghFailed: 1, couldNotSave: 1, you: 1 };
