@@ -90,9 +90,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:601;min-height:calc(90px + env(s
 .btn-primary::before{content:'';position:absolute;inset:0;background:rgba(43,42,40,.12);transform:translateX(-100%);transition:transform .35s cubic-bezier(.77,0,.175,1)}
 .btn-primary:hover{color:var(--black)}.btn-primary:hover::before{transform:translateX(0)}
 .btn-primary span{position:relative;z-index:1}
-#eagleeyes-intro:hover .btn-primary{transform:scale(1.05);box-shadow:0 0 0 2px rgba(43,42,40,.5),0 0 32px rgba(43,42,40,.22);transition:all .35s cubic-bezier(.77,0,.175,1)}
-#eagleeyes-intro:hover .btn-primary::before{transform:translateX(0)}
-#eagleeyes-intro .btn-primary:hover{transform:scale(1.08);box-shadow:0 0 0 2px rgba(43,42,40,.9),0 0 48px rgba(43,42,40,.4),0 0 80px rgba(43,42,40,.15)}
 #roundtable:hover .btn-primary{transform:scale(1.05);box-shadow:0 0 0 2px rgba(43,42,40,.5),0 0 32px rgba(43,42,40,.22);transition:all .35s cubic-bezier(.77,0,.175,1)}
 #roundtable:hover .btn-primary::before{transform:translateX(0)}
 #roundtable .btn-primary:hover{transform:scale(1.08);box-shadow:0 0 0 2px rgba(43,42,40,.9),0 0 48px rgba(43,42,40,.4),0 0 80px rgba(43,42,40,.15)}
@@ -600,7 +597,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   <li><a style="cursor:pointer" onclick="gatedPage('projects')">Projects</a></li>
   <li><a href="/talent">Talent</a></li>
       <li><a style="cursor:pointer" onclick="openBuild()">My profile</a></li>
-      <li><a style="cursor:pointer" onclick="showPage('eagleeyes')">EagleEyes</a></li>
 </ul>
   <div style="display:flex;align-items:center;gap:.6rem;flex-shrink:0">
     <span id="nav-friend-badge" onclick="gatedPage('collective')" title="Friend requests" style="display:none;position:relative;cursor:pointer;padding:.2rem .28rem;transition:opacity .2s" onmouseenter="this.style.opacity='.7'" onmouseleave="this.style.opacity='1'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(43,42,40,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span id="nav-friend-count" style="position:absolute;top:-3px;right:-4px;background:#2b4c7e;color:#ece8e3;font-family:'DM Sans',sans-serif;font-size:.36rem;font-weight:800;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 3px;line-height:1"></span></span>
@@ -621,7 +617,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     
     <a onclick="closeMobileNav();gatedPage('platform')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(43,42,40,0.95);border-bottom:1px solid rgba(43,42,40,.05);cursor:pointer">Opportunities</a>
     <a onclick="closeMobileNav();gatedPage('collective')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(43,42,40,0.95);border-bottom:1px solid rgba(43,42,40,.05);cursor:pointer">RoundTable</a>
-    <a onclick="closeMobileNav();showPage('eagleeyes')" style="padding:.95rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(43,42,40,0.95);border-bottom:1px solid rgba(43,42,40,.05);cursor:pointer;display:flex;align-items:center;gap:.6rem"><span style="font-size:.8rem">&#10022;</span>EagleEyes</a>
     <a onclick="closeMobileNav();openApply()" style="margin:1.2rem 1.4rem 0;padding:.85rem 1.2rem;background:#2b2a28;color:#ece8e3;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-align:center;cursor:pointer">Apply Now</a>
     <div id="mobile-nav-user" onclick="closeMobileNav();openProfile()" style="display:none;padding:.9rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.6rem;color:rgba(43,42,40,0.95);letter-spacing:.14em;text-transform:uppercase;cursor:pointer"></div>
     <a id="mobile-nav-signout" onclick="closeMobileNav();doSignOut()" style="display:none;padding:.7rem 1.6rem;font-family:'Barlow Condensed',sans-serif;font-size:.62rem;color:rgba(43,42,40,0.95);cursor:pointer;letter-spacing:.1em">Sign Out</a>
@@ -644,7 +639,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <a class="m-card" onclick="gatedPage('collective')"><b>RoundTable</b><span>Neuropian's place and space for intellectual expansion: chat, problem and build rooms.</span></a>
     <a class="m-card" onclick="openBuild()"><b>Your public profile</b><span>Describe what you've made, link to it, approve the draft, publish it to Talent. For any field.</span></a>
     <a class="m-card" onclick="gatedPage('projects')"><b>Invite friends</b><span>Share your invite link. When a friend you invite publishes their profile, you get 25 credits, for up to 10 friends.</span></a>
-        <a class="m-card" onclick="showPage('eagleeyes')"><b>EagleEyes</b><span>Neuropian's scouting agent: a browser extension that records what you read, write and work on, on the sites you choose, and adds it to your profile. Built; not yet public.</span></a>
   </div>
   <p class="m-legal"><a onclick="showPage('tos')">Terms of Service</a> · <a onclick="showPage('privacy')">Privacy Policy</a> · <a href="/">neuropian.com</a></p>
 </section>
@@ -1458,11 +1452,6 @@ async function claimInvite(){
 // ── gate logic ───────────────────────────────────────────
 function gatedPage(pg){
   if(pg==='projects'){ if(!isAuthed){pendingPage='projects';showAuth('reg','projects');} else showPage('projects'); return; }
-  if(pg==='eagleeyes'){
-    if(!isAuthed){pendingPage='eagleeyes';showAuth('reg','eagleeyes');}
-    else{showPage('eagleeyes');}
-    return;
-  }
   if(pg==='platform'){
     if(!isAuthed){pendingPage='platform';showAuth('reg','platform');}
     else{showPage('platform');}
@@ -1578,7 +1567,7 @@ async function doLogin(){
     surveyDone=true;
   }
   closeAuth();
-  const dest=pendingPage==='eagleeyes'?'eagleeyes':(pendingPage||'build');
+  const dest=pendingPage||'build';
   showPage(dest);
   pendingPage=null;
 }
@@ -1780,7 +1769,7 @@ async function doRegister(){
     }
   }catch(e){/* avatar upload failed silently - user can set it later in profile */}
   closeAuth();
-  const dest=pendingPage==='eagleeyes'?'eagleeyes':(pendingPage==='collective'?'collective':(pendingPage||'build'));
+  const dest=pendingPage==='collective'?'collective':(pendingPage||'build');
   showPage(dest);
   pendingPage=null;
 }
@@ -4728,16 +4717,6 @@ else{renderOppPreview();}
 
 </script>
 
-<!-- EAGLEEYES PAGE -->
-<div id="page-eagleeyes" class="page" style="background:#ece8e3;min-height:100vh;color:#33312f">
-  <section class="m-home">
-    <p class="m-kicker">EagleEyes · Neuropian’s scouting agent</p>
-    <h1 class="m-title">EagleEyes</h1>
-    <p class="m-lede">A browser extension, built and not yet public. You turn it on site by site. On those sites it records
-    what you read, write and work on, and adds it to your Neuropian profile. It does nothing on any other site.</p>
-    <div class="m-actions"><button class="m-btn ghost" onclick="showPage('home')">Back</button></div>
-  </section>
-</div><!-- /page-eagleeyes -->
 
 <!-- PRIVACY POLICY PAGE -->
 <div id="page-privacy" class="page" style="background:#e6e2de;min-height:100vh;color:#33312f">
@@ -5274,7 +5253,7 @@ html.np-embed .auth-gate{background:rgba(236,232,227,.5)!important;-webkit-backd
 <script>
 (function(){
   const q=new URLSearchParams(location.search);
-  const PAGES=['home','survey','platform','collective','build','eagleeyes','projects'];
+  const PAGES=['home','survey','platform','collective','build','projects'];
   const go=q.get('go');
   if(go&&PAGES.includes(go)&&!q.has('embed')){
     const t=setInterval(()=>{ if(currentUser){clearInterval(t); history.replaceState(null,'','/app'); showPage(go);} },250);
