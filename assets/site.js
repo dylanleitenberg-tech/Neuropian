@@ -6,16 +6,28 @@
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var io = "IntersectionObserver" in window;
 
-  /* Type text in, once, when it scrolls into view. The text is in the HTML; this only replays it. */
+  /* Type text in, once, when it scrolls into view. The text is in the HTML; this only replays it.
+     The untyped rest stays in place, invisible, so every line break is final from the first letter and no
+     half-typed word jumps to the next line (Dylan, 2026-10-25). The cursor floats (position:absolute at its
+     static spot), so it takes no room either. */
   function typeInto(el, text, speed, done) {
     if (reduce) { el.textContent = text; if (done) done(); return; }
-    el.classList.add("typing"); el.textContent = "";
+    var shown = document.createTextNode(""), rest = document.createElement("span");
+    rest.style.visibility = "hidden"; rest.setAttribute("aria-hidden", "true");
+    el.textContent = ""; el.appendChild(shown);
+    if (el.hasAttribute("data-type")) {
+      var caret = document.createElement("span");
+      caret.textContent = "\u258C"; caret.setAttribute("aria-hidden", "true");
+      caret.style.cssText = "position:absolute;margin-left:2px;color:var(--acc);animation:blink 1s steps(1) infinite";
+      el.appendChild(caret);
+    }
+    el.appendChild(rest);
     var i = 0;
     (function step() {
       i += Math.max(1, Math.round(text.length / 60));
-      el.textContent = text.slice(0, i);
+      shown.data = text.slice(0, i); rest.textContent = text.slice(i);
       if (i < text.length) setTimeout(step, speed);
-      else { el.classList.remove("typing"); el.style.minHeight = ""; if (done) done(); }
+      else { el.textContent = text; el.style.minHeight = ""; if (done) done(); }
     })();
   }
 
