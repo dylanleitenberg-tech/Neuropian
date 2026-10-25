@@ -347,9 +347,6 @@
       css += '@media(max-width:480px){.bar .wrap{gap:12px}.nav{gap:16px;font-size:16px}.nav a.login{padding:6px 12px}}\n';
     } else {
       css += '.np-en-note{color:rgba(43,42,40,.38)}\n';
-      // phones, signed in: the translated Sign out / Apply labels don't fit the top bar next to the name (English wraps
-      // to two lines); Sign out is still in the phone menu and the profile box
-      css += '@media(max-width:600px){html:not(#np-x) body #nav-signout{display:none!important}}\n';
       if (RTL) css += 'html:not(#np-x) #mobile-nav-drawer > div[dir=rtl] a{text-align:right}\n' +
                       'html:not(#np-x) #page-projects [dir=rtl] .pc-ledger .d{text-align:left}\n' +
                       'html:not(#np-x) [dir=rtl] #pc-welcome{margin-left:0;margin-right:auto}\n';
