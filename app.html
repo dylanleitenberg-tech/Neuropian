@@ -643,6 +643,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <a class="m-card" onclick="gatedPage('platform')"><b>Opportunities</b><span>Openings for members. None listed yet.</span></a>
     <a class="m-card" onclick="gatedPage('collective')"><b>RoundTable</b><span>Neuropian's place and space for intellectual expansion: chat, problem and build rooms.</span></a>
     <a class="m-card" onclick="openBuild()"><b>Your public profile</b><span>Describe what you've made, link to it, approve the draft, publish it to Talent. For any field.</span></a>
+    <a class="m-card" onclick="gatedPage('projects')"><b>Invite friends</b><span>Share your invite link. When a friend you invite publishes their profile, you get 25 credits, for up to 10 friends.</span></a>
         <a class="m-card" onclick="showPage('eagleeyes')"><b>EagleEyes</b><span>Neuropian's scouting agent: a browser extension that records what you read, write and work on, on the sites you choose, and adds it to your profile. Built; not yet public.</span></a>
   </div>
   <p class="m-legal"><a onclick="showPage('tos')">Terms of Service</a> · <a onclick="showPage('privacy')">Privacy Policy</a> · <a href="/">neuropian.com</a></p>
@@ -1425,11 +1426,20 @@ function setNavUser(user){
 }
 
 // ── session restore on page load ─────────────────────────
+// Invite links (/app?ref=CODE): the code waits in this browser until someone is signed in, then is claimed once.
+// invite_claim only counts accounts made in the last 7 days, so existing members can't be claimed.
+try{const r=new URLSearchParams(location.search).get('ref'); if(r)localStorage.setItem('np_ref',r);}catch(e){}
+async function claimInvite(){
+  let r=null; try{r=localStorage.getItem('np_ref');}catch(e){}
+  if(!r||!sb)return;
+  const {error}=await sb.rpc('invite_claim',{p_code:r});
+  if(!error){try{localStorage.removeItem('np_ref');}catch(e){}}
+}
 (async function initSession(){
   if(!sb)return;
   const {data:{session}}=await sb.auth.getSession();
   if(session){
-    currentUser=session.user; isAuthed=true; setNavUser(session.user); if(typeof checkTerms==='function')setTimeout(()=>checkTerms(session.user),0);
+    currentUser=session.user; isAuthed=true; setNavUser(session.user); if(typeof checkTerms==='function')setTimeout(()=>checkTerms(session.user),0); claimInvite();
     // Check if they already completed the survey
     const {data}=await sb.from('profiles').select('traits').eq('user_id',session.user.id).single();
     if(data?.traits && Object.keys(data.traits).length>0){
@@ -1440,7 +1450,7 @@ function setNavUser(user){
   // Listen for auth changes (login/logout in other tabs)
   sb.auth.onAuthStateChange((event,session)=>{
     if(event==='PASSWORD_RECOVERY'){showSetPasswordModal();return;}
-    if(session){currentUser=session.user;isAuthed=true;setNavUser(session.user);}
+    if(session){currentUser=session.user;isAuthed=true;setNavUser(session.user);claimInvite();}
     else{currentUser=null;isAuthed=false;surveyDone=false;setNavUser(null);}
   });
 })();
@@ -5324,6 +5334,10 @@ html:not(#np-x) a:focus-visible,html:not(#np-x) button:focus-visible,html:not(#n
   <p class="m-lede">Post a project with a credit reward. People who join submit what they did, and a Neuropian reviewer checks
   the work. Approved contributors share the reward and can earn a Neuropian bonus.</p>
   <div class="pc-balance"><span class="pc-k">Your credits</span><b id="pc-bal">–</b><div id="pc-welcome"></div></div>
+  <div class="pc-invite"><span class="pc-k">Invite a friend</span>
+    <p class="b-p">When a friend you invite publishes their profile, you get 25 credits, for up to 10 friends.</p>
+    <div class="m-actions" style="margin-top:10px"><button class="m-btn ghost" onclick="npcInvite()">Copy your invite link</button></div>
+    <p id="pc-inv" class="b-p small" aria-live="polite"></p></div>
   <p id="pc-msg" class="b-p" role="status" aria-live="polite"></p>
 
   <div id="pc-terms" class="pc-box" hidden>
@@ -5357,6 +5371,7 @@ html:not(#np-x) a:focus-visible,html:not(#np-x) button:focus-visible,html:not(#n
 <style>
 .pc-back{font:inherit;font-size:15px;background:none;border:0;padding:0;color:rgba(43,42,40,.76);cursor:pointer;margin-bottom:2rem}
 .pc-balance{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:2rem;padding:18px 0;border-top:2px solid #2b2a28;border-bottom:1px solid rgba(43,42,40,.16)}
+.pc-invite{padding:18px 0;border-bottom:1px solid rgba(43,42,40,.16)}
 #page-projects .pc-k{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(43,42,40,.76)}
 #page-projects #pc-bal{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-weight:500;font-size:clamp(34px,5vw,52px);line-height:1}
 #pc-welcome{margin-left:auto}
@@ -5421,12 +5436,20 @@ html:not(#np-x) a:focus-visible,html:not(#np-x) button:focus-visible,html:not(#n
   const STATUS={open:'Open',in_review:'In review',succeeded:'Verified',unverified:'Not verified',cancelled:'Cancelled'};
   const MSTATUS={requested:'Asked to join',accepted:'Accepted',declined:'Not accepted',submitted:'Work submitted',approved:'Approved',rejected:'Not approved',left:'No work submitted before it closed'};
 
+  window.npcInvite=async function(){
+    const {data:code,error}=await sb.rpc('invite_code');
+    if(error){ $('pc-inv').textContent=error.message; return; }
+    const link=location.origin+'/app?ref='+code;
+    try{ await navigator.clipboard.writeText(link); $('pc-inv').textContent='Copied: '+link; }
+    catch(e){ $('pc-inv').textContent='Your invite link: '+link; }
+  };
   window.npcLoad=async function(keep){
     if(!currentUser)return;
     if(!keep)msg('');
     const {data:me,error}=await sb.rpc('credits_me');
     if(error){ msg(error.message,true); return; }
     $('pc-bal').textContent=me.balance.toLocaleString('en-US');
+    sb.rpc('invite_stats').then(({data:s})=>{ if(s&&s.joined) $('pc-inv').textContent=s.joined+(s.joined===1?' friend':' friends')+' joined through your link, '+s.published+' published.'; });
     $('pc-terms').hidden=!!me.terms; $('pc-main').hidden=!me.terms;
     $('pc-accept').hidden=!me.adult; $('pc-adult').hidden=!!me.adult;
     $('pc-welcome').innerHTML=(!me.terms||me.welcome_claimed)?'':(me.has_profile
