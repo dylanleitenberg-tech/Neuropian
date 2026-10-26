@@ -695,6 +695,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   <div class="b-step"><span class="b-n">3</span><div>
     <b>Draft it</b>
     <p class="b-p">Neuropian turns what you wrote, your links and (if connected) your public GitHub work into a draft. Nothing is published yet.</p>
+    <div id="b-country" class="b-l" hidden>The country you live in (never shown on your profile)<select id="b-country-in" class="np-country"></select><button class="m-btn ghost" style="margin-top:10px" onclick="saveCountry()">Save</button></div>
     <div id="b-dob" class="b-l" hidden>Your date of birth (Neuropian is for adults)<input type="date" id="b-dob-in"><button class="m-btn ghost" style="margin-top:10px" onclick="saveBirthdate()">Save</button></div>
     <div class="m-actions" style="margin-top:12px"><button class="m-btn" id="b-draft" onclick="draftProfile()">Draft my profile</button></div>
   </div></div>
@@ -1596,6 +1597,7 @@ async function doLogin(){
 // ── register ──────────────────────────────────────────────
 function checkDobConsent(){return;
   const dob=document.getElementById('rg-dob').value;
+  const country=(document.getElementById('rg-country')||{}).value||'';
   if(!dob)return;
   const today=new Date();
   const birth=new Date(dob);
@@ -1726,7 +1728,7 @@ async function doRegister(){
   const dob=document.getElementById('rg-dob').value;
   const email=document.getElementById('rg-email').value.trim();
   const pass=document.getElementById('rg-pass').value;
-  if(!username||!fn||!ln||!dob||!email||!pass){showErr('rg-err','Please fill in all fields.');return}
+  if(!username||!fn||!ln||!dob||!country||!email||!pass){showErr('rg-err','Please fill in all fields.');return}
   if(username.length<=3){showErr('rg-err','Username must be more than 3 characters.');return}
   if(!/^[a-zA-Z0-9_]+$/.test(username)){showErr('rg-err','Username can only contain letters, numbers, and underscores.');return}
   const today=new Date();
@@ -1746,7 +1748,7 @@ async function doRegister(){
   showErr('rg-err','');
   const {data,error}=await sb.auth.signUp({
     email,password:pass,
-    options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob,username,tos_version:'2026-10-18',tos_accepted_at:new Date().toISOString()}}
+    options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob,country,username,tos_version:'2026-10-18',tos_accepted_at:new Date().toISOString()}}
   });
   authBtn('rg-btn',false,'Create Account &amp; Continue');
   if(error){if(/already (registered|exists)/i.test(error.message)){switchToLogin();document.getElementById('li-email').value=email;showErr('li-err','This email already has an account. Sign in with your password, or use Forgot password.');return}showErr('rg-err',error.message);return}
@@ -4744,9 +4746,9 @@ else{renderOppPreview();}
   <div class="lg-bar"><button onclick="showPage('home')">← Back</button><span>Neuropian · Legal</span></div>
   <div class="lg-doc">
     <h1>Privacy Policy</h1>
-    <p class="lg-upd">Last updated: 19 October 2026 · <a href="/privacy">Open as a page</a></p>
+    <p class="lg-upd">Last updated: 25 October 2026 · <a href="/privacy">Open as a page</a></p>
       <h2>1. Who we are</h2><div class="lg"><p>Neuropian is run by Dylan Leitenberg (not yet incorporated). Questions and requests: <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p></div>
-      <h2>2. What we collect from members</h2><div class="lg"><ul><li><strong>Account:</strong> name, username, email address, date of birth, profile picture and your Neuropian ID.</li><li><strong>Sign-in with GitHub or another service:</strong> your username, name, email address and picture from that service, and the public work there (for GitHub, your public repositories and the pull requests other projects merged), which Neuropian may read to build your profile.</li><li><strong>Profile:</strong> your bio, and the answers you gave in our earlier profile survey, which we no longer ask.</li><li><strong>RoundTable:</strong> messages, files you upload, reactions, problems and builds you post, servers, friends, reports and whether you are online.</li><li><strong>Opportunities:</strong> what you save or apply to.</li><li><strong>Credits and projects:</strong> your credit balance and history, projects you post or ask to join, the proof of work you submit, and reviewers' decisions.</li><li><strong>Public profile, if you make one:</strong> what you write or approve (name, headline, summary, skills, work and links), and, if you connect GitHub, your GitHub username and what GitHub shares at sign-in (name, email address and profile picture).</li><li><strong>EagleEyes, if you use it:</strong> on the sites you turn it on for, what you read, write and engage with there. Nothing from any other site.</li><li><strong>Technical:</strong> what our hosting provider logs to run sign-in securely, such as IP address and browser.</li></ul></div>
+      <h2>2. What we collect from members</h2><div class="lg"><ul><li><strong>Account:</strong> name, username, email address, date of birth, profile picture and your Neuropian ID.</li><li><strong>Country:</strong> the country you live in, which you tell us when you sign up or publish a profile. For a few accounts that connected GitHub, we filled it in from the location on the public GitHub profile until the member tells us. We use it only to know which privacy laws apply to you (for example, whether you are in the EU), and it is never shown on your profile.</li><li><strong>Sign-in with GitHub or another service:</strong> your username, name, email address and picture from that service, and the public work there (for GitHub, your public repositories and the pull requests other projects merged), which Neuropian may read to build your profile.</li><li><strong>Profile:</strong> your bio, and the answers you gave in our earlier profile survey, which we no longer ask.</li><li><strong>RoundTable:</strong> messages, files you upload, reactions, problems and builds you post, servers, friends, reports and whether you are online.</li><li><strong>Opportunities:</strong> what you save or apply to.</li><li><strong>Credits and projects:</strong> your credit balance and history, projects you post or ask to join, the proof of work you submit, and reviewers' decisions.</li><li><strong>Public profile, if you make one:</strong> what you write or approve (name, headline, summary, skills, work and links), and, if you connect GitHub, your GitHub username and what GitHub shares at sign-in (name, email address and profile picture).</li><li><strong>EagleEyes, if you use it:</strong> on the sites you turn it on for, what you read, write and engage with there. Nothing from any other site.</li><li><strong>Technical:</strong> what our hosting provider logs to run sign-in securely, such as IP address and browser.</li></ul></div>
       <h2>3. How we use it</h2><div class="lg"><p>To run your account and RoundTable, to match you with opportunities, to share your profile with companies and funds hiring through Neuropian (section 4), to keep the service secure, and to send account emails such as confirmations and password resets. No marketing email without your consent.</p></div>
       <h2>4. Who we share it with</h2><div class="lg"><ul><li><strong>Companies and funds hiring through Neuropian:</strong> your profile (name, username, email, survey results and what you add to your profile) when you may fit what they are looking for. They may pay us. Under California law this can count as selling or sharing personal information. You can opt out at any time: email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a> with “Do not share my profile” and we stop within 7 days.</li><li><strong>Service providers</strong> that run the service for us: Supabase (database, sign-in and file storage, in the United States) and Cloudflare (the website). Pages also load fonts from Google Fonts and code from jsDelivr, which see your IP address.</li><li><strong>If the law requires it.</strong></li></ul><p>Never shared with hiring companies: your password and your private messages. Never sold to data brokers or advertisers.</p><p><strong>Everyone</strong> can see and search a profile you publish on Talent: the headline, summary, skills, work and links you approved, your GitHub username if you connected GitHub, and your name only if you chose to show it. To write the draft, your public GitHub information may be sent to Anthropic's Claude AI model; search uses an AI model that runs inside Supabase.</p><p><strong>Other members</strong> can see projects, who posted them, and approved contributors with the proof that was approved. Requests to join and work waiting for review are seen only by the member who sent it, the project's owner and Neuropian reviewers.</p><p><strong>Other members</strong> can see your username, name, profile picture, Neuropian ID, whether you are online, your bio and profile-card answers (unless you set them to friends only) and the messages you post in rooms and servers.</p><p>Accounts created before 18 October 2026 were made under a policy that did not include sharing. Nothing from those accounts is shared until the member accepts these terms.</p></div>
       <h2>5. People we find through public work</h2><div class="lg"><p>Neuropian's search tool, Falcon, reads public, self-published information through official data feeds and public pages: GitHub (profiles, merged pull requests and code search), Codeforces, AtCoder, Math Stack Exchange and other Stack Exchange sites, Kaggle's public Meta Kaggle dataset, the Online Go Server, and personal websites linked from those profiles. Every page fetch checks the site's robots.txt first.</p><p>What it keeps: usernames; the name, location, company, bio and website shown on public profiles; follower counts; contest results, answers and merged pull requests; a short fingerprint of public profile photos, used only to tell whether two accounts belong to the same person (not the photo itself); and contact details people published themselves, such as a public profile email or the email and social-media links on their own website.</p><p>From this we keep lists and short internal reports. We publish only totals and one redacted example, never anyone's name or profile, and we share no one's information with a hiring company unless they have signed up. To see what we hold about you or to have it removed, email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p></div>
@@ -4969,6 +4971,7 @@ else{renderOppPreview();}
         <div class="auth-field"><label>Last Name</label><input type="text" id="rg-ln" placeholder="Family name" autocomplete="family-name"></div>
       </div>
       <div class="auth-field"><label>Date of Birth</label><input type="date" id="rg-dob" onchange="checkDobConsent()" style="width:100%;padding:.75rem .95rem;border:1px solid rgba(43,42,40,.12);font-family:'Barlow',sans-serif;font-size:.84rem;color:var(--white);background:rgba(43,42,40,.05);outline:none;transition:border-color .25s;box-sizing:border-box;color-scheme:dark" onfocus="this.style.borderColor='#33312f'" onblur="this.style.borderColor='rgba(43,42,40,.12)'"></div>
+      <div class="auth-field"><label>Country you live in</label><select id="rg-country" class="np-country" style="width:100%;padding:.75rem .95rem;border:1px solid rgba(43,42,40,.12);font-family:'Barlow',sans-serif;font-size:.84rem;color:var(--white);background:rgba(43,42,40,.05);outline:none;box-sizing:border-box"></select></div>
       
       <div class="auth-field"><label>Email Address</label><input type="email" id="rg-email" placeholder="you@example.com" autocomplete="email"></div>
       <div class="auth-field"><label>Password</label><input type="password" id="rg-pass" placeholder="Create a strong password" autocomplete="new-password"><div style="font-size:.52rem;color:#b0aca8;margin-top:.3rem;line-height:1.5">At least 6 characters.</div></div>
@@ -5111,6 +5114,7 @@ async function loadBuild(){
   const {data}=await sb.from('member_profiles').select('*').eq('user_id',currentUser.id).maybeSingle();
   const {data:pub}=await sb.from('published_profiles').select('public_id').eq('user_id',currentUser.id).maybeSingle();
   _bPub=pub?pub.public_id:null;
+  _bCheckCountry();
   _bFill(data||{display_name:[currentUser.user_metadata?.first_name,currentUser.user_metadata?.last_name].filter(Boolean).join(' ')});
   if(gh&&!data&&(currentUser.user_metadata||{}).tos_version===TOS_VERSION)draftProfile();   // first visit with GitHub: research them now
 }
@@ -5146,8 +5150,29 @@ async function draftProfile(){
        _bMsg((d.profile.ai_drafted?'AI drafted this from your work.':'Drafted from what you gave.')+' Check every line, then publish.'); }
   catch(e){_bMsg(e.message);} finally{_bBusy=false; b.disabled=false; b.textContent='Draft my profile';}
 }
+// country (server-only, member_geo): which privacy laws apply, e.g. EU. Never shown on a profile.
+const NP_CC='AF AX AL DZ AS AD AO AI AQ AG AR AM AW AU AT AZ BS BH BD BB BY BE BZ BJ BM BT BO BQ BA BW BV BR IO BN BG BF BI CV KH CM CA KY CF TD CL CN CX CC CO KM CG CD CK CR CI HR CU CW CY CZ DK DJ DM DO EC EG SV GQ ER EE SZ ET FK FO FJ FI FR GF PF TF GA GM GE DE GH GI GR GL GD GP GU GT GG GN GW GY HT HM VA HN HK HU IS IN ID IR IQ IE IM IL IT JM JP JE JO KZ KE KI KP KR KW KG LA LV LB LS LR LY LI LT LU MO MG MW MY MV ML MT MH MQ MR MU YT MX FM MD MC MN ME MS MA MZ MM NA NR NP NL NC NZ NI NE NG NU NF MK MP NO OM PK PW PS PA PG PY PE PH PN PL PT PR QA RE RO RU RW BL SH KN LC MF PM VC WS SM ST SA SN RS SC SL SG SX SK SI SB SO ZA GS SS ES LK SD SR SJ SE CH SY TW TJ TZ TH TL TG TK TO TT TN TR TM TC TV UG UA AE GB US UM UY UZ VU VE VN VG VI WF EH YE ZM ZW XK'.split(' ');
+function npFillCountries(){
+  let dn=null; try{dn=new Intl.DisplayNames(['en'],{type:'region'});}catch(e){}
+  const opts=NP_CC.map(c=>[c,(dn&&dn.of(c))||c]).sort((a,b)=>a[1].localeCompare(b[1]));
+  document.querySelectorAll('select.np-country').forEach(el=>{ if(el.options.length)return;
+    el.add(new Option('Select…','')); opts.forEach(([c,n])=>el.add(new Option(n,c))); });
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',npFillCountries); else npFillCountries();
+let _bCountry=null;
+async function _bCheckCountry(){
+  try{const {data}=await sb.rpc('my_country'); _bCountry=data||null;}catch(e){_bCountry=null;}
+  document.getElementById('b-country').hidden=!!_bCountry; return !!_bCountry;
+}
+async function saveCountry(){
+  const c=document.getElementById('b-country-in').value; if(!c){_bMsg('Choose the country you live in.');return;}
+  const {error}=await sb.rpc('set_my_country',{p_country:c});
+  if(error){_bMsg('Could not save: '+error.message);return;}
+  _bCountry=c; document.getElementById('b-country').hidden=true; _bMsg('Saved.');
+}
 async function publishProfile(){
   const p=_bCollect(); if(!p.headline){_bMsg('Add a headline first.');return;}
+  if(!_bCountry&&!(await _bCheckCountry())){_bMsg('Add the country you live in first (step 3).');return;}
   _bMsg('Publishing…');
   if(!(await _bSave()))return;
   try{const d=await _bCall({action:'publish'}); _bPub=d.public_id; _bShowPub(); _bMsg('Published.');}
