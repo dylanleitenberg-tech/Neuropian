@@ -10,7 +10,7 @@ try{var q=new URLSearchParams(location.search);if(q.has('lang'))l=f(q.get('lang'
   try{if(window.parent!==window)l=f(parent.document.documentElement.lang);}catch(e){}
   if(!l&&window.__npFresh){var s=JSON.parse(sessionStorage.getItem('np_lang')||'null');sessionStorage.removeItem('np_lang');if(s&&Date.now()-s.t<36e5)l=f(s.l);}}}catch(e){}
 if(!l)return;window.__npLang=l;
-window.__npI18n=new Promise(function(r){var s=document.createElement('script');s.src='/assets/app/auth-i18n.js?v=20261026a';s.onload=s.onerror=function(){r();};setTimeout(r,4000);document.head.appendChild(s);});})();</script>
+window.__npI18n=new Promise(function(r){var s=document.createElement('script');s.src='/assets/app/auth-i18n.js?v=20261026b';s.onload=s.onerror=function(){r();};setTimeout(r,4000);document.head.appendChild(s);});})();</script>
 <meta name="robots" content="noindex">
 <meta name="description" content="Neuropian members: profile survey, opportunities and RoundTable.">
 <link rel="canonical" href="https://neuropian.com/app.html">
@@ -4959,8 +4959,8 @@ else{renderOppPreview();}
       <div class="auth-switch"><a onclick="backToLogin()">← Back to Sign In</a></div>
     </div>
     <div id="auth-reg-view" style="display:none">
-      <div class="auth-title">Get your <em>profile</em></div>
-      <div class="auth-sub">Sign in with GitHub and we draft your profile from your merged pull requests. You check it, then publish.</div>
+      <div class="auth-title">Let startups find you <em>by your code</em></div>
+      <div class="auth-sub">Sign in with GitHub and we build your profile from the pull requests you've had merged. Free. You approve it before anything goes public, and it never shows your email or location.</div>
       <div class="auth-switch" style="margin:.2rem 0 .9rem">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
       <div class="np-oauth" hidden><div class="np-oa-list"></div>
       <p class="np-oa-note">By continuing you agree to the <a onclick="showAuthLegal('tos')">Terms of Service</a> and <a onclick="showAuthLegal('privacy')">Privacy Policy</a> and confirm you are 18 or older. Neuropian reads your public work there to build your profile.</p>
