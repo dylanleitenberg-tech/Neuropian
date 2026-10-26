@@ -5149,7 +5149,7 @@ function _bStatus(p,msg){
   if(msg){el.textContent=msg;return;}
   const gh=(currentUser&&currentUser.identities||[]).some(i=>i.provider==='github');
   if(_bPub)el.textContent='Your profile is live. Edit it below any time; your public page changes when you press Publish.';
-  else if(_bHasDraft(p))el.textContent=(gh?(p.ai_drafted?'We drafted this from your public GitHub work.':'We drafted this from your public GitHub data: no AI, nothing invented.'):'Here is your draft.')+' Check it, then publish.';
+  else if(_bHasDraft(p))el.textContent=(gh?'We drafted this from your public GitHub work.':'Here is your draft.')+' Check it, then publish.';
   else el.textContent='Paste links to what you\'ve made, or connect GitHub, and we write the first draft for you.';
 }
 function _bLinks(){
