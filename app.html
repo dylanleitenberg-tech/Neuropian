@@ -10,7 +10,7 @@ try{var q=new URLSearchParams(location.search);if(q.has('lang'))l=f(q.get('lang'
   try{if(window.parent!==window)l=f(parent.document.documentElement.lang);}catch(e){}
   if(!l&&window.__npFresh){var s=JSON.parse(sessionStorage.getItem('np_lang')||'null');sessionStorage.removeItem('np_lang');if(s&&Date.now()-s.t<36e5)l=f(s.l);}}}catch(e){}
 if(!l)return;window.__npLang=l;
-window.__npI18n=new Promise(function(r){var s=document.createElement('script');s.src='/assets/app/auth-i18n.js?v=20261025b';s.onload=s.onerror=function(){r();};setTimeout(r,4000);document.head.appendChild(s);});})();</script>
+window.__npI18n=new Promise(function(r){var s=document.createElement('script');s.src='/assets/app/auth-i18n.js?v=20261026a';s.onload=s.onerror=function(){r();};setTimeout(r,4000);document.head.appendChild(s);});})();</script>
 <meta name="robots" content="noindex">
 <meta name="description" content="Neuropian members: profile survey, opportunities and RoundTable.">
 <link rel="canonical" href="https://neuropian.com/app.html">
@@ -678,48 +678,52 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 <section class="m-home b-wrap">
   <button class="pc-back" onclick="showPage('home')">← Members home</button>
   <p class="m-kicker">Neuropian · Your public profile</p>
-  <h1 class="m-title">Show what you've made.</h1>
-  <p class="m-lede">Engineering, science, design, art, music, writing, business: anything you've built, made or solved.
-  Describe it, link to it, and Neuropian drafts your profile. You edit and approve it; published profiles appear on
-  <a href="/talent" style="color:inherit">neuropian.com/talent</a> and in its search.</p>
-  <div class="b-step"><span class="b-n">1</span><div style="flex:1;min-width:0">
-    <b>What you've made</b>
-    <label class="b-l">In your own words<textarea id="b-about" rows="5" maxlength="2000" placeholder="What you've built, made or solved, and what it does. Projects, research, designs, music, writing, companies…"></textarea></label>
-    <div class="b-l">Links to your work<div id="b-work"></div><button class="m-btn ghost" style="margin-top:10px" onclick="addWork()">Add a link</button></div>
-  </div></div>
-  <div class="b-step"><span class="b-n">2</span><div>
-    <b>Code on GitHub? Connect it (optional)</b>
-    <p id="b-gh" class="b-p">Checking…</p>
-    <div class="m-actions" style="margin-top:12px"><button class="m-btn ghost" id="b-gh-btn" onclick="connectGitHub()">Connect GitHub</button></div>
-  </div></div>
-  <div class="b-step"><span class="b-n">3</span><div>
-    <b>Draft it</b>
-    <p class="b-p">Neuropian turns what you wrote, your links and (if connected) your public GitHub work into a draft. Nothing is published yet.</p>
-    <div id="b-country" class="b-l" hidden>The country you live in (never shown on your profile)<select id="b-country-in" class="np-country"></select><button class="m-btn ghost" style="margin-top:10px" onclick="saveCountry()">Save</button></div>
-    <div id="b-dob" class="b-l" hidden>Your date of birth (Neuropian is for adults)<input type="date" id="b-dob-in"><button class="m-btn ghost" style="margin-top:10px" onclick="saveBirthdate()">Save</button></div>
-    <div class="m-actions" style="margin-top:12px"><button class="m-btn" id="b-draft" onclick="draftProfile()">Draft my profile</button></div>
-  </div></div>
-  <div class="b-step"><span class="b-n">4</span><div style="flex:1;min-width:0">
-    <b>Edit and approve</b>
-    <label class="b-l">Name<input id="b-name" maxlength="80"></label>
-    <label class="b-c"><input type="checkbox" id="b-show"> Show my name on my public profile</label>
-    <p class="b-p small">Your GitHub username (if connected) is shown, and links to your work usually point to your accounts, so hiding your name may not make you anonymous.</p>
-    <label class="b-l">Headline<input id="b-head" maxlength="120" placeholder="e.g. Product designer · Mobile health apps"></label>
+  <h1 class="m-title" id="b-title">Your profile</h1>
+  <p class="b-status" id="b-status" aria-live="polite">Loading…</p>
+  <div id="b-flow">
+  <div class="b-card" id="b-edit">
+    <b>Check it, then publish</b>
+    <label class="b-l">Headline<input id="b-head" maxlength="120" placeholder="e.g. Backend engineer · Rust and Postgres"></label>
     <label class="b-l">Summary<textarea id="b-sum" rows="4" maxlength="1200"></textarea></label>
     <label class="b-l">Skills, separated by commas<input id="b-skills" maxlength="480"></label>
-    <p class="b-p small">Publishing makes this page public: anyone can see it and find it in search.</p>
-    <div class="m-actions"><button class="m-btn" onclick="publishProfile()">Publish</button><button class="m-btn ghost" id="b-save" onclick="saveDraftProfile()">Save</button><button class="m-btn ghost" id="b-unpub" onclick="unpublishProfile()" hidden>Unpublish</button></div>
+    <div class="b-l">Your work<div id="b-work"></div><button type="button" class="b-link" onclick="addWork()">+ Add one by hand</button></div>
+    <label class="b-l">Name<input id="b-name" maxlength="80"></label>
+    <label class="b-c"><input type="checkbox" id="b-show"> Show my name on my public profile</label>
+    <div id="b-country" class="b-l" hidden>Country you live in<select id="b-country-in" class="np-country"></select><span class="b-p small">Never shown on your profile. It tells us which privacy laws protect you.</span></div>
+    <div id="b-dob" class="b-l" hidden>Your date of birth (Neuropian is for adults)<input type="date" id="b-dob-in"><button class="m-btn ghost" style="margin-top:10px" onclick="saveBirthdate()">Save</button></div>
+    <p class="b-p small">Publishing makes this page public: anyone can see it and find it in search. Never your email or location.</p>
+    <div class="m-actions"><button class="m-btn" id="b-publish" onclick="publishProfile()">Publish</button><button type="button" class="b-link" id="b-save" onclick="saveDraftProfile()">Save draft</button><button class="m-btn ghost" id="b-unpub" onclick="unpublishProfile()" hidden>Unpublish</button></div>
     <p id="b-pub" class="b-p"></p>
     <p id="b-msg" class="b-p" aria-live="polite"></p>
-  </div></div>
-  <div class="b-step"><span class="b-n">5</span><div>
-    <b>What next</b>
-    <p class="b-p">Once it's published, startups searching Talent can find you. Browse it, or go back to the members home.</p>
-    <div class="m-actions" style="margin-top:12px"><button class="m-btn ghost" onclick="location.href='/talent'">Browse Talent</button><button class="m-btn ghost" onclick="showPage('home')">Members home</button></div>
-  </div></div>
+  </div>
+  <details class="b-card" id="b-add" open>
+    <summary><b id="b-add-title">Add your work</b></summary>
+    <p class="b-p">Paste links to anything you've made, one per line. We open each page and fill in the details, so you don't have to.</p>
+    <label class="b-l">Links<textarea id="b-links" rows="4" placeholder="https://github.com/you/project&#10;https://your-site.com&#10;Papers, app store pages, Kaggle, Hugging Face, YouTube, Behance, Dribbble…"></textarea></label>
+    <div class="b-gh"><p id="b-gh" class="b-p">Checking…</p><button class="m-btn ghost" id="b-gh-btn" onclick="connectGitHub()">Connect GitHub</button></div>
+    <details class="b-more"><summary>+ Describe it in your own words (optional)</summary>
+      <textarea id="b-about" rows="4" maxlength="2000" placeholder="What you've built, made or solved, and what it does."></textarea></details>
+    <div class="m-actions" style="margin-top:14px"><button class="m-btn" id="b-draft" onclick="draftProfile()">Draft my profile</button></div>
+  </details>
+  </div>
+  <p class="b-p small" style="margin-top:28px">Once it's published, startups searching <a href="/talent" style="color:inherit">Talent</a> can find you.</p>
 </section>
 <style>
 .b-wrap{max-width:820px}
+#b-flow{display:flex;flex-direction:column;gap:18px;margin-top:18px}
+#b-flow.has-draft #b-edit{order:-1}
+#b-flow:not(.has-draft) #b-edit{display:none}
+.b-card{border:1px solid rgba(43,42,40,.14);border-radius:14px;padding:22px 24px;background:rgba(255,255,255,.18)}
+.b-card>b,.b-card summary b{font-size:18px;font-weight:500}
+.b-card summary{cursor:pointer;list-style:none}.b-card summary::-webkit-details-marker{display:none}
+#b-add:not([open]) summary b:after{content:" +";color:rgba(43,42,40,.5)}
+.b-status{font-size:17px;line-height:1.55;color:#33312f;margin-top:10px;max-width:640px}
+.b-link{background:none;border:0;padding:0;margin-top:10px;color:#2b4c7e;font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.m-actions .b-link{margin:0 0 0 6px;align-self:center}
+.b-gh{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px}.b-gh .b-p{margin:0;flex:1;min-width:220px}
+.b-more{margin-top:12px;font-size:14px;color:rgba(43,42,40,.7)}.b-more summary{cursor:pointer}
+.b-more textarea,#b-links,#b-country select{display:block;width:100%;margin-top:6px;font-size:15px;color:#33312f;background:#e0ddd8;border:1px solid rgba(43,42,40,.14);border-radius:10px;padding:10px 12px;outline:none}
+#b-country .b-p{display:block;margin-top:4px}
 .b-step{display:flex;gap:18px;border-top:1px solid rgba(43,42,40,.14);padding:26px 0;margin-top:8px}
 .b-n{flex:0 0 32px;height:32px;border:1px solid rgba(43,42,40,.14);border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(43,42,40,.62)}
 .b-step b{font-size:18px;font-weight:500}
@@ -4955,14 +4959,14 @@ else{renderOppPreview();}
       <div class="auth-switch"><a onclick="backToLogin()">← Back to Sign In</a></div>
     </div>
     <div id="auth-reg-view" style="display:none">
-      <div class="auth-title">Join <em>neuropian</em></div>
-      <div class="auth-sub">Show what you've built, find opportunities and join RoundTable</div>
+      <div class="auth-title">Get your <em>profile</em></div>
+      <div class="auth-sub">Sign in with GitHub and we draft your profile from your merged pull requests. You check it, then publish.</div>
       <div class="auth-switch" style="margin:.2rem 0 .9rem">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
       <div class="np-oauth" hidden><div class="np-oa-list"></div>
       <p class="np-oa-note">By continuing you agree to the <a onclick="showAuthLegal('tos')">Terms of Service</a> and <a onclick="showAuthLegal('privacy')">Privacy Policy</a> and confirm you are 18 or older. Neuropian reads your public work there to build your profile.</p>
-      <div class="np-or"><span>or with email</span></div></div>
+      <div class="np-or"><span>or</span></div><button type="button" class="np-oa alt" id="rg-email-open" onclick="document.getElementById('rg-email-form').classList.add('open');this.hidden=true">Sign up with email</button></div>
       
-      <div class="auth-err" id="rg-err"></div>
+      <div id="rg-email-form"><div class="auth-err" id="rg-err"></div>
       <div class="auth-field">
         <label>Username</label>
         <input type="text" id="rg-username" placeholder="yourhandle" autocomplete="username" oninput="onUsernameInput(this.value)" style="letter-spacing:.02em">
@@ -5002,7 +5006,7 @@ else{renderOppPreview();}
       </div>
       <p class="rg-notice" style="font-family:'Barlow',sans-serif;font-size:.74rem;line-height:1.6;color:rgba(43,42,40,.8);margin:0 0 .9rem">Neuropian may share your profile with companies and funds that hire through us. By creating an account you agree to the <a onclick="showAuthLegal('tos')" style="color:#33312f;text-decoration:underline;cursor:pointer">Terms of Service</a> and <a onclick="showAuthLegal('privacy')" style="color:#33312f;text-decoration:underline;cursor:pointer">Privacy Policy</a>. You must be 18 or older.</p>
       <button class="auth-sub-btn" id="rg-btn" onclick="doRegister()">Create Account &amp; Continue</button>
-      <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
+      <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></div></div>
     </div>
     <div id="auth-legal-view" style="display:none;position:absolute;inset:0;background:var(--off-black);flex-direction:column;border-radius:0;overflow:hidden">
       <div style="display:flex;align-items:center;gap:.8rem;padding:.9rem 1.4rem;border-bottom:1px solid rgba(43,42,40,.08);flex-shrink:0">
@@ -5093,14 +5097,31 @@ function _bFill(p){
   document.getElementById('b-head').value=p.headline||''; document.getElementById('b-sum').value=p.summary||'';
   document.getElementById('b-skills').value=(p.skills||[]).join(', ');
   const wk=document.getElementById('b-work'); wk.innerHTML=''; (p.work||[]).forEach(addWork);
+  const has=_bHasDraft(p); document.getElementById('b-flow').classList.toggle('has-draft',has);
+  document.getElementById('b-add').open=!has; document.getElementById('b-add-title').textContent=has?'Add more of your work':'Add your work';
+  document.getElementById('b-title').textContent=has?'Your profile':'Show what you\'ve made.';
   _bShowPub();
+}
+function _bHasDraft(p){return !!(p&&((p.headline||'').trim()||(p.work||[]).length));}
+function _bStatus(p,msg){
+  const el=document.getElementById('b-status'); if(!el)return;
+  if(msg){el.textContent=msg;return;}
+  const gh=(currentUser&&currentUser.identities||[]).some(i=>i.provider==='github');
+  if(_bPub)el.textContent='Your profile is live. Edit it below any time; your public page changes when you press Publish.';
+  else if(_bHasDraft(p))el.textContent=(gh?'We drafted this from your public GitHub work.':'Here is your draft.')+' Check it, then publish.';
+  else el.textContent='Paste links to what you\'ve made, or connect GitHub, and we write the first draft for you.';
+}
+function _bLinks(){
+  const have=new Set([...document.querySelectorAll('#b-work .b-w')].map(d=>d.querySelectorAll('input')[1].value.trim()));
+  return (document.getElementById('b-links').value.match(/https?:\/\/[^\s<>"']+/g)||[]).map(u=>u.replace(/[),.;]+$/,''))
+    .filter(u=>!have.has(u)&&(have.add(u),true)).slice(0,12).map(u=>({title:'',url:u,detail:''}));
 }
 function _bCollect(){
   return {about:document.getElementById('b-about').value.trim(),
     display_name:document.getElementById('b-name').value.trim(), show_name:document.getElementById('b-show').checked,
     headline:document.getElementById('b-head').value.trim(), summary:document.getElementById('b-sum').value.trim(),
     skills:document.getElementById('b-skills').value.split(',').map(s=>s.trim()).filter(Boolean).slice(0,12),
-    work:[...document.querySelectorAll('#b-work .b-w')].map(d=>{const [t,u,x]=d.querySelectorAll('input');return {title:t.value.trim(),url:u.value.trim(),detail:x.value.trim()};}).filter(w=>w.title)};
+    work:[...[...document.querySelectorAll('#b-work .b-w')].map(d=>{const [t,u,x]=d.querySelectorAll('input');return {title:t.value.trim(),url:u.value.trim(),detail:x.value.trim()};}).filter(w=>w.title||w.url),..._bLinks()].slice(0,12)};
 }
 function _bShowPub(){
   document.getElementById('b-unpub').hidden=!_bPub;
@@ -5111,7 +5132,7 @@ function _bShowPub(){
 async function loadBuild(){
   const {data:{user}}=await sb.auth.getUser(); if(user)currentUser=user;
   const gh=(currentUser.identities||[]).find(i=>i.provider==='github');
-  document.getElementById('b-gh').textContent=gh?'GitHub connected: '+(gh.identity_data.user_name||'')+'. After you publish, your profile shows "GitHub verified" and marks the work that came from GitHub.':'Not connected. You can still publish without GitHub; your links will show as added by you.';
+  document.getElementById('b-gh').textContent=gh?'GitHub connected ('+(gh.identity_data.user_name||'')+'). We read your merged pull requests and mark them verified.':'Code on GitHub? Connect it and we add your merged pull requests, marked verified. Optional: you can still publish without GitHub; your links will show as added by you.';
   document.getElementById('b-gh-btn').hidden=!!gh;
   const {data}=await sb.from('member_profiles').select('*').eq('user_id',currentUser.id).maybeSingle();
   const {data:pub}=await sb.from('published_profiles').select('public_id').eq('user_id',currentUser.id).maybeSingle();
@@ -5119,6 +5140,7 @@ async function loadBuild(){
   _bCheckCountry();
   _bFill(data||{display_name:[currentUser.user_metadata?.first_name,currentUser.user_metadata?.last_name].filter(Boolean).join(' ')});
   if(gh&&!data&&(currentUser.user_metadata||{}).tos_version===TOS_VERSION)draftProfile();   // first visit with GitHub: research them now
+  else _bStatus(data);
 }
 async function connectGitHub(){
   const {error}=await sb.auth.linkIdentity({provider:'github',options:{redirectTo:location.origin+'/app?build=1'}});
@@ -5128,7 +5150,7 @@ async function _bCall(body){
   const {data:{session}}=await sb.auth.getSession();
   const r=await fetch(TALENT_FN,{method:'POST',headers:{'Content-Type':'application/json',apikey:SUPA_KEY,Authorization:'Bearer '+(session?session.access_token:'')},body:JSON.stringify(body)});
   let d={}; try{d=await r.json();}catch(e){d={error:'The profile service is not available yet.'};}
-  if(d.error==='NEED_BIRTHDATE'){document.getElementById('b-dob').hidden=false; throw new Error('Add your date of birth first (step 3).');}
+  if(d.error==='NEED_BIRTHDATE'){document.getElementById('b-dob').hidden=false; throw new Error('Add your date of birth first (just above Publish).');}
   if(!r.ok||d.error)throw new Error(d.error||('Error '+r.status)); return d;
 }
 async function saveBirthdate(){
@@ -5148,9 +5170,10 @@ async function draftProfile(){
   const p=_bCollect();
   if((p.headline||p.summary)&&!confirm('Replace your headline, summary and skills with a new draft? Your name and the links you added are kept.'))return;
   _bBusy=true; const b=document.getElementById('b-draft'); b.disabled=true; b.textContent='Drafting…'; _bMsg('');
-  try{ if(!(await _bSave()))return; const d=await _bCall({action:'draft'}); _bFill(d.profile);
-       _bMsg((d.profile.ai_drafted?'AI drafted this from your work.':'Drafted from what you gave.')+' Check every line, then publish.'); }
-  catch(e){_bMsg(e.message);} finally{_bBusy=false; b.disabled=false; b.textContent='Draft my profile';}
+  _bStatus(null,'Reading your work'+((currentUser.identities||[]).some(i=>i.provider==='github')?' and your GitHub':'')+'… this takes a few seconds.');
+  try{ if(!(await _bSave()))return; const d=await _bCall({action:'draft'}); document.getElementById('b-links').value=''; _bFill(d.profile); _bStatus(d.profile);
+       _bMsg(''); document.getElementById('b-edit').scrollIntoView({behavior:'smooth',block:'start'}); }
+  catch(e){_bMsg(e.message); _bStatus(null,e.message);} finally{_bBusy=false; b.disabled=false; b.textContent='Draft my profile';}
 }
 // country (server-only, member_geo): which privacy laws apply, e.g. EU. Never shown on a profile.
 const NP_CC='AF AX AL DZ AS AD AO AI AQ AG AR AM AW AU AT AZ BS BH BD BB BY BE BZ BJ BM BT BO BQ BA BW BV BR IO BN BG BF BI CV KH CM CA KY CF TD CL CN CX CC CO KM CG CD CK CR CI HR CU CW CY CZ DK DJ DM DO EC EG SV GQ ER EE SZ ET FK FO FJ FI FR GF PF TF GA GM GE DE GH GI GR GL GD GP GU GT GG GN GW GY HT HM VA HN HK HU IS IN ID IR IQ IE IM IL IT JM JP JE JO KZ KE KI KP KR KW KG LA LV LB LS LR LY LI LT LU MO MG MW MY MV ML MT MH MQ MR MU YT MX FM MD MC MN ME MS MA MZ MM NA NR NP NL NC NZ NI NE NG NU NF MK MP NO OM PK PW PS PA PG PY PE PH PN PL PT PR QA RE RO RU RW BL SH KN LC MF PM VC WS SM ST SA SN RS SC SL SG SX SK SI SB SO ZA GS SS ES LK SD SR SJ SE CH SY TW TJ TZ TH TL TG TK TO TT TN TR TM TC TV UG UA AE GB US UM UY UZ VU VE VN VG VI WF EH YE ZM ZW XK'.split(' ');
@@ -5174,10 +5197,15 @@ async function saveCountry(){
 }
 async function publishProfile(){
   const p=_bCollect(); if(!p.headline){_bMsg('Add a headline first.');return;}
-  if(!_bCountry&&!(await _bCheckCountry())){_bMsg('Add the country you live in first (step 3).');return;}
+  if(!_bCountry&&!(await _bCheckCountry())){
+    const c=document.getElementById('b-country-in').value;
+    if(!c){_bMsg('Choose the country you live in, just above Publish.');document.getElementById('b-country-in').focus();return;}
+    const {error}=await sb.rpc('set_my_country',{p_country:c}); if(error){_bMsg('Could not save your country: '+error.message);return;}
+    _bCountry=c; document.getElementById('b-country').hidden=true;
+  }
   _bMsg('Publishing…');
   if(!(await _bSave()))return;
-  try{const d=await _bCall({action:'publish'}); _bPub=d.public_id; _bShowPub(); _bMsg('Published.');}
+  try{const d=await _bCall({action:'publish'}); _bPub=d.public_id; _bShowPub(); _bStatus(p); _bMsg('Published. Startups searching Talent can find you now.');}
   catch(e){_bMsg(e.message);}
 }
 async function unpublishProfile(){ try{await _bCall({action:'unpublish'}); _bPub=null; _bShowPub(); _bMsg('Unpublished. Your page is no longer public.');}catch(e){_bMsg(e.message);} }
@@ -5200,13 +5228,17 @@ if(new URLSearchParams(location.search).has('build')){
 .np-oa-note{font-size:12px;line-height:1.5;color:rgba(43,42,40,.55);margin:10px 0 0}.np-oa-note a{color:rgba(43,42,40,.8);text-decoration:underline;cursor:pointer}
 .np-or{display:flex;align-items:center;gap:10px;margin:16px 0 6px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(43,42,40,.45)}
 .np-or:before,.np-or:after{content:"";flex:1;height:1px;background:rgba(43,42,40,.14)}
+#auth-reg-view .np-oauth:not([hidden]) ~ #rg-email-form:not(.open){display:none}
+#rg-email-form.open{margin-top:12px}
 </style>
 <script>
 (function(){
   const GH='<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>';
-  const P=[['github','Continue with GitHub',GH,''],['gitlab','Continue with GitLab','','alt'],['figma','Continue with Figma','','alt'],['linkedin_oidc','Continue with LinkedIn','','alt']];
+  const GG='<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.2l7.9 6.1C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 2.9-2.2 5.4-4.7 7.1l7.6 5.9c4.4-4.1 6.9-10.1 6.9-17.5z"/><path fill="#FBBC05" d="M10.6 28.7c-.5-1.4-.8-3-.8-4.7s.3-3.2.8-4.7l-7.9-6.1C1 16.6 0 20.2 0 24s1 7.4 2.7 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.2 0-11.5-4.1-13.4-9.8l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg>';
+  const P=[['github','Continue with GitHub',GH,''],['google','Continue with Google',GG,'alt'],['gitlab','Continue with GitLab','','alt'],['figma','Continue with Figma','','alt'],['linkedin_oidc','Continue with LinkedIn','','alt']];
   window.npOAuth=async function(provider){
     const {data,error}=await sb.auth.signInWithOAuth({provider,options:{redirectTo:location.origin+'/app?go=build',skipBrowserRedirect:true}});
+    try{ sessionStorage.setItem('np_oauth_terms',String(Date.now())); }catch(e){}   // agreed to Terms + 18+ by pressing the button under the note
     if(error){ showErr('li-err',error.message); showErr('rg-err',error.message); return; }
     try{ if(window.__npLang)sessionStorage.setItem('np_lang',JSON.stringify({l:window.__npLang,t:Date.now()})); else sessionStorage.removeItem('np_lang'); }catch(e){}   // the terms step after GitHub speaks the same language
     try{ (window.top||window).location.href=data.url; }catch(e){ location.href=data.url; }     // GitHub refuses to load inside a frame
@@ -5239,6 +5271,16 @@ function checkTerms(user){
   const md=user.user_metadata||{};
   if(md.tos_version===TOS_VERSION)return;
   const age=_ageOf(md.date_of_birth), g=document.getElementById('terms-gate'), t=document.getElementById('tg-text'), ok=document.getElementById('tg-ok');
+  let oa=0; try{ oa=+sessionStorage.getItem('np_oauth_terms')||0; }catch(e){}
+  if(age===null&&oa&&Date.now()-oa<30*60*1000){        // just pressed "Continue with …" under "By continuing you agree … and confirm you are 18 or older"
+    try{ sessionStorage.removeItem('np_oauth_terms'); }catch(e){}
+    sb.auth.updateUser({data:{tos_version:TOS_VERSION,tos_accepted_at:new Date().toISOString(),adult_confirmed:true,tos_via:'oauth_note'}}).then(({data,error})=>{
+      if(error){ checkTerms(user); return; }
+      if(data&&data.user)currentUser=data.user;
+      const pb=document.getElementById('page-build'); if(pb&&pb.classList.contains('active')&&typeof loadBuild==='function')loadBuild();
+    });
+    return;
+  }
   if(age!==null&&age<18){
     t.innerHTML='Neuropian is now for adults (18+), so this account is paused. Nothing from it is shared. To download or delete your data, email <a href="mailto:dylan@neuropian.com" style="color:#33312f">dylan@neuropian.com</a>.';
     ok.style.display='none';
