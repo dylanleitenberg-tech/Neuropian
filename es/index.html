@@ -422,6 +422,21 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
 @media (max-width:860px){.block{grid-template-columns:minmax(0,1fr)}.d-top{flex-wrap:wrap}.d-grid dd{overflow-wrap:anywhere}}
 @media print{.reveal{opacity:1!important;transform:none!important;transition:none!important}.orbit{height:auto!important}.orbit-stick{position:static!important;height:auto!important}.orbit-poster{display:block!important}.orbit canvas,.hud,.hud-ctl,video{display:none!important}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orbit canvas{transition:none!important}.gallery img{transition:none}.js .reveal{opacity:1;transform:none;transition:none}.orbit.holo .orbit-stage::after{animation:none}.term li{opacity:1!important}}
+
+/* members carousel: published profiles only (people who chose to be public), never names */
+.mq-sec{padding:56px 0 8px}.mq-sec[hidden]{display:none}
+.mq{direction:ltr;overflow:hidden;margin-top:22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.mq-track{display:flex;gap:16px;width:max-content;animation:mq var(--mq-dur,90s) linear infinite;padding:4px 0}
+.mq:hover .mq-track,.mq:focus-within .mq-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+[dir=rtl] .mq-card{direction:rtl}
+.mq-card{flex:0 0 300px;display:block;text-decoration:none;color:inherit;border:1px solid rgba(43,42,40,.18);border-radius:14px;padding:16px 18px;background:rgba(255,255,255,.22)}
+.mq-card:hover{border-color:rgba(43,42,40,.45)}
+.mq-h{font-size:17px;line-height:1.35;margin:0 0 10px}
+.mq-w{font-size:13.5px;line-height:1.45;color:rgba(43,42,40,.66);margin:0 0 10px}
+.mq-s{display:flex;flex-wrap:wrap;gap:6px}.mq-s span{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.04em;border:1px solid rgba(43,42,40,.2);border-radius:999px;padding:3px 8px}
+.mq-all{display:inline-block;margin-top:18px;color:inherit}
+@media (prefers-reduced-motion:reduce){.mq-track{animation:none}.mq{overflow-x:auto}}
 </style>
 <!--i18n:head-->
 <link rel="alternate" hreflang="en" href="https://neuropian.com/">
@@ -469,7 +484,7 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
     <p class="kicker">Neuropian · Acelerador de intelecto</p>
     <h1>La inteligencia, <span class="brush">reimaginada.</span></h1>
     <p class="lede">Neuropian es donde las personas brillantes son descubiertas por <b>lo que han construido, creado y resuelto</b>, y por <b>cómo lideran y trabajan con otros</b>, no por lo que dice su currículum.</p>
-    <div class="ctas"><a class="cta" href="/app?lang=es" data-auth="reg"><img class="cta-mark" src="/assets/brain.png" srcset="/assets/brain@2x.png 2x" width="20" height="20" alt="">Crear una cuenta</a><a class="cta ghost" href="#contact">Contrata con Neuropian →</a></div>
+    <div class="ctas"><a class="cta" href="/app?lang=es" data-auth="reg"><img class="cta-mark" src="/assets/brain.png" srcset="/assets/brain@2x.png 2x" width="20" height="20" alt="">Crear una cuenta</a><a class="cta ghost" href="/talent?lang=es" data-auth="hire" data-next="/talent">Contrata con Neuropian →</a></div>
     <p class="tagline">Señal, no currículums · No se exigen títulos</p>
    </div>
    <div class="hero-art">
@@ -481,6 +496,16 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
     <img class="engr brain" src="/assets/engr/brain.webp" width="857" height="960" alt="Grabado en madera de la base del cerebro humano, de la anatomía de Andreas Vesalius, 1543" decoding="async">
    </div>
   </div>
+</section>
+
+<section id="members" class="mq-sec" hidden>
+  <div class="wrap">
+    <p class="kicker">Ahora en Neuropian</p>
+    <h2>Los que construyen y la búsqueda pasó por alto.</h2>
+    <p class="lede">Desarrolladores en solitario y colaboradores con gran trabajo y pocos seguidores. Cada perfil aquí lo publicó la propia persona, y los nombres siguen siendo privados salvo que decida mostrarlos.</p>
+  </div>
+  <div class="mq" role="region" aria-label="Perfiles publicados"><div class="mq-track" id="mq-track"></div></div>
+  <div class="wrap"><a class="mq-all" href="/talent?lang=es">Verlos todos en Talent →</a></div>
 </section>
 
 <section id="fields" class="plates-sec">
@@ -693,7 +718,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
    navigates away until you pick where to go. */
 (function(){
   var K="sb-qggduzzwvdkmekihwuav-auth-token", API="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
-  var ov=null, fr=null, ready=false, want="login", card=null, opener=null;
+  var ov=null, fr=null, ready=false, want="login", card=null, opener=null, next=null;   // next: where a button like "Hire with Neuropian" goes once signed in
   function session(){ try{ var s=JSON.parse(localStorage.getItem(K)||"null"); s=s&&(s.currentSession||s); return s&&s.refresh_token&&s.user?s:null; }catch(e){ return null; } }
   function nameOf(u){ var m=u.user_metadata||{}; return m.username||m.user_name||m.first_name||m.full_name||(u.email||"").split("@")[0]||"Miembro"; }
   function esc(t){ return String(t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
@@ -757,6 +782,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
       (function show(){ var s=session();
         if(!s&&tries++<10) return setTimeout(show,150);
         close(); paint();
+        if(next&&s){ location.href=next; return; }
         var made=s&&s.user&&Date.parse(s.user.created_at||0);
         if(!openCard(made&&Date.now()-made<15*60*1000)) location.href="/app?lang=es";   // no saved session (storage blocked): the app has it
       })();
@@ -765,8 +791,8 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   document.addEventListener("keydown",function(e){ if(e.key!=="Escape") return; if(card) closeCard(); else if(ov&&ov.style.display==="block") close(); });
   document.addEventListener("click",function(e){
     var a=e.target.closest&&e.target.closest("[data-auth]"); if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button) return;
-    e.preventDefault(); opener=a;
-    if(session()) openCard(false); else open(a.getAttribute("data-auth"));
+    e.preventDefault(); opener=a; next=a.getAttribute("data-next");
+    if(session()){ if(next) location.href=next; else openCard(false); } else open(a.getAttribute("data-auth"));
   });
   function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov&&!session()) build(a.getAttribute("data-auth")); }
   document.addEventListener("pointerover",warm); document.addEventListener("touchstart",warm,{passive:true}); document.addEventListener("focusin",warm);
@@ -787,6 +813,29 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
     if (!was) { f.classList.add("open"); hit.setAttribute("aria-expanded","true"); var a = f.querySelector(".ph-cta"); if (a) a.focus({preventScroll:true}); }
   });
   document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeAll(); });
+})();
+</script>
+<script>
+/* members carousel: the newest published profiles from Talent (public by their choice); headline, a skill or three and
+   one piece of work; no names. Hidden until at least 6 load. */
+(function(){
+  var API="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
+  var sec=document.getElementById("members"), tr=document.getElementById("mq-track"); if(!sec||!tr) return;
+  function esc(t){ return String(t==null?"":t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  fetch(API+"/rest/v1/talent?select=id,headline,skills,work&order=published_at.desc&limit=40",{headers:{apikey:KEY,Authorization:"Bearer "+KEY}})
+   .then(function(r){ return r.ok?r.json():[]; }).then(function(rows){
+    rows=(rows||[]).filter(function(r){ return r&&r.headline; }); if(rows.length<6) return;
+    for(var i=rows.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=rows[i]; rows[i]=rows[j]; rows[j]=t; }
+    var html=rows.map(function(r){
+      var w=(r.work||[])[0]||{}, sk=(r.skills||[]).slice(0,3);
+      return '<a class="mq-card" href="/talent?lang=es#'+esc(r.id)+'"><p class="mq-h">'+esc(String(r.headline).slice(0,110))+'</p>'
+        +(w.title?'<p class="mq-w">'+esc(String(w.title).length>78?String(w.title).slice(0,76).replace(/\s+\S*$/,'')+'…':w.title)+'</p>':'')
+        +'<div class="mq-s">'+sk.map(function(s){ return '<span>'+esc(s)+'</span>'; }).join("")+'</div></a>';
+    }).join("");
+    tr.innerHTML=html+html.replace(/class="mq-card"/g,'class="mq-card" aria-hidden="true" tabindex="-1"');
+    tr.style.setProperty("--mq-dur",Math.max(40,rows.length*6)+"s");
+    sec.hidden=false;
+  }).catch(function(){});
 })();
 </script>
 </body>

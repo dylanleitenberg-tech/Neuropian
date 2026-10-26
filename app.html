@@ -10,7 +10,7 @@ try{var q=new URLSearchParams(location.search);if(q.has('lang'))l=f(q.get('lang'
   try{if(window.parent!==window)l=f(parent.document.documentElement.lang);}catch(e){}
   if(!l&&window.__npFresh){var s=JSON.parse(sessionStorage.getItem('np_lang')||'null');sessionStorage.removeItem('np_lang');if(s&&Date.now()-s.t<36e5)l=f(s.l);}}}catch(e){}
 if(!l)return;window.__npLang=l;
-window.__npI18n=new Promise(function(r){var s=document.createElement('script');s.src='/assets/app/auth-i18n.js?v=20261026b';s.onload=s.onerror=function(){r();};setTimeout(r,4000);document.head.appendChild(s);});})();</script>
+window.__npI18n=new Promise(function(r){var s=document.createElement('script');s.src='/assets/app/auth-i18n.js?v=20261026d';s.onload=s.onerror=function(){r();};setTimeout(r,4000);document.head.appendChild(s);});})();</script>
 <meta name="robots" content="noindex">
 <meta name="description" content="Neuropian members: profile survey, opportunities and RoundTable.">
 <link rel="canonical" href="https://neuropian.com/app.html">
@@ -1503,7 +1503,11 @@ function showAuth(mode,dest){
   document.getElementById('auth-gate').classList.add('show');
   document.getElementById('auth-reset-view').style.display='none';
   hideAuthLegal();
-  if(mode==='login'){
+  const lv=document.getElementById('auth-login-view'), lt=lv.querySelector('.auth-title'), ls=lv.querySelector('.auth-sub');
+  if(lt&&lt.dataset.t0===undefined){lt.dataset.t0=lt.innerHTML; ls.dataset.t0=ls.innerHTML;}
+  if(lt){ const h=mode==='hire'; lt.innerHTML=h?(window.__npT?window.__npT('Sign in to view <em>Talent</em>'):'Sign in to view <em>Talent</em>'):lt.dataset.t0;
+    ls.innerHTML=h?(window.__npT?window.__npT('Search builders by the work they\'ve shipped. Free while we\'re early.'):'Search builders by the work they\'ve shipped. Free while we\'re early.'):ls.dataset.t0; }
+  if(mode==='login'||mode==='hire'){
     document.getElementById('auth-login-view').style.display='';
     document.getElementById('auth-reg-view').style.display='none';
   } else {
@@ -4959,8 +4963,8 @@ else{renderOppPreview();}
       <div class="auth-switch"><a onclick="backToLogin()">← Back to Sign In</a></div>
     </div>
     <div id="auth-reg-view" style="display:none">
-      <div class="auth-title">Let startups find you <em>by your code</em></div>
-      <div class="auth-sub">Sign in with GitHub and we build your profile from the pull requests you've had merged. Free. You approve it before anything goes public, and it never shows your email or location.</div>
+      <div class="auth-title">Discover <em>opportunities</em></div>
+      <div class="auth-sub">For builders search engines miss. Sign in with GitHub and see your draft profile in seconds, made from the pull requests you've had merged. Free. Nothing goes public until you publish, and it never shows your email or location.</div>
       <div class="auth-switch" style="margin:.2rem 0 .9rem">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
       <div class="np-oauth" hidden><div class="np-oa-list"></div>
       <p class="np-oa-note">By continuing you agree to the <a onclick="showAuthLegal('tos')">Terms of Service</a> and <a onclick="showAuthLegal('privacy')">Privacy Policy</a> and confirm you are 18 or older. Neuropian reads your public work there to build your profile.</p>
@@ -5368,12 +5372,12 @@ html.np-embed .auth-gate{background:rgba(236,232,227,.5)!important;-webkit-backd
   const _show=showPage; showPage=function(id){ if(id==='home')return; tell({type:'np-auth-done',page:id}); };
   const _close=closeAuth; closeAuth=function(){ _close(); if(!currentUser)tell({type:'np-auth-close'}); };
   window.addEventListener('message',e=>{ if(e.origin!==location.origin||!e.data)return;
-    if(e.data.type==='np-auth-mode')showAuth(e.data.mode==='reg'?'reg':'login'); });
+    if(e.data.type==='np-auth-mode')showAuth(['reg','hire'].includes(e.data.mode)?e.data.mode:'login'); });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeAuth(); });
   setTimeout(async()=>{ let ses=null; try{ ses=(await sb.auth.getSession()).data.session; }catch(e){}
     if(ses){tell({type:'np-auth-done',page:'home'});return;}            // really signed in: straight to the app
     if(window.__npI18n)await window.__npI18n;                          // translated pop-up: the parent's "Opening…" stays up until the strings are in
-    showAuth(q.get('auth')==='reg'?'reg':'login'); tell({type:'np-auth-ready'}); },30);
+    showAuth(['reg','hire'].includes(q.get('auth'))?q.get('auth'):'login'); tell({type:'np-auth-ready'}); },30);
 })();
 </script>
 <style id="np-paper">
