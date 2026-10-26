@@ -22,11 +22,11 @@ try{q=new URLSearchParams(location.search);if(q.has('lang')){l=f(q.get('lang'));
     else{try{l=f(localStorage.getItem(P));}catch(e){}if(!l)l=nav();}}}}catch(e){}   // nothing stored: the browser's language, unless one was picked
 if(!l)return;window.__npLang=l;
 var add=function(src,ordered){var s=document.createElement('script');s.src=src;if(ordered)s.async=false;document.head.appendChild(s);return s;};
-window.__npI18n=new Promise(function(r){var s=add('/assets/app/auth-i18n.js?v=20261026d');s.onload=s.onerror=function(){r();};setTimeout(r,4000);});
+window.__npI18n=new Promise(function(r){var s=add('/assets/app/auth-i18n.js?v=20261026e');s.onload=s.onerror=function(){r();};setTimeout(r,4000);});
 if(q&&q.has('embed'))return;
 var d=document.documentElement,st=document.createElement('style');st.textContent='html.np-i18n-wait body{visibility:hidden}';document.head.appendChild(st);
 d.classList.add('np-i18n-wait');setTimeout(function(){d.classList.remove('np-i18n-wait');},3000);   // shown in English if the table never arrives
-add('/assets/app/i18n/'+l+'.js?v=20261025e',1);add('/assets/app/app-i18n.js?v=20261025e',1);})();</script>
+add('/assets/app/i18n/'+l+'.js?v=20261026a',1);add('/assets/app/app-i18n.js?v=20261026a',1);})();</script>
 <meta name="robots" content="noindex">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
 <meta name="description" content="Neuropian members: profile survey, opportunities and RoundTable.">
@@ -5000,7 +5000,7 @@ else{renderOppPreview();}
     </div>
     <div id="auth-reg-view" style="display:none">
       <div class="auth-title">Discover <em>opportunities</em></div>
-      <div class="auth-sub">For builders search engines miss. Sign in with GitHub and see your draft profile in seconds, made from the pull requests you've had merged. Free. Nothing goes public until you publish, and it never shows your email or location.</div>
+      <div class="auth-sub">Sign in with GitHub and see your draft profile in seconds, made from the pull requests you've had merged. Free. Nothing goes public until you publish, and it never shows your email or location.</div>
       <div class="auth-switch" style="margin:.2rem 0 .9rem">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
       <div class="np-oauth" hidden><div class="np-oa-list"></div>
       <p class="np-oa-note">By continuing you agree to the <a onclick="showAuthLegal('tos')">Terms of Service</a> and <a onclick="showAuthLegal('privacy')">Privacy Policy</a> and confirm you are 18 or older. Neuropian reads your public work there to build your profile.</p>
@@ -5173,7 +5173,7 @@ function _bShowPub(){
 async function loadBuild(){
   const {data:{user}}=await sb.auth.getUser(); if(user)currentUser=user;
   const gh=(currentUser.identities||[]).find(i=>i.provider==='github');
-  document.getElementById('b-gh').textContent=gh?'GitHub connected ('+(gh.identity_data.user_name||'')+'). We read your merged pull requests and mark them verified.':'Code on GitHub? Connect it and we add your merged pull requests, marked verified. Optional: you can still publish without GitHub; your links will show as added by you.';
+  document.getElementById('b-gh').textContent=gh?'GitHub connected. We read your merged pull requests and mark them verified.':'Code on GitHub? Connect it and we add your merged pull requests, marked verified. Optional: you can still publish without GitHub; your links will show as added by you.';
   document.getElementById('b-gh-btn').hidden=!!gh;
   const {data}=await sb.from('member_profiles').select('*').eq('user_id',currentUser.id).maybeSingle();
   const {data:pub}=await sb.from('published_profiles').select('public_id').eq('user_id',currentUser.id).maybeSingle();
