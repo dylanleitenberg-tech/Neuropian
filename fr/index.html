@@ -425,18 +425,21 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
 
 /* members carousel: published profiles only (people who chose to be public), never names */
 .mq-sec{padding:56px 0 8px}.mq-sec[hidden]{display:none}
-.mq{direction:ltr;overflow:hidden;margin-top:22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.mq-track{display:flex;gap:16px;width:max-content;animation:mq var(--mq-dur,90s) linear infinite;padding:4px 0}
-.mq:hover .mq-track,.mq:focus-within .mq-track{animation-play-state:paused}
-@keyframes mq{to{transform:translateX(-50%)}}
+.mq{direction:ltr;margin-top:22px}
+.mq-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:4px max(var(--pad),calc((100% - var(--max))/2 + var(--pad)));scroll-padding:0 max(var(--pad),calc((100% - var(--max))/2 + var(--pad)))}
+.mq-track::-webkit-scrollbar{display:none}
 [dir=rtl] .mq-card{direction:rtl}
-.mq-card{flex:0 0 300px;display:block;text-decoration:none;color:inherit;border:1px solid rgba(43,42,40,.18);border-radius:14px;padding:16px 18px;background:rgba(255,255,255,.22)}
+.mq-card{flex:0 0 min(320px,80vw);scroll-snap-align:start;display:block;text-decoration:none;color:inherit;border:1px solid rgba(43,42,40,.18);border-radius:14px;padding:16px 18px;background:rgba(255,255,255,.22)}
 .mq-card:hover{border-color:rgba(43,42,40,.45)}
 .mq-h{font-size:17px;line-height:1.35;margin:0 0 10px}
 .mq-w{font-size:13.5px;line-height:1.45;color:rgba(43,42,40,.66);margin:0 0 10px}
 .mq-s{display:flex;flex-wrap:wrap;gap:6px}.mq-s span{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.04em;border:1px solid rgba(43,42,40,.2);border-radius:999px;padding:3px 8px}
-.mq-all{display:inline-block;margin-top:18px;color:inherit}
-@media (prefers-reduced-motion:reduce){.mq-track{animation:none}.mq{overflow-x:auto}}
+.mq-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:18px}
+.mq-all{display:inline-block;color:inherit}
+.mq-nav{display:flex;gap:10px;direction:ltr}
+.mq-b{width:44px;height:44px;border-radius:50%;border:1px solid rgba(43,42,40,.3);background:transparent;color:inherit;font:inherit;font-size:20px;line-height:1;cursor:pointer}
+.mq-b:hover{border-color:rgba(43,42,40,.7)}
+@media (prefers-reduced-motion:reduce){.mq-track{scroll-behavior:auto}}
 </style>
 <!--i18n:head-->
 <link rel="alternate" hreflang="en" href="https://neuropian.com/">
@@ -520,7 +523,7 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
     <p class="lede">Les bâtisseurs de Neuropian. Chacun a publié son propre profil, et les noms restent privés sauf si la personne choisit de les montrer.</p>
   </div>
   <div class="mq" role="region" aria-label="Profils publiés"><div class="mq-track" id="mq-track"></div></div>
-  <div class="wrap"><a class="mq-all" href="/talent?lang=fr">Les voir tous sur Talent →</a></div>
+  <div class="wrap mq-foot"><a class="mq-all" href="/talent?lang=fr">Les voir tous sur Talent →</a><span class="mq-nav"><button class="mq-b" type="button" data-d="-1" aria-label="Précédent">&larr;</button><button class="mq-b" type="button" data-d="1" aria-label="Suivant">&rarr;</button></span></div>
 </section>
 
 <section id="fields" class="plates-sec">
@@ -839,16 +842,20 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   function esc(t){ return String(t==null?"":t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
   fetch(API+"/rest/v1/talent?select=id,headline,skills,work&order=published_at.desc&limit=40",{headers:{apikey:KEY,Authorization:"Bearer "+KEY}})
    .then(function(r){ return r.ok?r.json():[]; }).then(function(rows){
-    rows=(rows||[]).filter(function(r){ return r&&r.headline; }); if(rows.length<6) return;
+    rows=(rows||[]).filter(function(r){ return r&&r.headline&&(r.skills||[]).length; }); if(rows.length<6) return;
     for(var i=rows.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=rows[i]; rows[i]=rows[j]; rows[j]=t; }
     var html=rows.map(function(r){
       var w=(r.work||[])[0]||{}, sk=(r.skills||[]).slice(0,3);
-      return '<a class="mq-card" href="/talent?lang=fr#'+esc(r.id)+'"><p class="mq-h">'+esc(String(r.headline).slice(0,110))+'</p>'
+      return '<a class="mq-card" href="/talent?lang=fr#'+esc(r.id)+'"><p class="mq-h">'+esc(r.headline)+'</p>'
         +(w.title?'<p class="mq-w">'+esc(String(w.title).length>78?String(w.title).slice(0,76).replace(/\s+\S*$/,'')+'…':w.title)+'</p>':'')
         +'<div class="mq-s">'+sk.map(function(s){ return '<span>'+esc(s)+'</span>'; }).join("")+'</div></a>';
     }).join("");
-    tr.innerHTML=html+html.replace(/class="mq-card"/g,'class="mq-card" aria-hidden="true" tabindex="-1"');
-    tr.style.setProperty("--mq-dur",Math.max(40,rows.length*6)+"s");
+    tr.innerHTML=html;
+    /* one card per click; past the last card it turns back to the first */
+    Array.prototype.forEach.call(sec.querySelectorAll(".mq-b"),function(b){ b.addEventListener("click",function(){
+      var c=tr.querySelector(".mq-card"), step=c?c.getBoundingClientRect().width+16:320, d=+b.getAttribute("data-d"), max=tr.scrollWidth-tr.clientWidth;
+      if(d>0&&tr.scrollLeft>=max-4) tr.scrollTo({left:0}); else if(d<0&&tr.scrollLeft<=4) tr.scrollTo({left:max}); else tr.scrollBy({left:d*step});
+    }); });
     sec.hidden=false;
   }).catch(function(){});
 })();
