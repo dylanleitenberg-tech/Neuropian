@@ -1728,6 +1728,7 @@ async function doRegister(){
   const dob=document.getElementById('rg-dob').value;
   const email=document.getElementById('rg-email').value.trim();
   const pass=document.getElementById('rg-pass').value;
+  const country=(document.getElementById('rg-country')||{}).value||'';
   if(!username||!fn||!ln||!dob||!country||!email||!pass){showErr('rg-err','Please fill in all fields.');return}
   if(username.length<=3){showErr('rg-err','Username must be more than 3 characters.');return}
   if(!/^[a-zA-Z0-9_]+$/.test(username)){showErr('rg-err','Username can only contain letters, numbers, and underscores.');return}
