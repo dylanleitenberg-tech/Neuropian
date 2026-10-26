@@ -447,6 +447,7 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
 <link rel="alternate" hreflang="zh-Hans" href="https://neuropian.com/zh/">
 <link rel="alternate" hreflang="x-default" href="https://neuropian.com/">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
+<script src="/assets/lang-menu.js?v=20261025a" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Serif+Devanagari:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* language switcher (site_i18n.py) */
@@ -454,6 +455,19 @@ footer .langs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 20px;margin-bo
 footer .langs a{color:var(--dim);text-decoration:none}
 footer .langs a:hover{color:#ECE8E3;text-decoration:underline}
 footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decoration-color:rgba(236,232,227,.6)}
+/* language menu in the top bar (assets/lang-menu.js; same markup and look on /app and /talent) */
+.bar .nav{margin-inline-start:auto}
+.np-lang{position:relative;display:inline-flex;flex-shrink:0}
+.np-lang-btn{display:inline-flex;align-items:center;gap:6px;margin:-7px 0;font:inherit;font-family:var(--mono,ui-monospace,Menlo,monospace);font-size:13px;letter-spacing:.06em;line-height:1;color:var(--fg);background:transparent;border:1px solid rgba(43,42,40,.3);border-radius:0;padding:7px 9px;cursor:pointer}
+.np-lang-btn svg{width:15px;height:15px;flex-shrink:0}
+.np-lang-btn:hover,.np-lang-btn[aria-expanded="true"]{border-color:var(--fg)}
+.np-lang-btn:focus-visible,.np-lang-list a:focus-visible{outline:2px solid var(--acc,#2B4C7E);outline-offset:2px}
+.np-lang-list{position:absolute;top:calc(100% + 14px);inset-inline-end:0;z-index:20;min-width:170px;margin:0;padding:6px 0;list-style:none;background:var(--bg,#ECE8E3);border:1px solid rgba(43,42,40,.3);box-shadow:0 14px 36px rgba(0,0,0,.18);text-align:start}
+.np-lang-list[hidden]{display:none}
+.np-lang-list a{display:block;padding:9px 16px;font-family:"EB Garamond","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif;font-size:17px;line-height:1.25;color:var(--fg);text-decoration:none;white-space:nowrap}
+.np-lang-list a:hover{background:rgba(43,42,40,.07)}
+.np-lang-list a[aria-current]{text-decoration:underline;text-underline-offset:.2em}
+@media(max-width:480px){.bar .wrap{gap:12px}.nav{gap:16px}.nav a:not(.login){display:none}.np-lang-btn{padding:7px 7px}}
 /* hi */
 @media(max-width:480px){.bar .wrap{gap:12px}.nav{gap:16px;font-size:16px}.nav a.login{padding:6px 12px}}
 @media(max-width:380px){.nav a:not(.login){display:none}}
@@ -479,10 +493,11 @@ html .npac-k,html .npld{letter-spacing:0}html .npac h2{line-height:1.3}
     <nav class="nav" aria-label="अनुभाग">
       <a href="#plain">यह कैसे काम करता है</a>
       <a href="#method">पद्धति</a>
-      <a href="/talent">Talent</a>
+      <a href="/talent?lang=hi">Talent</a>
       <a href="#contact">संपर्क</a>
       <a class="login" href="/app?lang=hi" data-auth="login">लॉग इन</a>
     </nav>
+    <!--i18n:menu--><div class="np-lang"><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="भाषा"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">HI</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/" hreflang="en" lang="en" translate="no">English</a></li><li><a href="/fr/" hreflang="fr" lang="fr" translate="no">Français</a></li><li><a href="/es/" hreflang="es" lang="es" translate="no">Español</a></li><li><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a></li><li><a href="/hi/" hreflang="hi" lang="hi" translate="no" aria-current="page">हिन्दी</a></li><li><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></li></ul></div><!--/i18n:menu-->
   </div>
 </header>
 
@@ -666,7 +681,7 @@ html .npac-k,html .npld{letter-spacing:0}html .npac h2{line-height:1.3}
       <li><span class="tag">परीक्षण में</span><span>एक व्यक्ति के अलग-अलग प्लेटफ़ॉर्म के खातों को जोड़ना<small>Falcon खातों को सिर्फ़ उन लिंक के ज़रिए जोड़ता है जो व्यक्ति ने ख़ुद प्रकाशित किए हों। कमज़ोर मिलान (वही हैंडल, नाम या फ़ोटो) को अंक दिए जाते हैं, उन्हें अपुष्ट रखा जाता है और कभी किसी से संपर्क के लिए इस्तेमाल नहीं किया जाता।</small></span></li>
       <li><span class="tag">लाइव</span><span>RoundTable, बौद्धिक विस्तार के लिए Neuropian की जगह और मंच<small>सदस्य साइन अप करते हैं, प्रोफ़ाइल बनाते हैं और चैट, समस्या और निर्माण रूम में बात करते हैं। साइन अप करना ही वह सहमति है जिससे Neuropian किसी सदस्य की प्रोफ़ाइल उन कंपनियों और फ़ंड के साथ साझा कर सकता है जो Neuropian के ज़रिए भर्ती करते हैं।</small></span></li>
       <li><span class="tag">लाइव</span><span>प्रोजेक्ट और क्रेडिट<small>सदस्य क्रेडिट इनाम के साथ प्रोजेक्ट पोस्ट करते हैं और दूसरे उनसे जुड़ते हैं। किसी को क्रेडिट मिलने से पहले Neuropian का एक समीक्षक हर योगदानकर्ता के काम की जाँच करता है, और मंज़ूर हुए योगदानकर्ता बोनस कमा सकते हैं। क्रेडिट Neuropian के भीतर के अंक हैं, जिनका कोई नकद मूल्य नहीं है।</small></span></li>
-      <li><span class="tag">लाइव</span><span>Talent<small>किसी भी क्षेत्र के लोगों की प्रोफ़ाइल, जो उनके अपने विवरण और काम से तैयार की जाती हैं, उनकी मंज़ूरी के बाद, और जिन्हें <a href="/talent">neuropian.com/talent</a> पर अर्थ के आधार पर खोजा जा सकता है।</small></span></li>
+      <li><span class="tag">लाइव</span><span>Talent<small>किसी भी क्षेत्र के लोगों की प्रोफ़ाइल, जो उनके अपने विवरण और काम से तैयार की जाती हैं, उनकी मंज़ूरी के बाद, और जिन्हें <a href="/talent?lang=hi">neuropian.com/talent</a> पर अर्थ के आधार पर खोजा जा सकता है।</small></span></li>
       <li><span class="tag">तैयार</span><span>EagleEyes, Neuropian का स्काउटिंग एजेंट<small>एक ब्राउज़र एक्सटेंशन। जिन साइटों पर कोई सदस्य इसे चालू करता है, वहाँ वह जो पढ़ता, लिखता और जिस पर काम करता है, उसे यह उसकी Neuropian प्रोफ़ाइल में जोड़ देता है। अभी सार्वजनिक नहीं।</small></span></li>
     </ul>
   </div>
@@ -698,7 +713,7 @@ html .npac-k,html .npld{letter-spacing:0}html .npac h2{line-height:1.3}
   <div class="wrap">
     <!--i18n:langs--><nav class="langs" aria-label="भाषा"><a href="/" hreflang="en" lang="en" translate="no">English</a><a href="/fr/" hreflang="fr" lang="fr" translate="no">Français</a><a href="/es/" hreflang="es" lang="es" translate="no">Español</a><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a><a href="/hi/" hreflang="hi" lang="hi" translate="no" aria-current="page">हिन्दी</a><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></nav><!--/i18n:langs-->
     <span>© 2026 Neuropian · असीम से परे · चित्र, सभी सार्वजनिक डोमेन में: Vesalius 1543, B. H. Babbage 1853, Eddystone लाइटहाउस 1884, Hooke 1665, Zabaglia 1743, Robison 1822, Dürer 1525 (Rijksmuseum)</span>
-    <span><a href="/terms.html">शर्तें</a> · <a href="/privacy.html">गोपनीयता</a> · <a href="/app?lang=hi">सदस्य</a><!--i18n:en--> <span class="en-note">(अंग्रेज़ी में)</span><!--/i18n:en--></span>
+    <span><a href="/terms.html">शर्तें</a> · <a href="/privacy.html">गोपनीयता</a><!--i18n:en--> <span class="en-note">(अंग्रेज़ी में)</span><!--/i18n:en--> · <a href="/app?lang=hi">सदस्य</a></span>
   </div>
 </footer>
 <script src="/assets/site.js?v=20261025a" defer></script>
@@ -759,7 +774,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   function closeCard(){ if(card){ card.remove(); card=null; } document.documentElement.style.overflow=""; if(opener&&opener.focus) opener.focus(); opener=null; }
   function openCard(isNew){
     var s=session(); if(!s) return false;
-    closeCard(); var u=s.user, T=!!document.querySelector('a[href="/talent"]');
+    closeCard(); var u=s.user, T=!!document.querySelector('a[href^="/talent"]');
     card=document.createElement("div"); card.className="npac-ov";
     card.innerHTML='<div class="npac" role="dialog" aria-modal="true" aria-labelledby="npac-n" tabindex="-1">'
       +'<button class="npac-x" type="button" aria-label="बंद करें">×</button>'
@@ -770,7 +785,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
       +'<a href="/app?lang=hi&go=projects">प्रोजेक्ट और क्रेडिट<span>काम पोस्ट करें, प्रोजेक्ट से जुड़ें, समीक्षक की जाँच के बाद क्रेडिट पाएँ</span></a>'
       +'<a href="/app?lang=hi&go=collective">RoundTable<span>चैट, समस्या और निर्माण रूम</span></a>'
       +'<a href="/app?lang=hi&go=platform">अवसर<span>सदस्यों के लिए रिक्तियाँ</span></a>'
-      +(T?'<a href="/talent">Talent<span>सदस्य प्रोफ़ाइल खोजें</span></a>':"")
+      +(T?'<a href="/talent?lang=hi">Talent<span>सदस्य प्रोफ़ाइल खोजें</span></a>':"")
       +'</nav><div class="npac-f"><span>आप नहीं हैं?</span><button class="npac-out" type="button">साइन आउट</button></div></div>';
     document.body.appendChild(card); document.documentElement.style.overflow="hidden";
     card.addEventListener("click",function(e){ if(e.target===card||e.target.closest(".npac-x")) closeCard(); else if(e.target.closest(".npac-out")) signOut(); });

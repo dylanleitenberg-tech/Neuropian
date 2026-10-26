@@ -2,16 +2,33 @@
 <html lang="en">
 <head>
 <script>window.__npRecovery=/type=recovery/.test(location.hash)||/[?&]type=recovery/.test(location.search);window.__npFresh=!window.__npRecovery&&(/access_token=/.test(location.hash)||/[?&]code=/.test(location.search));</script>
-<script>/* Language of the sign-in pop-up, the terms step and the set-password box (2026-10-25): ?lang=fr|es|he|hi|zh (the
-   translated home pages add it), else the framing page's <html lang>, else a GitHub sign-in started from a translated
-   page (np_lang, set by npOAuth). No language = English, and the table in /assets/app/auth-i18n.js is never loaded. */
-(function(){var L=['fr','es','he','hi','zh'],l=null,f=function(v){v=String(v||'').toLowerCase().split('-')[0];return L.indexOf(v)>=0?v:null;};
-try{var q=new URLSearchParams(location.search);if(q.has('lang'))l=f(q.get('lang'));else{
-  try{if(window.parent!==window)l=f(parent.document.documentElement.lang);}catch(e){}
-  if(!l&&window.__npFresh){var s=JSON.parse(sessionStorage.getItem('np_lang')||'null');sessionStorage.removeItem('np_lang');if(s&&Date.now()-s.t<36e5)l=f(s.l);}}}catch(e){}
+<script>/* Language of the members app (2026-10-25): ?lang=fr|es|he|hi|zh (the translated home pages and the language menus
+   add it; ?lang=en = English), else the framing page's <html lang> (the sign-in pop-up), else a GitHub sign-in started
+   in a language (sessionStorage np_lang, set by npOAuth, read only on the return from GitHub), else the page you came
+   from (the English home page means English), else the language used before in this browser (localStorage
+   np_lang_pref, kept between /app and /talent), else the browser's language (navigator.languages, only if no language
+   was ever picked: np_lang_choice; never for crawlers). No language = English, and no table is ever loaded. auth-i18n.js translates the pop-up, the terms step and the set-password box;
+   i18n/<lang>.js + app-i18n.js the rest of the app (not inside the pop-up frame). Storage blocked: ?lang= still works. */
+(function(){var L=['fr','es','he','hi','zh'],l=null,f=function(v){v=String(v||'').toLowerCase().split('-')[0];return L.indexOf(v)>=0?v:null;},
+P='np_lang_pref',keep=function(v){try{if(v)localStorage.setItem(P,v);else localStorage.removeItem(P);}catch(e){}},q=null,done=false,h=null,
+nav=function(){try{if(localStorage.getItem('np_lang_choice'))return null;}catch(e){}if(/bot|crawl|spider|slurp|preview/i.test(navigator.userAgent||''))return null;var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];for(var i=0;i<ls.length;i++){var b=String(ls[i]).toLowerCase().split('-')[0];if(b==='iw')b='he';if(b==='en')return null;if(L.indexOf(b)>=0)return b;}return null;};
+try{h=JSON.parse(sessionStorage.getItem('np_lang')||'null');sessionStorage.removeItem('np_lang');}catch(e){}   // read once, on any load: never left behind
+try{q=new URLSearchParams(location.search);if(q.has('lang')){l=f(q.get('lang'));keep(l);}else{
+  try{if(window.parent!==window){done=true;l=f(parent.document.documentElement.lang);}}catch(e){}
+  if(!done&&window.__npFresh&&q.get('go')==='build'&&h&&Date.now()-h.t<36e5){l=f(h.l);keep(l);done=true;}   // back from GitHub (npOAuth); h.l 'en' = English
+  if(!done){var r=null,m;try{r=new URL(document.referrer);}catch(e){}
+    if(r&&r.origin===location.origin&&/^\/(index\.html)?$/.test(r.pathname))keep(null);
+    else if(r&&r.origin===location.origin&&(m=/^\/(fr|es|he|hi|zh)\//.exec(r.pathname))){l=m[1];keep(l);}
+    else{try{l=f(localStorage.getItem(P));}catch(e){}if(!l)l=nav();}}}}catch(e){}   // nothing stored: the browser's language, unless one was picked
 if(!l)return;window.__npLang=l;
-window.__npI18n=new Promise(function(r){var s=document.createElement('script');s.src='/assets/app/auth-i18n.js?v=20261026d';s.onload=s.onerror=function(){r();};setTimeout(r,4000);document.head.appendChild(s);});})();</script>
+var add=function(src,ordered){var s=document.createElement('script');s.src=src;if(ordered)s.async=false;document.head.appendChild(s);return s;};
+window.__npI18n=new Promise(function(r){var s=add('/assets/app/auth-i18n.js?v=20261026d');s.onload=s.onerror=function(){r();};setTimeout(r,4000);});
+if(q&&q.has('embed'))return;
+var d=document.documentElement,st=document.createElement('style');st.textContent='html.np-i18n-wait body{visibility:hidden}';document.head.appendChild(st);
+d.classList.add('np-i18n-wait');setTimeout(function(){d.classList.remove('np-i18n-wait');},3000);   // shown in English if the table never arrives
+add('/assets/app/i18n/'+l+'.js?v=20261025e',1);add('/assets/app/app-i18n.js?v=20261025e',1);})();</script>
 <meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
 <meta name="description" content="Neuropian members: profile survey, opportunities and RoundTable.">
 <link rel="canonical" href="https://neuropian.com/app.html">
 <meta charset="UTF-8">
@@ -613,6 +630,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <span id="nav-user" onclick="openProfile()" style="font-family:'Barlow Condensed',sans-serif;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(43,42,40,0.95);font-weight:500;display:none;cursor:pointer;transition:opacity .2s;align-items:center;gap:.45rem" onmouseenter="this.style.opacity='.7'" onmouseleave="this.style.opacity='1'"><span id="nav-avatar" style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#cfd1d4,#2b4c7e);display:inline-flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:.42rem;font-weight:700;color:#2b2a28;overflow:hidden;flex-shrink:0;vertical-align:middle"><span id="nav-avatar-initials"></span></span><span id="nav-user-name"></span></span>
     <button id="nav-signout" style="display:none;background:transparent;border:1px solid rgba(43,42,40,.2);color:rgba(43,42,40,0.95);padding:.25rem .6rem;font-family:'Barlow Condensed',sans-serif;font-size:.46rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .22s" onmouseenter="this.style.borderColor='rgba(43,42,40,.5)';this.style.color='#2b2a28'" onmouseleave="this.style.borderColor='rgba(43,42,40,.2)';this.style.color='rgba(43,42,40,.5)'" onclick="doSignOut()">Sign Out</button>
     <button class="nav-apply" onclick="openApply()">Apply Now</button>
+    <div class="np-lang" data-dynamic><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="Language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">EN</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/app?lang=en" hreflang="en" lang="en" translate="no" aria-current="true">English</a></li><li><a href="/app?lang=fr" hreflang="fr" lang="fr" translate="no">Français</a></li><li><a href="/app?lang=es" hreflang="es" lang="es" translate="no">Español</a></li><li><a href="/app?lang=he" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a></li><li><a href="/app?lang=hi" hreflang="hi" lang="hi" translate="no">हिन्दी</a></li><li><a href="/app?lang=zh" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></li></ul></div>
   </div>
 
 <!-- LANGUAGE SWITCHER -->
@@ -652,6 +670,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <a class="m-card" onclick="gatedPage('projects')"><b>Invite friends</b><span>Share your invite link. When a friend you invite publishes their profile, you get 25 credits, for up to 10 friends.</span></a>
   </div>
   <p class="m-legal"><a onclick="showPage('tos')">Terms of Service</a> · <a onclick="showPage('privacy')">Privacy Policy</a> · <a href="/">neuropian.com</a></p>
+  <div class="m-langs" role="navigation" aria-label="Language"><a href="/app?lang=en" hreflang="en" lang="en" translate="no" aria-current="true">English</a><a href="/app?lang=fr" hreflang="fr" lang="fr" translate="no">Français</a><a href="/app?lang=es" hreflang="es" lang="es" translate="no">Español</a><a href="/app?lang=he" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a><a href="/app?lang=hi" hreflang="hi" lang="hi" translate="no">हिन्दी</a><a href="/app?lang=zh" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></div>
 </section>
 <style>
 .m-home{max-width:880px;margin:0 auto;padding:9rem 2rem 6rem;color:#33312f}
@@ -671,6 +690,23 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 .m-card:hover b{color:#2b4c7e}
 .m-legal{margin-top:3rem;font-size:14px;color:rgba(43,42,40,.38)}
 .m-legal a{color:rgba(43,42,40,.62);text-decoration:underline;text-decoration-color:rgba(43,42,40,.38);text-underline-offset:.2em;cursor:pointer}
+/* language menu in the top bar (assets/lang-menu.js; same as the home pages and /talent) */
+.np-lang{position:relative;display:inline-flex;flex-shrink:0}
+html:not(#np-x) .np-lang-btn{display:inline-flex;align-items:center;gap:6px;margin:0;font:inherit;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-size:13px;letter-spacing:.06em;line-height:1;color:#2B2A28;background:transparent;border:1px solid rgba(43,42,40,.3);border-radius:0;padding:7px 9px;cursor:pointer}
+.np-lang-btn svg{width:15px;height:15px;flex-shrink:0}
+.np-lang-btn:hover,.np-lang-btn[aria-expanded="true"]{border-color:#2B2A28}
+.np-lang-btn:focus-visible,.np-lang-list a:focus-visible{outline:2px solid #2B4C7E;outline-offset:2px}
+.np-lang-list{position:absolute;top:calc(100% + 14px);inset-inline-end:0;z-index:1000;min-width:170px;margin:0;padding:6px 0;list-style:none;background:#ECE8E3;border:1px solid rgba(43,42,40,.3);box-shadow:0 14px 36px rgba(0,0,0,.18);text-align:start}
+.np-lang-list[hidden]{display:none}
+html:not(#np-x) .np-lang-list a{display:block;padding:9px 16px;font-family:"EB Garamond","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif!important;font-size-adjust:none!important;font-size:17px;line-height:1.25;color:#2B2A28;text-decoration:none;white-space:nowrap}
+.np-lang-list a:hover{background:rgba(43,42,40,.07)}
+html:not(#np-x) .np-lang-list a[aria-current]{text-decoration:underline!important;text-underline-offset:.2em}
+/* phones: Sign out moves to the menu and the profile box, so the bar keeps its menu button, logo, avatar, Apply and language */
+@media(max-width:600px){html:not(#np-x) #nav-signout{display:none!important}html:not(#np-x) .nav-right{gap:.45rem!important}}
+/* language list (as in the home pages' footer; a div, since the app styles every <nav> as its top bar); the names use tiny font subsets loaded in <head> */
+.m-langs{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:.8rem;font-size:15px}
+html:not(#np-x) .m-langs a{font-family:"EB Garamond","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif!important;color:rgba(43,42,40,.62);text-decoration:none}
+.m-langs a:hover,.m-langs a[aria-current]{color:#33312f!important;text-decoration:underline;text-decoration-color:rgba(43,42,40,.38);text-underline-offset:.2em}
 @media(max-width:720px){.m-grid{grid-template-columns:1fr}.m-home{padding:7rem 1.2rem 4rem}}
 </style>
 </div>
@@ -955,7 +991,7 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
     <div style="flex:1;overflow-y:auto;padding:.5rem 0">
       <div style="font-size:.42rem;letter-spacing:.28em;text-transform:uppercase;color:#b0aca8;font-weight:700;padding:.6rem 1rem .3rem">Chat Hubs</div>
       <div id="room-list"></div>
-      <div style="font-size:.42rem;letter-spacing:.28em;text-transform:uppercase;color:#b0aca8;font-weight:700;padding:.8rem 1rem .3rem;display:flex;align-items:center;justify-content:space-between">
+      <div id="problem-rooms-header" style="font-size:.42rem;letter-spacing:.28em;text-transform:uppercase;color:#b0aca8;font-weight:700;padding:.8rem 1rem .3rem;display:flex;align-items:center;justify-content:space-between">
         <span>Problem Rooms</span>
         <span onclick="openPostProblem()" style="cursor:pointer;color:#22406c;font-size:.7rem" title="Post a Problem">+</span>
       </div>
@@ -2919,7 +2955,7 @@ async function renderSidebarForServer(serverId, serverData){
   }
   // Problems only shown on the main Neuropian server
   const problemSection = document.querySelector('[style*="Problem Rooms"]')?.closest('div[style]')?.parentElement;
-  const problemHeader = Array.from(document.querySelectorAll('#chat-sidebar div')).find(el => el.textContent.trim() === 'Problem Rooms' || el.querySelector?.('span')?.textContent?.trim() === 'Problem Rooms');
+  const problemHeader = document.getElementById('problem-rooms-header');   // by id, not by its English text (translated in other languages)
   if(serverId==='neuropian'){
     await loadProblemRooms();
     if(problemHeader)problemHeader.style.display='';
@@ -4227,7 +4263,7 @@ async function submitReport(){
       created_at:new Date().toISOString()
     });
   }
-  const reportBtn=document.querySelector(`button[data-msgid="${msgId}"][title="Report"]`);
+  const reportBtn=document.querySelector(`button[data-msgid="${msgId}"][data-username]`);   // the report button (its title is translated)
   if(reportBtn){reportBtn.textContent='✓';reportBtn.style.color='#2b4c7e';reportBtn.disabled=true;}
   btn.disabled=false;btn.textContent='Submit Report';
   closeReportModal();
@@ -5036,6 +5072,7 @@ else{renderOppPreview();}
 
 <div id="notif-container" style="position:fixed;bottom:1.2rem;right:1.2rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;pointer-events:none;max-width:320px"></div>
 <script>document.addEventListener("click",function(){var m=document.getElementById("lang-menu");if(m)m.style.display="none";});</script>
+<script src="/assets/lang-menu.js?v=20261025a" defer></script>
 <script>
 // ── iOS status bar fill (JS measurement - more reliable than pure CSS) ──
 (function(){
@@ -5244,7 +5281,7 @@ if(new URLSearchParams(location.search).has('build')){
     const {data,error}=await sb.auth.signInWithOAuth({provider,options:{redirectTo:location.origin+'/app?go=build',skipBrowserRedirect:true}});
     try{ sessionStorage.setItem('np_oauth_terms',String(Date.now())); }catch(e){}   // agreed to Terms + 18+ by pressing the button under the note
     if(error){ showErr('li-err',error.message); showErr('rg-err',error.message); return; }
-    try{ if(window.__npLang)sessionStorage.setItem('np_lang',JSON.stringify({l:window.__npLang,t:Date.now()})); else sessionStorage.removeItem('np_lang'); }catch(e){}   // the terms step after GitHub speaks the same language
+    try{ sessionStorage.setItem('np_lang',JSON.stringify({l:window.__npLang||'en',t:Date.now()})); }catch(e){}   // the terms step after GitHub speaks the same language (en: English, even if another was chosen before)
     try{ (window.top||window).location.href=data.url; }catch(e){ location.href=data.url; }     // GitHub refuses to load inside a frame
   };
   fetch(SUPA_URL+'/auth/v1/settings',{headers:{apikey:SUPA_KEY}}).then(r=>r.json()).then(st=>{

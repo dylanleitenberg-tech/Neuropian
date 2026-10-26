@@ -3,6 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>/* Language (2026-10-25), as in /app: ?lang=fr|es|he|hi|zh (?lang=en = English), else the page you came from (the
+   English home page means English), else the language chosen before in this browser (localStorage np_lang_pref, kept
+   between /app and /talent), else the browser's language (navigator.languages, when no language was ever picked:
+   np_lang_choice; never for crawlers). No language = English, and nothing is loaded. assets/app/app-i18n.js with i18n/<lang>.js
+   translates the page; <html lang> is set here so the sign-in pop-up (an /app frame) speaks the same language. */
+(function(){var L=['fr','es','he','hi','zh'],l=null,f=function(v){v=String(v||'').toLowerCase().split('-')[0];return L.indexOf(v)>=0?v:null;},
+P='np_lang_pref',keep=function(v){try{if(v)localStorage.setItem(P,v);else localStorage.removeItem(P);}catch(e){}},
+nav=function(){try{if(localStorage.getItem('np_lang_choice'))return null;}catch(e){}if(/bot|crawl|spider|slurp|preview/i.test(navigator.userAgent||''))return null;var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];for(var i=0;i<ls.length;i++){var b=String(ls[i]).toLowerCase().split('-')[0];if(b==='iw')b='he';if(b==='en')return null;if(L.indexOf(b)>=0)return b;}return null;};
+try{var q=new URLSearchParams(location.search);if(q.has('lang')){l=f(q.get('lang'));keep(l);}else{var r=null,m;try{r=new URL(document.referrer);}catch(e){}
+  if(r&&r.origin===location.origin&&/^\/(index\.html)?$/.test(r.pathname))keep(null);
+  else if(r&&r.origin===location.origin&&(m=/^\/(fr|es|he|hi|zh)\//.exec(r.pathname))){l=m[1];keep(l);}
+  else{try{l=f(localStorage.getItem(P));}catch(e){}if(!l)l=nav();}}}catch(e){}   // nothing stored: the browser's language, unless one was picked
+if(!l)return;window.__npLang=l;var d=document.documentElement;d.lang=l==='zh'?'zh-Hans':l;if(l==='he')d.dir='rtl';
+var st=document.createElement('style');st.textContent='html.np-i18n-wait body{visibility:hidden}';document.head.appendChild(st);
+d.classList.add('np-i18n-wait');setTimeout(function(){d.classList.remove('np-i18n-wait');},3000);   // shown in English if the table never arrives
+['/assets/app/i18n/'+l+'.js?v=20261025e','/assets/app/app-i18n.js?v=20261025e'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
 <title>Talent · Neuropian</title>
 <meta name="description" content="Search the profiles Neuropian members published about their own work: what they have built and solved.">
 <link rel="canonical" href="https://neuropian.com/talent">
@@ -67,6 +84,22 @@ h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)
 .hire-msg{font-size:15px;margin-top:14px;min-height:1.2em}
 footer{border-top:1px solid var(--line);padding:32px 0 48px;font-size:14px;color:var(--faint)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* language menu in the top bar (assets/lang-menu.js; same as the home pages and /app) */
+.bar .nav{margin-inline-start:auto}
+.np-lang{position:relative;display:inline-flex;flex-shrink:0}
+.np-lang-btn{display:inline-flex;align-items:center;gap:6px;margin:0;font:inherit;font-family:var(--mono);font-size:13px;letter-spacing:.06em;line-height:1;color:#2B2A28;background:transparent;border:1px solid rgba(43,42,40,.3);border-radius:0;padding:7px 9px;cursor:pointer}
+.np-lang-btn svg{width:15px;height:15px;flex-shrink:0}
+.np-lang-btn:hover,.np-lang-btn[aria-expanded="true"]{border-color:#2B2A28}
+.np-lang-btn:focus-visible,.np-lang-list a:focus-visible{outline:2px solid #2B4C7E;outline-offset:2px}
+.np-lang-list{position:absolute;top:calc(100% + 14px);inset-inline-end:0;z-index:1000;min-width:170px;margin:0;padding:6px 0;list-style:none;background:#ECE8E3;border:1px solid rgba(43,42,40,.3);box-shadow:0 14px 36px rgba(0,0,0,.18);text-align:start}
+.np-lang-list[hidden]{display:none}
+.np-lang-list a{display:block;padding:9px 16px;font-family:"EB Garamond","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif;font-size:17px;line-height:1.25;color:#2B2A28;text-decoration:none;white-space:nowrap}
+.np-lang-list a:hover{background:rgba(43,42,40,.07)}
+.np-lang-list a[aria-current]{text-decoration:underline;text-underline-offset:.2em}
+@media(max-width:480px){.bar .wrap{gap:12px}.nav a:not(.login){display:none}.np-lang-btn{padding:7px}}
+footer .langs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 20px;font-size:15px;font-family:"EB Garamond","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif}
+footer .langs a{color:var(--dim);text-decoration:none}
+footer .langs a:hover,footer .langs a[aria-current]{color:var(--fg);text-decoration:underline}
 @media(max-width:720px){.nav a:not(:nth-last-child(-n+2)){display:none}.search button{padding:0 18px}}
 
 /* paper edition, as neuropian.com */
@@ -89,6 +122,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 <header class="bar"><div class="wrap">
   <a class="mark" href="/"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
   <nav class="nav"><a href="/#plain">How it works</a><a href="/#method">Method</a><a href="/talent" aria-current="page">Talent</a><a class="login" href="/app" data-auth="login">Log in</a></nav>
+  <div class="np-lang" data-dynamic><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="Language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">EN</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/talent?lang=en" hreflang="en" lang="en" translate="no" aria-current="true">English</a></li><li><a href="/talent?lang=fr" hreflang="fr" lang="fr" translate="no">Français</a></li><li><a href="/talent?lang=es" hreflang="es" lang="es" translate="no">Español</a></li><li><a href="/talent?lang=he" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a></li><li><a href="/talent?lang=hi" hreflang="hi" lang="hi" translate="no">हिन्दी</a></li><li><a href="/talent?lang=zh" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></li></ul></div>
 </div></header>
 <main id="main" class="wrap">
   <section id="list">
@@ -104,7 +138,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   </section>
   <section id="profile" class="prof" hidden></section>
 </main>
-<footer><div class="wrap"><span>© 2026 Neuropian · Beyond Limitless</span><span><a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href="/app">Members</a></span></div></footer>
+<footer><div class="wrap"><nav class="langs" aria-label="Language"><a href="/talent?lang=en" hreflang="en" lang="en" translate="no" aria-current="true">English</a><a href="/talent?lang=fr" hreflang="fr" lang="fr" translate="no">Français</a><a href="/talent?lang=es" hreflang="es" lang="es" translate="no">Español</a><a href="/talent?lang=he" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a><a href="/talent?lang=hi" hreflang="hi" lang="hi" translate="no">हिन्दी</a><a href="/talent?lang=zh" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></nav><span>© 2026 Neuropian · Beyond Limitless</span><span><a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href="/app">Members</a></span></div></footer>
 <script>
 (function(){
 "use strict";
@@ -247,7 +281,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   function closeCard(){ if(card){ card.remove(); card=null; } document.documentElement.style.overflow=""; if(opener&&opener.focus) opener.focus(); opener=null; }
   function openCard(isNew){
     var s=session(); if(!s) return false;
-    closeCard(); var u=s.user, T=!!document.querySelector('a[href="/talent"]');
+    closeCard(); var u=s.user, T=!!document.querySelector('a[href^="/talent"]');
     card=document.createElement("div"); card.className="npac-ov";
     card.innerHTML='<div class="npac" role="dialog" aria-modal="true" aria-labelledby="npac-n" tabindex="-1">'
       +'<button class="npac-x" type="button" aria-label="Close">×</button>'
@@ -297,5 +331,6 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   paint();
 })();
 </script>
+<script src="/assets/lang-menu.js?v=20261025a" defer></script>
 </body>
 </html>
