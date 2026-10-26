@@ -146,7 +146,7 @@ function show(id){
       (p.summary?'<p class="p-sum">'+esc(p.summary)+'</p>':'')+
       ((p.skills||[]).length?'<h2>Skills</h2><div class="chips">'+chips(p.skills)+'</div>':'')+
       ((p.work||[]).length?'<h2>Built and solved</h2><ul class="work">'+(p.work||[]).map(function(w){var u=safeUrl(w.url);return '<li><span class="w-title">'+(u?'<a rel="nofollow ugc noopener" href="'+u+'">'+esc(w.title)+'</a>':esc(w.title))+'</span><span class="w-src">'+(w.verified?'Verified from GitHub':'Added by member')+(w.source?' · '+esc(w.source):'')+'</span><span class="w-detail">'+esc(w.detail)+'</span></li>';}).join("")+'</ul>':'')+
-      '<p class="note">'+(p.ai_drafted?'Drafted with AI from this member\'s own description and work, then reviewed and published by them.':'Published by this member.')+' Links go to the original work so you can check it.</p>'+
+      '<p class="note">Links go to the original work so you can check it.</p>'+
       '<div class="hire"><h2>Hiring?</h2><p>Tell Neuropian about the role. We pass it on to '+esc(p.name||"this member")+' and introduce you if they want to talk. Their email is never shown.</p>'+
       '<button class="hire-btn" type="button">Hire or contact '+esc(p.name?p.name.split(" ")[0]:"this member")+'</button>'+
       '<form class="hire-f" hidden><label>Your name<input name="name" maxlength="120" required autocomplete="name"></label>'+
