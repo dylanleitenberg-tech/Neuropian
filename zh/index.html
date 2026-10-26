@@ -494,7 +494,6 @@ html .npac-k,html .npld{letter-spacing:.06em}
     <a class="mark" href="#top" aria-label="Neuropian，回到页面顶部"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
     <nav class="nav" aria-label="栏目">
       <a href="#plain">运作方式</a>
-      <a href="#method">方法</a>
       <a href="/talent?lang=zh">Talent</a>
       <a href="#contact">联系</a>
       <a class="login" href="/app?lang=zh" data-auth="login">登录</a>
@@ -584,39 +583,6 @@ html .npac-k,html .npld{letter-spacing:.06em}
     <p class="flow-end reveal">目前已为其中 100 人各写了一份简短报告，直接链接到他们的工作。</p>
   </div>
 </section>
-
-<section id="method">
-  <div class="wrap">
-    <p class="kicker">方法 · 数据截至 2026 年 10 月 25 日</p>
-
-    <div class="block">
-      <div>
-        <h3>推理者</h3>
-        <p class="what">竞赛程序员和数学家。Neuropian 读取他们的竞赛成绩和数学解答；在分数相同的人当中，它更善于看出谁会是下一个达到 Grandmaster（2400）的人。</p>
-      </div>
-      <div>
-        <div class="stat"><b>1.5×</b><span>仅凭等级分时预测信号的倍数：用于在等级分相同的 Codeforces 选手中找出谁会达到 Grandmaster（等级分 2400）。在 2022–24 年的数据上选定，在 2024–26 年上原样测试；该群组此前已被分析过，所以它不是一个完全干净的保留测试集。</span></div>
-        <figure class="chart dotplot reveal" role="group" aria-label="在等级分相同的 Codeforces 选手中，两年内谁达到 2400 的 AUC：随机 0.5，仅等级分 0.599，Neuropian 评分 0.647"><div class="dp-row chance" tabindex="0" title="随机：AUC 0.500"><span class="dp-lab">随机</span><span class="dp-track"><i class="dp-stem" style="--x:0.0%"></i><b class="dp-dot" style="--x:0.0%"></b></span><span class="dp-val">0.500</span></div><div class="dp-row base" tabindex="0" title="仅等级分：AUC 0.599"><span class="dp-lab">仅等级分</span><span class="dp-track"><i class="dp-stem" style="--x:49.5%"></i><b class="dp-dot" style="--x:49.5%"></b></span><span class="dp-val">0.599</span></div><div class="dp-row ours" tabindex="0" title="Neuropian 评分：AUC 0.647"><span class="dp-lab">Neuropian 评分</span><span class="dp-track"><i class="dp-stem" style="--x:73.5%"></i><b class="dp-dot" style="--x:73.5%"></b></span><span class="dp-val">0.647</span></div><div class="dp-row dp-axis" aria-hidden="true"><span class="dp-lab"></span><span class="dp-ticks"><span style="--x:0.0%">0.50</span><span style="--x:25.0%">0.55</span><span style="--x:50.0%">0.60</span><span style="--x:75.0%">0.65</span><span style="--x:100.0%">0.70</span></span><span class="dp-val"></span></div><figcaption>在等级分相同的选手中，谁在两年内达到了 2400（AUC；0.5 为随机水平）。高于随机的信号：等级分 0.099，Neuropian 0.147，1.48×。在 2022–24 年上选定，在 2024–26 年上原样测试。</figcaption></figure>
-        
-        <details>
-          <summary>方法与数据</summary>
-          <ul>
-            <li><strong>群组。</strong>2024 年 10 月 16 日等级分在 1600–2300 之间、至少参加过 15 场计分比赛且在此前一年中参加过 3 场的每一位 Codeforces 选手：共 11,088 人。其中 290 人（2.6%）在之后两年内达到 2400。</li>
-            <li><strong>在更早的数据上选定。</strong>同样的规则用于 2022 年 10 月 16 日：9,305 名选手，其中 274 人在 2024 年 10 月前达到 2400，即测试期开始之前。若某项特征在区间内的 AUC 高于 0.55 就保留，低于 0.45 就反向使用：12 个月的等级分涨幅、达到 2000 所用比赛场数之少（从未达到则为 0）、最后一场比赛前 12 个月中有比赛的月数、距离本人峰值的差距，以及有计分比赛的自然年数（取负）。</li>
-            <li><strong>排序方式，同样在 2022–24 年上选定。</strong>候选方案：仅等级分；等级分加 0.05、0.1 或 0.2 × 评分；按 10、25、50 或 100 分划分等级分区间，在每个区间内按评分排序。25 分区间在前 50、100 和 290 名中找到的未来 2400 选手最多。</li>
-            <li><strong>测试。</strong>冻结后应用于 2024 年群组：仅评分在 100 分区间内得到 0.647（等级分：0.599），在 10 分区间内得到 0.632。实际采用的排序整体 AUC 为 0.899，仅等级分为 0.896（95% 置信区间 0.878–0.913）。等级分 + 0.2 × 评分的 AUC 最高，为 0.908（配对自助法测得相对等级分的提升为 +0.005 到 +0.019），但它的前 50、100 和 290 名中只有 13、28 和 81 名未来 2400 选手，所以没有采用。在名单的最顶端，等级分仍然很难被超越：实际采用的排序在前 50、100 和 290 名中有 18、40 和 92 名未来 2400 选手，仅等级分则为 21、40 和 89 名。</li>
-            <li><strong>谁会继续参赛。</strong>2024 年群组中有 37% 的人之后没有再参加任何计分比赛。如果除了等级分之外，再按之后参加的比赛场数对选手分组，评分的 AUC 降到 0.613。</li>
-            <li><strong>注意事项。</strong>在这次测试之前，2024 年群组已在样本内被分析过（在同一批选手上选定特征并打分：0.655；从 2023 年起、三年窗口：0.668），所以它不是一个完全干净的保留测试集。最初的公式（等级分，加 0.6 × 12 个月涨幅，再加通过爬升筛选的奖励分）整体得分 0.879，低于仅等级分。</li>
-            <li><strong>当前名单。</strong>等级分 2100 及以上的活跃选手，关注者最多 60 个，账号注册不满五年，且用户名不带奥赛风格或出生年份；他们选自按“等级分减去关注者惩罚”排名最高的 1,200 人。他们还必须通过测试中未使用的筛选条件，包括至少 25 场计分比赛、比最初 10 场比赛时上升 300，以及 12 个月涨幅为正。测试覆盖的等级分范围是 1600–2300；目前名单上的 64 人中有 25 人高于 2300。AtCoder 和 Math Stack Exchange 名单没有做过回测。</li>
-            <li><strong>AUC</strong> = 随机选一名达到 2400 的选手，其排名高于一名未达到者的概率。区间内 AUC 是对各区间取平均，按达到 2400 的人数加权；一个区间至少需要 3 名达到者和 3 名未达到者。</li>
-          </ul>
-        </details>
-      </div>
-    </div>
-
-  </div>
-</section>
-
 
 <section id="next">
   <div class="wrap">

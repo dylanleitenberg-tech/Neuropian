@@ -495,7 +495,6 @@ footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decor
     <a class="mark" href="#top" aria-label="Neuropian, top of page"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
     <nav class="nav" aria-label="Sections">
       <a href="#plain">How it works</a>
-      <a href="#method">Method</a>
       <a href="/talent">Talent</a>
       <a href="#contact">Contact</a>
       <a class="login" href="/app" data-auth="login">Log in</a>
@@ -585,39 +584,6 @@ footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decor
     <p class="flow-end reveal">For 100 of them so far, a short report links straight to their work.</p>
   </div>
 </section>
-
-<section id="method">
-  <div class="wrap">
-    <p class="kicker">Method · numbers as of 25 Oct 2026</p>
-
-    <div class="block">
-      <div>
-        <h3>Reasoners</h3>
-        <p class="what">Competitive programmers and mathematicians. Neuropian reads their contest results and math answers, and among people with the same score it is better at spotting who will reach Grandmaster (2400) next.</p>
-      </div>
-      <div>
-        <div class="stat"><b>1.5×</b><span>the predictive signal of rating alone, for spotting who reaches Grandmaster (a 2400 rating) among Codeforces players with the same rating. Chosen on 2022–24 data and tested unchanged on 2024–26; that cohort had been explored earlier, so it is not a fully clean holdout.</span></div>
-        <figure class="chart dotplot reveal" role="group" aria-label="Among Codeforces players of the same rating, AUC for who reached 2400 within two years: chance 0.5, rating alone 0.599, Neuropian score 0.647"><div class="dp-row chance" tabindex="0" title="Chance: AUC 0.500"><span class="dp-lab">Chance</span><span class="dp-track"><i class="dp-stem" style="--x:0.0%"></i><b class="dp-dot" style="--x:0.0%"></b></span><span class="dp-val">0.500</span></div><div class="dp-row base" tabindex="0" title="Rating alone: AUC 0.599"><span class="dp-lab">Rating alone</span><span class="dp-track"><i class="dp-stem" style="--x:49.5%"></i><b class="dp-dot" style="--x:49.5%"></b></span><span class="dp-val">0.599</span></div><div class="dp-row ours" tabindex="0" title="Neuropian score: AUC 0.647"><span class="dp-lab">Neuropian score</span><span class="dp-track"><i class="dp-stem" style="--x:73.5%"></i><b class="dp-dot" style="--x:73.5%"></b></span><span class="dp-val">0.647</span></div><div class="dp-row dp-axis" aria-hidden="true"><span class="dp-lab"></span><span class="dp-ticks"><span style="--x:0.0%">0.50</span><span style="--x:25.0%">0.55</span><span style="--x:50.0%">0.60</span><span style="--x:75.0%">0.65</span><span style="--x:100.0%">0.70</span></span><span class="dp-val"></span></div><figcaption>Who reached 2400 within two years, among players of the same rating (AUC; 0.5 is chance). Signal above chance: rating 0.099, Neuropian 0.147, 1.48×. Chosen on 2022–24, tested unchanged on 2024–26.</figcaption></figure>
-        
-        <details>
-          <summary>Method and numbers</summary>
-          <ul>
-            <li><strong>Cohort.</strong> Every Codeforces player rated 1600–2300 on 16 Oct 2024, with at least 15 rated contests and 3 in the year before: 11,088 players. 290 (2.6%) reached 2400 in the two years after.</li>
-            <li><strong>Chosen on earlier data.</strong> Same rules on 16 Oct 2022: 9,305 players, 274 reached 2400 by Oct 2024, before the test period starts. Traits kept if their within-band AUC was above 0.55, reversed if below 0.45: 12-month rating gain, how few contests it took to reach 2000 (0 if never), months with a contest in the 12 months before their last one, distance below their own peak, minus calendar years with a rated contest.</li>
-            <li><strong>Ranking, also chosen on 2022–24.</strong> Candidates: rating alone; rating plus 0.05, 0.1 or 0.2 × score; rating bands of 10, 25, 50 or 100 points with the score ordering each band. 25-point bands found the most future 2400s in the top 50, 100 and 290.</li>
-            <li><strong>Test.</strong> Frozen and applied to the 2024 cohort: the score alone gets 0.647 within 100-point bands (rating: 0.599) and 0.632 within 10-point bands. The deployed ranking gets AUC 0.899 overall, against 0.896 for rating alone (95% CI 0.878–0.913). Rating + 0.2 × score had the highest AUC, 0.908 (paired-bootstrap gain over rating +0.005 to +0.019), but only 13, 28 and 81 future 2400s in its top 50, 100 and 290, so it isn't used. At the very top of a list rating is still hard to beat: the deployed ranking's top 50, 100 and 290 held 18, 40 and 92 future 2400s, against 21, 40 and 89 for rating alone.</li>
-            <li><strong>Who keeps competing.</strong> 37% of the 2024 cohort played no rated contest afterwards. Grouping players by contests played afterwards as well as by rating, the score's AUC falls to 0.613.</li>
-            <li><strong>Caveats.</strong> The 2024 cohort had been explored in-sample before this test (traits chosen and scored on the same players: 0.655; from a 2023 start, three-year window: 0.668), so it is not a fully clean holdout. The first formula (rating, plus 0.6 × 12-month gain, plus a bonus for passing the climb filter) scored 0.879 overall, below rating alone.</li>
-            <li><strong>Live list.</strong> Active players rated 2100 or more, with at most 60 followers, accounts under five years old and no olympiad-style or birth-year handles, drawn from the 1,200 highest by rating less a follower penalty. They must also pass filters the test didn't use, including 25 or more rated contests, a climb of 300 from their first 10 contests and a positive 12-month gain. The test covered ratings 1600–2300; 25 of the 64 now listed are above 2300. The AtCoder and Math Stack Exchange lists are not back-tested.</li>
-            <li><strong>AUC</strong> = the probability that a randomly chosen player who reached 2400 is ranked above one who did not. Within-band AUC is averaged across bands, weighted by the number who reached 2400; a band needs at least 3 who did and 3 who didn't.</li>
-          </ul>
-        </details>
-      </div>
-    </div>
-
-  </div>
-</section>
-
 
 <section id="next">
   <div class="wrap">
