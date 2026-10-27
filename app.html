@@ -22,7 +22,7 @@ try{q=new URLSearchParams(location.search);if(q.has('lang')){l=f(q.get('lang'));
     else{try{l=f(localStorage.getItem(P));}catch(e){}if(!l)l=nav();}}}}catch(e){}   // nothing stored: the browser's language, unless one was picked
 if(!l)return;window.__npLang=l;
 var add=function(src,ordered){var s=document.createElement('script');s.src=src;if(ordered)s.async=false;document.head.appendChild(s);return s;};
-window.__npI18n=new Promise(function(r){var s=add('/assets/app/auth-i18n.js?v=20261026e');s.onload=s.onerror=function(){r();};setTimeout(r,4000);});
+window.__npI18n=new Promise(function(r){var s=add('/assets/app/auth-i18n.js?v=20261026f');s.onload=s.onerror=function(){r();};setTimeout(r,4000);});
 if(q&&q.has('embed'))return;
 var d=document.documentElement,st=document.createElement('style');st.textContent='html.np-i18n-wait body{visibility:hidden}';document.head.appendChild(st);
 d.classList.add('np-i18n-wait');setTimeout(function(){d.classList.remove('np-i18n-wait');},3000);   // shown in English if the table never arrives
@@ -1595,7 +1595,7 @@ async function doSetPassword(){
   const errEl=document.getElementById('sp-err');
   errEl.style.display='none';
   if(!p1||!p2){errEl.textContent='Please fill in both fields.';errEl.style.display='block';return;}
-  if(p1.length<6){errEl.textContent='Password must be at least 6 characters.';errEl.style.display='block';return;}
+  if(p1.length<8||!/[A-Z]/.test(p1)||!/[a-z]/.test(p1)||!/[0-9]/.test(p1)){errEl.textContent='Password needs 8+ characters, with a capital letter and a number.';errEl.style.display='block';return;}
   if(p1!==p2){errEl.textContent='Passwords do not match.';errEl.style.display='block';return;}
   const btn=document.getElementById('sp-btn');btn.textContent='Updating…';btn.disabled=true;
   const{error}=await sb.auth.updateUser({password:p1});
@@ -1784,7 +1784,7 @@ async function doRegister(){
   if(m<0||(m===0&&today.getDate()<birth.getDate()))age--;
   if(isNaN(age)||age>110){showErr('rg-err','Please enter your real date of birth.');return}if(age<18){showErr('rg-err','You must be 18 or older to create an account.');return}
   
-  if(pass.length<6){showErr('rg-err','Password must be at least 6 characters.');return}
+  if(pass.length<8||!/[A-Z]/.test(pass)||!/[a-z]/.test(pass)||!/[0-9]/.test(pass)){showErr('rg-err','Password needs 8+ characters, with a capital letter and a number.');return}
   // Check username uniqueness
   try{
     const{data:taken}=await sb.from('public_profiles').select('user_id').eq('username',username).maybeSingle();
@@ -5020,7 +5020,7 @@ else{renderOppPreview();}
       <div class="auth-field"><label>Country you live in</label><select id="rg-country" class="np-country" style="width:100%;padding:.75rem .95rem;border:1px solid rgba(43,42,40,.12);font-family:'Barlow',sans-serif;font-size:.84rem;color:var(--white);background:rgba(43,42,40,.05);outline:none;box-sizing:border-box"></select></div>
       
       <div class="auth-field"><label>Email Address</label><input type="email" id="rg-email" placeholder="you@example.com" autocomplete="email"></div>
-      <div class="auth-field"><label>Password</label><input type="password" id="rg-pass" placeholder="Create a strong password" autocomplete="new-password"><div style="font-size:.52rem;color:#b0aca8;margin-top:.3rem;line-height:1.5">At least 6 characters.</div></div>
+      <div class="auth-field"><label>Password</label><input type="password" id="rg-pass" placeholder="Create a strong password" autocomplete="new-password"><div style="font-size:.52rem;color:#b0aca8;margin-top:.3rem;line-height:1.5">8+ characters, with a capital letter and a number.</div></div>
       <div class="auth-field" style="margin-bottom:1.1rem">
         <label style="display:block;margin-bottom:.55rem">Profile Picture <span style="color:#a09d9a;font-size:.65em;font-weight:400">- required</span></label>
         <div style="display:flex;align-items:center;gap:1rem">
