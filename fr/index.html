@@ -440,26 +440,15 @@ a:focus-visible,summary:focus-visible{outline-color:var(--acc)}
 .mq-b{width:44px;height:44px;border-radius:50%;border:1px solid rgba(43,42,40,.3);background:transparent;color:inherit;font:inherit;font-size:20px;line-height:1;cursor:pointer}
 .mq-b:hover{border-color:rgba(43,42,40,.7)}
 @media (prefers-reduced-motion:reduce){.mq-track{scroll-behavior:auto}}
-/* members globe (#where): one bone-white point per member at their city rounded to 0.5 deg; a hologram on a dark disc (assets/globe.js) */
-.geo-sec{padding:clamp(56px,8vw,112px) 0}
-.geo-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:center}
-.geo-sec .lede{margin-top:18px}
-.geo-key{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:28px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
-.geo-key li{display:flex;align-items:center;gap:10px}
-.geo-key i{flex:none;display:block;width:8px;height:8px;border-radius:50%;background:#FFFCF4;box-shadow:0 0 0 4px var(--night),0 0 6px 5px rgba(237,230,214,.55)}
-.geo{--holo:237,230,214;margin:0;width:min(100%,520px);justify-self:end}
-.geo-stage{position:relative;aspect-ratio:1/1;border-radius:50%;box-shadow:0 0 0 1px rgba(43,42,40,.28),0 26px 70px rgba(20,22,26,.30)}
-.geo canvas{position:absolute;inset:0;display:block;width:100%;height:100%;border-radius:50%;touch-action:pan-y;cursor:grab;-webkit-tap-highlight-color:transparent}
+/* members globe: a bone-white side piece in #members; one point per member at their city rounded to 0.5 deg; turning it turns the carousel (assets/globe.js) */
+.mq-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,4vw,64px);align-items:center}
+.geo{margin:0;width:clamp(300px,30vw,400px)}
+.geo-stage{position:relative;aspect-ratio:1/1}
+.geo canvas{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab;-webkit-tap-highlight-color:transparent}
 .geo canvas:active{cursor:grabbing}
-.geo:not(.geo-on) .geo-stage{background:radial-gradient(circle at 38% 35%,#262B34,#0C0E12 72%)}
-.geo-stage::after{content:"";position:absolute;inset:5%;border-radius:50%;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(var(--holo),.045) 0 1px,transparent 1px 3px)}
-.geo.geo-on canvas{animation:geo-flicker 9s steps(1) infinite}
-@keyframes geo-flicker{0%,100%{opacity:1}41%{opacity:.93}42%{opacity:1}77%{opacity:.96}78%{opacity:1}}
-.geo-hint{display:none;margin-top:14px;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
-.geo.geo-on .geo-hint{display:block}
+.geo-stage::after{content:"";position:absolute;inset:8%;border-radius:50%;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(43,42,40,.022) 0 1px,transparent 1px 3px)}
 html:not(.js) .geo,.geo.geo-off{display:none}
-@media (prefers-reduced-motion:reduce){.geo.geo-on canvas{animation:none}}
-@media (max-width:860px){.geo-grid{grid-template-columns:minmax(0,1fr)}.geo{justify-self:center;width:min(100%,420px)}}
+@media (max-width:860px){.mq-head{grid-template-columns:minmax(0,1fr)}.geo{justify-self:center;width:min(100%,280px)}}
 </style>
 <!--i18n:head-->
 <link rel="alternate" hreflang="en" href="https://neuropian.com/">
@@ -536,25 +525,16 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
 </section>
 
 <section id="members" class="mq-sec" hidden>
-  <div class="wrap">
+  <div class="wrap mq-head">
+   <div class="mq-intro">
     <p class="kicker">En ce moment sur Neuropian</p>
     <h2>Notre équipe.</h2>
     <p class="lede">Les bâtisseurs de Neuropian. Chacun a publié son propre profil, et les noms restent privés sauf si la personne choisit de les montrer.</p>
+   </div>
+   <figure class="geo" id="geo"><div class="geo-stage"><canvas width="400" height="400" role="img" data-geo-total="29" aria-label="Globe : des membres dans 29 pays ; surtout aux États-Unis et en Inde"></canvas></div></figure>
   </div>
   <div class="mq" role="region" aria-label="Profils publiés"><div class="mq-track" id="mq-track"></div></div>
   <div class="wrap mq-foot"><a class="mq-all" href="/talent?lang=fr">Les voir tous sur Talent →</a><span class="mq-nav"><button class="mq-b" type="button" data-d="-1" aria-label="Précédent">&larr;</button><button class="mq-b" type="button" data-d="1" aria-label="Suivant">&rarr;</button></span></div>
-</section>
-
-<section id="where" class="geo-sec">
-  <div class="wrap geo-grid">
-    <div class="geo-text">
-      <p class="kicker">Où sont les membres</p>
-      <h2 data-geo-total="29">Des membres dans 29 pays.</h2>
-      <p class="lede">Surtout aux États-Unis et en Inde. Un point par membre, placé sur sa ville arrondie à environ 50 km : on voit où, jamais qui. Les membres qui n’ont pas indiqué où ils vivent sont placés dans des régions où nous ne sommes pas encore.</p>
-      <ul class="geo-key" aria-label="Légende"><li><i></i>Un membre</li></ul>
-    </div>
-    <figure class="geo" id="geo"><div class="geo-stage"><canvas width="480" height="480" role="img" data-geo-total="29" aria-label="Globe : des membres dans 29 pays ; surtout aux États-Unis et en Inde"></canvas></div><figcaption class="geo-hint" aria-hidden="true">Faites glisser pour tourner</figcaption></figure>
-  </div>
 </section>
 
 <section id="fields" class="plates-sec">
@@ -652,7 +632,7 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
   </div>
 </footer>
 <script src="/assets/site.js?v=20261025a" defer></script>
-<script src="/assets/globe.js?v=20261027b" defer></script>
+<script src="/assets/globe.js?v=20261027d" defer></script>
 <style>
 /* account card: opens over the page when you're signed in (Log in / Create an account never leave the page) */
 a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
