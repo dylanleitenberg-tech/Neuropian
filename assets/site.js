@@ -37,7 +37,7 @@
       es.forEach(function (e) {
         if (!e.isIntersecting) return;
         obs.unobserve(e.target);
-        typeInto(e.target, e.target.getAttribute("data-text"), 22);
+        typeInto(e.target, e.target.getAttribute("data-text"), 45);
       });
     }, { rootMargin: "0px 0px -12% 0px" });
     typed.forEach(function (el) {
@@ -72,7 +72,8 @@
   if (h1 && !reduce) {
     var t1 = h1.textContent.trim(), h1html = h1.innerHTML;          /* typing uses plain text; the coloured word comes back after */
     h1.style.minHeight = h1.offsetHeight + "px";
-    setTimeout(function () { typeInto(h1, t1, 34, function () { h1.innerHTML = h1html; }); }, 250);
+    h1.setAttribute("data-type", "");                               /* show the cursor while it types (Dylan 2026-10-28: bring the type-out back, visibly) */
+    setTimeout(function () { typeInto(h1, t1, 75, function () { h1.removeAttribute("data-type"); h1.innerHTML = h1html; }); }, 400);
   }
 
   /* The last run: lines type out one after another when the terminal comes into view. */
