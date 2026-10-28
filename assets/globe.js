@@ -10,19 +10,21 @@
   var fig = document.getElementById("geo"), cv = fig && fig.querySelector("canvas");
   if (!fig || !cv || !cv.getContext || !window.fetch) return;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var SPIN_DEG_PER_SEC = 1.5;   /* auto-spin speed; the carousel it drives moves with it (360 deg = the whole track) */
+  var SPIN_DEG_PER_SEC = 1.5, DEG_PER_CARD = 12;   /* auto-spin = one card every 8 s; a quarter-turn drag = ~7 cards */
+  var SPIN_DEG_PER_SEC_ = SPIN_DEG_PER_SEC;   /* auto-spin speed; the carousel it drives moves with it (360 deg = the whole track) */
   var DOT_SCALE = [1, 1.4, 1.85, 2.35, 2.8];   /* member dot size by cluster bucket: 1, 2-3, 4-7, 8-15, 16+ members */
   var RAD = Math.PI / 180, started = false;
   var GRAT = "140,126,100", LAND = "168,152,120", SHADE = "112,96,68", TINT = "196,182,150";   /* bone greys */
 
   function start() {
     if (started) return; started = true;
-    fetch("/assets/members-geo.json?v=20261027c").then(function (r) { if (!r.ok) throw r; return r.json(); })
+    fetch("/assets/members-geo.json?v=20261028a").then(function (r) { if (!r.ok) throw r; return r.json(); })
       .then(run).catch(function () { fig.classList.add("geo-off"); });
   }
   function prep(lat, lon) { return [Math.cos(lat * RAD), Math.sin(lat * RAD), lon * RAD]; }
 
-  /* the carousel follows the globe: degrees turned -> pixels scrolled (360 degrees = the whole track), looping.
+  /* the carousel follows the globe: degrees turned -> pixels scrolled at a FIXED rate, one card per DEG_PER_CARD degrees
+     (Dylan 2026-10-28: "a reasonable rate"; 360 deg = whole track got faster with every new member), looping.
      Someone using the carousel themselves (arrows, swipe, wheel, keys) gets it back, snapping as usual, for a moment. */
   var track = document.getElementById("mq-track"), pos = null, hold = 0;
   function handBack() {
@@ -40,7 +42,9 @@
     var max = track.scrollWidth - track.clientWidth; if (max <= 0) return;
     if (track.style.scrollSnapType !== "none") { track.style.scrollSnapType = "none"; track.style.scrollBehavior = "auto"; }
     if (pos === null || Math.abs(pos - track.scrollLeft) > 3) pos = track.scrollLeft;
-    pos += dl * max / 360;
+    var card = track.firstElementChild, gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    var step = card ? card.getBoundingClientRect().width + gap : track.clientWidth / 3;
+    pos += dl * step / DEG_PER_CARD;
     if (pos > max) pos -= max; else if (pos < 0) pos += max;   /* past the last card: back to the first, and the reverse */
     track.scrollLeft = pos;
   }
