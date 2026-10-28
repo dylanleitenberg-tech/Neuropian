@@ -5246,7 +5246,7 @@ async function publishProfile(){
   }
   _bMsg('Publishing…');
   if(!(await _bSave()))return;
-  try{const d=await _bCall({action:'publish'}); _bPub=d.public_id; _bShowPub(); _bStatus(p); _bMsg('Published. Startups searching Talent can find you now.');}
+  try{const d=await _bCall({action:'publish'}); _bPub=d.public_id; _bShowPub(); _bStatus(p); _bMsg('Submitted. Every profile is reviewed before it appears on Talent; we will email you when yours is listed.');}
   catch(e){_bMsg(e.message);}
 }
 async function unpublishProfile(){ try{await _bCall({action:'unpublish'}); _bPub=null; _bShowPub(); _bMsg('Unpublished. Your page is no longer public.');}catch(e){_bMsg(e.message);} }
