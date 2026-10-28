@@ -302,24 +302,24 @@
      in caps put the script's sans first and drop the letter-spacing made for capitals. Hindi: the app's font-size-adjust
      (.46) shrinks Devanagari next to Latin words, so it is off. */
   var F = {
-    he: ['"EB Garamond","Noto Serif Hebrew",Garamond,Georgia,serif', '"DM Serif Display","Frank Ruhl Libre","Noto Serif Hebrew",Georgia,serif',
-         '"Noto Sans Hebrew","JetBrains Mono",ui-monospace,Menlo,monospace', '.02em',
+    he: ['"Newsreader","Noto Serif Hebrew",Garamond,Georgia,serif', '"Newsreader","Frank Ruhl Libre","Noto Serif Hebrew",Georgia,serif',
+         '"Noto Sans Hebrew","IBM Plex Mono",ui-monospace,Menlo,monospace', '.02em',
          'family=Frank+Ruhl+Libre:wght@400;500;700&family=Noto+Serif+Hebrew:wght@400;500;600&family=Noto+Sans+Hebrew:wght@400;500'],
-    hi: ['"EB Garamond","Noto Serif Devanagari",Garamond,Georgia,serif', '"DM Serif Display","Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif',
-         '"Noto Sans Devanagari","JetBrains Mono",ui-monospace,Menlo,monospace', '0',
+    hi: ['"Newsreader","Noto Serif Devanagari",Garamond,Georgia,serif', '"Newsreader","Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif',
+         '"Noto Sans Devanagari","IBM Plex Mono",ui-monospace,Menlo,monospace', '0',
          'family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Serif+Devanagari:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500'],
-    zh: ['"EB Garamond","Noto Serif SC",Garamond,Georgia,serif', '"DM Serif Display","Noto Serif SC",Georgia,serif',
-         '"Noto Sans SC","JetBrains Mono",ui-monospace,Menlo,monospace', '.06em',
+    zh: ['"Newsreader","Noto Serif SC",Garamond,Georgia,serif', '"Newsreader","Noto Serif SC",Georgia,serif',
+         '"Noto Sans SC","IBM Plex Mono",ui-monospace,Menlo,monospace', '.06em',
          'family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500']
   }[L];
   /* Talent uses the home pages' font variables, so it gets the home pages' rules (site_i18n.py LANG_CSS) */
   var TCSS = {
-    he: ':root{--serif:"EB Garamond","Noto Serif Hebrew",Garamond,Georgia,serif;--display:"DM Serif Display","Frank Ruhl Libre","Noto Serif Hebrew",Georgia,serif;--mono:"JetBrains Mono","Noto Sans Hebrew",ui-monospace,SFMono-Regular,Menlo,monospace}\n' +
+    he: ':root{--serif:"Newsreader","Noto Serif Hebrew",Garamond,Georgia,serif;--display:"Newsreader","Frank Ruhl Libre","Noto Serif Hebrew",Georgia,serif;--mono:"IBM Plex Mono","Noto Sans Hebrew",ui-monospace,SFMono-Regular,Menlo,monospace}\n' +
         'body{line-height:1.55}h1,h2,h3,.npac h2{font-weight:500;font-synthesis:none}.kicker,.badge,.chip,.npac-k,.npld{letter-spacing:.02em}\n' +
         'html .npac-x{right:auto;left:12px}html .npac-l a::after{content:"\\2190"}html .npac-l a:hover{padding-left:0;padding-right:6px}\n',
-    hi: ':root{--serif:"EB Garamond","Noto Serif Devanagari",Garamond,Georgia,serif;--display:"DM Serif Display","Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;--mono:"JetBrains Mono","Noto Sans Devanagari",ui-monospace,SFMono-Regular,Menlo,monospace}\n' +
+    hi: ':root{--serif:"Newsreader","Noto Serif Devanagari",Garamond,Georgia,serif;--display:"Newsreader","Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;--mono:"IBM Plex Mono","Noto Sans Devanagari",ui-monospace,SFMono-Regular,Menlo,monospace}\n' +
         'body{line-height:1.65}h1,h2,h3{letter-spacing:0;line-height:1.3}.kicker,.badge,.chip,.c-match,.npac-k,.npld{letter-spacing:0}html .npac h2{line-height:1.3}.kicker{font-size:14px}html .npac-k{font-size:13px}\n',
-    zh: ':root{--serif:"EB Garamond","Noto Serif SC",Garamond,Georgia,serif;--display:"DM Serif Display","Noto Serif SC",Georgia,serif;--mono:"JetBrains Mono","Noto Sans SC",ui-monospace,SFMono-Regular,Menlo,monospace}\n' +
+    zh: ':root{--serif:"Newsreader","Noto Serif SC",Garamond,Georgia,serif;--display:"Newsreader","Noto Serif SC",Georgia,serif;--mono:"IBM Plex Mono","Noto Sans SC",ui-monospace,SFMono-Regular,Menlo,monospace}\n' +
         'body{line-height:1.7}h1,h2,h3,.npac h2{font-weight:600;font-synthesis:none;letter-spacing:0}.kicker,.npac-k,.npld{letter-spacing:.06em}\n'
   };
   /* in a right-to-left area, what people wrote (names, titles, bios) keeps its own direction per paragraph, aligned right with the page */

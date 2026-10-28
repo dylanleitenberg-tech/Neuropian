@@ -10,7 +10,7 @@
   var fig = document.getElementById("geo"), cv = fig && fig.querySelector("canvas");
   if (!fig || !cv || !cv.getContext || !window.fetch) return;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var SPIN_DEG_PER_SEC = 1.5, DEG_PER_CARD = 24;   /* auto-spin = one card every 16 s; a quarter-turn drag = ~4 cards (Dylan 2026-10-28: slower) */
+  var SPIN_DEG_PER_SEC = 1.5, DEG_PER_CARD = 48;   /* auto-spin = one card every 32 s; a quarter-turn drag = ~2 cards (Dylan 2026-10-28: globe turns the cards less) */
   var SPIN_DEG_PER_SEC_ = SPIN_DEG_PER_SEC;   /* auto-spin speed; the carousel it drives moves with it (360 deg = the whole track) */
   var DOT_SCALE = [1, 1.4, 1.85, 2.35, 2.8];   /* member dot size by cluster bucket: 1, 2-3, 4-7, 8-15, 16+ members */
   var RAD = Math.PI / 180, started = false;

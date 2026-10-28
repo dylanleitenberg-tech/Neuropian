@@ -776,14 +776,14 @@
      letter-spacing made for capitals. Hindi: the app's font-size-adjust (.46) shrinks Devanagari next to Latin words, so
      it is off there and the smallest text is a little larger. */
   var F = {
-    he: ['"EB Garamond","Noto Serif Hebrew",Garamond,Georgia,serif', '"DM Serif Display","Frank Ruhl Libre","Noto Serif Hebrew",Georgia,serif',
-         '"Noto Sans Hebrew","JetBrains Mono",ui-monospace,Menlo,monospace', '.02em', '12px', '12px',
+    he: ['"Newsreader","Noto Serif Hebrew",Garamond,Georgia,serif', '"Newsreader","Frank Ruhl Libre","Noto Serif Hebrew",Georgia,serif',
+         '"Noto Sans Hebrew","IBM Plex Mono",ui-monospace,Menlo,monospace', '.02em', '12px', '12px',
          'family=Frank+Ruhl+Libre:wght@400;500;700&family=Noto+Serif+Hebrew:wght@400;500;600&family=Noto+Sans+Hebrew:wght@400;500'],
-    hi: ['"EB Garamond","Noto Serif Devanagari",Garamond,Georgia,serif', '"DM Serif Display","Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif',
-         '"Noto Sans Devanagari","JetBrains Mono",ui-monospace,Menlo,monospace', '0', '13px', '13px',
+    hi: ['"Newsreader","Noto Serif Devanagari",Garamond,Georgia,serif', '"Newsreader","Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif',
+         '"Noto Sans Devanagari","IBM Plex Mono",ui-monospace,Menlo,monospace', '0', '13px', '13px',
          'family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Serif+Devanagari:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500'],
-    zh: ['"EB Garamond","Noto Serif SC",Garamond,Georgia,serif', '"DM Serif Display","Noto Serif SC",Georgia,serif',
-         '"Noto Sans SC","JetBrains Mono",ui-monospace,Menlo,monospace', '.06em', '12px', '12px',
+    zh: ['"Newsreader","Noto Serif SC",Garamond,Georgia,serif', '"Newsreader","Noto Serif SC",Georgia,serif',
+         '"Noto Sans SC","IBM Plex Mono",ui-monospace,Menlo,monospace', '.06em', '12px', '12px',
          'family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500']
   }[L];
   function style() {

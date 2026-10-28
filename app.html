@@ -38,7 +38,7 @@ add('/assets/app/i18n/'+l+'.js?v=20261026a',1);add('/assets/app/app-i18n.js?v=20
 <meta property="og:site_name" content="Neuropian">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.106.2/dist/umd/supabase.js" integrity="sha384-m/8UHFJHeU6nrCKP2hBnAseuvAKUmLF+8e5bWos5CJL023vuxX7kiVL5t8yjsJhV" crossorigin="anonymous"></script>
 <style>
 
@@ -692,20 +692,20 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 .m-legal a{color:rgba(43,42,40,.62);text-decoration:underline;text-decoration-color:rgba(43,42,40,.38);text-underline-offset:.2em;cursor:pointer}
 /* language menu in the top bar (assets/lang-menu.js; same as the home pages and /talent) */
 .np-lang{position:relative;display:inline-flex;flex-shrink:0}
-html:not(#np-x) .np-lang-btn{display:inline-flex;align-items:center;gap:6px;margin:0;font:inherit;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-size:13px;letter-spacing:.06em;line-height:1;color:#2B2A28;background:transparent;border:1px solid rgba(43,42,40,.3);border-radius:0;padding:7px 9px;cursor:pointer}
+html:not(#np-x) .np-lang-btn{display:inline-flex;align-items:center;gap:6px;margin:0;font:inherit;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-size:13px;letter-spacing:.06em;line-height:1;color:#2B2A28;background:transparent;border:1px solid rgba(43,42,40,.3);border-radius:0;padding:7px 9px;cursor:pointer}
 .np-lang-btn svg{width:15px;height:15px;flex-shrink:0}
 .np-lang-btn:hover,.np-lang-btn[aria-expanded="true"]{border-color:#2B2A28}
 .np-lang-btn:focus-visible,.np-lang-list a:focus-visible{outline:2px solid #2B4C7E;outline-offset:2px}
 .np-lang-list{position:absolute;top:calc(100% + 14px);inset-inline-end:0;z-index:1000;min-width:170px;margin:0;padding:6px 0;list-style:none;background:#ECE8E3;border:1px solid rgba(43,42,40,.3);box-shadow:0 14px 36px rgba(0,0,0,.18);text-align:start}
 .np-lang-list[hidden]{display:none}
-html:not(#np-x) .np-lang-list a{display:block;padding:9px 16px;font-family:"EB Garamond","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif!important;font-size-adjust:none!important;font-size:17px;line-height:1.25;color:#2B2A28;text-decoration:none;white-space:nowrap}
+html:not(#np-x) .np-lang-list a{display:block;padding:9px 16px;font-family:"Newsreader","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif!important;font-size-adjust:none!important;font-size:17px;line-height:1.25;color:#2B2A28;text-decoration:none;white-space:nowrap}
 .np-lang-list a:hover{background:rgba(43,42,40,.07)}
 html:not(#np-x) .np-lang-list a[aria-current]{text-decoration:underline!important;text-underline-offset:.2em}
 /* phones: Sign out moves to the menu and the profile box, so the bar keeps its menu button, logo, avatar, Apply and language */
 @media(max-width:600px){html:not(#np-x) #nav-signout{display:none!important}html:not(#np-x) .nav-right{gap:.45rem!important}}
 /* language list (as in the home pages' footer; a div, since the app styles every <nav> as its top bar); the names use tiny font subsets loaded in <head> */
 .m-langs{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:.8rem;font-size:15px}
-html:not(#np-x) .m-langs a{font-family:"EB Garamond","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif!important;color:rgba(43,42,40,.62);text-decoration:none}
+html:not(#np-x) .m-langs a{font-family:"Newsreader","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif!important;color:rgba(43,42,40,.62);text-decoration:none}
 .m-langs a:hover,.m-langs a[aria-current]{color:#33312f!important;text-decoration:underline;text-decoration-color:rgba(43,42,40,.38);text-underline-offset:.2em}
 @media(max-width:720px){.m-grid{grid-template-columns:1fr}.m-home{padding:7rem 1.2rem 4rem}}
 </style>
@@ -982,7 +982,7 @@ html:not(#np-x) .m-langs a{font-family:"EB Garamond","Noto Serif Hebrew","Noto S
     <div id="server-join-code-bar" style="display:none;padding:.5rem 1rem;background:rgba(43,76,126,.06);border-bottom:1px solid rgba(43,76,126,.1);flex-shrink:0">
       <div style="font-size:.38rem;letter-spacing:.22em;text-transform:uppercase;color:#22406c;font-weight:700;margin-bottom:.25rem">Invite</div>
       <div style="display:flex;align-items:center;gap:.5rem">
-        <span id="server-join-code-text" style="font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;color:#353431;letter-spacing:.14em;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+        <span id="server-join-code-text" style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:700;color:#353431;letter-spacing:.14em;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
         <button onclick="copyInviteLink()" title="Copy invite link" style="background:rgba(43,76,126,.12);border:1px solid rgba(43,76,126,.25);border-radius:3px;color:#22406c;cursor:pointer;font-size:.6rem;padding:.15rem .5rem;line-height:1;transition:background .15s;flex-shrink:0" onmouseenter="this.style.background='rgba(43,76,126,.22)'" onmouseleave="this.style.background='rgba(43,76,126,.12)'" id="copy-code-btn">Copy Link</button>
       </div>
       <div id="invite-link-text" style="font-size:.5rem;color:#b0aca8;margin-top:.2rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div>
@@ -1301,7 +1301,7 @@ html:not(#np-x) .m-langs a{font-family:"EB Garamond","Noto Serif Hebrew","Noto S
       </div>
       <div style="text-align:center">
         <div id="uc-name" style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:#353431;margin-bottom:.18rem"></div>
-        <div id="uc-nid" style="font-family:'JetBrains Mono',monospace;font-size:.52rem;color:#b0aca8;letter-spacing:.12em"></div>
+        <div id="uc-nid" style="font-family:'IBM Plex Mono',monospace;font-size:.52rem;color:#b0aca8;letter-spacing:.12em"></div>
       </div>
     </div>
     <div id="uc-bio-row" style="display:none;background:rgba(43,42,40,.03);border:1px solid rgba(43,42,40,.07);border-radius:4px;padding:.7rem .9rem;margin-bottom:1rem">
@@ -1330,7 +1330,7 @@ html:not(#np-x) .m-langs a{font-family:"EB Garamond","Noto Serif Hebrew","Noto S
     <p style="font-size:.7rem;color:#33312f;line-height:1.6;margin-bottom:1rem">Enter the 7-digit Neuropian ID of the person you want to add.</p>
     <div style="display:flex;flex-direction:column;gap:.9rem">
       <div><label style="font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#33312f;display:block;margin-bottom:.35rem">Neuropian ID</label>
-        <input id="fr-email" type="text" placeholder="e.g. 1234567" maxlength="7" style="width:100%;background:#d8d5d0;border:1px solid rgba(43,76,126,.15);border-radius:4px;padding:.6rem .85rem;color:#3f3d3b;font-family:'JetBrains Mono',monospace;font-size:1rem;letter-spacing:.18em;outline:none;box-sizing:border-box"></div>
+        <input id="fr-email" type="text" placeholder="e.g. 1234567" maxlength="7" style="width:100%;background:#d8d5d0;border:1px solid rgba(43,76,126,.15);border-radius:4px;padding:.6rem .85rem;color:#3f3d3b;font-family:'IBM Plex Mono',monospace;font-size:1rem;letter-spacing:.18em;outline:none;box-sizing:border-box"></div>
       <div id="fr-msg" style="font-size:.7rem;display:none"></div>
       <button id="fr-btn" onclick="submitFriendRequest()" style="padding:.75rem;background:#2b4c7e;border:none;border-radius:4px;color:#ece8e3;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Send Request</button>
     </div>
@@ -4015,7 +4015,7 @@ async function runTeamAssembly(roomId,roomDesc){return;
         <div style="flex:1;min-width:0">
           <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.15rem">
             <span style="font-size:.76rem;font-weight:600;color:#353431;cursor:pointer" onclick="showUserCard('${p.user_id}')">${escHtml(name)}</span>
-            ${p.neuropian_id?`<span style="font-size:.48rem;color:#22406c;letter-spacing:.1em;font-family:'JetBrains Mono',monospace">${escHtml(p.neuropian_id)}</span>`:''}
+            ${p.neuropian_id?`<span style="font-size:.48rem;color:#22406c;letter-spacing:.1em;font-family:'IBM Plex Mono',monospace">${escHtml(p.neuropian_id)}</span>`:''}
           </div>
           <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem">
             <span style="font-size:.6rem;color:#ece8e3;background:#2b4c7e;padding:.1rem .45rem;border-radius:2px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">${escHtml(role.label)}</span>
@@ -4873,7 +4873,7 @@ else{renderOppPreview();}
     <div style="background:rgba(43,76,126,.05);border:1px solid rgba(43,76,126,.15);border-radius:6px;padding:1rem 1.2rem;margin-bottom:1.2rem">
       <div style="font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:#22406c;font-weight:700;margin-bottom:.4rem">Your Neuropian ID</div>
       <div style="display:flex;align-items:center;gap:.6rem">
-        <span id="profile-neuropian-id" style="font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:#353431;letter-spacing:.18em">, </span>
+        <span id="profile-neuropian-id" style="font-family:'IBM Plex Mono',monospace;font-size:1.3rem;font-weight:700;color:#353431;letter-spacing:.18em">, </span>
         <button onclick="copyNeuropianId()" style="background:rgba(43,76,126,.1);border:1px solid rgba(43,76,126,.2);border-radius:3px;color:#22406c;cursor:pointer;font-size:.52rem;padding:.2rem .5rem;transition:background .15s" onmouseenter="this.style.background='rgba(43,76,126,.22)'" onmouseleave="this.style.background='rgba(43,76,126,.1)'" id="copy-nid-btn">Copy</button>
       </div>
       <div style="font-size:.52rem;color:#a09d9a;margin-top:.4rem">Share this 7-digit ID so others can add you as a friend.</div>
@@ -5350,7 +5350,7 @@ async function declineTerms(){
 <style id="np-restyle">
 :root{--black:#e6e2de;--off-black:#e6e2de;--white:#33312f}
 html,body{background:#e6e2de!important;color:#33312f}
-body *:not(svg):not(svg *):not([style*="Mono"]):not(code):not(pre){font-family:"EB Garamond",Garamond,Georgia,"Times New Roman",serif!important;font-size-adjust:.46}
+body *:not(svg):not(svg *):not([style*="Mono"]):not(code):not(pre){font-family:"Newsreader",Garamond,Georgia,"Times New Roman",serif!important;font-size-adjust:.46}
 /* headings: the site's medium weight and tight tracking, no serif italics */
 h1,h2,h3,.auth-title,[style*="Playfair"],[style*="font-size:clamp(2"],[style*="font-size:clamp(3"]{font-weight:500!important;letter-spacing:-.03em!important;font-style:normal!important}
 h1 em,h2 em,h3 em,.auth-title em,[style*="Playfair"] em{font-style:normal!important;color:rgba(43,42,40,.62)!important}
@@ -5420,10 +5420,10 @@ html.np-embed .auth-gate{background:rgba(236,232,227,.5)!important;-webkit-backd
 <style id="np-paper">
 /* paper edition: the same ink, paper, type and one blue accent as neuropian.com */
 html:not(.np-embed),html:not(.np-embed) body{background:#ECE8E3 url(/assets/paper.webp) 0 0/900px 900px!important;color:#2B2A28}
-html:not(#np-x) h1,html:not(#np-x) h2,html:not(#np-x) h3,html:not(#np-x) .auth-title,html:not(#np-x) [style*="Playfair"],html:not(#np-x) [style*="font-size:clamp(2"],html:not(#np-x) [style*="font-size:clamp(3"],html:not(#np-x) h1 *,html:not(#np-x) h2 *,html:not(#np-x) h3 *,html:not(#np-x) .auth-title *{font-family:"DM Serif Display",Georgia,serif!important;font-weight:400!important;letter-spacing:-.01em!important;font-size-adjust:none!important}
-html:not(#np-x) [style*="text-transform:uppercase"],html:not(#np-x) [style*="text-transform: uppercase"],html:not(#np-x) .np-or,html:not(#np-x) .m-kicker,html:not(#np-x) .auth-field label,html:not(#np-x) .auth-label{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-weight:500!important}
-html:not(#np-x) button:not([style*="uppercase"]),html:not(#np-x) .m-btn,html:not(#np-x) .auth-sub-btn,html:not(#np-x) .np-oa{font-family:"EB Garamond",Garamond,Georgia,serif!important;font-size-adjust:.46!important;letter-spacing:0!important}
-html:not(#np-x) code,html:not(#np-x) pre,html:not(#np-x) [style*="Mono"]{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important}
+html:not(#np-x) h1,html:not(#np-x) h2,html:not(#np-x) h3,html:not(#np-x) .auth-title,html:not(#np-x) [style*="Playfair"],html:not(#np-x) [style*="font-size:clamp(2"],html:not(#np-x) [style*="font-size:clamp(3"],html:not(#np-x) h1 *,html:not(#np-x) h2 *,html:not(#np-x) h3 *,html:not(#np-x) .auth-title *{font-family:"Newsreader",Georgia,serif!important;font-weight:400!important;letter-spacing:-.01em!important;font-size-adjust:none!important}
+html:not(#np-x) [style*="text-transform:uppercase"],html:not(#np-x) [style*="text-transform: uppercase"],html:not(#np-x) .np-or,html:not(#np-x) .m-kicker,html:not(#np-x) .auth-field label,html:not(#np-x) .auth-label{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-weight:500!important}
+html:not(#np-x) button:not([style*="uppercase"]),html:not(#np-x) .m-btn,html:not(#np-x) .auth-sub-btn,html:not(#np-x) .np-oa{font-family:"Newsreader",Garamond,Georgia,serif!important;font-size-adjust:.46!important;letter-spacing:0!important}
+html:not(#np-x) code,html:not(#np-x) pre,html:not(#np-x) [style*="Mono"]{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important}
 html:not(#np-x) nav{background:rgba(236,232,227,.92)!important;border-bottom:1px solid rgba(43,42,40,.16)!important}
 html:not(#np-x) .nav-links a{font-size:17px!important;color:rgba(43,42,40,.76)!important}.nav-links a:hover{color:#2B2A28!important}
 /* buttons: square; primary = the blue accent, others = ink outline */
@@ -5484,23 +5484,23 @@ html:not(#np-x) a:focus-visible,html:not(#np-x) button:focus-visible,html:not(#n
 .pc-back{font:inherit;font-size:15px;background:none;border:0;padding:0;color:rgba(43,42,40,.76);cursor:pointer;margin-bottom:2rem}
 .pc-balance{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:2rem;padding:18px 0;border-top:2px solid #2b2a28;border-bottom:1px solid rgba(43,42,40,.16)}
 .pc-invite{padding:18px 0;border-bottom:1px solid rgba(43,42,40,.16)}
-#page-projects .pc-k{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(43,42,40,.76)}
-#page-projects #pc-bal{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-weight:500;font-size:clamp(34px,5vw,52px);line-height:1}
+#page-projects .pc-k{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(43,42,40,.76)}
+#page-projects #pc-bal{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-weight:500;font-size:clamp(34px,5vw,52px);line-height:1}
 #pc-welcome{margin-left:auto}
 .pc-h{font-size:clamp(26px,3vw,34px)!important;margin:2.6rem 0 .8rem}
 .pc-box,.pc-card{border:1px solid rgba(43,42,40,.25);background:rgba(255,255,255,.28);padding:18px 20px;margin-top:12px}
 .pc-top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
 .pc-top b{font-size:20px}
-#page-projects .pc-rw{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-size:14px;white-space:nowrap;color:#2b4c7e}
+#page-projects .pc-rw{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-size:14px;white-space:nowrap;color:#2b4c7e}
 .pc-sum{margin-top:8px;line-height:1.5;white-space:pre-wrap}
 .pc-meta{margin-top:8px;font-size:14px;color:rgba(43,42,40,.76)}
-#page-projects .pc-st{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(43,42,40,.4);padding:2px 8px;margin-left:8px;color:#2b2a28}
+#page-projects .pc-st{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(43,42,40,.4);padding:2px 8px;margin-left:8px;color:#2b2a28}
 .pc-row{border-top:1px solid rgba(43,42,40,.16);padding:12px 0;margin-top:12px}
 .pc-row .m-actions{margin-top:10px}
 .pc-proof{display:block;margin-top:6px;overflow-wrap:anywhere}
 .pc-ledger{list-style:none;border-top:1px solid rgba(43,42,40,.16)}
 .pc-ledger li{display:grid;grid-template-columns:90px 1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid rgba(43,42,40,.16);font-size:15px}
-#page-projects .pc-ledger .d{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;text-align:right}
+#page-projects .pc-ledger .d{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace!important;font-size-adjust:none!important;text-align:right}
 .pc-ledger .when{color:rgba(43,42,40,.76);font-size:14px}
 .pc-empty{color:rgba(43,42,40,.76);margin-top:8px}
 .pc-ledger li.none{display:block}
