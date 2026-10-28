@@ -1398,7 +1398,7 @@ function closeMobileNav(){
 const SUPA_URL = 'https://qggduzzwvdkmekihwuav.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw';
 const sb = (typeof supabase !== 'undefined') ? supabase.createClient(SUPA_URL, SUPA_KEY) : null;
-if(sb)sb.auth.onAuthStateChange(function(ev){ if(ev==='PASSWORD_RECOVERY')setTimeout(function(){showSetPasswordModal();},0); });
+if(sb)sb.auth.onAuthStateChange(function(ev){ if(ev==='PASSWORD_RECOVERY')setTimeout(function(){showSetPasswordModal();},0); if(ev==='SIGNED_IN'&&/[?&]claim=1/.test(location.search)){try{history.replaceState(null,'',location.pathname+location.search.replace(/[?&]claim=1/,'').replace(/^&/,'?')+location.hash);}catch(e){} setTimeout(function(){showSetPasswordModal(true);},0);} });
 
 // ═══ AUTH STATE ═══
 let isAuthed = false;
@@ -1797,7 +1797,7 @@ async function doRegister(){
     options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob,country,username,tos_version:'2026-10-18',tos_accepted_at:new Date().toISOString()}}
   });
   authBtn('rg-btn',false,'Create Account &amp; Continue');
-  if(error){if(/already (registered|exists)/i.test(error.message)){switchToLogin();document.getElementById('li-email').value=email;showErr('li-err','This email already has an account. Sign in with your password, or use Forgot password.');return}showErr('rg-err',error.message);return}
+  if(error){if(/already (registered|exists)/i.test(error.message)){/* Email already has an account (often a profile we made from their work, no password yet): email a one-click sign-in link that proves the address is theirs, then they land in that account (Dylan 2026-10-27). */const{error:oe}=await sb.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:location.origin+'/app?claim=1'+(window.__npLang?'&lang='+window.__npLang:'')}});switchToLogin();document.getElementById('li-email').value=email;showErr('li-err',oe?'This email already has an account. Sign in with your password, or use Forgot password.':'Good news: this email already has a Neuropian profile. We just emailed you a sign-in link. Open it to connect, then set a password if you like.');return}showErr('rg-err',error.message);return}
   currentUser=data.user;
   isAuthed=true;
   setNavUser(data.user);
