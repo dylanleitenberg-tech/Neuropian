@@ -1,6 +1,6 @@
-/* Members globe (side piece in #members): one point per member, at their city rounded to 0.5 degree (about 50 km),
-   from the static /assets/members-geo.json (members_geo.py). No names, ids or links reach the browser; points carry
-   nothing but a rounded latitude and longitude. A bone-white sphere with bone-grey lines and land dots and bright
+/* Members globe (side piece in #members): member CLUSTERS (members within 450 km merged into one dot, sized by
+   a count bucket), each member first placed at their city rounded to 0.5 degree (about 50 km), from the static /assets/members-geo.json (members_geo.py). No names, ids or links reach the browser; a dot carries
+   nothing but a rounded latitude, longitude and size bucket. A bone-white sphere with bone-grey lines and land dots and bright
    near-white member points, so it reads on the paper page. Turning the globe (spin or drag) turns the "Our team."
    carousel in step: motion only, one full turn runs through every card; no card is ever tied to a dot or a place.
    It starts once #members is shown (hidden until the carousel loads) and near the screen. Hand-rolled
@@ -10,12 +10,14 @@
   var fig = document.getElementById("geo"), cv = fig && fig.querySelector("canvas");
   if (!fig || !cv || !cv.getContext || !window.fetch) return;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var SPIN_DEG_PER_SEC = 1.5;   /* auto-spin speed; the carousel it drives moves with it (360 deg = the whole track) */
+  var DOT_SCALE = [1, 1.4, 1.85, 2.35, 2.8];   /* member dot size by cluster bucket: 1, 2-3, 4-7, 8-15, 16+ members */
   var RAD = Math.PI / 180, started = false;
   var GRAT = "140,126,100", LAND = "168,152,120", SHADE = "112,96,68", TINT = "196,182,150";   /* bone greys */
 
   function start() {
     if (started) return; started = true;
-    fetch("/assets/members-geo.json?v=20261027b").then(function (r) { if (!r.ok) throw r; return r.json(); })
+    fetch("/assets/members-geo.json?v=20261027c").then(function (r) { if (!r.ok) throw r; return r.json(); })
       .then(run).catch(function () { fig.classList.add("geo-off"); });
   }
   function prep(lat, lon) { return [Math.cos(lat * RAD), Math.sin(lat * RAD), lon * RAD]; }
@@ -46,7 +48,7 @@
   function run(data) {
     var ctx = cv.getContext("2d"), land = [], pts = [], grat = [], i, j;
     for (i = 0; i + 1 < data.land.length; i += 2) land.push(prep(data.land[i] / 10, data.land[i + 1] / 10));
-    (data.points || []).forEach(function (p, k) { var q = prep(p[0], p[1]); q.push(k * 2.399); pts.push(q); });
+    (data.points || []).forEach(function (p, k) { var q = prep(p[0], p[1]); q.push(k * 2.399, DOT_SCALE[p[2] | 0] || 1); pts.push(q); });
     for (i = -180; i < 180; i += 20) { var m = []; for (j = -80; j <= 80; j += 4) m.push(prep(j, i)); grat.push(m); }
     for (i = -60; i <= 60; i += 20) { var pl = []; for (j = -180; j <= 180; j += 4) pl.push(prep(i, j)); grat.push(pl); }
 
@@ -126,13 +128,14 @@
       pts.forEach(function (q) {
         var p = proj(q);
         if (p[2] < 0) { ctx.globalAlpha = 1; ctx.fillStyle = "rgba(" + SHADE + ",.16)"; ctx.fillRect(p[0] - 1, p[1] - 1, 2, 2); return; }
-        p.push(q[3]); near.push(p);
+        p.push(q[3], q[4]); near.push(p);
       });
-      near.forEach(function (p) { ctx.globalAlpha = 0.5 + 0.5 * Math.min(1, p[2] * 3); ctx.drawImage(halo, p[0] - hs / 2, p[1] - hs / 2 + 1.5, hs, hs); });
+      near.sort(function (a, b) { return b[4] - a[4]; });                     /* big clusters first, small on top */
+      near.forEach(function (p) { var h = hs * p[4]; ctx.globalAlpha = 0.5 + 0.5 * Math.min(1, p[2] * 3); ctx.drawImage(halo, p[0] - h / 2, p[1] - h / 2 + 1.5, h, h); });
       near.forEach(function (p) {
         var tw = reduce ? 1 : 0.8 + 0.2 * Math.sin(t * 2.2 + p[3]), e = Math.min(1, p[2] * 3);
-        ctx.globalAlpha = tw; ctx.drawImage(bloom, p[0] - bs / 2, p[1] - bs / 2, bs, bs);
-        ctx.globalAlpha = 0.6 + 0.4 * e; ctx.beginPath(); ctx.arc(p[0], p[1], cr * (0.7 + 0.3 * e), 0, 2 * Math.PI);
+        var b = bs * p[4]; ctx.globalAlpha = tw; ctx.drawImage(bloom, p[0] - b / 2, p[1] - b / 2, b, b);
+        ctx.globalAlpha = 0.6 + 0.4 * e; ctx.beginPath(); ctx.arc(p[0], p[1], cr * p[4] * (0.7 + 0.3 * e), 0, 2 * Math.PI);
         ctx.fillStyle = "#FFFDF7"; ctx.fill(); ctx.lineWidth = 0.8; ctx.strokeStyle = "rgba(" + SHADE + ",.6)"; ctx.stroke();
       });
       ctx.globalAlpha = 1;
@@ -140,7 +143,7 @@
     function tick(now) {
       raf = 0;
       var dt = last ? Math.min(64, now - last) : 0; last = now;
-      if (!hover && !drag && dt) setLam(lam + dt * 0.006);     /* 6 degrees a second; land drifts left like the cards */
+      if (!hover && !drag && dt) setLam(lam + dt * SPIN_DEG_PER_SEC / 1000);   /* land drifts left like the cards */
       draw(now);
       if (onScreen && !document.hidden) raf = requestAnimationFrame(tick); else last = 0;
     }
