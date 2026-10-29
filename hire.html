@@ -117,6 +117,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.01em}
 .search button{border-radius:0;background:var(--acc);color:#F3F0EB}
 .chip,.badge{border-radius:0}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@keyframes blink{50%{opacity:0}}
 .steps{list-style:none;padding:0;margin:26px 0 0;max-width:40em}
 .steps li{border-top:1px solid var(--line);padding:12px 0;font-size:17px}
 .steps b{font-weight:600}
@@ -135,7 +136,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   <div class="np-lang" data-dynamic><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="Language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">EN</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/talent?lang=en" hreflang="en" lang="en" translate="no" aria-current="true">English</a></li><li><a href="/talent?lang=fr" hreflang="fr" lang="fr" translate="no">Français</a></li><li><a href="/talent?lang=es" hreflang="es" lang="es" translate="no">Español</a></li><li><a href="/talent?lang=he" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a></li><li><a href="/talent?lang=hi" hreflang="hi" lang="hi" translate="no">हिन्दी</a></li><li><a href="/talent?lang=zh" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></li></ul></div>
 </div></header>
 <main id="main" class="wrap">
-  <section>
+  <section class="hero">
     <div class="top">
       <a class="back" href="/" id="back">← Back</a>
       <p class="kicker" style="margin-top:22px">Neuropian · For companies</p>
@@ -298,6 +299,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   paint();
 })();
 </script>
+<script src="/assets/site.js?v=20261028a" defer></script>
 <script src="/assets/lang-menu.js?v=20261025a" defer></script>
 </body>
 </html>
