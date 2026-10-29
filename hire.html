@@ -137,7 +137,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 <main id="main" class="wrap">
   <section>
     <div class="top">
-      <p class="kicker">Neuropian · For companies</p>
+      <a class="back" href="/" id="back">← Back</a>
+      <p class="kicker" style="margin-top:22px">Neuropian · For companies</p>
       <h1>Hire from the 0.2%.</h1>
       <p class="lede">We find engineers and scientists by the work expert maintainers accepted, not by résumés. Only about 0.2% of the builders we evaluate make our cut, and our members work in <span data-geo-total="41">41</span> countries.</p>
     </div>
@@ -174,6 +175,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 "use strict";
 // Company path (Dylan 2026-10-29): the role goes to Neuropian (company_signup), never straight to members.
 var SB="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
+document.getElementById("back").addEventListener("click",function(e){ if(document.referrer.indexOf(location.origin)===0&&history.length>1){e.preventDefault();history.back();} });
 var f=document.getElementById("cf"), msg=document.getElementById("cmsg");
 f.addEventListener("submit",function(e){
   e.preventDefault(); var d=new FormData(f), sub=f.querySelector("button[type=submit]");
