@@ -77,6 +77,7 @@ h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)
 .note{font-size:14px;color:var(--faint);margin-top:36px;max-width:42em}
 .hire{margin-top:44px;border-top:2px solid var(--fg);padding-top:22px;max-width:42em}
 .hire p{color:var(--dim);font-size:15px;margin-top:8px}
+.more{text-align:center;margin:28px 0 8px}.more button{font:inherit;font-size:15px;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:12px 28px;cursor:pointer}.more button:disabled{opacity:.5;cursor:default}
 .hire-btn,.hire-f button{font:inherit;font-size:15px;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:12px 24px;cursor:pointer;margin-top:16px}
 .hire-f label{display:block;font-size:13px;color:var(--dim);margin-top:14px}
 .hire-f input,.hire-f textarea,.hire-f select{display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;color:var(--fg);background:#e4e0db;border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none}
@@ -135,6 +136,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
     </div>
     <p class="status" id="st" aria-live="polite"></p>
     <div class="grid" id="grid"></div>
+    <div class="more"><button type="button" id="more" hidden>Show next 30</button></div>
   </section>
   <section id="profile" class="prof" hidden></section>
 </main>
@@ -154,18 +156,33 @@ function card(p){
     '<div class="chips">'+chips(p.skills)+'</div>'+(w?'<div class="c-work">'+esc(w.title)+(w.detail?' · '+esc(w.detail):'')+'</div>':'')+
 '</a>';
 }
+var PAGE=30, shown=0, moreBtn=document.getElementById("more");
+function browse(offset){
+  return fetch(SB+"/rest/v1/talent?select=*&order=published_at.desc,id.asc&limit="+PAGE+"&offset="+offset,{headers:{"apikey":KEY,"Authorization":"Bearer "+KEY}})
+    .then(function(r){return r.json();}).then(function(rows){return Array.isArray(rows)?{results:rows}:{error:"unavailable"};});
+}
+// "Show next 30" (Dylan 2026-10-28): browse mode only; search results are one ranked list.
+moreBtn.addEventListener("click",function(){
+  moreBtn.disabled=true; moreBtn.textContent="Loading…";
+  browse(shown).then(function(d){ if(d.error)throw new Error(d.error); var rows=d.results||[];
+    grid.insertAdjacentHTML("beforeend",rows.map(card).join("")); shown+=rows.length;
+    st.textContent=shown+" newest profiles"; moreBtn.hidden=rows.length<PAGE; })
+  .catch(function(){ st.textContent="Could not load more right now."; })
+  .then(function(){ moreBtn.disabled=false; moreBtn.textContent="Show next 30"; });
+});
 function render(rows,q){
   if(!rows.length){
-    grid.innerHTML=""; st.textContent="";
+    grid.innerHTML=""; st.textContent=""; moreBtn.hidden=true;
     grid.innerHTML='<div class="empty">'+(q?'No member profile matches that yet.':'No member has published a profile yet.')+' Builders: <a href="/app" data-auth="reg">create an account</a> and publish yours.</div>';
     return;
   }
   st.textContent=q?"Closest first, for “"+q+"”":rows.length+" newest profiles";
   grid.innerHTML=rows.map(card).join("");
+  shown=q?0:rows.length; moreBtn.hidden=!!q||rows.length<PAGE;
 }
 function search(q){
   st.textContent=q?"Searching…":"Loading…";
-  (q?call({action:"search",q:q}):fetch(SB+"/rest/v1/talent?select=*&order=published_at.desc&limit=30",{headers:{"apikey":KEY,"Authorization":"Bearer "+KEY}}).then(function(r){return r.json();}).then(function(rows){return Array.isArray(rows)?{results:rows}:{error:"unavailable"};})).then(function(d){ if(d.error)throw new Error(d.error); render(d.results||[],q); })
+  (q?call({action:"search",q:q}):browse(0)).then(function(d){ if(d.error)throw new Error(d.error); render(d.results||[],q); })
   .catch(function(){ st.textContent="Search is unavailable right now."; grid.innerHTML=""; });
 }
 function show(id){
