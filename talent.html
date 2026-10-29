@@ -212,7 +212,7 @@ function show(id){
     if(!p){prof.innerHTML='<a class="back" href="#">← All talent</a><p class="p-head" style="margin-top:24px">This profile is not published.</p>';return;}
     document.title=(p.name||"Member")+" · Neuropian Talent";
     prof.innerHTML='<a class="back" href="#">← All talent</a><h1 class="p-name">'+esc(p.name||"Member")+'</h1><p class="p-head">'+esc(p.headline)+'</p>'+
-      '<div class="badges">'+(p.github_verified?'<a class="badge ok" rel="nofollow ugc noopener" href="https://github.com/'+esc(p.github)+'">GitHub verified · '+esc(p.github)+'</a>':(p.github?'<a class="badge" rel="nofollow ugc noopener" href="https://github.com/'+esc(p.github)+'">GitHub · '+esc(p.github)+' · work checked by Neuropian</a>':((p.work||[]).some(function(w){return w.verified;})?'<span class="badge">Work checked by Neuropian</span>':'')))+
+      '<div class="badges">'+(p.github_verified?'<a class="badge ok" rel="nofollow ugc noopener" href="https://github.com/'+esc(p.github)+'">GitHub verified · '+esc(p.github)+'</a>':((p.work||[]).some(function(w){return w.verified;})?'<span class="badge">Work checked by Neuropian</span>':''))+
 '</div>'+
       (p.summary?'<p class="p-sum">'+esc(p.summary)+'</p>':'')+
       ((p.skills||[]).length?'<h2>Skills</h2><div class="chips">'+chips(p.skills)+'</div>':'')+
