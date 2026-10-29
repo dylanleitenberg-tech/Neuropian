@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>/* Language (2026-10-25), as in /app: ?lang=fr|es|he|hi|zh (?lang=en = English), else the page you came from (the
+   English home page means English), else the language chosen before in this browser (localStorage np_lang_pref, kept
+   between /app and /talent), else the browser's language (navigator.languages, when no language was ever picked:
+   np_lang_choice; never for crawlers). No language = English, and nothing is loaded. assets/app/app-i18n.js with i18n/<lang>.js
+   translates the page; <html lang> is set here so the sign-in pop-up (an /app frame) speaks the same language. */
+(function(){var L=['fr','es','he','hi','zh'],l=null,f=function(v){v=String(v||'').toLowerCase().split('-')[0];return L.indexOf(v)>=0?v:null;},
+P='np_lang_pref',keep=function(v){try{if(v)localStorage.setItem(P,v);else localStorage.removeItem(P);}catch(e){}},
+nav=function(){try{if(localStorage.getItem('np_lang_choice'))return null;}catch(e){}if(/bot|crawl|spider|slurp|preview/i.test(navigator.userAgent||''))return null;var ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];for(var i=0;i<ls.length;i++){var b=String(ls[i]).toLowerCase().split('-')[0];if(b==='iw')b='he';if(b==='en')return null;if(L.indexOf(b)>=0)return b;}return null;};
+try{var q=new URLSearchParams(location.search);if(q.has('lang')){l=f(q.get('lang'));keep(l);}else{var r=null,m;try{r=new URL(document.referrer);}catch(e){}
+  if(r&&r.origin===location.origin&&/^\/(index\.html)?$/.test(r.pathname))keep(null);
+  else if(r&&r.origin===location.origin&&(m=/^\/(fr|es|he|hi|zh)\//.exec(r.pathname))){l=m[1];keep(l);}
+  else{try{l=f(localStorage.getItem(P));}catch(e){}if(!l)l=nav();}}}catch(e){}   // nothing stored: the browser's language, unless one was picked
+if(!l)return;window.__npLang=l;var d=document.documentElement;d.lang=l==='zh'?'zh-Hans':l;if(l==='he')d.dir='rtl';
+var st=document.createElement('style');st.textContent='html.np-i18n-wait body{visibility:hidden}';document.head.appendChild(st);
+d.classList.add('np-i18n-wait');setTimeout(function(){d.classList.remove('np-i18n-wait');},3000);   // shown in English if the table never arrives
+['/assets/app/i18n/'+l+'.js?v=20261026a','/assets/app/app-i18n.js?v=20261026a'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
+<title>Hire · Neuropian</title>
+<meta name="description" content="Hire engineers and scientists found by the work expert maintainers accepted. Your first hire through Neuropian is free.">
+<link rel="canonical" href="https://neuropian.com/hire">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ECE8E3">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ECE8E3;--fg:#2B2A28;--dim:rgba(43,42,40,.76);--faint:rgba(43,42,40,.70);--line:rgba(43,42,40,.16);--acc:#2B4C7E;--pad:clamp(16px,5vw,64px);--max:1280px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:.2em}
+a:hover{text-decoration-color:var(--fg)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.bar{position:sticky;top:0;z-index:5;background:rgba(236,232,227,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:24px}
+.mark{font-weight:600;letter-spacing:.22em;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.nav{display:flex;gap:24px;font-size:14px;align-items:center}
+.nav a{text-decoration:none;color:var(--dim)}.nav a:hover,.nav a[aria-current]{color:var(--fg)}
+.nav a.login{color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:5px 14px;margin:-6px 0}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:20px}
+h1{font-size:clamp(40px,6.5vw,88px);font-weight:500;letter-spacing:-.04em;line-height:1}
+.lede{font-size:clamp(17px,1.6vw,21px);color:var(--dim);max-width:38em;margin-top:24px}
+.top{padding:clamp(64px,10vw,140px) 0 clamp(28px,4vw,48px)}
+.search{display:flex;gap:10px;margin-top:36px;max-width:760px}
+.search input{flex:1;min-width:0;font:inherit;font-size:18px;color:var(--fg);background:#e4e0db;border:1px solid var(--line);border-radius:999px;padding:14px 22px;outline:none}
+.search input:focus{border-color:var(--acc)}
+.search button{font:inherit;font-size:15px;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:0 24px;cursor:pointer}
+.hint{font-size:14px;color:var(--faint);margin-top:12px}
+.status{font-size:14px;color:var(--dim);margin:28px 0 8px;min-height:1.2em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:clamp(16px,2vw,24px);padding-bottom:96px}
+.card{border-top:1px solid var(--line);padding-top:20px;cursor:pointer;text-decoration:none;display:block}
+.card:hover .c-name{color:#2b4c7e}
+.c-name{font-size:20px;font-weight:500;letter-spacing:-.01em}
+.c-head{color:var(--dim);margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{font-size:12.5px;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.c-work{font-size:14px;color:var(--faint);margin-top:12px}
+.c-match{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-top:10px}
+.empty{grid-column:1/-1;border-top:1px solid var(--line);padding:28px 0 96px;color:var(--dim);max-width:40em}
+.empty a{color:var(--fg)}
+.prof{padding:clamp(48px,8vw,110px) 0 96px;max-width:860px}
+.back{font-size:14px;color:var(--dim);text-decoration:none;cursor:pointer}
+.p-name{font-size:clamp(36px,5.5vw,64px);font-weight:500;letter-spacing:-.035em;line-height:1.05;margin-top:24px}
+.p-head{font-size:clamp(18px,1.8vw,22px);color:var(--dim);margin-top:10px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--dim)}
+.badge.ok{color:#2b4c7e;border-color:rgba(43,76,126,.4)}
+.p-sum{font-size:18px;line-height:1.65;margin-top:32px;max-width:40em}
+h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:500;margin-top:44px}
+.work{list-style:none;margin-top:14px}
+.work li{border-top:1px solid var(--line);padding:16px 0;display:grid;grid-template-columns:1fr auto;gap:4px 16px}
+.work li:last-child{border-bottom:1px solid var(--line)}
+.w-title{font-weight:500}.w-detail{color:var(--dim);font-size:15px;grid-column:1}.w-src{color:var(--faint);font-size:13px;grid-row:1;grid-column:2}
+.note{font-size:14px;color:var(--faint);margin-top:36px;max-width:42em}
+.hire{margin-top:44px;border-top:2px solid var(--fg);padding-top:22px;max-width:42em}
+.hire p{color:var(--dim);font-size:15px;margin-top:8px}
+.more{text-align:center;margin:28px 0 8px}.more button{font:inherit;font-size:15px;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:12px 28px;cursor:pointer}.more button:disabled{opacity:.5;cursor:default}
+.hire-btn,.hire-f button{font:inherit;font-size:15px;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:12px 24px;cursor:pointer;margin-top:16px}
+.hire-f label{display:block;font-size:13px;color:var(--dim);margin-top:14px}
+.hire-f input,.hire-f textarea,.hire-f select{display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;color:var(--fg);background:#e4e0db;border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none}
+.hire-f input:focus,.hire-f textarea:focus,.hire-f select:focus{border-color:var(--acc)}
+.hire-msg{font-size:15px;margin-top:14px;min-height:1.2em}
+footer{border-top:1px solid var(--line);padding:32px 0 48px;font-size:14px;color:var(--faint)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* language menu in the top bar (assets/lang-menu.js; same as the home pages and /app) */
+.bar .nav{margin-inline-start:auto}
+.np-lang{position:relative;display:inline-flex;flex-shrink:0}
+.np-lang-btn{display:inline-flex;align-items:center;gap:6px;margin:0;font:inherit;font-family:var(--mono);font-size:13px;letter-spacing:.06em;line-height:1;color:#2B2A28;background:transparent;border:1px solid rgba(43,42,40,.3);border-radius:0;padding:7px 9px;cursor:pointer}
+.np-lang-btn svg{width:15px;height:15px;flex-shrink:0}
+.np-lang-btn:hover,.np-lang-btn[aria-expanded="true"]{border-color:#2B2A28}
+.np-lang-btn:focus-visible,.np-lang-list a:focus-visible{outline:2px solid #2B4C7E;outline-offset:2px}
+.np-lang-list{position:absolute;top:calc(100% + 14px);inset-inline-end:0;z-index:1000;min-width:170px;margin:0;padding:6px 0;list-style:none;background:#ECE8E3;border:1px solid rgba(43,42,40,.3);box-shadow:0 14px 36px rgba(0,0,0,.18);text-align:start}
+.np-lang-list[hidden]{display:none}
+.np-lang-list a{display:block;padding:9px 16px;font-family:"Newsreader","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif;font-size:17px;line-height:1.25;color:#2B2A28;text-decoration:none;white-space:nowrap}
+.np-lang-list a:hover{background:rgba(43,42,40,.07)}
+.np-lang-list a[aria-current]{text-decoration:underline;text-underline-offset:.2em}
+@media(max-width:480px){.bar .wrap{gap:12px}.nav a:not(.login){display:none}.np-lang-btn{padding:7px}}
+footer .langs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 20px;font-size:15px;font-family:"Newsreader","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif}
+footer .langs a{color:var(--dim);text-decoration:none}
+footer .langs a:hover,footer .langs a[aria-current]{color:var(--fg);text-decoration:underline}
+@media(max-width:720px){.nav a:not(:nth-last-child(-n+2)){display:none}.search button{padding:0 18px}}
+
+/* paper edition, as neuropian.com */
+:root{--serif:"Newsreader",Garamond,Georgia,"Times New Roman",serif;--display:"Newsreader",Georgia,"Times New Roman",serif;--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;--acc:#2B4C7E}
+html,body{background:#ECE8E3 url(/assets/paper.webp) 0 0/900px 900px}
+body{font-family:var(--serif);font-size:19px}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.01em}
+.kicker,.badge,.chip,.tag{font-family:var(--mono);letter-spacing:.08em}
+.kicker{font-size:12px;letter-spacing:.12em}
+.mark{font-family:var(--display);font-weight:400;letter-spacing:.01em;font-size:25px}
+.bar{background:rgba(236,232,227,.92)!important}
+.nav a.login{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);border-radius:0;padding:6px 16px}
+.search input{border-radius:0;background:rgba(255,255,255,.45)}
+.search button{border-radius:0;background:var(--acc);color:#F3F0EB}
+.chip,.badge{border-radius:0}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.steps{list-style:none;padding:0;margin:26px 0 0;max-width:40em}
+.steps li{border-top:1px solid var(--line);padding:12px 0;font-size:17px}
+.steps b{font-weight:600}
+.price{margin-top:22px;font-size:17px;max-width:40em}
+.alt{margin-top:10px;font-size:15px;color:var(--dim)}
+.hire-f{max-width:42em;margin-top:8px}
+.hire-f .row{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:620px){.hire-f .row{grid-template-columns:1fr}}
+</style>
+<link rel="icon" type="image/png" href="/assets/brain.png">
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="mark" href="/"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
+  <nav class="nav"><a href="/#plain">How it works</a><a href="/talent">Talent</a><a href="/hire" aria-current="page">Hire</a><a class="login" href="/app" data-auth="login">Log in</a></nav>
+  <div class="np-lang" data-dynamic><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="Language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">EN</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/talent?lang=en" hreflang="en" lang="en" translate="no" aria-current="true">English</a></li><li><a href="/talent?lang=fr" hreflang="fr" lang="fr" translate="no">Français</a></li><li><a href="/talent?lang=es" hreflang="es" lang="es" translate="no">Español</a></li><li><a href="/talent?lang=he" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a></li><li><a href="/talent?lang=hi" hreflang="hi" lang="hi" translate="no">हिन्दी</a></li><li><a href="/talent?lang=zh" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></li></ul></div>
+</div></header>
+<main id="main" class="wrap">
+  <section>
+    <div class="top">
+      <p class="kicker">Neuropian · For companies</p>
+      <h1>Hire from the 0.2%.</h1>
+      <p class="lede">We find engineers and scientists by the work expert maintainers accepted, not by résumés. Only about 0.2% of the builders we evaluate make our cut, and our members work in <span data-geo-total="41">41</span> countries.</p>
+    </div>
+    <ol class="steps">
+      <li><b>Tell us the role.</b> The work, the pay and where it is.</li>
+      <li><b>We send you the members whose work fits,</b> with links to the code they shipped.</li>
+      <li><b>You pick who to meet.</b> We introduce you when they say yes. Their email stays private until then.</li>
+    </ol>
+    <p class="price">Your first hire through Neuropian is free. After that, the fee is 5% of first-year pay.</p>
+    <p class="alt">Prefer to look yourself? <a href="/talent">Browse Talent</a>.</p>
+    <div class="hire">
+      <h2>The role</h2>
+      <form class="hire-f" id="cf">
+        <div class="row"><label>Your name<input name="name" maxlength="120" required autocomplete="name"></label>
+        <label>Company<input name="company" maxlength="120" required autocomplete="organization"></label></div>
+        <div class="row"><label>Your work email<input name="email" type="email" maxlength="254" required autocomplete="email"></label>
+        <label>Company website (optional)<input name="website" type="url" maxlength="300" placeholder="https://"></label></div>
+        <label>The role<input name="role" maxlength="160" required placeholder="e.g. Founding compiler engineer"></label>
+        <div class="row"><label>Type of role<select name="employment" required><option value="">Choose</option><option value="full-time">Full-time</option><option value="part-time">Part-time</option><option value="contract">Contract</option><option value="internship">Internship</option><option value="co-founder">Co-founder</option></select></label>
+        <label>Where<select name="work_mode" required><option value="">Choose</option><option value="on-site">On-site</option><option value="hybrid">Hybrid</option><option value="remote">Remote</option></select></label></div>
+        <div class="row"><label>Location (city, or the time zones you hire in if remote)<input name="location" maxlength="160" placeholder="e.g. San Francisco, or Remote (US time zones)"></label>
+        <label>Pay range, and equity if any<input name="compensation" maxlength="160" required placeholder="e.g. $160k–190k + 0.3% equity"></label></div>
+        <label>Stack or skills (optional)<input name="stack" maxlength="300" placeholder="e.g. Rust, CUDA, distributed systems"></label>
+        <label>About the role: the work and the team<textarea name="details" rows="6" maxlength="4000" required></textarea></label>
+        <button type="submit">Send to Neuropian</button>
+      </form>
+      <p class="hire-msg" id="cmsg" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><nav class="langs" aria-label="Language"><a href="/hire?lang=en" hreflang="en" lang="en" translate="no" aria-current="true">English</a><a href="/hire?lang=fr" hreflang="fr" lang="fr" translate="no">Français</a><a href="/hire?lang=es" hreflang="es" lang="es" translate="no">Español</a><a href="/hire?lang=he" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a><a href="/hire?lang=hi" hreflang="hi" lang="hi" translate="no">हिन्दी</a><a href="/hire?lang=zh" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></nav><span>© 2026 Neuropian · Beyond Limitless</span><span><a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href="/app">Members</a></span></div></footer>
+<script>
+(function(){
+"use strict";
+// Company path (Dylan 2026-10-29): the role goes to Neuropian (company_signup), never straight to members.
+var SB="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
+var f=document.getElementById("cf"), msg=document.getElementById("cmsg");
+f.addEventListener("submit",function(e){
+  e.preventDefault(); var d=new FormData(f), sub=f.querySelector("button[type=submit]");
+  sub.disabled=true; msg.textContent="Sending…";
+  fetch(SB+"/rest/v1/rpc/company_signup",{method:"POST",headers:{"apikey":KEY,"Authorization":"Bearer "+KEY,"Content-Type":"application/json"},
+    body:JSON.stringify({p_name:d.get("name"),p_company:d.get("company"),p_email:d.get("email"),p_website:d.get("website")||null,p_role:d.get("role"),
+      p_employment:d.get("employment"),p_work_mode:d.get("work_mode"),p_location:d.get("location")||null,p_compensation:d.get("compensation"),
+      p_stack:d.get("stack")||null,p_details:d.get("details")})})
+  .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
+  .then(function(x){ if(!x.ok)throw new Error((x.j&&x.j.message)||"Could not send. Please try again.");
+    f.hidden=true; msg.textContent="Received. We'll email you the members whose work fits this role."; })
+  .catch(function(err){ sub.disabled=false; msg.textContent=err.message; });
+});
+})();
+</script>
+<style>
+/* account card: opens over the page when you're signed in (Log in / Create an account never leave the page) */
+a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+.npac-ov{position:fixed;inset:0;z-index:9998;display:flex;align-items:flex-start;justify-content:center;padding:76px 16px 16px;overflow:auto;background:rgba(236,232,227,.62);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.npac:focus{outline:none}
+.npld{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);margin:0;padding:14px 22px;background:var(--bg,#ECE8E3);color:var(--fg,#2B2A28);border:1px solid var(--line,rgba(43,42,40,.25));font-family:var(--mono,ui-monospace,Menlo,monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.npac{position:relative;width:min(440px,100%);background:var(--bg,#ECE8E3);color:var(--fg,#2B2A28);border:1px solid var(--line,rgba(43,42,40,.2));box-shadow:0 30px 80px rgba(0,0,0,.35);padding:26px 28px 20px}
+.npac-k{font-family:var(--mono,ui-monospace,Menlo,monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim,rgba(43,42,40,.76))}
+.npac h2{font-family:var(--display,inherit);font-weight:400;text-transform:none;color:inherit;font-size:clamp(30px,6vw,40px);line-height:1.05;margin-top:10px;overflow-wrap:anywhere;letter-spacing:-.01em;max-width:none}
+.npac-e{margin-top:6px;font-size:15px;color:var(--dim,rgba(43,42,40,.76));overflow-wrap:anywhere}
+.npac-l{margin-top:18px;border-top:1px solid var(--line,rgba(43,42,40,.2))}
+.npac-l a{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:13px 0;border-bottom:1px solid var(--line,rgba(43,42,40,.2));text-decoration:none;color:inherit;font-size:19px;line-height:1.25}
+.npac-l a::after{content:"\2192";grid-column:2;grid-row:1/3;align-self:center;color:var(--dim,rgba(43,42,40,.76))}
+.npac-l a span{grid-column:1;font-size:14px;color:var(--dim,rgba(43,42,40,.76))}
+.npac-l a:hover::after{color:inherit}.npac-l a:hover{padding-left:6px;transition:padding .2s ease}
+.npac-f{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:14px;color:var(--dim,rgba(43,42,40,.76))}
+.npac-out{font:inherit;font-size:15px;color:inherit;background:none;border:0;padding:4px 0;cursor:pointer;text-decoration:underline;text-underline-offset:.2em}
+.npac-x{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line,rgba(43,42,40,.3));background:transparent;color:inherit;font-size:20px;line-height:1;cursor:pointer}
+.npac a:focus-visible,.npac button:focus-visible{outline:2px solid var(--acc,currentColor);outline-offset:2px}
+</style>
+<script>
+/* Log in / Create an account: the Neuropian sign-in box pops up over this page (it lives in /app; same origin).
+   Once you're signed in you stay on this page: the nav shows your name and opens your account card, and nothing
+   navigates away until you pick where to go. */
+(function(){
+  var K="sb-qggduzzwvdkmekihwuav-auth-token", API="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
+  var ov=null, fr=null, ready=false, want="login", card=null, opener=null;
+  function session(){ try{ var s=JSON.parse(localStorage.getItem(K)||"null"); s=s&&(s.currentSession||s); return s&&s.refresh_token&&s.user?s:null; }catch(e){ return null; } }
+  function nameOf(u){ var m=u.user_metadata||{}; return m.username||m.user_name||m.first_name||m.full_name||(u.email||"").split("@")[0]||"Member"; }
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function paint(){
+    var s=session();
+    document.querySelectorAll("[data-auth]").forEach(function(a){
+      if(a.dataset.t0===undefined) a.dataset.t0=a.innerHTML;
+      if(a.classList.contains("login")){ a.textContent=s?nameOf(s.user):"Log in"; if(s){ a.setAttribute("aria-haspopup","dialog"); a.title="Your account"; } else { a.removeAttribute("aria-haspopup"); a.removeAttribute("title"); } }
+      else a.innerHTML=s?a.dataset.t0.replace("Create an account","Your account").replace("create an account","open your account"):a.dataset.t0;
+    });
+  }
+  function build(mode){
+    ov=document.createElement("div");
+    ov.setAttribute("style","position:fixed;inset:0;z-index:9999;display:none;background:rgba(236,232,227,.62);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)");
+    ov.innerHTML='<p class="npld" role="status">Opening…</p>';
+    fr=document.createElement("iframe");
+    fr.title="Sign in to Neuropian"; fr.src="/app?embed=1&auth="+mode;
+    fr.setAttribute("style","position:absolute;inset:0;border:0;width:100%;height:100%;background:transparent;color-scheme:light");
+    fr.setAttribute("allowtransparency","true");
+    ov.appendChild(fr); document.body.appendChild(ov);
+  }
+  function drop(){ if(ov){ ov.remove(); } ov=null; fr=null; ready=false; }
+  function open(mode){
+    want=mode; if(!ov) build(mode); else if(ready) fr.contentWindow.postMessage({type:"np-auth-mode",mode:mode},location.origin);
+    ov.style.display="block"; document.documentElement.style.overflow="hidden";
+  }
+  function close(){ if(ov){ ov.style.display="none"; } if(!card) document.documentElement.style.overflow=""; }
+  function closeCard(){ if(card){ card.remove(); card=null; } document.documentElement.style.overflow=""; if(opener&&opener.focus) opener.focus(); opener=null; }
+  function openCard(isNew){
+    var s=session(); if(!s) return false;
+    closeCard(); var u=s.user, T=!!document.querySelector('a[href^="/talent"]');
+    card=document.createElement("div"); card.className="npac-ov";
+    card.innerHTML='<div class="npac" role="dialog" aria-modal="true" aria-labelledby="npac-n" tabindex="-1">'
+      +'<button class="npac-x" type="button" aria-label="Close">×</button>'
+      +'<p class="npac-k">'+(isNew?"Welcome to Neuropian":"Signed in")+'</p>'
+      +'<h2 id="npac-n">'+esc(nameOf(u))+'</h2>'+(u.email?'<p class="npac-e">'+esc(u.email)+'</p>':"")
+      +'<nav class="npac-l" aria-label="Your account">'
+      +'<a href="/app?go=build">Your public profile<span>'+(isNew?"Start here: show what you've made, then publish it":"Describe what you've made and publish it to Talent")+'</span></a>'
+      +'<a href="/app?go=projects">Projects and credits<span>Post work, join projects, get credited once a reviewer checks it</span></a>'
+      +'<a href="/app?go=collective">RoundTable<span>Chat, problem and build rooms</span></a>'
+      +'<a href="/app?go=platform">Opportunities<span>Openings for members</span></a>'
+      +(T?'<a href="/talent">Talent<span>Search member profiles</span></a>':"")
+      +'</nav><div class="npac-f"><span>Not you?</span><button class="npac-out" type="button">Sign out</button></div></div>';
+    document.body.appendChild(card); document.documentElement.style.overflow="hidden";
+    card.addEventListener("click",function(e){ if(e.target===card||e.target.closest(".npac-x")) closeCard(); else if(e.target.closest(".npac-out")) signOut(); });
+    card.querySelector(".npac").focus({preventScroll:true});
+    return true;
+  }
+  function signOut(){
+    var s=session(), done=function(){ try{ localStorage.removeItem(K); }catch(e){} drop(); closeCard(); paint(); };
+    if(!s) return done();
+    fetch(API+"/auth/v1/logout?scope=local",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+s.access_token}}).catch(function(){}).then(done);
+  }
+  window.addEventListener("message",function(e){
+    if(e.origin!==location.origin||!e.data) return;
+    if(e.data.type==="np-auth-ready"){ ready=true; ov.style.background="transparent"; ov.style.webkitBackdropFilter=ov.style.backdropFilter="none"; var ld=ov.querySelector(".npld"); if(ld) ld.remove();
+      if(want!=="login"||fr.src.indexOf("auth="+want)<0) fr.contentWindow.postMessage({type:"np-auth-mode",mode:want},location.origin); }
+    if(e.data.type==="np-auth-close") close();
+    if(e.data.type==="np-auth-done"){                      // signed in: stay here, show the account card
+      var tries=0;
+      (function show(){ var s=session();
+        if(!s&&tries++<10) return setTimeout(show,150);
+        close(); paint();
+        var made=s&&s.user&&Date.parse(s.user.created_at||0);
+        if(!openCard(made&&Date.now()-made<15*60*1000)) location.href="/app";   // no saved session (storage blocked): the app has it
+      })();
+    }
+  });
+  document.addEventListener("keydown",function(e){ if(e.key!=="Escape") return; if(card) closeCard(); else if(ov&&ov.style.display==="block") close(); });
+  document.addEventListener("click",function(e){
+    var a=e.target.closest&&e.target.closest("[data-auth]"); if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button) return;
+    e.preventDefault(); opener=a;
+    if(session()) openCard(false); else open(a.getAttribute("data-auth"));
+  });
+  function warm(e){ var a=e.target.closest&&e.target.closest("[data-auth]"); if(a&&!ov&&!session()) build(a.getAttribute("data-auth")); }
+  document.addEventListener("pointerover",warm); document.addEventListener("touchstart",warm,{passive:true}); document.addEventListener("focusin",warm);
+  window.addEventListener("storage",function(e){ if(e.key===K){ paint(); if(!session()){ drop(); closeCard(); } } });
+  paint();
+})();
+</script>
+<script src="/assets/lang-menu.js?v=20261025a" defer></script>
+</body>
+</html>
