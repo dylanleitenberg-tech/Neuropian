@@ -156,17 +156,36 @@ function card(p){
     '<div class="chips">'+chips(p.skills)+'</div>'+(w?'<div class="c-work">'+esc(w.title)+(w.detail?' · '+esc(w.detail):'')+'</div>':'')+
 '</a>';
 }
-var PAGE=30, shown=0, moreBtn=document.getElementById("more");
-function browse(offset){
-  return fetch(SB+"/rest/v1/talent?select=*&order=published_at.desc,id.asc&limit="+PAGE+"&offset="+offset,{headers:{"apikey":KEY,"Authorization":"Bearer "+KEY}})
-    .then(function(r){return r.json();}).then(function(rows){return Array.isArray(rows)?{results:rows}:{error:"unavailable"};});
+var PAGE=30, shown=0, total=0, order=null, moreBtn=document.getElementById("more");
+var H={headers:{"apikey":KEY,"Authorization":"Bearer "+KEY}};
+// Browse = every listed profile in a fresh random order on each visit (Dylan 2026-10-28: "the top is always new and
+// fresh"): shuffle the ids once, then load them 30 at a time.
+function ids(){
+  if(order)return Promise.resolve(order);
+  return fetch(SB+"/rest/v1/talent?select=id",H).then(function(r){return r.json();}).then(function(rows){
+    if(!Array.isArray(rows))throw new Error("unavailable");
+    var a=rows.map(function(x){return x.id;});
+    for(var k=a.length-1;k>0;k--){var m=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[m];a[m]=t;}
+    order=a; total=a.length; return a;
+  });
 }
+function browse(offset){
+  return ids().then(function(all){
+    var page=all.slice(offset,offset+PAGE); if(!page.length)return {results:[]};
+    return fetch(SB+"/rest/v1/talent?select=*&id=in.("+page.map(encodeURIComponent).join(",")+")",H).then(function(r){return r.json();}).then(function(rows){
+      if(!Array.isArray(rows))return {error:"unavailable"};
+      var byId={}; rows.forEach(function(x){byId[x.id]=x;});
+      return {results:page.map(function(id){return byId[id];}).filter(Boolean)};
+    });
+  }).catch(function(){return {error:"unavailable"};});
+}
+function count(){return "Showing "+shown+" of "+total+" members, in random order";}
 // "Show next 30" (Dylan 2026-10-28): browse mode only; search results are one ranked list.
 moreBtn.addEventListener("click",function(){
   moreBtn.disabled=true; moreBtn.textContent="Loading…";
   browse(shown).then(function(d){ if(d.error)throw new Error(d.error); var rows=d.results||[];
     grid.insertAdjacentHTML("beforeend",rows.map(card).join("")); shown+=rows.length;
-    st.textContent=shown+" newest profiles"; moreBtn.hidden=rows.length<PAGE; })
+    st.textContent=count(); moreBtn.hidden=shown>=total; })
   .catch(function(){ st.textContent="Could not load more right now."; })
   .then(function(){ moreBtn.disabled=false; moreBtn.textContent="Show next 30"; });
 });
@@ -176,9 +195,10 @@ function render(rows,q){
     grid.innerHTML='<div class="empty">'+(q?'No member profile matches that yet.':'No member has published a profile yet.')+' Builders: <a href="/app" data-auth="reg">create an account</a> and publish yours.</div>';
     return;
   }
-  st.textContent=q?"Closest first, for “"+q+"”":rows.length+" newest profiles";
+  shown=q?0:rows.length;
+  st.textContent=q?"Closest first, for “"+q+"”":count();
   grid.innerHTML=rows.map(card).join("");
-  shown=q?0:rows.length; moreBtn.hidden=!!q||rows.length<PAGE;
+  moreBtn.hidden=!!q||shown>=total;
 }
 function search(q){
   st.textContent=q?"Searching…":"Loading…";
