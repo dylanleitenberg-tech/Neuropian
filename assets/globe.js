@@ -18,7 +18,7 @@
 
   function start() {
     if (started) return; started = true;
-    fetch("/assets/members-geo.json?v=20261028a").then(function (r) { if (!r.ok) throw r; return r.json(); })
+    fetch("/assets/members-geo.json?v=20261030a").then(function (r) { if (!r.ok) throw r; return r.json(); })
       .then(run).catch(function () { fig.classList.add("geo-off"); });
   }
   function prep(lat, lon) { return [Math.cos(lat * RAD), Math.sin(lat * RAD), lon * RAD]; }
