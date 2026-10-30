@@ -81,6 +81,7 @@ h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)
 .hire-btn,.hire-f button{font:inherit;font-size:15px;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:12px 24px;cursor:pointer;margin-top:16px}
 .hire-f label{display:block;font-size:13px;color:var(--dim);margin-top:14px}
 .hire-f input,.hire-f textarea,.hire-f select{display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;color:var(--fg);background:#e4e0db;border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none}
+.hire-f label.agree{display:flex;gap:10px;align-items:flex-start;font-size:14px}.hire-f label.agree input{width:auto;margin:3px 0 0;flex-shrink:0}.hire-f label.agree a{color:var(--fg)}
 .hire-f input:focus,.hire-f textarea:focus,.hire-f select:focus{border-color:var(--acc)}
 .hire-msg{font-size:15px;margin-top:14px;min-height:1.2em}
 footer{border-top:1px solid var(--line);padding:32px 0 48px;font-size:14px;color:var(--faint)}
@@ -162,6 +163,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
         <label>Pay range, and equity if any<input name="compensation" maxlength="160" required placeholder="e.g. $160k–190k + 0.3% equity"></label></div>
         <label>Stack or skills (optional)<input name="stack" maxlength="300" placeholder="e.g. Rust, CUDA, distributed systems"></label>
         <label>About the role: the work and the team<textarea name="details" rows="6" maxlength="4000" required></textarea></label>
+        <label class="agree"><input type="checkbox" name="agree" required> I agree to the <a href="/terms#companies">Terms for companies</a> and the <a href="/privacy">Privacy Policy</a>.</label>
         <button type="submit">Send to Neuropian</button>
       </form>
       <p class="hire-msg" id="cmsg" aria-live="polite"></p>
