@@ -160,14 +160,13 @@ function card(p){
 }
 var PAGE=30, shown=0, total=0, order=null, moreBtn=document.getElementById("more");
 var H={headers:{"apikey":KEY,"Authorization":"Bearer "+KEY}};
-// Browse = every listed profile in a fresh random order on each visit (Dylan 2026-10-28: "the top is always new and
-// fresh"): shuffle the ids once, then load them 30 at a time.
+// Browse = every listed profile, S first, then A, then B (Dylan 2026-11-02), in a fresh random order within each group
+// on each visit (Dylan 2026-10-28: "the top is always new and fresh"). The server returns ids only, never tiers.
 function ids(){
   if(order)return Promise.resolve(order);
-  return fetch(SB+"/rest/v1/talent?select=id",H).then(function(r){return r.json();}).then(function(rows){
+  return fetch(SB+"/rest/v1/rpc/talent_browse_ids",{method:"POST",headers:{"apikey":KEY,"Authorization":"Bearer "+KEY,"Content-Type":"application/json"},body:"{}"}).then(function(r){return r.json();}).then(function(rows){
     if(!Array.isArray(rows))throw new Error("unavailable");
     var a=rows.map(function(x){return x.id;});
-    for(var k=a.length-1;k>0;k--){var m=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[m];a[m]=t;}
     order=a; total=a.length; return a;
   });
 }
@@ -181,7 +180,7 @@ function browse(offset){
     });
   }).catch(function(){return {error:"unavailable"};});
 }
-function count(){return "Showing "+shown+" of "+total+" members, in random order";}
+function count(){return "Showing "+shown+" of "+total+" members";}
 // "Show next 30" (Dylan 2026-10-28): browse mode only; search results are one ranked list.
 moreBtn.addEventListener("click",function(){
   moreBtn.disabled=true; moreBtn.textContent="Loading…";
