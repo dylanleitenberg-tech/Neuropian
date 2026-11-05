@@ -736,14 +736,19 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
 })();
 </script>
 <script>
-/* members carousel: the newest published profiles from Talent (public by their choice); headline, a skill or three and
+/* members carousel: listed S and A profiles from Talent (public by their choice), random order; headline, a skill or three and
    one piece of work; no names. Hidden until at least 6 load. */
 (function(){
   var API="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
   var sec=document.getElementById("members"), tr=document.getElementById("mq-track"); if(!sec||!tr) return;
   function esc(t){ return String(t==null?"":t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
-  fetch(API+"/rest/v1/talent?select=id,headline,skills,work&order=published_at.desc&limit=40",{headers:{apikey:KEY,Authorization:"Bearer "+KEY}})
-   .then(function(r){ return r.ok?r.json():[]; }).then(function(rows){
+  /* S and A tier only (Dylan 2026-11-05): talent_carousel_ids returns up to 40 listed S/A ids in random order, never tiers */
+  fetch(API+"/rest/v1/rpc/talent_carousel_ids",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"},body:"{}"})
+   .then(function(r){ return r.ok?r.json():[]; }).then(function(ids){
+    ids=(ids||[]).map(function(x){ return x&&x.id; }).filter(Boolean); if(!ids.length) return [];
+    return fetch(API+"/rest/v1/talent?select=id,headline,skills,work&id=in.("+ids.map(encodeURIComponent).join(",")+")",{headers:{apikey:KEY,Authorization:"Bearer "+KEY}})
+     .then(function(r){ return r.ok?r.json():[]; });
+   }).then(function(rows){
     rows=(rows||[]).filter(function(r){ return r&&r.headline&&(r.skills||[]).length; }); if(rows.length<6) return;
     for(var i=rows.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=rows[i]; rows[i]=rows[j]; rows[j]=t; }
     var html=rows.map(function(r){
