@@ -191,8 +191,8 @@ f.addEventListener("submit",function(e){
       p_stack:d.get("stack")||null,p_details:d.get("details")})})
   .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
   .then(function(x){ if(!x.ok)throw new Error((x.j&&x.j.message)||"Could not send. Please try again.");
-    f.hidden=true; msg.textContent="Received. We'll email you the members whose work fits this role."; })
-  .catch(function(err){ sub.disabled=false; msg.textContent=err.message; });
+    f.hidden=true; msg.textContent="Received. We'll email you the members whose work fits this role."; msg.scrollIntoView({block:"nearest"}); })
+  .catch(function(err){ sub.disabled=false; msg.textContent=(err instanceof TypeError)?"Could not reach Neuropian. Check your connection and try again, or email dylan@neuropian.com.":err.message; msg.scrollIntoView({block:"nearest"}); });
 });
 })();
 </script>
