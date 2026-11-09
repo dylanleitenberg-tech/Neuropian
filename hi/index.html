@@ -355,7 +355,6 @@ figure video{display:block;width:100%;height:auto;background:#000}
 .p-media img{width:100%;height:auto;background:#000;border:1px solid var(--line)}
 
 @media (max-width:860px){
-  .nav a:not(:nth-last-child(-n+2)){display:none}
   .figures{grid-template-columns:1fr;gap:28px}
   .steps{grid-template-columns:1fr}
   .flow{grid-template-columns:1fr 1fr;row-gap:28px}.flow li:not(:last-child)::after{display:none}
@@ -480,7 +479,8 @@ footer .langs a[aria-current]{color:#ECE8E3;text-decoration:underline;text-decor
 .np-lang-list a{display:block;padding:9px 16px;font-family:"Newsreader","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif;font-size:17px;line-height:1.25;color:var(--fg);text-decoration:none;white-space:nowrap}
 .np-lang-list a:hover{background:rgba(43,42,40,.07)}
 .np-lang-list a[aria-current]{text-decoration:underline;text-underline-offset:.2em}
-@media(max-width:480px){.bar .wrap{gap:12px}.nav{gap:16px}.nav a:not(.login){display:none}.np-lang-btn{padding:7px 7px}}
+/* phones and small tablets: logo + language on the first row, Talent / Hire / Contact / Log in on a second row (they used to be hidden, so Talent and Hire were unreachable from the top bar) */
+@media(max-width:720px){.bar .wrap{flex-wrap:wrap;height:auto;padding-top:9px;padding-bottom:2px;gap:0 12px}.bar .nav{order:3;flex:1 0 100%;flex-wrap:wrap;margin:0;gap:0 16px;font-size:15px}.bar .nav a{padding:9px 0}.bar .nav a.login{margin:0;margin-inline-start:auto;padding:6px 12px}.np-lang{margin-inline-start:auto}.np-lang-btn{padding:7px}}
 /* hi */
 @media(max-width:480px){.bar .wrap{gap:12px}.nav{gap:16px;font-size:16px}.nav a.login{padding:6px 12px}}
 @media(max-width:380px){.nav a:not(.login){display:none}}

@@ -98,11 +98,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .np-lang-list a{display:block;padding:9px 16px;font-family:"Newsreader","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif;font-size:17px;line-height:1.25;color:#2B2A28;text-decoration:none;white-space:nowrap}
 .np-lang-list a:hover{background:rgba(43,42,40,.07)}
 .np-lang-list a[aria-current]{text-decoration:underline;text-underline-offset:.2em}
-@media(max-width:480px){.bar .wrap{gap:12px}.nav a:not(.login){display:none}.np-lang-btn{padding:7px}}
 footer .langs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 20px;font-size:15px;font-family:"Newsreader","Noto Serif Hebrew","Noto Serif Devanagari","Noto Serif SC",Georgia,serif}
 footer .langs a{color:var(--dim);text-decoration:none}
 footer .langs a:hover,footer .langs a[aria-current]{color:var(--fg);text-decoration:underline}
-@media(max-width:720px){.nav a:not(:nth-last-child(-n+2)){display:none}.search button{padding:0 18px}}
 
 /* paper edition, as neuropian.com */
 :root{--serif:"Newsreader",Garamond,Georgia,"Times New Roman",serif;--display:"Newsreader",Georgia,"Times New Roman",serif;--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;--acc:#2B4C7E}
@@ -118,6 +116,11 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.01em}
 .search button{border-radius:0;background:var(--acc);color:#F3F0EB}
 .chip,.badge{border-radius:0}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+/* phones and small tablets: logo + language on the first row, nav links + Log in on a second row (they used to be hidden) */
+@media(max-width:720px){.bar .wrap{flex-wrap:wrap;height:auto;padding-top:9px;padding-bottom:2px;gap:0 12px}.bar .nav{order:3;flex:1 0 100%;flex-wrap:wrap;margin:0;gap:0 16px;font-size:15px}.bar .nav a{padding:9px 0}.bar .nav a.login{margin:0;margin-inline-start:auto;padding:6px 12px}.np-lang{margin-inline-start:auto}.np-lang-btn{padding:7px}.search button{padding:0 18px}}
+@media(max-width:480px){.search{flex-direction:column;gap:8px}.search button{padding:13px 18px}}
+.back{display:inline-block;padding:10px 0;margin:-10px 0}
+footer .langs a{display:inline-block;padding:6px 0}
 </style>
 <link rel="icon" type="image/png" href="/assets/brain.png">
 </head>
