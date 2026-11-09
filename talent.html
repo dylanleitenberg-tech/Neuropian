@@ -119,6 +119,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 /* phones and small tablets: logo + language on the first row, nav links + Log in on a second row (they used to be hidden) */
 @media(max-width:720px){.bar .wrap{flex-wrap:wrap;height:auto;padding-top:9px;padding-bottom:2px;gap:0 12px}.bar .nav{order:3;flex:1 0 100%;flex-wrap:wrap;margin:0;gap:0 16px;font-size:15px}.bar .nav a{padding:9px 0}.bar .nav a.login{margin:0;margin-inline-start:auto;padding:6px 12px}.np-lang{margin-inline-start:auto}.np-lang-btn{padding:7px}.search button{padding:0 18px}}
 @media(max-width:480px){.search{flex-direction:column;gap:8px}.search button{padding:13px 18px}}
+.skip{position:absolute;left:-9999px;top:8px;background:#2B4C7E;color:#F3F0EB;padding:8px 14px;z-index:20;text-decoration:none}.skip:focus{left:8px}
 .back{display:inline-block;padding:10px 0;margin:-10px 0}
 @media(max-width:620px){.work li{grid-template-columns:1fr}.w-src{grid-row:auto;grid-column:1;order:3}.w-detail{order:2}}
 footer .langs a{display:inline-block;padding:6px 0}
@@ -126,6 +127,7 @@ footer .langs a{display:inline-block;padding:6px 0}
 <link rel="icon" type="image/png" href="/assets/brain.png">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="wrap">
   <a class="mark" href="/"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
   <nav class="nav"><a href="/#run">How it works</a><a href="/talent" aria-current="page">Talent</a><a href="/hire">Hire</a><a class="login" href="/app" data-auth="login">Log in</a></nav>
