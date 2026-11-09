@@ -743,14 +743,17 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   var sec=document.getElementById("members"), tr=document.getElementById("mq-track"); if(!sec||!tr) return;
   function esc(t){ return String(t==null?"":t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
   /* S and A tier only (Dylan 2026-11-05): talent_carousel_ids returns up to 40 listed S/A ids in random order, never tiers */
+  /* Featured first (Dylan 2026-11-08): the RPC returns every featured member, then S/A, each group in random order;
+     the cards keep that order (no client shuffle). */
+  var ord=[];
   fetch(API+"/rest/v1/rpc/talent_carousel_ids",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"},body:"{}"})
    .then(function(r){ return r.ok?r.json():[]; }).then(function(ids){
-    ids=(ids||[]).map(function(x){ return x&&x.id; }).filter(Boolean); if(!ids.length) return [];
+    ids=(ids||[]).map(function(x){ return x&&x.id; }).filter(Boolean); ord=ids; if(!ids.length) return [];
     return fetch(API+"/rest/v1/talent?select=id,headline,skills,work&id=in.("+ids.map(encodeURIComponent).join(",")+")",{headers:{apikey:KEY,Authorization:"Bearer "+KEY}})
      .then(function(r){ return r.ok?r.json():[]; });
    }).then(function(rows){
     rows=(rows||[]).filter(function(r){ return r&&r.headline&&(r.skills||[]).length; }); if(rows.length<6) return;
-    for(var i=rows.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=rows[i]; rows[i]=rows[j]; rows[j]=t; }
+    var pos={}; ord.forEach(function(id,i){ pos[id]=i; }); rows.sort(function(a,b){ return pos[a.id]-pos[b.id]; });
     var html=rows.map(function(r){
       var w=(r.work||[])[0]||{}, sk=(r.skills||[]).slice(0,3);
       return '<a class="mq-card" href="/talent?lang=es#'+esc(r.id)+'"><p class="mq-h">'+esc(r.headline)+'</p>'
