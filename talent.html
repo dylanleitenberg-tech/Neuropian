@@ -207,9 +207,11 @@ function render(rows,q){
 function search(q){
   st.textContent=q?"Searching…":"Loading…";
   (q?call({action:"search",q:q}):browse(0)).then(function(d){ if(d.error)throw new Error(d.error); render(d.results||[],q); })
-  .catch(function(){ st.textContent="Search is unavailable right now."; grid.innerHTML=""; });
+  .catch(function(){ st.textContent=q?"Search is unavailable right now. Please try again in a moment.":"Could not load profiles right now. Please reload in a moment."; grid.innerHTML=""; moreBtn.hidden=true; });
 }
+var listY=0;   // where the list was scrolled to when a profile was opened, so Back puts you in the same place
 function show(id){
+  if(!list.hidden)listY=window.scrollY;
   fetch(SB+"/rest/v1/talent?id=eq."+encodeURIComponent(id)+"&select=*",{headers:{"apikey":KEY,"Authorization":"Bearer "+KEY}})
   .then(function(r){return r.json();}).then(function(rows){
     var p=rows&&rows[0]; list.hidden=true; prof.hidden=false; window.scrollTo(0,0);
@@ -251,13 +253,13 @@ function hireForm(p){
       body:JSON.stringify({p_profile:p.id,p_name:d.get("name"),p_company:d.get("company"),p_email:d.get("email"),p_role:d.get("role"),p_details:d.get("details"),p_link:d.get("link")||null,p_compensation:d.get("compensation"),p_work_mode:d.get("work_mode"),p_location:d.get("location")||null,p_employment:d.get("employment")})})
     .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
     .then(function(x){ if(!x.ok)throw new Error((x.j&&x.j.message)||"Could not send. Please try again.");
-      f.hidden=true; msg.textContent="Sent. Neuropian will pass it on and email you if "+(p.name?p.name.split(" ")[0]+" wants":"they want")+" to talk."; })
-    .catch(function(err){ sub.disabled=false; msg.textContent=err.message; });
+      f.hidden=true; msg.textContent="Sent. Neuropian will pass it on and email you if "+(p.name?p.name.split(" ")[0]+" wants":"they want")+" to talk."; msg.scrollIntoView({block:"nearest"}); })
+    .catch(function(err){ sub.disabled=false; msg.textContent=(err instanceof TypeError)?"Could not reach Neuropian. Check your connection and try again, or email dylan@neuropian.com.":err.message; msg.scrollIntoView({block:"nearest"}); });
   });
 }
 function route(){
   var id=location.hash.slice(1);
-  if(id){show(id);}else{prof.hidden=true;list.hidden=false;document.title="Talent · Neuropian";}
+  if(id){show(id);}else{var back=list.hidden;prof.hidden=true;list.hidden=false;document.title="Talent · Neuropian";if(back)window.scrollTo(0,listY);}
 }
 document.getElementById("f").addEventListener("submit",function(e){e.preventDefault();var q=document.getElementById("q").value.trim();history.replaceState(null,"","?q="+encodeURIComponent(q));search(q);});
 window.addEventListener("hashchange",route);
