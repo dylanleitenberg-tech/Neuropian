@@ -1,3 +1,13 @@
 # Cloudflare Workers static assets: never serve these on neuropian.com
 scout/
 _config.yml
+# build/config files and anything that should never be public (2026-11-11; only applies if the host reads this file)
+.assetsignore
+*.bak
+*.bak-*
+*.sql
+*.py
+*.map
+*.env
+.env*
+.DS_Store
