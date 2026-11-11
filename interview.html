@@ -104,21 +104,26 @@ label.ck input{width:20px;height:20px;margin-top:5px;flex:none;accent-color:var(
   <ul class="facts">
     <li id="c-len"></li>
     <li><b>One take.</b> Video and audio are recorded from start to finish. Each question appears only once recording starts. You can't pause, but you can move on as soon as you're done with a question.</li>
-    <li><b>Two quick checks.</b> At two random moments you'll be asked to hold up a number of fingers in front of your face. It confirms the recording is really you.</li>
-    <li><b>Who sees it.</b> Neuropian. The hiring company sees it only if you tick the second box below.</li>
-    <li><b>How it's reviewed.</b> We transcribe it and use AI to help us review it. A person makes every decision.</li>
-    <li><b>Deleting it.</b> Email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a> at any time and we'll delete the recording.</li>
+    <li><b>Two quick checks.</b> At two random moments you'll be asked to hold up a number of fingers in front of your face. It confirms the recording is really you; a Neuropian person checks those moments.</li>
+    <li id="c-ai"><b>How AI is used, and what it evaluates.</b> After you finish, software on our own computer turns your speech into text. An AI model (Claude, made by Anthropic) reads that text together with your public work and drafts notes on each answer: how specific and technically correct it is, whether it matches the work you've published, and what you said about your experience, work mode and hours, the kind of company you want, relocation and start date. Software also measures communication signals (speaking rate, pauses, filler words, how clearly your speech could be transcribed, and how much your pitch and loudness vary) to see how clearly you communicate and to spot answers read from a script. Accent and national origin are never scored, and none of these signals is on its own a reason to turn anyone down. A Neuropian person watches your recording, reads the notes and makes every decision. If you'd rather not have AI-assisted review, email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a> before you start and a person will review it without AI.</li>
+    <li><b>Who sees it.</b> Neuropian, and the providers that store and process it for us (Supabase for storage, Anthropic for the AI notes). <span class="c-co">The hiring company</span> sees your recording, transcript and our notes only if you tick the optional box below.</li>
+    <li><b>How long we keep it.</b> We delete the recording, transcript and our notes 12 months after the interview, unless you're hired through us.</li>
+    <li><b>Deleting it.</b> Email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a> at any time. Within 30 days we delete every copy and tell anyone we shared it with, including <span class="c-co2">the hiring company</span>, to delete theirs.</li>
   </ul>
+  <p class="note">More detail: <a href="/privacy#interviews" target="_blank" rel="noopener">Privacy Policy, "Recorded interviews and AI evaluation"</a>.</p>
   <p class="note" id="c-resume" hidden></p>
-  <label class="ck"><input type="checkbox" id="ck-rec"><span>I agree to be recorded for this interview.</span></label>
-  <label class="ck"><input type="checkbox" id="ck-share"><span id="ck-share-t">Neuropian may share the recording with the hiring company.</span></label>
+  <label class="ck"><input type="checkbox" id="ck-rec"><span>I agree to be recorded (video and audio) for this interview.</span></label>
+  <label class="ck"><input type="checkbox" id="ck-ai"><span>I agree to the AI-assisted review described above.</span></label>
+  <label class="ck"><input type="checkbox" id="ck-share"><span id="ck-share-t">Optional: Neuropian may share my recording, transcript and Neuropian's notes with the hiring company, after telling me its name by email, only to consider me for this role.</span></label>
+  <label class="ck"><input type="checkbox" id="ck-adult"><span>I am 18 or older.</span></label>
+  <p class="note">By continuing you agree to Neuropian's <a href="/terms" target="_blank" rel="noopener">Terms</a> and <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</p>
   <button class="btn" id="b-consent" disabled>Continue</button>
 </section>
 
 <section id="s-check" hidden>
   <p class="kicker">Step 2 of 3 · Camera and microphone</p>
   <h1>Check your camera and mic.</h1>
-  <p class="lede">Find a quiet spot and face a light. Keep this tab open until the end; the recording uploads as you go.</p>
+  <p class="lede">Find a quiet spot and face a light. Nothing is recorded or uploaded until you press Start recording. Keep this tab open until the end; the recording uploads as you go.</p>
   <div class="cam"><video id="v-check" playsinline muted autoplay></video></div>
   <div class="meter" aria-hidden="true"><i id="lvl"></i></div>
   <p class="note" id="lvl-note">Say something: the bar should move.</p>
@@ -151,7 +156,7 @@ label.ck input{width:20px;height:20px;margin-top:5px;flex:none;accent-color:var(
 <section id="s-done" hidden>
   <p class="kicker">Neuropian · Interview</p>
   <h1 id="done-title">Done. Thank you.</h1>
-  <p class="lede" id="done-text">Your interview is saved. We'll review it and get back to you by email. You can close this tab.</p>
+  <p class="lede" id="done-text">Your interview is saved. We'll review it and get back to you by email. To have your recording deleted, email dylan@neuropian.com. You can close this tab.</p>
   <div class="dl" id="done-dl" hidden></div>
 </section>
 
@@ -265,6 +270,7 @@ function init() {
     var total = (d.seconds || []).reduce(function (a, s) { return a + s; }, 0);
     var lo = Math.min.apply(null, d.seconds && d.seconds.length ? d.seconds : [150]) / 60, hi = Math.max.apply(null, d.seconds && d.seconds.length ? d.seconds : [150]) / 60;
     $("c-title").textContent = "Hi " + d.first_name + ". This is a short recorded interview.";
+    fillCompany(d);
     $("c-lede").textContent = "It's for " + (d.role ? d.role + " at " : "") + d.company + ", introduced by Neuropian. The questions are about your work and what you're looking for, so there's nothing to prepare.";
     $("c-len").innerHTML = "<b>About " + Math.max(1, Math.round(total / 60)) + " minutes.</b> " + d.count + " questions, each with its own timer (" + (lo === hi ? lo + (lo === 1 ? " minute" : " minutes") : lo + " to " + hi + " minutes") + ").";
     if (d.resume && d.resume.next_q > 0) {
@@ -281,9 +287,19 @@ function init() {
   });
 }
 
-$("ck-rec").addEventListener("change", function () { $("b-consent").disabled = !this.checked; });
+// Consent (Illinois AI Video Interview Act style, 2026-11-11): recording, AI review and 18+ are required; sharing is optional.
+var CONSENT_VERSION = "2026-11-11-v2";
+function consentOk() { return $("ck-rec").checked && $("ck-ai").checked && $("ck-adult").checked; }
+["ck-rec", "ck-ai", "ck-adult"].forEach(function (id) { $(id).addEventListener("change", function () { $("b-consent").disabled = !consentOk(); }); });
+function fillCompany(d) {
+  var c = String(d.company || ""), named = c && !/^(a|an|the)\s/i.test(c);   // "a startup we work with" is a description, not a name
+  document.querySelectorAll(".c-co").forEach(function (el) { el.textContent = named ? c.charAt(0).toUpperCase() + c.slice(1) : "The hiring company"; });
+  document.querySelectorAll(".c-co2").forEach(function (el) { el.textContent = named ? c : "the hiring company"; });
+  $("ck-share-t").textContent = "Optional: Neuropian may share my recording, transcript and Neuropian's notes with " +
+    (named ? c : "the hiring company, after telling me its name by email,") + " only to consider me for this role.";
+}
 $("b-consent").addEventListener("click", function () {
-  if (!$("ck-rec").checked) return;
+  if (!consentOk()) return;
   show("s-check");
   var why = unsupported();
   if (why) { $("check-msg").className = "msg err"; $("check-msg").textContent = why; $("b-cam").disabled = true; }
@@ -365,7 +381,8 @@ function pickMime() {
 $("b-start").addEventListener("click", function () {
   if (!stream) return;
   var btn = $("b-start"); btn.disabled = true;
-  api("begin", { consent_recording: true, consent_share: $("ck-share").checked }).then(function (d) {
+  api("begin", { consent_recording: true, consent_ai: $("ck-ai").checked, adult_confirmed: $("ck-adult").checked,
+                 consent_share: $("ck-share").checked, consent_version: CONSENT_VERSION }).then(function (d) {
     attempt = d.attempt; startI = qi = d.start_i || 0; qCount = d.count;
     stopMeter();
     startRecording();
@@ -619,7 +636,7 @@ $("b-signout").addEventListener("click", function () {
 });
 
 // ---------- headless self-test (localhost + ?t=demo&autotest=1 only; Chrome's fake camera) ----------
-function autotestConsent() { $("ck-rec").checked = true; $("ck-rec").dispatchEvent(new Event("change")); setTimeout(function () { $("b-consent").click(); }, 200); }
+function autotestConsent() { ["ck-ai", "ck-adult", "ck-rec"].forEach(function (id) { $(id).checked = true; $(id).dispatchEvent(new Event("change")); }); setTimeout(function () { $("b-consent").click(); }, 200); }
 function autotestCheck() { setTimeout(function () { $("b-cam").click(); }, 200); var w = setInterval(function () { if (!$("b-start").disabled) { clearInterval(w); setTimeout(function () { $("b-start").click(); }, 500); } }, 200); }
 function autotestQuestion(i) { document.title = "AUTOTEST q" + i; if (i === 0) setTimeout(function () { $("b-next").click(); }, 2900); }
 function autotestDone() {
