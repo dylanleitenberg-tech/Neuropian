@@ -5,3 +5,15 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   X-Content-Type-Options: nosniff
+/interview
+  ! Permissions-Policy
+  Permissions-Policy: camera=(self), microphone=(self), geolocation=(), payment=()
+  X-Robots-Tag: noindex, nofollow
+  ! Referrer-Policy
+  Referrer-Policy: no-referrer
+/interview.html
+  ! Permissions-Policy
+  Permissions-Policy: camera=(self), microphone=(self), geolocation=(), payment=()
+  X-Robots-Tag: noindex, nofollow
+  ! Referrer-Policy
+  Referrer-Policy: no-referrer

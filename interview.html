@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Neuropian interview</title>
+<link rel="icon" href="/assets/brain-ink.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Same paper look as neuropian.com/talent */
+:root{--bg:#ECE8E3;--fg:#2B2A28;--dim:rgba(43,42,40,.76);--faint:rgba(43,42,40,.70);--line:rgba(43,42,40,.16);--acc:#2B4C7E;--rec:#A3302A;
+  --serif:"EB Garamond",Garamond,Georgia,"Times New Roman",serif;--display:"DM Serif Display",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;--pad:clamp(16px,5vw,64px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#ECE8E3 url(/assets/paper.webp) 0 0/900px 900px;color:var(--fg)}
+body{font-family:var(--serif);font-size:19px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-underline-offset:.2em}
+.bar{border-bottom:1px solid var(--line);background:rgba(236,232,227,.92)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.wrap{max-width:860px;margin:0 auto;padding:0 var(--pad)}
+.mark{font-family:var(--display);font-size:25px;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.mark img{width:30px;height:30px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+main.wrap{padding-top:48px;padding-bottom:72px}
+.bar .kicker{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(32px,5.5vw,52px);line-height:1.08;letter-spacing:-.01em;margin-top:14px}
+.lede{color:var(--dim);font-size:clamp(18px,1.8vw,21px);margin-top:18px;max-width:36em}
+ul.facts{list-style:none;margin-top:28px;border-top:1px solid var(--line)}
+ul.facts li{padding:12px 0;border-bottom:1px solid var(--line)}
+ul.facts b{font-weight:600}
+label.ck{display:flex;gap:12px;align-items:flex-start;margin-top:18px;cursor:pointer}
+label.ck input{width:20px;height:20px;margin-top:5px;flex:none;accent-color:var(--acc)}
+.btn{font:inherit;font-family:var(--serif);font-size:18px;font-weight:500;background:var(--acc);color:#F3F0EB;border:1px solid var(--acc);border-radius:0;padding:12px 26px;cursor:pointer;margin-top:28px}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.ghost{background:transparent;color:var(--fg);border-color:rgba(43,42,40,.35)}
+.btn:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.note{font-size:15px;color:var(--faint);margin-top:18px;max-width:40em}
+.msg{font-size:16px;margin-top:16px;min-height:1.2em}
+.msg.err{color:var(--rec)}
+.cam{position:relative;margin-top:22px;width:100%;max-width:400px;aspect-ratio:4/3;background:#2B2A28;border:1px solid var(--line);overflow:hidden}
+.cam video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block}
+.meter{height:8px;background:rgba(43,42,40,.12);margin-top:10px;max-width:400px}
+.meter i{display:block;height:100%;width:0;background:var(--acc);transition:width .08s linear}
+.mini{position:fixed;right:16px;bottom:16px;width:132px;aspect-ratio:3/4;background:#2B2A28;border:1px solid var(--line);overflow:hidden;z-index:4}
+.mini video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.recbar{display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--rec);margin-right:8px;vertical-align:-1px;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.q{font-family:var(--display);font-size:clamp(23px,3.3vw,32px);line-height:1.25;margin-top:30px;min-height:4em;max-width:30em}
+.live{margin-top:22px;border:2px solid var(--acc);background:rgba(43,76,126,.08);padding:16px 20px}
+.live-n{font-family:var(--display);font-size:clamp(26px,4vw,38px);line-height:1.2;margin-top:6px}
+.live-n b{font-size:1.35em;color:var(--acc);font-weight:400}
+.timer{display:flex;align-items:center;gap:16px;margin-top:26px}
+.timer .t{font-family:var(--mono);font-size:28px;min-width:4.2ch}
+.timer .t.low{color:var(--rec)}
+.track{flex:1;height:6px;background:rgba(43,42,40,.12)}
+.track i{display:block;height:100%;background:var(--acc);width:100%}
+.progress{height:8px;background:rgba(43,42,40,.12);margin-top:22px;max-width:480px}
+.progress i{display:block;height:100%;width:0;background:var(--acc)}
+.dl a{display:inline-block;margin:14px 18px 0 0}
+[hidden]{display:none!important}
+@media (max-width:560px){body{font-size:18px}main.wrap{padding-top:32px;padding-bottom:160px}.mini{width:96px}.btn{width:100%}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="mark" href="/"><img src="/assets/brain-ink.png" alt="">Neuropian</a>
+  <span class="kicker" id="hdr">Interview</span>
+</div></header>
+<main class="wrap">
+
+<section id="s-load"><p class="kicker">Neuropian · Interview</p><h1>Loading…</h1></section>
+
+<section id="s-error" hidden>
+  <p class="kicker">Neuropian · Interview</p>
+  <h1 id="err-title">This link is not valid.</h1>
+  <p class="lede" id="err-text">Check that you opened the full link from the email, or write to <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p>
+</section>
+
+<section id="s-consent" hidden>
+  <p class="kicker">Step 1 of 3 · Before you start</p>
+  <h1 id="c-title">Hi. This is a short recorded interview.</h1>
+  <p class="lede" id="c-lede"></p>
+  <ul class="facts">
+    <li id="c-len"></li>
+    <li><b>One take.</b> Video and audio are recorded from start to finish. Each question appears only once recording starts. You can't pause, but you can move on as soon as you're done with a question.</li>
+    <li><b>Two quick checks.</b> At two random moments you'll be asked to hold up a number of fingers in front of your face. It confirms the recording is really you.</li>
+    <li><b>Who sees it.</b> Neuropian. The hiring company sees it only if you tick the second box below.</li>
+    <li><b>How it's reviewed.</b> We transcribe it and use AI to help us review it. A person makes every decision.</li>
+    <li><b>Deleting it.</b> Email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a> at any time and we'll delete the recording.</li>
+  </ul>
+  <p class="note" id="c-resume" hidden></p>
+  <label class="ck"><input type="checkbox" id="ck-rec"><span>I agree to be recorded for this interview.</span></label>
+  <label class="ck"><input type="checkbox" id="ck-share"><span id="ck-share-t">Neuropian may share the recording with the hiring company.</span></label>
+  <button class="btn" id="b-consent" disabled>Continue</button>
+</section>
+
+<section id="s-check" hidden>
+  <p class="kicker">Step 2 of 3 · Camera and microphone</p>
+  <h1>Check your camera and mic.</h1>
+  <p class="lede">Find a quiet spot and face a light. Keep this tab open until the end; the recording uploads as you go.</p>
+  <div class="cam"><video id="v-check" playsinline muted autoplay></video></div>
+  <div class="meter" aria-hidden="true"><i id="lvl"></i></div>
+  <p class="note" id="lvl-note">Say something: the bar should move.</p>
+  <div class="row">
+    <button class="btn ghost" id="b-cam">Turn on camera and mic</button>
+    <button class="btn" id="b-start" disabled>Start recording</button>
+  </div>
+  <p class="msg" id="check-msg" role="status"></p>
+</section>
+
+<section id="s-rec" hidden>
+  <div class="recbar"><span><span class="dot"></span>Recording <span id="elapsed">0:00</span></span><span id="qcount"></span></div>
+  <div class="live" id="live" hidden role="alert"><p class="kicker">Quick check</p><p class="live-n">Hold up <b id="live-n">3</b> <span id="live-w">fingers</span> in front of your face</p><p class="note" style="margin-top:6px">Keep them up for a few seconds, then carry on.</p></div>
+  <p class="q" id="qtext" aria-live="polite"></p>
+  <div class="timer"><span class="t" id="tleft">2:30</span><span class="track"><i id="tbar"></i></span></div>
+  <div class="row"><button class="btn" id="b-next" disabled>Next question</button></div>
+  <p class="msg" id="rec-msg" role="status"></p>
+  <p class="note">Take a moment to think before you answer; that's normal. Answer in your own words. The next question appears automatically when time runs out.</p>
+</section>
+
+<section id="s-up" hidden>
+  <p class="kicker">Step 3 of 3 · Uploading</p>
+  <h1>Saving your interview…</h1>
+  <p class="lede">Please keep this tab open until it finishes.</p>
+  <div class="progress"><i id="upbar"></i></div>
+  <p class="msg" id="up-msg" role="status"></p>
+  <div class="dl" id="up-save" hidden><p class="note">If it doesn't finish, save a copy and email it to <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p><a href="#" id="a-save">Save a copy of the recording</a></div>
+</section>
+
+<section id="s-done" hidden>
+  <p class="kicker">Neuropian · Interview</p>
+  <h1 id="done-title">Done. Thank you.</h1>
+  <p class="lede" id="done-text">Your interview is saved. We'll review it and get back to you by email. You can close this tab.</p>
+  <div class="dl" id="done-dl" hidden></div>
+</section>
+
+</main>
+<div class="mini" id="mini" hidden><video id="v-mini" playsinline muted autoplay></video></div>
+
+<script>
+(function () {
+"use strict";
+// Backend: the `interview` edge function (service role inside). The anon key is the public key the site already ships.
+var SB = "https://qggduzzwvdkmekihwuav.supabase.co";
+var KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
+var FN = SB + "/functions/v1/interview";
+var BUCKET = "interviews";
+var params = new URLSearchParams(location.search);
+var TOKEN = params.get("t") || "";
+var DEMO = TOKEN === "demo";
+var LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+var AUTOTEST = DEMO && LOCAL && params.get("autotest") === "1";   // headless test only (fake camera), never in production
+var CHUNK_MS = AUTOTEST ? 2000 : 10000;   // one chunk every 10 s, uploaded while recording continues
+
+// Demo pack: generic questions so the page can be tried with ?t=demo. Nothing is uploaded in demo mode.
+var DEMO_PACK = {
+  first_name: "there", company: "a startup we work with",
+  questions: [
+    "Walk us through something you built that you're proud of: what it does, the hardest part, and what you'd do differently.",
+    "Who did you lead or work with on it? What was your role on the team?",
+    "How many years of experience do you have, and in what?",
+    "Remote, hybrid or onsite? How many hours a week do you want to work?",
+    "What kind of company do you want to work at: stage, size, what it builds?",
+    "Would you relocate? Where to?",
+    "When could you start?",
+    "Last one: tell us a joke."
+  ].map(function (t) { return { text: t, seconds: 60 }; })
+};
+
+var $ = function (id) { return document.getElementById(id); };
+var SCREENS = ["s-load", "s-error", "s-consent", "s-check", "s-rec", "s-up", "s-done"];
+function show(id) { SCREENS.forEach(function (s) { $(s).hidden = s !== id; }); window.scrollTo(0, 0); }
+function fail(title, text) { $("err-title").textContent = title; if (text) $("err-text").textContent = text; show("s-error"); stopAll(); }
+function mmss(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2); }
+function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+// ---------- backend calls ----------
+function ApiError(msg, status) { this.message = msg; this.status = status; }
+function api(action, body) {
+  if (DEMO) return demoApi(action, body || {});
+  var b = Object.assign({ action: action, t: TOKEN }, body || {});
+  return fetch(FN, { method: "POST", headers: { "Content-Type": "application/json", "apikey": KEY, "Authorization": "Bearer " + KEY }, body: JSON.stringify(b) })
+    .then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (d) {
+        if (!r.ok || d.error) throw new ApiError(d.error || ("Error " + r.status), r.status);
+        return d;
+      });
+    });
+}
+var demoNext = 0;
+function demoApi(action, b) {
+  var qs = DEMO_PACK.questions;
+  return sleep(150).then(function () {
+    if (action === "open") return { first_name: DEMO_PACK.first_name, company: DEMO_PACK.company, count: qs.length, seconds: qs.map(function (q) { return q.seconds; }), resume: null };
+    if (action === "begin") return { attempt: 1, start_i: 0, count: qs.length };
+    if (action === "question") {
+      if (b.i > demoNext || b.i < demoNext - 1) throw new ApiError("That question isn't available.", 409);
+      demoNext = Math.max(demoNext, b.i + 1);
+      var q = qs[b.i]; return { i: b.i, text: q.text, seconds: AUTOTEST ? 4 : q.seconds, last: b.i === qs.length - 1 };
+    }
+    if (action === "check") return { k: b.k, n: 1 + Math.floor(Math.random() * 5) };
+    if (action === "upload") return { demo: true };
+    if (action === "finish") return { ok: true };
+    throw new ApiError("bad request", 400);
+  });
+}
+
+// ---------- state ----------
+var info = null;            // from open
+var attempt = 0, qi = 0, qCount = 0, startI = 0;
+var stream = null, rec = null, mime = "", baseMime = "", ext = "webm";
+var t0 = 0;                 // performance.now() when recording started
+var log = null;
+var seq = 0, queue = [], uploading = false, sentCount = 0, madeCount = 0, allChunks = [], totalBytes = 0, uploadFatal = null;
+var stopped = false, finishing = false, afterStopRan = false;
+var liveDone = 0, liveActive = false, liveTimers = [], qReady = false;
+var LIVE_CHECKS = 2, LIVE_MS = AUTOTEST ? 1200 : 7000;
+var deadline = 0, qSeconds = 150, tick = null, elapsedTick = null, wakeLock = null, audioCtx = null, meterRaf = 0;
+
+function msNow() { return t0 ? Math.round(performance.now() - t0) : 0; }
+function snapshotLog() { if (log) { log.chunks = madeCount; log.bytes = totalBytes; } return log; }
+
+// ---------- start ----------
+function init() {
+  if (!TOKEN) return fail("This link is incomplete.", "Open the full link from the email, or write to dylan@neuropian.com.");
+  if (!DEMO && !/^[A-Za-z0-9_-]{32,64}$/.test(TOKEN)) return fail("This link is not valid.");
+  if (DEMO) $("hdr").textContent = "Demo · not uploaded";
+  api("open").then(function (d) {
+    info = d;
+    if (d.done) { $("done-title").textContent = "This interview is already finished."; $("done-text").textContent = "Thank you" + (d.first_name ? ", " + d.first_name : "") + ". We have your recording and will be in touch by email."; return show("s-done"); }
+    var total = (d.seconds || []).reduce(function (a, s) { return a + s; }, 0);
+    var lo = Math.min.apply(null, d.seconds && d.seconds.length ? d.seconds : [150]) / 60, hi = Math.max.apply(null, d.seconds && d.seconds.length ? d.seconds : [150]) / 60;
+    $("c-title").textContent = "Hi " + d.first_name + ". This is a short recorded interview.";
+    $("c-lede").textContent = "It's for " + d.company + ", introduced by Neuropian. The questions are about your work and what you're looking for, so there's nothing to prepare.";
+    $("c-len").innerHTML = "<b>About " + Math.max(1, Math.round(total / 60)) + " minutes.</b> " + d.count + " questions, each with its own timer (" + (lo === hi ? lo + (lo === 1 ? " minute" : " minutes") : lo + " to " + hi + " minutes") + ").";
+    if (d.resume && d.resume.next_q > 0) {
+      $("c-resume").hidden = false;
+      $("c-resume").textContent = "Your earlier session was interrupted. You'll pick up at question " + d.resume.next_q + "; what you already recorded is kept.";
+    }
+    show("s-consent");
+    if (AUTOTEST) autotestConsent();
+  }).catch(function (e) {
+    if (e && e.status === 410) fail("This link has expired.", e.message);
+    else if (e && e.status === 404) fail("This link is not valid.");
+    else fail("We couldn't load the interview.", "Check your connection and reload the page. If it keeps happening, write to dylan@neuropian.com.");
+  });
+}
+
+$("ck-rec").addEventListener("change", function () { $("b-consent").disabled = !this.checked; });
+$("b-consent").addEventListener("click", function () {
+  if (!$("ck-rec").checked) return;
+  show("s-check");
+  var why = unsupported();
+  if (why) { $("check-msg").className = "msg err"; $("check-msg").textContent = why; $("b-cam").disabled = true; }
+  if (AUTOTEST) autotestCheck();
+});
+
+function unsupported() {
+  if (!window.isSecureContext) return "This page must be opened over https.";
+  try {
+    var fp = document.permissionsPolicy || document.featurePolicy;
+    if (fp && fp.allowsFeature && (!fp.allowsFeature("camera") || !fp.allowsFeature("microphone")))
+      return "This page isn't allowed to use the camera right now (site setting). Please email dylan@neuropian.com; it's on our side.";
+  } catch (e) {}
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder)
+    return "This browser can't record video. Please open the link in Chrome, Safari, Edge or Firefox (not inside an email or social app).";
+  return "";
+}
+
+// ---------- camera check ----------
+$("b-cam").addEventListener("click", function () {
+  var m = $("check-msg"); m.className = "msg"; m.textContent = "Asking for your camera and microphone…";
+  stopStream();
+  navigator.mediaDevices.getUserMedia({
+    video: { width: { ideal: 640 }, height: { ideal: 480 }, frameRate: { ideal: 24, max: 30 }, facingMode: "user" },
+    audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+  }).then(function (s) {
+    stream = s;
+    $("v-check").srcObject = s; $("v-check").play().catch(function () {});
+    startMeter(s);
+    pickMime();
+    m.textContent = baseMime ? "Looks good. Start when you're ready." : "Your browser can't record here. Please try Chrome or Safari.";
+    $("b-start").disabled = !baseMime;
+    $("b-cam").textContent = "Restart camera and mic";
+  }).catch(function (e) {
+    m.className = "msg err";
+    var n = e && e.name;
+    if (n === "NotAllowedError" || n === "SecurityError") m.textContent = "Camera or microphone access was blocked. Allow it for this site (in the address bar or browser settings), then press the button again.";
+    else if (n === "NotFoundError" || n === "OverconstrainedError") m.textContent = "No camera or microphone was found. Connect one and try again.";
+    else if (n === "NotReadableError") m.textContent = "Your camera or mic is in use by another app. Close it (Zoom, Meet, FaceTime) and try again.";
+    else m.textContent = "Couldn't start the camera: " + (e && e.message ? e.message : n || "unknown error");
+  });
+});
+
+function startMeter(s) {
+  try {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    if (audioCtx) audioCtx.close();
+    audioCtx = new AC();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    var src = audioCtx.createMediaStreamSource(s), an = audioCtx.createAnalyser();
+    an.fftSize = 512; src.connect(an);
+    var buf = new Uint8Array(an.fftSize);
+    var loop = function () {
+      an.getByteTimeDomainData(buf);
+      var peak = 0;
+      for (var i = 0; i < buf.length; i++) peak = Math.max(peak, Math.abs(buf[i] - 128));
+      $("lvl").style.width = Math.min(100, peak / 64 * 100) + "%";
+      meterRaf = requestAnimationFrame(loop);
+    };
+    loop();
+  } catch (e) {}
+}
+function stopMeter() { if (meterRaf) cancelAnimationFrame(meterRaf); meterRaf = 0; if (audioCtx) { audioCtx.close().catch(function () {}); audioCtx = null; } }
+function stopStream() { if (stream) stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
+function stopAll() { stopMeter(); stopStream(); releaseWake(); clearInterval(tick); clearInterval(elapsedTick); }
+
+// Chrome records webm; Safari records mp4 (newer Safari can do both). Keep the base type for storage.
+function pickMime() {
+  var C = ["video/webm;codecs=vp8,opus", "video/webm;codecs=vp9,opus", "video/webm",
+           "video/mp4;codecs=avc1.42E01E,mp4a.40.2", "video/mp4;codecs=avc1,mp4a", "video/mp4"];
+  mime = "";
+  for (var i = 0; i < C.length; i++) { try { if (MediaRecorder.isTypeSupported(C[i])) { mime = C[i]; break; } } catch (e) {} }
+  baseMime = mime ? mime.split(";")[0] : (window.MediaRecorder ? "video/mp4" : "");
+  ext = baseMime.indexOf("webm") >= 0 ? "webm" : "mp4";
+}
+
+// ---------- recording ----------
+$("b-start").addEventListener("click", function () {
+  if (!stream) return;
+  var btn = $("b-start"); btn.disabled = true;
+  api("begin", { consent_recording: true, consent_share: $("ck-share").checked }).then(function (d) {
+    attempt = d.attempt; startI = qi = d.start_i || 0; qCount = d.count;
+    stopMeter();
+    startRecording();
+  }).catch(function (e) {
+    btn.disabled = false; $("check-msg").className = "msg err"; $("check-msg").textContent = e.message || "Couldn't start. Please try again.";
+  });
+});
+
+function startRecording() {
+  var opts = { videoBitsPerSecond: 700000, audioBitsPerSecond: 64000 };
+  if (mime) opts.mimeType = mime;
+  try { rec = new MediaRecorder(stream, opts); }
+  catch (e) { try { rec = new MediaRecorder(stream); } catch (e2) { return fail("Recording couldn't start.", "Please try Chrome or Safari, or write to dylan@neuropian.com."); } }
+  log = { v: 1, attempt: attempt, mime: rec.mimeType || mime, ua: navigator.userAgent.slice(0, 240), started_at: new Date().toISOString(),
+          chunk_ms: CHUNK_MS, start_i: startI, q: [], hidden: [], events: [], liveness: [] };
+  rec.ondataavailable = function (e) { if (e.data && e.data.size > 0) enqueue(e.data); };
+  rec.onerror = function (e) { log.events.push({ ms: msNow(), what: "recorder-error", detail: String((e && e.error && e.error.name) || "") }); endInterview("error"); };
+  rec.onstop = function () {
+    stopped = true;
+    if (!finishing) { log.events.push({ ms: msNow(), what: "recorder-stopped" }); markEnd("recorder-stopped"); }
+    afterStop();
+  };
+  rec.onstart = function () {
+    t0 = performance.now();
+    if (rec.mimeType) { baseMime = rec.mimeType.split(";")[0]; ext = baseMime.indexOf("webm") >= 0 ? "webm" : "mp4"; log.mime = rec.mimeType; }
+    show("s-rec"); $("mini").hidden = false; $("v-mini").srcObject = stream; $("v-mini").play().catch(function () {});
+    elapsedTick = setInterval(function () { $("elapsed").textContent = mmss(msNow() / 1000); }, 500);
+    holdWake();
+    planLiveness();
+    loadQuestion(qi);
+  };
+  stream.getTracks().forEach(function (t) { t.onended = function () { log.events.push({ ms: msNow(), what: t.kind + "-ended" }); $("rec-msg").className = "msg err"; $("rec-msg").textContent = "Your " + (t.kind === "video" ? "camera" : "microphone") + " stopped. Keep going if you can; we'll still get what was recorded."; }; });
+  rec.start(CHUNK_MS);
+}
+
+function loadQuestion(i) {
+  $("b-next").disabled = true; clearInterval(tick);
+  $("qcount").textContent = "Question " + (i + 1) + " of " + qCount;
+  $("qtext").textContent = "…";
+  var tries = 0;
+  var go = function () {
+    api("question", { attempt: attempt, i: i }).then(function (q) {
+      if (stopped || finishing) return;
+      qi = i; qSeconds = q.seconds || 150; qReady = true;
+      $("qtext").textContent = q.text; $("rec-msg").textContent = ""; $("rec-msg").className = "msg";
+      $("b-next").textContent = q.last ? "Finish" : "Next question"; $("b-next").disabled = liveActive;
+      log.q.push({ i: i, shown_ms: msNow() });
+      deadline = performance.now() + qSeconds * 1000;
+      renderTimer(); tick = setInterval(renderTimer, 250);
+      if (AUTOTEST) autotestQuestion(i);
+    }).catch(function (e) {
+      tries++;
+      if (e && e.status === 409 && tries > 2) return fail("This interview was opened somewhere else.", "If that wasn't you, write to dylan@neuropian.com.");
+      $("rec-msg").className = "msg err"; $("rec-msg").textContent = "Couldn't load the next question. Retrying… (the recording continues)";
+      setTimeout(go, Math.min(8000, 1000 * tries));
+    });
+  };
+  go();
+}
+
+function renderTimer() {
+  var left = (deadline - performance.now()) / 1000;
+  $("tleft").textContent = mmss(left);
+  $("tleft").className = "t" + (left <= 20 ? " low" : "");
+  $("tbar").style.width = Math.max(0, Math.min(100, left / qSeconds * 100)) + "%";
+  if (left <= 0) advance("timeout");
+}
+
+function advance(how) {
+  if ($("b-next").disabled || finishing || liveActive || !qReady) return;
+  if (qi + 1 >= qCount && liveDone < LIVE_CHECKS) { runCheck(); return; }   // both checks always happen before Finish
+  qReady = false; $("b-next").disabled = true; clearInterval(tick);
+  var cur = log.q[log.q.length - 1]; if (cur && cur.ended_ms == null) { cur.ended_ms = msNow(); cur.how = how; }
+  if (qi + 1 >= qCount) endInterview("finished");
+  else loadQuestion(qi + 1);
+}
+$("b-next").addEventListener("click", function () { advance("next"); });
+
+document.addEventListener("visibilitychange", function () {
+  if (!log || !t0 || stopped) return;
+  if (document.hidden) log.hidden.push({ from_ms: msNow(), q: qi });
+  else { var h = log.hidden[log.hidden.length - 1]; if (h && h.to_ms == null) h.to_ms = msNow(); }
+});
+window.addEventListener("beforeunload", function (e) {
+  if ((rec && !stopped) || queue.length || uploading) { e.preventDefault(); e.returnValue = ""; return ""; }
+});
+
+function holdWake() { try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(function (w) { wakeLock = w; }).catch(function () {}); } catch (e) {} }
+function releaseWake() { try { if (wakeLock) wakeLock.release(); } catch (e) {} wakeLock = null; }
+
+// ---------- liveness (anti-deepfake): "hold up N fingers", N picked by the server at that moment ----------
+function planLiveness() {
+  liveTimers.forEach(clearTimeout); liveTimers = [];
+  var secs = (info && info.seconds ? info.seconds.slice(startI) : []).reduce(function (a, s) { return a + s; }, 0) || 600;
+  var rnd = function (a, b) { return a + Math.random() * (b - a); };
+  var at = AUTOTEST ? [1.0, 9.0] : [rnd(Math.max(20, 0.12 * secs), 0.42 * secs), rnd(0.55 * secs, 0.85 * secs)];
+  at.forEach(function (t) { liveTimers.push(setTimeout(runCheck, t * 1000)); });
+}
+function runCheck() {
+  if (finishing || stopped || liveDone >= LIVE_CHECKS) return;
+  if (liveActive) { liveTimers.push(setTimeout(runCheck, LIVE_MS + 4000)); return; }
+  var k = liveDone++;
+  liveActive = true; $("b-next").disabled = true;
+  var showN = function (n, src) {
+    if (finishing) { liveActive = false; return; }
+    $("live-n").textContent = n; $("live-w").textContent = n === 1 ? "finger" : "fingers";
+    $("live").hidden = false;
+    var entry = { k: k, n: n, src: src, shown_ms: msNow(), q: qi };
+    log.liveness.push(entry);
+    setTimeout(function () {
+      $("live").hidden = true; entry.hidden_ms = msNow(); liveActive = false;
+      $("b-next").disabled = !qReady;
+    }, LIVE_MS);
+  };
+  api("check", { attempt: attempt, k: k }).then(function (d) { showN(d.n, DEMO ? "demo" : "server"); })
+    .catch(function () { showN(1 + Math.floor(Math.random() * 5), "client"); });   // never skip the check over a network blip
+}
+
+function markEnd(why) {
+  finishing = true; clearInterval(tick); clearInterval(elapsedTick); liveTimers.forEach(clearTimeout); $("live").hidden = true;
+  log.finished_ms = msNow(); log.end = why;
+  show("s-up"); $("mini").hidden = true;
+  updateUp();
+}
+function endInterview(why) {
+  if (finishing) return;
+  markEnd(why);
+  try { if (rec && rec.state !== "inactive") rec.stop(); else { stopped = true; afterStop(); } } catch (e) { stopped = true; afterStop(); }
+}
+
+function afterStop() {
+  if (afterStopRan) return;
+  afterStopRan = true;
+  stopAll();
+  waitUploads().then(function () {
+    return api("finish", { attempt: attempt, log: snapshotLog() });
+  }).then(function () {
+    if (DEMO) showDemoResult();
+    show("s-done");
+    if (info && info.first_name && !DEMO) $("done-title").textContent = "Done. Thank you, " + info.first_name + ".";
+    if (AUTOTEST) autotestDone();
+  }).catch(function (e) {
+    $("up-msg").className = "msg err";
+    $("up-msg").textContent = (e && e.message) || "We couldn't finish saving.";
+    offerSave();
+  });
+}
+
+// ---------- chunked upload: one chunk at a time, in order, retried with backoff ----------
+function enqueue(blob) {
+  var c = { seq: seq++, blob: blob, tries: 0 };
+  allChunks.push(blob); totalBytes += blob.size; madeCount++;
+  queue.push(c); pump(); updateUp();
+}
+function pump() {
+  if (uploading || !queue.length || uploadFatal) return;
+  uploading = true;
+  var c = queue[0];
+  uploadOne(c).then(function () {
+    queue.shift(); sentCount++; uploading = false; c.blob = null; updateUp(); pump();
+  }).catch(function (e) {
+    uploading = false; c.tries++;
+    if (e && e.status && e.status >= 400 && e.status < 500 && e.status !== 408 && e.status !== 429 && c.tries > 3) {
+      uploadFatal = e.message || "Upload refused."; updateUp(); offerSave(); return;
+    }
+    var wait = Math.min(30000, 1000 * Math.pow(2, Math.min(c.tries, 5)));
+    netNote("Connection problem; retrying the upload in " + Math.round(wait / 1000) + " s. The recording continues.");
+    if (c.tries >= 4 && finishing) offerSave();
+    setTimeout(pump, wait);
+  });
+}
+function uploadOne(c) {
+  return api("upload", { attempt: attempt, seq: c.seq, mime: baseMime, log: snapshotLog() }).then(function (d) {
+    if (d.demo) return sleep(60);
+    var path = String(d.path).split("/").map(encodeURIComponent).join("/");
+    var url = SB + "/storage/v1/object/upload/sign/" + BUCKET + "/" + path + "?token=" + encodeURIComponent(d.token);
+    return fetch(url, { method: "PUT", headers: { "Content-Type": baseMime, "apikey": KEY, "Authorization": "Bearer " + KEY }, body: c.blob })
+      .then(function (r) { if (r.status === 409) return;   // already stored by an earlier try whose reply was lost
+        if (!r.ok) return r.text().then(function (t) { throw new ApiError("Upload failed (" + r.status + ")", r.status >= 500 ? 0 : r.status); }); netNote(""); });
+  });
+}
+function netNote(s) {
+  var el = finishing ? $("up-msg") : $("rec-msg");
+  if (s) { el.className = "msg err"; el.textContent = s; }
+  else if (el.textContent.indexOf("retrying") >= 0) { el.className = "msg"; el.textContent = ""; }
+}
+function waitUploads() {
+  return new Promise(function (resolve, reject) {
+    var check = function () {
+      if (uploadFatal) return reject(new ApiError(uploadFatal + " Please save a copy and email it to dylan@neuropian.com."));
+      if (stopped && !queue.length && !uploading) return resolve();
+      setTimeout(check, 300);
+    };
+    check();
+  });
+}
+function updateUp() {
+  if (!finishing) return;
+  var pct = madeCount ? Math.round(sentCount / madeCount * 100) : 0;
+  $("upbar").style.width = pct + "%";
+  if (!uploadFatal && !$("up-msg").classList.contains("err")) $("up-msg").textContent = stopped ? ("Uploaded " + sentCount + " of " + madeCount + " parts.") : "Finishing the recording…";
+}
+function recordingBlob() { return new Blob(allChunks, { type: baseMime || "video/webm" }); }
+function stamp() { return new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19); }
+function offerSave() {
+  $("up-save").hidden = false;
+  var a = $("a-save");
+  a.href = URL.createObjectURL(recordingBlob());
+  a.download = "neuropian-interview-" + stamp() + "." + ext;
+}
+function showDemoResult() {
+  var box = $("done-dl"); box.hidden = false; box.innerHTML = "";
+  $("done-title").textContent = "Demo finished.";
+  $("done-text").textContent = "Nothing was uploaded. Save the recording and the timing log below to test review_interview.py --local.";
+  var name = "interview-demo-" + stamp();
+  var a1 = document.createElement("a"); a1.href = URL.createObjectURL(recordingBlob()); a1.download = name + "." + ext; a1.textContent = "Save recording (" + (totalBytes / 1048576).toFixed(1) + " MB, " + ext + ")";
+  var a2 = document.createElement("a"); a2.href = URL.createObjectURL(new Blob([JSON.stringify(snapshotLog(), null, 2)], { type: "application/json" })); a2.download = name + ".json"; a2.textContent = "Save timing log (json)";
+  box.appendChild(a1); box.appendChild(a2);
+}
+
+// ---------- headless self-test (localhost + ?t=demo&autotest=1 only; Chrome's fake camera) ----------
+function autotestConsent() { $("ck-rec").checked = true; $("ck-rec").dispatchEvent(new Event("change")); setTimeout(function () { $("b-consent").click(); }, 200); }
+function autotestCheck() { setTimeout(function () { $("b-cam").click(); }, 200); var w = setInterval(function () { if (!$("b-start").disabled) { clearInterval(w); setTimeout(function () { $("b-start").click(); }, 500); } }, 200); }
+function autotestQuestion(i) { document.title = "AUTOTEST q" + i; if (i === 0) setTimeout(function () { $("b-next").click(); }, 2900); }
+function autotestDone() {
+  var blob = recordingBlob(), lg = snapshotLog();
+  document.title = "AUTOTEST uploading";
+  fetch("/__autotest?ext=" + ext, { method: "PUT", body: blob })
+    .then(function () { return fetch("/__autotest?ext=json", { method: "PUT", body: JSON.stringify(lg) }); })
+    .then(function () { document.title = "AUTOTEST DONE bytes=" + blob.size + " chunks=" + madeCount + " mime=" + baseMime + " q=" + lg.q.length + " live=" + lg.liveness.map(function (x) { return x.n + "@" + x.shown_ms; }).join(","); })
+    .catch(function (e) { document.title = "AUTOTEST PUT-FAILED " + e; });
+}
+window.addEventListener("error", function (e) { if (AUTOTEST) document.title = "AUTOTEST JSERROR " + e.message; });
+
+init();
+})();
+</script>
+</body>
+</html>
