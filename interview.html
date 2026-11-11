@@ -7,6 +7,7 @@
 <meta name="referrer" content="no-referrer">
 <title>Neuropian interview</title>
 <link rel="icon" href="/assets/brain-ink.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.106.2/dist/umd/supabase.js" integrity="sha384-m/8UHFJHeU6nrCKP2hBnAseuvAKUmLF+8e5bWos5CJL023vuxX7kiVL5t8yjsJhV" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* Same paper look as neuropian.com/talent */
@@ -76,8 +77,24 @@ label.ck input{width:20px;height:20px;margin-top:5px;flex:none;accent-color:var(
 
 <section id="s-error" hidden>
   <p class="kicker">Neuropian · Interview</p>
-  <h1 id="err-title">This link is not valid.</h1>
-  <p class="lede" id="err-text">Check that you opened the full link from the email, or write to <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p>
+  <h1 id="err-title">Something went wrong.</h1>
+  <p class="lede" id="err-text">Reload the page, or write to <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p>
+</section>
+
+<section id="s-signin" hidden>
+  <p class="kicker">Neuropian · Interview</p>
+  <h1>Sign in to open your interview.</h1>
+  <p class="lede">Interviews are private to the account they were sent to. Sign in on Neuropian with the GitHub account we wrote to, and your interview opens here.</p>
+  <div class="row"><button class="btn" id="b-signin">Sign in with GitHub</button></div>
+  <p class="note">No invitation? This page is only for members we've invited to a recorded interview.</p>
+</section>
+
+<section id="s-noinvite" hidden>
+  <p class="kicker">Neuropian · Interview</p>
+  <h1>There's no interview for this account.</h1>
+  <p class="lede" id="ni-text">Interview invitations are tied to the GitHub account we wrote to. If you were invited with a different account, sign out and sign in with that one.</p>
+  <div class="row"><button class="btn ghost" id="b-signout">Sign out</button><a class="btn ghost" href="/" style="text-decoration:none">Go to Neuropian</a></div>
+  <p class="note">Think this is a mistake? Write to <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p>
 </section>
 
 <section id="s-consent" hidden>
@@ -150,8 +167,21 @@ var KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
 var FN = SB + "/functions/v1/interview";
 var BUCKET = "interviews";
 var params = new URLSearchParams(location.search);
-var TOKEN = params.get("t") || "";
+var TOKEN = params.get("t") || "";                 // optional extra (older invites); the gate is the signed-in account
 var DEMO = TOKEN === "demo";
+if (!DEMO && !/^[A-Za-z0-9_-]{32,64}$/.test(TOKEN)) TOKEN = "";
+// The signed-in Neuropian session (GitHub sign-in on the site; same storage as /app). supabase-js keeps it fresh
+// through a long recording; if the library didn't load, the saved session is read directly.
+var AUTH_KEY = "sb-qggduzzwvdkmekihwuav-auth-token";
+var sbc = null;
+try { if (window.supabase && window.supabase.createClient) sbc = window.supabase.createClient(SB, KEY); } catch (e) {}
+function savedSession() {
+  try { var s = JSON.parse(localStorage.getItem(AUTH_KEY) || "null"); s = s && (s.currentSession || s); return s && s.access_token && s.user ? s : null; } catch (e) { return null; }
+}
+function session() {
+  if (sbc) return sbc.auth.getSession().then(function (r) { return (r && r.data && r.data.session) || null; }).catch(function () { return savedSession(); });
+  return Promise.resolve(savedSession());
+}
 var LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 var AUTOTEST = DEMO && LOCAL && params.get("autotest") === "1";   // headless test only (fake camera), never in production
 var CHUNK_MS = AUTOTEST ? 2000 : 10000;   // one chunk every 10 s, uploaded while recording continues
@@ -172,7 +202,7 @@ var DEMO_PACK = {
 };
 
 var $ = function (id) { return document.getElementById(id); };
-var SCREENS = ["s-load", "s-error", "s-consent", "s-check", "s-rec", "s-up", "s-done"];
+var SCREENS = ["s-load", "s-error", "s-signin", "s-noinvite", "s-consent", "s-check", "s-rec", "s-up", "s-done"];
 function show(id) { SCREENS.forEach(function (s) { $(s).hidden = s !== id; }); window.scrollTo(0, 0); }
 function fail(title, text) { $("err-title").textContent = title; if (text) $("err-text").textContent = text; show("s-error"); stopAll(); }
 function mmss(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2); }
@@ -182,9 +212,11 @@ function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
 function ApiError(msg, status) { this.message = msg; this.status = status; }
 function api(action, body) {
   if (DEMO) return demoApi(action, body || {});
-  var b = Object.assign({ action: action, t: TOKEN }, body || {});
-  return fetch(FN, { method: "POST", headers: { "Content-Type": "application/json", "apikey": KEY, "Authorization": "Bearer " + KEY }, body: JSON.stringify(b) })
-    .then(function (r) {
+  var b = Object.assign({ action: action }, TOKEN ? { t: TOKEN } : {}, body || {});
+  return session().then(function (s) {
+    if (!s) throw new ApiError("signin", 401);
+    return fetch(FN, { method: "POST", headers: { "Content-Type": "application/json", "apikey": KEY, "Authorization": "Bearer " + s.access_token }, body: JSON.stringify(b) });
+  }).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (d) {
         if (!r.ok || d.error) throw new ApiError(d.error || ("Error " + r.status), r.status);
         return d;
@@ -226,8 +258,6 @@ function snapshotLog() { if (log) { log.chunks = madeCount; log.bytes = totalByt
 
 // ---------- start ----------
 function init() {
-  if (!TOKEN) return fail("This link is incomplete.", "Open the full link from the email, or write to dylan@neuropian.com.");
-  if (!DEMO && !/^[A-Za-z0-9_-]{32,64}$/.test(TOKEN)) return fail("This link is not valid.");
   if (DEMO) $("hdr").textContent = "Demo · not uploaded";
   api("open").then(function (d) {
     info = d;
@@ -235,7 +265,7 @@ function init() {
     var total = (d.seconds || []).reduce(function (a, s) { return a + s; }, 0);
     var lo = Math.min.apply(null, d.seconds && d.seconds.length ? d.seconds : [150]) / 60, hi = Math.max.apply(null, d.seconds && d.seconds.length ? d.seconds : [150]) / 60;
     $("c-title").textContent = "Hi " + d.first_name + ". This is a short recorded interview.";
-    $("c-lede").textContent = "It's for " + d.company + ", introduced by Neuropian. The questions are about your work and what you're looking for, so there's nothing to prepare.";
+    $("c-lede").textContent = "It's for " + (d.role ? d.role + " at " : "") + d.company + ", introduced by Neuropian. The questions are about your work and what you're looking for, so there's nothing to prepare.";
     $("c-len").innerHTML = "<b>About " + Math.max(1, Math.round(total / 60)) + " minutes.</b> " + d.count + " questions, each with its own timer (" + (lo === hi ? lo + (lo === 1 ? " minute" : " minutes") : lo + " to " + hi + " minutes") + ").";
     if (d.resume && d.resume.next_q > 0) {
       $("c-resume").hidden = false;
@@ -244,8 +274,9 @@ function init() {
     show("s-consent");
     if (AUTOTEST) autotestConsent();
   }).catch(function (e) {
-    if (e && e.status === 410) fail("This link has expired.", e.message);
-    else if (e && e.status === 404) fail("This link is not valid.");
+    if (e && e.status === 401) showSignin();
+    else if (e && e.status === 404 && e.message === "noinvite") showNoInvite();
+    else if (e && e.status === 410) fail("This invitation has expired.", e.message);
     else fail("We couldn't load the interview.", "Check your connection and reload the page. If it keeps happening, write to dylan@neuropian.com.");
   });
 }
@@ -267,7 +298,7 @@ function unsupported() {
       return "This page isn't allowed to use the camera right now (site setting). Please email dylan@neuropian.com; it's on our side.";
   } catch (e) {}
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder)
-    return "This browser can't record video. Please open the link in Chrome, Safari, Edge or Firefox (not inside an email or social app).";
+    return "This browser can't record video. Please open this page in Chrome, Safari, Edge or Firefox (not inside an email or social app).";
   return "";
 }
 
@@ -554,6 +585,38 @@ function showDemoResult() {
   var a2 = document.createElement("a"); a2.href = URL.createObjectURL(new Blob([JSON.stringify(snapshotLog(), null, 2)], { type: "application/json" })); a2.download = name + ".json"; a2.textContent = "Save timing log (json)";
   box.appendChild(a1); box.appendChild(a2);
 }
+
+// ---------- signed out / not invited ----------
+function showSignin() { show("s-signin"); }
+function showNoInvite() {
+  show("s-noinvite");
+  session().then(function (s) {
+    var m = s && s.user && s.user.user_metadata || {}, who = m.user_name || m.preferred_username || (s && s.user && s.user.email) || "";
+    if (who) $("ni-text").textContent = "You're signed in as " + (m.user_name || m.preferred_username ? "@" : "") + who + ". Interview invitations are tied to the GitHub account we wrote to. If you were invited with a different account, sign out and sign in with that one.";
+  });
+}
+// Sign in: the site's own sign-in box (the one on the home page) opens over this page. GitHub sends you back to the
+// site, where the invitation pop-up offers "Start"; an email sign-in comes straight back here.
+var authOv = null;
+$("b-signin").addEventListener("click", function () {
+  if (authOv) { authOv.style.display = "block"; return; }
+  authOv = document.createElement("div");
+  authOv.setAttribute("style", "position:fixed;inset:0;z-index:9999;background:rgba(236,232,227,.62)");
+  var fr = document.createElement("iframe");
+  fr.title = "Sign in to Neuropian"; fr.src = "/app?embed=1&auth=login";
+  fr.setAttribute("style", "position:absolute;inset:0;border:0;width:100%;height:100%;background:transparent;color-scheme:light");
+  authOv.appendChild(fr); document.body.appendChild(authOv);
+});
+window.addEventListener("message", function (e) {
+  if (e.origin !== location.origin || !e.data || !authOv) return;
+  if (e.data.type === "np-auth-ready") authOv.style.background = "transparent";
+  if (e.data.type === "np-auth-close") authOv.style.display = "none";
+  if (e.data.type === "np-auth-done") location.reload();
+});
+$("b-signout").addEventListener("click", function () {
+  var done = function () { try { localStorage.removeItem(AUTH_KEY); } catch (e) {} location.reload(); };
+  if (sbc) sbc.auth.signOut({ scope: "local" }).then(done, done); else done();
+});
 
 // ---------- headless self-test (localhost + ?t=demo&autotest=1 only; Chrome's fake camera) ----------
 function autotestConsent() { $("ck-rec").checked = true; $("ck-rec").dispatchEvent(new Event("change")); setTimeout(function () { $("b-consent").click(); }, 200); }
