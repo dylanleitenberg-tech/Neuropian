@@ -83,6 +83,7 @@ section{border-top:1px solid var(--line);padding:clamp(72px,11vw,160px) 0}
 .cta .ast{font-size:18px;line-height:1}
 .cta-mark{display:block;width:20px;height:20px;flex:none}
 .cta.ghost{background:transparent;color:var(--fg);border:0;padding:0;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:.25em}
+.cta.line{background:transparent;color:var(--acc)}.cta.line:hover{background:rgba(43,76,126,.08)}   /* Create an account: same size as Hire, outlined (2026-11-11: Hire is the solid button) */
 .cta.ghost:hover{transform:none;text-decoration-color:var(--fg)}
 .hero-art{position:relative;padding-top:4px}
 .ticker{position:relative;padding-left:44px;font-family:var(--mono);color:var(--fg)}
@@ -522,7 +523,7 @@ html{scroll-padding-top:68px}
     <p class="kicker">Neuropian · Intellect accelerator</p>
     <h1>Intelligence, <span class="brush">Reimagined.</span></h1>
     <p class="lede">Neuropian is where brilliant people get found by <b>what they've built, made and solved</b>, and <b>how they lead and work with others</b>, not by what's on their résumé.</p>
-    <div class="ctas"><a class="cta" href="/app" data-auth="reg"><img class="cta-mark" src="/assets/brain.png" srcset="/assets/brain@2x.png 2x" width="20" height="20" alt="">Create an account</a><a class="cta ghost" href="/hire">Hire with Neuropian →</a></div>
+    <div class="ctas"><a class="cta" href="/hire">Hire with Neuropian →</a><a class="cta line" href="/app" data-auth="reg"><img class="cta-mark" src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" width="20" height="20" alt="">Create an account</a></div>
     <p class="tagline">Signal, not résumés · No credentials required</p>
    </div>
    <div class="hero-art">
@@ -540,7 +541,7 @@ html{scroll-padding-top:68px}
   <div class="wrap mq-head">
    <div class="mq-intro">
     <p class="kicker">On Neuropian now</p>
-    <h2>Our team.</h2>
+    <h2>Engineers you can hire.</h2>
     <p class="lede">The builders on Neuropian, found by their work.</p>
    </div>
    <figure class="geo" id="geo"><div class="geo-stage"><canvas width="400" height="400" role="img" data-geo-total="52" aria-label="Globe: members in 52 countries; most in the United States and India"></canvas></div></figure>

@@ -634,7 +634,13 @@ window.__npAppDict = {
     "Choose on-site, hybrid or remote.": "Elige presencial, híbrido o remoto.",
     "Add where the job is.": "Indica dónde es el trabajo.",
     "Choose the type of role.": "Elige el tipo de puesto.",
-    "Too many requests today. Please try again tomorrow.": "Demasiadas solicitudes hoy. Inténtalo de nuevo mañana."
+    "Too many requests today. Please try again tomorrow.": "Demasiadas solicitudes hoy. Inténtalo de nuevo mañana.",
+
+    // /talent and /hire, 2026-11-11: count note, Request intro, fee line, consent line under both hiring forms
+    "Talent lists every member we've reviewed. The 156 on our home page are the ones who passed our bar.": "Talent muestra a todos los miembros que hemos revisado. Los 156 de nuestra página de inicio son los que superaron nuestro listón.",
+    "Request intro": "Solicitar presentación",
+    "$20,000 per hire, paid only when they start. 60-day replacement.": "20.000 USD por contratación, se pagan solo cuando la persona empieza. Reemplazo durante 60 días.",
+    "By sending, you agree to the <a>Terms</a> and <a>Privacy Policy</a>.": "Al enviar, aceptas los <a>Términos</a> y la <a>Política de privacidad</a> (en inglés)."
   },
   rx: {
     invited: "$1 te invitó a Neuropian.",

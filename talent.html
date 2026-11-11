@@ -19,7 +19,7 @@ try{var q=new URLSearchParams(location.search);if(q.has('lang')){l=f(q.get('lang
 if(!l)return;window.__npLang=l;var d=document.documentElement;d.lang=l==='zh'?'zh-Hans':l;if(l==='he')d.dir='rtl';
 var st=document.createElement('style');st.textContent='html.np-i18n-wait body{visibility:hidden}';document.head.appendChild(st);
 d.classList.add('np-i18n-wait');setTimeout(function(){d.classList.remove('np-i18n-wait');},3000);   // shown in English if the table never arrives
-['/assets/app/i18n/'+l+'.js?v=20261026a','/assets/app/app-i18n.js?v=20261026a'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
+['/assets/app/i18n/'+l+'.js?v=20261111a','/assets/app/app-i18n.js?v=20261026a'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
 <title>Talent · Neuropian</title>
 <meta name="description" content="Search Neuropian profiles, drafted from each member's public work and published with their yes: what they have built and solved.">
@@ -76,7 +76,7 @@ h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)
 .work li:last-child{border-bottom:1px solid var(--line)}
 .w-title{font-weight:500}.w-detail{color:var(--dim);font-size:15px;grid-column:1}.w-src{color:var(--faint);font-size:13px;grid-row:1;grid-column:2}
 .note{font-size:14px;color:var(--faint);margin-top:36px;max-width:42em}
-.hire{margin-top:44px;border-top:2px solid var(--fg);padding-top:22px;max-width:42em}
+.hire{margin-top:44px;border-top:2px solid var(--fg);padding-top:22px;max-width:42em;scroll-margin-top:76px}
 .hire p{color:var(--dim);font-size:15px;margin-top:8px}
 .more{text-align:center;margin:28px 0 8px}.more button{font:inherit;font-size:15px;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:12px 28px;cursor:pointer}.more button:disabled{opacity:.5;cursor:default}
 .hire-btn,.hire-f button{font:inherit;font-size:15px;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:12px 24px;cursor:pointer;margin-top:16px}
@@ -84,6 +84,9 @@ h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)
 .hire-f input,.hire-f textarea,.hire-f select{display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;color:var(--fg);background:#e4e0db;border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none}
 .hire-f input:focus,.hire-f textarea:focus,.hire-f select:focus{border-color:var(--acc)}
 .hire-msg{font-size:15px;margin-top:14px;min-height:1.2em}
+.hire p.fee{color:var(--fg)}
+.hire-f .consent{font-size:14px;color:var(--dim);margin-top:10px}.hire-f .consent a{color:var(--fg)}
+.intro-btn{font:inherit;font-size:15px;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:10px 22px;cursor:pointer;margin-top:18px}
 footer{border-top:1px solid var(--line);padding:32px 0 48px;font-size:14px;color:var(--faint)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 /* language menu in the top bar (assets/lang-menu.js; same as the home pages and /app) */
@@ -141,6 +144,7 @@ footer .langs a{display:inline-block;padding:6px 0}
       <p class="lede">Profiles drafted from each member's public work and published with their yes. Search by what you need done; AI ranks the profiles by meaning, not keywords.</p>
       <form class="search" id="f" role="search"><input id="q" name="q" type="search" maxlength="200" placeholder="e.g. a product designer who ships, a protein biologist, a Rust engineer" aria-label="Search talent" autocomplete="off"><button>Search</button></form>
       <p class="hint">Only people who said yes to a profile appear here.</p>
+      <p class="hint">Talent lists every member we've reviewed. The 156 on our home page are the ones who passed our bar.</p>
     </div>
     <p class="status" id="st" aria-live="polite"></p>
     <div class="grid" id="grid"></div>
@@ -223,32 +227,50 @@ function show(id){
     prof.innerHTML='<a class="back" href="#">← All talent</a><h1 class="p-name">'+esc(p.name||"Member")+'</h1><p class="p-head">'+esc(p.headline)+'</p>'+
       '<div class="badges">'+(p.github_verified?'<a class="badge ok" rel="nofollow ugc noopener" href="https://github.com/'+esc(p.github)+'">GitHub verified · '+esc(p.github)+'</a>':((p.work||[]).some(function(w){return w.verified;})?'<span class="badge">Work checked by Neuropian</span>':''))+
 '</div>'+
+      '<button class="intro-btn" type="button">Request intro</button>'+
       (p.summary?'<p class="p-sum">'+esc(p.summary)+'</p>':'')+
       ((p.skills||[]).length?'<h2>Skills</h2><div class="chips">'+chips(p.skills)+'</div>':'')+
       ((p.work||[]).length?'<h2>Built and solved</h2><ul class="work">'+(p.work||[]).map(function(w){var u=safeUrl(w.url);return '<li><span class="w-title">'+(u?'<a rel="nofollow ugc noopener" href="'+u+'">'+esc(w.title)+'</a>':esc(w.title))+'</span><span class="w-src">'+(w.verified?'Verified from GitHub':'Added by member')+(w.source?' · '+esc(w.source):'')+'</span><span class="w-detail">'+esc(w.detail)+'</span></li>';}).join("")+'</ul>':'')+
       '<p class="note">Links go to the original work so you can check it.</p>'+
       '<div class="hire"><h2>Hiring?</h2><p>Tell Neuropian about the role. We pass it on to '+esc(p.name||"this member")+' and introduce you if they want to talk. Their email is never shown.</p>'+
+      '<p class="fee">$20,000 per hire, paid only when they start. 60-day replacement.</p>'+
       '<button class="hire-btn" type="button">Hire or contact '+esc(p.name?p.name.split(" ")[0]:"this member")+'</button>'+
       '<form class="hire-f" hidden><label>Your name<input name="name" maxlength="120" required autocomplete="name"></label>'+
       '<label>Company<input name="company" maxlength="120" required autocomplete="organization"></label>'+
       '<label>Your work email<input name="email" type="email" maxlength="254" required autocomplete="email"></label>'+
       '<label>The role<input name="role" maxlength="160" required placeholder="e.g. Founding compiler engineer"></label>'+
-      '<label>Type of role<select name="employment" required><option value="">Choose</option><option value="full-time">Full-time</option><option value="part-time">Part-time</option><option value="contract">Contract</option><option value="internship">Internship</option><option value="co-founder">Co-founder</option></select></label>'+
+      '<label>Type of role<select name="employment" required><option value="">Choose</option><option value="full-time" selected>Full-time</option><option value="part-time">Part-time</option><option value="contract">Contract</option><option value="internship">Internship</option><option value="co-founder">Co-founder</option></select></label>'+
       '<label>Pay range, and equity if any<input name="compensation" maxlength="160" required placeholder="e.g. $160k–190k + 0.3% equity"></label>'+
       '<label>Where<select name="work_mode" required><option value="">Choose</option><option value="on-site">On-site</option><option value="hybrid">Hybrid</option><option value="remote">Remote</option></select></label>'+
       '<label>Location (city, or the time zones you hire in if remote)<input name="location" maxlength="160" placeholder="e.g. San Francisco, or Remote (US/EU time zones)"></label>'+
       '<label>About the role: the work and the team<textarea name="details" rows="5" maxlength="4000" required></textarea></label>'+
       '<label>Link to the job or company (optional)<input name="link" type="url" maxlength="500" placeholder="https://"></label>'+
-      '<button type="submit">Send to Neuropian</button></form><p class="hire-msg" aria-live="polite"></p></div>';
+      '<button type="submit">Send to Neuropian</button>'+
+      '<p class="consent">By sending, you agree to the <a href="/terms#companies">Terms</a> and <a href="/privacy">Privacy Policy</a>.</p></form><p class="hire-msg" aria-live="polite"></p></div>';
     hireForm(p);
   }).catch(function(){ prof.hidden=false; list.hidden=true; prof.innerHTML='<a class="back" href="#">← All talent</a><p class="p-head" style="margin-top:24px">Could not load this profile.</p>'; });
 }
 // "Hire or contact": the request goes to Neuropian (hire_request), never straight to the member; we check it and
 // ask the member before any introduction (Dylan, 2026-10-25).
+// The company's details are remembered on this device after a send (np_hire_ctx, shared with /hire) and filled in on the
+// next form. Values only, set with .value; storage blocked or garbled = blank form, as before.
+var CTX="np_hire_ctx", KEEP=["name","company","email","role","employment","work_mode","location","compensation"];
+function prefill(f){
+  try{ var c=JSON.parse(localStorage.getItem(CTX)||"null"); if(!c||typeof c!=="object")return;
+    KEEP.forEach(function(k){ var el=f.elements[k], v=c[k]; if(!el||typeof v!=="string"||!v||v.length>300)return;
+      if(el.tagName==="SELECT"){ if([].some.call(el.options,function(o){return o.value===v;})) el.value=v; } else el.value=v; });
+  }catch(e){}
+}
+function remember(d){ try{ var o={}; KEEP.forEach(function(k){ var v=d.get(k); if(typeof v==="string"&&v.trim()) o[k]=v.trim().slice(0,300); }); localStorage.setItem(CTX,JSON.stringify(o)); }catch(e){} }
 function hireForm(p){
   var box=prof.querySelector(".hire"); if(!box)return;
-  var btn=box.querySelector(".hire-btn"), f=box.querySelector(".hire-f"), msg=box.querySelector(".hire-msg");
-  btn.addEventListener("click",function(){ btn.hidden=true; f.hidden=false; f.querySelector("input").focus(); });
+  var btn=box.querySelector(".hire-btn"), f=box.querySelector(".hire-f"), msg=box.querySelector(".hire-msg"), intro=prof.querySelector(".intro-btn");
+  prefill(f);
+  function openForm(){ if(f.hidden&&!msg.textContent){ btn.hidden=true; f.hidden=false; }
+    var first=[].filter.call(f.querySelectorAll("input,textarea"),function(el){return el.required&&!el.value;})[0]||f.querySelector("textarea")||f.querySelector("input");
+    if(first)first.focus({preventScroll:true}); box.scrollIntoView({block:"start",behavior:"smooth"}); }
+  btn.addEventListener("click",openForm);
+  if(intro)intro.addEventListener("click",openForm);
   f.addEventListener("submit",function(e){
     e.preventDefault(); var d=new FormData(f), sub=f.querySelector("button[type=submit]");
     sub.disabled=true; msg.textContent="Sending…";
@@ -256,7 +278,7 @@ function hireForm(p){
       body:JSON.stringify({p_profile:p.id,p_name:d.get("name"),p_company:d.get("company"),p_email:d.get("email"),p_role:d.get("role"),p_details:d.get("details"),p_link:d.get("link")||null,p_compensation:d.get("compensation"),p_work_mode:d.get("work_mode"),p_location:d.get("location")||null,p_employment:d.get("employment")})})
     .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
     .then(function(x){ if(!x.ok)throw new Error((x.j&&x.j.message)||"Could not send. Please try again.");
-      f.hidden=true; msg.textContent="Sent. Neuropian will pass it on and email you if "+(p.name?p.name.split(" ")[0]+" wants":"they want")+" to talk."; msg.scrollIntoView({block:"nearest"}); })
+      remember(d); f.hidden=true; msg.textContent="Sent. Neuropian will pass it on and email you if "+(p.name?p.name.split(" ")[0]+" wants":"they want")+" to talk."; msg.scrollIntoView({block:"nearest"}); })
     .catch(function(err){ sub.disabled=false; msg.textContent=(err instanceof TypeError)?"Could not reach Neuropian. Check your connection and try again, or email dylan@neuropian.com.":err.message; msg.scrollIntoView({block:"nearest"}); });
   });
 }

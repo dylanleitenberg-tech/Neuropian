@@ -19,7 +19,7 @@ try{var q=new URLSearchParams(location.search);if(q.has('lang')){l=f(q.get('lang
 if(!l)return;window.__npLang=l;var d=document.documentElement;d.lang=l==='zh'?'zh-Hans':l;if(l==='he')d.dir='rtl';
 var st=document.createElement('style');st.textContent='html.np-i18n-wait body{visibility:hidden}';document.head.appendChild(st);
 d.classList.add('np-i18n-wait');setTimeout(function(){d.classList.remove('np-i18n-wait');},3000);   // shown in English if the table never arrives
-['/assets/app/i18n/'+l+'.js?v=20261026a','/assets/app/app-i18n.js?v=20261026a'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
+['/assets/app/i18n/'+l+'.js?v=20261111a','/assets/app/app-i18n.js?v=20261026a'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
 <title>Hire · Neuropian</title>
 <meta name="description" content="Hire engineers and scientists found by the work expert maintainers accepted.">
@@ -84,6 +84,7 @@ h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)
 .hire-f input,.hire-f textarea,.hire-f select{display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;color:var(--fg);background:#e4e0db;border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none}
 .hire-f label.agree{display:flex;gap:10px;align-items:flex-start;font-size:14px}.hire-f label.agree input{width:auto;margin:3px 0 0;flex-shrink:0}.hire-f label.agree a{color:var(--fg)}
 .hire-f input:focus,.hire-f textarea:focus,.hire-f select:focus{border-color:var(--acc)}
+.hire-f .consent{font-size:14px;color:var(--dim);margin-top:10px}.hire-f .consent a{color:var(--fg)}
 .hire-msg{font-size:15px;margin-top:14px;min-height:1.2em}
 footer{border-top:1px solid var(--line);padding:32px 0 48px;font-size:14px;color:var(--faint)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -146,14 +147,17 @@ footer .langs a{display:inline-block;padding:6px 0}
   <section class="hero">
     <div class="top">
       <a class="back" href="/" id="back">← Back</a>
-      <p class="kicker" style="margin-top:22px">Neuropian · For companies</p>
-      <h1>Hire from the 0.2%.</h1>
+      <p class="kicker" style="margin-top:22px" data-static>Neuropian · For companies</p>
+      <h1 data-static>Hire from the 0.2%.</h1>
       <p class="lede">We find engineers and scientists by the work expert maintainers accepted, not by résumés. Fewer than 0.2% of the builders we evaluate make our cut, and our members work in <span data-geo-total="52">52</span> countries.</p>
     </div>
     <ol class="steps">
       <li><b>Tell us the role.</b></li>
-      <li><b>We send you the members whose work fits.</b></li>
+      <li><b>We check our members' work against it.</b></li>
+      <li><b>We email you profiles as we find people who fit.</b> Niche roles can take longer.</li>
     </ol>
+    <p class="price"><b>$20,000 per hire, paid only when they start.</b> 60-day replacement. <a href="/terms#companies">Terms</a></p>
+    <p class="alt">Rather talk? Email <!--email_off--><a href="mailto:dylan@neuropian.com?subject=Hiring%20through%20Neuropian">dylan@neuropian.com</a><!--/email_off-->.</p>
     <p class="alt">Prefer to look yourself? <a href="/talent">Browse Talent</a>.</p>
     <div class="hire">
       <h2>The role</h2>
@@ -163,14 +167,14 @@ footer .langs a{display:inline-block;padding:6px 0}
         <div class="row"><label>Your work email<input name="email" type="email" maxlength="254" required autocomplete="email"></label>
         <label>Company website (optional)<input name="website" type="url" maxlength="300" placeholder="https://"></label></div>
         <label>The role<input name="role" maxlength="160" required placeholder="e.g. Founding compiler engineer"></label>
-        <div class="row"><label>Type of role<select name="employment" required><option value="">Choose</option><option value="full-time">Full-time</option><option value="part-time">Part-time</option><option value="contract">Contract</option><option value="internship">Internship</option><option value="co-founder">Co-founder</option></select></label>
+        <div class="row"><label>Type of role<select name="employment" required><option value="">Choose</option><option value="full-time" selected>Full-time</option><option value="part-time">Part-time</option><option value="contract">Contract</option><option value="internship">Internship</option><option value="co-founder">Co-founder</option></select></label>
         <label>Where<select name="work_mode" required><option value="">Choose</option><option value="on-site">On-site</option><option value="hybrid">Hybrid</option><option value="remote">Remote</option></select></label></div>
         <div class="row"><label>Location (city, or the time zones you hire in if remote)<input name="location" maxlength="160" placeholder="e.g. San Francisco, or Remote (US time zones)"></label>
         <label>Pay range, and equity if any<input name="compensation" maxlength="160" required placeholder="e.g. $160k–190k + 0.3% equity"></label></div>
         <label>Stack or skills (optional)<input name="stack" maxlength="300" placeholder="e.g. Rust, CUDA, distributed systems"></label>
         <label>About the role: the work and the team<textarea name="details" rows="6" maxlength="4000" required></textarea></label>
-        <label class="agree"><input type="checkbox" name="agree" required><span>I agree to the <a href="/terms#companies">Terms for companies</a> and the <a href="/privacy">Privacy Policy</a>.</span></label>
         <button type="submit">Send to Neuropian</button>
+        <p class="consent">By sending, you agree to the <a href="/terms#companies">Terms</a> and <a href="/privacy">Privacy Policy</a>.</p>
       </form>
       <p class="hire-msg" id="cmsg" aria-live="polite"></p>
     </div>
@@ -184,6 +188,11 @@ footer .langs a{display:inline-block;padding:6px 0}
 var SB="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
 document.getElementById("back").addEventListener("click",function(e){ if(document.referrer.indexOf(location.origin)===0&&history.length>1){e.preventDefault();history.back();} });
 var f=document.getElementById("cf"), msg=document.getElementById("cmsg");
+// Remember the company's details on this device after a send, and fill them in next time (/hire and Talent profiles
+// share np_hire_ctx). Values only, set with .value; storage blocked or garbled = blank form, as before.
+var CTX="np_hire_ctx", KEEP=["name","company","email","role","employment","work_mode","location","compensation"];
+try{ var c=JSON.parse(localStorage.getItem(CTX)||"null"); if(c&&typeof c==="object") KEEP.forEach(function(k){ var el=f.elements[k], v=c[k];
+  if(el&&typeof v==="string"&&v&&v.length<=300){ if(el.tagName==="SELECT"){ if([].some.call(el.options,function(o){return o.value===v;})) el.value=v; } else el.value=v; } }); }catch(e){}
 f.addEventListener("submit",function(e){
   e.preventDefault(); var d=new FormData(f), sub=f.querySelector("button[type=submit]");
   sub.disabled=true; msg.textContent="Sending…";
@@ -193,7 +202,8 @@ f.addEventListener("submit",function(e){
       p_stack:d.get("stack")||null,p_details:d.get("details")})})
   .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
   .then(function(x){ if(!x.ok)throw new Error((x.j&&x.j.message)||"Could not send. Please try again.");
-    f.hidden=true; msg.textContent="Received. We'll email you the members whose work fits this role."; msg.scrollIntoView({block:"nearest"}); })
+    try{ var o={}; KEEP.forEach(function(k){ var v=d.get(k); if(typeof v==="string"&&v.trim()) o[k]=v.trim().slice(0,300); }); localStorage.setItem(CTX,JSON.stringify(o)); }catch(e){}
+    f.hidden=true; msg.textContent="Received. We'll email you profiles as we find people whose work fits. Niche roles can take longer. Questions: dylan@neuropian.com."; msg.scrollIntoView({block:"nearest"}); })
   .catch(function(err){ sub.disabled=false; msg.textContent=(err instanceof TypeError)?"Could not reach Neuropian. Check your connection and try again, or email dylan@neuropian.com.":err.message; msg.scrollIntoView({block:"nearest"}); });
 });
 })();
@@ -305,7 +315,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   paint();
 })();
 </script>
-<script src="/assets/site.js?v=20261028a" defer></script>
+<script src="/assets/site.js?v=20261111a" defer></script>
 <script src="/assets/lang-menu.js?v=20261025a" defer></script>
 </body>
 </html>

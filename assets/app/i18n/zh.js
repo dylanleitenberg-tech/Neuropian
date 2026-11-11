@@ -634,7 +634,13 @@ window.__npAppDict = {
     "Choose on-site, hybrid or remote.": "请选择现场办公、混合办公或远程。",
     "Add where the job is.": "请填写工作地点。",
     "Choose the type of role.": "请选择职位类型。",
-    "Too many requests today. Please try again tomorrow.": "今天的请求太多了，请明天再试。"
+    "Too many requests today. Please try again tomorrow.": "今天的请求太多了，请明天再试。",
+
+    // /talent and /hire, 2026-11-11: count note, Request intro, fee line, consent line under both hiring forms
+    "Talent lists every member we've reviewed. The 156 on our home page are the ones who passed our bar.": "Talent 列出我们审核过的所有成员。首页上的 156 人是通过我们标准的成员。",
+    "Request intro": "请求引荐",
+    "$20,000 per hire, paid only when they start. 60-day replacement.": "每次录用 20,000 美元，仅在对方入职后支付。60 天内可替换。",
+    "By sending, you agree to the <a>Terms</a> and <a>Privacy Policy</a>.": "发送即表示你同意<a>条款</a>和<a>隐私政策</a>（英文）。"
   },
   rx: {
     invited: "$1 邀请你加入 Neuropian。",

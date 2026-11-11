@@ -31,7 +31,7 @@
     })();
   }
 
-  var typed = document.querySelectorAll("[data-type], .kicker, section:not(.hero) h2");
+  var typed = document.querySelectorAll("[data-type], .kicker:not([data-static]), section:not(.hero) h2:not([data-static])");   /* data-static: shown as written, never typed (/hire, 2026-11-11) */
   if (io && !reduce) {
     var obs = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
@@ -69,7 +69,7 @@
 
   /* Hero: the headline types in on load. */
   var h1 = document.querySelector(".hero h1");
-  if (h1 && !reduce) {
+  if (h1 && !reduce && !h1.hasAttribute("data-static")) {
     var t1 = h1.textContent.trim(), h1html = h1.innerHTML;          /* typing uses plain text; the coloured word comes back after */
     h1.style.minHeight = h1.offsetHeight + "px";
     h1.setAttribute("data-type", "");                               /* show the cursor while it types (Dylan 2026-10-28: bring the type-out back, visibly) */
