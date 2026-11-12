@@ -639,11 +639,11 @@ window.__npAppDict = {
 
     // /talent and /hire, 2026-11-11: count note, Request intro, fee line, consent line under both hiring forms
     "I'm hiring": "אנחנו מגייסים",
-    "I'm a recruiter": "אני רכז/ת גיוס",
+    "I'm a builder": "אני בונה",
     "Profiles are anonymous. Request an intro and Neuropian connects you.": "הפרופילים אנונימיים. בקשו היכרות ו-Neuropian תחבר ביניכם.",
     "GitHub verified": "מאומת ב-GitHub",
     "Request intro": "בקשת היכרות",
-    "$20,000 per hire, paid only when they start. 60-day replacement.": "20,000 דולר לכל גיוס, בתשלום רק כשהעובד מתחיל לעבוד. החלפה בתוך 60 יום.",
+    "20% of first-year salary, paid only when they start. 90-day replacement.": "20% מהשכר של השנה הראשונה, בתשלום רק כשהעובד מתחיל לעבוד. החלפה בתוך 90 יום.",
     "By sending, you agree to the <a>Terms</a> and <a>Privacy Policy</a>.": "בשליחה אתם מסכימים ל<a>תנאים</a> ול<a>מדיניות הפרטיות</a> (באנגלית)."
   },
   rx: {

@@ -19,7 +19,7 @@ try{var q=new URLSearchParams(location.search);if(q.has('lang')){l=f(q.get('lang
 if(!l)return;window.__npLang=l;var d=document.documentElement;d.lang=l==='zh'?'zh-Hans':l;if(l==='he')d.dir='rtl';
 var st=document.createElement('style');st.textContent='html.np-i18n-wait body{visibility:hidden}';document.head.appendChild(st);
 d.classList.add('np-i18n-wait');setTimeout(function(){d.classList.remove('np-i18n-wait');},3000);   // shown in English if the table never arrives
-['/assets/app/i18n/'+l+'.js?v=20261111b','/assets/app/app-i18n.js?v=20261111b'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
+['/assets/app/i18n/'+l+'.js?v=20261111c','/assets/app/app-i18n.js?v=20261111c'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
 <title>Talent · Neuropian</title>
 <meta name="description" content="Search Neuropian profiles, drafted from each member's public work and published with their yes: what they have built and solved.">
@@ -121,7 +121,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.01em}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 /* phones and small tablets: logo + language on the first row, nav links + Log in on a second row (they used to be hidden) */
 @media(max-width:720px){.bar .wrap{flex-wrap:wrap;height:auto;padding-top:9px;padding-bottom:2px;gap:0 12px}.bar .nav{order:3;flex:1 0 100%;flex-wrap:wrap;margin:0;gap:0 16px;font-size:15px}.bar .nav a{padding:9px 0}.bar .nav a.login{margin:0;margin-inline-start:auto;padding:6px 12px}.np-lang{margin-inline-start:auto}.np-lang-btn{padding:7px}.search button{padding:0 18px}}
-/* 2026-11-11: two primary buttons in the bar (I'm hiring / I'm a recruiter); Sign in is a small link */
+/* 2026-11-11: two primary buttons in the bar (I'm hiring solid, I'm a builder outlined); Sign in is a small link */
 .nav{align-items:center}.nav a.login{color:var(--fg);background:none;border:0;padding:0;margin:0;text-decoration:underline;text-decoration-color:rgba(43,42,40,.35);text-underline-offset:.25em}.nav a.nbtn{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);padding:6px 14px;margin:-7px 0;white-space:nowrap;text-decoration:none}.nav a.nbtn:hover{background:#22406c;color:#F3F0EB}.nav a.nbtn.line{background:transparent;color:var(--acc)}.nav a.nbtn.line:hover{background:rgba(43,76,126,.08);color:var(--acc)}@media(max-width:720px){.bar .nav{gap:6px 14px}.bar .nav a.login{margin:0;padding:9px 0}.bar .nav a.nbtn{padding:5px 10px;margin:4px 0;font-size:14px}.bar .nav a.nbtn:first-of-type{margin-inline-start:auto}}
 @media(max-width:480px){.search{flex-direction:column;gap:8px}.search button{padding:13px 18px}}
 .skip{position:absolute;left:-9999px;top:8px;background:#2B4C7E;color:#F3F0EB;padding:8px 14px;z-index:20;text-decoration:none}.skip:focus{left:8px}
@@ -135,7 +135,7 @@ footer .langs a{display:inline-block;padding:6px 0}
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="wrap">
   <a class="mark" href="/"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
-  <nav class="nav"><a href="/#run">How it works</a><a href="/talent" aria-current="page">Talent</a><a class="login" href="/app" data-auth="login">Sign in</a><a class="nbtn" href="/hire">I'm hiring</a><a class="nbtn line" href="/hire?type=recruiter">I'm a recruiter</a></nav>
+  <nav class="nav"><a href="/#run">How it works</a><a href="/talent" aria-current="page">Talent</a><a class="login" href="/app" data-auth="login">Sign in</a><a class="nbtn" href="/hire">I'm hiring</a><a class="nbtn line" href="/app?auth=reg" data-auth="reg">I'm a builder</a></nav>
   <div class="np-lang" data-dynamic><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="Language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">EN</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/talent?lang=en" hreflang="en" lang="en" translate="no" aria-current="true">English</a></li><li><a href="/talent?lang=fr" hreflang="fr" lang="fr" translate="no">Français</a></li><li><a href="/talent?lang=es" hreflang="es" lang="es" translate="no">Español</a></li><li><a href="/talent?lang=he" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a></li><li><a href="/talent?lang=hi" hreflang="hi" lang="hi" translate="no">हिन्दी</a></li><li><a href="/talent?lang=zh" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></li></ul></div>
 </div></header>
 <main id="main" class="wrap">
@@ -235,7 +235,7 @@ function show(id){
       ((p.work||[]).length?'<h2>Built and solved</h2><ul class="work">'+(p.work||[]).map(function(w){var u=safeUrl(w.url);return '<li><span class="w-title">'+(u?'<a rel="nofollow ugc noopener" href="'+u+'">'+esc(w.title)+'</a>':esc(w.title))+'</span><span class="w-src">'+(w.verified?'Verified from GitHub':'Added by member')+(w.source?' · '+esc(w.source):'')+'</span><span class="w-detail">'+esc(w.detail)+'</span></li>';}).join("")+'</ul>':'')+
       '<p class="note">Links go to the original work so you can check it.</p>'+
       '<div class="hire"><h2>Hiring?</h2><p>Tell Neuropian about the role. We pass it on to this member and introduce you if they want to talk. Their email is never shown.</p>'+
-      '<p class="fee">$20,000 per hire, paid only when they start. 60-day replacement.</p>'+
+      '<p class="fee">20% of first-year salary, paid only when they start. 90-day replacement.</p>'+
       '<button class="hire-btn" type="button">Hire or contact this member</button>'+
       '<form class="hire-f" hidden><label>Your name<input name="name" maxlength="120" required autocomplete="name"></label>'+
       '<label>Company<input name="company" maxlength="120" required autocomplete="organization"></label>'+

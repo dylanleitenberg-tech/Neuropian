@@ -486,7 +486,7 @@ html{scroll-padding-top:68px}
 @media(max-width:480px){.bar .wrap{gap:12px}.nav{gap:16px;font-size:16px}.nav a.login{padding:6px 12px}}
 @media(max-width:380px){.nav a:not(.login){display:none}}
 h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
-/* 2026-11-11: two primary buttons (I'm hiring / I'm a recruiter) in the bar and hero; Sign in is a small link */
+/* 2026-11-11: two primary buttons (I'm hiring solid, I'm a builder outlined) in the bar and hero; Sign in is a small link */
 .nav{align-items:center}.nav a.login{color:var(--fg);background:none;border:0;border-radius:0;padding:0;margin:0;text-decoration:underline;text-decoration-color:rgba(43,42,40,.35);text-underline-offset:.25em}.nav a.login:hover{background:none;text-decoration-color:var(--fg)}.nav a.nbtn{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);padding:6px 14px;margin:-7px 0;white-space:nowrap}.nav a.nbtn:hover{background:#22406c;border-color:#22406c;color:#F3F0EB}.nav a.nbtn.line{background:transparent;color:var(--acc)}.nav a.nbtn.line:hover{background:rgba(43,76,126,.08);color:var(--acc)}#screen .next{margin-top:clamp(22px,3vw,36px)}.ticker .tk-full{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}@media(max-width:720px){.bar .nav{gap:6px 14px}.bar .nav a.login{margin:0;padding:9px 0}.bar .nav a.nbtn{padding:5px 10px;margin:4px 0;font-size:14px}.bar .nav a.nbtn:first-of-type{margin-inline-start:auto}}
 </style>
 <!--/i18n:head-->
@@ -502,7 +502,7 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
       <a href="#contact">Contact</a>
       <a class="login" href="/app?lang=fr" data-auth="login">Connexion</a>
       <a class="nbtn" href="/hire?lang=fr">Je recrute</a>
-      <a class="nbtn line" href="/hire?lang=fr&type=recruiter">Je suis recruteur</a>
+      <a class="nbtn line" href="/app?lang=fr&auth=reg" data-auth="reg">Je suis bâtisseur</a>
     </nav>
     <!--i18n:menu--><div class="np-lang"><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="Langue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">FR</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/" hreflang="en" lang="en" translate="no">English</a></li><li><a href="/fr/" hreflang="fr" lang="fr" translate="no" aria-current="page">Français</a></li><li><a href="/es/" hreflang="es" lang="es" translate="no">Español</a></li><li><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a></li><li><a href="/hi/" hreflang="hi" lang="hi" translate="no">हिन्दी</a></li><li><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></li></ul></div><!--/i18n:menu-->
   </div>
@@ -516,7 +516,7 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
     <p class="kicker">Neuropian · Accélérateur d’intellect</p>
     <h1>L’intelligence, <span class="brush">réinventée.</span></h1>
     <p class="lede">Neuropian, c’est l’endroit où les personnes brillantes sont repérées pour <b>ce qu’elles ont construit, créé et résolu</b>, et pour <b>leur façon de diriger et de travailler avec les autres</b>, pas pour ce qui figure sur leur CV.</p>
-    <div class="ctas"><a class="cta" href="/hire?lang=fr">Je recrute →</a><a class="cta line" href="/hire?lang=fr&type=recruiter">Je suis recruteur →</a></div>
+    <div class="ctas"><a class="cta" href="/hire?lang=fr">Je recrute →</a><a class="cta line" href="/app?lang=fr&auth=reg" data-auth="reg">Je suis bâtisseur →</a></div>
     <p class="tagline">Le signal, pas le CV · Aucun diplôme requis</p>
    </div>
    <div class="hero-art">

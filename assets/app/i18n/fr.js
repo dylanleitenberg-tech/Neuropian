@@ -638,11 +638,11 @@ window.__npAppDict = {
 
     // /talent and /hire, 2026-11-11: count note, Request intro, fee line, consent line under both hiring forms
     "I'm hiring": "Je recrute",
-    "I'm a recruiter": "Je suis recruteur",
+    "I'm a builder": "Je suis bâtisseur",
     "Profiles are anonymous. Request an intro and Neuropian connects you.": "Les profils sont anonymes. Demandez une mise en relation et Neuropian s’en charge.",
     "GitHub verified": "GitHub vérifié",
     "Request intro": "Demander une mise en relation",
-    "$20,000 per hire, paid only when they start. 60-day replacement.": "20 000 $ US par recrutement, payés seulement quand la personne commence. Remplacement possible pendant 60 jours.",
+    "20% of first-year salary, paid only when they start. 90-day replacement.": "20\u00a0% du salaire de la première année, à régler seulement quand la personne commence. Remplacement possible pendant 90\u00a0jours.",
     "By sending, you agree to the <a>Terms</a> and <a>Privacy Policy</a>.": "En envoyant, vous acceptez les <a>Conditions</a> et la <a>Politique de confidentialité</a> (en anglais)."
   },
   rx: {

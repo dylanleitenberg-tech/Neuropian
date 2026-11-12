@@ -638,11 +638,11 @@ window.__npAppDict = {
 
     // /talent and /hire, 2026-11-11: count note, Request intro, fee line, consent line under both hiring forms
     "I'm hiring": "我要招聘",
-    "I'm a recruiter": "我是猎头",
+    "I'm a builder": "我是建造者",
     "Profiles are anonymous. Request an intro and Neuropian connects you.": "档案均为匿名。申请引荐，由 Neuropian 为你牵线。",
     "GitHub verified": "GitHub 已验证",
     "Request intro": "请求引荐",
-    "$20,000 per hire, paid only when they start. 60-day replacement.": "每次录用 20,000 美元，仅在对方入职后支付。60 天内可替换。",
+    "20% of first-year salary, paid only when they start. 90-day replacement.": "首年薪资的 20%，仅在对方入职后支付。90 天内可替换。",
     "By sending, you agree to the <a>Terms</a> and <a>Privacy Policy</a>.": "发送即表示你同意<a>条款</a>和<a>隐私政策</a>（英文）。"
   },
   rx: {
