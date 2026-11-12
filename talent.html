@@ -19,7 +19,7 @@ try{var q=new URLSearchParams(location.search);if(q.has('lang')){l=f(q.get('lang
 if(!l)return;window.__npLang=l;var d=document.documentElement;d.lang=l==='zh'?'zh-Hans':l;if(l==='he')d.dir='rtl';
 var st=document.createElement('style');st.textContent='html.np-i18n-wait body{visibility:hidden}';document.head.appendChild(st);
 d.classList.add('np-i18n-wait');setTimeout(function(){d.classList.remove('np-i18n-wait');},3000);   // shown in English if the table never arrives
-['/assets/app/i18n/'+l+'.js?v=20261111c','/assets/app/app-i18n.js?v=20261111c'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
+['/assets/app/i18n/'+l+'.js?v=20261112a','/assets/app/app-i18n.js?v=20261112a'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
 <title>Talent · Neuropian</title>
 <meta name="description" content="Search Neuropian profiles, drafted from each member's public work and published with their yes: what they have built and solved.">
@@ -124,7 +124,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 /* 2026-11-11: two primary buttons in the bar (I'm hiring solid, I'm a builder outlined); Sign in is a small link */
 .nav{align-items:center}.nav a.login{color:var(--fg);background:none;border:0;padding:0;margin:0;text-decoration:underline;text-decoration-color:rgba(43,42,40,.35);text-underline-offset:.25em}.nav a.nbtn{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);padding:6px 14px;margin:-7px 0;white-space:nowrap;text-decoration:none}.nav a.nbtn:hover{background:#22406c;color:#F3F0EB}.nav a.nbtn.line{background:transparent;color:var(--acc)}.nav a.nbtn.line:hover{background:rgba(43,76,126,.08);color:var(--acc)}@media(max-width:720px){.bar .nav{gap:6px 14px}.bar .nav a.login{margin:0;padding:9px 0}.bar .nav a.nbtn{padding:5px 10px;margin:4px 0;font-size:14px}.bar .nav a.nbtn:first-of-type{margin-inline-start:auto}}
 @media(max-width:480px){.search{flex-direction:column;gap:8px}.search button{padding:13px 18px}}
-.skip{position:absolute;left:-9999px;top:8px;background:#2B4C7E;color:#F3F0EB;padding:8px 14px;z-index:20;text-decoration:none}.skip:focus{left:8px}
+.skip{position:absolute;left:-9999px;top:8px;background:#2B4C7E;color:#F3F0EB;padding:8px 14px;z-index:20;text-decoration:none}.skip:focus{left:8px}[dir=rtl] .skip{left:auto;right:-9999px}[dir=rtl] .skip:focus{right:8px}
 .back{display:inline-block;padding:10px 0;margin:-10px 0}
 @media(max-width:620px){.work li{grid-template-columns:1fr}.w-src{grid-row:auto;grid-column:1;order:3}.w-detail{order:2}}
 footer .langs a{display:inline-block;padding:6px 0}
@@ -233,8 +233,7 @@ function show(id){
       (p.summary?'<p class="p-sum">'+esc(p.summary)+'</p>':'')+
       ((p.skills||[]).length?'<h2>Skills</h2><div class="chips">'+chips(p.skills)+'</div>':'')+
       ((p.work||[]).length?'<h2>Built and solved</h2><ul class="work">'+(p.work||[]).map(function(w){var u=safeUrl(w.url);return '<li><span class="w-title">'+(u?'<a rel="nofollow ugc noopener" href="'+u+'">'+esc(w.title)+'</a>':esc(w.title))+'</span><span class="w-src">'+(w.verified?'Verified from GitHub':'Added by member')+(w.source?' · '+esc(w.source):'')+'</span><span class="w-detail">'+esc(w.detail)+'</span></li>';}).join("")+'</ul>':'')+
-      '<p class="note">Links go to the original work so you can check it.</p>'+
-      '<div class="hire"><h2>Hiring?</h2><p>Tell Neuropian about the role. We pass it on to this member and introduce you if they want to talk. Their email is never shown.</p>'+
+      '<div class="hire"><h2>Hiring?</h2><p>Tell Neuropian about the role. We pass it on to this member and introduce you after our interview, if they want to talk. Their email is never shown.</p>'+
       '<p class="fee">20% of first-year salary, paid only when they start. 90-day replacement.</p>'+
       '<button class="hire-btn" type="button">Hire or contact this member</button>'+
       '<form class="hire-f" hidden><label>Your name<input name="name" maxlength="120" required autocomplete="name"></label>'+
