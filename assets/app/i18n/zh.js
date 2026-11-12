@@ -637,7 +637,10 @@ window.__npAppDict = {
     "Too many requests today. Please try again tomorrow.": "今天的请求太多了，请明天再试。",
 
     // /talent and /hire, 2026-11-11: count note, Request intro, fee line, consent line under both hiring forms
-    "Talent lists every member we've reviewed. The 156 on our home page are the ones who passed our bar.": "Talent 列出我们审核过的所有成员。首页上的 156 人是通过我们标准的成员。",
+    "I'm hiring": "我要招聘",
+    "I'm a recruiter": "我是猎头",
+    "Profiles are anonymous. Request an intro and Neuropian connects you.": "档案均为匿名。申请引荐，由 Neuropian 为你牵线。",
+    "GitHub verified": "GitHub 已验证",
     "Request intro": "请求引荐",
     "$20,000 per hire, paid only when they start. 60-day replacement.": "每次录用 20,000 美元，仅在对方入职后支付。60 天内可替换。",
     "By sending, you agree to the <a>Terms</a> and <a>Privacy Policy</a>.": "发送即表示你同意<a>条款</a>和<a>隐私政策</a>（英文）。"

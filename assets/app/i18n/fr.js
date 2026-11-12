@@ -637,7 +637,10 @@ window.__npAppDict = {
     "Too many requests today. Please try again tomorrow.": "Trop de demandes aujourd’hui. Veuillez réessayer demain.",
 
     // /talent and /hire, 2026-11-11: count note, Request intro, fee line, consent line under both hiring forms
-    "Talent lists every member we've reviewed. The 156 on our home page are the ones who passed our bar.": "Talent recense tous les membres que nous avons examinés. Les 156 de notre page d’accueil sont ceux qui ont passé notre sélection.",
+    "I'm hiring": "Je recrute",
+    "I'm a recruiter": "Je suis recruteur",
+    "Profiles are anonymous. Request an intro and Neuropian connects you.": "Les profils sont anonymes. Demandez une mise en relation et Neuropian s’en charge.",
+    "GitHub verified": "GitHub vérifié",
     "Request intro": "Demander une mise en relation",
     "$20,000 per hire, paid only when they start. 60-day replacement.": "20 000 $ US par recrutement, payés seulement quand la personne commence. Remplacement possible pendant 60 jours.",
     "By sending, you agree to the <a>Terms</a> and <a>Privacy Policy</a>.": "En envoyant, vous acceptez les <a>Conditions</a> et la <a>Politique de confidentialité</a> (en anglais)."

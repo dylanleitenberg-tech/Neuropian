@@ -22,11 +22,11 @@ try{q=new URLSearchParams(location.search);if(q.has('lang')){l=f(q.get('lang'));
     else{try{l=f(localStorage.getItem(P));}catch(e){}if(!l)l=nav();}}}}catch(e){}   // nothing stored: the browser's language, unless one was picked
 if(!l)return;window.__npLang=l;
 var add=function(src,ordered){var s=document.createElement('script');s.src=src;if(ordered)s.async=false;document.head.appendChild(s);return s;};
-window.__npI18n=new Promise(function(r){var s=add('/assets/app/auth-i18n.js?v=20261026f');s.onload=s.onerror=function(){r();};setTimeout(r,4000);});
+window.__npI18n=new Promise(function(r){var s=add('/assets/app/auth-i18n.js?v=20261111b');s.onload=s.onerror=function(){r();};setTimeout(r,4000);});
 if(q&&q.has('embed'))return;
 var d=document.documentElement,st=document.createElement('style');st.textContent='html.np-i18n-wait body{visibility:hidden}';document.head.appendChild(st);
 d.classList.add('np-i18n-wait');setTimeout(function(){d.classList.remove('np-i18n-wait');},3000);   // shown in English if the table never arrives
-add('/assets/app/i18n/'+l+'.js?v=20261111a',1);add('/assets/app/app-i18n.js?v=20261026a',1);})();</script>
+add('/assets/app/i18n/'+l+'.js?v=20261111b',1);add('/assets/app/app-i18n.js?v=20261111b',1);})();</script>
 <meta name="robots" content="noindex">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
 <meta name="description" content="Neuropian members: profile survey, opportunities and RoundTable.">
@@ -396,6 +396,9 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
 .auth-title em{font-style:italic;color:#33312f}
 .auth-sub{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#33312f;font-weight:300;margin-bottom:2rem;line-height:1.6;font-style:italic}
 .auth-field{margin-bottom:1rem}
+.rg-field-chips{display:flex;flex-wrap:wrap;gap:8px;margin:-.2rem 0 1rem}
+.rg-field-chips button{font:inherit;font-size:.8rem;padding:6px 12px;border:1px solid rgba(43,42,40,.25);background:transparent;color:#33312f;cursor:pointer}
+.rg-field-chips button:hover,.rg-field-chips button[aria-pressed="true"]{border-color:#2b4c7e;background:rgba(43,76,126,.08);color:#22406c}
 .auth-field label{display:block;font-family:'Barlow Condensed',sans-serif;font-size:.52rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#33312f;margin-bottom:.38rem}
 .auth-field input{width:100%;padding:.75rem .95rem;border:1px solid rgba(43,42,40,.12);font-family:'Barlow',sans-serif;font-size:.84rem;color:var(--white);background:rgba(43,42,40,.05);outline:none;transition:border-color .25s}
 .auth-field input:focus{border-color:#33312f;background:rgba(43,42,40,.07)}
@@ -507,7 +510,6 @@ footer{background:var(--black);color:var(--white);padding:5rem 3rem 3rem;border-
   .auth-gate{align-items:flex-start;overflow-y:auto;padding:1.2rem 0}
   .auth-box{width:95vw;padding:1.8rem 1.2rem;margin:auto}
 
-  .dylan-bar{display:none!important}
   .nav-links{display:none!important}
 }
 
@@ -1500,7 +1502,7 @@ async function claimInvite(){
   if(!sb)return;
   const {data:{session}}=await sb.auth.getSession();
   if(session){
-    currentUser=session.user; isAuthed=true; setNavUser(session.user); if(typeof checkTerms==='function')setTimeout(()=>checkTerms(session.user),0); claimInvite();
+    currentUser=session.user; isAuthed=true; setNavUser(session.user); if(typeof checkTerms==='function')setTimeout(()=>checkTerms(session.user),0); claimInvite(); setTimeout(()=>saveFieldPending(session.user),1500);
     // Check if they already completed the survey
     const {data}=await sb.from('profiles').select('traits').eq('user_id',session.user.id).single();
     if(data?.traits && Object.keys(data.traits).length>0){
@@ -1553,6 +1555,7 @@ function showAuth(mode,dest){
   } else {
     document.getElementById('auth-login-view').style.display='none';
     document.getElementById('auth-reg-view').style.display='';
+    rgShowFieldStep(!window._rgField);
     // Init avatar picker
     _rgInitSwatches();
     _rgUpdatePreview();
@@ -1767,6 +1770,34 @@ function rgPreviewUpload(input){
   }
 }
 
+// "Your field" (2026-11-11): the first step of member sign-up, any field (not only software). Free text with suggestions.
+// Stored in profiles.field (nullable) and in the auth user's metadata; for GitHub/Google sign-ups it waits in
+// localStorage (np_field_pending) until the session exists, then saveFieldPending() writes it.
+function rgShowFieldStep(on){
+  const st=document.getElementById('rg-field-step'), mn=document.getElementById('rg-main'); if(!st||!mn)return;
+  st.style.display=on?'':'none'; mn.style.display=on?'none':'';
+  if(on){ const i=document.getElementById('rg-field'); if(i&&window._rgField)i.value=window._rgField; }
+}
+document.addEventListener('click',function(e){ const b=e.target.closest&&e.target.closest('.rg-field-chips button'); if(!b)return;
+  const i=document.getElementById('rg-field'); if(i){ i.value=b.dataset.v; i.focus(); }
+  document.querySelectorAll('.rg-field-chips button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false')); });
+function rgFieldNext(){
+  const v=(document.getElementById('rg-field').value||'').trim().slice(0,80);
+  if(!v){ showErr('rg-field-err','Tell us your field, or pick Other.'); return; }
+  showErr('rg-field-err',''); window._rgField=v;
+  try{ localStorage.setItem('np_field_pending',v); }catch(e){}
+  rgShowFieldStep(false);
+}
+async function saveFieldPending(user){
+  let v=null; try{ v=localStorage.getItem('np_field_pending'); }catch(e){}
+  if(!v||!user||!sb)return;
+  v=String(v).trim().slice(0,80); if(!v)return;
+  try{
+    const{data}=await sb.from('profiles').update({field:v}).eq('user_id',user.id).select('user_id');
+    if(!data||!data.length){ await sb.auth.updateUser({data:{field:v}}); }
+    try{ localStorage.removeItem('np_field_pending'); }catch(e){}
+  }catch(e){}
+}
 async function doRegister(){
   if(!sb){showErr('rg-err','Service unavailable. Please try again later.');return}
   // Avatar check
@@ -1798,10 +1829,10 @@ async function doRegister(){
   showErr('rg-err','');
   const {data,error}=await sb.auth.signUp({
     email,password:pass,
-    options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob,country,username,tos_version:'2026-10-18',tos_accepted_at:new Date().toISOString()}}
+    options:{data:{first_name:fn,last_name:ln,full_name:`${fn} ${ln}`,date_of_birth:dob,country,username,field:window._rgField||null,tos_version:'2026-10-18',tos_accepted_at:new Date().toISOString()}}
   });
   authBtn('rg-btn',false,'Create Account &amp; Continue');
-  if(error){if(/already (registered|exists)/i.test(error.message)){/* Email already has an account (often a profile we made from their work, no password yet): email a one-click sign-in link that proves the address is theirs, then they land in that account (Dylan 2026-10-27). */const{error:oe}=await sb.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:location.origin+'/app?claim=1'+(window.__npLang?'&lang='+window.__npLang:'')}});switchToLogin();document.getElementById('li-email').value=email;showErr('li-err',oe?'This email already has an account. Sign in with your password, or use Forgot password.':'Good news: this email already has a Neuropian profile. Check your inbox to confirm your email and link your account, then set a password if you like.');return}showErr('rg-err',error.message);return}
+  if(error){if(/already (registered|exists)/i.test(error.message)){/* Email already has an account (often a profile we made from their work, no password yet): email a one-click sign-in link that proves the address is theirs, then they land in that account (2026-10-27). */const{error:oe}=await sb.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:location.origin+'/app?claim=1'+(window.__npLang?'&lang='+window.__npLang:'')}});switchToLogin();document.getElementById('li-email').value=email;showErr('li-err',oe?'This email already has an account. Sign in with your password, or use Forgot password.':'Good news: this email already has a Neuropian profile. Check your inbox to confirm your email and link your account, then set a password if you like.');return}showErr('rg-err',error.message);return}
   currentUser=data.user;
   isAuthed=true;
   setNavUser(data.user);
@@ -1813,7 +1844,8 @@ async function doRegister(){
     if(!existing){neuropianId=candidate;break;}
   }
   if(!neuropianId)neuropianId=String(Date.now()).slice(-7);
-  await sb.from('profiles').upsert({user_id:data.user.id,first_name:fn,last_name:ln,username,email,traits:{},neuropian_id:neuropianId},{onConflict:'user_id'});
+  await sb.from('profiles').upsert({user_id:data.user.id,first_name:fn,last_name:ln,username,email,traits:{},neuropian_id:neuropianId,field:window._rgField||null},{onConflict:'user_id'});
+  try{ localStorage.removeItem('np_field_pending'); }catch(e){}
   // Upload avatar
   try{
     let avatarBlob, avatarPath, avatarMime;
@@ -4797,7 +4829,7 @@ else{renderOppPreview();}
   <div class="lg-doc">
     <h1>Privacy Policy</h1>
     <p class="lg-upd">Last updated: 11 November 2026 · <a href="/privacy">Open as a page</a></p>
-      <h2>1. Who we are</h2><div class="lg"><p>Neuropian is run by Dylan Leitenberg (not yet incorporated). Questions and requests: <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p></div>
+      <h2>1. Who we are</h2><div class="lg"><p>Neuropian runs this site and service (not yet incorporated). Questions and requests: <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p></div>
       <h2>2. What we collect from members</h2><div class="lg"><ul><li><strong>Account:</strong> name, username, email address, date of birth, profile picture and your Neuropian ID.</li><li><strong>Country:</strong> the country you live in, which you tell us when you sign up or publish a profile. Until you tell us, we may fill it in from the country of the connection you signed up from, the location on your public GitHub profile or your email address's country domain. We use it only to know which privacy laws apply to you (for example, whether you are in the EU), and it is never shown on your profile.</li><li><strong>Sign-in with GitHub or another service:</strong> your username, name, email address and picture from that service, and the public work there (for GitHub, your public repositories and the pull requests other projects merged), which Neuropian may read to build your profile.</li><li><strong>Profile:</strong> your bio, and the answers you gave in our earlier profile survey, which we no longer ask.</li><li><strong>RoundTable:</strong> messages, files you upload, reactions, problems and builds you post, servers, friends, reports and whether you are online.</li><li><strong>Opportunities:</strong> what you save or apply to.</li><li><strong>Credits and projects:</strong> your credit balance and history, projects you post or ask to join, the proof of work you submit, and reviewers' decisions.</li><li><strong>Public profile, if you make one:</strong> what you write or approve (name, headline, summary, skills, work and links), and, if you connect GitHub, your GitHub username and what GitHub shares at sign-in (name, email address and profile picture).</li><li><strong>A profile we make after you say yes by email:</strong> your email address, your reply (including that you are 18 or over) and the public work we built the profile from.</li><li><strong>Our assessment of your public work:</strong> an internal rating we use to decide whom to contact and whom to recommend to companies. It is never shown on your profile, published or shown to companies.</li><li><strong>EagleEyes, if you use it:</strong> on the sites you turn it on for, what you read, write and engage with there. Nothing from any other site.</li><li><strong>Technical:</strong> what our hosting provider logs to run sign-in securely, such as IP address and browser.</li></ul></div>
       <h2>3. How we use it</h2><div class="lg"><p>To run your account and RoundTable, to match you with opportunities, to share your profile with companies and funds hiring through Neuropian (section 4), to keep the service secure, and to send account emails such as confirmations and password resets. No marketing email without your consent.</p></div>
       <h2>4. Who we share it with</h2><div class="lg"><ul><li><strong>Companies and funds hiring through Neuropian:</strong> your profile (name, username, answers to our old survey if you gave them, and what you add to your profile) when you may fit what they are looking for. We give a company your email address only when you agree to be introduced to it. They may pay us. Under California law this can count as selling or sharing personal information. You can opt out at any time: email <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a> with “Do not share my profile” and we stop within 7 days.</li><li><strong>Service providers</strong> that run the service for us: Supabase (database, sign-in, file storage, interview-recording storage and the AI model that runs search, in the United States); Cloudflare and Netlify (website hosting and DNS); Google (Gmail and Google Workspace, our email); Anthropic (the Claude AI model, used to draft profiles from public work, to help write our emails and to draft notes on recorded interviews); and Granola (notes and transcripts of calls we record). Pages also load fonts from Google Fonts and code from jsDelivr, which see your IP address.</li><li><strong>If the law requires it.</strong></li></ul><p>Never shared with hiring companies: your password and your private messages. Never sold to data brokers or advertisers.</p><p><strong>Everyone</strong> can see and search a profile you publish on Talent: the headline, summary, skills, work and links you approved, your GitHub username if you connected GitHub, and your name only if you chose to show it. To write the draft, your public work (such as your GitHub activity or papers) may be sent to Anthropic's Claude AI model; search uses an AI model that runs inside Supabase.</p><p><strong>Other members</strong> can see projects, who posted them, and approved contributors with the proof that was approved. Requests to join and work waiting for review are seen only by the member who sent it, the project's owner and Neuropian reviewers.</p><p><strong>Other members</strong> can see your username, name, profile picture, Neuropian ID, whether you are online, your bio and profile-card answers (unless you set them to friends only) and the messages you post in rooms and servers.</p><p>Accounts created before 18 October 2026 were made under a policy that did not include sharing. Nothing from those accounts is shared until the member accepts these terms.</p></div>
@@ -4828,7 +4860,7 @@ else{renderOppPreview();}
   <div class="lg-doc">
     <h1>Terms of Service</h1>
     <p class="lg-upd">Last updated: 11 November 2026 · <a href="/terms">Open as a page</a></p>
-      <h2>1. Who we are</h2><div class="lg"><p>Neuropian is run by Dylan Leitenberg. The company is not incorporated yet; when it is, these terms move to it and we will tell you. Contact: <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p></div>
+      <h2>1. Who we are</h2><div class="lg"><p>Neuropian runs this site and service. The company is not incorporated yet; when it is, these terms move to it and we will tell you. Contact: <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>.</p></div>
       <h2>2. What Neuropian is</h2><div class="lg"><p>Neuropian finds skilled people for companies and funds that are hiring. With an account you can build a profile, browse opportunities and use RoundTable, our community chat. Companies tell us about a role at neuropian.com/hire, and we send them the members whose work fits.</p></div>
       <h2>3. We share your profile with companies that hire through us</h2><div class="lg"><p>This is what Neuropian is for. When you create an account, we may share your profile with companies and funds hiring through Neuropian when you may fit what they are looking for. Your profile means your name, username, answers to our old survey if you gave them, and anything you add to your profile. We give a company your email address only when you agree to be introduced to it. Companies may pay Neuropian.</p><p>We never share your password or your private messages, and we do not sell your information to data brokers or advertisers. You can turn sharing off at any time by emailing <a href="mailto:dylan@neuropian.com">dylan@neuropian.com</a>; we stop within 7 days.</p></div>
       <h2>4. Who can join</h2><div class="lg"><p>You must be 18 or older. One account per person, with accurate information. You are responsible for keeping your password safe and for what happens under your account.</p></div>
@@ -5006,6 +5038,16 @@ else{renderOppPreview();}
       <div class="auth-switch"><a onclick="backToLogin()">← Back to Sign In</a></div>
     </div>
     <div id="auth-reg-view" style="display:none">
+      <div id="rg-field-step">
+      <div class="auth-title">What's your <em>field</em>?</div>
+      <div class="auth-sub">Neuropian is for brilliant people in any field. Tell us yours first.</div>
+      <div class="auth-err" id="rg-field-err"></div>
+      <div class="auth-field"><label for="rg-field">Your field</label><input type="text" id="rg-field" list="rg-field-list" maxlength="80" placeholder="e.g. Software, Fashion design" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();rgFieldNext()}"><datalist id="rg-field-list"><option value="Software"><option value="Hardware"><option value="Design"><option value="Fashion design"><option value="Research"><option value="Other"></datalist></div>
+      <div class="rg-field-chips"><button type="button" data-v="Software">Software</button><button type="button" data-v="Hardware">Hardware</button><button type="button" data-v="Design">Design</button><button type="button" data-v="Fashion design">Fashion design</button><button type="button" data-v="Research">Research</button><button type="button" data-v="Other">Other</button></div>
+      <button class="auth-sub-btn" id="rg-field-btn" type="button" onclick="rgFieldNext()">Continue</button>
+      <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
+      </div>
+      <div id="rg-main" style="display:none">
       <div class="auth-title">Discover <em>opportunities</em></div>
       <div class="auth-sub">Sign in with GitHub and see your draft profile in seconds, made from the pull requests you've had merged. Free. Nothing goes public until you publish, and it never shows your email or location.</div>
       <div class="auth-switch" style="margin:.2rem 0 .9rem">Already have an account? <a onclick="switchToLogin()">Sign in</a></div>
@@ -5054,6 +5096,7 @@ else{renderOppPreview();}
       <p class="rg-notice" style="font-family:'Barlow',sans-serif;font-size:.74rem;line-height:1.6;color:rgba(43,42,40,.8);margin:0 0 .9rem">Neuropian may share your profile with companies and funds that hire through us. By creating an account you agree to the <a onclick="showAuthLegal('tos')" style="color:#33312f;text-decoration:underline;cursor:pointer">Terms of Service</a> and <a onclick="showAuthLegal('privacy')" style="color:#33312f;text-decoration:underline;cursor:pointer">Privacy Policy</a>. You must be 18 or older.</p>
       <button class="auth-sub-btn" id="rg-btn" onclick="doRegister()">Create Account &amp; Continue</button>
       <div class="auth-switch">Already have an account? <a onclick="switchToLogin()">Sign in</a></div></div>
+      </div>
     </div>
     <div id="auth-legal-view" style="display:none;position:absolute;inset:0;background:var(--off-black);flex-direction:column;border-radius:0;overflow:hidden">
       <div style="display:flex;align-items:center;gap:.8rem;padding:.9rem 1.4rem;border-bottom:1px solid rgba(43,42,40,.08);flex-shrink:0">
@@ -5113,7 +5156,7 @@ const TALENT_FN=SUPA_URL+'/functions/v1/talent';
 let _bPub=null, _bGhUrls=new Set();
 function _bMsg(t){document.getElementById('b-msg').textContent=t;}
 // Month/day/year pickers in place of <input type="date">: Safari's date box keeps stray year digits ("0008") and
-// won't take a retyped year (Dylan, 2026-10-25). The original input stays, hidden, and holds YYYY-MM-DD for the code that reads it.
+// won't take a retyped year (2026-10-25). The original input stays, hidden, and holds YYYY-MM-DD for the code that reads it.
 function _dobSelects(id){
   const inp=document.getElementById(id); if(!inp||inp.dataset.sel)return; inp.dataset.sel='1'; inp.type='hidden';
   const y=new Date().getFullYear(), M=['January','February','March','April','May','June','July','August','September','October','November','December'];

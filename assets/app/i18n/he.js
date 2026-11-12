@@ -638,7 +638,10 @@ window.__npAppDict = {
     "Too many requests today. Please try again tomorrow.": "יותר מדי פניות היום. נסו שוב מחר.",
 
     // /talent and /hire, 2026-11-11: count note, Request intro, fee line, consent line under both hiring forms
-    "Talent lists every member we've reviewed. The 156 on our home page are the ones who passed our bar.": "ב-⁠Talent מופיעים כל החברים שבדקנו. 156 המוצגים בדף הבית שלנו הם אלה שעברו את הרף שלנו.",
+    "I'm hiring": "אנחנו מגייסים",
+    "I'm a recruiter": "אני רכז/ת גיוס",
+    "Profiles are anonymous. Request an intro and Neuropian connects you.": "הפרופילים אנונימיים. בקשו היכרות ו-Neuropian תחבר ביניכם.",
+    "GitHub verified": "מאומת ב-GitHub",
     "Request intro": "בקשת היכרות",
     "$20,000 per hire, paid only when they start. 60-day replacement.": "20,000 דולר לכל גיוס, בתשלום רק כשהעובד מתחיל לעבוד. החלפה בתוך 60 יום.",
     "By sending, you agree to the <a>Terms</a> and <a>Privacy Policy</a>.": "בשליחה אתם מסכימים ל<a>תנאים</a> ול<a>מדיניות הפרטיות</a> (באנגלית)."

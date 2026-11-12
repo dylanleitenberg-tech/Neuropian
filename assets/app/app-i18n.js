@@ -120,7 +120,7 @@
   var SKIPTEXT = '.pc-top > b, .jco';
   var NAMES = '[onclick^="openUserCard"], #chat-username, #nav-user-name, #mobile-nav-user, #uc-name, #reply-bar-name, ' +
               '.pc-row > b, #friend-requests-list span, #members-panel-list div[style*="nowrap"], .c-name, .p-name, #npac-n, a.login[data-auth]';
-  var STANDIN = { Member: 1, Anonymous: 1, Someone: 1, 'Log in': 1, 'Loading…': 1 };
+  var STANDIN = { Member: 1, Anonymous: 1, Someone: 1, 'Log in': 1, 'Sign in': 1, 'Loading…': 1 };
   /* a few labels read differently in one place (D.ctx: [selector, {English: translation}], checked first) */
   var CTX = D.ctx || [];
 

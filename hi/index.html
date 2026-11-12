@@ -496,6 +496,8 @@ h1,h2,h3{letter-spacing:0;line-height:1.3}.hero h1{line-height:1.22}
 html .npac-k,html .npld{letter-spacing:0}html .npac h2{line-height:1.3}
 /* Devanagari needs a little more size than 11-12px mono labels */
 .kicker,.tk-path,.tk-cap,.tagline,summary,.d-top{font-size:14px}.d-grid dt,.tag,.idx{font-size:13px}html .npac-k{font-size:13px}
+/* 2026-11-11: two primary buttons (I'm hiring / I'm a recruiter) in the bar and hero; Sign in is a small link */
+.nav{align-items:center}.nav a.login{color:var(--fg);background:none;border:0;border-radius:0;padding:0;margin:0;text-decoration:underline;text-decoration-color:rgba(43,42,40,.35);text-underline-offset:.25em}.nav a.login:hover{background:none;text-decoration-color:var(--fg)}.nav a.nbtn{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);padding:6px 14px;margin:-7px 0;white-space:nowrap}.nav a.nbtn:hover{background:#22406c;border-color:#22406c;color:#F3F0EB}.nav a.nbtn.line{background:transparent;color:var(--acc)}.nav a.nbtn.line:hover{background:rgba(43,76,126,.08);color:var(--acc)}#screen .next{margin-top:clamp(22px,3vw,36px)}.ticker .tk-full{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}@media(max-width:720px){.bar .nav{gap:6px 14px}.bar .nav a.login{margin:0;padding:9px 0}.bar .nav a.nbtn{padding:5px 10px;margin:4px 0;font-size:14px}.bar .nav a.nbtn:first-of-type{margin-inline-start:auto}}
 </style>
 <!--/i18n:head-->
 </head>
@@ -507,9 +509,10 @@ html .npac-k,html .npld{letter-spacing:0}html .npac h2{line-height:1.3}
     <a class="mark" href="#top" aria-label="Neuropian, पेज के ऊपर जाएँ"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
     <nav class="nav" aria-label="अनुभाग">
       <a href="/talent?lang=hi">Talent</a>
-      <a href="/hire?lang=hi">भर्ती</a>
       <a href="#contact">संपर्क</a>
       <a class="login" href="/app?lang=hi" data-auth="login">लॉग इन</a>
+      <a class="nbtn" href="/hire?lang=hi">हम भर्ती कर रहे हैं</a>
+      <a class="nbtn line" href="/hire?lang=hi&type=recruiter">मैं रिक्रूटर हूँ</a>
     </nav>
     <!--i18n:menu--><div class="np-lang"><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="भाषा"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">HI</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/" hreflang="en" lang="en" translate="no">English</a></li><li><a href="/fr/" hreflang="fr" lang="fr" translate="no">Français</a></li><li><a href="/es/" hreflang="es" lang="es" translate="no">Español</a></li><li><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a></li><li><a href="/hi/" hreflang="hi" lang="hi" translate="no" aria-current="page">हिन्दी</a></li><li><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></li></ul></div><!--/i18n:menu-->
   </div>
@@ -523,17 +526,29 @@ html .npac-k,html .npld{letter-spacing:0}html .npac h2{line-height:1.3}
     <p class="kicker">Neuropian · बुद्धि त्वरक</p>
     <h1>बुद्धिमत्ता, <span class="brush">नए सिरे से।</span></h1>
     <p class="lede">Neuropian वह जगह है जहाँ प्रतिभाशाली लोग अपने रिज़्यूमे से नहीं, बल्कि इस बात से पहचाने जाते हैं कि <b>उन्होंने क्या बनाया, रचा और हल किया</b>, और <b>वे कैसे नेतृत्व करते हैं और दूसरों के साथ काम करते हैं</b>।</p>
-    <div class="ctas"><a class="cta" href="/hire?lang=hi">Neuropian के साथ भर्ती करें →</a><a class="cta line" href="/app?lang=hi" data-auth="reg"><img class="cta-mark" src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" width="20" height="20" alt="">खाता बनाएँ</a></div>
+    <div class="ctas"><a class="cta" href="/hire?lang=hi">हम भर्ती कर रहे हैं →</a><a class="cta line" href="/hire?lang=hi&type=recruiter">मैं रिक्रूटर हूँ →</a></div>
     <p class="tagline">संकेत, रिज़्यूमे नहीं · कोई प्रमाणपत्र ज़रूरी नहीं</p>
    </div>
    <div class="hero-art">
-    <div class="ticker" role="img" aria-label="Falcon द्वारा खोजे गए 138,625 निर्माता">
-     <span class="tk-path" aria-hidden="true">Falcon ने खोजे</span>
-     <b data-count="138625" aria-hidden="true">138,625</b>
-     <span class="tk-cap" aria-hidden="true">निर्माता</span>
+    <div class="ticker" role="img" aria-label="हम जिन इंजीनियरों को खोजते हैं, उनमें से शीर्ष 0.1% को भर्ती करते हैं।">
+     <span class="tk-path" aria-hidden="true">हम जिन इंजीनियरों को खोजते हैं, उनमें से शीर्ष</span>
+     <b aria-hidden="true">0.1%</b>
+     <span class="tk-cap" aria-hidden="true">को भर्ती करते हैं</span>
     </div>
     <img class="engr brain" src="/assets/engr/brain.webp" width="857" height="960" alt="Andreas Vesalius की शरीर-रचना पुस्तक से मानव मस्तिष्क के निचले हिस्से का काष्ठ-चित्र, 1543" decoding="async">
    </div>
+  </div>
+</section>
+
+<section id="screen">
+  <div class="wrap">
+    <p class="kicker">हमारा मानक</p>
+    <h2>हम कैसे परखते हैं।</h2>
+    <ul class="next">
+      <li><span class="tag">1 · काम</span><span>बड़े ओपन-सोर्स प्रोजेक्ट में मर्ज हुआ काम<small>हम Python, Rust, LLVM और Home Assistant जैसे बड़े प्रोजेक्ट में मर्ज हुए pull requests पढ़ते हैं: ऐसा कोड जिसे विशेषज्ञ मेंटेनरों ने जाँचा और स्वीकार किया।</small></span></li>
+      <li><span class="tag">2 · गहराई</span><span>हम खुद कोड जाँचते हैं<small>हर व्यक्ति के पिछले 12 महीनों के मर्ज हुए pull requests को असली कोड बदलाव (डॉक्स, टाइपो या कॉन्फ़िग सुधार नहीं), आकार, मेंटेनरों ने कितनी बारीकी से रिव्यू किया, और 1,000+ स्टार वाले प्रोजेक्ट में विविधता पर अंक मिलते हैं। सिर्फ़ संख्या बढ़ाने पर अंक कटते हैं।</small></span></li>
+      <li><span class="tag">3 · इंटरव्यू</span><span>किसी भी परिचय से पहले इंटरव्यू<small>उम्मीदवार हमें अपना बनाया कुछ दिखाते हैं, सबसे कठिन हिस्सा और किनके साथ काम किया, और बताते हैं कि आगे क्या चाहते हैं। उसके बाद ही हम परिचय कराते हैं।</small></span></li>
+    </ul>
   </div>
 </section>
 
@@ -550,45 +565,15 @@ html .npac-k,html .npld{letter-spacing:0}html .npac h2{line-height:1.3}
   <div class="wrap mq-foot"><a class="mq-all" href="/talent?lang=hi">सभी को Talent पर देखें →</a><span class="mq-nav"><button class="mq-b" type="button" data-d="-1" aria-label="पिछला">&larr;</button><button class="mq-b" type="button" data-d="1" aria-label="अगला">&rarr;</button></span></div>
 </section>
 
-<section id="fields" class="plates-sec">
-  <div class="wrap">
-    <p class="kicker">चित्र I–VI · कोई भी क्षेत्र</p>
-    <h2>किसी भी क्षेत्र का काम।</h2>
-    <p class="lede">हर क्षेत्र में हमें क्या दिखाना है, यह देखने के लिए कोई चित्र खोलें।</p>
-    <div class="plates"><figure class="ph ph1"><img class="engr" src="/assets/engr/code.webp" width="549" height="703" alt="एक यांत्रिक कैलकुलेटर, डिफ़रेंस इंजन के एक हिस्से का काष्ठ-चित्र, Benjamin Herschel Babbage के एक चित्र पर आधारित, 1853" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip"><i>I.</i> कोड</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>कोड</b><p>वह कोड जिसे विशेषज्ञों ने असली सॉफ़्टवेयर में स्वीकार किया। Falcon उसे पढ़ता है; सदस्य उसका लिंक देते हैं।</p><a class="ph-cta" href="/app?lang=hi" data-auth="reg">अपना कोड दिखाएँ →</a></div></figure><figure class="ph ph2"><img class="engr" src="/assets/engr/leadership.webp" width="434" height="760" alt="नए Eddystone लाइटहाउस का कमरा-दर-कमरा अनुप्रस्थ काट, 1884" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip"><i>II.</i> नेतृत्व</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>नेतृत्व</b><p>किसने कुछ शुरू किया, किसी निर्माण की अगुवाई की या लोगों को अपने साथ जोड़ा।</p><a class="ph-cta" href="/app?lang=hi" data-auth="reg">बताइए आपने किसकी अगुवाई की →</a></div></figure><figure class="ph ph3"><img class="engr" src="/assets/engr/science.webp" width="625" height="693" alt="Robert Hooke का सूक्ष्मदर्शी, उनकी Micrographia के लिए उकेरा गया, 1665" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip"><i>III.</i> विज्ञान</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>विज्ञान</b><p>ऐसे शोध और नतीजे जिन्हें आप दिखा सकें: शोधपत्र, डेटा, प्रयोग।</p><a class="ph-cta" href="/app?lang=hi" data-auth="reg">अपना शोध साझा करें →</a></div></figure><figure class="ph ph4"><img class="engr" src="/assets/engr/teamwork.webp" width="900" height="706" alt="1586 में रोम में लगभग 900 मज़दूरों और 75 घोड़ों द्वारा वैटिकन ओबिलिस्क खड़ा किए जाने की नक़्क़ाशी" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip"><i>IV.</i> टीमवर्क</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>टीमवर्क</b><p>कौन दूसरों के काम की समीक्षा करता है, मदद करता है और उनके साथ मिलकर बनाता है, सिर्फ़ अकेले नहीं।</p><a class="ph-cta" href="/app?lang=hi" data-auth="reg">अपनी टीम खोजें →</a></div></figure><figure class="ph ph5"><img class="engr" src="/assets/engr/hardware.webp" width="617" height="760" alt="James Watt के डबल-एक्टिंग भाप इंजन की उकेरी गई प्लेट, 1822" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip"><i>V.</i> हार्डवेयर</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>हार्डवेयर</b><p>आपकी डिज़ाइन की और बनाई हुई चीज़ें, साबित करने के लिए फ़ोटो और फ़ाइलों के साथ।</p><a class="ph-cta" href="/app?lang=hi" data-auth="reg">दिखाएँ कि आपने क्या बनाया →</a></div></figure><figure class="ph ph6"><img class="engr" src="/assets/engr/design.webp" width="900" height="644" alt="Albrecht Dürer का काष्ठ-चित्र, जिसमें दो आदमी एक परिप्रेक्ष्य फ़्रेम की मदद से ल्यूट का चित्र बना रहे हैं, 1525" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip"><i>VI.</i> डिज़ाइन</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>डिज़ाइन</b><p>आपका बनाया और जारी किया हुआ काम, आपकी प्रोफ़ाइल पर।</p><a class="ph-cta" href="/app?lang=hi" data-auth="reg">अपने डिज़ाइन दिखाएँ →</a></div></figure></div>
-  </div>
-</section>
-
-
-
-
-
 <section id="run">
   <div class="wrap">
     <p class="kicker">Falcon, आसमान में हमारी आँखें</p>
     <h2>बहुत कम लोग चुने जाते हैं।</h2>
-    <p class="cut-lead reveal" style="font-size:clamp(22px,2.6vw,32px);font-weight:700;letter-spacing:-.015em;line-height:1.25;margin:10px 0 clamp(22px,3vw,36px);max-width:26em">138,625 लोगों में से, जिनका काम विशेषज्ञों ने स्वीकार किया, लगभग 0.11% हमारी कसौटी पर खरे उतरे।</p>
+    <p class="cut-lead reveal" style="font-size:clamp(22px,2.6vw,32px);font-weight:700;letter-spacing:-.015em;line-height:1.25;margin:10px 0 clamp(22px,3vw,36px);max-width:26em">हम जिन इंजीनियरों को खोजते हैं, उनमें से शीर्ष 0.1% को भर्ती करते हैं।</p>
     <ol class="flow">
       <li class="reveal"><b data-count="3088">3,088</b><span>बड़े सॉफ़्टवेयर प्रोजेक्ट खंगाले गए, जैसे Python, Rust, LLVM, Zephyr और Home Assistant</span></li>
       <li class="reveal"><b>2.0M</b><span>पिछले एक साल में मर्ज हुए पुल रिक्वेस्ट</span></li>
-      <li class="reveal"><b data-count="138625">138,625</b><span>लोग, जिनका काम विशेषज्ञों ने इन प्रोजेक्ट में स्वीकार किया</span></li>
-      <li class="reveal hit"><b data-count="156">156</b><span>हमारे मानक पर खरे उतरे: 1,000 में 2 से भी कम</span></li>
     </ol>
-  </div>
-</section>
-
-<section id="next">
-  <div class="wrap">
-    <p class="kicker">आज</p>
-    <h2>हमने क्या बनाया है।</h2>
-    <ul class="next">
-      <li><span class="tag">तैयार</span><span>Falcon, आसमान में हमारी आँखें<small>बड़े ओपन-सोर्स प्रोजेक्ट, प्रोग्रामिंग प्रतियोगिताओं और गणित के सवाल-जवाब में सार्वजनिक काम पढ़ता है, और ऐसे इंजीनियर और गणितज्ञ खोजता है जिनका काम विशेषज्ञों ने स्वीकार किया, पर जिन्हें कम ही लोग फ़ॉलो करते हैं।</small></span></li>
-      <li><span class="tag">परीक्षण में</span><span>एक व्यक्ति के अलग-अलग प्लेटफ़ॉर्म के खातों को जोड़ना<small>Falcon खातों को सिर्फ़ उन लिंक के ज़रिए जोड़ता है जो व्यक्ति ने ख़ुद प्रकाशित किए हों। कमज़ोर मिलान (वही हैंडल, नाम या फ़ोटो) को अंक दिए जाते हैं, उन्हें अपुष्ट रखा जाता है और कभी किसी से संपर्क के लिए इस्तेमाल नहीं किया जाता।</small></span></li>
-      <li><span class="tag">लाइव</span><span>RoundTable, बौद्धिक विस्तार के लिए Neuropian की जगह और मंच<small>सदस्य साइन अप करते हैं, प्रोफ़ाइल बनाते हैं और चैट, समस्या और निर्माण रूम में बात करते हैं। साइन अप करना ही वह सहमति है जिससे Neuropian किसी सदस्य की प्रोफ़ाइल उन कंपनियों और फ़ंड के साथ साझा कर सकता है जो Neuropian के ज़रिए भर्ती करते हैं।</small></span></li>
-      <li><span class="tag">लाइव</span><span>प्रोजेक्ट और क्रेडिट<small>सदस्य क्रेडिट इनाम के साथ प्रोजेक्ट पोस्ट करते हैं और दूसरे उनसे जुड़ते हैं। किसी को क्रेडिट मिलने से पहले Neuropian का एक समीक्षक हर योगदानकर्ता के काम की जाँच करता है, और मंज़ूर हुए योगदानकर्ता बोनस कमा सकते हैं। क्रेडिट Neuropian के भीतर के अंक हैं, जिनका कोई नकद मूल्य नहीं है।</small></span></li>
-      <li><span class="tag">लाइव</span><span>Talent<small>किसी भी क्षेत्र के लोगों की प्रोफ़ाइल, जो उनके अपने विवरण और काम से तैयार की जाती हैं, उनकी मंज़ूरी के बाद, और जिन्हें <a href="/talent?lang=hi">neuropian.com/talent</a> पर अर्थ के आधार पर खोजा जा सकता है।</small></span></li>
-      <li><span class="tag">तैयार</span><span>EagleEyes, Neuropian का स्काउटिंग एजेंट<small>एक ब्राउज़र एक्सटेंशन। जिन साइटों पर कोई सदस्य इसे चालू करता है, वहाँ वह जो पढ़ता, लिखता और जिस पर काम करता है, उसे यह उसकी Neuropian प्रोफ़ाइल में जोड़ देता है। अभी सार्वजनिक नहीं।</small></span></li>
-    </ul>
   </div>
 </section>
 
@@ -754,8 +739,8 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   var API="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
   var sec=document.getElementById("members"), tr=document.getElementById("mq-track"); if(!sec||!tr) return;
   function esc(t){ return String(t==null?"":t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
-  /* S and A tier only (Dylan 2026-11-05): talent_carousel_ids returns up to 40 listed S/A ids in random order, never tiers */
-  /* Featured first (Dylan 2026-11-08): the RPC returns every featured member, then S/A, each group in random order;
+  /* S and A tier only (2026-11-05): talent_carousel_ids returns up to 40 listed S/A ids in random order, never tiers */
+  /* Featured first (2026-11-08): the RPC returns every featured member, then S/A, each group in random order;
      the cards keep that order (no client shuffle). */
   var ord=[];
   fetch(API+"/rest/v1/rpc/talent_carousel_ids",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"},body:"{}"})
@@ -775,7 +760,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
     tr.innerHTML=html;
     /* a full screen of cards per click; past the last card it turns back to the first */
     Array.prototype.forEach.call(sec.querySelectorAll(".mq-b"),function(b){ b.addEventListener("click",function(){
-      var c=tr.querySelector(".mq-card"), one=c?c.getBoundingClientRect().width+16:320, step=Math.max(1,Math.floor(tr.clientWidth/one))*one, d=+b.getAttribute("data-d"), max=tr.scrollWidth-tr.clientWidth;   /* a full screen of cards per click (Dylan 2026-10-28) */
+      var c=tr.querySelector(".mq-card"), one=c?c.getBoundingClientRect().width+16:320, step=Math.max(1,Math.floor(tr.clientWidth/one))*one, d=+b.getAttribute("data-d"), max=tr.scrollWidth-tr.clientWidth;   /* a full screen of cards per click (2026-10-28) */
       if(d>0&&tr.scrollLeft>=max-4) tr.scrollTo({left:0}); else if(d<0&&tr.scrollLeft<=4) tr.scrollTo({left:max}); else tr.scrollBy({left:d*step});
     }); });
     sec.hidden=false;

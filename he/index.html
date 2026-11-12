@@ -510,6 +510,8 @@ h1,h2,h3,.chip,.ph-more b,.d-name,.npac h2{font-weight:500;font-synthesis:none}
 /* the account card's own stylesheet comes later in <body>: html-prefixed so these win */
 html .npac-x{right:auto;left:12px}html .npac-l a::after{content:"\2190"}html .npac-l a:hover{padding-left:0;padding-right:6px}
 html .npac-k,html .npld{letter-spacing:.02em}
+/* 2026-11-11: two primary buttons (I'm hiring / I'm a recruiter) in the bar and hero; Sign in is a small link */
+.nav{align-items:center}.nav a.login{color:var(--fg);background:none;border:0;border-radius:0;padding:0;margin:0;text-decoration:underline;text-decoration-color:rgba(43,42,40,.35);text-underline-offset:.25em}.nav a.login:hover{background:none;text-decoration-color:var(--fg)}.nav a.nbtn{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);padding:6px 14px;margin:-7px 0;white-space:nowrap}.nav a.nbtn:hover{background:#22406c;border-color:#22406c;color:#F3F0EB}.nav a.nbtn.line{background:transparent;color:var(--acc)}.nav a.nbtn.line:hover{background:rgba(43,76,126,.08);color:var(--acc)}#screen .next{margin-top:clamp(22px,3vw,36px)}.ticker .tk-full{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}@media(max-width:720px){.bar .nav{gap:6px 14px}.bar .nav a.login{margin:0;padding:9px 0}.bar .nav a.nbtn{padding:5px 10px;margin:4px 0;font-size:14px}.bar .nav a.nbtn:first-of-type{margin-inline-start:auto}}
 </style>
 <!--/i18n:head-->
 </head>
@@ -521,9 +523,10 @@ html .npac-k,html .npld{letter-spacing:.02em}
     <a class="mark" href="#top" aria-label="Neuropian, לראש העמוד"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
     <nav class="nav" aria-label="מקטעים">
       <a href="/talent?lang=he">Talent</a>
-      <a href="/hire?lang=he">גיוס</a>
       <a href="#contact">יצירת קשר</a>
       <a class="login" href="/app?lang=he" data-auth="login">התחברות</a>
+      <a class="nbtn" href="/hire?lang=he">אנחנו מגייסים</a>
+      <a class="nbtn line" href="/hire?lang=he&type=recruiter">אני רכז/ת גיוס</a>
     </nav>
     <!--i18n:menu--><div class="np-lang"><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="שפה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">HE</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/" hreflang="en" lang="en" translate="no">English</a></li><li><a href="/fr/" hreflang="fr" lang="fr" translate="no">Français</a></li><li><a href="/es/" hreflang="es" lang="es" translate="no">Español</a></li><li><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no" aria-current="page">עברית</a></li><li><a href="/hi/" hreflang="hi" lang="hi" translate="no">हिन्दी</a></li><li><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></li></ul></div><!--/i18n:menu-->
   </div>
@@ -537,17 +540,29 @@ html .npac-k,html .npld{letter-spacing:.02em}
     <p class="kicker">Neuropian · מאיץ אינטלקט</p>
     <h1>אינטליגנציה, <span class="brush">מחדש.</span></h1>
     <p class="lede">Neuropian היא המקום שבו אנשים מבריקים מתגלים בזכות <b>מה שבנו, יצרו ופתרו</b>, ובזכות <b>האופן שבו הם מובילים ועובדים עם אחרים</b>, ולא בזכות מה שכתוב בקורות החיים שלהם.</p>
-    <div class="ctas"><a class="cta" href="/hire?lang=he">גייסו עם Neuropian ←</a><a class="cta line" href="/app?lang=he" data-auth="reg"><img class="cta-mark" src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" width="20" height="20" alt="">יצירת חשבון</a></div>
+    <div class="ctas"><a class="cta" href="/hire?lang=he">אנחנו מגייסים ←</a><a class="cta line" href="/hire?lang=he&type=recruiter">אני רכז/ת גיוס ←</a></div>
     <p class="tagline">אותות, לא קורות חיים · ללא צורך בתעודות</p>
    </div>
    <div class="hero-art">
-    <div class="ticker" role="img" aria-label="138,625 בונים שנמצאו על ידי Falcon">
-     <span class="tk-path" aria-hidden="true">נמצאו על ידי Falcon</span>
-     <b data-count="138625" aria-hidden="true">138,625</b>
-     <span class="tk-cap" aria-hidden="true">בונים</span>
+    <div class="ticker" role="img" aria-label="אנחנו מגייסים את 0.1% המובילים מבין המהנדסים שאנחנו מוצאים.">
+     <span class="tk-path" aria-hidden="true">אנחנו מגייסים את</span>
+     <b aria-hidden="true">0.1%</b>
+     <span class="tk-cap" aria-hidden="true">המובילים מבין המהנדסים שאנחנו מוצאים</span>
     </div>
     <img class="engr brain" src="/assets/engr/brain.webp" width="857" height="960" alt="חיתוך עץ של בסיס המוח האנושי, מתוך האנטומיה של Andreas Vesalius, 1543" decoding="async">
    </div>
+  </div>
+</section>
+
+<section id="screen">
+  <div class="wrap">
+    <p class="kicker">הרף שלנו</p>
+    <h2>איך אנחנו מסננים.</h2>
+    <ul class="next">
+      <li><span class="tag">1 · עבודה</span><span>עבודה שמוזגה בפרויקטי קוד פתוח גדולים<small>אנחנו קוראים pull requests שמוזגו בפרויקטים גדולים כמו Python,‏ Rust,‏ LLVM ו-Home Assistant: קוד שמתחזקים מומחים בדקו וקיבלו.</small></span></li>
+      <li><span class="tag">2 · עומק</span><span>אנחנו בודקים את הקוד עצמו<small>ה-pull requests שמוזגו של כל אדם ב-12 החודשים האחרונים מקבלים ציון לפי שינויי קוד אמיתיים (לא תיעוד, תיקוני הקלדה או קונפיגורציה), גודל, כמה לעומק המתחזקים בדקו אותם, ומגוון פרויקטים עם יותר מ-1,000 כוכבים. ניפוח כמות נענש.</small></span></li>
+      <li><span class="tag">3 · ראיון</span><span>ראיון לפני כל היכרות<small>המועמדים מציגים לנו משהו שבנו, את החלק הקשה ביותר ועם מי עבדו, ומספרים מה הם רוצים הלאה. רק אחרי זה אנחנו מכירים ביניכם.</small></span></li>
+    </ul>
   </div>
 </section>
 
@@ -564,45 +579,15 @@ html .npac-k,html .npld{letter-spacing:.02em}
   <div class="wrap mq-foot"><a class="mq-all" href="/talent?lang=he">לצפייה בכולם ב-⁠Talent ←</a><span class="mq-nav"><button class="mq-b" type="button" data-d="-1" aria-label="הקודם">&larr;</button><button class="mq-b" type="button" data-d="1" aria-label="הבא">&rarr;</button></span></div>
 </section>
 
-<section id="fields" class="plates-sec">
-  <div class="wrap">
-    <p class="kicker">לוחות I–VI · כל תחום</p>
-    <h2>עבודה בכל תחום.</h2>
-    <p class="lede">פתחו לוח כדי לראות מה להראות לנו בכל תחום.</p>
-    <div class="plates"><figure class="ph ph1"><img class="engr" src="/assets/engr/code.webp" width="549" height="703" alt="חיתוך עץ של חלק ממנוע הפרשים, מחשבון מכני, לפי ציור של Benjamin Herschel Babbage, 1853" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip"><i>I.</i> קוד</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>קוד</b><p>קוד שמומחים קיבלו ושילבו בתוכנה אמיתית. Falcon קורא אותו; החברים מקשרים אליו.</p><a class="ph-cta" href="/app?lang=he" data-auth="reg">הראו את הקוד שלכם ←</a></div></figure><figure class="ph ph2"><img class="engr" src="/assets/engr/leadership.webp" width="434" height="760" alt="חתך של מגדלור Eddystone החדש, חדר אחר חדר, 1884" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip"><i>II.</i> מנהיגות</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>מנהיגות</b><p>מי שיזם משהו, הוביל פרויקט או סחף אנשים איתו.</p><a class="ph-cta" href="/app?lang=he" data-auth="reg">ספרו לנו מה הובלתם ←</a></div></figure><figure class="ph ph3"><img class="engr" src="/assets/engr/science.webp" width="625" height="693" alt="המיקרוסקופ של Robert Hooke, בתחריט שנעשה עבור ספרו Micrographia, 1665" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip"><i>III.</i> מדע</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>מדע</b><p>מחקר ותוצאות שאפשר להצביע עליהם: מאמרים, נתונים, ניסויים.</p><a class="ph-cta" href="/app?lang=he" data-auth="reg">שתפו את המחקר שלכם ←</a></div></figure><figure class="ph ph4"><img class="engr" src="/assets/engr/teamwork.webp" width="900" height="706" alt="תחריט של הקמת האובליסק של הוותיקן ברומא ב-⁠1586 על ידי כ-⁠900 פועלים ו-⁠75 סוסים" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip"><i>IV.</i> עבודת צוות</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>עבודת צוות</b><p>מי שסוקר, עוזר ובונה עם אחרים, לא רק לבד.</p><a class="ph-cta" href="/app?lang=he" data-auth="reg">מצאו את הצוות שלכם ←</a></div></figure><figure class="ph ph5"><img class="engr" src="/assets/engr/hardware.webp" width="617" height="760" alt="לוח תחריט של מנוע הקיטור הדו-פעולתי של James Watt, 1822" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip"><i>V.</i> חומרה</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>חומרה</b><p>דברים שתכננתם ובניתם, עם תמונות וקבצים שמוכיחים זאת.</p><a class="ph-cta" href="/app?lang=he" data-auth="reg">הראו מה בניתם ←</a></div></figure><figure class="ph ph6"><img class="engr" src="/assets/engr/design.webp" width="900" height="644" alt="חיתוך העץ של Albrecht Dürer: שני אנשים מציירים לאוטה בעזרת מסגרת פרספקטיבה, 1525" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip"><i>VI.</i> עיצוב</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>עיצוב</b><p>עבודה שיצרתם והשקתם, שמוצגת בפרופיל שלכם.</p><a class="ph-cta" href="/app?lang=he" data-auth="reg">הראו את העיצובים שלכם ←</a></div></figure></div>
-  </div>
-</section>
-
-
-
-
-
 <section id="run">
   <div class="wrap">
     <p class="kicker">Falcon, העיניים שלנו בשמיים</p>
     <h2>מעטים עוברים את הסינון.</h2>
-    <p class="cut-lead reveal" style="font-size:clamp(22px,2.6vw,32px);font-weight:700;letter-spacing:-.015em;line-height:1.25;margin:10px 0 clamp(22px,3vw,36px);max-width:26em">מתוך 138,625 אנשים שעבודתם התקבלה על ידי מומחים, כ-0.11% עברו את הסינון שלנו.</p>
+    <p class="cut-lead reveal" style="font-size:clamp(22px,2.6vw,32px);font-weight:700;letter-spacing:-.015em;line-height:1.25;margin:10px 0 clamp(22px,3vw,36px);max-width:26em">אנחנו מגייסים את 0.1% המובילים מבין המהנדסים שאנחנו מוצאים.</p>
     <ol class="flow">
       <li class="reveal"><b data-count="3088">3,088</b><span>פרויקטי תוכנה מרכזיים שנסרקו, כמו Python, Rust, LLVM, Zephyr ו-⁠Home Assistant</span></li>
       <li class="reveal"><b>2.0M</b><span>בקשות מיזוג שמוזגו בשנה האחרונה</span></li>
-      <li class="reveal"><b data-count="138625">138,625</b><span>אנשים שהמומחים קיבלו את עבודתם בפרויקטים האלה</span></li>
-      <li class="reveal hit"><b data-count="156">156</b><span>עברו את הרף שלנו: פחות מ-2 מכל 1,000</span></li>
     </ol>
-  </div>
-</section>
-
-<section id="next">
-  <div class="wrap">
-    <p class="kicker">היום</p>
-    <h2>מה בנינו.</h2>
-    <ul class="next">
-      <li><span class="tag">מוכן</span><span>Falcon, העיניים שלנו בשמיים<small>קורא עבודה פומבית בפרויקטי קוד פתוח מרכזיים, בתחרויות תכנות ובאתרי שאלות ותשובות במתמטיקה, ומוצא מהנדסים ומתמטיקאים שמומחים קיבלו את עבודתם אבל מעטים עוקבים אחריהם.</small></span></li>
-      <li><span class="tag">בבדיקה</span><span>קישור החשבונות של אדם אחד בין פלטפורמות<small>Falcon מקשר חשבונות רק דרך קישורים שהאדם עצמו פרסם. התאמות חלשות יותר (אותו כינוי, שם או תמונה) מקבלות ציון, נשארות לא מאומתות ולעולם לא משמשות כדי לפנות למישהו.</small></span></li>
-      <li><span class="tag">פעיל</span><span>RoundTable, המקום והמרחב של Neuropian להתרחבות אינטלקטואלית<small>חברים נרשמים, בונים פרופיל ומשוחחים בחדרי צ׳אט, בעיות ובנייה. ההרשמה היא ההסכמה שמאפשרת ל-⁠Neuropian לשתף את הפרופיל של חבר עם חברות וקרנות שמגייסות דרך Neuropian.</small></span></li>
-      <li><span class="tag">פעיל</span><span>פרויקטים וקרדיטים<small>חברים מפרסמים פרויקטים עם תגמול בקרדיטים, ואחרים מצטרפים. סוקר של Neuropian בודק את העבודה של כל תורם לפני שמישהו מקבל קרדיט, ותורמים שאושרו יכולים לקבל בונוס. קרדיטים הם נקודות בתוך Neuropian ללא ערך כספי.</small></span></li>
-      <li><span class="tag">פעיל</span><span>Talent<small>פרופילים של אנשים מכל תחום, שנוסחו על סמך התיאור והעבודה שלהם, אושרו על ידם, וניתן לחפש בהם לפי משמעות ב-⁠<a href="/talent?lang=he">neuropian.com/talent</a>.</small></span></li>
-      <li><span class="tag">מוכן</span><span>EagleEyes, סוכן הגילוי של Neuropian<small>תוסף לדפדפן. באתרים שחבר מפעיל אותו בהם, הוא מוסיף לפרופיל Neuropian שלו את מה שהוא קורא, כותב ועובד עליו. עדיין לא פומבי.</small></span></li>
-    </ul>
   </div>
 </section>
 
@@ -768,8 +753,8 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   var API="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
   var sec=document.getElementById("members"), tr=document.getElementById("mq-track"); if(!sec||!tr) return;
   function esc(t){ return String(t==null?"":t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
-  /* S and A tier only (Dylan 2026-11-05): talent_carousel_ids returns up to 40 listed S/A ids in random order, never tiers */
-  /* Featured first (Dylan 2026-11-08): the RPC returns every featured member, then S/A, each group in random order;
+  /* S and A tier only (2026-11-05): talent_carousel_ids returns up to 40 listed S/A ids in random order, never tiers */
+  /* Featured first (2026-11-08): the RPC returns every featured member, then S/A, each group in random order;
      the cards keep that order (no client shuffle). */
   var ord=[];
   fetch(API+"/rest/v1/rpc/talent_carousel_ids",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"},body:"{}"})
@@ -789,7 +774,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
     tr.innerHTML=html;
     /* a full screen of cards per click; past the last card it turns back to the first */
     Array.prototype.forEach.call(sec.querySelectorAll(".mq-b"),function(b){ b.addEventListener("click",function(){
-      var c=tr.querySelector(".mq-card"), one=c?c.getBoundingClientRect().width+16:320, step=Math.max(1,Math.floor(tr.clientWidth/one))*one, d=+b.getAttribute("data-d"), max=tr.scrollWidth-tr.clientWidth;   /* a full screen of cards per click (Dylan 2026-10-28) */
+      var c=tr.querySelector(".mq-card"), one=c?c.getBoundingClientRect().width+16:320, step=Math.max(1,Math.floor(tr.clientWidth/one))*one, d=+b.getAttribute("data-d"), max=tr.scrollWidth-tr.clientWidth;   /* a full screen of cards per click (2026-10-28) */
       if(d>0&&tr.scrollLeft>=max-4) tr.scrollTo({left:0}); else if(d<0&&tr.scrollLeft<=4) tr.scrollTo({left:max}); else tr.scrollBy({left:d*step});
     }); });
     sec.hidden=false;

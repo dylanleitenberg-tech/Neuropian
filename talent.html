@@ -19,7 +19,7 @@ try{var q=new URLSearchParams(location.search);if(q.has('lang')){l=f(q.get('lang
 if(!l)return;window.__npLang=l;var d=document.documentElement;d.lang=l==='zh'?'zh-Hans':l;if(l==='he')d.dir='rtl';
 var st=document.createElement('style');st.textContent='html.np-i18n-wait body{visibility:hidden}';document.head.appendChild(st);
 d.classList.add('np-i18n-wait');setTimeout(function(){d.classList.remove('np-i18n-wait');},3000);   // shown in English if the table never arrives
-['/assets/app/i18n/'+l+'.js?v=20261111a','/assets/app/app-i18n.js?v=20261026a'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
+['/assets/app/i18n/'+l+'.js?v=20261111b','/assets/app/app-i18n.js?v=20261111b'].forEach(function(u){var s=document.createElement('script');s.src=u;s.async=false;document.head.appendChild(s);});})();</script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew&family=Noto+Serif+Devanagari&family=Noto+Serif+SC&text=%D7%A2%D7%91%D7%A8%D7%99%D7%AA%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80%E4%B8%AD%E6%96%87&display=swap" rel="stylesheet">
 <title>Talent · Neuropian</title>
 <meta name="description" content="Search Neuropian profiles, drafted from each member's public work and published with their yes: what they have built and solved.">
@@ -121,6 +121,8 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.01em}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 /* phones and small tablets: logo + language on the first row, nav links + Log in on a second row (they used to be hidden) */
 @media(max-width:720px){.bar .wrap{flex-wrap:wrap;height:auto;padding-top:9px;padding-bottom:2px;gap:0 12px}.bar .nav{order:3;flex:1 0 100%;flex-wrap:wrap;margin:0;gap:0 16px;font-size:15px}.bar .nav a{padding:9px 0}.bar .nav a.login{margin:0;margin-inline-start:auto;padding:6px 12px}.np-lang{margin-inline-start:auto}.np-lang-btn{padding:7px}.search button{padding:0 18px}}
+/* 2026-11-11: two primary buttons in the bar (I'm hiring / I'm a recruiter); Sign in is a small link */
+.nav{align-items:center}.nav a.login{color:var(--fg);background:none;border:0;padding:0;margin:0;text-decoration:underline;text-decoration-color:rgba(43,42,40,.35);text-underline-offset:.25em}.nav a.nbtn{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);padding:6px 14px;margin:-7px 0;white-space:nowrap;text-decoration:none}.nav a.nbtn:hover{background:#22406c;color:#F3F0EB}.nav a.nbtn.line{background:transparent;color:var(--acc)}.nav a.nbtn.line:hover{background:rgba(43,76,126,.08);color:var(--acc)}@media(max-width:720px){.bar .nav{gap:6px 14px}.bar .nav a.login{margin:0;padding:9px 0}.bar .nav a.nbtn{padding:5px 10px;margin:4px 0;font-size:14px}.bar .nav a.nbtn:first-of-type{margin-inline-start:auto}}
 @media(max-width:480px){.search{flex-direction:column;gap:8px}.search button{padding:13px 18px}}
 .skip{position:absolute;left:-9999px;top:8px;background:#2B4C7E;color:#F3F0EB;padding:8px 14px;z-index:20;text-decoration:none}.skip:focus{left:8px}
 .back{display:inline-block;padding:10px 0;margin:-10px 0}
@@ -133,7 +135,7 @@ footer .langs a{display:inline-block;padding:6px 0}
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="wrap">
   <a class="mark" href="/"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
-  <nav class="nav"><a href="/#run">How it works</a><a href="/talent" aria-current="page">Talent</a><a href="/hire">Hire</a><a class="login" href="/app" data-auth="login">Log in</a></nav>
+  <nav class="nav"><a href="/#run">How it works</a><a href="/talent" aria-current="page">Talent</a><a class="login" href="/app" data-auth="login">Sign in</a><a class="nbtn" href="/hire">I'm hiring</a><a class="nbtn line" href="/hire?type=recruiter">I'm a recruiter</a></nav>
   <div class="np-lang" data-dynamic><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="Language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">EN</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/talent?lang=en" hreflang="en" lang="en" translate="no" aria-current="true">English</a></li><li><a href="/talent?lang=fr" hreflang="fr" lang="fr" translate="no">Français</a></li><li><a href="/talent?lang=es" hreflang="es" lang="es" translate="no">Español</a></li><li><a href="/talent?lang=he" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a></li><li><a href="/talent?lang=hi" hreflang="hi" lang="hi" translate="no">हिन्दी</a></li><li><a href="/talent?lang=zh" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></li></ul></div>
 </div></header>
 <main id="main" class="wrap">
@@ -144,7 +146,7 @@ footer .langs a{display:inline-block;padding:6px 0}
       <p class="lede">Profiles drafted from each member's public work and published with their yes. Search by what you need done; AI ranks the profiles by meaning, not keywords.</p>
       <form class="search" id="f" role="search"><input id="q" name="q" type="search" maxlength="200" placeholder="e.g. a product designer who ships, a protein biologist, a Rust engineer" aria-label="Search talent" autocomplete="off"><button>Search</button></form>
       <p class="hint">Only people who said yes to a profile appear here.</p>
-      <p class="hint">Talent lists every member we've reviewed. The 156 on our home page are the ones who passed our bar.</p>
+      <p class="hint">Profiles are anonymous. Request an intro and Neuropian connects you.</p>
     </div>
     <p class="status" id="st" aria-live="polite"></p>
     <div class="grid" id="grid"></div>
@@ -170,8 +172,8 @@ function card(p){
 }
 var PAGE=30, shown=0, total=0, order=null, moreBtn=document.getElementById("more");
 var H={headers:{"apikey":KEY,"Authorization":"Bearer "+KEY}};
-// Browse = every listed profile, S first, then A, then B (Dylan 2026-11-02), in a fresh random order within each group
-// on each visit (Dylan 2026-10-28: "the top is always new and fresh"). The server returns ids only, never tiers.
+// Browse = every listed profile, S first, then A, then B (2026-11-02), in a fresh random order within each group
+// on each visit (2026-10-28: "the top is always new and fresh"). The server returns ids only, never tiers.
 function ids(){
   if(order)return Promise.resolve(order);
   return fetch(SB+"/rest/v1/rpc/talent_browse_ids",{method:"POST",headers:{"apikey":KEY,"Authorization":"Bearer "+KEY,"Content-Type":"application/json"},body:"{}"}).then(function(r){return r.json();}).then(function(rows){
@@ -191,7 +193,7 @@ function browse(offset){
   }).catch(function(){return {error:"unavailable"};});
 }
 function count(){return "Showing "+shown+" of "+total+" members";}
-// "Show next 30" (Dylan 2026-10-28): browse mode only; search results are one ranked list.
+// "Show next 30" (2026-10-28): browse mode only; search results are one ranked list.
 moreBtn.addEventListener("click",function(){
   moreBtn.disabled=true; moreBtn.textContent="Loading…";
   browse(shown).then(function(d){ if(d.error)throw new Error(d.error); var rows=d.results||[];
@@ -225,16 +227,16 @@ function show(id){
     if(!p){prof.innerHTML='<a class="back" href="#">← All talent</a><p class="p-head" style="margin-top:24px">This profile is not published.</p>';return;}
     document.title=(p.name||"Member")+" · Neuropian Talent";
     prof.innerHTML='<a class="back" href="#">← All talent</a><h1 class="p-name">'+esc(p.name||"Member")+'</h1><p class="p-head">'+esc(p.headline)+'</p>'+
-      '<div class="badges">'+(p.github_verified?'<a class="badge ok" rel="nofollow ugc noopener" href="https://github.com/'+esc(p.github)+'">GitHub verified · '+esc(p.github)+'</a>':((p.work||[]).some(function(w){return w.verified;})?'<span class="badge">Work checked by Neuropian</span>':''))+
+      '<div class="badges">'+(p.github_verified?'<span class="badge ok">GitHub verified</span>':((p.work||[]).some(function(w){return w.verified;})?'<span class="badge">Work checked by Neuropian</span>':''))+
 '</div>'+
       '<button class="intro-btn" type="button">Request intro</button>'+
       (p.summary?'<p class="p-sum">'+esc(p.summary)+'</p>':'')+
       ((p.skills||[]).length?'<h2>Skills</h2><div class="chips">'+chips(p.skills)+'</div>':'')+
       ((p.work||[]).length?'<h2>Built and solved</h2><ul class="work">'+(p.work||[]).map(function(w){var u=safeUrl(w.url);return '<li><span class="w-title">'+(u?'<a rel="nofollow ugc noopener" href="'+u+'">'+esc(w.title)+'</a>':esc(w.title))+'</span><span class="w-src">'+(w.verified?'Verified from GitHub':'Added by member')+(w.source?' · '+esc(w.source):'')+'</span><span class="w-detail">'+esc(w.detail)+'</span></li>';}).join("")+'</ul>':'')+
       '<p class="note">Links go to the original work so you can check it.</p>'+
-      '<div class="hire"><h2>Hiring?</h2><p>Tell Neuropian about the role. We pass it on to '+esc(p.name||"this member")+' and introduce you if they want to talk. Their email is never shown.</p>'+
+      '<div class="hire"><h2>Hiring?</h2><p>Tell Neuropian about the role. We pass it on to this member and introduce you if they want to talk. Their email is never shown.</p>'+
       '<p class="fee">$20,000 per hire, paid only when they start. 60-day replacement.</p>'+
-      '<button class="hire-btn" type="button">Hire or contact '+esc(p.name?p.name.split(" ")[0]:"this member")+'</button>'+
+      '<button class="hire-btn" type="button">Hire or contact this member</button>'+
       '<form class="hire-f" hidden><label>Your name<input name="name" maxlength="120" required autocomplete="name"></label>'+
       '<label>Company<input name="company" maxlength="120" required autocomplete="organization"></label>'+
       '<label>Your work email<input name="email" type="email" maxlength="254" required autocomplete="email"></label>'+
@@ -251,7 +253,7 @@ function show(id){
   }).catch(function(){ prof.hidden=false; list.hidden=true; prof.innerHTML='<a class="back" href="#">← All talent</a><p class="p-head" style="margin-top:24px">Could not load this profile.</p>'; });
 }
 // "Hire or contact": the request goes to Neuropian (hire_request), never straight to the member; we check it and
-// ask the member before any introduction (Dylan, 2026-10-25).
+// ask the member before any introduction (2026-10-25).
 // The company's details are remembered on this device after a send (np_hire_ctx, shared with /hire) and filled in on the
 // next form. Values only, set with .value; storage blocked or garbled = blank form, as before.
 var CTX="np_hire_ctx", KEEP=["name","company","email","role","employment","work_mode","location","compensation"];
@@ -278,7 +280,7 @@ function hireForm(p){
       body:JSON.stringify({p_profile:p.id,p_name:d.get("name"),p_company:d.get("company"),p_email:d.get("email"),p_role:d.get("role"),p_details:d.get("details"),p_link:d.get("link")||null,p_compensation:d.get("compensation"),p_work_mode:d.get("work_mode"),p_location:d.get("location")||null,p_employment:d.get("employment")})})
     .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
     .then(function(x){ if(!x.ok)throw new Error((x.j&&x.j.message)||"Could not send. Please try again.");
-      remember(d); f.hidden=true; msg.textContent="Sent. Neuropian will pass it on and email you if "+(p.name?p.name.split(" ")[0]+" wants":"they want")+" to talk."; msg.scrollIntoView({block:"nearest"}); })
+      remember(d); f.hidden=true; msg.textContent="Sent. Neuropian will pass it on and email you if they want to talk."; msg.scrollIntoView({block:"nearest"}); })
     .catch(function(err){ sub.disabled=false; msg.textContent=(err instanceof TypeError)?"Could not reach Neuropian. Check your connection and try again, or email dylan@neuropian.com.":err.message; msg.scrollIntoView({block:"nearest"}); });
   });
 }
@@ -326,7 +328,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
     var s=session();
     document.querySelectorAll("[data-auth]").forEach(function(a){
       if(a.dataset.t0===undefined) a.dataset.t0=a.innerHTML;
-      if(a.classList.contains("login")){ a.textContent=s?nameOf(s.user):"Log in"; if(s){ a.setAttribute("aria-haspopup","dialog"); a.title="Your account"; } else { a.removeAttribute("aria-haspopup"); a.removeAttribute("title"); } }
+      if(a.classList.contains("login")){ a.textContent=s?nameOf(s.user):"Sign in"; if(s){ a.setAttribute("aria-haspopup","dialog"); a.title="Your account"; } else { a.removeAttribute("aria-haspopup"); a.removeAttribute("title"); } }
       else a.innerHTML=s?a.dataset.t0.replace("Create an account","Your account").replace("create an account","open your account"):a.dataset.t0;
     });
   }

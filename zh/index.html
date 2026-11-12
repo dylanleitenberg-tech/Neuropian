@@ -495,6 +495,8 @@ h2{line-height:1.15;max-width:12em}.hero h1{line-height:1.12}h3{line-height:1.3}
 .proof .big{line-height:1.45;letter-spacing:0}.steps-end,.next li,.mail{letter-spacing:0}
 .kicker,.tk-path,.tk-cap,.tagline,.tag,summary,.idx,.d-top,.d-grid dt{letter-spacing:.06em}
 html .npac-k,html .npld{letter-spacing:.06em}
+/* 2026-11-11: two primary buttons (I'm hiring / I'm a recruiter) in the bar and hero; Sign in is a small link */
+.nav{align-items:center}.nav a.login{color:var(--fg);background:none;border:0;border-radius:0;padding:0;margin:0;text-decoration:underline;text-decoration-color:rgba(43,42,40,.35);text-underline-offset:.25em}.nav a.login:hover{background:none;text-decoration-color:var(--fg)}.nav a.nbtn{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);padding:6px 14px;margin:-7px 0;white-space:nowrap}.nav a.nbtn:hover{background:#22406c;border-color:#22406c;color:#F3F0EB}.nav a.nbtn.line{background:transparent;color:var(--acc)}.nav a.nbtn.line:hover{background:rgba(43,76,126,.08);color:var(--acc)}#screen .next{margin-top:clamp(22px,3vw,36px)}.ticker .tk-full{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}@media(max-width:720px){.bar .nav{gap:6px 14px}.bar .nav a.login{margin:0;padding:9px 0}.bar .nav a.nbtn{padding:5px 10px;margin:4px 0;font-size:14px}.bar .nav a.nbtn:first-of-type{margin-inline-start:auto}}
 </style>
 <!--/i18n:head-->
 </head>
@@ -506,9 +508,10 @@ html .npac-k,html .npld{letter-spacing:.06em}
     <a class="mark" href="#top" aria-label="Neuropian，回到页面顶部"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
     <nav class="nav" aria-label="栏目">
       <a href="/talent?lang=zh">Talent</a>
-      <a href="/hire?lang=zh">招聘</a>
       <a href="#contact">联系</a>
       <a class="login" href="/app?lang=zh" data-auth="login">登录</a>
+      <a class="nbtn" href="/hire?lang=zh">我要招聘</a>
+      <a class="nbtn line" href="/hire?lang=zh&type=recruiter">我是猎头</a>
     </nav>
     <!--i18n:menu--><div class="np-lang"><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="语言"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">ZH</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/" hreflang="en" lang="en" translate="no">English</a></li><li><a href="/fr/" hreflang="fr" lang="fr" translate="no">Français</a></li><li><a href="/es/" hreflang="es" lang="es" translate="no">Español</a></li><li><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a></li><li><a href="/hi/" hreflang="hi" lang="hi" translate="no">हिन्दी</a></li><li><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no" aria-current="page">中文</a></li></ul></div><!--/i18n:menu-->
   </div>
@@ -522,17 +525,28 @@ html .npac-k,html .npld{letter-spacing:.06em}
     <p class="kicker">Neuropian · 智识加速器</p>
     <h1>智识，<span class="brush">重新定义。</span></h1>
     <p class="lede">在 Neuropian，出色的人凭<b>自己构建、创造和解决过的东西</b>，以及<b>领导他人、与人协作的方式</b>被发现，而不是凭简历上写了什么。</p>
-    <div class="ctas"><a class="cta" href="/hire?lang=zh">通过 Neuropian 招聘 →</a><a class="cta line" href="/app?lang=zh" data-auth="reg"><img class="cta-mark" src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" width="20" height="20" alt="">创建账号</a></div>
+    <div class="ctas"><a class="cta" href="/hire?lang=zh">我要招聘 →</a><a class="cta line" href="/hire?lang=zh&type=recruiter">我是猎头 →</a></div>
     <p class="tagline">看信号，不看简历 · 无需任何资历证明</p>
    </div>
    <div class="hero-art">
-    <div class="ticker" role="img" aria-label="Falcon 发现的 138,625 位建造者">
-     <span class="tk-path" aria-hidden="true">由 Falcon 发现</span>
-     <b data-count="138625" aria-hidden="true">138,625</b>
-     <span class="tk-cap" aria-hidden="true">建造者</span>
+    <div class="ticker" role="img" aria-label="我们招募所发现的工程师中最顶尖的 0.1%。">
+     <span class="tk-path" aria-hidden="true">我们招募所发现的工程师中最顶尖的</span>
+     <b aria-hidden="true">0.1%</b>
     </div>
     <img class="engr brain" src="/assets/engr/brain.webp" width="857" height="960" alt="Andreas Vesalius 解剖学著作中人脑底部的木刻版画，1543" decoding="async">
    </div>
+  </div>
+</section>
+
+<section id="screen">
+  <div class="wrap">
+    <p class="kicker">我们的标准</p>
+    <h2>我们如何筛选。</h2>
+    <ul class="next">
+      <li><span class="tag">1 · 作品</span><span>在大型开源项目中被合并的工作<small>我们阅读 Python、Rust、LLVM、Home Assistant 等大型项目中被合并的 pull request：由资深维护者审阅并接受的代码。</small></span></li>
+      <li><span class="tag">2 · 深度</span><span>我们检查代码本身<small>每个人过去 12 个月被合并的 pull request 会按以下几点打分：真实的代码改动（不算文档、错别字或配置修改）、改动规模、维护者审阅的细致程度，以及在 1,000 星以上项目中的广度。刷数量会被扣分。</small></span></li>
+      <li><span class="tag">3 · 面试</span><span>引荐之前先面试<small>候选人向我们讲解自己做过的一个项目、最难的部分、与谁合作，以及接下来想做什么。之后我们才会引荐。</small></span></li>
+    </ul>
   </div>
 </section>
 
@@ -549,45 +563,15 @@ html .npac-k,html .npld{letter-spacing:.06em}
   <div class="wrap mq-foot"><a class="mq-all" href="/talent?lang=zh">在 Talent 上查看全部 →</a><span class="mq-nav"><button class="mq-b" type="button" data-d="-1" aria-label="上一个">&larr;</button><button class="mq-b" type="button" data-d="1" aria-label="下一个">&rarr;</button></span></div>
 </section>
 
-<section id="fields" class="plates-sec">
-  <div class="wrap">
-    <p class="kicker">图版 I–VI · 任何领域</p>
-    <h2>任何领域的作品。</h2>
-    <p class="lede">打开一块图版，看看每个领域该给我们看什么。</p>
-    <div class="plates"><figure class="ph ph1"><img class="engr" src="/assets/engr/code.webp" width="549" height="703" alt="差分机（一种机械计算器）局部的木刻版画，根据 Benjamin Herschel Babbage 的绘图制作，1853" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip"><i>I.</i> 代码</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>代码</b><p>被专家接受、进入真实软件的代码。Falcon 会读它；成员会附上它的链接。</p><a class="ph-cta" href="/app?lang=zh" data-auth="reg">展示你的代码 →</a></div></figure><figure class="ph ph2"><img class="engr" src="/assets/engr/leadership.webp" width="434" height="760" alt="新 Eddystone 灯塔的剖面图，逐个房间展示，1884" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip"><i>II.</i> 领导力</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>领导力</b><p>谁发起过什么、牵头做过一个项目，或带动别人一起做事。</p><a class="ph-cta" href="/app?lang=zh" data-auth="reg">告诉我们你领导过什么 →</a></div></figure><figure class="ph ph3"><img class="engr" src="/assets/engr/science.webp" width="625" height="693" alt="Robert Hooke 的显微镜，为其《Micrographia》雕版，1665" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip"><i>III.</i> 科学</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>科学</b><p>拿得出手的研究和成果：论文、数据、实验。</p><a class="ph-cta" href="/app?lang=zh" data-auth="reg">分享你的研究 →</a></div></figure><figure class="ph ph4"><img class="engr" src="/assets/engr/teamwork.webp" width="900" height="706" alt="1586 年约 900 名工人和 75 匹马在罗马竖起梵蒂冈方尖碑的版画" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip"><i>IV.</i> 团队协作</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>团队协作</b><p>谁会审阅、帮助他人并与别人一起构建，而不只是单打独斗。</p><a class="ph-cta" href="/app?lang=zh" data-auth="reg">找到你的团队 →</a></div></figure><figure class="ph ph5"><img class="engr" src="/assets/engr/hardware.webp" width="617" height="760" alt="James Watt 双作用蒸汽机的雕版图，1822" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip"><i>V.</i> 硬件</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>硬件</b><p>你设计并制造的东西，附上照片和文件作为证明。</p><a class="ph-cta" href="/app?lang=zh" data-auth="reg">展示你造了什么 →</a></div></figure><figure class="ph ph6"><img class="engr" src="/assets/engr/design.webp" width="900" height="644" alt="Albrecht Dürer 的木刻版画：两个人借助透视框描绘一把鲁特琴，1525" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip"><i>VI.</i> 设计</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>设计</b><p>你做出并发布的作品，展示在你的个人资料上。</p><a class="ph-cta" href="/app?lang=zh" data-auth="reg">展示你的设计 →</a></div></figure></div>
-  </div>
-</section>
-
-
-
-
-
 <section id="run">
   <div class="wrap">
     <p class="kicker">Falcon，我们在空中的眼睛</p>
     <h2>能入选的人很少。</h2>
-    <p class="cut-lead reveal" style="font-size:clamp(22px,2.6vw,32px);font-weight:700;letter-spacing:-.015em;line-height:1.25;margin:10px 0 clamp(22px,3vw,36px);max-width:26em">在 138,625 位作品被专家接受的人中，约 0.11% 通过了我们的筛选。</p>
+    <p class="cut-lead reveal" style="font-size:clamp(22px,2.6vw,32px);font-weight:700;letter-spacing:-.015em;line-height:1.25;margin:10px 0 clamp(22px,3vw,36px);max-width:26em">我们招募所发现的工程师中最顶尖的 0.1%。</p>
     <ol class="flow">
       <li class="reveal"><b data-count="3088">3,088</b><span>搜索过的大型软件项目，比如 Python、Rust、LLVM、Zephyr 和 Home Assistant</span></li>
       <li class="reveal"><b>2.0M</b><span>过去一年里被合并的拉取请求</span></li>
-      <li class="reveal"><b data-count="138625">138,625</b><span>工作被专家接受进这些项目的人</span></li>
-      <li class="reveal hit"><b data-count="156">156</b><span>达到了我们的标准：不到千分之二</span></li>
     </ol>
-  </div>
-</section>
-
-<section id="next">
-  <div class="wrap">
-    <p class="kicker">今天</p>
-    <h2>我们已经做出的东西。</h2>
-    <ul class="next">
-      <li><span class="tag">已完成</span><span>Falcon，我们的空中之眼<small>读取大型开源项目、编程竞赛和数学问答中的公开成果，找出那些工作被专家接受、却很少有人关注的工程师和数学家。</small></span></li>
-      <li><span class="tag">测试中</span><span>把同一个人在不同平台上的账号关联起来<small>Falcon 只通过此人自己公布的链接来关联账号。较弱的匹配（相同的用户名、姓名或照片）会被打分，保持未确认状态，并且绝不用于联系任何人。</small></span></li>
-      <li><span class="tag">已上线</span><span>RoundTable，Neuropian 用于智识拓展的场所与空间<small>成员注册、建立个人资料，并在聊天、难题和构建房间里交流。注册即表示同意 Neuropian 将成员的个人资料分享给通过 Neuropian 招聘的公司和基金。</small></span></li>
-      <li><span class="tag">已上线</span><span>项目与积分<small>成员发布带有积分奖励的项目，其他人加入。在任何人获得积分之前，Neuropian 的审核者会检查每位贡献者的工作，获批的贡献者还可以获得额外奖励。积分是 Neuropian 内部的点数，没有现金价值。</small></span></li>
-      <li><span class="tag">已上线</span><span>Talent<small>面向任何领域的人的个人资料，根据他们自己的描述和作品起草，经本人批准，并可在 <a href="/talent?lang=zh">neuropian.com/talent</a> 按语义搜索。</small></span></li>
-      <li><span class="tag">已完成</span><span>EagleEyes，Neuropian 的人才发掘代理<small>一个浏览器扩展。在成员为它开启的网站上，它会把成员阅读、撰写和从事的内容添加到其 Neuropian 个人资料中。尚未公开。</small></span></li>
-    </ul>
   </div>
 </section>
 
@@ -753,8 +737,8 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   var API="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
   var sec=document.getElementById("members"), tr=document.getElementById("mq-track"); if(!sec||!tr) return;
   function esc(t){ return String(t==null?"":t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
-  /* S and A tier only (Dylan 2026-11-05): talent_carousel_ids returns up to 40 listed S/A ids in random order, never tiers */
-  /* Featured first (Dylan 2026-11-08): the RPC returns every featured member, then S/A, each group in random order;
+  /* S and A tier only (2026-11-05): talent_carousel_ids returns up to 40 listed S/A ids in random order, never tiers */
+  /* Featured first (2026-11-08): the RPC returns every featured member, then S/A, each group in random order;
      the cards keep that order (no client shuffle). */
   var ord=[];
   fetch(API+"/rest/v1/rpc/talent_carousel_ids",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"},body:"{}"})
@@ -774,7 +758,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
     tr.innerHTML=html;
     /* a full screen of cards per click; past the last card it turns back to the first */
     Array.prototype.forEach.call(sec.querySelectorAll(".mq-b"),function(b){ b.addEventListener("click",function(){
-      var c=tr.querySelector(".mq-card"), one=c?c.getBoundingClientRect().width+16:320, step=Math.max(1,Math.floor(tr.clientWidth/one))*one, d=+b.getAttribute("data-d"), max=tr.scrollWidth-tr.clientWidth;   /* a full screen of cards per click (Dylan 2026-10-28) */
+      var c=tr.querySelector(".mq-card"), one=c?c.getBoundingClientRect().width+16:320, step=Math.max(1,Math.floor(tr.clientWidth/one))*one, d=+b.getAttribute("data-d"), max=tr.scrollWidth-tr.clientWidth;   /* a full screen of cards per click (2026-10-28) */
       if(d>0&&tr.scrollLeft>=max-4) tr.scrollTo({left:0}); else if(d<0&&tr.scrollLeft<=4) tr.scrollTo({left:max}); else tr.scrollBy({left:d*step});
     }); });
     sec.hidden=false;

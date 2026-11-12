@@ -486,6 +486,8 @@ html{scroll-padding-top:68px}
 @media(max-width:480px){.bar .wrap{gap:12px}.nav{gap:16px;font-size:16px}.nav a.login{padding:6px 12px}}
 @media(max-width:380px){.nav a:not(.login){display:none}}
 h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
+/* 2026-11-11: two primary buttons (I'm hiring / I'm a recruiter) in the bar and hero; Sign in is a small link */
+.nav{align-items:center}.nav a.login{color:var(--fg);background:none;border:0;border-radius:0;padding:0;margin:0;text-decoration:underline;text-decoration-color:rgba(43,42,40,.35);text-underline-offset:.25em}.nav a.login:hover{background:none;text-decoration-color:var(--fg)}.nav a.nbtn{color:#F3F0EB;background:var(--acc);border:1px solid var(--acc);padding:6px 14px;margin:-7px 0;white-space:nowrap}.nav a.nbtn:hover{background:#22406c;border-color:#22406c;color:#F3F0EB}.nav a.nbtn.line{background:transparent;color:var(--acc)}.nav a.nbtn.line:hover{background:rgba(43,76,126,.08);color:var(--acc)}#screen .next{margin-top:clamp(22px,3vw,36px)}.ticker .tk-full{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}@media(max-width:720px){.bar .nav{gap:6px 14px}.bar .nav a.login{margin:0;padding:9px 0}.bar .nav a.nbtn{padding:5px 10px;margin:4px 0;font-size:14px}.bar .nav a.nbtn:first-of-type{margin-inline-start:auto}}
 </style>
 <!--/i18n:head-->
 </head>
@@ -497,9 +499,10 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
     <a class="mark" href="#top" aria-label="Neuropian, inicio de la página"><img src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" alt="" width="30" height="30">Neuropian</a>
     <nav class="nav" aria-label="Secciones">
       <a href="/talent?lang=es">Talent</a>
-      <a href="/hire?lang=es">Contratar</a>
       <a href="#contact">Contacto</a>
       <a class="login" href="/app?lang=es" data-auth="login">Iniciar sesión</a>
+      <a class="nbtn" href="/hire?lang=es">Estoy contratando</a>
+      <a class="nbtn line" href="/hire?lang=es&type=recruiter">Soy reclutador</a>
     </nav>
     <!--i18n:menu--><div class="np-lang"><button type="button" class="np-lang-btn" aria-expanded="false" aria-controls="np-lang-list" aria-label="Idioma"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span translate="no">ES</span></button><ul class="np-lang-list" id="np-lang-list" hidden><li><a href="/" hreflang="en" lang="en" translate="no">English</a></li><li><a href="/fr/" hreflang="fr" lang="fr" translate="no">Français</a></li><li><a href="/es/" hreflang="es" lang="es" translate="no" aria-current="page">Español</a></li><li><a href="/he/" hreflang="he" lang="he" dir="rtl" translate="no">עברית</a></li><li><a href="/hi/" hreflang="hi" lang="hi" translate="no">हिन्दी</a></li><li><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" translate="no">中文</a></li></ul></div><!--/i18n:menu-->
   </div>
@@ -513,17 +516,29 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
     <p class="kicker">Neuropian · Acelerador de intelecto</p>
     <h1>La inteligencia, <span class="brush">reimaginada.</span></h1>
     <p class="lede">Neuropian es donde las personas brillantes son descubiertas por <b>lo que han construido, creado y resuelto</b>, y por <b>cómo lideran y trabajan con otros</b>, no por lo que dice su currículum.</p>
-    <div class="ctas"><a class="cta" href="/hire?lang=es">Contrata con Neuropian →</a><a class="cta line" href="/app?lang=es" data-auth="reg"><img class="cta-mark" src="/assets/brain-ink.png" srcset="/assets/brain-ink@2x.png 2x" width="20" height="20" alt="">Crear una cuenta</a></div>
+    <div class="ctas"><a class="cta" href="/hire?lang=es">Estoy contratando →</a><a class="cta line" href="/hire?lang=es&type=recruiter">Soy reclutador →</a></div>
     <p class="tagline">Señal, no currículums · No se exigen títulos</p>
    </div>
    <div class="hero-art">
-    <div class="ticker" role="img" aria-label="138,625 constructores encontrados por Falcon">
-     <span class="tk-path" aria-hidden="true">Encontrados por Falcon</span>
-     <b data-count="138625" aria-hidden="true">138,625</b>
-     <span class="tk-cap" aria-hidden="true">constructores</span>
+    <div class="ticker" role="img" aria-label="Reclutamos al mejor 0,1 % de los ingenieros que encontramos.">
+     <span class="tk-path" aria-hidden="true">Reclutamos al mejor</span>
+     <b aria-hidden="true">0,1 %</b>
+     <span class="tk-cap" aria-hidden="true">de los ingenieros que encontramos</span>
     </div>
     <img class="engr brain" src="/assets/engr/brain.webp" width="857" height="960" alt="Grabado en madera de la base del cerebro humano, de la anatomía de Andreas Vesalius, 1543" decoding="async">
    </div>
+  </div>
+</section>
+
+<section id="screen">
+  <div class="wrap">
+    <p class="kicker">Nuestro listón</p>
+    <h2>Cómo seleccionamos.</h2>
+    <ul class="next">
+      <li><span class="tag">1 · Trabajo</span><span>Trabajo fusionado en grandes proyectos de código abierto<small>Leemos pull requests fusionadas en grandes proyectos como Python, Rust, LLVM y Home Assistant: código que mantenedores expertos revisaron y aceptaron.</small></span></li>
+      <li><span class="tag">2 · Profundidad</span><span>Revisamos el código en sí<small>Las pull requests fusionadas de cada persona en los últimos 12 meses se puntúan por cambios reales de código (no documentación, erratas ni configuración), tamaño, cuánto las revisaron los mantenedores y variedad de proyectos con más de 1.000 estrellas. Inflar el volumen se penaliza.</small></span></li>
+      <li><span class="tag">3 · Entrevista</span><span>Una entrevista antes de cualquier presentación<small>Los candidatos nos cuentan algo que construyeron, la parte más difícil y con quién trabajaron, y qué quieren a continuación. Solo después los presentamos.</small></span></li>
+    </ul>
   </div>
 </section>
 
@@ -540,45 +555,15 @@ h2,h3{text-wrap:balance}.tile.t3 b{font-size:clamp(32px,3.6vw,50px)}
   <div class="wrap mq-foot"><a class="mq-all" href="/talent?lang=es">Verlos todos en Talent →</a><span class="mq-nav"><button class="mq-b" type="button" data-d="-1" aria-label="Anterior">&larr;</button><button class="mq-b" type="button" data-d="1" aria-label="Siguiente">&rarr;</button></span></div>
 </section>
 
-<section id="fields" class="plates-sec">
-  <div class="wrap">
-    <p class="kicker">Láminas I–VI · Cualquier campo</p>
-    <h2>Trabajo en cualquier campo.</h2>
-    <p class="lede">Abre una lámina para ver qué mostrarnos en cada campo.</p>
-    <div class="plates"><figure class="ph ph1"><img class="engr" src="/assets/engr/code.webp" width="549" height="703" alt="Grabado en madera de parte de una máquina diferencial, una calculadora mecánica, a partir de un dibujo de Benjamin Herschel Babbage, 1853" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-code"><span class="chip"><i>I.</i> Código</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-code"><b>Código</b><p>Código que expertos aceptaron en software real. Falcon lo lee; los miembros lo enlazan.</p><a class="ph-cta" href="/app?lang=es" data-auth="reg">Muestra tu código →</a></div></figure><figure class="ph ph2"><img class="engr" src="/assets/engr/leadership.webp" width="434" height="760" alt="Sección del nuevo faro de Eddystone, sala por sala, 1884" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-leadership"><span class="chip"><i>II.</i> Liderazgo</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-leadership"><b>Liderazgo</b><p>Quién empezó algo, dirigió un proyecto o sumó a otras personas.</p><a class="ph-cta" href="/app?lang=es" data-auth="reg">Cuéntanos qué lideraste →</a></div></figure><figure class="ph ph3"><img class="engr" src="/assets/engr/science.webp" width="625" height="693" alt="El microscopio de Robert Hooke, grabado para su Micrographia, 1665" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-science"><span class="chip"><i>III.</i> Ciencia</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-science"><b>Ciencia</b><p>Investigación y resultados que puedes mostrar: artículos, datos, experimentos.</p><a class="ph-cta" href="/app?lang=es" data-auth="reg">Comparte tu investigación →</a></div></figure><figure class="ph ph4"><img class="engr" src="/assets/engr/teamwork.webp" width="900" height="706" alt="Grabado del obelisco del Vaticano erigido en Roma en 1586 por unos 900 obreros y 75 caballos" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-teamwork"><span class="chip"><i>IV.</i> Trabajo en equipo</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-teamwork"><b>Trabajo en equipo</b><p>Quién revisa, ayuda y construye con otros, no solo por su cuenta.</p><a class="ph-cta" href="/app?lang=es" data-auth="reg">Encuentra a tu equipo →</a></div></figure><figure class="ph ph5"><img class="engr" src="/assets/engr/hardware.webp" width="617" height="760" alt="Lámina grabada de la máquina de vapor de doble efecto de James Watt, 1822" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-hardware"><span class="chip"><i>V.</i> Hardware</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-hardware"><b>Hardware</b><p>Cosas que diseñaste y construiste, con fotos y archivos que lo demuestran.</p><a class="ph-cta" href="/app?lang=es" data-auth="reg">Muestra lo que construiste →</a></div></figure><figure class="ph ph6"><img class="engr" src="/assets/engr/design.webp" width="900" height="644" alt="Grabado en madera de Albrecht Dürer: dos hombres dibujan un laúd con un marco de perspectiva, 1525" loading="lazy" decoding="async"><button class="ph-hit" type="button" aria-expanded="false" aria-controls="ph-design"><span class="chip"><i>VI.</i> Diseño</span><span class="plus" aria-hidden="true">+</span></button><div class="ph-more" id="ph-design"><b>Diseño</b><p>Trabajo que hiciste y lanzaste, mostrado en tu perfil.</p><a class="ph-cta" href="/app?lang=es" data-auth="reg">Muestra tus diseños →</a></div></figure></div>
-  </div>
-</section>
-
-
-
-
-
 <section id="run">
   <div class="wrap">
     <p class="kicker">Falcon, nuestros ojos en el cielo</p>
     <h2>Pocos pasan el corte.</h2>
-    <p class="cut-lead reveal" style="font-size:clamp(22px,2.6vw,32px);font-weight:700;letter-spacing:-.015em;line-height:1.25;margin:10px 0 clamp(22px,3vw,36px);max-width:26em">De 138.625 personas cuyo trabajo aceptaron los expertos, cerca del 0,11 % pasó nuestro corte.</p>
+    <p class="cut-lead reveal" style="font-size:clamp(22px,2.6vw,32px);font-weight:700;letter-spacing:-.015em;line-height:1.25;margin:10px 0 clamp(22px,3vw,36px);max-width:26em">Reclutamos al mejor 0,1 % de los ingenieros que encontramos.</p>
     <ol class="flow">
       <li class="reveal"><b data-count="3088">3,088</b><span>grandes proyectos de software analizados, como Python, Rust, LLVM, Zephyr y Home Assistant</span></li>
       <li class="reveal"><b>2.0M</b><span>pull requests fusionados en el último año</span></li>
-      <li class="reveal"><b data-count="138625">138,625</b><span>personas cuyo trabajo los expertos aceptaron en estos proyectos</span></li>
-      <li class="reveal hit"><b data-count="156">156</b><span>superaron nuestro listón: menos de 2 de cada 1.000</span></li>
     </ol>
-  </div>
-</section>
-
-<section id="next">
-  <div class="wrap">
-    <p class="kicker">Hoy</p>
-    <h2>Lo que hemos construido.</h2>
-    <ul class="next">
-      <li><span class="tag">Construido</span><span>Falcon, nuestros ojos en el cielo<small>Lee trabajo público en grandes proyectos de código abierto, concursos de programación y preguntas y respuestas de matemáticas, y encuentra ingenieros y matemáticos cuyo trabajo aceptaron expertos pero a quienes sigue poca gente.</small></span></li>
-      <li><span class="tag">En pruebas</span><span>Vincular las cuentas de una persona entre plataformas<small>Falcon vincula cuentas solo mediante enlaces que la persona publicó. Las coincidencias más débiles (mismo nombre de usuario, nombre o foto) se puntúan, quedan sin confirmar y nunca se usan para contactar a nadie.</small></span></li>
-      <li><span class="tag">Activo</span><span>RoundTable, el lugar y espacio de Neuropian para la expansión intelectual<small>Los miembros se registran, crean un perfil y conversan en salas de chat, de resolución de problemas y de creación. Registrarse es el consentimiento que permite a Neuropian compartir el perfil de un miembro con empresas y fondos que contratan a través de Neuropian.</small></span></li>
-      <li><span class="tag">Activo</span><span>Proyectos y créditos<small>Los miembros publican proyectos con una recompensa en créditos y otros se unen. Un revisor de Neuropian comprueba el trabajo de cada colaborador antes de dar créditos a nadie, y los colaboradores aprobados pueden ganar un bono. Los créditos son puntos dentro de Neuropian sin valor monetario.</small></span></li>
-      <li><span class="tag">Activo</span><span>Talent<small>Perfiles de personas de cualquier campo, redactados a partir de su propia descripción y su trabajo, aprobados por ellas y que se pueden buscar por significado en <a href="/talent?lang=es">neuropian.com/talent</a>.</small></span></li>
-      <li><span class="tag">Construido</span><span>EagleEyes, el agente de exploración de Neuropian<small>Una extensión de navegador. En los sitios donde un miembro la activa, añade a su perfil de Neuropian lo que lee, escribe y hace. Aún no es pública.</small></span></li>
-    </ul>
   </div>
 </section>
 
@@ -744,8 +729,8 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
   var API="https://qggduzzwvdkmekihwuav.supabase.co", KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnZ2R1enp3dmRrbWVraWh3dWF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTAyNzgsImV4cCI6MjA5MzM4NjI3OH0.xoF8SE1dg-L-nh0SErgLPm9dWpSFAa1O-9bqduyijkw";
   var sec=document.getElementById("members"), tr=document.getElementById("mq-track"); if(!sec||!tr) return;
   function esc(t){ return String(t==null?"":t).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
-  /* S and A tier only (Dylan 2026-11-05): talent_carousel_ids returns up to 40 listed S/A ids in random order, never tiers */
-  /* Featured first (Dylan 2026-11-08): the RPC returns every featured member, then S/A, each group in random order;
+  /* S and A tier only (2026-11-05): talent_carousel_ids returns up to 40 listed S/A ids in random order, never tiers */
+  /* Featured first (2026-11-08): the RPC returns every featured member, then S/A, each group in random order;
      the cards keep that order (no client shuffle). */
   var ord=[];
   fetch(API+"/rest/v1/rpc/talent_carousel_ids",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"},body:"{}"})
@@ -765,7 +750,7 @@ a.login[data-auth]{display:inline-block;max-width:15ch;overflow:hidden;text-over
     tr.innerHTML=html;
     /* a full screen of cards per click; past the last card it turns back to the first */
     Array.prototype.forEach.call(sec.querySelectorAll(".mq-b"),function(b){ b.addEventListener("click",function(){
-      var c=tr.querySelector(".mq-card"), one=c?c.getBoundingClientRect().width+16:320, step=Math.max(1,Math.floor(tr.clientWidth/one))*one, d=+b.getAttribute("data-d"), max=tr.scrollWidth-tr.clientWidth;   /* a full screen of cards per click (Dylan 2026-10-28) */
+      var c=tr.querySelector(".mq-card"), one=c?c.getBoundingClientRect().width+16:320, step=Math.max(1,Math.floor(tr.clientWidth/one))*one, d=+b.getAttribute("data-d"), max=tr.scrollWidth-tr.clientWidth;   /* a full screen of cards per click (2026-10-28) */
       if(d>0&&tr.scrollLeft>=max-4) tr.scrollTo({left:0}); else if(d<0&&tr.scrollLeft<=4) tr.scrollTo({left:max}); else tr.scrollBy({left:d*step});
     }); });
     sec.hidden=false;

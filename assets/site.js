@@ -8,7 +8,7 @@
 
   /* Type text in, once, when it scrolls into view. The text is in the HTML; this only replays it.
      The untyped rest stays in place, invisible, so every line break is final from the first letter and no
-     half-typed word jumps to the next line (Dylan, 2026-10-25). The cursor floats (position:absolute at its
+     half-typed word jumps to the next line (2026-10-25). The cursor floats (position:absolute at its
      static spot), so it takes no room either. */
   function typeInto(el, text, speed, done) {
     if (reduce) { el.textContent = text; if (done) done(); return; }
@@ -72,7 +72,7 @@
   if (h1 && !reduce && !h1.hasAttribute("data-static")) {
     var t1 = h1.textContent.trim(), h1html = h1.innerHTML;          /* typing uses plain text; the coloured word comes back after */
     h1.style.minHeight = h1.offsetHeight + "px";
-    h1.setAttribute("data-type", "");                               /* show the cursor while it types (Dylan 2026-10-28: bring the type-out back, visibly) */
+    h1.setAttribute("data-type", "");                               /* show the cursor while it types (2026-10-28: bring the type-out back, visibly) */
     setTimeout(function () { typeInto(h1, t1, 75, function () { h1.removeAttribute("data-type"); h1.innerHTML = h1html; }); }, 400);
   }
 

@@ -1,4 +1,4 @@
-/* Interview invite (2026-11-11, Dylan: "a special page only available to the accounts we offer. They connect git, open
+/* Interview invite (2026-11-11: "a special page only available to the accounts we offer. They connect git, open
    interview page from some pop up"). When a signed-in member has a pending recorded interview, this shows one pop-up
    ("Start" opens /interview, "Later" hides it for 12 hours) and adds an "Your interview" link to the account card (home,
    Talent, Hire) or the members-app nav. Everyone else sees nothing: the `interview` function answers {invited:false}
