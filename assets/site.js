@@ -73,7 +73,7 @@
     var t1 = h1.textContent.trim(), h1html = h1.innerHTML;          /* typing uses plain text; the coloured word comes back after */
     h1.style.minHeight = h1.offsetHeight + "px";
     h1.setAttribute("data-type", "");                               /* show the cursor while it types (2026-10-28: bring the type-out back, visibly) */
-    setTimeout(function () { typeInto(h1, t1, 75, function () { h1.removeAttribute("data-type"); h1.innerHTML = h1html; }); }, 400);
+    setTimeout(function () { typeInto(h1, t1, 30, function () { h1.removeAttribute("data-type"); h1.innerHTML = h1html; }); }, 200);   /* 2026-11-12 Dylan: type faster (was 75 ms/char, 400 ms delay) */
   }
 
   /* The last run: lines type out one after another when the terminal comes into view. */
