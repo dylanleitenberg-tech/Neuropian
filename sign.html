@@ -143,6 +143,9 @@ call({action:"get",token:token}).then(function(j){
   if(j.status==="signed"){$("lede").textContent="";showSigned(j,false);render(j.pdf);return;}
   $("lede").textContent="Sent by "+j.sender_name+", Neuropian"+(j.signer_label?", for "+j.signer_label:"")+". It's already signed on Neuropian's side. Read it below, then sign at the bottom.";
   $("consent").textContent=j.consent;$("email").value=j.signer_email||"";
+  // Count the document as opened only on a real interaction (link-preview bots load pages but never scroll or tap)
+  var seen=false,mark=function(){if(seen)return;seen=true;["scroll","pointerdown","keydown","touchstart"].forEach(function(t){window.removeEventListener(t,mark,true);});call({action:"view",token:token}).catch(function(){});};
+  ["scroll","pointerdown","keydown","touchstart"].forEach(function(t){window.addEventListener(t,mark,{capture:true,passive:true});});
   $("form").classList.remove("hide");size();var lw=pad.getBoundingClientRect().width;window.addEventListener("resize",function(){var w=pad.getBoundingClientRect().width;if(!drawing&&w!==lw){lw=w;size();}});
   render(j.pdf);
 }).catch(function(e){fail(e.message);});
