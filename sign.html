@@ -78,7 +78,8 @@ input:focus{outline:2px solid var(--acc);outline-offset:1px}
 <script>
 (function(){
 var FN="https://qggduzzwvdkmekihwuav.supabase.co/functions/v1/esign";
-var token=new URLSearchParams(location.search).get("t")||"";
+// Token from ?t=… or #t=… / #… (the hash form survives redirects and link filters that drop query strings)
+var token=new URLSearchParams(location.search).get("t")||new URLSearchParams(location.hash.slice(1)).get("t")||(/^#[A-Za-z0-9_-]{32,64}$/.test(location.hash)?location.hash.slice(1):"");
 var $=function(id){return document.getElementById(id);};
 function call(body){return fetch(FN,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)})
   .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||"Something went wrong.");return j;});});}
