@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Sign · Neuropian</title>
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ECE8E3">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+/* Neuropian e-sign page (2026-11-24). Private links only (?t=<token>), made by neuropian-tools/esign/create_request.py.
+   Reads and signs through the esign edge function; nothing here talks to the database directly. */
+:root{--bg:#ECE8E3;--fg:#2B2A28;--dim:rgba(43,42,40,.76);--line:rgba(43,42,40,.16);--acc:#2B4C7E;--err:#9B2C2C;--pad:clamp(16px,5vw,48px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-underline-offset:.2em}
+.bar{border-bottom:1px solid var(--line)}
+.bar div,.main{max-width:880px;margin:0 auto;padding:0 var(--pad)}
+.bar div{height:60px;display:flex;align-items:center}
+.mark{font-weight:600;letter-spacing:.22em;font-size:13px;text-decoration:none}
+.main{padding-top:40px;padding-bottom:80px}
+h1{font-family:Newsreader,Georgia,serif;font-weight:500;font-size:clamp(28px,5vw,40px);line-height:1.15;margin-bottom:10px}
+.lede{color:var(--dim);margin-bottom:28px}
+.doc{background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px;margin-bottom:10px}
+.doc canvas{display:block;width:100%;height:auto}
+.doc canvas+canvas{border-top:1px solid var(--line);margin-top:8px;padding-top:8px}
+.open{font-size:15px;color:var(--dim);margin-bottom:36px}
+h2{font-family:Newsreader,Georgia,serif;font-weight:500;font-size:26px;margin-bottom:16px}
+label{display:block;font-size:14px;font-weight:500;margin:16px 0 6px}
+input[type=text],input[type=email]{width:100%;font:inherit;padding:11px 12px;border:1px solid rgba(43,42,40,.3);border-radius:6px;background:#fff;color:var(--fg)}
+input:focus{outline:2px solid var(--acc);outline-offset:1px}
+.pad{position:relative;background:#fff;border:1px solid rgba(43,42,40,.3);border-radius:6px;height:170px;touch-action:none}
+.pad canvas{width:100%;height:100%;display:block;cursor:crosshair}
+.pad .hint{position:absolute;left:14px;bottom:12px;font-size:14px;color:var(--dim);pointer-events:none}
+.pad .base{position:absolute;left:14px;right:14px;bottom:40px;border-top:1px solid var(--line);pointer-events:none}
+.clear{font:inherit;font-size:14px;background:none;border:0;color:var(--dim);text-decoration:underline;cursor:pointer;margin-top:6px}
+.consent{display:flex;gap:12px;align-items:flex-start;margin:22px 0;font-size:15px}
+.consent input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--acc)}
+.go{font:inherit;font-weight:500;background:var(--fg);color:var(--bg);border:0;border-radius:6px;padding:14px 26px;cursor:pointer;width:100%;max-width:320px}
+.go:disabled{opacity:.5;cursor:default}
+.err{color:var(--err);margin-top:14px;min-height:1.5em}
+.done{background:#fff;border:1px solid var(--line);border-radius:6px;padding:22px}
+.done p+p{margin-top:8px}
+.muted{color:var(--dim);font-size:15px}
+.hide{display:none}
+</style>
+</head>
+<body>
+<header class="bar"><div><a class="mark" href="/">NEUROPIAN</a></div></header>
+<main class="main">
+  <h1 id="title">Loading…</h1>
+  <p class="lede" id="lede"></p>
+  <div id="docwrap" class="hide">
+    <div class="doc" id="doc"></div>
+    <p class="open"><a id="pdflink" href="#" target="_blank" rel="noopener">Open the PDF</a> to read or save it.</p>
+  </div>
+  <section id="form" class="hide">
+    <h2>Sign</h2>
+    <label for="name">Full name</label>
+    <input type="text" id="name" autocomplete="name" maxlength="100">
+    <label for="role">Title</label>
+    <input type="text" id="role" autocomplete="organization-title" maxlength="100" placeholder="e.g. CEO">
+    <label for="email">Email for notices</label>
+    <input type="email" id="email" autocomplete="email" maxlength="200">
+    <label>Signature</label>
+    <div class="pad"><canvas id="pad"></canvas><div class="base"></div><span class="hint" id="hint">Draw your signature here</span></div>
+    <button type="button" class="clear" id="clear">Clear signature</button>
+    <div class="consent"><input type="checkbox" id="agree"><label for="agree" id="consent" style="margin:0;font-weight:400;font-size:15px"></label></div>
+    <button type="button" class="go" id="go">Sign agreement</button>
+    <p class="err" id="err" role="alert"></p>
+  </section>
+  <section id="done" class="done hide"></section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+(function(){
+var FN="https://qggduzzwvdkmekihwuav.supabase.co/functions/v1/esign";
+var token=new URLSearchParams(location.search).get("t")||"";
+var $=function(id){return document.getElementById(id);};
+function call(body){return fetch(FN,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)})
+  .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||"Something went wrong.");return j;});});}
+function fail(msg){$("title").textContent="This link isn't working";$("lede").textContent=msg+" If you think this is a mistake, email dylan@neuropian.com.";}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+function render(url){
+  $("pdflink").href=url;$("docwrap").classList.remove("hide");
+  if(!window.pdfjsLib)return;
+  pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  pdfjsLib.getDocument(url).promise.then(function(pdf){
+    var doc=$("doc");doc.innerHTML="";
+    var chain=Promise.resolve();
+    for(var i=1;i<=pdf.numPages;i++)(function(n){chain=chain.then(function(){return pdf.getPage(n).then(function(p){
+      var w=Math.min(doc.clientWidth-16,860),v0=p.getViewport({scale:1}),s=(w/v0.width)*Math.min(window.devicePixelRatio||1,2.5);
+      var v=p.getViewport({scale:s}),c=document.createElement("canvas");c.width=v.width;c.height=v.height;doc.appendChild(c);
+      return p.render({canvasContext:c.getContext("2d"),viewport:v}).promise;});});})(i);
+  }).catch(function(){$("doc").innerHTML='<p class="muted" style="padding:16px">The preview did not load. Use “Open the PDF” below.</p>';});
+}
+
+function showSigned(j,fresh){
+  $("form").classList.add("hide");var d=$("done");d.classList.remove("hide");
+  d.innerHTML=(fresh?"<p><strong>Signed. Thank you.</strong></p><p>"+(j.emailed===false?"We'll email you the signed copy shortly. You can also download it now.":"A signed copy is on its way to your email.")+"</p>":
+    "<p><strong>This agreement has been signed"+(j.signer_name?" by "+esc(j.signer_name):"")+".</strong></p>")+
+    '<p class="muted"><a href="'+esc(j.pdf)+'" target="_blank" rel="noopener">Download the signed PDF</a> (link works for one hour).</p>';
+}
+
+// Signature pad
+var pad=$("pad"),ctx=pad.getContext("2d"),ink=false,drawing=false,last=null,box=null;
+function size(){var r=pad.getBoundingClientRect(),d=window.devicePixelRatio||1;var old=ink?pad.toDataURL():null;
+  pad.width=r.width*d;pad.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);ctx.lineCap="round";ctx.lineJoin="round";ctx.lineWidth=2.4;ctx.strokeStyle="#1a1f4d";
+  if(old){var im=new Image();im.onload=function(){ctx.drawImage(im,0,0,r.width,r.height);};im.src=old;}}
+function pt(e){var r=pad.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+function grow(p){box=box?{x0:Math.min(box.x0,p.x),y0:Math.min(box.y0,p.y),x1:Math.max(box.x1,p.x),y1:Math.max(box.y1,p.y)}:{x0:p.x,y0:p.y,x1:p.x,y1:p.y};}
+pad.addEventListener("pointerdown",function(e){e.preventDefault();pad.setPointerCapture(e.pointerId);drawing=true;last=pt(e);grow(last);
+  ctx.beginPath();ctx.arc(last.x,last.y,1.2,0,7);ctx.fillStyle="#1a1f4d";ctx.fill();});
+pad.addEventListener("pointermove",function(e){if(!drawing)return;var p=pt(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();
+  last=p;grow(p);if(!ink){ink=true;$("hint").style.display="none";}});
+["pointerup","pointercancel","pointerleave"].forEach(function(t){pad.addEventListener(t,function(){drawing=false;});});
+$("clear").onclick=function(){ctx.clearRect(0,0,pad.width,pad.height);ink=false;box=null;$("hint").style.display="";};
+function signaturePng(){var d=window.devicePixelRatio||1,m=6,x=Math.max(0,(box.x0-m)*d),y=Math.max(0,(box.y0-m)*d),
+  w=Math.min(pad.width-x,(box.x1-box.x0+2*m)*d),h=Math.min(pad.height-y,(box.y1-box.y0+2*m)*d),c=document.createElement("canvas");
+  c.width=Math.max(1,Math.round(w));c.height=Math.max(1,Math.round(h));c.getContext("2d").drawImage(pad,x,y,w,h,0,0,c.width,c.height);return c.toDataURL("image/png");}
+
+$("go").onclick=function(){
+  var err=$("err");err.textContent="";
+  if($("name").value.trim().length<2)return err.textContent="Please type your full name.";
+  if(!$("role").value.trim())return err.textContent="Please add your title.";
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("email").value.trim()))return err.textContent="Please add a valid email for notices.";
+  if(!ink||!box)return err.textContent="Please draw your signature.";
+  if(!$("agree").checked)return err.textContent="Please tick the box to agree to sign electronically.";
+  var b=$("go");b.disabled=true;b.textContent="Signing…";
+  call({action:"sign",token:token,name:$("name").value.trim(),title:$("role").value.trim(),email:$("email").value.trim(),signature:signaturePng(),consent:true})
+    .then(function(j){showSigned(j,true);render(j.pdf);window.scrollTo(0,0);})
+    .catch(function(e){err.textContent=e.message;b.disabled=false;b.textContent="Sign agreement";});
+};
+
+if(!token){fail("This page needs the full link you were sent.");return;}
+call({action:"get",token:token}).then(function(j){
+  document.title=j.title+" · Neuropian";$("title").textContent=j.title;
+  if(j.status==="signed"){$("lede").textContent="";showSigned(j,false);render(j.pdf);return;}
+  $("lede").textContent="Sent by "+j.sender_name+", Neuropian"+(j.signer_label?", for "+j.signer_label:"")+". It's already signed on Neuropian's side. Read it below, then sign at the bottom.";
+  $("consent").textContent=j.consent;$("email").value=j.signer_email||"";
+  $("form").classList.remove("hide");size();var lw=pad.getBoundingClientRect().width;window.addEventListener("resize",function(){var w=pad.getBoundingClientRect().width;if(!drawing&&w!==lw){lw=w;size();}});
+  render(j.pdf);
+}).catch(function(e){fail(e.message);});
+})();
+</script>
+</body>
+</html>
