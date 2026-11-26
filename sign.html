@@ -59,6 +59,10 @@ input:focus{outline:2px solid var(--acc);outline-offset:1px}
   </div>
   <section id="form" class="hide">
     <h2>Sign</h2>
+    <div id="cowrap" class="hide">
+      <label for="company">Company legal name</label>
+      <input type="text" id="company" autocomplete="organization" maxlength="200" placeholder="e.g. Tensormesh, Inc.">
+    </div>
     <label for="name">Full name</label>
     <input type="text" id="name" autocomplete="name" maxlength="100">
     <label for="role">Title</label>
@@ -124,15 +128,19 @@ function signaturePng(){var d=window.devicePixelRatio||1,m=6,x=Math.max(0,(box.x
   w=Math.min(pad.width-x,(box.x1-box.x0+2*m)*d),h=Math.min(pad.height-y,(box.y1-box.y0+2*m)*d),c=document.createElement("canvas");
   c.width=Math.max(1,Math.round(w));c.height=Math.max(1,Math.round(h));c.getContext("2d").drawImage(pad,x,y,w,h,0,0,c.width,c.height);return c.toDataURL("image/png");}
 
+var needsCompany=false;
 $("go").onclick=function(){
   var err=$("err");err.textContent="";
+  if(needsCompany&&$("company").value.trim().length<2)return err.textContent="Please type the company's full legal name.";
   if($("name").value.trim().length<2)return err.textContent="Please type your full name.";
   if(!$("role").value.trim())return err.textContent="Please add your title.";
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("email").value.trim()))return err.textContent="Please add a valid email for notices.";
   if(!ink||!box)return err.textContent="Please draw your signature.";
   if(!$("agree").checked)return err.textContent="Please tick the box to agree to sign electronically.";
   var b=$("go");b.disabled=true;b.textContent="Signing…";
-  call({action:"sign",token:token,name:$("name").value.trim(),title:$("role").value.trim(),email:$("email").value.trim(),signature:signaturePng(),consent:true})
+  var body={action:"sign",token:token,name:$("name").value.trim(),title:$("role").value.trim(),email:$("email").value.trim(),signature:signaturePng(),consent:true};
+  if(needsCompany)body.company=$("company").value.trim().replace(/\s+/g," ");
+  call(body)
     .then(function(j){showSigned(j,true);render(j.pdf);window.scrollTo(0,0);})
     .catch(function(e){err.textContent=e.message;b.disabled=false;b.textContent="Sign agreement";});
 };
@@ -143,6 +151,8 @@ call({action:"get",token:token}).then(function(j){
   if(j.status==="signed"){$("lede").textContent="";showSigned(j,false);render(j.pdf);return;}
   $("lede").textContent="Sent by "+j.sender_name+", Neuropian"+(j.signer_label?", for "+j.signer_label:"")+". It's already signed on Neuropian's side. Read it below, then sign at the bottom.";
   $("consent").textContent=j.consent;$("email").value=j.signer_email||"";
+  // Generic agreements leave the company's legal-name cell blank; the signer types it and it is stamped there
+  if(j.needs_company){needsCompany=true;$("cowrap").classList.remove("hide");}
   // Count the document as opened only on a real interaction (link-preview bots load pages but never scroll or tap)
   var seen=false,mark=function(){if(seen)return;seen=true;["scroll","pointerdown","keydown","touchstart"].forEach(function(t){window.removeEventListener(t,mark,true);});call({action:"view",token:token}).catch(function(){});};
   ["scroll","pointerdown","keydown","touchstart"].forEach(function(t){window.addEventListener(t,mark,{capture:true,passive:true});});
